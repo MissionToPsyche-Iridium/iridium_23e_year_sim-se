@@ -6,7 +6,7 @@ const container = document.getElementById('container3d');
 const scene = new THREE.Scene();
 
 // Set the background color of the scene to a specific color
-scene.background = new THREE.Color(0x0000ff);  // Blue background
+scene.background = new THREE.Color(0x000000);  // Black background
 
 // Set the camera aspect ratio based on container size
 const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);

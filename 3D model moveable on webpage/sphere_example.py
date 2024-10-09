@@ -28,15 +28,15 @@ z = math.radians(z_degree)
 bpy.ops.object.camera_add(
     enter_editmode=False, 
     align='VIEW', 
-    location=(15, 0, -2),  # Position the camera to get a good 3D view of the sphere
+    location=(15, 0, -2),  # Position the camera
     rotation=(x, y, z)  # Rotate the camera to face the sphere
 )
 camera = bpy.context.object  # Reference the camera
 
-# Set the camera as the active camera for rendering
+# Set the camera as the active camera
 bpy.context.scene.camera = camera
 
-# Add a sun light for better shadows and 3D depth
+# Add a sun light for better shadows
 bpy.ops.object.light_add(type='SUN', location=(5, -5, 10))
 light = bpy.context.object  # Reference the light
 light.data.energy = 5  # Adjust the intensity of the sunlight
@@ -48,7 +48,7 @@ material.use_nodes = True  # Enable node-based shading
 # Set the material's Principled BSDF node to a green color
 bsdf = material.node_tree.nodes.get("Principled BSDF")
 bsdf.inputs['Base Color'].default_value = (0, 1, 0, 1)  # Green color
-bsdf.inputs['Roughness'].default_value = 0.4  # Slightly shiny for 3D effect
+bsdf.inputs['Roughness'].default_value = 0.4  # Shine for 3D effect
 
 
 sphere.data.materials.append(material)
