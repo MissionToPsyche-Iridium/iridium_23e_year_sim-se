@@ -1,0 +1,68 @@
+### Screen Reader Compatibility for 3D Models
+
+#### Key Principles of Screen Reader Compatibility in 3D Models
+
+##### Descriptive Labels and ARIA Roles
+
+- **Provide Descriptive Labels**: Every interactive 3D object must have a meaningful textual description that screen readers can interpret. This can be done using ARIA attributes, such as `aria-label` or `aria-labelledby`.
+  
+- **Use ARIA Roles**: Assign appropriate ARIA roles to key elements and controls in the 3D scene. Roles such as `button`, `slider`, and `region` help screen readers understand the function of different elements.
+
+##### Hierarchical Navigation for Screen Readers
+
+- **Semantic Grouping**: Ensure that 3D objects or regions are semantically grouped so users can navigate between them logically. Use ARIA's `role="group"` to organize multiple objects or sections that are part of a larger interactive model.
+  
+- **Navigate Between Key Objects**: Implement a navigation system where the user can jump between important sections or objects in the 3D model using a keyboard or by issuing voice commands to the screen reader.
+
+##### Providing Feedback for Actions
+
+- **Announce Changes or Events**: When a user performs an action (e.g., selecting a part of the model or rotating the camera), provide immediate feedback through the screen reader. Use **ARIA live regions** (`aria-live`) to announce significant updates or dynamic changes in the environment.
+  
+- **Descriptive Movement Feedback**: If the user moves the camera or navigates within the 3D space, the screen reader should provide context. For example, "You are now viewing the front side of the building" or "Zooming in on the center."
+
+##### Keyboard Navigation for Screen Reader Users
+
+- **Focus Management**: Properly manage focus to ensure users can navigate through the 3D model. Focus should be automatically set on key interactive elements or regions when they become active, and users should be notified of the change through the screen reader.
+
+- **Keyboard-Accessible Controls**: Implement keyboard-friendly controls for manipulating 3D models, such as rotating, zooming, or selecting objects. Use ARIA landmarks and roles to guide screen readers through these controls.
+
+##### Provide Contextual Help
+
+- **Contextual Descriptions**: When a user enters a new section of the 3D model, provide a brief overview of what they are interacting with. This can include the dimensions, key features, and available interactive elements.
+
+- **Help Modal**: Offer a help modal (that can be accessed by keyboard, e.g., pressing **H**) that explains how to interact with the 3D model, providing step-by-step instructions on using screen readers with the 3D environment.
+
+---
+
+### Technical Considerations for Implementing Screen Reader Compatibility in Three.js
+
+#### Adding ARIA Labels and Roles to HTML Elements
+
+Although Three.js primarily handles rendering, you must work with HTML elements for screen reader accessibility. Here’s how to implement ARIA labels and roles:
+
+```html
+<!-- Example: ARIA labels on interactive objects -->
+<div id="3d-object-1" role="button" aria-label="3D Object 1: Cube Shape"></div>
+<div id="3d-object-2" role="button" aria-label="3D Object 2: Sphere Shape"></div>
+```
+#### Using ARIA Live Regions for Real-Time Updates
+
+For real-time feedback, such as when the camera moves or the user selects an object, implement live regions:
+
+```html
+<div aria-live="polite" aria-atomic="true" id="feedback-area">
+  <!-- Screen readers will announce content placed here -->
+</div>
+```
+In JavaScript, dynamically update the content:
+
+```js
+const feedbackArea = document.getElementById('feedback-area');
+
+function updateFeedback(message) {
+    feedbackArea.textContent = message;
+}
+
+// Example: Announce when the camera is moved
+updateFeedback('Camera rotated to the left. Viewing the left side of the object.');
+```
