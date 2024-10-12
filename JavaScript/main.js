@@ -1,3 +1,11 @@
+// Define the buttons and image outside the functions
+const devilsButton = document.getElementById('devilsButton');
+const metsButton = document.getElementById('metsButton');
+const image = document.getElementById('myImage');
+
+// Disable the devils button on page load
+devilsButton.disabled = true;
+
 // Function to toggle text color by toggling the hidden class
 function toggleVisibility(elementId) {
     const element = document.getElementById(elementId);
@@ -15,24 +23,17 @@ function toggleVisibility(elementId) {
     }
 }
 
-function increment(){
-    const button2 = document.getElementById('increment');
-    
+function increment() {
     var x = parseInt(document.getElementById('counter').innerHTML);
-    
     document.getElementById('counter').innerHTML = x + 1;
 }
 
-function decrement(){
-    const button3 = document.getElementById('decrement');
-    
+function decrement() {
     var z = parseInt(document.getElementById('counter').innerHTML);
-    
     document.getElementById('counter').innerHTML = z - 1;
 }
 
-function reset(){
-    const button3 = document.getElementById('reset');
+function reset() {
     document.getElementById('counter').innerHTML = 0;
 }
 
@@ -42,11 +43,22 @@ document.getElementById('dateButton').addEventListener('click', function() {
 });
 
 // Event listeners for changing images
-document.getElementById('devilsButton').addEventListener('click', function() {
-    document.getElementById('myImage').src = 'njdevils.png';
+devilsButton.addEventListener('click', function() {
+    // Set the Devils image
+    image.src = 'njdevils.png';
+    
+    // Disable the Devils button and re-enable the Mets button
+    devilsButton.disabled = true;
+    metsButton.disabled = false;
 });
-document.getElementById('metsButton').addEventListener('click', function() {
-    document.getElementById('myImage').src = 'nymets.png';
+
+metsButton.addEventListener('click', function() {
+    // Set the Mets image
+    image.src = 'nymets.png';
+    
+    // Disable the Mets button and re-enable the Devils button
+    metsButton.disabled = true;
+    devilsButton.disabled = false;
 });
 
 // Event listener for toggling the text color of demo2 paragraph
@@ -54,14 +66,14 @@ document.getElementById('toggleButton').addEventListener('click', function() {
     toggleVisibility('demo2');
 });
 
-document.getElementById('increment').addEventListener('click',function(){
+document.getElementById('increment').addEventListener('click', function() {
     increment();
-})
+});
 
-document.getElementById('decrement').addEventListener('click',function(){
+document.getElementById('decrement').addEventListener('click', function() {
     decrement();
-})
+});
 
-document.getElementById('reset').addEventListener('click',function(){
+document.getElementById('reset').addEventListener('click', function() {
     reset();
-})
+});
