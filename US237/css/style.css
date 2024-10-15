@@ -54,23 +54,88 @@ button#info {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: antiquewhite;
+  transform: translate(-50%, -50%) skew(-5deg);
+  /*background-image: url("/US237/images/Psyche_2.jpg");*/
+  background-color: black;
+  background-blend-mode: darken;
+  background-size: cover;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  width: 400px;
+  width: 70%;
   padding: 20px;
   border-radius: 20px;
+  color: antiquewhite;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  transform: skew(5deg);
+}
+
+.popup-buttons button {
+  margin: 0 10px;
 }
 
 .popup-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.popup-content-header {
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: xx-large;
+  font-weight: bolder;
+  transform: skew(5deg);
+  color: gray;
+  text-shadow: 0px 0px 30px antiquewhite;
+}
+
+.popup-content-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-weight: bold;
+  
+  
+}
+
+.popup-content-body p {
+  flex: 1;
+  margin-right: 20px;
+  text-align: left;
+  font-size: x-large;
+  padding: 5%;
+  color: gray;
+  background-color: black;
+  border-radius: 10px;
+  text-shadow: 0px 0px 30px antiquewhite;
 }
 
 .popup-content button {
   z-index: 1001;
   position: relative;
   margin-top: 20px;
+  background-color: gray;
+  color: black;
+  transform: skew(-5deg);
+  border-radius: 6px;
+  font-size: large;
+  cursor: pointer;
+  box-shadow: 0px 0px 40px antiquewhite; 
+}
+
+.popup-content button:hover{
+  background-color: antiquewhite;
+  color: black;
+  transition: 1s ease;
 }
 
 /* Overlay */
@@ -82,4 +147,12 @@ button#info {
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
+}
+
+
+
+#psyche1 {
+  width: 40%;
+  height: auto;
+  border-radius: 10px;
 }
