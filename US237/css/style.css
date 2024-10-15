@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
+}
+
+header {
+  margin-top: 3em;
+  text-align: center;
+  color: white;
+}
+
+header h1 {
+  font-size: 2em;
+  font-weight: 900;
+}
+
+#container3D canvas {
+  width: 100vw !important;
+  height: 100vh !important;
+  position: absolute;
+  padding-top: 10%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: black;
+}
+
+.popup {
+  position: fixed;
+  top: 25%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  background-color: antiquewhite;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  width: 400px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup-content button {
+  z-index: 1001; /* Ensure button is clickable */
+  position: relative;
+  margin-top: 20px;
+}
+
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 20%;
+  background: black;
+  z-index: 999;
+}
+
+button {
+  background-color: gray;
+  cursor: pointer;
+  color: antiquewhite;
+  font-family: 'Courier New', Courier, monospace;
+  position: relative;
+  z-index: 1001; /* Ensure it's above the canvas and popup overlay */
+}
