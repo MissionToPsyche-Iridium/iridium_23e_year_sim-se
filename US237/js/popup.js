@@ -49,17 +49,23 @@ function firstScreen() {
     const popupContent = document.querySelector('.popup-content');
     // Update the content of the first screen
     popupContent.innerHTML = `
-      <div class="popup-content-header">
+    <div  id="screen1">
+      <div class="popup-content-header" id="header1">
+        <img src="images/Psyche_icon_white.svg" id="logo">
         <h1>Asteroid 16 Psyche</h1>
-        <h2>First Screen</h2>
+        <img src="images/Psyche_icon_white.svg" id="logo">
       </div>
       <div class="popup-content-body">
-        <p>This is the first screen.</p>
+        <p>16 Psyche is a metal-rich asteroid, contained within the asteroid belt, orbiting the Sun between Mars & Jupiter. This asteroid is of particular interest, as Psyche may have started out as a core of a planetesimal. If Psyche is indeed the core 
+        of a planetsimal, this will give scientists a better understanding of the inner layers of planets like Earth.</p>
+        <p>Psyche was first disovered by Italian astronomer Annibale de Gasparis in 1852, named after the ancient Greek mythology goddess of the soul. Psyche is currently three times farther from the sun than we are on Earth. Due to Psyche's orbit, the
+        distance between Earth and Psyche varies from 186 million miles to more than 372 million miles.</p>
       </div>
       <div class="popup-buttons">
         <button id="nextButton">Next</button>
         <button id="closeButton">Close</button>
       </div>
+    </div>
     `;
     
     // Attach event listeners for the buttons
