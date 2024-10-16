@@ -175,3 +175,15 @@ button#info {
   color: gray;
   text-shadow: 0px 0px 50px antiquewhite;
 }
+
+#rings {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+}
+
+#atmosphere {
+  width: 60%;
+  height: auto;
+  border-radius: 10px;
+}

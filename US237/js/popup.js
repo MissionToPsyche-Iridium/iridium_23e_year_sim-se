@@ -257,10 +257,11 @@ function ninthScreen() {
     // Update content for the ninth screen
     popupContent.innerHTML = `
     <div class="popup-content-header">
-      <h2>Ninth Screen</h2>
+      <h2>Rings</h2>
     </div>
     <div class="popup-content-body">
-      <p>This is the ninth screen.</p>
+      <p>While a few asteroids are known to have rings, 16 Psyche does not possess any.</p>
+      <img src="images/rings.jpg" id="rings">
     </div>
     <div class="popup-buttons">
       <button id="nextButton">Next</button>
@@ -285,8 +286,10 @@ function tenthScreen() {
         <h2>Atmosphere</h2>
       </div>
       <div class="popup-content-body">
-        <p>Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts. Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris</p>
-      </div>
+        <p>Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts. 
+        <br><br>Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris</p>
+        <img src="images/aurora.jpg" id="atmosphere">
+        </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
