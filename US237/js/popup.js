@@ -106,11 +106,17 @@ function thirdScreen() {
     
     // Update content for the third screen
     popupContent.innerHTML = `
-      <h2>Third Screen</h2>
-      <p>This is the third screen.</p>
-      <button id="nextButton">Next</button>
-      <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+      <div class="popup-content-header">
+        <h2>Third Screen</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>This is the third screen.</p>
+      </div>
+      <div class="popup-buttons">
+        <button id="nextButton">Next</button>
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
     `;
     
     // Attach event listeners for buttons
@@ -125,11 +131,17 @@ function fourthScreen() {
     
     // Update content for the fourth screen
     popupContent.innerHTML = `
-      <h2>Fourth Screen</h2>
-      <p>This is the fourth screen.</p>
-      <button id="nextButton">Next</button>
-      <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+      <div class="popup-content-header">
+        <h2>Fourth Screen</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>This is the fourth screen.</p>
+      </div>
+      <div class="popup-buttons">
+        <button id="nextButton">Next</button>
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
     `;
     
     // Attach event listeners for buttons
@@ -144,11 +156,17 @@ function fifthScreen() {
     
     // Update content for the fifth screen
     popupContent.innerHTML = `
-      <h2>Fifth Screen</h2>
-      <p>This is the fifth screen.</p>
-      <button id="nextButton">Next</button>
-      <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+      <div class="popup-content-header">
+        <h2>Fifth Screen</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>This is the fifth screen.</p>
+      </div>
+      <div class="popup-buttons">
+        <button id="nextButton">Next</button>
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
     `;
     
     // Attach event listeners for buttons
@@ -163,11 +181,17 @@ function sixthScreen() {
     
     // Update content for the sixth screen
     popupContent.innerHTML = `
-      <h2>Sixth Screen</h2>
-      <p>This is the sixth screen.</p>
-      <button id="nextButton">Next</button>
-      <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+      <div class="popup-content-header">  
+        <h2>Sixth Screen</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>This is the sixth screen.</p>
+      </div>
+      <div class="popup-buttons">
+        <button id="nextButton">Next</button>
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
     `;
     
     // Attach event listeners for buttons
@@ -182,11 +206,17 @@ function seventhScreen() {
     
     // Update content for the seventh screen
     popupContent.innerHTML = `
+    <div class="popup-content-header">  
       <h2>Seventh Screen</h2>
+    </div>
+    <div class="popup-content-body">
       <p>This is the seventh screen.</p>
+    </div>
+    <div class="popup-buttons">
       <button id="nextButton">Next</button>
       <button id="prevButton">Previous</button>
       <button id="closeButton">Close</button>
+    </div>
     `;
     
     // Attach event listeners for buttons
@@ -201,11 +231,17 @@ function eighthScreen() {
     
     // Update content for the eighth screen
     popupContent.innerHTML = `
+      <div class="popup-content-header">
       <h2>Eighth Screen</h2>
-      <p>This is the eighth screen.</p>
-      <button id="nextButton">Next</button>
-      <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+      </div>
+      <div class="popup-content-body">
+        <p>This is the eighth screen.</p>
+      </div>
+      <div class="popup-buttons">
+        <button id="nextButton">Next</button>
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
     `;
     
     // Attach event listeners for buttons
@@ -220,11 +256,17 @@ function ninthScreen() {
     
     // Update content for the ninth screen
     popupContent.innerHTML = `
+    <div class="popup-content-header">
       <h2>Ninth Screen</h2>
+    </div>
+    <div class="popup-content-body">
       <p>This is the ninth screen.</p>
+    </div>
+    <div class="popup-buttons">
       <button id="nextButton">Next</button>
       <button id="prevButton">Previous</button>
       <button id="closeButton">Close</button>
+    </div>
     `;
     
     // Attach event listeners for buttons
@@ -239,10 +281,16 @@ function tenthScreen() {
     
     // Update content for the tenth screen
     popupContent.innerHTML = `
-      <h2>Tenth Screen</h2>
-      <p>This is the tenth screen.</p>
-      <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+      <div class="popup-content-header">
+        <h2>Atmosphere</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts. Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris</p>
+      </div>
+      <div class="popup-buttons">
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
     `;
     
     // Attach event listeners for buttons
