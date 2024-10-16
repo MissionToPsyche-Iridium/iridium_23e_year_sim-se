@@ -136,16 +136,23 @@ function fourthScreen() {
     
     // Update content for the fourth screen
     popupContent.innerHTML = `
-      <div class="popup-content-header">
-        <h2>Fourth Screen</h2>
-      </div>
-      <div class="popup-content-body">
-        <p>This is the fourth screen.</p>
-      </div>
-      <div class="popup-buttons">
-        <button id="prevButton">Previous</button>
-        <button id="closeButton">Close</button>
-        <button id="nextButton">Next</button>
+      <div class="screen4">
+        <div class="popup-content-header">
+          <h2>Surface of Psyche</h2>
+        </div>
+        <div class="popup-content-body">
+          <p>The information we have regarding 16 Psyche is based on radar and optical observations. The observations have given evidence of a surface consisting of a mix of of metal and silicate. Other observations have lead scientists to believe 
+          there are two craterlike depressions. Scientists believe the asteroid may contain significant amounts of metal, consistent with the core of a planetesimal. 
+          <br><br>Planetesimal's are believed to be the building blocks of our solar system. This belief
+          is the main principal behind the NASA Psyche mission, hoping to shed light on Earth's core. The mission will be able to provide scientists with more in depth details of the asteroid, and hopefully other planets in the solar system.
+          <br><br>16 Psyche is believed to be the survivor of multiple violent collissions, occurring during the formation of the solar system.</p>
+          <img src="images/Psyche_2.jpg" id="psyche2">
+        </div>
+        <div class="popup-buttons">
+          <button id="prevButton">Previous</button>
+          <button id="closeButton">Close</button>
+          <button id="nextButton">Next</button>
+        </div>
       </div>
     `;
     
