@@ -55,7 +55,6 @@ button#info {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) skew(-5deg);
-  /*background-image: url("/US237/images/Psyche_2.jpg");*/
   background-color: black;
   background-blend-mode: darken;
   background-size: cover;
@@ -103,8 +102,6 @@ button#info {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: italic;
   font-weight: bold;
-  
-  
 }
 
 .popup-content-body p {
@@ -190,6 +187,18 @@ button#info {
 
 #moons {
   width: 50%;
+  height: auto;
+  border-radius: 10px;
+}
+
+#plants {
+  width: 20%;
+  height: auto;
+  border-radius: 10px;
+}
+
+#ocean {
+  width: 40%;
   height: auto;
   border-radius: 10px;
 }
