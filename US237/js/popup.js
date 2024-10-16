@@ -49,11 +49,17 @@ function firstScreen() {
     const popupContent = document.querySelector('.popup-content');
     // Update the content of the first screen
     popupContent.innerHTML = `
-      <h1>Name of Planet/Moon/Asteroid</h1>
-      <h2>First Screen</h2>
-      <p>This is the first screen.</p>
-      <button id="nextButton">Next</button>
-      <button id="closeButton">Close</button>
+      <div class="popup-content-header">
+        <h1>Asteroid 16 Psyche</h1>
+        <h2>First Screen</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>This is the first screen.</p>
+      </div>
+      <div class="popup-buttons">
+        <button id="nextButton">Next</button>
+        <button id="closeButton">Close</button>
+      </div>
     `;
     
     // Attach event listeners for the buttons
@@ -67,11 +73,19 @@ function secondScreen() {
     
     // Update the content of the second screen
     popupContent.innerHTML = `
-      <h2>Second Screen</h2>
-      <p>This is the second screen.</p>
-      <button id="nextButton">Next</button>
-      <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+      <div class="popup-content-header">
+        <h2>Size and Dimensions</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>16 Psyche is a potato-like shape, measuring 173 miles (280 kilometers) long at it widest spot, and 144 miles (232 kilometers) long. The total surface area is 64,000 square
+        miles (165,800 square kilometers).</p>
+        <img id="psyche1" src = "images/Psyche_1.jpg">
+      </div>
+      <div class="popup-buttons">
+        <button id="nextButton">Next</button>
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
     `;
     
     // Re-attach event listeners for the new buttons after updating the content
