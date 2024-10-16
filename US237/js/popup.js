@@ -84,8 +84,8 @@ function secondScreen() {
       </div>
       <div class="popup-content-body">
         <p>16 Psyche is a potato-like shape, measuring 173 miles (280 kilometers) long at it widest spot, and 144 miles (232 kilometers) long. The total surface area is 64,000 square
-        miles (165,800 square kilometers).</p>
-        <img id="psyche1" src = "images/Psyche_1.jpg">
+        miles (165,800 square kilometers).<br><br> NASA Jet Propulsion Laboratory (JPL) has compared its size to the State of Maryland in the United States of America.</p>
+        <img id="psyche1" src = "images/Psyche_MD_3.jpg">
       </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
@@ -232,10 +232,13 @@ function eighthScreen() {
     // Update content for the eighth screen
     popupContent.innerHTML = `
       <div class="popup-content-header">
-      <h2>Eighth Screen</h2>
+      <h2>Moons</h2>
       </div>
       <div class="popup-content-body">
-        <p>This is the eighth screen.</p>
+        <p>NASA has identified more than 150 asteroids that have an orbiting moon, and in some cases more than one moon.
+        Other asteroids can have other asteroids orbiting each other, referred to as binary or triple asteroid systems.<br><br>16 Psyche
+        does not have any moons or asteroids orbiting around it.</p>
+        <img src="images/moons.jpg" id="moons">
       </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
