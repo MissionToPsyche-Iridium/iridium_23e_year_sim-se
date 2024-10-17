@@ -195,6 +195,13 @@ button#info {
   border-radius: 10px;
 }
 
+/* video */
+#video {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+}
+
 /* Specific Screen Header */
 
 #header1 {
@@ -212,6 +219,10 @@ button#info {
 }
 
 .screen4 p {
+  font-size: large;
+}
+
+.screen7 p {
   font-size: large;
 }
 
