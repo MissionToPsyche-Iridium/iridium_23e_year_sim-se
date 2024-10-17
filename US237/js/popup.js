@@ -107,11 +107,16 @@ function thirdScreen() {
     // Update content for the third screen
     popupContent.innerHTML = `
       <div class="popup-content-header">
-        <h2>Third Screen</h2>
+        <h2>Life on Psyche</h2>
       </div>
       <div class="popup-content-body">
-        <p>This is the third screen.</p>
+        <p>It is believed, amongst the scientific community, that comets and asteroids were responsible for delivering key ingredients, to include water
+        , that was the key complex chemistry needed to sustain life on Earth. It is believed that some of these asteroids have the capability of supporting
+        human life.<br><br>As of now, 16 Pscyhe is not believed to hold the key nutrients of water, breathable atmosphere, and a hospitable environment to 
+        allow for human life.</p>
+        <img src="images/ocean.jpg" id="ocean">
       </div>
+        
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
