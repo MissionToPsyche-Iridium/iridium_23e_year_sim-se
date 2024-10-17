@@ -110,10 +110,11 @@ function thirdScreen() {
         <h2>Life on Psyche</h2>
       </div>
       <div class="popup-content-body">
-        <p>It is believed, amongst the scientific community, that comets and asteroids were responsible for delivering key ingredients, to include water
-        , that was the key complex chemistry needed to sustain life on Earth. It is believed that some of these asteroids have the capability of supporting
-        human life.<br><br>As of now, 16 Pscyhe is not believed to hold the key nutrients of water, breathable atmosphere, and a hospitable environment to 
-        allow for human life.</p>
+        <p>The scientific community believes that comets and asteroids are responsible for delivering key ingredients, including water, 
+        which is the key complex chemistry needed to sustain life on Earth. Some asteroids are believed to have the capability 
+        of supporting human life.
+        <br><br>Currently, 16 Psyche does not show evidence of the critical nutrients of water, a breathable atmosphere, and a hospitable 
+        environment to allow for human life.</p>
         <img src="images/ocean.jpg" id="ocean">
       </div>
         
@@ -141,11 +142,15 @@ function fourthScreen() {
           <h2>Surface of Psyche</h2>
         </div>
         <div class="popup-content-body">
-          <p>The information we have regarding 16 Psyche is based on radar and optical observations. The observations have given evidence of a surface consisting of a mix of of metal and silicate. Other observations have lead scientists to believe 
-          there are two craterlike depressions. Scientists believe the asteroid may contain significant amounts of metal, consistent with the core of a planetesimal. 
-          <br><br>Planetesimal's are believed to be the building blocks of our solar system. This belief
-          is the main principal behind the NASA Psyche mission, hoping to shed light on Earth's core. The mission will be able to provide scientists with more in depth details of the asteroid, and hopefully other planets in the solar system.
-          <br><br>16 Psyche is believed to be the survivor of multiple violent collissions, occurring during the formation of the solar system.</p>
+          <p>Our information, regarding 16 Psyche, is based on radar and optical observations. The observations have given evidence of a 
+          surface consisting of a mix of metal and silicate. Other observations have led scientists to believe there are two crater-like 
+          depressions. Scientists believe the asteroid may contain significant amounts of metal, consistent with the core of a planetesimal.
+          <br><br>
+          The NASA Psyche mission, based on the belief that planetesimals are the building blocks of our solar system, aims to provide a deeper 
+          understanding of 16 Psyche, and potentially other planets. This mission is a significant step towards shedding light on Earth's core 
+          and advancing our knowledge of planetary science.
+          <br><br>
+          16 Psyche is believed to have survived multiple violent collisions during the solar system's formation.</p>
           <img src="images/Psyche_2.jpg" id="psyche2">
         </div>
         <div class="popup-buttons">
@@ -249,7 +254,8 @@ function eighthScreen() {
       <div class="popup-content-body">
         <p>NASA has identified more than 150 asteroids that have an orbiting moon, and in some cases more than one moon.
         Other asteroids can have other asteroids orbiting each other, referred to as binary or triple asteroid systems.<br><br>16 Psyche
-        does not have any moons or asteroids orbiting around it.</p>
+        does not believe to have any moons or asteroids orbiting around it, however, more information will be known in 2029 when the Pscyche
+        mission is expected to reach the asteroid.</p>
         <img src="images/moons.jpg" id="moons">
       </div>
       <div class="popup-buttons">
@@ -302,7 +308,7 @@ function tenthScreen() {
       </div>
       <div class="popup-content-body">
         <p>Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts. 
-        <br><br>Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris</p>
+        <br><br>Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris.</p>
         <img src="images/aurora.jpg" id="atmosphere">
         </div>
       <div class="popup-buttons">
