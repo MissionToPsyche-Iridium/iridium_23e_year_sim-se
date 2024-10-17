@@ -62,8 +62,8 @@ function firstScreen() {
         distance between Earth and Psyche varies from 186 million miles to more than 372 million miles.</p>
       </div>
       <div class="popup-buttons">
-        <button id="nextButton">Next</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     </div>
     `;
@@ -88,9 +88,9 @@ function secondScreen() {
         <img id="psyche1" src = "images/Psyche_1.jpg">
       </div>
       <div class="popup-buttons">
-        <button id="nextButton">Next</button>
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     `;
     
@@ -113,9 +113,9 @@ function thirdScreen() {
         <p>This is the third screen.</p>
       </div>
       <div class="popup-buttons">
-        <button id="nextButton">Next</button>
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     `;
     
@@ -138,9 +138,9 @@ function fourthScreen() {
         <p>This is the fourth screen.</p>
       </div>
       <div class="popup-buttons">
-        <button id="nextButton">Next</button>
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     `;
     
@@ -163,9 +163,9 @@ function fifthScreen() {
         <p>This is the fifth screen.</p>
       </div>
       <div class="popup-buttons">
-        <button id="nextButton">Next</button>
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     `;
     
@@ -188,9 +188,9 @@ function sixthScreen() {
         <p>This is the sixth screen.</p>
       </div>
       <div class="popup-buttons">
-        <button id="nextButton">Next</button>
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     `;
     
@@ -213,9 +213,9 @@ function seventhScreen() {
       <p>This is the seventh screen.</p>
     </div>
     <div class="popup-buttons">
-      <button id="nextButton">Next</button>
       <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+        <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
     </div>
     `;
     
@@ -238,9 +238,9 @@ function eighthScreen() {
         <p>This is the eighth screen.</p>
       </div>
       <div class="popup-buttons">
-        <button id="nextButton">Next</button>
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     `;
     
@@ -257,15 +257,16 @@ function ninthScreen() {
     // Update content for the ninth screen
     popupContent.innerHTML = `
     <div class="popup-content-header">
-      <h2>Ninth Screen</h2>
+      <h2>Rings</h2>
     </div>
     <div class="popup-content-body">
-      <p>This is the ninth screen.</p>
+      <p>While a few asteroids are known to have rings, 16 Psyche does not possess any.</p>
+      <img src="images/rings.jpg" id="rings">
     </div>
     <div class="popup-buttons">
-      <button id="nextButton">Next</button>
       <button id="prevButton">Previous</button>
-      <button id="closeButton">Close</button>
+        <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
     </div>
     `;
     
@@ -285,8 +286,10 @@ function tenthScreen() {
         <h2>Atmosphere</h2>
       </div>
       <div class="popup-content-body">
-        <p>Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts. Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris</p>
-      </div>
+        <p>Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts. 
+        <br><br>Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris</p>
+        <img src="images/aurora.jpg" id="atmosphere">
+        </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
