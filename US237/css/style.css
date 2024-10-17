@@ -49,7 +49,8 @@ button#info {
   z-index: 1002; /* Ensure it's above the canvas */
 }
 
-/* Popup */
+
+/* Generic Popup */
 .popup {
   position: fixed;
   top: 50%;
@@ -144,33 +145,24 @@ button#info {
   z-index: 999;
 }
 
+/* Images */
+
 #psyche1 {
   width: 40%;
   height: auto;
   border-radius: 10px;
 }
 
-#header1 {
-  display: flex;
-  align-items: center;
-  position: relative;
+#psyche2 {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
 }
 
 #logo {
   width: 20%;
   height: auto;
   opacity: .8;
-}
-
-#screen1 p {
-  opacity: 0.9;
-  color: gray;
-  background-color: transparent;
-}
-
-#screen1 h1 {
-  color: gray;
-  text-shadow: 0px 0px 50px antiquewhite;
 }
 
 #rings {
@@ -202,3 +194,29 @@ button#info {
   height: auto;
   border-radius: 10px;
 }
+
+/* Specific Screen Header */
+
+#header1 {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Specific Screens */
+
+#screen1 p {
+  opacity: 0.9;
+  color: gray;
+  background-color: transparent;
+}
+
+.screen4 p {
+  font-size: large;
+}
+
+#screen1 h1 {
+  color: gray;
+  text-shadow: 0px 0px 50px antiquewhite;
+}
+
