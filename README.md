@@ -4,6 +4,8 @@
 
 Each **Blender Unit (BU)** is set to **100 km** for scaling. Therefore, the **Sun**, with a documented diameter of **1.4 million kilometers**, is modeled with a **radius of 7000 Blender Units (BU)**. Below is the process for adding and scaling the Sun sphere model.
 
+![sunModel.png](https://github.com/MissionToPsyche-Iridium/iridium_23e_year_sim-se/blob/Task236/screenshots/scaleSun.png)
+
 ---
 > ⚠️ **Important:**  
 > It is critical in all Blender viewports to ensure **clipping is adjusted**.  
