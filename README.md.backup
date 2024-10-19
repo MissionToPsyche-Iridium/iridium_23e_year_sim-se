@@ -1,10 +1,46 @@
-## Scale Sun Model:
+## Scale Sun Model: Sprint 2, Task236 (238, 239, 240)
+```
+### Task 236 - Scale Model of the Sun
+### Task 238 - Scaled sun model (blank)
+### Task 239 - Scaled sun model with textures
+### Task 240 - Updated Cheat Sheet
+```
 
 ### This sun model is built in Blender 4.2.   
+![sunModel.png](https://github.com/MissionToPsyche-Iridium/iridium_23e_year_sim-se/blob/Task236/screenshots/scaleSun.png)
+## Cheat Sheet:
+#### This Cheat Sheet can be used to create a basic scaled model in Blender 4.2 and run it in a browser window using a Vite live server.
+
+### Installing Local Dependencies and Running Vite (assuming Node.js is installed)
+1. **Initialize your project:**
+   ```
+   npm init -y
+ 
+   // install Three.js
+   npm install --save three
+
+   // install vite
+   npm install --save-dev vite
+	```
+2. **Start the Vite server:**
+   - Option 1 (without modifying `package.json`):
+     ```bash
+     npx vite
+     ```
+   - Option 2 (with a custom script):
+     Add this to `package.json`:
+     ```json
+     "scripts": {
+       "dev": "vite"
+     }
+     ```
+     Then run:
+     ```bash
+     npm run dev
+     ```
+
 
 Each **Blender Unit (BU)** is set to **100 km** for scaling. Therefore, the **Sun**, with a documented diameter of **1.4 million kilometers**, is modeled with a **radius of 7000 Blender Units (BU)**. Below is the process for adding and scaling the Sun sphere model.
-
-![sunModel.png](https://github.com/MissionToPsyche-Iridium/iridium_23e_year_sim-se/blob/Task236/screenshots/scaleSun.png)
 
 ---
 > ⚠️ **Important:**  
