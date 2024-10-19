@@ -130,18 +130,18 @@ button#info {
 *
 * 
 */ 
+
 .popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) skew(-5deg);
-  /*background-image: url("/US237/images/Psyche_2.jpg");*/
   background-color: black;
   background-blend-mode: darken;
   background-size: cover;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  width: 70%;
+  width: 80%;
   padding: 20px;
   border-radius: 20px;
   color: antiquewhite;
@@ -224,6 +224,16 @@ button#info {
   border-radius: 10px;
 }
 
+
+/**************************
+* .popup-content-body li
+*
+* popup content body styling
+*/ 
+.popup-content-body li {
+  font-size: x-large;
+}
+
 /**************************
 * .popup-content button
 *
@@ -266,6 +276,8 @@ button#info {
   z-index: 999;
 }
 
+/************ Images ************/
+
 /**************************
 * #psyche1
 *
@@ -284,6 +296,16 @@ button#info {
   display: flex;
   align-items: center;
   position: relative;
+
+/**************************
+* #psyche2
+*
+*/ 
+#psyche2 {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+
 }
 
 /**************************
@@ -316,21 +338,31 @@ button#info {
 }
 
 /**************************
-* #rings
+* #path
 *
-*/ 
-#rings {
+*/
+#path {
   width: 50%;
   height: auto;
   border-radius: 10px;
 }
 
 /**************************
+* #rings
+*
+*/
+#rings {
+  width: 70%;
+  height: 50%;
+  border-radius: 10px;
+}
+
+/**************************
 * #atmosphere
 *
-*/ 
+*/  
 #atmosphere {
-  width: 60%;
+  width: 40%;
   height: auto;
   border-radius: 10px;
 }
@@ -344,3 +376,79 @@ button#info {
   height: auto;
   border-radius: 10px;
 }
+
+/**************************
+* #plants
+*
+*/ 
+#plants {
+  width: 20%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/**************************
+* #oceans
+*
+*/ 
+#ocean {
+  width: 40%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/**************************
+* #video
+*
+*/ 
+#video {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/**************************
+* #header1
+*
+*/ 
+#header1 {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/**************************
+* #screen1 p
+*
+*/ 
+#screen1 p {
+  opacity: 0.9;
+  color: gray;
+  background-color: transparent;
+}
+
+/**************************
+* .screen4 p
+*
+*/ 
+.screen4 p {
+  font-size: large;
+}
+
+/**************************
+* .screen7 p
+*
+*/ 
+.screen7 p {
+  font-size: large;
+}
+
+/**************************
+* #screen1 h1
+*
+*/ 
+#screen1 h1 {
+  color: gray;
+  text-shadow: 0px 0px 50px antiquewhite;
+}
+
