@@ -1,29 +1,59 @@
 <!--
-  Name: Psyche 16
-  Team: 35
-  Members: Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
-  Version: 1.1
-  Date: 10/14/2024
+* index.html
+*
+* This file is the driver of the three.js program. It is the root file that is the only open file in the browser window. 
+* This file loads all of the CSS styles and JavaScript files from references.
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       10/17/24
+* Revision:   1.0
+*
+* Files Linked:
+*    css/style.css -  This file defines the presentation aspects of this HTML file
+*
+*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
+*                     the asteroid model and action listeners to manipulate. 
+*
+*    js/popup.js -    This file 
+*  
 -->
 
+<!--
+========================================================================================================
+File Start
+========================================================================================================
+--> 
+
+<!-- Defines the document type and version of HTML-->
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Defines the character encoding for the document-->
     <meta charset="utf-8" />
+    <!-- Defines the webpage tab title-->
     <title>Psyche 16</title>
+    <!-- Linking the CSS stylesheet for colors, fonts, spacing and more-->
     <link rel="stylesheet" href="css/style.css" />
   </head>
+  <!-- <body> contains everything that is visible to the user-->
   <body>
     <header>
+      <!-- Defines webpage header title-->
       <h1>Psyche 16</h1>
     </header>
-
+    <!-- 'Main' section for the dominant content of the page-->
     <main>
       <div id="container3D"></div>
-      <!-- More Information Button -->
+      <!-- More Information Button - Opens the popup information pages-->
       <button id="info">More Information</button>
+      <!-- Linking the main.js file that displays the asteroid-->
       <script type="module" src="js/main.js"></script>
+      <!-- Linking the popup.js file that displays the popup information pages-->
       <script src="js/popup.js"></script>
+    <!-- End main section-->
     </main>
   </body>
 </html>
