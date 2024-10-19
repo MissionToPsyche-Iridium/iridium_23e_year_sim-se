@@ -218,12 +218,20 @@ function sixthScreen() {
     // Update content for the sixth screen
     popupContent.innerHTML = `
       <div class="popup-content-header">  
-        <h2>Sixth Screen</h2>
+        <h2>Orbit and Rotation</h2>
       </div>
       <div class="popup-content-body">
         <p>
-          This is the sixth screen.
+          16 Psyche is part of the Main Asteroid Belt, sitting between Mars and Jupiter. 
+          <br>
+          <br>
+          16 Psyche completes one rotation around the Sun, a Psyche year, approximately
+          every five Earth years. 
+          <br>
+          <br>
+          Psyche rotates along its axis, a Psyche day, about once every four hours.
         </p>
+        <img src="images/psyche_path.jpg" id="path">
       </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
