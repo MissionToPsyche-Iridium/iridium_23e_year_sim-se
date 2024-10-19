@@ -165,6 +165,12 @@ button#info {
   opacity: .8;
 }
 
+#path {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+}
+
 #rings {
   width: 50%;
   height: auto;
