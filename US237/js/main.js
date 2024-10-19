@@ -1,15 +1,49 @@
 /* 
 * main.js
 * 
-* Class:    SER01
-* Author:   Tyler Brown & Dan McNeil
-* Date:     10/9/2024
-* Revision: 1.1
 *
-* Description: This main.js creates a scene that is rendered and displayed on a webpage. 
-<describe elements> 
+* This main.js creates a scene that is rendered and displayed on a webpage. 
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       10/17/24
+* Revision:   1.0
+*
+* Functions:
+*    css/style.css -  This file defines the presentation aspects of this HTML file
+*
+*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
+*                     the asteroid model and action listeners to manipulate. 
+*
+*    js/popup.js -    This file 
+* 
+* Listeners: 
+*    css/style.css -  This file defines the presentation aspects of this HTML file
+*
+*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
+*                     the asteroid model and action listeners to manipulate. 
+*
+*    js/popup.js -    This file 
+*
 */
 
+/*
+========================================================================================================
+File Start
+========================================================================================================
+*/
+
+/*****************************************************
+ * IMPORTS
+ * 
+ * Importing the needed libraries 
+ *  THREE - JavaScript Animation library 
+ *  OrbitalControls - Camera control around scene objects
+ *  GLTFLoader - Loading and displaying 3D models
+ *  
+ */
 //Import the THREE.js library
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 // To allow for the camera to move around the scene
@@ -21,10 +55,6 @@ import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/l
 const scene = new THREE.Scene();
 //create a new camera with positions and angles
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
-
-//Keep track of the mouse position, so we can make the eye move
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
 
 //Keep the 3D object on a global variable so we can access it later
 let object;
@@ -42,6 +72,21 @@ const mouse = new THREE.Vector2(); // a new 2D Vector (x, y) or a point in 2D sp
 // Define the zoom step (how much the camera moves forward)
 const zoomStep = 2; 
 
+/*****************************************************
+ * onDoubleCLick()
+ * 
+ * This function moves the camera view towards the area of the asteroid that was double clicked
+ * 
+ * arguments:
+ *  event - location of the double click
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The camera view will zoom in towards the area of the asteroid that was double clicked.
+ * 
+ */
 function onDoubleClick(event) {
   // Get mouse position relative to canvas
   const mouse = new THREE.Vector2(
@@ -69,7 +114,23 @@ function onDoubleClick(event) {
 //Instantiate the loader for GLTF models
 const loader = new GLTFLoader();
 
-// Load the file and ensure the object is fully ready for raycasting
+/*****************************************************
+ * loader.load()
+ * 
+ * This function loads the asteroid Psyche 3D model into the scene.
+ * Ensures that the object is fully ready for raycasting. 
+ * 
+ * arguments:
+ *  `models/${objToRender}/psyche.glb` - Path to Psyche model to load
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  If successful the 3D Psyche model will load.
+ *  If error, the error will be logged to the console.
+ * 
+ */
 loader.load(
   `models/${objToRender}/psyche.glb`,
   function (gltf) {
@@ -129,7 +190,23 @@ if (objToRender === "psyche") {
 // Create a flag to control rotation
 let isRotating = true;
 
-//Render the scene
+/*****************************************************
+ * animate()
+ * 
+ * This function renders the scene and starts the animations for the scene objects. 
+ * Currently called as the last line in this file.
+ * 
+ * arguments:
+ *  none
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The scene elements will start to animate. The Psyche model will start to spin 
+ *  while the light source (the sun) will remain stationary. 
+ * 
+ */
 function animate() {
   requestAnimationFrame(animate);
 
@@ -144,14 +221,46 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-// Add an event listener to toggle rotation on a key press
+/*****************************************************
+ * listener "keydown" - "r"
+ * 
+ * This listener is invoked when the 'r' button is pressed. It will toggle 
+ * the asteroid's rotation on and off.
+ * 
+ * arguments:
+ *  event - the event key pressed
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The Psyche asteroid's rotation will toggle on and off. 
+ * 
+ */
 document.addEventListener("keydown", (event) => {
   if (event.key === "r") {
     isRotating = !isRotating; // Toggle rotation on/off
   }
 });
 
-// Add an event listener to toggle lighting on a key press 
+
+/*****************************************************
+ * listener "keydown" - "+" or "-" 
+ * 
+ * This listener is invoked when the '+' button is pressed. It will increase the
+ * lighting in the scene that is reflected towards Psyche. If the "-" is pressed,
+ * the lighting in the scene will decrease. 
+ * 
+ * arguments:
+ *  event - the event key pressed
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The Psyche asteroid's lighting will increase with + and decrease with -. 
+ * 
+ */
 document.addEventListener("keydown", (event) => {
   if (event.key === "+") {
     topLight.intensity += .05;
@@ -160,20 +269,44 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-//Add a listener to the window, so we can resize the window and the camera
+/*****************************************************
+ * listener "resize" - browser window resize 
+ * 
+ * This listener is invoked when the browser dimensions change with a resize by the user.
+ * 
+ * arguments:
+ *  resize - the window is resized
+ *  function - calculates new window dimensions for new renderer size
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The scene will readjust to the new browser window size. 
+ * 
+ */
 window.addEventListener("resize", function () {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-//Add mouse position listener, so we can make the eye move
-document.onmousemove = (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-}
-
-// Use renderer's DOM element to listen for canvas double clicks
+/*****************************************************
+ * listener "dblclick" - mouse is double clicked
+ * 
+ * This listener is invoked when the mouse is double clicked
+ * 
+ * arguments:
+ *  dblclick - the event of a mouse double click 
+ *  onDoubleClick() - function to zoom to area of double click
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The listener calls the onDoubleClick function().  
+ * 
+ */
 renderer.domElement.addEventListener('dblclick', onDoubleClick);
 
 //Start the 3D rendering
