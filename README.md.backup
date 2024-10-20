@@ -1,0 +1,34 @@
+## Sprint 2, Task 248 & 29: Multi-Page Info Overlay With QuickFacts
+
+### This sun model is built in Blender 4.2.   
+
+Tasks 248 and 249 were about adding overlays to the sun model to display information a
+
+### Installing Local Dependencies and Running Vite (assuming Node.js is installed)
+1. **Initialize your project:**
+   ```
+   npm init -y
+ 
+   // install Three.js
+   npm install --save three
+
+   // install vite
+   npm install --save-dev vite
+	```
+2. **Start the Vite server:**
+   - Option 1 (without modifying `package.json`):
+     ```bash
+     npx vite
+     ```
+   - Option 2 (with a custom script):
+     Add this to `package.json`:
+     ```json
+     "scripts": {
+       "dev": "vite"
+     }
+     ```
+     Then run:
+     ```bash
+     npm run dev
+     ```
+
