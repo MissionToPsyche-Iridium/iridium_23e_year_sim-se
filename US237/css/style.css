@@ -10,6 +10,42 @@
 * Date:       10/17/24
 * Revision:   1.0
 *
+* NASA PSYCHE MISSION STYLING GUIDELINES FULL DOCUMENT Link:https://drive.google.com/drive/folders/1MIwxLJ-mtbufn1g5_l8kPB9kicp_dtrM
+* Finding Summary below:
+*   Color Pallette: These are the component colors of the badge, and the larger brand system. They should be used
+*                   sparingly as accents of to create hierarchy. 
+* Mustard -     HEX #f9a000| RGB 250R 160G 0B
+* Gold -        HEX #f47c33| RGB 245R 125G 50B
+* Coral -       HEX #ef5966| RGB 239R 89G  102B
+* Magenta -     HEX #a53f5b| RGB 165R 63G  91B
+* Purple -      HEX #592651| RGB 89R  38G  81B
+* Dark Purple - HEX #302144| RGB 48R  33G  68B
+*
+*   Backgrounds: The primary color pallette can be used to create gradient backgrounds with these 6 following combinations. 
+*                No more than two colors are allowed to be in a single gradient!
+* Dark Purple - Black
+* Purple - Dark Purple
+* Magenta - Purple
+* Coral - Magenta
+* Gold - Coral
+* Mustard - Gold
+*
+*   Neutral Palette: A secondary set of neutral grays can be used to create hierarchy or organization in a layout, and should be based 
+*                    off of the following tints of a rich cool black. 
+* Black - HEX #12031d| RGB 18R  3G   29B 
+* Tints - 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black
+* 
+*   Typography: All messaging should be kept as simple and legible as possible. Use consistent sizes and treatment for headlines, copy,
+*               and any other type element to create a structure and improve readability.
+*   White topography over gradients ensures proper contrast. 
+*   DO NOT use gradients in topography. 
+*   DO NOT use more than one color in topography           
+*
+* Fonts: Kockout - Can be used for titles and short headlines.
+*        Helvetica - Use this font for longer headlines, body copy, and any web applications. **THIS IS OUR MAIN FONT**         
+* 
+*
+*
 * Tips:       (.name) The "."" makes this a class selector and we can apply .name 
 *             to multiple elements. 
 *             (#name1) The "#" makes this a class selector for a specific element. 
@@ -56,7 +92,7 @@ File Start
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background-color: black;
+  background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
 }
 
 /**************************
@@ -99,7 +135,7 @@ header h1 {
 #container3D canvas {
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
   position: relative;
   z-index: 1;
 }
@@ -111,7 +147,7 @@ header h1 {
 * "More Information" button
 */ 
 button#info {
-  background-color: gray;
+  background-color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
   cursor: pointer;
   color: antiquewhite;
   font-family: 'Courier New', Courier, monospace;
@@ -136,10 +172,10 @@ button#info {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) skew(-5deg);
-  background-color: black;
+  background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
   background-blend-mode: darken;
   background-size: cover;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
   z-index: 1000;
   width: 80%;
   padding: 20px;
@@ -190,8 +226,8 @@ button#info {
   font-size: xx-large;
   font-weight: bolder;
   transform: skew(5deg);
-  color: gray;
-  text-shadow: 0px 0px 30px antiquewhite;
+  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
+  text-shadow: 0px 0px 30px antiquewhite; /* Lets discuss the white as a team */
 }
 
 /**************************
@@ -219,8 +255,8 @@ button#info {
   text-align: left;
   font-size: x-large;
   padding: 5%;
-  color: gray;
-  background-color: black;
+  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
+  background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
   border-radius: 10px;
 }
 
@@ -243,8 +279,8 @@ button#info {
   z-index: 1001;
   position: relative;
   margin-top: 20px;
-  background-color: gray;
-  color: black;
+  background-color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
+  color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
   transform: skew(-5deg);
   border-radius: 6px;
   font-size: large;
@@ -257,8 +293,8 @@ button#info {
 * style changes for hovering curser over button
 */ 
 .popup-content button:hover{
-  background-color: #592651;
-  color: #f47c33;
+  background-color: #592651; /* Purple */
+  color: #f47c33; /* Gold */
   transition: 1s ease;
 }
 
@@ -272,7 +308,7 @@ button#info {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5); /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
   z-index: 999;
 }
 
@@ -296,6 +332,7 @@ button#info {
   display: flex;
   align-items: center;
   position: relative;
+}
 
 /**************************
 * #psyche2
@@ -324,7 +361,7 @@ button#info {
 */ 
 #screen1 p {
   opacity: 0.9;
-  color: gray;
+  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
   background-color: transparent;
 }
 
@@ -333,7 +370,7 @@ button#info {
 *
 */ 
 #screen1 h1 {
-  color: gray;
+  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
   text-shadow: 0px 0px 50px antiquewhite;
 }
 
@@ -423,7 +460,7 @@ button#info {
 */ 
 #screen1 p {
   opacity: 0.9;
-  color: gray;
+  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
   background-color: transparent;
 }
 
@@ -448,7 +485,7 @@ button#info {
 *
 */ 
 #screen1 h1 {
-  color: gray;
+  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
   text-shadow: 0px 0px 50px antiquewhite;
 }
 
