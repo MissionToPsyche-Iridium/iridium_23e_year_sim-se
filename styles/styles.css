@@ -1,0 +1,196 @@
+/* ===============================
+   Global Styles and Layout
+   ===============================
+   Defines base styles for the body tag to ensure no scrollbars appear (hidden overflow).
+   Sets a standard font across the project.
+*/
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* ===============================
+   Menu Toggle Button Styles
+   ===============================
+   Controls the appearance and placement of the menu toggle button.
+   It stays fixed at the top-left corner and rotates on interaction.
+   This triggers the vertical menu expansion.
+*/
+#menu-toggle {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+#menu-toggle img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Circular image button */
+}
+
+#menu-toggle.rotate {
+  transform: rotate(360deg); /* Rotation effect on click */
+}
+
+/* ===============================
+   Collapsible Vertical Menu
+   ===============================
+   This div initially remains hidden (height: 0) and expands vertically when toggled.
+   The icons inside become visible during this transition.
+   It uses a gradient background and shadow for aesthetics.
+*/
+#collapsible-menu {
+  position: fixed;
+  top: 30px;
+  left: 40px;
+  width: 10px; /* Narrow menu initially */
+  height: 0; /* Collapsed state */
+  border-radius: 0 15px 15px 15px;
+  display: none; /* Hidden initially */
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: visible;
+  transition: height 0.3s ease-in-out, width 0.5s ease-in-out;
+  z-index: 1;
+}
+
+/* ===============================
+   Expanded Menu - Icon Behavior
+   ===============================
+   When the menu expands, icons transition to their full size and become visible.
+   A slight delay aligns the transition with the menu’s animation.
+*/
+#collapsible-menu.expanded .menu-icon {
+  font-size: 30px;  /* Full size when expanded */
+  opacity: 1;  /* Fully visible */
+  transition-delay: 0.15s;  /* Aligns with menu transition */
+}
+
+#collapsible-menu.horizontal-expanded {
+  width: 230px;  /* Expanded width */
+  transition: width 0.5s ease-in-out;
+  display: flex;
+  align-items: flex-start; /* Ensure icons stay in place */
+  justify-content: space-evenly; /* Maintain even spacing */
+}
+
+#collapsible-menu.horizontal-expanded #settings-overlay {
+  display: block;
+  opacity: 1;  /* Make visible when menu is expanded horizontally */
+}
+
+/* ===============================
+   Menu Icon Base Styles
+   ===============================
+   Sets the default appearance of the icons.
+   They are initially hidden (size 0, opacity 0) and become visible upon expansion.
+   Includes a zoom effect on hover.
+*/
+.menu-icon {
+  color: white;
+  font-size: 0px;  /* Hidden size */
+  opacity: 0;  /* Transparent */
+  transition: font-size 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition */
+  cursor: pointer;
+}
+
+.menu-icon:hover {
+  transform: scale(1.2);  /* Zoom effect */
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+/* ===============================
+   Settings Overlay
+   ===============================
+   This overlay appears when triggered by the settings icon.
+   It remains hidden by default (opacity 0) and fades in with a smooth transition.
+*/
+#settings-overlay {
+  color: white;
+  display: none;
+  position: fixed; /* Same as collapsible menu */
+  top: 30px; /* Match the top position of the menu */
+  left: 40px; /* Slight offset to align with the menu */
+  width: 0; /* Start with collapsed width */
+  height: 350px; /* Same height as the collapsible menu */
+  border-radius: 0 15px 15px 15px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden; /* Prevent content overflow during transition */
+  transition: width 0.5s ease-in-out, opacity 0.3s ease;
+  z-index: 0;
+}
+
+
+/* ===============================
+   Settings Content Layout
+   ===============================
+   Organizes the elements within the settings overlay.
+   Uses flexbox to align items vertically with a consistent gap.
+*/
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  opacity: 0;  /* Start hidden */
+  transition: opacity 0.3s ease-in-out;  /* Smooth fade-in/out */
+}
+
+#settings-icon.rotate {
+  transform: rotate(360deg); /* Rotation effect on click */
+}
+
+
+/* for the info overlay */
+.hidden {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Info Overlay Styling */
+#info-overlay {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  width: 80%; /* Adjust as needed */
+  max-width: 600px;
+  background: linear-gradient(145deg, #0d0d0d, #1c1c1c);
+  padding: 20px;
+  box-shadow: 0 5px 30px rgba(255, 255, 255, 0.2), 
+              0 0 20px rgba(213, 221, 100, 0.6), 
+              inset 0 0 10px rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  z-index: 100;
+
+  opacity: 0; /* Start fully transparent */
+  transform: translateX(-50%) scale(0.7); /* Start smaller */
+  transition: transform 0.5s ease-out, opacity 0.5s ease-in-out;
+}
+
+/* Inner content styling */
+.info-content h2 {
+  margin-top: 0;
+  color: #f89b07;
+  text-align: left;
+  text-shadow: 0 0 20px #352247;
+}
+
+.info-content p {
+  text-align: center;
+}
+
+/* Active class to make the overlay appear */
+#info-overlay.active {
+  display: block; /* Make it visible */
+  transform: translateX(-50%) scale(1); /* Zoom into view */
+  opacity: 1; /* Fade in */
+}
+
