@@ -2,7 +2,7 @@
 
 ### This sun model is built in Blender 4.2.   
 
-Tasks 248 and 249 were about adding overlays to the sun model to display information a
+Tasks 248 and 249 were about adding overlays to the sun model to display information. Pages are added in the pageInfo.js script. 
 
 ### Installing Local Dependencies and Running Vite (assuming Node.js is installed)
 1. **Initialize your project:**
