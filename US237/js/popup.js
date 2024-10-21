@@ -37,7 +37,8 @@
 *    ninthScreen() -  This opens the seventh popup screen. Displays the ring info
 *
 *    tenthScreen()-  This opens the sixth popup screen. Displays the atmosphere info. 
-*
+* 
+*   eleventhScreen()This function populates and displays the eleventh screen with unique facts about Psyche's economic value and composition details.
 */
 
 /*
@@ -682,10 +683,50 @@ function tenthScreen() {
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     `;
     
     // Attach event listeners for buttons
     document.getElementById('prevButton').addEventListener('click', ninthScreen); // Go back to the ninth screen
     document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
+    document.getElementById('nextButton').addEventListener('click', eleventhScreen); // Added this new listener
+}
+
+
+function eleventhScreen() {
+    const popupContent = document.querySelector('.popup-content');
+    
+    // Update content for the eleventh screen
+    popupContent.innerHTML = `
+      <div class="popup-content-header">
+        <h2>Economics & Composition</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>
+          Psyche's estimated worth is around $10,000 quadrillion, making it potentially more valuable than Earth's entire economy. 
+          This value comes from its unique metal composition, primarily iron and nickel, similar to Earth's core.
+        <br>
+        <br>
+          The asteroid's surface has unique features:
+          • Albedo (reflectivity) ranges from 0.1 to 0.3
+          • Surface temperature varies from -150°C to -40°C (-238°F to -40°F)
+          • Some areas might contain trace amounts of gold and platinum metals
+          • Radar observations suggest metal concentrations up to 60%
+        <br>
+        <br>
+          If brought to Earth, this single asteroid would collapse the world's commodity markets. However, NASA's Psyche mission 
+          is purely scientific, focusing on understanding planetary formation rather than resource extraction.
+        </p>
+        <img src="../../US237/images/psyche-economy.png" id="value">
+      </div>
+      <div class="popup-buttons">
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
+    `;
+    
+    // Attach event listeners for buttons
+    document.getElementById('prevButton').addEventListener('click', tenthScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
 }
