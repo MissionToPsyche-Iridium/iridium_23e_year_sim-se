@@ -489,3 +489,39 @@ button#info {
   text-shadow: 0px 0px 50px antiquewhite;
 }
 
+/**************************
+* .screen11 p
+*
+*/ 
+.screen11 p {
+    font-size: large;
+  }
+  
+
+/**************************
+* #value
+*
+*/ 
+#value {
+    width: 40%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  /**************************
+  * .screen12 p
+  *
+  */ 
+  .screen12 p {
+    font-size: large;
+  }
+
+  /**************************
+* #instruments
+*
+*/ 
+#instruments {
+    width: 40%;
+    height: auto;
+    border-radius: 10px;
+  }

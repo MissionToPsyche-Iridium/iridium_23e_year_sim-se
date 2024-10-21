@@ -697,7 +697,6 @@ function tenthScreen() {
 function eleventhScreen() {
     const popupContent = document.querySelector('.popup-content');
     
-    // Update content for the eleventh screen
     popupContent.innerHTML = `
       <div class="popup-content-header">
         <h2>Economics & Composition</h2>
@@ -706,15 +705,13 @@ function eleventhScreen() {
         <p>
           Psyche's estimated worth is around $10,000 quadrillion, making it potentially more valuable than Earth's entire economy. 
           This value comes from its unique metal composition, primarily iron and nickel, similar to Earth's core.
-        <br>
-        <br>
+        <br><br>
           The asteroid's surface has unique features:
           • Albedo (reflectivity) ranges from 0.1 to 0.3
           • Surface temperature varies from -150°C to -40°C (-238°F to -40°F)
           • Some areas might contain trace amounts of gold and platinum metals
           • Radar observations suggest metal concentrations up to 60%
-        <br>
-        <br>
+        <br><br>
           If brought to Earth, this single asteroid would collapse the world's commodity markets. However, NASA's Psyche mission 
           is purely scientific, focusing on understanding planetary formation rather than resource extraction.
         </p>
@@ -723,10 +720,109 @@ function eleventhScreen() {
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
         <button id="closeButton">Close</button>
+        <button id="nextButton">Next</button>
       </div>
     `;
     
-    // Attach event listeners for buttons
     document.getElementById('prevButton').addEventListener('click', tenthScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', twelfthScreen);
+}
+
+function twelfthScreen() {
+    const popupContent = document.querySelector('.popup-content');
+    
+    popupContent.innerHTML = `
+      <div class="popup-content-header">
+        <h2>Mission Instruments</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>
+          The Psyche spacecraft carries a sophisticated suite of instruments designed to study the asteroid's properties:
+          <br><br>
+          <strong>• Multispectral Imager:</strong> Twin cameras with color filters will provide detailed images of the 
+          asteroid's surface. These high-resolution images help map Psyche's geology, determine its composition variations,
+          and create topographic maps.
+          <br><br>
+          <strong>• Gamma Ray and Neutron Spectrometer:</strong> This instrument detects gamma rays and neutrons emitted 
+          from the asteroid's surface elements. It will help determine Psyche's elemental composition, particularly its 
+          iron and nickel content.
+          <br><br>
+          <strong>• Magnetometer:</strong> Two identical sensors mounted on a 6-foot (2-meter) boom will measure the 
+          asteroid's magnetic field. This data will provide evidence of whether Psyche was once a planetary core that 
+          generated a magnetic field.
+          <br><br>
+          <strong>• X-band Radio Telecommunications System:</strong> Besides communication, this system will measure 
+          Psyche's gravity field by tracking subtle changes in the spacecraft's radio signals, helping determine the 
+          asteroid's internal structure.
+        </p>
+        <img src="/US237/images/psyche-instruments.png" id="instruments">
+      </div>
+      <div class="popup-buttons">
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
+    `;
+    
+    document.getElementById('prevButton').addEventListener('click', eleventhScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+}
+
+/*****************************************************
+ * twelfthScreen()
+ * 
+ * This function populates and displays information about the
+ * scientific instruments aboard the Psyche spacecraft.
+ * 
+ * arguments:
+ *  none
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  Displays the twelfth popup screen to the user.
+ * 
+ * listeners: 
+ *  prevButton - calls eleventhScreen()
+ *  closeButton - calls closePopup()
+ * 
+ */
+function twelfthScreen() {
+    const popupContent = document.querySelector('.popup-content');
+    
+    popupContent.innerHTML = `
+      <div class="popup-content-header">
+        <h2>Mission Instruments</h2>
+      </div>
+      <div class="popup-content-body">
+        <p>
+          The Psyche spacecraft carries a sophisticated suite of instruments designed to study the asteroid's properties:
+          <br><br>
+          <strong>• Multispectral Imager:</strong> Twin cameras with color filters will provide detailed images of the 
+          asteroid's surface. These high-resolution images help map Psyche's geology, determine its composition variations,
+          and create topographic maps.
+          <br><br>
+          <strong>• Gamma Ray and Neutron Spectrometer:</strong> This instrument detects gamma rays and neutrons emitted 
+          from the asteroid's surface elements. It will help determine Psyche's elemental composition, particularly its 
+          iron and nickel content.
+          <br><br>
+          <strong>• Magnetometer:</strong> Two identical sensors mounted on a 6-foot (2-meter) boom will measure the 
+          asteroid's magnetic field. This data will provide evidence of whether Psyche was once a planetary core that 
+          generated a magnetic field.
+          <br><br>
+          <strong>• X-band Radio Telecommunications System:</strong> Besides communication, this system will measure 
+          Psyche's gravity field by tracking subtle changes in the spacecraft's radio signals, helping determine the 
+          asteroid's internal structure.
+        </p>
+        <img src="/US237/images/psyche-instruments.png" id="instruments">
+      </div>
+      <div class="popup-buttons">
+        <button id="prevButton">Previous</button>
+        <button id="closeButton">Close</button>
+      </div>
+    `;
+    
+    document.getElementById('prevButton').addEventListener('click', eleventhScreen);
     document.getElementById('closeButton').addEventListener('click', closePopup);
 }
