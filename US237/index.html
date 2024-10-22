@@ -13,6 +13,8 @@
 *
 * Files Linked:
 *    css/style.css -  This file defines the presentation aspects of this HTML file
+*    css/popup_style.css -  This file defines the presentation aspects of popup
+*    css/popup_style.css -  This file defines the presentation aspects of the Psyche popup
 *
 *    js/main.js -     This file is the main driver of the Psyche simulation. Contains
 *                     the asteroid model and action listeners to manipulate. 
@@ -35,20 +37,23 @@ File Start
     <meta charset="utf-8" />
     <!-- Defines the webpage tab title-->
     <title>Psyche 16</title>
-    <!-- Linking the CSS stylesheet for colors, fonts, spacing and more-->
+    <!-- Linking the CSS stylesheet for colors, fonts, spacing, and more-->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/psyche_style.css"/>
+    <link rel="stylesheet" href="css/popup_style.css"/>
   </head>
   <!-- <body> contains everything that is visible to the user-->
   <body>
     <header>
       <!-- Defines webpage header title-->
-      <h1>Psyche 16</h1>
+      <h1>16 Psyche</h1>
     </header>
     <!-- 'Main' section for the dominant content of the page-->
     <main>
-      <div id="container3D"></div>
-      <!-- More Information Button - Opens the popup information pages-->
-      <button id="info">More Information</button>
+      <div id="container3D">
+        <!-- More Information Button - Opens the popup information pages-->
+        <button id="info"><img src="images/info_button.png" id="info_button"></button>
+      </div>
       <!-- Linking the main.js file that displays the asteroid-->
       <script type="module" src="js/main.js"></script>
       <!-- Linking the popup.js file that displays the popup information pages-->
@@ -57,4 +62,5 @@ File Start
     </main>
   </body>
 </html>
+
 

@@ -57,25 +57,7 @@
 *     #container3D
 *     #container3D canvas
 *     button#info
-*     .popup
-*     .popup-buttons
-*     .popup-buttons button
-*     .popup-content
-*     .popup-content-header
-*     .popup-content-body
-*     .popup-content-body p
-*     .popup-content button
-*     .popup-content button:hover
-*     .popup-overlay
-*     #psyche1
-*     #header1
-*     #logo
-*     #screen1 p
-*     #screen1 h1
-*     #rings
-*     #atmosphere
-*     #moons
-*     
+* 
 *     
 */ 
 
@@ -92,7 +74,7 @@ File Start
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
+  background-color: white; 
 }
 
 /**************************
@@ -102,9 +84,10 @@ body {
 header {
   padding: 2em 0;
   text-align: center;
-  color: white;
+  color: black;
   z-index: 10;
   position: relative;
+  font-size: large;
 }
 
 /**************************
@@ -122,10 +105,17 @@ header h1 {
 *
 */ 
 #container3D {
-  position: relative;
-  width: 100vw;
-  height: calc(100vh - 100px); /* Adjust height to leave room for the header and button */
-  margin-top: 0;
+  width: 90vw; /* 80% of the viewport width */
+  height: 40vh; /* 40% of the viewport height */
+  margin: 0 auto; /* Center horizontally */
+  position: absolute;
+  top: 10%; 
+  left: 50%; /* Start from the middle horizontally */
+  transform: translateX(-50%); /* Adjust to center horizontally */
+  background-color: black; 
+  border-radius: 20px; 
+  border: solid white 2px;
+  overflow: hidden; /* Ensure content stays within the container */
 }
 
 /**************************
@@ -135,7 +125,7 @@ header h1 {
 #container3D canvas {
   width: 100%;
   height: 100%;
-  background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
+  background-color: #12031d;
   position: relative;
   z-index: 1;
 }
@@ -147,345 +137,22 @@ header h1 {
 * "More Information" button
 */ 
 button#info {
-  background-color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
+  background-color: transparent;
+  color: antiquewhite; 
   cursor: pointer;
-  color: antiquewhite;
   font-family: 'Courier New', Courier, monospace;
-  padding: 10px 20px;
+  padding: 5px 10px; 
   border: none;
-  border-radius: 5px;
+  border-radius: 3px; 
   position: absolute;
-  bottom: 20px; /* Place it at the bottom of the viewport */
-  left: 50%;
-  transform: translateX(-50%); /* Center the button horizontally */
-  z-index: 1002; /* Ensure it's above the canvas */
+  top: 1%; 
+  left: 10px; 
+  z-index: 1002; /* Ensure it's above other elements */
+  font-size: 0.8em; 
+  width: 8%; 
+  background-position: center;
 }
 
-/**************************
-* .popup
-*
-* 
-*/ 
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) skew(-5deg);
-  background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
-  background-blend-mode: darken;
-  background-size: cover;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
-  z-index: 1000;
-  width: 80%;
-  padding: 20px;
-  border-radius: 20px;
-  color: antiquewhite;
+#info_button {
+  width: 100%;
 }
-
-/**************************
-* .popup-buttons
-*
-* container for the three popup buttons
-*/ 
-.popup-buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  transform: skew(5deg);
-}
-
-/**************************
-* .popup-buttons button
-* 
-* sizing for the individual buttons
-*/ 
-.popup-buttons button {
-  margin: 0 10px;
-}
-
-/**************************
-* .popup-content
-*
-* 
-*/ 
-.popup-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-/**************************
-* .popup-content-header
-*
-*/ 
-.popup-content-header {
-  text-align: center;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: xx-large;
-  font-weight: bolder;
-  transform: skew(5deg);
-  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-  text-shadow: 0px 0px 30px antiquewhite; /* Lets discuss the white as a team */
-}
-
-/**************************
-* .popup-content-body
-*
-*/ 
-.popup-content-body {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-grow: 1;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: italic;
-  font-weight: bold;
-}
-
-/**************************
-* .popup-content-body p
-*
-* popup content paragraph body styling
-*/ 
-.popup-content-body p {
-  flex: 1;
-  margin-right: 20px;
-  text-align: left;
-  font-size: x-large;
-  padding: 5%;
-  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-  background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
-  border-radius: 10px;
-}
-
-
-/**************************
-* .popup-content-body li
-*
-* popup content body styling
-*/ 
-.popup-content-body li {
-  font-size: x-large;
-}
-
-/**************************
-* .popup-content button
-*
-* popup content button styling
-*/ 
-.popup-content button {
-  z-index: 1001;
-  position: relative;
-  margin-top: 20px;
-  background-color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-  color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
-  transform: skew(-5deg);
-  border-radius: 6px;
-  font-size: large;
-  cursor: pointer;
-}
-
-/**************************
-* .popup-content button:hover
-*
-* style changes for hovering curser over button
-*/ 
-.popup-content button:hover{
-  background-color: #592651; /* Purple */
-  color: #f47c33; /* Gold */
-  transition: 1s ease;
-}
-
-/**************************
-* .popup-overlay
-*
-*/ 
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
-  z-index: 999;
-}
-
-/************ Images ************/
-
-/**************************
-* #psyche1
-*
-*/ 
-#psyche1 {
-  width: 40%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/**************************
-* #header1
-*
-*/ 
-#header1 {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-/**************************
-* #psyche2
-*
-*/ 
-#psyche2 {
-  width: 50%;
-  height: auto;
-  border-radius: 10px;
-
-}
-
-/**************************
-* #logo
-*
-*/ 
-#logo {
-  width: 20%;
-  height: auto;
-  opacity: .8;
-}
-
-/**************************
-* #screen1 p
-*
-*/ 
-#screen1 p {
-  opacity: 0.9;
-  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-  background-color: transparent;
-}
-
-/**************************
-* #screen1 h1
-*
-*/ 
-#screen1 h1 {
-  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-  text-shadow: 0px 0px 50px antiquewhite;
-}
-
-/**************************
-* #path
-*
-*/
-#path {
-  width: 50%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/**************************
-* #rings
-*
-*/
-#rings {
-  width: 70%;
-  height: 50%;
-  border-radius: 10px;
-}
-
-/**************************
-* #atmosphere
-*
-*/  
-#atmosphere {
-  width: 40%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/**************************
-* #moons
-*
-*/ 
-#moons {
-  width: 50%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/**************************
-* #plants
-*
-*/ 
-#plants {
-  width: 20%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/**************************
-* #oceans
-*
-*/ 
-#ocean {
-  width: 40%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/**************************
-* #video
-*
-*/ 
-#video {
-  width: 50%;
-  height: auto;
-  border-radius: 10px;
-}
-
-/**************************
-* #header1
-*
-*/ 
-#header1 {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-/**************************
-* #screen1 p
-*
-*/ 
-#screen1 p {
-  opacity: 0.9;
-  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-  background-color: transparent;
-}
-
-/**************************
-* .screen4 p
-*
-*/ 
-.screen4 p {
-  font-size: large;
-}
-
-/**************************
-* .screen7 p
-*
-*/ 
-.screen7 p {
-  font-size: large;
-}
-
-/**************************
-* #screen1 h1
-*
-*/ 
-#screen1 h1 {
-  color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-  text-shadow: 0px 0px 50px antiquewhite;
-}
-
