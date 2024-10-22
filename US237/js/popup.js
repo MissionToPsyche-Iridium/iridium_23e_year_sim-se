@@ -167,9 +167,9 @@ function firstScreen() {
     popupContent.innerHTML = `
     <div  id="screen1">
       <div class="popup-content-header" id="header1">
-        <img src="images/Psyche_icon_white.svg" id="logo">
+        <img src="images/psyche_popup_images/Psyche_icon_white.svg" id="logo">
         <h1>Asteroid 16 Psyche</h1>
-        <img src="images/Psyche_icon_white.svg" id="logo">
+        <img src="images/psyche_popup_images/Psyche_icon_white.svg" id="logo">
       </div>
       <div class="popup-content-body">
         <p>
@@ -237,7 +237,7 @@ function secondScreen() {
           <li>The Psyche mission is expected to reach the asteroid in 2029</li>
         </ul>
         <video id="video" controls autoplay muted loop>
-          <source src="images/psyche_quick_overview.mp4" type="video/mp4">
+          <source src="images/psyche_popup_images/psyche_quick_overview.mp4" type="video/mp4">
         </video>
       </div>
       <div class="popup-buttons">
@@ -289,7 +289,7 @@ function thirdScreen() {
           area is 64,000 square miles (165,800 square kilometers).<br><br> NASA Jet Propulsion Laboratory (JPL) has compared its size to the State of Maryland 
           in the United States of America.
         </p>
-        <img id="psyche1" src = "images/Psyche_MD_3.jpg">
+        <img id="psyche1" src = "images/psyche_popup_images/Psyche_MD_3.jpg">
       </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
@@ -344,7 +344,7 @@ function fourthScreen() {
           Currently, 16 Psyche does not show evidence of the critical nutrients of water, a breathable atmosphere, and a hospitable 
           environment to allow for human life.
         </p>
-        <img src="images/ocean.jpg" id="ocean">
+        <img src="images/psyche_popup_images/ocean.jpg" id="ocean">
       </div>
         
       <div class="popup-buttons">
@@ -403,7 +403,7 @@ function fifthScreen() {
           <br>
             16 Psyche is believed to have survived multiple violent collisions during the solar system's formation.
           </p>
-          <img src="images/Psyche_2.jpg" id="psyche2">
+          <img src="images/psyche_popup_images/Psyche_2.jpg" id="psyche2">
         </div>
         <div class="popup-buttons">
           <button id="prevButton">Previous</button>
@@ -460,7 +460,7 @@ function sixthScreen() {
           <br>
           Psyche rotates along its axis, a Psyche day, about once every four hours.
         </p>
-        <img src="images/psyche_path.jpg" id="path">
+        <img src="images/psyche_popup_images/psyche_path.jpg" id="path">
       </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
@@ -519,7 +519,7 @@ function seventhScreen() {
           the Moon, where lifting a car on Psyche would be equivalent to lifting a dog on Earth.
         </p>
         <video id="video" controls autoplay muted loop>
-          <source src="images/psyche_video.mp4" type="video/mp4">
+          <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
         </video>
       </div>
       <div class="popup-buttons">
@@ -573,7 +573,7 @@ function eighthScreen() {
           does not believe to have any moons or asteroids orbiting around it, however, more information will be known in 2029 when the Pscyche
           mission is expected to reach the asteroid.
         </p>
-        <img src="images/moons.jpg" id="moons">
+        <img src="images/psyche_popup_images/moons.jpg" id="moons">
       </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
@@ -624,7 +624,7 @@ function ninthScreen() {
           While a few asteroids are known to have rings, 16 Psyche does not possess any.
         </p>
         <div>
-        <img src="images/rings.jpg" id="rings">
+        <img src="images/psyche_popup_images/rings.jpg" id="rings">
         </div>
       </div>
       <div class="popup-buttons">
@@ -677,7 +677,7 @@ function tenthScreen() {
         <br>
           Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris.
         </p>
-        <img src="images/aurora.jpg" id="atmosphere">
+        <img src="images/psyche_popup_images/aurora.jpg" id="atmosphere">
         </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
