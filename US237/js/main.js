@@ -1,295 +1,99 @@
-/* 
-* main.js
-* 
-*
-* This main.js creates a scene that is rendered and displayed on a webpage. 
-* 
-* Class:      SER 401
-* Team:       35
-* Project:    NASA Psyche Mission: Year on Psyche Simulation
-* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
-* Date:       10/17/24
-* Revision:   1.0
-*
-* Functions:
-*    css/style.css -  This file defines the presentation aspects of this HTML file
-*
-*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
-*                     the asteroid model and action listeners to manipulate. 
-*
-*    js/popup.js -    This file 
-* 
-* Listeners: 
-*    css/style.css -  This file defines the presentation aspects of this HTML file
-*
-*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
-*                     the asteroid model and action listeners to manipulate. 
-*
-*    js/popup.js -    This file 
-*
-*/
-
-/*
-========================================================================================================
-File Start
-========================================================================================================
-*/
-
-/*****************************************************
- * IMPORTS
- * 
- * Importing the needed libraries 
- *  THREE - JavaScript Animation library 
- *  OrbitalControls - Camera control around scene objects
- *  GLTFLoader - Loading and displaying 3D models
- *  
- */
-//Import the THREE.js library
+// Import the THREE.js library
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 // To allow for the camera to move around the scene
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 // To allow for importing the .gltf file
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 
-//Create a Three.JS Scene
+// Create a Three.JS Scene
 const scene = new THREE.Scene();
-//create a new camera with positions and angles
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+// Get the container and create a camera with its aspect ratio based on the container
+const container = document.getElementById('container3D');
+const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
 
-//Keep the 3D object on a global variable so we can access it later
-let object;
-
-//OrbitControls allow the camera to move around the scene
+// OrbitControls allow the camera to move around the scene
 let controls;
 
-//Set which object to render
+// Keep the 3D object on a global variable so we can access it later
+let object;
+
+// Set which object to render
 let objToRender = 'psyche';
 
 // Add raycaster and mouse vector for detecting intersections
-const raycaster = new THREE.Raycaster(); //racyaster is short for raycasting which helps in mouse picking or working out where an object in 3D space is based on the mouse
-const mouse = new THREE.Vector2(); // a new 2D Vector (x, y) or a point in 2D space
+const raycaster = new THREE.Raycaster(); // Raycaster for detecting intersections
+const mouse = new THREE.Vector2(); // Mouse vector for capturing click coordinates
 
-// Define the zoom step (how much the camera moves forward)
-const zoomStep = 2; 
+// Instantiate a new renderer and set its size based on the container
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
 
-/*****************************************************
- * onDoubleCLick()
- * 
- * This function moves the camera view towards the area of the asteroid that was double clicked
- * 
- * arguments:
- *  event - location of the double click
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The camera view will zoom in towards the area of the asteroid that was double clicked.
- * 
- */
-function onDoubleClick(event) {
-  // Get mouse position relative to canvas
-  const mouse = new THREE.Vector2(
-    (event.clientX / window.innerWidth) * 2 - 1,
-    -(event.clientY / window.innerHeight) * 2 + 1
-  );
+// Add the renderer to the container
+container.appendChild(renderer.domElement);
 
-  // Raycast from the mouse position
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObject(object, true);
+// Set the initial camera position
+camera.position.set(0, 0, 30); // Adjusted to be farther away from the object
 
-  if (intersects.length > 0) {
-    const intersectPoint = intersects[0].point;
-
-    // Calculate direction from camera to intersect point
-    const direction = new THREE.Vector3().subVectors(intersectPoint, camera.position).normalize();
-
-    // Move the camera towards the intersect point
-    camera.position.addScaledVector(direction, zoomStep); // Move camera closer by 'zoomStep'
-    camera.lookAt(intersectPoint); // Make the camera focus on the intersection point
-    controls.update(); // Update controls after moving the camera
-  }
-}
-
-//Instantiate the loader for GLTF models
-const loader = new GLTFLoader();
-
-/*****************************************************
- * loader.load()
- * 
- * This function loads the asteroid Psyche 3D model into the scene.
- * Ensures that the object is fully ready for raycasting. 
- * 
- * arguments:
- *  `models/${objToRender}/psyche.glb` - Path to Psyche model to load
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  If successful the 3D Psyche model will load.
- *  If error, the error will be logged to the console.
- * 
- */
-loader.load(
-  `models/${objToRender}/psyche.glb`,
-  function (gltf) {
-    // If the file is loaded, add it to the scene
-    object = gltf.scene;
-    object.traverse((child) => {
-      if (child.isMesh) {
-        child.geometry.computeBoundingBox(); // Ensure it has a bounding box for raycasting
-      }
-    });
-    scene.add(object);
-    console.log('Object loaded and added to scene.');
-  },
-  function (xhr) {
-    // While it is loading, log the progress
-    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-  },
-  function (error) {
-    // If there is an error, log it
-    console.error(error);
-  }
-);
-
-//Instantiate a new renderer and set its size
-const renderer = new THREE.WebGLRenderer({ alpha: true }); //Alpha: true allows for the transparent background
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-//Add the renderer to the DOM
-document.getElementById("container3D").appendChild(renderer.domElement);
-
-//Set how far the camera will be from the 3D model
-camera.position.z = 10;
-
-//Add lights to the scene, so we can actually see the 3D model
-const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
-topLight.position.set(500, 500, 500) //top-left-ish
-topLight.castShadow = true;
+// Add lights to the scene
+const topLight = new THREE.DirectionalLight(0xffffff, 1);
+topLight.position.set(500, 500, 500);
 scene.add(topLight);
 
 const ambientLight = new THREE.AmbientLight(0x333333, 1);
 scene.add(ambientLight);
 
-//This adds controls to the camera, so we can rotate / zoom it with the mouse
-if (objToRender === "psyche") {
-  controls = new OrbitControls(camera, renderer.domElement);
-  
-  // Add your custom configuration for panning here
-  controls.enablePan = true;
-  controls.panSpeed = 1.0; // Optional: adjust speed
-  controls.mouseButtons = {
-    LEFT: THREE.MOUSE.ROTATE,    // Left-click rotates
-    MIDDLE: THREE.MOUSE.DOLLY,    // Middle-click zooms
-    RIGHT: THREE.MOUSE.PAN        // Right-click pans
-  };
-}
+// Load the 3D model using the GLTFLoader
+const loader = new GLTFLoader();
+loader.load(
+  `models/${objToRender}/psyche.glb`,
+  function (gltf) {
+    object = gltf.scene;
+    object.scale.set(3, 3, 3); // Scale the object to fit within the container
+    object.position.set(0, 0, 0); // Center the object
+    scene.add(object);
+    console.log('Object loaded and added to scene.');
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+  },
+  function (error) {
+    console.error(error);
+  }
+);
 
-// Create a flag to control rotation
-let isRotating = true;
+// Add OrbitControls to allow user interaction
+controls = new OrbitControls(camera, renderer.domElement);
+controls.enablePan = true;
+controls.enableDamping = true; // Enable damping for a smoother rotation
+controls.dampingFactor = 0.05;
+controls.update();
 
-/*****************************************************
- * animate()
- * 
- * This function renders the scene and starts the animations for the scene objects. 
- * Currently called as the last line in this file.
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The scene elements will start to animate. The Psyche model will start to spin 
- *  while the light source (the sun) will remain stationary. 
- * 
- */
+// Add a resize listener to adjust the canvas and camera aspect ratio when the window is resized
+window.addEventListener("resize", function () {
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+  renderer.setSize(width, height);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+});
+
+// Function to animate the scene
 function animate() {
   requestAnimationFrame(animate);
 
-  //Make Psyche rotate along x axis 
-  //Mimics its actual rotation like a roticery chicken
-  if (objToRender === "psyche" && object && isRotating) {
-    // not sure the how the math correlates to reality, but a good starting point 
-    object.rotation.x += 0.0009;
-    object.rotation.y += 0.001;
-    object.rotation.z += 0.0009;
+  // Rotate the object if it exists
+  if (object) {
+    object.rotation.x += 0.001; // Slower rotation on the x-axis
+    object.rotation.y += 0.001; // Slower rotation on the y-axis
   }
+
+  controls.update();
   renderer.render(scene, camera);
 }
 
-/*****************************************************
- * listener "keydown" - "r"
- * 
- * This listener is invoked when the 'r' button is pressed. It will toggle 
- * the asteroid's rotation on and off.
- * 
- * arguments:
- *  event - the event key pressed
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The Psyche asteroid's rotation will toggle on and off. 
- * 
- */
-document.addEventListener("keydown", (event) => {
-  if (event.key === "r") {
-    isRotating = !isRotating; // Toggle rotation on/off
-  }
-});
-
-
-/*****************************************************
- * listener "keydown" - "+" or "-" 
- * 
- * This listener is invoked when the '+' button is pressed. It will increase the
- * lighting in the scene that is reflected towards Psyche. If the "-" is pressed,
- * the lighting in the scene will decrease. 
- * 
- * arguments:
- *  event - the event key pressed
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The Psyche asteroid's lighting will increase with + and decrease with -. 
- * 
- */
-document.addEventListener("keydown", (event) => {
-  if (event.key === "+") {
-    topLight.intensity += .05;
-  } else if (event.key === "-") {
-    topLight.intensity -= .05;
-  }
-});
-
-/*****************************************************
- * listener "resize" - browser window resize 
- * 
- * This listener is invoked when the browser dimensions change with a resize by the user.
- * 
- * arguments:
- *  resize - the window is resized
- *  function - calculates new window dimensions for new renderer size
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The scene will readjust to the new browser window size. 
- * 
- */
-window.addEventListener("resize", function () {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+// Start the animation
+animate();
 
 /*****************************************************
  * listener "dblclick" - mouse is double clicked
@@ -309,5 +113,82 @@ window.addEventListener("resize", function () {
  */
 renderer.domElement.addEventListener('dblclick', onDoubleClick);
 
-//Start the 3D rendering
-animate();
+/*****************************************************
+ * onDoubleClick()
+ * 
+ * This function moves the camera view towards the area of the object that was double clicked
+ * 
+ * arguments:
+ *  event - location of the double click
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The camera view will zoom in towards the area of the object that was double clicked.
+ * 
+ */
+function onDoubleClick(event) {
+  // Calculate mouse position in normalized device coordinates
+  mouse.x = (event.clientX / container.clientWidth) * 2 - 1;
+  mouse.y = -(event.clientY / container.clientHeight) * 2 + 1;
+
+  // Update the raycaster with the camera and mouse position
+  raycaster.setFromCamera(mouse, camera);
+
+  // Calculate objects intersecting the picking ray
+  const intersects = raycaster.intersectObject(object, true);
+
+  if (intersects.length > 0) {
+    // Get the point of intersection
+    const intersectPoint = intersects[0].point;
+
+    // Move the camera towards the intersected point
+    const direction = new THREE.Vector3().subVectors(intersectPoint, camera.position).normalize();
+    const zoomDistance = 5; // Adjust the zoom step as needed
+
+    camera.position.addScaledVector(direction, zoomDistance);
+    camera.lookAt(intersectPoint);
+    controls.update();
+  }
+}
+
+/*****************************************************
+ * listener "mouseover"
+ * 
+ * This listener is invoked when the mouse hovers over the information button. It will change the logo
+ * displaying an alternative colored information button
+ * 
+ * arguments:
+ *  event - mouse hovers over the information button
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The information button will change
+ * 
+ */
+document.getElementById('info').addEventListener('mouseover', function() {
+  document.getElementById('info_button').src = "images/info_button_color.png";
+});
+
+/*****************************************************
+ * listener "mouseout"
+ * 
+ * This listener is invoked when the mouse moves away from the information button. It will change the logo
+ * displaying the original information button
+ * 
+ * arguments:
+ *  event - mouse hovers over the information button
+ * 
+ * returns:
+ *  nothing
+ * 
+ * changes: 
+ *  The information button will change
+ * 
+ */
+document.getElementById('info').addEventListener('mouseout', function() {
+  document.getElementById('info_button').src = "images/info_button.png";
+});
