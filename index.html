@@ -5,28 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sun Model with Three.js</title>
 
+    <!-- External Stylesheet -->
     <link rel="stylesheet" href="/styles/styles.css" />
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
+  
   <body>
+    <!-- Menu Toggle Button -->
     <div id="menu-toggle">
       <img src="/public/Psyche_Icon_Color-PNG.png" alt="Menu" />
     </div>
 
-    <!-- Collapsible menu div and menu icons-->
+    <!-- Collapsible Menu with Icons -->
     <div id="collapsible-menu">
-      <i class="fa-solid fa-circle-info menu-icon" id="info-icon" alt="Info"></i>
+      <i class="fa-solid fa-circle-info menu-icon" id="info-icon"></i>
       <i class="fa-solid fa-box-open menu-icon" id="placeholder-icon"></i>
       <i class="fa-solid fa-gear menu-icon" id="settings-icon"></i>
     </div>
 
-    <!-- Info Overlay -->
+    <!-- Info Overlay Section -->
     <div id="info-overlay" class="hidden">
       <div class="info-content">
         <h2>INFO PANEL</h2>
         <i class="fa-solid fa-circle-xmark" id="close-info-overlay"></i>
         <p class="popup-content">Info for the panel....</p>
+        
+        <!-- Pagination Controls -->
         <div class="pagination">
           <i class="fa-solid fa-less-than" id="previous-page"></i>
           <i class="fa-solid fa-greater-than" id="next-page"></i>
@@ -34,12 +40,16 @@
       </div>
     </div>
 
-    <!-- Settings Overlay -->
+    <!-- Settings Overlay Section -->
     <div id="settings-overlay">
       <div class="menu-content">
         <h3>Settings</h3>
+        
+        <!-- Bloom Intensity Slider -->
         <label for="bloom-slider" style="font-size: 20px;">Bloom Intensity:</label>
         <input type="range" id="bloom-slider" min="0" max="3" step="0.1" value="1.5" />
+        
+        <!-- Camera Coordinates Display -->
         <div id="camera-coords">
           <p>CamCoord:</p>
           <p>X: <span id="coord-x">0</span></p>
@@ -49,8 +59,10 @@
       </div>
     </div>
 
+    <!-- JavaScript Modules -->
     <script type="module" src="/src/ui.js"></script>
     <script type="module" src="/src/infoPages.js"></script>
     <script type="module" src="/src/script.js"></script>
   </body>
 </html>
+

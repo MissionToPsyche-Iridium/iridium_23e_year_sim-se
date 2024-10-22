@@ -1,9 +1,42 @@
+/* ============================================================
+   Admin Info
+   ============================================================
+   Project Name   : [Your Project Name]
+   Module         : [Module Name / File Purpose]
+   Author         : Joshua Anselm SER401
+   Created Date   : [Creation Date]
+   Last Modified  : 10/24/2024
+   Reviewed By    : [Reviewer Name]
+   Description    : 
+   This script manages UI interactions for the 3D visualization module.  
+   It handles toggling of menus, overlays, and interactive icons, such as  
+   settings and informational elements. Smooth transitions are ensured,  
+   with real-time camera coordinate updates integrated into the Three.js-  
+   based rendering system. The script also controls UI elements like bloom  
+   intensity sliders and provides mechanisms to collapse overlays when  
+   clicking outside. Placeholders are prepared for future icon functionality.  
+
+   Usage Instructions:
+   1. [Usage Step 1]
+   2. [Usage Step 2]
+   3. [Additional usage details as needed]
+
+   Dependencies:
+   - [List any dependencies or libraries used]
+
+   Notes:
+   - [Any special notes or warnings about this script]
+
+   ============================================================
+*/
+
+
 /* ===============================
    Element Selection and State Variables
    ===============================
    This section selects key DOM elements and initializes state variables 
-   to track the menu and settings overlay status. 
-   These elements are controlled throughout the script to show/hide and animate.
+   to track the menu and settings overlay status. These elements are used 
+   throughout the script to control visibility, transitions, and animations.
 */
 const menuToggle = document.getElementById('menu-toggle');
 const collapsibleMenu = document.getElementById('collapsible-menu');
@@ -18,131 +51,137 @@ let menuOpen = false;
 let horizontalExpanded = false;
 
 /* ===============================
-Auto-expand Menu After Page Load
-=============================== */
+   Auto-expand Menu After Page Load
+   ===============================
+   Automatically expands the collapsible menu a short time after the page loads, 
+   ensuring a smooth transition. This block handles delayed display adjustments 
+   and menu state management.
+*/
 window.addEventListener('load', () => {
   setTimeout(() => {
     collapsibleMenu.style.display = 'flex';
     setTimeout(() => {
       collapsibleMenu.classList.add('expanded');
-      collapsibleMenu.style.height = '300px'; // Full height
-      menuOpen = true; // Mark menu as open
-    }, 10); // Small delay to ensure smooth transition
-  }, 1000); // Expand after 2 seconds
+      collapsibleMenu.style.height = '300px';
+      menuOpen = true;
+    }, 10);
+  }, 1000);
 });
 
 /* ===============================
    Menu Toggle Logic
    ===============================
-   This function toggles the menu button rotation and controls the 
-   vertical expansion of the collapsible menu.
-   When clicked, the menu expands or collapses with a smooth transition.
+   Toggles the visibility of the collapsible menu. Expands or collapses 
+   the menu with a smooth transition when the toggle button is clicked, 
+   updating the visual state and managing the menu state variable.
 */
 menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('rotate'); // Rotate the button icon
-
+  menuToggle.classList.toggle('rotate');
   if (!menuOpen) {
-    // Expand the menu
     collapsibleMenu.style.display = 'flex';
     setTimeout(() => {
       collapsibleMenu.classList.add('expanded');
-      collapsibleMenu.style.height = '300px'; // Expand to full height
+      collapsibleMenu.style.height = '300px';
     }, 10);
   } else {
-    // Collapse the menu
     collapsibleMenu.classList.remove('expanded');
     collapsibleMenu.style.height = '0';
     setTimeout(() => {
-      collapsibleMenu.style.display = 'none'; // Hide after collapsing
-    }, 300); // Match the transition duration
+      collapsibleMenu.style.display = 'none';
+    }, 300);
   }
-
-  menuOpen = !menuOpen; // Toggle menu state
+  menuOpen = !menuOpen;
 });
 
 /* ===============================
    Settings Overlay Toggle
    ===============================
-   This function handles the display of the settings overlay.
-   Clicking the settings icon toggles the overlay visibility.
+   Manages the horizontal expansion and collapse of the settings overlay. 
+   It toggles the visibility and opacity of the overlay content, 
+   ensuring synchronized transitions and animations.
 */
-// Settings icon triggers horizontal expansion and overlay
 settingsIcon.addEventListener('click', () => {
   if (!horizontalExpanded) {
-    // Expand the overlay and show content after the width transition
     settingsOverlay.style.display = 'block';
-
     setTimeout(() => {
-      settingsOverlay.style.width = '230px';  // Expand horizontally
+      settingsOverlay.style.width = '230px';
     }, 10);
-
     setTimeout(() => {
-      document.querySelector('.menu-content').style.opacity = '1';  // Fade-in content
-    }, 500);  // Match with the width transition duration
+      document.querySelector('.menu-content').style.opacity = '1';
+    }, 500);
   } else {
-    // Fade-out content before collapsing
     document.querySelector('.menu-content').style.opacity = '0';
-
     setTimeout(() => {
-      settingsOverlay.style.width = '0';  // Collapse horizontally
+      settingsOverlay.style.width = '0';
     }, 300);
-
     setTimeout(() => {
-      settingsOverlay.style.display = 'none';  // Hide after collapsing
-    }, 600);  // Ensure transition completes
+      settingsOverlay.style.display = 'none';
+    }, 600);
   }
-
   horizontalExpanded = !horizontalExpanded;
 });
 
-// Close overlay by clicking outside of it
+/* ===============================
+   Close Overlay on Outside Click
+   ===============================
+   Listens for clicks outside the settings overlay and collapses it if open. 
+   This ensures the overlay is closed when clicking outside its area 
+   or on any element other than the settings icon.
+*/
 document.addEventListener('click', (event) => {
   if (
     horizontalExpanded &&
     !settingsOverlay.contains(event.target) &&
     event.target !== settingsIcon
   ) {
-    document.querySelector('.menu-content').style.opacity = '0';  // Fade-out content
-
+    document.querySelector('.menu-content').style.opacity = '0';
     setTimeout(() => {
-      settingsOverlay.style.width = '0';  // Collapse overlay
+      settingsOverlay.style.width = '0';
     }, 300);
-
     setTimeout(() => {
-      settingsOverlay.style.display = 'none';  // Hide after collapse
+      settingsOverlay.style.display = 'none';
     }, 600);
-
     horizontalExpanded = false;
   }
 });
 
-// Toggle the overlay on info icon click
+/* ===============================
+   Info Overlay Toggle
+   ===============================
+   Toggles the visibility of the info overlay. This section manages the 
+   display and removal of the active class to handle the animation states 
+   for a smooth fade-in and fade-out effect.
+*/
 infoIcon.addEventListener('click', () => {
   if (infoOverlay.classList.contains('active')) {
-    // Fade out: Remove the active class after the animation
     infoOverlay.classList.remove('active');
     setTimeout(() => {
       infoOverlay.style.display = 'none';
-    }, 500); // Match with the CSS transition duration
+    }, 500);
   } else {
-    // Fade in: Make it visible and apply the active class
     infoOverlay.style.display = 'block';
     setTimeout(() => infoOverlay.classList.add('active'), 10);
   }
 });
 
+/* ===============================
+   Close Info Overlay on Click
+   ===============================
+   This block handles closing the info overlay when the close button is clicked. 
+   It removes the active class and hides the overlay after the animation completes.
+*/
 closeInfoOverlay.addEventListener('click', () => {
   infoOverlay.classList.remove('active');
   setTimeout(() => {
     infoOverlay.style.display = 'none';
-  }, 500); // Match transition duration
+  }, 500);
 });
 
 /* ===============================
-   Icon Placeholder Actions (TBD)
+   Placeholder Icon Action Handler
    ===============================
-   These event listeners log interactions with the info and placeholder icons.
-   Additional functionality can be added to these icons later.
+   Logs interactions with the placeholder icon. This section serves as a placeholder 
+   for additional functionality that can be assigned to the icon in future development.
 */
 placeholderIcon.addEventListener('click', () => {
   console.log('Placeholder icon clicked');
@@ -151,12 +190,13 @@ placeholderIcon.addEventListener('click', () => {
 /* ===============================
    Camera Coordinates Update
    ===============================
-   This function updates the displayed camera coordinates.
-   It interacts with an external camera object and updates text content
-   with the camera's current X, Y, and Z position.
+   Updates the displayed camera coordinates by interacting with an external camera object. 
+   It retrieves the X, Y, and Z positions from the camera and updates the corresponding 
+   text elements on the page with the formatted coordinates.
 */
 export function updateCameraCoords(camera) {
   document.getElementById('coord-x').textContent = camera.position.x.toFixed(2);
   document.getElementById('coord-y').textContent = camera.position.y.toFixed(2);
   document.getElementById('coord-z').textContent = camera.position.z.toFixed(2);
 }
+
