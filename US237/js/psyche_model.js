@@ -76,8 +76,11 @@ function fitObjectToContainer(object) {
    // Determine the scale factor based on screen width (detect if it's a phone)
    let scaleFactor;
    console.log(`Screen width: ${window.innerWidth}, Screen height: ${window.innerHeight}`);
-   if (window.innerWidth <= 768) { // Mobile screen sizes
-     console.log('Mobile screen detected');
+   if (window.innerWidth <= 500) { // Mobile screen sizes
+    console.log('Mobile screen detected');
+    scaleFactor = 19 / maxDimension; // Use a larger scale for smaller screens
+   } else if (window.innerWidth <= 768) { // Mobile screen sizes
+     console.log('tablet screen detected');
      scaleFactor = 20 / maxDimension; // Use a larger scale for smaller screens
    } else { // Desktop and tablet sizes
      console.log('Larger screen detected'); // Debug log to confirm detection
