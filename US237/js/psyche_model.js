@@ -49,8 +49,7 @@ loader.load(
   `models/${objToRender}/psyche.glb`,
   function (gltf) {
     object = gltf.scene;
-    object.scale.set(3, 3, 3); // Scale the object to fit within the container
-    object.position.set(0, 0, 0); // Center the object
+    fitObjectToContainer(object); // Call function to fit the object
     scene.add(object);
     console.log('Object loaded and added to scene.');
   },
@@ -61,6 +60,42 @@ loader.load(
     console.error(error);
   }
 );
+
+// Function to fit the object within the container using bounding box
+function fitObjectToContainer(object) {
+  // Compute the bounding box of the object
+  const boundingBox = new THREE.Box3().setFromObject(object);
+
+  // Get the size of the bounding box
+  const size = new THREE.Vector3();
+  boundingBox.getSize(size);
+
+  // Calculate the largest dimension of the bounding box
+  const maxDimension = Math.max(size.x, size.y, size.z);
+
+   // Determine the scale factor based on screen width (detect if it's a phone)
+   let scaleFactor;
+   console.log(`Screen width: ${window.innerWidth}, Screen height: ${window.innerHeight}`);
+   if (window.innerWidth <= 768) { // Mobile screen sizes
+     console.log('Mobile screen detected');
+     scaleFactor = 20 / maxDimension; // Use a larger scale for smaller screens
+   } else { // Desktop and tablet sizes
+     console.log('Larger screen detected'); // Debug log to confirm detection
+     scaleFactor = 35 / maxDimension; // Adjust this for larger screens
+   }
+
+  // Apply the calculated scale
+  object.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+  // Center the object
+  const center = new THREE.Vector3();
+  boundingBox.getCenter(center);
+  object.position.sub(center);
+
+  // Log the scale factor and other information for debugging
+  console.log(`Applied scale factor: ${scaleFactor}`);
+  console.log(`Bounding Box Size: ${size.x}, ${size.y}, ${size.z}`);
+}
 
 // Add OrbitControls to allow user interaction
 controls = new OrbitControls(camera, renderer.domElement);
@@ -95,39 +130,10 @@ function animate() {
 // Start the animation
 animate();
 
-/*****************************************************
- * listener "dblclick" - mouse is double clicked
- * 
- * This listener is invoked when the mouse is double clicked
- * 
- * arguments:
- *  dblclick - the event of a mouse double click 
- *  onDoubleClick() - function to zoom to area of double click
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The listener calls the onDoubleClick function().  
- * 
- */
+// listener "dblclick" - mouse is double clicked
 renderer.domElement.addEventListener('dblclick', onDoubleClick);
 
-/*****************************************************
- * onDoubleClick()
- * 
- * This function moves the camera view towards the area of the object that was double clicked
- * 
- * arguments:
- *  event - location of the double click
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The camera view will zoom in towards the area of the object that was double clicked.
- * 
- */
+// onDoubleClick() - This function moves the camera view towards the area of the object that was double clicked
 function onDoubleClick(event) {
   // Calculate mouse position in normalized device coordinates
   mouse.x = (event.clientX / container.clientWidth) * 2 - 1;
@@ -237,86 +243,62 @@ document.getElementById('fullscreen').addEventListener('mouseout', function() {
 const fullscreenButton = document.getElementById('fullscreen');
 const infobutton = document.getElementById('info');
 const container3D = document.getElementById('container3D');
-let isFullscreen = false; // Track fullscreen state
 
-/*****************************************************
- * listener "click" - fullscreen button
- * 
- * This listener is invoked when the fullscreen button is clicked.
- * 
- * arguments:
- *  event - the event of clicking the button
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The container3D element goes into fullscreen mode, adjusts the camera zoom, 
- *  and hides the fullscreen button.
- * 
- */
+// listener "click" - fullscreen button
 fullscreenButton.addEventListener('click', function() {
-  // Check if fullscreen is already active
   if (!document.fullscreenElement) {
-    // Request fullscreen for the container3D element
+    fullscreenButton.style.display = 'none';
+    infobutton.style.display = 'none';
     if (container3D.requestFullscreen) {
-      container3D.requestFullscreen();
+      container3D.requestFullscreen().then(() => {
+        container3D.classList.add('fullscreen-mode');
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
     } else if (container3D.webkitRequestFullscreen) { // For Safari
-      container3D.webkitRequestFullscreen();
+      container3D.webkitRequestFullscreen().then(() => {
+        container3D.classList.add('fullscreen-mode');
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
     } else if (container3D.msRequestFullscreen) { // For IE11
-      container3D.msRequestFullscreen();
+      container3D.msRequestFullscreen().then(() => {
+        container3D.classList.add('fullscreen-mode');
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
     }
-    isFullscreen = true;
-    adjustCameraZoom(true); // Zoom out when entering fullscreen
-    fullscreenButton.style.display = 'none'; // Hide the fullscreen button
-    infobutton.style.display = 'none'; // Hide the more information button
   } else {
-    // If fullscreen is active, exit fullscreen
+    
     if (document.exitFullscreen) {
-      document.exitFullscreen();
+      document.exitFullscreen().then(() => {
+        container3D.classList.remove('fullscreen-mode');
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+      });
     } else if (document.webkitExitFullscreen) { // For Safari
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { // For IE11
-      document.msExitFullscreen();
+      document.webkitExitFullscreen().then(() => {
+        container3D.classList.remove('fullscreen-mode');
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+      });
     }
-    isFullscreen = false;
-    adjustCameraZoom(false); // Reset the camera zoom when exiting fullscreen
-    fullscreenButton.style.display = 'block'; // Show the fullscreen button again
-    infobutton.style.display = 'block'; // Show the more information button again
   }
 });
 
-/*****************************************************
- * adjustCameraZoom()
- * 
- * This function adjusts the camera zoom based on the fullscreen state.
- * 
- * arguments:
- *  enteringFullscreen - a boolean indicating if we are entering or exiting fullscreen
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The camera's position is adjusted to zoom out or reset when toggling fullscreen.
- * 
- */
-function adjustCameraZoom(enteringFullscreen) {
-  if (enteringFullscreen) {
-    // Move the camera back to zoom out when entering fullscreen
-    camera.position.z += 30; // Adjust this value to control how much you want to zoom out
-  } else {
-    // Reset the camera position when exiting fullscreen
-    camera.position.z -= 30; // Reset it back to the original position
-  }
-}
-
-// Event listener to detect when fullscreen mode is exited using the ESC key or browser controls
+// Event listener for fullscreen changes
 document.addEventListener('fullscreenchange', () => {
   if (!document.fullscreenElement) {
-    isFullscreen = false;
-    adjustCameraZoom(false); // Reset the camera zoom when exiting fullscreen
-    fullscreenButton.style.display = 'block'; // Show the fullscreen button again
-    infobutton.style.display = 'block'; // Show the more information button again
+    fullscreenButton.style.display = 'block';
+    infobutton.style.display = 'block';
+    container3D.classList.remove('fullscreen-mode');
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
   }
 });
