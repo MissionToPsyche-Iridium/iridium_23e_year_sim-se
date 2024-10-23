@@ -78,16 +78,17 @@ File Start
 * 
 */ 
 .popup {
-    position: fixed;
-    top: 30%;
+    position: absolute;
+    top: 10.15%;
+    width: 90vw;
+    height: 57vh;
     left: 50%;
-    transform: translate(-50%, -50%) skew(-5deg);
+    transform: translate(-50%) skew(-5deg);
     background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
     background-blend-mode: darken;
     background-size: cover;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
     z-index: 1000;
-    width: 80%;
     padding: 20px;
     border-radius: 20px;
     color: antiquewhite;
@@ -96,19 +97,21 @@ File Start
   /**************************
   * .popup-buttons
   *
-  * container for the three popup buttons
   */ 
   .popup-buttons {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    transform: skew(5deg);
+    position: absolute;
+    bottom: 20px;
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 100%;
+    padding: 10px;
   }
   
   /**************************
   * .popup-buttons button
   * 
-  * sizing for the individual buttons
   */ 
   .popup-buttons button {
     margin: 0 10px;
@@ -146,44 +149,43 @@ File Start
   */ 
   .popup-content-body {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: flex-start; 
+    gap: 20px; 
     flex-grow: 1;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-style: italic;
-    font-weight: bold;
-  }
+    width: 100%;
+}
   
   /**************************
   * .popup-content-body p
   *
-  * popup content paragraph body styling
   */ 
   .popup-content-body p {
-    flex: 1;
-    margin-right: 20px;
-    text-align: left;
+    flex: 1; 
+    padding-top: 1% !important;
+    margin: 10px; 
     font-size: x-large;
     padding: 5%;
-    color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-    background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
+    color: gray;
+    background-color: black;
     border-radius: 10px;
-  }
-  
+}
   
   /**************************
   * .popup-content-body li
   *
-  * popup content body styling
+  * 
   */ 
   .popup-content-body li {
-    font-size: x-large;
+    font-size: xx-large !important;
+    font-weight: normal;
   }
   
   /**************************
   * .popup-content button
   *
-  * popup content button styling
+  * 
   */ 
   .popup-content button {
     z-index: 1001;
@@ -191,16 +193,17 @@ File Start
     margin-top: 20px;
     background-color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
-    transform: skew(-5deg);
+    transform: skew(5deg);
     border-radius: 6px;
     font-size: large;
     cursor: pointer;
+    padding: 8px 15px;
   }
   
   /**************************
   * .popup-content button:hover
   *
-  * style changes for hovering curser over button
+  * 
   */ 
   .popup-content button:hover{
     background-color: #592651; /* Purple */

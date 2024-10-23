@@ -1,5 +1,5 @@
 /* 
-* psyche_style.css
+* psyche_style_laptop.css
 *
 * This file defines the presentation aspects of this HTML file
 * 
@@ -77,8 +77,8 @@ File Start
   *
   */ 
   #psyche_size {
-    width: 27%;
-    border-radius: 10px;
+    display: flex;
+    transform: scale(0.65) translateY(-30%); 
   }
   
   /**************************
@@ -97,7 +97,7 @@ File Start
   */ 
   #psyche_surface {
     padding-top: 1%;
-    width: 40%;
+    transform: scale(0.75) translateY(-20%); 
     border-radius: 10px;
   }
   
@@ -106,9 +106,10 @@ File Start
   *
   */ 
   #logo {
-    width: 15%;
+    width: 12.5%;
     height: auto;
     opacity: .8;
+    margin: auto;
   }
   
 
@@ -120,6 +121,7 @@ File Start
     display: flex;
     align-items: center;
     position: relative;
+    font-size: x-large;
   }
   
   /**************************
@@ -130,6 +132,7 @@ File Start
     opacity: 0.9;
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     background-color: transparent;
+    font-size: 20px;
   }
     
   /**************************
@@ -152,7 +155,7 @@ File Start
     opacity: 0.9;
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     background-color: transparent;
-    font-size: xx-large !important;
+    font-size: 20px !important;
   }
 
   /**************************
@@ -160,7 +163,9 @@ File Start
   *
   */ 
   #screen2 ul {
-    margin-top: 4%;
+    margin-top: 2.5%;
+    margin-right: 0;
+    width: 50%;
   }
 
   /**************************
@@ -168,9 +173,9 @@ File Start
   *
   */ 
   #screen3 p {
-    margin-top: 5%;
-    font-size: xx-large !important;
-    width: 30%;
+    margin-top: 2.5%;
+    padding-right: 20%;
+    font-size: x-large !important;
   }
   
   /**************************
@@ -187,8 +192,8 @@ File Start
   *
   */ 
   #screen4 p {
-    margin-top: 5%;
-    font-size: xx-large;
+    margin-top: 2.5%;
+    font-size: x-large !important;
   }
 
   /**************************
@@ -197,7 +202,7 @@ File Start
   */ 
   #screen5 p {
     margin-top: 2.5%;
-    font-size: 26px !important;
+    font-size: 18px !important;
   }
 
   /**************************
@@ -205,8 +210,8 @@ File Start
   *
   */ 
   #screen6 p {
-    margin-top: 5%;
-    font-size: xx-large !important;
+    margin-top: 2.5%;
+    font-size: x-large !important;
     padding-right: 10%;
   }
 
@@ -216,7 +221,7 @@ File Start
   */ 
   #screen7 p {
     margin-top: 2.5%;
-    font-size: 28px !important;
+    font-size: 18px !important;
   }
 
   /**************************
@@ -224,8 +229,8 @@ File Start
   *
   */ 
   #screen8 p {
-    margin-top: 5%;
-    font-size: xx-large !important;
+    margin-top: 2.5%;
+    font-size: x-large !important;
   }
 
   /**************************
@@ -234,7 +239,7 @@ File Start
   */ 
   #screen9 p {
     margin-top: 5%;
-    font-size: xx-large !important;
+    font-size: x-large !important;
   }
 
   /**************************
@@ -243,7 +248,7 @@ File Start
   */ 
   #screen10 p {
     margin-top: 5%;
-    font-size: xx-large !important;
+    font-size: x-large !important;
   }
   
   /**************************
@@ -251,7 +256,7 @@ File Start
   *
   */
   #path_picture {
-    width: 40%;
+    transform: scale(0.9) translateY(-5%); 
     height: auto;
     border-radius: 10px;
   }
@@ -261,8 +266,9 @@ File Start
   *
   */
   #ring_picture {
-    transform: scale(0.7) translateY(-30%);
+    transform: scale(0.5) translateY(-60%); 
     border-radius: 10px;
+    padding-left: 30%;
   }
   
   /**************************
@@ -270,8 +276,7 @@ File Start
   *
   */  
   #atmosphere {
-    width: 35%;
-    max-height: 75%;
+    transform: scale(0.7) translateY(-20%); 
     height: auto;
     border-radius: 10px;
   }
@@ -281,7 +286,7 @@ File Start
   *
   */ 
   #moon_picture {
-    width: 40%;
+    transform: scale(0.9) translateY(-15%); 
     border-radius: 10px;
   }
   
@@ -300,7 +305,7 @@ File Start
   *
   */ 
   #ocean {
-    width: 35%;
+    transform: scale(0.7) translateY(-25%);
     height: auto;
     border-radius: 10px;
   }
@@ -310,9 +315,12 @@ File Start
   *
   */ 
   #video1 {
-    width: 40%;
+    width: 35%;
     height: auto;
     border-radius: 10px;
+    position: absolute;
+    margin-left: 55%;
+    align-self: flex-start;
   }
 
   /**************************
@@ -320,7 +328,7 @@ File Start
   *
   */ 
   #video2 {
-    width: 40%;
+    transform: scale(0.9) translateY(-5%); 
     max-height: 75%;
     border-radius: 10px;
   }
