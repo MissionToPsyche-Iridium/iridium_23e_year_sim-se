@@ -65,6 +65,7 @@
 *     #psyche_surface
 *     #screen6 p
 *     #path_picture
+*     #background_video
 *     #screen7 p
 *     #video2
 *     #screen8 p
@@ -239,6 +240,14 @@ File Start
 
   /************ seventh screen (Structure) ************/
 
+  /**************************
+  * #background_video
+  *
+  */ 
+  #background_video {
+    display: none;
+  }
+  
   /**************************
   * #screen7 p
   *

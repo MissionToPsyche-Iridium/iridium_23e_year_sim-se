@@ -1,0 +1,177 @@
+/* 
+* style_tablet_small.css
+*
+* This file defines the presentation aspects of this HTML file
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       10/17/24
+* Revision:   1.0
+*
+* NASA PSYCHE MISSION STYLING GUIDELINES FULL DOCUMENT Link:https://drive.google.com/drive/folders/1MIwxLJ-mtbufn1g5_l8kPB9kicp_dtrM
+* Finding Summary below:
+*   Color Pallette: These are the component colors of the badge, and the larger brand system. They should be used
+*                   sparingly as accents of to create hierarchy. 
+* Mustard -     HEX #f9a000| RGB 250R 160G 0B
+* Gold -        HEX #f47c33| RGB 245R 125G 50B
+* Coral -       HEX #ef5966| RGB 239R 89G  102B
+* Magenta -     HEX #a53f5b| RGB 165R 63G  91B
+* Purple -      HEX #592651| RGB 89R  38G  81B
+* Dark Purple - HEX #302144| RGB 48R  33G  68B
+*
+*   Backgrounds: The primary color pallette can be used to create gradient backgrounds with these 6 following combinations. 
+*                No more than two colors are allowed to be in a single gradient!
+* Dark Purple - Black
+* Purple - Dark Purple
+* Magenta - Purple
+* Coral - Magenta
+* Gold - Coral
+* Mustard - Gold
+*
+*   Neutral Palette: A secondary set of neutral grays can be used to create hierarchy or organization in a layout, and should be based 
+*                    off of the following tints of a rich cool black. 
+* Black - HEX #12031d| RGB 18R  3G   29B 
+* Tints - 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black
+* 
+*   Typography: All messaging should be kept as simple and legible as possible. Use consistent sizes and treatment for headlines, copy,
+*               and any other type element to create a structure and improve readability.
+*   White topography over gradients ensures proper contrast. 
+*   DO NOT use gradients in topography. 
+*   DO NOT use more than one color in topography           
+*
+* Fonts: Kockout - Can be used for titles and short headlines.
+*        Helvetica - Use this font for longer headlines, body copy, and any web applications. **THIS IS OUR MAIN FONT**         
+* 
+*
+*
+* Tips:       (.name) The "."" makes this a class selector and we can apply .name 
+*             to multiple elements. 
+*             (#name1) The "#" makes this a class selector for a specific element. 
+*
+* Styles Defined:
+*     body
+*     header
+*     header h1
+*     #container3D
+*     #container3D canvas
+*     button#info
+*     button#fullscreen
+*     
+*/ 
+
+/*
+========================================================================================================
+File Start
+========================================================================================================
+*/
+
+/**************************
+* body container
+*
+*/ 
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    background-color: white; 
+  }
+  
+  /**************************
+  * header
+  *
+  */ 
+  header {
+    padding: 2em 0;
+    text-align: center;
+    color: black;
+    z-index: 10;
+    position: relative;
+    font-size: large;
+  }
+  
+  /**************************
+  * header h1
+  *
+  */ 
+  header h1 {
+    font-size: 2em;
+    font-weight: 900;
+    margin: 0;
+  }
+  
+  /**************************
+  * #container3D
+  *
+  */ 
+  #container3D {
+    top: 20%;
+    width: 90vw; 
+    height: 60vh;
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%); 
+    background-color: black; 
+    border-radius: 20px; 
+    border: solid white 2px;
+    overflow: hidden; 
+  }
+  
+  /**************************
+  * #container3D canvas
+  *
+  */ 
+  #container3D canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #12031d;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /**************************
+  * button#info
+  * 
+  * 
+  */ 
+  button#info {
+    background-color: transparent;
+    color: antiquewhite; 
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 1px 1px; 
+    border: none;
+    border-radius: 3px; 
+    position: absolute;
+    top: 1px; 
+    left: 1px; 
+    z-index: 1002; 
+    font-size: 0.8em; 
+    width: 10%; 
+    background-position: center;
+  }
+  
+  #info_button {
+    width: 100%;
+  }
+  
+  /**************************
+* button#fullscreen
+* 
+* 
+*/ 
+button#fullscreen {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  bottom: 10px; 
+  right: -46%; 
+  z-index: 1002; 
+}
+
+#fullscreen_button {
+  width: 7%; 
+  height: auto; 
+}
