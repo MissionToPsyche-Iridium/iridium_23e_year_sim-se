@@ -1,5 +1,5 @@
 /* 
-* psyche_style.css
+* psyche_style_tablet.css
 *
 * This file defines the presentation aspects of this HTML file
 * 
@@ -89,11 +89,12 @@ File Start
   *
   */ 
   #logo {
-    width: 15%;
+    width: 20%;
     height: auto;
     opacity: .8;
+    margin: auto;
   }
-  
+
   /**************************
   * #header1
   *
@@ -102,7 +103,8 @@ File Start
     display: flex;
     align-items: center;
     position: relative;
-  }   
+    font-size: x-large;
+  }
   
   /**************************
   * #screen1 h1
@@ -112,19 +114,19 @@ File Start
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     text-shadow: 0px 0px 50px antiquewhite;
     align-items: center;
-    margin: 0 20%;
-  } 
+    margin: 0 5%;
+  }
 
   /**************************
   * #screen1 p
   *
   */ 
   #screen1 p {
-    margin-top: 1%;
+    margin-top: 2.5%;
     opacity: 0.9;
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     background-color: transparent;
-    font-size: xx-large !important;
+    font-size: x-large !important;
   }
 
 
@@ -135,18 +137,20 @@ File Start
   *
   */ 
   #screen2 ul {
-    margin-top: 4%;
-  } 
+    margin-top: 1%;
+    margin-left: auto;
+    width: 100%;
+  }
 
   /**************************
   * #video1
   *
   */ 
   #video1 {
-    width: 40%;
-    height: auto;
+    transform: scale(1.35); 
     border-radius: 10px;
-  } 
+    margin: 3.5% 30%;
+  }
   
   
   /************ third screen (Size and Dimensions) ************/
@@ -156,19 +160,21 @@ File Start
   *
   */ 
   #screen3 p {
-    margin-top: 5%;
-    font-size: xx-large !important;
-    width: 30%;
+    margin-top: 2.5%;
+    font-size: x-large !important;
+    width: 90%;
   }
 
+
   /**************************
-  * #psyche_size
+  * #psyche1
   *
   */ 
   #psyche_size {
-    width: 27%;
-    border-radius: 10px;
-  } 
+    transform: scale(1.5); 
+    margin: 5% 35%;
+  }
+  
   
   /************ fourth screen (Life on Psyche) ************/
   
@@ -177,20 +183,19 @@ File Start
   *
   */ 
   #screen4 p {
-    margin-top: 5%;
-    font-size: xx-large;
-  } 
+    margin-top: 1%;
+    font-size: x-large !important;
+  }
   
   /**************************
   * #ocean
   *
   */ 
   #ocean {
-    width: 35%;
-    height: auto;
+    transform: scale(1.35);
     border-radius: 10px;
-  } 
-
+    margin: 2.5% 32.5%;
+  }
   
   /************ fifth screen (Surface of Psyche) ************/
 
@@ -199,8 +204,8 @@ File Start
   *
   */ 
   #screen5 p {
-    margin-top: 2.5%;
-    font-size: 26px !important;
+    margin-top: -0.5%;
+    font-size: 21px !important;
   }
 
   /**************************
@@ -208,9 +213,9 @@ File Start
   *
   */ 
   #psyche_surface {
-    padding-top: 1%;
-    width: 40%;
+    transform: scale(1) translateY(-20%); 
     border-radius: 10px;
+    margin: 0 30%;
   }
 
   
@@ -221,19 +226,19 @@ File Start
   *
   */ 
   #screen6 p {
-    margin-top: 5%;
-    font-size: xx-large !important;
+    margin-top: 0.25%;
+    font-size: x-large !important;
     padding-right: 10%;
-  } 
+  }
 
   /**************************
-  * #path_picture
+  * #path
   *
   */
   #path_picture {
-    width: 40%;
-    height: auto;
+    transform: scale(1.5); 
     border-radius: 10px;
+    margin: 0.5% 30%;
   }
 
 
@@ -244,18 +249,19 @@ File Start
   *
   */ 
   #screen7 p {
-    margin-top: 2.5%;
-    font-size: 28px !important;
-  } 
+    margin-top: 1%;
+    font-size: 20px !important;
+  }
 
   /**************************
   * #video2
   *
   */ 
   #video2 {
-    width: 40%;
+    transform: scale(1.1) translateY(-5%); 
     max-height: 75%;
     border-radius: 10px;
+    margin: 0 30%;
   }
 
 
@@ -266,38 +272,41 @@ File Start
   *
   */ 
   #screen8 p {
-    margin-top: 5%;
-    font-size: xx-large !important;
-  } 
+    margin-top: 1.5%;
+    font-size: x-large !important;
+  }
 
   /**************************
   * #moons
   *
   */ 
   #moon_picture {
-    width: 40%;
+    transform: scale(1.25); 
     border-radius: 10px;
-  }  
+    margin: 0 30%;
+  }
 
 
   /************ ninth screen (Rings) ************/
-  
   /**************************
   * #screen9 p
   *
   */ 
   #screen9 p {
     margin-top: 5%;
-    font-size: xx-large !important;
+    font-size: x-large !important;
   }
-  
+
   /**************************
   * #ring_picture
   *
   */
   #ring_picture {
-    transform: scale(0.7) translateY(-30%);
+    transform: scale(0.5) translateY(-55%); 
     border-radius: 10px;
+    padding-left: 0;
+    max-width: 100%;
+    margin: 0 5%;
   }
 
 
@@ -308,18 +317,16 @@ File Start
   *
   */ 
   #screen10 p {
-    margin-top: 5%;
-    font-size: xx-large !important;
+    margin-top: 3.5%;
+    font-size: x-large !important;
   }
-   
+  
   /**************************
   * #atmosphere
   *
   */  
   #atmosphere {
-    width: 35%;
-    max-height: 75%;
-    height: auto;
+    transform: scale(1.5); 
     border-radius: 10px;
+    margin: 5% 35%;
   }  
-   

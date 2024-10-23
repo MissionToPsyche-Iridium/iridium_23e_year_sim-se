@@ -39,13 +39,25 @@ File Start
     <!-- Defines the webpage tab title-->
     <title>Psyche 16</title>
     <!-- Linking the CSS stylesheet for colors, fonts, spacing, and more-->
+     <!-- Desktop/laptop screens 2560px + -->
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/psyche_style.css"/>
     <link rel="stylesheet" href="css/popup_style.css"/>
-    <!-- Desktop styles (for screens 769px and above) -->
-    <link rel="stylesheet" href="css/style_laptop.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
-  <link rel="stylesheet" href="css/psyche_style_laptop.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
-  <link rel="stylesheet" href="css/popup_style_laptop.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
+    <!-- Desktop/laptop screens 1920-2550px -->
+    <link rel="stylesheet" href="css/style_1080.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
+    <link rel="stylesheet" href="css/psyche_style_1080.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
+    <link rel="stylesheet" href="css/popup_style_1080.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
+    <!-- Desktop/laptop screens 1920-2550px -->
+    <link rel="stylesheet" href="css/style_960.css" media="screen and (min-width: 960px) and (max-width: 1919px)"/>
+    <link rel="stylesheet" href="css/psyche_style_960.css" media="screen and (min-width: 960px) and (max-width: 1919px)"/>
+    <link rel="stylesheet" href="css/popup_style_960.css" media="screen and (min-width: 960px) and (max-width: 1919px)"/>
+    <!-- tablets -->
+    <link rel="stylesheet" href="css/style_tablet.css" media="screen and (min-width: 600px) and (max-width: 1024px), 
+    screen and (min-width: 800px) and (max-width: 1366px)">
+    <link rel="stylesheet" href="css/psyche_style_tablet.css" media="screen and (min-width: 600px) and (max-width: 1024px), 
+    screen and (min-width: 800px) and (max-width: 1366px)">
+    <link rel="stylesheet" href="css/popup_style_tablet.css" media="screen and (min-width: 600px) and (max-width: 1024px), 
+    screen and (min-width: 800px) and (max-width: 1366px)">
 
   </head>
   <!-- <body> contains everything that is visible to the user-->
@@ -68,6 +80,10 @@ File Start
       <script src="js/popup.js"></script>
     <!-- End main section-->
     </main>
+    <div id="resolution-display" style="position: fixed; top: 10px; left: 10px; background-color: lightgray; padding: 5px; z-index: 1000;">
+      Screen Resolution: <span id="resolution"></span>
+    </div>
+    <script src="js/screen_testing.js"></script>
   </body>
 </html>
 
