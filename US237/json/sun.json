@@ -1,0 +1,15 @@
+{
+    "sun": {
+      "name": "Sun",
+      "type": "Yellow Dwarf Star",
+      "size_d_km": 1392000,
+      "size_d_m": 865000,
+      "surface_temperature_celsius": 5500,
+      "surface_temperature_fahrenheit": 9941,
+      "composition": {
+        "hydrogen": "74%",
+        "helium": "24%",
+        "other_elements": "2%"
+      }
+    }
+  }
