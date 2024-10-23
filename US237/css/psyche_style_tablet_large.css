@@ -1,5 +1,5 @@
 /* 
-* psyche_style_large_smartphone.css
+* psyche_style_tablet.css
 *
 * This file defines the presentation aspects of this HTML file
 * 
@@ -104,7 +104,7 @@ File Start
     display: flex;
     align-items: center;
     position: relative;
-    font-size: 17px;
+    font-size: x-large;
   }
   
   /**************************
@@ -123,11 +123,11 @@ File Start
   *
   */ 
   #screen1 p {
-    margin-top: 5%;
+    margin-top: 2.5%;
     opacity: 0.9;
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     background-color: transparent;
-    font-size: 15px !important;
+    font-size: x-large !important;
   }
 
 
@@ -140,7 +140,7 @@ File Start
   #screen2 ul {
     margin-top: 1%;
     margin-left: auto;
-    width: 80%;
+    width: 100%;
   }
 
   /**************************
@@ -148,7 +148,7 @@ File Start
   *
   */ 
   #video1 {
-    transform: scale(1.75) translateY(15%); 
+    transform: scale(1.35); 
     border-radius: 10px;
     margin: 3.5% 30%;
   }
@@ -162,7 +162,7 @@ File Start
   */ 
   #screen3 p {
     margin-top: 2.5%;
-    font-size: 14px !important;
+    font-size: x-large !important;
     width: 90%;
   }
 
@@ -172,7 +172,7 @@ File Start
   *
   */ 
   #psyche_size {
-    transform: scale(2.5) translateY(20%); 
+    transform: scale(1.5); 
     margin: 5% 35%;
   }
   
@@ -185,7 +185,7 @@ File Start
   */ 
   #screen4 p {
     margin-top: 1%;
-    font-size: 14px !important;
+    font-size: x-large !important;
   }
   
   /**************************
@@ -193,7 +193,7 @@ File Start
   *
   */ 
   #ocean {
-    transform: scale(2) translateY(15%);
+    transform: scale(1.35);
     border-radius: 10px;
     margin: 2.5% 32.5%;
   }
@@ -206,7 +206,7 @@ File Start
   */ 
   #screen5 p {
     margin-top: -0.5%;
-    font-size: 13px !important;
+    font-size: 21px !important;
   }
 
   /**************************
@@ -214,7 +214,7 @@ File Start
   *
   */ 
   #psyche_surface {
-    transform: scale(1.25) translateY(-20%); 
+    transform: scale(1) translateY(-20%); 
     border-radius: 10px;
     margin: 0 30%;
   }
@@ -228,7 +228,7 @@ File Start
   */ 
   #screen6 p {
     margin-top: 0.25%;
-    font-size: 14px !important;
+    font-size: x-large !important;
     padding-right: 10%;
   }
 
@@ -237,7 +237,7 @@ File Start
   *
   */
   #path_picture {
-    transform: scale(2.25) translateY(30%); 
+    transform: scale(1.5); 
     border-radius: 10px;
     margin: 0.5% 30%;
   }
@@ -252,14 +252,14 @@ File Start
   #background_video {
     display: none;
   }
-  
+
   /**************************
   * #screen7 p
   *
   */ 
   #screen7 p {
-    margin-top: 0;
-    font-size: 12px !important;
+    margin-top: 1%;
+    font-size: 20px !important;
   }
 
   /**************************
@@ -267,7 +267,8 @@ File Start
   *
   */ 
   #video2 {
-    transform: scale(1.5) translateY(5%); 
+    transform: scale(1.1) translateY(-5%); 
+    max-height: 75%;
     border-radius: 10px;
     margin: 0 30%;
   }
@@ -281,7 +282,7 @@ File Start
   */ 
   #screen8 p {
     margin-top: 1.5%;
-    font-size: 14px !important;
+    font-size: x-large !important;
   }
 
   /**************************
@@ -289,7 +290,7 @@ File Start
   *
   */ 
   #moon_picture {
-    transform: scale(1.75) translateY(30%); 
+    transform: scale(1.25); 
     border-radius: 10px;
     margin: 0 30%;
   }
@@ -301,8 +302,8 @@ File Start
   *
   */ 
   #screen9 p {
-    margin-top: 10%;
-    font-size: 16px !important;
+    margin-top: 5%;
+    font-size: x-large !important;
   }
 
   /**************************
@@ -310,8 +311,9 @@ File Start
   *
   */
   #ring_picture {
-    transform: scale(0.75) translateY(-5%); 
+    transform: scale(0.5) translateY(-55%); 
     border-radius: 10px;
+    padding-left: 0;
     max-width: 100%;
     margin: 0 5%;
   }
@@ -325,7 +327,7 @@ File Start
   */ 
   #screen10 p {
     margin-top: 3.5%;
-    font-size: 14px !important;
+    font-size: x-large !important;
   }
   
   /**************************
@@ -333,7 +335,7 @@ File Start
   *
   */  
   #atmosphere {
-    transform: scale(2.5) translateY(25%); 
+    transform: scale(1.5); 
     border-radius: 10px;
     margin: 5% 35%;
   }  

@@ -514,7 +514,10 @@ function seventhScreen() {
       <div class="popup-content-header">  
         <h2>Structure</h2>
       </div>
-      <div class="popup-content-body">
+      <div class="popup-content-body" id="video-background">
+        <video autoplay muted loop playsinline id="background_video">
+            <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
+        </video>
         <p>
           16 Psyche is classified as a Metallic-type (M-type) asteroid, the third most common type of asteroids in the solar system.
           These types of asteroids are common, however very little is known about them. 16 Psyche was previously belived to be composed
