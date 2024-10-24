@@ -1,5 +1,5 @@
 /* 
-* style.css
+* style_large_smartphone.css
 *
 * This file defines the presentation aspects of this HTML file
 * 
@@ -72,91 +72,90 @@ File Start
 *
 */ 
 body {
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
-  background-color: white; 
-}
-
-/**************************
-* header
-*
-*/ 
-header {
-  padding: 2em 0;
-  text-align: center;
-  color: black;
-  z-index: 10;
-  position: relative;
-  font-size: large;
-}
-
-/**************************
-* header h1
-*
-*/ 
-header h1 {
-  font-size: 2em;
-  font-weight: 900;
-  margin: 0;
-}
-
-/**************************
-* #container3D
-*
-*/ 
-#container3D {
-  top: 10%;
-  width: 90vw; 
-  height: 60vh; 
-  position: absolute;
-  left: 50%; 
-  transform: translateX(-50%); 
-  background-color: black; 
-  border-radius: 20px; 
-  border: solid white 2px;
-  overflow: hidden; 
-}
-
-/**************************
-* #container3D canvas
-*
-*/ 
-#container3D canvas {
-  width: 100%;
-  height: 100%;
-  background-color: #12031d;
-  position: relative;
-  z-index: 1;
-}
-
-
-/**************************
-* button#info
-* 
-* 
-*/ 
-button#info {
-  background-color: transparent;
-  color: antiquewhite; 
-  cursor: pointer;
-  font-family: 'Courier New', Courier, monospace;
-  padding: 1px 1px; 
-  border: none;
-  border-radius: 3px; 
-  position: absolute;
-  top: 1px; 
-  left: 1px; 
-  z-index: 1002; 
-  font-size: 0.8em; 
-  width: 3%; 
-  background-position: center;
-}
-
-#info_button {
-  width: 100%;
-}
-
-/**************************
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    background-color: white; 
+  }
+  
+  /**************************
+  * header
+  *
+  */ 
+  header {
+    padding: 2em 0;
+    text-align: center;
+    color: black;
+    z-index: 10;
+    position: relative;
+    font-size: large;
+  }
+  
+  /**************************
+  * header h1
+  *
+  */ 
+  header h1 {
+    font-size: 2em;
+    font-weight: 900;
+    margin: 0;
+  }
+  
+  /**************************
+  * #container3D
+  *
+  */ 
+  #container3D {
+    top: 20%;
+    width: 90vw; 
+    height: 60vh;
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%); 
+    background-color: black; 
+    border-radius: 20px; 
+    border: solid white 2px;
+    overflow: hidden; 
+  }
+  
+  /**************************
+  * #container3D canvas
+  *
+  */ 
+  #container3D canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #12031d;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /**************************
+  * button#info
+  * 
+  * 
+  */ 
+  button#info {
+    background-color: transparent;
+    color: antiquewhite; 
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 1px 1px; 
+    border: none;
+    border-radius: 3px; 
+    position: absolute;
+    top: 1px; 
+    left: 1px; 
+    z-index: 1002; 
+    font-size: 0.8em; 
+    width: 15%; 
+    background-position: center;
+  }
+  
+  #info_button {
+    width: 100%;
+  }
+  
+  /**************************
 * button#fullscreen
 * 
 * 
@@ -166,13 +165,13 @@ button#fullscreen {
   border: none;
   cursor: pointer;
   position: absolute;
-  width: 2%;
+  width: 100%;
   bottom: 10px; 
-  right: 1%; 
+  right: -44%; 
   z-index: 1002; 
 }
 
 #fullscreen_button {
-  width: 125%; 
+  width: 10%; 
   height: auto; 
 }

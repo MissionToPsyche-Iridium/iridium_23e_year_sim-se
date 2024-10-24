@@ -1,5 +1,5 @@
 /* 
-* popup_style.css
+* popup_style_large_smartphone.css
 *
 * This file defines the presentation aspects of this HTML file
 * 
@@ -58,8 +58,10 @@
 *     .popup-content-header
 *     .popup-content-body
 *     .popup-content-body p
-*		  .popup-content-body li
-*     .popup-content button
+*	    .popup-content-body p, .popup-content-body img
+*     .popup-content-body img
+*	    .popup-content-body li
+*	    .popup-content button 
 *     .popup-content button:hover
 *     .popup-overlay
 *     
@@ -78,11 +80,11 @@ File Start
 */ 
 .popup {
     position: absolute;
-    top: 10.15%;
-    width: 90vw;
+    top: 50.5%;
+    width: 85vw;
     height: 57vh;
     left: 50%;
-    transform: translate(-50%) skew(-5deg);
+    transform: translate(-50%, -50%) skew(-1deg);
     background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
     background-blend-mode: darken;
     background-size: cover;
@@ -96,20 +98,22 @@ File Start
   /**************************
   * .popup-buttons
   *
+  * 
   */ 
   .popup-buttons {
     display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 20px;
+    justify-content: center; 
+    position: absolute; 
+    bottom: 20px; 
     left: 50%; 
-    transform: translateX(-50%);
-    width: 100%;
+    transform: translateX(-50%); 
+    width: 100%; 
     padding: 10px;
   }
   
   /**************************
   * .popup-buttons button
+  * 
   * 
   */ 
   .popup-buttons button {
@@ -133,11 +137,12 @@ File Start
   *
   */ 
   .popup-content-header {
+    display: block;
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: xx-large;
+    font-size: large;
     font-weight: bolder;
-    transform: skew(5deg);
+    transform: skew(1deg);
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     text-shadow: 0px 0px 30px antiquewhite; /* Lets discuss the white as a team */
   }
@@ -147,29 +152,54 @@ File Start
   *
   */ 
   .popup-content-body {
-    display: flex;
-    flex-direction: row; 
-    justify-content: center; 
-    align-items: flex-start; 
-    gap: 20px; 
+    display: block;
+    align-items: center;
+    gap: 20px;
     flex-grow: 1;
-    width: 100%;
-}
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+  }
   
   /**************************
   * .popup-content-body p
   *
+  * 
   */ 
   .popup-content-body p {
-    flex: 1; 
-    padding-top: 1% !important;
-    margin: 10px; 
-    font-size: x-large;
+    margin-right: 20px;
+    text-align: left;
+    font-size: 16px;
     padding: 5%;
-    color: gray;
-    background-color: black;
+    color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
+    background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
     border-radius: 10px;
-}
+  }
+  
+  /**************************
+  * .popup-content-body p,
+  * .popup-content-body img
+  *
+  * 
+  */ 
+  .popup-content-body p,
+  .popup-content-body img {
+    margin: 10px; 
+    background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
+    color: gray; /* Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% Black, 10% Black, 5% Black */
+    border-radius: 10px;
+  }
+
+  /**************************
+  * .popup-content-body img
+  *
+  * 
+  */ 
+  .popup-content-body img {
+    max-width: 90%; 
+    max-height: 75%;
+    height: auto; 
+  }
   
   /**************************
   * .popup-content-body li
@@ -177,8 +207,7 @@ File Start
   * 
   */ 
   .popup-content-body li {
-    font-size: xx-large !important;
-    font-weight: normal;
+    font-size: 14px !important;
   }
   
   /**************************
@@ -188,15 +217,14 @@ File Start
   */ 
   .popup-content button {
     z-index: 1001;
-    position: relative;
-    margin-top: 20px;
-    background-color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
-    color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
-    transform: skew(5deg);
+    margin: 0 10px;
+    padding: 2.5px 7.5px;
+    background-color: gray; 
+    color: black;
+    transform: skew(1deg);
     border-radius: 6px;
-    font-size: large;
+    font-size: 16px;
     cursor: pointer;
-    padding: 8px 15px;
   }
   
   /**************************

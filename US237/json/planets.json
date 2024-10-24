@@ -1,0 +1,84 @@
+{
+    "planets": [
+        {
+        "name": "Mercury",
+        "size_d_m": "3,033 miles",
+        "size_d_km": "4,879 kilometers",
+        "distance_au": "0.39 AUs",
+        "distance_m": "38 million miles",
+        "distance_km": "58 million kilometers",
+        "gravity": 3.7,
+        "order": 1
+        },
+        {
+        "name": "Venus",
+        "size_d_m": "7,521 miles",
+        "size_d_km": "12,104 kilometers",
+        "distance_au": "0.72 AUs",
+        "distance_m": "67 million miles",
+        "distance_km": "108 million kilometers",
+        "gravity": 8.9,
+        "order": 2
+        },
+        {
+        "name": "Earth",
+        "size_d_m": "7,918 miles",
+        "size_d_km": "12,742 kilometers",
+        "distance_au": "1.0 AUs",
+        "distance_m": "93 million miles",
+        "distance_km": "149 million kilometers",
+        "gravity": 9.8,
+        "order": 3
+        },
+        {
+        "name": "Mars",
+        "size_d_m": "4,212 miles",
+        "size_d_km": "6779 kilometers",
+        "distance_au": "1.52 AUs",
+        "distance_m": "142 million miles",
+        "distance_km": "228 million kilometers",
+        "gravity": 3.7,
+        "order": 4
+        },
+        {
+        "name": "Jupiter",
+        "size_d_m": "86,880 miles",
+        "size_d_km": "139,820 kilometers",
+        "distance_au": "5.2 AUs",
+        "distance_m": "484 million miles",
+        "distance_km": "778 million kilometers",
+        "gravity": 23.1,
+        "order": 5
+        },
+        {
+        "name": "Saturn",
+        "size_d_m": "72,365 miles",
+        "size_d_km": "116,460 kilometers",
+        "distance_au": "9.54 AUs",
+        "distance_m": "886 million miles",
+        "distance_km": "1.4 billion kilometers",
+        "gravity": 9.0,
+        "order": 6
+        },
+        {
+        "name": "Uranus",
+        "size_d_m": "31,518 miles",
+        "size_d_km": "50,724 kilometers",
+        "distance_au": "19.22 AUs",
+        "distance_m": "1.8 billion miles",
+        "distance_km": "2.9 billion kilometers",
+        "gravity": 8.7,
+        "order": 7
+        },
+        {
+        "name": "Neptune",
+        "size_d_m": "30,599 miles",
+        "size_d_km": "49,244 kilometers",
+        "distance_au": "30.06 AUs",
+        "distance_m": "2.8 billion miles",
+        "distance_km": "4.5 billion kilometers",
+        "gravity": 11.0,
+        "order": 8
+        }
+    ]
+}
