@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+const fullscreen_button = document.getElementById('fullscreen');
 /*****************************************************
  * openPopup()
  * 
@@ -93,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function openPopup() {
     const overlay = document.createElement('div');
+    fullscreen_button.style.display = 'none';
     overlay.id = 'popupOverlay';
     overlay.className = 'popup-overlay';
 
@@ -133,7 +135,7 @@ function closePopup() {
     if (overlay) {
         document.body.removeChild(overlay);
     }
-
+    fullscreen_button.style.display = 'block';
     // Make the 'info' button visible again when the popup is closed
     const infoButton = document.getElementById('info');
     if (infoButton) {

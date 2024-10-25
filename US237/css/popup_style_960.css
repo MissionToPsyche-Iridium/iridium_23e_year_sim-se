@@ -80,9 +80,9 @@ File Start
 */ 
 .popup {
     position: absolute;
-    top: 50.15%;
+    top: 68.5%;
     width: 90vw;
-    height: 54vh;
+    height: 57vh;
     left: 50%;
     transform: translate(-50%, -50%) skew(-5deg);
     background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
@@ -140,7 +140,7 @@ File Start
     display: block;
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: large;
+    font-size: x-large;
     font-weight: bolder;
     transform: skew(5deg);
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
@@ -211,7 +211,7 @@ File Start
   * 
   */ 
   .popup-content-body li {
-    font-size: 16px !important;
+    font-size: 20px !important;
   }
   
   /**************************

@@ -78,7 +78,7 @@ File Start
 */ 
 .popup {
     position: absolute;
-    top: 10.15%;
+    top: 27%;
     width: 90vw;
     height: 57vh;
     left: 50%;
@@ -87,7 +87,7 @@ File Start
     background-blend-mode: darken;
     background-size: cover;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
-    z-index: 1000;
+    z-index: 1004;
     padding: 20px;
     border-radius: 20px;
     color: antiquewhite;

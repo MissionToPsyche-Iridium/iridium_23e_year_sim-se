@@ -72,9 +72,14 @@ File Start
 *
 */ 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   margin: 0;
   font-family: "Montserrat", sans-serif;
   background-color: white; 
+  min-height: 100vh;
 }
 
 /**************************
@@ -82,12 +87,17 @@ body {
 *
 */ 
 header {
-  padding: 2em 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
   text-align: center;
   color: black;
   z-index: 10;
-  position: relative;
   font-size: large;
+  margin-bottom: 1%;
 }
 
 /**************************
@@ -98,6 +108,73 @@ header h1 {
   font-size: 2em;
   font-weight: 900;
   margin: 0;
+  padding-top: 15px;
+}
+
+/**************************
+* #top_navigation
+*
+*/ 
+#top_navigation {
+  display: flex;         
+  justify-content: space-between; 
+  align-items: center;    
+  width: 100%;
+  padding: 0 40px;
+  background-color: transparent; 
+  margin-bottom: 20px;
+}
+
+/* Center logo */
+.center_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+/* Right logos container */
+.right_logos {
+  display: flex;
+  flex-direction: row; /* Align logos side by side */
+  align-items: flex-start; /* Align items at the start */
+  gap: 10px; /* Space between the logos */
+  padding-right: 1%;
+}
+
+/**************************
+* Adjust individual right logos
+*
+*/ 
+#p_asu_logo {
+  position: relative;
+  top: -20px; /* Keep this logo in its original position */
+  max-width: 100px;
+  height: auto;
+}
+
+#nasa_logo {
+  position: relative;
+  top: 20px; /* Shift this logo down for a staggered effect */
+  max-width: 80px;
+  height: auto;
+  margin-left: -12px;
+}
+
+#main_logo {
+  max-width: 200px; /* Increase the size as needed */
+  height: auto; /* Maintain the aspect ratio */
+  margin-right: -100%;
+}
+
+
+/**************************
+* Logos General Style
+*
+*/ 
+.logos {
+  max-width: 80px;
+  height: auto; 
 }
 
 /**************************
@@ -105,16 +182,16 @@ header h1 {
 *
 */ 
 #container3D {
-  top: 10%;
   width: 90vw; 
   height: 60vh; 
-  position: absolute;
-  left: 50%; 
-  transform: translateX(-50%); 
-  background-color: black; 
+  margin-top: 1%;
   border-radius: 20px; 
-  border: solid white 2px;
+  border-style: solid;
+  border-color: #12031d;
   overflow: hidden; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /**************************
@@ -124,15 +201,13 @@ header h1 {
 #container3D canvas {
   width: 100%;
   height: 100%;
-  background-color: #12031d;
+  background-color: black;
   position: relative;
   z-index: 1;
 }
 
-
 /**************************
 * button#info
-* 
 * 
 */ 
 button#info {
@@ -144,8 +219,8 @@ button#info {
   border: none;
   border-radius: 3px; 
   position: absolute;
-  top: 1px; 
-  left: 1px; 
+  top: 28%; 
+  left: 5%; 
   z-index: 1002; 
   font-size: 0.8em; 
   width: 3%; 
@@ -159,7 +234,6 @@ button#info {
 /**************************
 * button#fullscreen
 * 
-* 
 */ 
 button#fullscreen {
   background-color: transparent;
@@ -167,8 +241,8 @@ button#fullscreen {
   cursor: pointer;
   position: absolute;
   width: 2%;
-  bottom: 10px; 
-  right: 1%; 
+  right: 6%; 
+  bottom: 13%;
   z-index: 1002; 
 }
 

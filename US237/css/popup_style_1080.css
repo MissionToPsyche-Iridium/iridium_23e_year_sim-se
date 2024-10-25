@@ -80,9 +80,9 @@ File Start
 */ 
 .popup {
     position: absolute;
-    top: 40.15%;
+    top: 65.15%;
     width: 90vw;
-    height: 56vh;
+    height: 57vh;
     left: 50%;
     transform: translate(-50%, -50%) skew(-5deg);
     background-color: black; /* need to make Black - HEX #12031d| RGB 18R  3G   29B */
