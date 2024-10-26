@@ -122,15 +122,15 @@ File Start
     margin-bottom: 10%;
     width: 100%;
     padding: 20px 0;
-    color: black;
+    color: black ;
     z-index: 10;
     font-size: large;
   }
 
   /**************************
+  */ 
   * header h1
   *
-  */ 
   header h1 {
     text-align: center;
     font-weight: 900;
