@@ -46,6 +46,10 @@ File Start
 ========================================================================================================
 */
 
+// Importing two methods to get planet data from JSON file. 
+// TODO: Sprint 3 - replace most hard coded info with JSON object info calls. 
+import { getAllData, getPlanetInfo  } from "./fetchPlanetData";
+
 /*****************************************************
  * More Information Button Listener
  * 
