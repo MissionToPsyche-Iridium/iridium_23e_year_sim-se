@@ -7,8 +7,8 @@
 * Team:       35
 * Project:    NASA Psyche Mission: Year on Psyche Simulation
 * Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
-* Date:       10/17/24
-* Revision:   1.0
+* Date:       10/25/24
+* Revision:   1.1
 *
 * NASA PSYCHE MISSION STYLING GUIDELINES FULL DOCUMENT Link:https://drive.google.com/drive/folders/1MIwxLJ-mtbufn1g5_l8kPB9kicp_dtrM
 * Finding Summary below:
@@ -51,14 +51,46 @@
 *             (#name1) The "#" makes this a class selector for a specific element. 
 *
 * Styles Defined:
-*     body
-*     header
-*     header h1
-*     #container3D
-*     #container3D canvas
-*     button#info
-*     button#fullscreen
-*     
+*    body container
+*    header
+*    header h1
+*    #header_navigation
+*    .center_logo
+*    .right_logos
+*    #p_asu_logo
+*    #nasa_logo
+*    #main_logo
+*    .logos
+*    .hamburger
+*    .hamburger .bar
+*    .menu-links
+*    .menu-links ul
+*    .menu-links li
+*    .menu-links a
+*    .scrolled .center_logo
+*    .scrolled #main_logo
+*    .scrolled .right_logos
+*    .scrolled h1
+*    #p_asu_logo_menu, #nasa_logo_menu
+*    #p_asu_logo_menu
+*    #nasa_logo_menu
+*    .scrolled .hamburger
+*    .menu-active
+*    #container3D
+*    #container3D canvas
+*    button#info
+*    button#fullscreen
+*    footer
+*    #footer_container
+*    #footer_container div
+*    #footer_container h3
+*    #footer_container li
+*    #left_footer
+*    #center_footer
+*    #center_footer h4
+*    #right_footer
+*    .hide
+*    
 */ 
 
 /*
@@ -120,13 +152,19 @@ header h1 {
   margin-bottom: 20px;
 }
 
-/* Center logo */
+/**************************
+* .center_logo
+*
+*/
 .center_logo {
   margin: 0 auto;
   margin-right: 22%;
 }
 
-/* Right logos container */
+/**************************
+* .right_logos
+*
+*/
 .right_logos {
   display: flex;
   flex-direction: row; 
@@ -136,7 +174,7 @@ header h1 {
 }
 
 /**************************
-* Adjust individual right logos
+* #p_asu_logo
 *
 */ 
 #p_asu_logo {
@@ -146,6 +184,10 @@ header h1 {
   height: auto;
 }
 
+/**************************
+* nasa_logo
+*
+*/ 
 #nasa_logo {
   position: relative;
   top: 20px;
@@ -154,6 +196,10 @@ header h1 {
   margin-left: -12px;
 }
 
+/**************************
+* #main_logo
+*
+*/ 
 #main_logo {
   max-width: 150px;
   height: auto; 
@@ -163,7 +209,7 @@ header h1 {
 
 
 /**************************
-* Logos General Style
+* .logos
 *
 */ 
 .logos {
@@ -171,38 +217,14 @@ header h1 {
   height: auto; 
 }
 
-.scrolled .center_logo {
-  margin-left: 1%;
-}
+/*
+=================== Header Hamburger Menu Elements ===================
+*/
 
-.scrolled #main_logo {
-  max-width: 60px;
-  margin-right: 0;
-  left: 0;
-}
-
-.scrolled .right_logos {
-  display: none;
-}
-
-.scrolled h1 {
-  display: none;
-}
-
-#p_asu_logo_menu, #nasa_logo_menu {
-  margin: 0;
-  position: static; 
-}
-
-#p_asu_logo_menu {
-  max-width: 70px;
-}
-
-#nasa_logo_menu {
-  max-width: 50px;
-}
-
-/* Hamburger menu */
+/**************************
+* .hamburger
+*
+*/ 
 .hamburger {
   display: none;
   position: fixed;
@@ -212,6 +234,10 @@ header h1 {
   cursor: pointer;
 }
 
+/**************************
+* .hamburger .bar
+*
+*/ 
 .hamburger .bar {
   width: 20px;
   height: 1px;
@@ -221,7 +247,10 @@ header h1 {
   padding-right: -5%;
 }
 
-/* Menu links */
+/**************************
+* .menu-links
+*
+*/ 
 .menu-links {
   border: solid black 2px;
   border-right: transparent;
@@ -237,32 +266,116 @@ header h1 {
   z-index: 1000;
 }
 
+/**************************
+* .menu-links ul
+*
+*/ 
 .menu-links ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
+/**************************
+* .menu-links li
+*
+*/ 
 .menu-links li {
   margin: 10px 0;
   padding: 7.5%;
 }
 
+/**************************
+* .menu-links a
+*
+*/ 
 .menu-links a {
   text-decoration: none;
   color: black;
 }
 
-/* When scrolled */
+/*
+=================== Scrolling Features ===================
+*/
+
+/**************************
+* .scrolled .center_logo
+*
+*/ 
+.scrolled .center_logo {
+  margin-left: 1%;
+}
+
+/**************************
+* .scrolled #main_logo
+*
+*/ 
+.scrolled #main_logo {
+  max-width: 60px;
+  margin-right: 0;
+  left: 0;
+}
+
+/**************************
+* .scrolled .right_logos
+*
+*/ 
+.scrolled .right_logos {
+  display: none;
+}
+
+/**************************
+* .scrolled h1
+*
+*/ 
+.scrolled h1 {
+  display: none;
+}
+
+/**************************
+* #p_asu_logo_menu, #nasa_logo_menu
+*
+*/ 
+#p_asu_logo_menu, #nasa_logo_menu {
+  margin: 0;
+  position: static; 
+}
+
+/**************************
+* #p_asu_logo_menu
+*
+*/ 
+#p_asu_logo_menu {
+  max-width: 70px;
+}
+
+/**************************
+* #nasa_logo_menu
+*
+*/ 
+#nasa_logo_menu {
+  max-width: 50px;
+}
+
+/*
+=================== Scrolling Features for Hamburger Menu ===================
+*/
+
+/**************************
+* .scrolled .hamburger
+*
+*/ 
 .scrolled .hamburger {
   display: block; 
 }
 
-/* When the menu is active */
+/**************************
+* .menu-active
+*
+*/ 
 .menu-active {
   display: block; 
 }
-
 
 /**************************
 * #container3D
@@ -319,7 +432,7 @@ header h1 {
     width: 100%;
   }
   
-  /**************************
+/**************************
 * button#fullscreen
 * 
 * 
@@ -340,6 +453,15 @@ button#fullscreen {
   height: auto; 
 }
 
+/*
+=================== Footer Elements ===================
+*/
+
+/**************************
+* footer
+* 
+* 
+*/ 
 footer {
   background-image: url('../images/main_images/psyche_background_gradient.jpg');
   background-repeat: no-repeat;
@@ -347,6 +469,11 @@ footer {
   margin-top: 20%;
 }
 
+/**************************
+* #footer_container
+* 
+* 
+*/ 
 #footer_container {
   width: 100%;
   height: auto;
@@ -356,15 +483,30 @@ footer {
   padding: 7.5% 0;
 }
 
+/**************************
+* #footer_container div
+* 
+* 
+*/ 
 #footer_container div {
   margin: 0 auto;
 }
 
+/**************************
+* #footer_container h3
+* 
+* 
+*/ 
 #footer_container h3 {
   font-size: large;
   font-weight: bolder;
 }
 
+/**************************
+* #footer_container li
+* 
+* 
+*/ 
 #footer_container li {
   list-style-type: none;
   font-size: medium;
@@ -373,22 +515,57 @@ footer {
   text-align: left;
 }
 
+/**************************
+* #left_footer
+* 
+* 
+*/ 
 #left_footer {
   color: #a53f5b;
 }
 
+/**************************
+* #center_footer
+* 
+* 
+*/ 
 #center_footer {
   color: #f9a000;
 }
 
-.hide {
-  visibility: hidden;
+/**************************
+* #center_footer h4
+* 
+* 
+*/ 
+#center_footer h4 {
+  font-size: medium;
 }
 
+/**************************
+* #right_footer
+* 
+* 
+*/ 
 #right_footer {
   color: #f47c33;
 }
 
-#center_footer h4 {
-  font-size: medium;
+/*
+=================== Class to hide elements ===================
+*/
+
+/**************************
+* .hide
+* 
+* 
+*/ 
+.hide {
+  visibility: hidden;
 }
+
+/*
+========================================================================================================
+File End
+========================================================================================================
+*/
