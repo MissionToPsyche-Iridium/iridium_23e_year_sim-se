@@ -1,5 +1,5 @@
 /* 
-* style_tablet.css
+* style_960.css
 *
 * This file defines the presentation aspects of this HTML file
 * 
@@ -72,10 +72,8 @@ File Start
 *
 */ 
 body {
-  display: flex;
-  flex-direction: column;
+  display: block;
   align-items: center;
-  justify-content: flex-start;
   margin: 0;
   font-family: "Montserrat", sans-serif;
   background-color: white; 
@@ -87,17 +85,14 @@ body {
 *
 */ 
 header {
+  top: 0;
+  position: fixed;
+  margin-bottom: 10%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 20px 0;
-  text-align: center;
   color: black;
   z-index: 10;
-  font-size: medium;
-  margin-bottom: 1%;
+  font-size: large;
 }
 
 /**************************
@@ -105,40 +100,39 @@ header {
 *
 */ 
 header h1 {
-  font-size: 2em;
+  text-align: center;
   font-weight: 900;
-  margin: 0;
+  margin: 0 auto;
   padding-top: 15px;
 }
 
 /**************************
-* #top_navigation
+* #header_navigation
 *
 */ 
-#top_navigation {
+#header_navigation {
   display: flex;         
   justify-content: space-between; 
   align-items: center;    
   width: 100%;
-  padding: 0 40px;
+  padding-right: 5%;
   background-color: transparent; 
   margin-bottom: 20px;
 }
 
 /* Center logo */
 .center_logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+  margin: 0 auto;
+  margin-right: 31%;
 }
 
 /* Right logos container */
 .right_logos {
   display: flex;
-  flex-direction: row; /* Align logos side by side */
-  align-items: flex-start; /* Align items at the start */
-  gap: 10px; /* Space between the logos */
+  flex-direction: row; 
+  align-items: flex-start; 
+  gap: 10px; 
+  padding-right: 1%;
 }
 
 /**************************
@@ -147,23 +141,24 @@ header h1 {
 */ 
 #p_asu_logo {
   position: relative;
-  top: -20px; /* Keep this logo in its original position */
-  max-width: 90px;
+  top: -20px;
+  max-width: 80px;
   height: auto;
 }
 
 #nasa_logo {
   position: relative;
-  top: 20px; /* Shift this logo down for a staggered effect */
-  max-width: 70px;
+  top: 20px;
+  max-width: 60px;
   height: auto;
   margin-left: -12px;
 }
 
 #main_logo {
-  max-width: 175px; /* Increase the size as needed */
-  height: auto; /* Maintain the aspect ratio */
-  margin-right: -100%;
+  max-width: 180px;
+  height: auto; 
+  transition: all 1s linear;
+  left: 0;
 }
 
 
@@ -176,19 +171,111 @@ header h1 {
   height: auto; 
 }
 
+.scrolled .center_logo {
+  margin-left: 1%;
+}
+
+.scrolled #main_logo {
+  max-width: 60px;
+  margin-right: 0;
+  left: 0;
+}
+
+.scrolled .right_logos {
+  display: none;
+}
+
+.scrolled h1 {
+  display: none;
+}
+
+#p_asu_logo_menu, #nasa_logo_menu {
+  margin: 0;
+  position: static; 
+}
+
+#p_asu_logo_menu {
+  max-width: 70px;
+}
+
+#nasa_logo_menu {
+  max-width: 50px;
+}
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+.hamburger .bar {
+  width: 20px;
+  height: 1px;
+  background-color: black;
+  margin: 6px 0;
+  transition: all 0.3s ease;
+}
+
+/* Menu links */
+.menu-links {
+  border: solid black 2px;
+  border-right: transparent;
+  display: none; 
+  position: fixed;
+  top: 60px;
+  height: 100%;
+  width: auto;
+  right: 0;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 2%;
+  z-index: 1000;
+}
+
+.menu-links ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-links li {
+  margin: 10px 0;
+  padding: 7.5%;
+}
+
+.menu-links a {
+  text-decoration: none;
+  color: black;
+}
+
+/* When scrolled */
+.scrolled .hamburger {
+  display: block; 
+}
+
+/* When the menu is active */
+.menu-active {
+  display: block; 
+}
+
+
 /**************************
 * #container3D
 *
 */ 
 #container3D {
-  width: 90vw; 
+  width: 85vw; 
   height: 60vh; 
-  margin-top: 1%;
+  margin: 0 auto;
+  margin-top: 25%;
   border-radius: 20px; 
   border-style: solid;
   border-color: #12031d;
   overflow: hidden; 
-  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -219,16 +306,16 @@ header h1 {
     border: none;
     border-radius: 3px; 
     position: absolute;
-    top: 25%; 
-    left: 5%; 
+    top: 35%; 
+    left: 7%; 
     z-index: 1002; 
     font-size: 0.8em; 
-    width: 10%; 
+    width: 5%; 
     background-position: center;
   }
   
   #info_button {
-    width: 100%;
+    width: 80%;
   }
   
   /**************************
@@ -242,12 +329,71 @@ button#fullscreen {
   cursor: pointer;
   position: absolute;
   width: 100%;
-  bottom: 18%; 
-  right: -42%; 
+  right: -40%; 
   z-index: 1002; 
+  bottom: 7%;
 }
 
 #fullscreen_button {
-  width: 7%; 
+  width: 3%; 
   height: auto; 
+}
+
+
+
+footer {
+  background-image: url('../images/main_images/psyche_background_gradient.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+#footer_container {
+  width: 100vw;
+  height: auto;
+  border-top: solid black 5px;
+  margin-top: 20%;
+  padding-top: 2%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  
+}
+
+#footer_container div {
+  margin: 0 auto;
+}
+
+#footer_container h3 {
+  font-size: large;
+  font-weight: bolder;
+}
+
+#footer_container li {
+  list-style-type: none;
+  font-size: medium;
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: left;
+}
+
+#left_footer {
+  color: #a53f5b;
+}
+
+#center_footer {
+  color: #f9a000;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+
+#right_footer {
+  color: #f47c33;
+}
+
+#center_footer h4 {
+  font-size: medium;
 }

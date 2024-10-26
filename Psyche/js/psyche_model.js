@@ -258,6 +258,7 @@ fullscreenButton.addEventListener('click', function() {
         renderer.setSize(window.innerWidth, window.innerHeight);
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
+        fullscreenButton.style.display = 'none';
       });
     } else if (container3D.webkitRequestFullscreen) { // For Safari
       container3D.webkitRequestFullscreen().then(() => {
@@ -265,6 +266,7 @@ fullscreenButton.addEventListener('click', function() {
         renderer.setSize(window.innerWidth, window.innerHeight);
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
+        fullscreenButton.style.display = 'none';
       });
     } else if (container3D.msRequestFullscreen) { // For IE11
       container3D.msRequestFullscreen().then(() => {
@@ -272,6 +274,7 @@ fullscreenButton.addEventListener('click', function() {
         renderer.setSize(window.innerWidth, window.innerHeight);
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
+        fullscreenButton.style.display = 'none';
       });
     }
   } else {
@@ -282,6 +285,7 @@ fullscreenButton.addEventListener('click', function() {
         renderer.setSize(container.clientWidth, container.clientHeight);
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
+        fullscreenButton.style.display = 'block';
       });
     } else if (document.webkitExitFullscreen) { // For Safari
       document.webkitExitFullscreen().then(() => {
@@ -289,6 +293,7 @@ fullscreenButton.addEventListener('click', function() {
         renderer.setSize(container.clientWidth, container.clientHeight);
         camera.aspect = container.clientWidth / container.clientHeight;
         camera.updateProjectionMatrix();
+        fullscreenButton.style.display = 'block';
       });
     }
   }

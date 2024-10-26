@@ -78,10 +78,10 @@ File Start
      media="screen and (max-width: 400px)">
   </head>
   <body>
-    <header>
-      <div id="top_navigation">
+    <header id="header">
+      <div id="header_navigation">
         <div class="center_logo">
-          <a href="index.html"><img src="images/main_images/Psyche_BadgeOutline_Color.png" id="main_logo" class="logos"></a>
+          <a href="index.html"><img src="images/main_images/Psyche_BadgeSolid_Color.png" id="main_logo" class="logos"></a>
         </div>
         <div class="right_logos">
           <a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo" class="logos"></a>
@@ -89,6 +89,12 @@ File Start
         </div>
       </div>
       <h1>16 Psyche</h1>
+      <nav id="menu-links" class="menu-links">
+          <ul>
+            <li><a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo_menu" class="logos"></a></li>
+            <li><a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo_menu" class="logos"></a></li>
+          </ul>
+      </nav>
     </header>
     <main>
       <div id="outer-container">
@@ -104,6 +110,37 @@ File Start
       Screen Resolution: <span id="resolution"></span>
     </div>
     <script src="js/screen_testing.js"></script>
+    <footer>
+      <div id="footer_container">
+        <div id="left_footer">
+          <h3>Sponsors</h3>
+          
+            <li><a href="https://psyche.asu.edu/" target="_blank">Psyche.ASU</a></li>
+            <li><a href="https://nasa.gov" target="_blank">NASA</a></li>
+          
+        </div>
+        <div id="center_footer">
+          <h3 class="hide">center footer</h3>
+          
+            <li class="hide">link</li>
+            <li class="hide">link</li>
+            <li class="hide">link</li>
+            <li class="hide">link</li>
+          
+          <h4>Copyright&copy 2024</h4>
+        </div>
+        <div id="right_footer">
+          <h3>Resources</h3>
+            <li>link</li>
+            <li>link</li>
+            <li>link</li>
+            <li>link</li>
+          
+        </div>
+      </div>   
+    </footer>
+    
+    <script src="js/scroll.js"></script>
   </body>
 </html>
 

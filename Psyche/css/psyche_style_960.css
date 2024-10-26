@@ -209,8 +209,8 @@ File Start
   *
   */ 
   #screen5 p {
-    margin-top: 0%;
-    font-size: 18px !important;
+    margin-top: -1%;
+    font-size: 17px !important;
   }
 
   /**************************
