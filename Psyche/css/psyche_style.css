@@ -129,7 +129,6 @@ File Start
     font-size: xx-large !important;
   }
 
-
   /************ second screen (Quick Facts) ************/
 
   /**************************
@@ -149,7 +148,6 @@ File Start
     height: auto;
     border-radius: 10px;
   } 
-  
   
   /************ third screen (Size and Dimensions) ************/
     
@@ -193,7 +191,6 @@ File Start
     border-radius: 10px;
   } 
 
-  
   /************ fifth screen (Surface of Psyche) ************/
 
   /**************************
@@ -215,7 +212,6 @@ File Start
     border-radius: 10px;
   }
 
-  
   /************ sixth screen (Orbit and Rotation) ************/
   
   /**************************
@@ -237,7 +233,6 @@ File Start
     height: auto;
     border-radius: 10px;
   }
-
 
   /************ seventh screen (Structure) ************/
 
@@ -268,7 +263,6 @@ File Start
     border-radius: 10px;
   }
 
-
   /************ eigth screen (Moons) ************/
 
   /**************************
@@ -289,7 +283,6 @@ File Start
     border-radius: 10px;
   }  
 
-
   /************ ninth screen (Rings) ************/
   
   /**************************
@@ -309,7 +302,6 @@ File Start
     transform: scale(0.7) translateY(-30%);
     border-radius: 10px;
   }
-
 
   /************ tenth screen (Atmosphere) ************/
 
@@ -333,3 +325,8 @@ File Start
     border-radius: 10px;
   }  
    
+/*
+========================================================================================================
+File End
+========================================================================================================
+*/

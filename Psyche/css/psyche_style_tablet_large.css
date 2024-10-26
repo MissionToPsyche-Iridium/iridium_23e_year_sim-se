@@ -130,7 +130,6 @@ File Start
     font-size: x-large !important;
   }
 
-
   /************ second screen (Quick Facts) ************/
 
   /**************************
@@ -153,7 +152,6 @@ File Start
     margin: 10% 30%;
   }
   
-  
   /************ third screen (Size and Dimensions) ************/
     
   /**************************
@@ -166,7 +164,6 @@ File Start
     width: 76%;
   }
 
-
   /**************************
   * #psyche1
   *
@@ -175,7 +172,6 @@ File Start
     transform: scale(1.5); 
     margin: 5% 35%;
   }
-  
   
   /************ fourth screen (Life on Psyche) ************/
   
@@ -218,7 +214,6 @@ File Start
     border-radius: 10px;
     margin: 0 30%;
   }
-
   
   /************ sixth screen (Orbit and Rotation) ************/
   
@@ -241,7 +236,6 @@ File Start
     border-radius: 10px;
     margin: 7.5% 30%;
   }
-
 
   /************ seventh screen (Structure) ************/
 
@@ -273,7 +267,6 @@ File Start
     margin: 0 30%;
   }
 
-
   /************ eigth screen (Moons) ************/
 
   /**************************
@@ -294,7 +287,6 @@ File Start
     border-radius: 10px;
     margin: 10% 30%;
   }
-
 
   /************ ninth screen (Rings) ************/
   /**************************
@@ -318,7 +310,6 @@ File Start
     margin: 0 5%;
   }
 
-
   /************ tenth screen (Atmosphere) ************/
 
   /**************************
@@ -339,3 +330,9 @@ File Start
     border-radius: 10px;
     margin: 10% 35%;
   }  
+
+/*
+========================================================================================================
+File End
+========================================================================================================
+*/
