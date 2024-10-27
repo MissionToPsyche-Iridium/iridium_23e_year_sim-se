@@ -5,6 +5,9 @@ This task did, however, highlight the alternative option of dynamically loading 
 
 Potential implementation would include dynamically scaling the loaded sun model to the current planet to give the perception of distance, while minimizing the actual grid distance of objects in the scene.  
  
+ 
+ ![241](https://github.com/MissionToPsyche-Iridium/iridium_23e_year_sim-se/blob/US169/Task%20241/Dynamic_Multi_glb/241.png)  
+ 
 ---
 ## Planet Modeling Guide
 ### Setting Units:   
