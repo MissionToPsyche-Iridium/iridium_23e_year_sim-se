@@ -56,9 +56,9 @@ loader.load(
   function (xhr) {
     console.log((xhr.loaded / xhr.total * 100) + '% loaded');
   },
-  function (error) {
-    console.error(error);
-  }
+  // function (error) {
+  //   console.error(error);
+  // }
 );
 
 // Function to fit the object within the container using bounding box
