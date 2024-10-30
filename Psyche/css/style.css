@@ -521,6 +521,30 @@ footer {
 #left_footer {
   color: #a53f5b;
 }
+/******************************
+* #references section styles
+*
+*/
+#references-toggle {
+  background-color: transparent;
+  border: none;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+  color: #a53f5b; /* Matches Sponsors color */
+  margin-top: 10px;
+}
+
+#references-list {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+#references-list li {
+  font-size: medium;
+  color: #a53f5b; /* Matches Sponsors color */
+  list-style-type: disc;
+}
 
 /**************************
 * #center_footer
