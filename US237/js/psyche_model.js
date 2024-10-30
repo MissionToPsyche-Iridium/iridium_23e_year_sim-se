@@ -9,7 +9,7 @@ import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/l
 const scene = new THREE.Scene();
 // Get the container and create a camera with its aspect ratio based on the container
 const container = document.getElementById('container3D');
-const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 2000000);
 
 // OrbitControls allow the camera to move around the scene
 let controls;
@@ -42,6 +42,48 @@ scene.add(topLight);
 
 const ambientLight = new THREE.AmbientLight(0x333333, 1);
 scene.add(ambientLight);
+
+/* Adding Starfield */
+// Create stars array to store all of the created stars
+var stars = new Array(0);
+// Minimum distance from the center
+var minDistance = 1000;
+// Maximum distance from the center
+var maxDistance = 20000;
+
+// For loop to place the stars between a sphere of 1000 and 20000
+for (var i = 0; i < 10000; i++) {
+  let r = THREE.Math.randFloat(minDistance, maxDistance);
+  let theta = THREE.Math.randFloat(0, Math.PI * 2);
+  // Use acos to ensure even distribution, just PI makes the sphere poles have too many stars
+  let phi = Math.acos(THREE.Math.randFloat(-1, 1));
+  // Converting spherical coordinates to cartesian 
+  let x = r * Math.sin(phi) * Math.cos(theta);
+  let y = r * Math.sin(phi) * Math.sin(theta);
+  let z = r * Math.cos(phi);
+  // Add the stars to the array
+  stars.push(x, y, z);
+}
+// Define the stars position the the BufferGeometry object
+var starsGeometry = new THREE.BufferGeometry();
+starsGeometry.setAttribute("position", new THREE.Float32BufferAttribute(stars, 3));
+
+// Load the star texture image for each star 
+const textureLoader = new THREE.TextureLoader();
+const particleTexture = textureLoader.load('./images/stars/star.png');
+
+// Define how the stars will appear at their positions
+var starsMaterial = new THREE.PointsMaterial({
+  map: particleTexture, // Texture
+  size: 4.0, // Size of the particles
+  sizeAttenuation: true, // size of the particle will be smaller as it gets further away from the camera
+  vertexColors: false // leave false for better rendering 
+});
+
+// Create the starField object with the geometry and materials and add to the scene
+var starField = new THREE.Points( starsGeometry, starsMaterial );
+scene.add( starField );
+/* End of Starfield */
 
 // Load the 3D model using the GLTFLoader
 const loader = new GLTFLoader();
@@ -105,6 +147,8 @@ controls = new OrbitControls(camera, renderer.domElement);
 controls.enablePan = true;
 controls.enableDamping = true; // Enable damping for a smoother rotation
 controls.dampingFactor = 0.05;
+controls.minDistance = 20;
+controls.maxDistance = 150;
 controls.update();
 
 // Add a resize listener to adjust the canvas and camera aspect ratio when the window is resized
