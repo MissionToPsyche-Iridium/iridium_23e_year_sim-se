@@ -178,11 +178,11 @@ function firstScreen() {
       <div class="popup-content-body">
         <p>
           16 Psyche is a metal-rich asteroid, contained within the asteroid belt, orbiting the Sun between Mars & Jupiter. This asteroid is of particular
-           interest, as Psyche may have started out as a core of a planetesimal. If Psyche is indeed the core of a planetsimal, this will give scientists 
+           interest, as Psyche may have started out as a core of a planetesimal. If Psyche is indeed the core of a planetesimal, this will give scientists 
            a better understanding of the inner layers of planets like Earth.
         </p>
         <p>
-          Psyche was first disovered by Italian astronomer Annibale de Gasparis in 1852, named after the ancient Greek mythology goddess of the soul. Psyche 
+          Psyche was first discovered by Italian astronomer Annibale de Gasparis in 1852, named after the ancient Greek mythology goddess of the soul. Psyche 
           is currently three times farther from the sun than we are on Earth. Due to Psyche's orbit, the distance between Earth and Psyche varies from 
           186 million miles to more than 372 million miles.
         </p>
@@ -234,7 +234,7 @@ function secondScreen() {
           <ul>
             <li>Psyche was the 16<sup>th</sup> asteroid discovered, hence it is sometimes referred to as 16 Psyche.</li>
             <li>M-Type Asteroid</li>
-            <li>Believed to be the core of a planetsimal</li>
+            <li>Believed to be the core of a planetesimal</li>
             <li>1 Year on Psyche is approximately 5 years on Earth</li>
             <li>1 Day on Psyche is about 4 hours on Earth</li>
             <li>Psyche has seasons</li>
@@ -524,12 +524,12 @@ function seventhScreen() {
         </video>
         <p>
           16 Psyche is classified as a Metallic-type (M-type) asteroid, the third most common type of asteroids in the solar system.
-          These types of asteroids are common, however very little is known about them. 16 Psyche was previously belived to be composed
+          These types of asteroids are common, however very little is known about them. 16 Psyche was previously believed to be composed
           of entirely metal, however, new data on its density points towards a mixture of metal and silicate.
         <br>
         <br>
           Psyche is considered to be very dense. Though measurements are still being made, the current bulk density appears to be 3400 - 4100
-          kilograms per cubic meter (kg/m<sup>3</sup>), composed of rock and metal. The surface is belived to be very porous, with estimates 
+          kilograms per cubic meter (kg/m<sup>3</sup>), composed of rock and metal. The surface is believed to be very porous, with estimates 
           ranging from 30-70% of the entire surface. The gravity on Psyche is much less than the Earth or 
           the Moon, where lifting a car on Psyche would be equivalent to lifting a dog on Earth.
         </p>
