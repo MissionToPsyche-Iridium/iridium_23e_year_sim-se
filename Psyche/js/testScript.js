@@ -14,7 +14,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuff
 renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.setPixelRatio(window.devicePixelRatio); // For high-DPI displays
 container.appendChild(renderer.domElement); // Attach renderer to the container
-const scaleFactor = .9;
+const scaleFactor = .1;
 ;
 /* ===============================
    Camera Controls Setup
@@ -27,7 +27,6 @@ controls.dampingFactor = 0.05;
    Update Camera Coordinates
    =============================== */
 function updateCameraCoords() {
-  console.log(document.getElementById('coord-x'));
   document.getElementById('coord-x').textContent = camera.position.x.toFixed(2);
   document.getElementById('coord-y').textContent = camera.position.y.toFixed(2);
   document.getElementById('coord-z').textContent = camera.position.z.toFixed(2);
@@ -43,49 +42,46 @@ scene.add(ambientLight);
    GLTFLoader Setup and Variables
    =============================== */
 const loader = new GLTFLoader();
-let currentPlanet = 'earth'; // Start on Earth
-let currentPlanetModel = null;
 
-const planets = [
-  { name: 'earth', distance: 0, model: '/models/sun/sun_only.glb' }, // Sun with Earth
-  { name: 'mars', distance: 22790, model: '/models/planets/mars.glb' }, // Mars
-  { name: 'venus', distance: 10820, model: '/models/planets/venus.glb' } // Venus
-];
-
-/* ===============================
-   Load Initial Sun Model (Sun + Earth)
-   =============================== */
-loader.load(planets[0].model, (gltf) => {
-  const model = gltf.scene;
-  model.scale.set(scaleFactor, scaleFactor, scaleFactor);
-  scene.add(model);
-  currentPlanetModel = model;
-  camera.lookAt(model.position); // Ensure the camera focuses on the model
-});
-
-/* ===============================
-   Load a Planet by Name
-   =============================== */
-function loadPlanet(planet) {
-  const planetInfo = planets.find(p => p.name === planet);
-
-  if (!planetInfo) {
-    console.error(`Planet ${planet} not found!`);
-    return;
-  }
-
-  if (currentPlanetModel) scene.remove(currentPlanetModel); // Remove existing model
-
-  loader.load(planetInfo.model, (gltf) => {
-    const model = gltf.scene;
-    model.position.set(planetInfo.distance, 0, 0);
-    scene.add(model);
-    currentPlanetModel = model;
-
-    camera.position.set(planetInfo.distance + 500, 0, 0); // Adjust camera position
-    camera.lookAt(model.position); // Focus on the loaded planet
+// Function to load a model as a promise
+function loadModel(url, position) {
+  return new Promise((resolve, reject) => {
+    loader.load(
+      url,
+      (gltf) => {
+        const model = gltf.scene;
+        model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+        model.position.set(...position);
+        scene.add(model);
+        console.log(`${url} loaded.`);
+        resolve(model);
+      },
+      undefined,
+      (error) => reject(error)
+    );
   });
 }
+
+// Load both models simultaneously
+Promise.all([
+  loadModel('/models/sun/sun_only.glb', [0, 0, 0]), // Sun at origin
+  loadModel('/models/earth/earth_only.glb', [60000, 0, 0]), // Earth on the X-axis
+])
+  .then(() => console.log('Both models loaded.'))
+  .catch((error) => console.error('Error loading models:', error));
+
+// Move the camera to a good viewing position near Earth
+const earthPosition = new THREE.Vector3(...earth_.position); // Earth's position
+camera.position.set(earthPosition.x + 500, earthPosition.y + 100, earthPosition.z + 300); // Offset to view Earth clearly
+camera.lookAt(earthPosition); // Make the camera look at Earth
+controls.update(); // Ensure the controls update with the new camera position
+
+// const planets = [
+//   { name: 'sun', distance: 0, model: '/models/sun/sun_only.glb' }, // Sun with Earth
+//   { name: 'earth', distance: 22790, model: '/models/earth/earth_only.glb' }, // earth
+//   { name: 'venus', distance: 10820, model: '/models/planets/venus.glb' } // Venus
+// ];
+
 
 /* ===============================
    Keyboard Controls to Switch Planets
