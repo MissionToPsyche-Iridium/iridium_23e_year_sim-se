@@ -114,8 +114,7 @@ File Start
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     text-shadow: 0px 0px 50px antiquewhite;
     align-items: center;
-    margin: 0 18%;
-    font-size: 75px;
+    margin: 0 15%;
   } 
 
   /**************************
@@ -127,7 +126,7 @@ File Start
     opacity: 0.9;
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     background-color: transparent;
-    font-size: 45px !important;
+    font-size: xx-large !important;
   }
 
   /************ second screen (Quick Facts) ************/
@@ -158,7 +157,7 @@ File Start
   */ 
   #screen3 p {
     margin-top: 5%;
-    font-size: 40px !important;
+    font-size: xx-large !important;
     width: 30%;
   }
 
@@ -169,7 +168,6 @@ File Start
   #psyche_size {
     width: 27%;
     border-radius: 10px;
-    margin-right: 2.5%;
   } 
   
   /************ fourth screen (Life on Psyche) ************/
@@ -180,7 +178,7 @@ File Start
   */ 
   #screen4 p {
     margin-top: 5%;
-    font-size: 40px !important;
+    font-size: xx-large;
   } 
   
   /**************************
@@ -191,7 +189,6 @@ File Start
     width: 35%;
     height: auto;
     border-radius: 10px;
-    margin-right: 2.5%;
   } 
 
   /************ fifth screen (Surface of Psyche) ************/
@@ -202,7 +199,7 @@ File Start
   */ 
   #screen5 p {
     margin-top: 2.5%;
-    font-size: 40px !important;
+    font-size: 26px !important;
   }
 
   /**************************
@@ -213,7 +210,6 @@ File Start
     padding-top: 1%;
     width: 40%;
     border-radius: 10px;
-    margin-right: 2.5%;
   }
 
   /************ sixth screen (Orbit and Rotation) ************/
@@ -224,7 +220,7 @@ File Start
   */ 
   #screen6 p {
     margin-top: 5%;
-    font-size: 40px !important;
+    font-size: xx-large !important;
     padding-right: 10%;
   } 
 
@@ -236,8 +232,6 @@ File Start
     width: 40%;
     height: auto;
     border-radius: 10px;
-    
-    margin-right: 2.5%;
   }
 
   /************ seventh screen (Structure) ************/
@@ -256,7 +250,7 @@ File Start
   */ 
   #screen7 p {
     margin-top: 2.5%;
-    font-size: 40px !important;
+    font-size: 28px !important;
   } 
 
   /**************************
@@ -267,7 +261,6 @@ File Start
     width: 40%;
     max-height: 75%;
     border-radius: 10px;
-    margin-right: 2.5%;
   }
 
   /************ eigth screen (Moons) ************/
@@ -278,7 +271,7 @@ File Start
   */ 
   #screen8 p {
     margin-top: 5%;
-    font-size: 40px !important;
+    font-size: xx-large !important;
   } 
 
   /**************************
@@ -288,7 +281,6 @@ File Start
   #moon_picture {
     width: 40%;
     border-radius: 10px;
-    margin-right: 2.5%;
   }  
 
   /************ ninth screen (Rings) ************/
@@ -299,7 +291,7 @@ File Start
   */ 
   #screen9 p {
     margin-top: 5%;
-    font-size: 40px !important;
+    font-size: xx-large !important;
   }
   
   /**************************
@@ -307,9 +299,8 @@ File Start
   *
   */
   #ring_picture {
-    transform: scale(1) translateY(-5%) translateX(-10%);
+    transform: scale(0.7) translateY(-30%);
     border-radius: 10px;
-    margin-right: 5%;
   }
 
   /************ tenth screen (Atmosphere) ************/
@@ -320,7 +311,7 @@ File Start
   */ 
   #screen10 p {
     margin-top: 5%;
-    font-size: 40px !important;
+    font-size: xx-large !important;
   }
    
   /**************************
@@ -332,7 +323,6 @@ File Start
     max-height: 75%;
     height: auto;
     border-radius: 10px;
-    margin-right: 2.5%;
   }  
    
 /*

@@ -162,7 +162,7 @@ header h1 {
 */
 .center_logo {
   margin: 0 auto;
-  margin-right: 40%;
+  margin-right: 38%;
 }
 
 /**************************
@@ -183,8 +183,8 @@ header h1 {
 */ 
 #p_asu_logo {
   position: relative;
-  top: -40px;
-  max-width: 150px;
+  top: -20px;
+  max-width: 100px;
   height: auto;
 }
 
@@ -194,8 +194,8 @@ header h1 {
 */ 
 #nasa_logo {
   position: relative;
-  top: 40px;
-  max-width: 100px;
+  top: 20px;
+  max-width: 80px;
   height: auto;
   margin-left: -12px;
 }
@@ -242,10 +242,10 @@ header h1 {
 *
 */
 .hamburger .bar {
-  width: 45px;
-  height: 5px;
+  width: 25px;
+  height: 3px;
   background-color: black;
-  margin: 10px 0;
+  margin: 8px 0;
   transition: all 0.3s ease;
 }
 
@@ -313,7 +313,7 @@ header h1 {
 *
 */ 
 .scrolled #main_logo {
-  max-width: 120px;
+  max-width: 80px;
   margin-right: 0;
   left: 0;
 }
@@ -422,8 +422,8 @@ button#info {
   border: none;
   border-radius: 3px; 
   position: absolute;
-  top: 36%; 
-  left: 4.5%; 
+  top: 38%; 
+  left: 6%; 
   z-index: 1002; 
   font-size: 0.8em; 
   width: 5%; 
@@ -444,8 +444,8 @@ button#fullscreen {
   cursor: pointer;
   position: absolute;
   width: 3.5%;
-  right: 5.5%; 
-  bottom: 5%;
+  right: 6%; 
+  bottom: 6%;
   z-index: 1002; 
 }
 
@@ -498,7 +498,7 @@ footer {
 * 
 */
 #footer_container h3 {
-  font-size: 40px;
+  font-size: xx-large;
   font-weight: bolder;
 }
 
@@ -508,7 +508,7 @@ footer {
 */
 #footer_container li {
   list-style-type: none;
-  font-size: xx-large;
+  font-size: x-large;
   font-weight: bold;
   line-height: 1.5;
   text-align: left;
@@ -535,7 +535,7 @@ footer {
 * 
 */
 #center_footer h4 {
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 /**************************
