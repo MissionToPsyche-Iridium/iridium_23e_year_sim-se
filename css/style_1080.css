@@ -1,0 +1,578 @@
+/* 
+* style_laptop.css
+*
+* This file defines the presentation aspects of this HTML file
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       10/25/24
+* Revision:   1.1
+*
+* NASA PSYCHE MISSION STYLING GUIDELINES FULL DOCUMENT Link:https://drive.google.com/drive/folders/1MIwxLJ-mtbufn1g5_l8kPB9kicp_dtrM
+* Finding Summary below:
+*   Color Pallette: These are the component colors of the badge, and the larger brand system. They should be used
+*                   sparingly as accents of to create hierarchy. 
+* Mustard -     HEX #f9a000| RGB 250R 160G 0B
+* Gold -        HEX #f47c33| RGB 245R 125G 50B
+* Coral -       HEX #ef5966| RGB 239R 89G  102B
+* Magenta -     HEX #a53f5b| RGB 165R 63G  91B
+* Purple -      HEX #592651| RGB 89R  38G  81B
+* Dark Purple - HEX #302144| RGB 48R  33G  68B
+*
+*   Backgrounds: The primary color pallette can be used to create gradient backgrounds with these 6 following combinations. 
+*                No more than two colors are allowed to be in a single gradient!
+* Dark Purple - Black
+* Purple - Dark Purple
+* Magenta - Purple
+* Coral - Magenta
+* Gold - Coral
+* Mustard - Gold
+*
+*   Neutral Palette: A secondary set of neutral grays can be used to create hierarchy or organization in a layout, and should be based 
+*                    off of the following tints of a rich cool black. 
+* Black - HEX #12031d| RGB 18R  3G   29B 
+* Tints - 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black
+* 
+*   Typography: All messaging should be kept as simple and legible as possible. Use consistent sizes and treatment for headlines, copy,
+*               and any other type element to create a structure and improve readability.
+*   White topography over gradients ensures proper contrast. 
+*   DO NOT use gradients in topography. 
+*   DO NOT use more than one color in topography           
+*
+* Fonts: Kockout - Can be used for titles and short headlines.
+*        Helvetica - Use this font for longer headlines, body copy, and any web applications. **THIS IS OUR MAIN FONT**         
+* 
+*
+*
+* Tips:       (.name) The "."" makes this a class selector and we can apply .name 
+*             to multiple elements. 
+*             (#name1) The "#" makes this a class selector for a specific element. 
+*
+* Styles Defined:
+*    body container
+*    header
+*    header h1
+*    #header_navigation
+*    .center_logo
+*    .right_logos
+*    #p_asu_logo
+*    #nasa_logo
+*    #main_logo
+*    .logos
+*    .hamburger
+*    .hamburger .bar
+*    .menu-links
+*    .menu-links ul
+*    .menu-links li
+*    .menu-links a
+*    .scrolled .center_logo
+*    .scrolled #main_logo
+*    .scrolled .right_logos
+*    .scrolled h1
+*    #p_asu_logo_menu, #nasa_logo_menu
+*    #p_asu_logo_menu
+*    #nasa_logo_menu
+*    .scrolled .hamburger
+*    .menu-active
+*    #container3D
+*    #container3D canvas
+*    button#info
+*    button#fullscreen
+*    footer
+*    #footer_container
+*    #footer_container div
+*    #footer_container h3
+*    #footer_container li
+*    #left_footer
+*    #center_footer
+*    #right_footer
+*    .hide
+*    
+*/
+
+
+/*
+========================================================================================================
+File Start
+========================================================================================================
+*/
+
+
+/**************************
+* body container
+*
+*/ 
+body {
+  display: block;
+  align-items: center;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: white; 
+  min-height: 100vh;
+}
+
+/**************************
+* header
+*
+*/ 
+header {
+  top: 0;
+  position: fixed;
+  margin-bottom: 10%;
+  width: 100%;
+  padding: 20px 0;
+  color: black;
+  z-index: 10;
+  font-size: x-large;
+}
+
+/**************************
+* header h1
+*
+*/ 
+header h1 {
+  text-align: center;
+  font-weight: 900;
+  margin: 0 auto;
+  padding-top: 15px;
+}
+
+/**************************
+* #header_navigation
+*
+*/ 
+#header_navigation {
+  display: flex;         
+  justify-content: space-between; 
+  align-items: center;    
+  width: 100%;
+  padding-right: 5%;
+  background-color: transparent; 
+  margin-bottom: 20px;
+}
+
+/**************************
+* .center_logo
+*
+*/
+.center_logo {
+  margin: 0 auto;
+  margin-right: 35%;
+}
+
+/**************************
+* .right_logos
+*
+*/
+.right_logos {
+  display: flex;
+  flex-direction: row; 
+  align-items: flex-start; 
+  gap: 10px; 
+  padding-right: 1%;
+}
+
+/**************************
+* #p_asu_logo
+*
+*/ 
+#p_asu_logo {
+  position: relative;
+  top: -20px;
+  max-width: 100px;
+  height: auto;
+}
+
+/**************************
+* nasa_logo
+*
+*/ 
+#nasa_logo {
+  position: relative;
+  top: 20px;
+  max-width: 80px;
+  height: auto;
+  margin-left: -12px;
+}
+
+/**************************
+* #main_logo
+*
+*/ 
+#main_logo {
+  max-width: 200px;
+  height: auto; 
+  transition: all 1s linear;
+  left: 0;
+}
+
+/**************************
+* .logos
+*
+*/ 
+.logos {
+  max-width: 80px;
+  height: auto; 
+}
+
+/*
+=================== Header Hamburger Menu Elements ===================
+*/
+
+/**************************
+* .hamburger
+*
+*/ 
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  cursor: pointer;
+}
+
+/**************************
+* .hamburger .bar
+*
+*/
+.hamburger .bar {
+  width: 20px;
+  height: 2px;
+  background-color: black;
+  margin: 6px 0;
+  transition: all 0.3s ease;
+}
+
+/**************************
+* .menu-links
+*
+*/ 
+.menu-links {
+  border: solid black 2px;
+  border-right: transparent;
+  display: none; 
+  position: fixed;
+  top: 60px;
+  height: 100%;
+  width: auto;
+  right: 0;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  padding: 2%;
+  z-index: 1000;
+}
+
+/**************************
+* .menu-links ul
+*
+*/
+.menu-links ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/**************************
+* .menu-links li
+*
+*/ 
+.menu-links li {
+  margin: 10px 0;
+  padding: 7.5%;
+}
+
+/**************************
+* .menu-links a
+*
+*/ 
+.menu-links a {
+  text-decoration: none;
+  color: black;
+}
+
+/*
+=================== Scrolling Features ===================
+*/
+
+/**************************
+* .scrolled .center_logo
+*
+*/ 
+.scrolled .center_logo {
+  margin-left: 1%;
+}
+
+/**************************
+* .scrolled #main_logo
+*
+*/ 
+.scrolled #main_logo {
+  max-width: 60px;
+  margin-right: 0;
+  left: 0;
+}
+
+/**************************
+* .scrolled .right_logos
+*
+*/ 
+.scrolled .right_logos {
+  display: none;
+}
+
+/**************************
+* .scrolled h1
+*
+*/ 
+.scrolled h1 {
+  display: none;
+}
+
+/**************************
+* #p_asu_logo_menu, #nasa_logo_menu
+*
+*/ 
+#p_asu_logo_menu, #nasa_logo_menu {
+  margin: 0;
+  position: static; 
+}
+
+/**************************
+* #p_asu_logo_menu
+*
+*/ 
+#p_asu_logo_menu {
+  max-width: 100px;
+}
+
+/**************************
+* #nasa_logo_menu
+*
+*/ 
+#nasa_logo_menu {
+  max-width: 80px;
+}
+
+/*
+=================== Scrolling Features for Hamburger Menu ===================
+*/
+
+/**************************
+* .scrolled .hamburger
+*
+*/ 
+.scrolled .hamburger {
+  display: block; 
+}
+
+/**************************
+* .menu-active
+*
+*/ 
+.menu-active {
+  display: block; 
+}
+
+/**************************
+* #container3D
+*
+*/ 
+#container3D {
+  width: 90vw; 
+  height: 60vh; 
+  margin: 0 auto;
+  margin-top: 25%;
+  border-radius: 20px; 
+  border-style: solid;
+  border-color: #12031d;
+  overflow: hidden; 
+  align-items: center;
+  justify-content: center;
+}
+
+/**************************
+* #container3D canvas
+*
+*/ 
+#container3D canvas {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  position: relative;
+  z-index: 1;
+}
+
+/**************************
+* button#info
+* 
+*/ 
+button#info {
+  background-color: transparent;
+  color: antiquewhite; 
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 1px 1px; 
+  border: none;
+  border-radius: 3px; 
+  position: absolute;
+  top: 46%; 
+  left: 6%; 
+  z-index: 1002; 
+  font-size: 0.8em; 
+  width: 5%; 
+  background-position: center;
+}
+
+#info_button {
+  width: 100%;
+}
+
+/**************************
+* button#fullscreen
+* 
+*/ 
+button#fullscreen {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  width: 3%;
+  bottom: -4%; 
+  right: 6%; 
+  z-index: 1002; 
+}
+
+#fullscreen_button {
+  width: 150%; 
+  height: auto; 
+}
+
+/*
+=================== Footer Elements ===================
+*/
+
+/**************************
+* footer
+* 
+* 
+*/ 
+footer {
+  background-image: url('../images/main_images/psyche_background_gradient.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+/**************************
+* #footer_container
+* 
+* 
+*/ 
+#footer_container {
+  width: 100vw;
+  height: auto;
+  border-top: solid black 5px;
+  margin-top: 20%;
+  padding-top: 2%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  
+}
+
+/**************************
+* #footer_container div
+* 
+* 
+*/ 
+#footer_container div {
+  margin: 0 auto;
+}
+
+/**************************
+* #footer_container h3
+* 
+* 
+*/
+#footer_container h3 {
+  font-size: x-large;
+  font-weight: bolder;
+} 
+
+/**************************
+* #footer_container li
+* 
+* 
+*/
+#footer_container li {
+  list-style-type: none;
+  font-size: large;
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/**************************
+* #left_footer
+* 
+* 
+*/ 
+#left_footer {
+  color: #a53f5b;
+}
+
+/**************************
+* #center_footer
+* 
+* 
+*/ 
+#center_footer {
+  color: #f9a000;
+}
+
+/**************************
+* #right_footer
+* 
+* 
+*/ 
+#right_footer {
+  color: #f47c33;
+}
+/*
+=================== Class to hide elements ===================
+*/
+
+/**************************
+* .hide
+* 
+* 
+*/ 
+
+.hide {
+  visibility: hidden;
+}
+ 
+
+/*
+========================================================================================================
+File End
+========================================================================================================
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

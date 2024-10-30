@@ -1,0 +1,39 @@
+{
+    "Psyche_Asteroid": {
+        "name" : "Psyche",
+        "size_d_m" : "140 miles",
+        "size_d_km" : "226 kilometers",
+        "distance_au" : "between 2.5 and 3.3 AUs",
+        "distance_m" : "between 235 to 309 million miles",
+        "distance_km" : "between 378 to 497 million kilometers",
+        "gravity" : "0.144 m/s2",
+        "day_length" : "4.2 hours",
+        "position" : "between Mars and Jupiter in the main asteroid belt",
+        "temperature" :"Psyche's temperature changes drastically between seasons (~100K / ~180&deg)"
+    },
+    "Psyche_Spacecraft" :{
+        "name" : "Psyche",
+        "size_m" : "24.76 meters long by 7.34 meters wide",
+        "size_f" : "81 feet long by 24 feet wide",
+        "size_relation" : "This is about the same size as a singles tennis court.",
+        "size_body_m" : "3.1 meters long by 2.4 meters wide",
+        "size_body_f" : "10 feet long by 8 feet wide",
+        "size_body_relation" : "This size is a little bigger than a small van and as tall as a basketball hoop.",
+        "total_mission_distance_m" : "2,038,718,881, around 2 billion miles",
+        "total_mission_distance_km" : "3,281000,000, around 3.2 billion kilometers "
+    }, 
+    "Psyche_Popups" :{
+        "screen1_p1" : "6 Psyche is a metal-rich asteroid, contained within the asteroid belt, orbiting the Sun between Mars & Jupiter. This asteroid is of particular interest, as Psyche may have started out as a core of a planetesimal. If Psyche is indeed the core of a planetesimal, this will give scientists a better understanding of the inner layers of planets like Earth.",
+        "screen1_p2" : "Psyche was first discovered by Italian astronomer Annibale de Gasparis in 1852, named after the ancient Greek mythology goddess of the soul. Psyche is currently three times farther from the sun than we are on Earth. Due to Psyche's orbit, the distance between Earth and Psyche varies from 186 million miles to more than 372 million miles.",
+        "screen2" : "Psyche was the 16th asteroid discovered, hence it is sometimes referred to as 16 Psyche.\nM-Type Asteroid\nBelieved to be the core of a planetesimal.\n1 Year on Psyche is approximately 5 years on Earth.\n1 Day on Psyche is about 4 hours on Earth.\nPsyche has seasons.\nPsyche's temperature changes drastically between seasons (~100K / ~180&deg).\nThe Psyche mission is expected to reach the asteroid in 2029.",
+        "screen3" : "16 Psyche is a potato-like shape, measuring 173 miles (280 kilometers) long at it widest spot, and 144 miles (232 kilometers) long. The total surface area is 64,000 square miles (165,800 square kilometers).<br><br> NASA Jet Propulsion Laboratory (JPL) has compared its size to the State of Maryland in the United States of America.",
+        "screen4_p1" : "The scientific community believes that comets and asteroids are responsible for delivering key ingredients, including water, which is the key complex chemistry needed to sustain life on Earth. Some asteroids are believed to have the capability of supporting human life.",
+        "screen4_p2" : "Currently, 16 Psyche does not show evidence of the critical nutrients of water, a breathable atmosphere, and a hospitable environment to allow for human life.",
+        "screen5" : "Our information, regarding 16 Psyche, is based on radar and optical observations. The observations have given evidence of a surface consisting of a mix of metal and silicate. Other observations have led scientists to believe there are two crater-like depressions. Scientists believe the asteroid may contain significant amounts of metal, consistent with the core of a planetesimal.\n\nThe NASA Psyche mission, based on the belief that planetesimals are the building blocks of our solar system, aims to provide a deeper understanding of 16 Psyche, and potentially other planets. This mission is a significant step towards shedding light on Earth's core and advancing our knowledge of planetary science.\n\n16 Psyche is believed to have survived multiple violent collisions during the solar system's formation.",
+        "screen6" : "16 Psyche is part of the Main Asteroid Belt, sitting between Mars and Jupiter.\n\n16 Psyche completes one rotation around the Sun, a Psyche year, approximately every five Earth years.\n\nPsyche rotates along its axis, a Psyche day, about once every four hours.",
+        "screen7" : "16 Psyche is classified as a Metallic-type (M-type) asteroid, the third most common type of asteroids in the solar system. These types of asteroids are common, however very little is known about them. 16 Psyche was previously belived to be composed of entirely metal, however, new data on its density points towards a mixture of metal and silicate.\n\nPsyche is considered to be very dense. Though measurements are still being made, the current bulk density appears to be 3400 - 4100 kilograms per cubic meter (kg/m<sup>3</sup>), composed of rock and metal. The surface is belived to be very porous, with estimates ranging from 30-70% of the entire surface. The gravity on Psyche is much less than the Earth or the Moon, where lifting a car on Psyche would be equivalent to lifting a dog on Earth.",
+        "screen8" : "NASA has identified more than 150 asteroids that have an orbiting moon, and in some cases more than one moon. Other asteroids can have other asteroids orbiting each other, referred to as binary or triple asteroid systems.<br><br>16 Psyche does not believe to have any moons or asteroids orbiting around it, however, more information will be known in 2029 when the Pscyche mission is expected to reach the asteroid.",
+        "screen9" : "While a few asteroids are known to have rings, 16 Psyche does not possess any.",
+        "screen10" : "Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts.\n\nWithout an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris."
+    }
+}

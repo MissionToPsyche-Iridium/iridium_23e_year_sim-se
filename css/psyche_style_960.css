@@ -1,0 +1,340 @@
+/* 
+* psyche_style_960.css
+*
+* This file defines the presentation aspects of this HTML file
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       10/17/24
+* Revision:   1.0
+*
+* NASA PSYCHE MISSION STYLING GUIDELINES FULL DOCUMENT Link:https://drive.google.com/drive/folders/1MIwxLJ-mtbufn1g5_l8kPB9kicp_dtrM
+* Finding Summary below:
+*   Color Pallette: These are the component colors of the badge, and the larger brand system. They should be used
+*                   sparingly as accents of to create hierarchy. 
+* Mustard -     HEX #f9a000| RGB 250R 160G 0B
+* Gold -        HEX #f47c33| RGB 245R 125G 50B
+* Coral -       HEX #ef5966| RGB 239R 89G  102B
+* Magenta -     HEX #a53f5b| RGB 165R 63G  91B
+* Purple -      HEX #592651| RGB 89R  38G  81B
+* Dark Purple - HEX #302144| RGB 48R  33G  68B
+*
+*   Backgrounds: The primary color pallette can be used to create gradient backgrounds with these 6 following combinations. 
+*                No more than two colors are allowed to be in a single gradient!
+* Dark Purple - Black
+* Purple - Dark Purple
+* Magenta - Purple
+* Coral - Magenta
+* Gold - Coral
+* Mustard - Gold
+*
+*   Neutral Palette: A secondary set of neutral grays can be used to create hierarchy or organization in a layout, and should be based 
+*                    off of the following tints of a rich cool black. 
+* Black - HEX #12031d| RGB 18R  3G   29B 
+* Tints - 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black
+* 
+*   Typography: All messaging should be kept as simple and legible as possible. Use consistent sizes and treatment for headlines, copy,
+*               and any other type element to create a structure and improve readability.
+*   White topography over gradients ensures proper contrast. 
+*   DO NOT use gradients in topography. 
+*   DO NOT use more than one color in topography           
+*
+* Fonts: Kockout - Can be used for titles and short headlines.
+*        Helvetica - Use this font for longer headlines, body copy, and any web applications. **THIS IS OUR MAIN FONT**         
+* 
+*
+*
+* Tips:       (.name) The "."" makes this a class selector and we can apply .name 
+*             to multiple elements. 
+*             (#name1) The "#" makes this a class selector for a specific element. 
+*
+* Styles Defined:
+*     #logo
+*     #header1
+*     #screen1 h1
+*     #screen1 p
+*     #screen2 ul
+*     #video1
+*     #screen3 p
+*     #psyche1
+*     #screen4 p
+*     #ocean
+*     #screen5 p
+*     #psyche_surface
+*     #screen6 p
+*     #path_picture
+*     #background_video
+*     #screen7 p
+*     #video2
+*     #screen8 p
+*     #moons
+*     #screen9p
+*     #ring_picture
+*     #screen10 p
+*     #atmosphere
+*     
+*/ 
+
+/*
+========================================================================================================
+File Start
+========================================================================================================
+*/
+
+  /************ first screen (Asteroid 16 Psyche) ************/
+  
+  /**************************
+  * #logo
+  *
+  */ 
+  #logo {
+    width: 10.5%;
+    height: auto;
+    opacity: .8;
+    margin: auto;
+  }
+
+  /**************************
+  * #header1
+  *
+  */ 
+  #header1 {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 24px;
+  }
+  
+  /**************************
+  * #screen1 h1
+  *
+  */ 
+  #screen1 h1 {
+    color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
+    text-shadow: 0px 0px 50px antiquewhite;
+    align-items: center;
+    margin: 0 5%;
+  }
+
+  /**************************
+  * #screen1 p
+  *
+  */ 
+  #screen1 p {
+    margin-top: 5%;
+    opacity: 0.9;
+    color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
+    background-color: transparent;
+    font-size: 20px !important;
+  }
+
+  /************ second screen (Quick Facts) ************/
+
+  /**************************
+  * #screen2 ul
+  *
+  */ 
+  #screen2 ul {
+    margin-top: 5%;
+    margin-right: 0;
+    width: 50%;
+  }
+
+  /**************************
+  * #video1
+  *
+  */ 
+  #video1 {
+    transform: scale(1) translateY(20%); 
+    border-radius: 10px;
+    position: absolute;
+    margin-left: 55%;
+    align-self: flex-start;
+  }
+  
+  /************ third screen (Size and Dimensions) ************/
+    
+  /**************************
+  * #screen3 p
+  *
+  */ 
+  #screen3 p {
+    margin-top: 5%;
+    padding-right: 20%;
+    font-size: 20px !important;
+  }
+
+  /**************************
+  * #psyche1
+  *
+  */ 
+  #psyche_size {
+    display: flex;
+    transform: scale(0.9) translateY(0); 
+  }
+  
+  /************ fourth screen (Life on Psyche) ************/
+  
+  /**************************
+  * #screen4 p
+  *
+  */ 
+  #screen4 p {
+    margin-top: 3%;
+    font-size: 20px !important;
+  }
+  
+  /**************************
+  * #ocean
+  *
+  */ 
+  #ocean {
+    transform: scale(1) translateY(3%);
+    height: auto;
+    border-radius: 10px;
+  }
+
+  /************ fifth screen (Surface of Psyche) ************/
+
+  /**************************
+  * #screen5 p
+  *
+  */ 
+  #screen5 p {
+    margin-top: -1%;
+    font-size: 17px !important;
+  }
+
+  /**************************
+  * #psyche_surface
+  *
+  */ 
+  #psyche_surface {
+    padding-top: 1%;
+    transform: scale(1) translateY(5%); 
+    border-radius: 10px;
+  }
+  
+  /************ sixth screen (Orbit and Rotation) ************/
+  
+  /**************************
+  * #screen6 p
+  *
+  */ 
+  #screen6 p {
+    margin-top: 5%;
+    font-size: 18px !important;
+    padding-right: 10%;
+  }
+
+  /**************************
+  * #path
+  *
+  */
+  #path_picture {
+    transform: scale(1) translateY(15%); 
+    border-radius: 10px;
+  }
+
+  /************ seventh screen (Structure) ************/
+
+  /**************************
+  * #background_video
+  *
+  */ 
+  #background_video {
+    display: none;
+  }
+  
+  /**************************
+  * #screen7 p
+  *
+  */ 
+  #screen7 p {
+    margin-top: 0%;
+    font-size: 18px !important;
+  }
+
+  /**************************
+  * #video2
+  *
+  */ 
+  #video2 {
+    transform: scale(1) translateY(15%); 
+    max-height: 75%;
+    border-radius: 10px;
+  }
+
+  /************ eigth screen (Moons) ************/
+
+  /**************************
+  * #screen8 p
+  *
+  */ 
+  #screen8 p {
+    margin-top: 5%;
+    font-size: 20px !important;
+  }
+
+  /**************************
+  * #moons
+  *
+  */ 
+  #moon_picture {
+    transform: scale(1) translateY(20%); 
+    border-radius: 10px;
+  }
+
+  /************ ninth screen (Rings) ************/
+
+  /**************************
+  * #screen9 p
+  *
+  */ 
+  #screen9 p {
+    flex-basis: 60%;
+    margin-top: 7.5%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px !important;
+  }
+
+  /**************************
+  * #ring_picture
+  *
+  */
+  #ring_picture {
+    transform: scale(0.5) translateY(-35%) translateX(-1%); 
+    border-radius: 10px;
+    padding-left: 0;
+    max-width: 100%;
+  }
+
+  /************ tenth screen (Atmosphere) ************/
+
+  /**************************
+  * #screen10 p
+  *
+  */ 
+  #screen10 p {
+    margin-top: 5%;
+    font-size: 20px !important;
+  }
+  
+  /**************************
+  * #atmosphere
+  *
+  */  
+  #atmosphere {
+    transform: scale(1) translateY(5%); 
+    height: auto;
+    border-radius: 10px;
+  }  
+
+/*
+========================================================================================================
+File End
+========================================================================================================
+*/

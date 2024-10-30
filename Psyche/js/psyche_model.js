@@ -15,7 +15,7 @@ const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container
 let controls;
 
 // Keep the 3D object on a global variable so we can access it later
-let object;
+let object, earthObject, sunObject;
 
 // Set which object to render
 let objToRender = 'psyche';
@@ -136,25 +136,21 @@ animate();
 // listener "dblclick" - mouse is double clicked
 renderer.domElement.addEventListener('dblclick', onDoubleClick);
 
-// onDoubleClick() - This function moves the camera view towards the area of the object that was double clicked
+// ===============================
+// Double-Click Handler Function
+// ===============================
+// Moves the camera towards the point on the object that was double-clicked using raycasting.
 function onDoubleClick(event) {
-  // Calculate mouse position in normalized device coordinates
   mouse.x = (event.clientX / container.clientWidth) * 2 - 1;
   mouse.y = -(event.clientY / container.clientHeight) * 2 + 1;
 
-  // Update the raycaster with the camera and mouse position
   raycaster.setFromCamera(mouse, camera);
-
-  // Calculate objects intersecting the picking ray
   const intersects = raycaster.intersectObject(object, true);
 
   if (intersects.length > 0) {
-    // Get the point of intersection
     const intersectPoint = intersects[0].point;
-
-    // Move the camera towards the intersected point
     const direction = new THREE.Vector3().subVectors(intersectPoint, camera.position).normalize();
-    const zoomDistance = 5; // Adjust the zoom step as needed
+    const zoomDistance = 5;
 
     camera.position.addScaledVector(direction, zoomDistance);
     camera.lookAt(intersectPoint);
