@@ -104,12 +104,13 @@ File Start
 *
 */ 
 body {
+  max-width: 5120px;
   display: block;
   align-items: center;
-  margin: 0;
+  margin: 0 auto;
   font-family: "Montserrat", sans-serif;
   background-color: white; 
-  min-height: 100vh;
+  max-height: 2160px;
 }
 
 /*
@@ -423,7 +424,7 @@ button#info {
   border-radius: 3px; 
   position: absolute;
   top: 48%; 
-  left: 5%; 
+  left: 6%; 
   z-index: 1002; 
   font-size: 0.8em; 
   width: 5%; 
@@ -444,7 +445,7 @@ button#fullscreen {
   cursor: pointer;
   position: absolute;
   width: 3.5%;
-  right: 5%; 
+  right:6%; 
   bottom: -7%;
   z-index: 1002; 
 }
