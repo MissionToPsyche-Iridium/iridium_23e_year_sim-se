@@ -18,7 +18,7 @@ let controls;
 let object;
 
 // Set which object to render
-let objToRender = 'psyche';
+let objToRender = 'mars';
 
 // Add raycaster and mouse vector for detecting intersections
 const raycaster = new THREE.Raycaster(); // Raycaster for detecting intersections
@@ -40,13 +40,13 @@ const topLight = new THREE.DirectionalLight(0xffffff, 1);
 topLight.position.set(500, 500, 500);
 scene.add(topLight);
 
-const ambientLight = new THREE.AmbientLight(0x333333, 1);
+const ambientLight = new THREE.AmbientLight(0x333333, 2);
 scene.add(ambientLight);
 
 // Load the 3D model using the GLTFLoader
 const loader = new GLTFLoader();
 loader.load(
-  `models/${objToRender}/psyche.glb`,
+  `models/${objToRender}/mars.glb`,
   function (gltf) {
     object = gltf.scene;
     fitObjectToContainer(object); // Call function to fit the object
