@@ -1,3 +1,12 @@
+/**
+ * This code handles the responsive navigation menu functionality:
+ * - Creates a hamburger menu icon dynamically when the page loads
+ * - Shows/hides the header based on scroll position (appears after scrolling 5% down the page)
+ * - Toggles the navigation menu when clicking the hamburger icon
+ * - Hides the fullscreen button when menu is open
+ * - Closes the menu when clicking outside of it
+ * - Handles mobile-friendly navigation
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('header');
     const fullscreenButton = document.getElementById('fullscreen');

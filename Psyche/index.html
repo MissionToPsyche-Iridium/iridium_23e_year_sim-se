@@ -12,14 +12,14 @@
 * Revision:   1.0
 *
 * Files Linked:
-*    css/style.css -  This file defines the presentation aspects of this HTML file
-*    css/popup_style.css -  This file defines the presentation aspects of popup
-*    css/popup_style.css -  This file defines the presentation aspects of the Psyche popup
+*    css/style.css -         This file defines the presentation aspects of this HTML file
+*    css/popup_style.css -   This file defines the presentation aspects of popup
+*    css/popup_style.css -   This file defines the presentation aspects of the Psyche popup
 *
-*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
-*                     the asteroid model and action listeners to manipulate. 
+*    js/main.js -           This file is the main driver of the Psyche simulation. Contains
+*                          the asteroid model and action listeners to manipulate. 
 *
-*    js/popup.js -    This file 
+*    js/popup.js -         This file 
 *  
 -->
 
@@ -33,13 +33,10 @@ File Start
 <!DOCTYPE html>
 <html>
   <head>
-     <!-- Defines the character encoding for the document-->
      <meta charset="utf-8" />
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Defines the webpage tab title-->
      <title>Psyche 16</title>
-     <!-- Linking the CSS stylesheet for colors, fonts, spacing, and more-->
-      <!-- Desktop/laptop screens 2560px + -->
+     <!-- Desktop/laptop screens 2560px + -->
      <link rel="stylesheet" href="css/style.css"/>
      <link rel="stylesheet" href="css/psyche_style.css"/>
      <link rel="stylesheet" href="css/popup_style.css"/>
@@ -76,6 +73,25 @@ File Start
      media="screen and (max-width: 400px)">
      <link rel="stylesheet" href="css/popup_style_small_smartphone.css" 
      media="screen and (max-width: 400px)">
+     <!-- Resolution display styles -->
+     <style>
+        #resolution-display {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        #resolution {
+            font-weight: bold;
+        }
+     </style>
   </head>
   <body>
     <header id="header">
@@ -104,45 +120,37 @@ File Start
         </div>
       </div>
     </main>
+    <!-- Resolution display element -->
+    <div id="resolution-display">
+        Resolution: <span id="resolution"></span>
+    </div>
     <script type="module" src="js/psyche_model.js"></script>
     <script src="js/popup.js"></script>
-    <div id="resolution-display" style="position: fixed; top: 10px; left: 10px; background-color: lightgray;">
-      Screen Resolution: <span id="resolution"></span>
-    </div>
-    <script src="js/screen_testing.js"></script>
+    <script type="module" src="js/screen_testing.js"></script>
     <footer>
       <div id="footer_container">
         <div id="left_footer">
           <h3>Sponsors</h3>
-          
-            <li><a href="https://psyche.asu.edu/" target="_blank">Psyche.ASU</a></li>
-            <li><a href="https://nasa.gov" target="_blank">NASA</a></li>
-          
+          <li><a href="https://psyche.asu.edu/" target="_blank">Psyche.ASU</a></li>
+          <li><a href="https://nasa.gov" target="_blank">NASA</a></li>
         </div>
         <div id="center_footer">
-          <h3 class="hide">center footer</h3>
-          
-            <li class="hide">link</li>
-            <li class="hide">link</li>
-            <li class="hide">link</li>
-            <li class="hide">link</li>
-          
+          <h3>Center Footer</h3>
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>
+          <li><a href="#">Link 4</a></li>
           <h4>Copyright&copy 2024</h4>
         </div>
         <div id="right_footer">
           <h3>Resources</h3>
-            <li>link</li>
-            <li>link</li>
-            <li>link</li>
-            <li>link</li>
-          
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>
+          <li><a href="#">Link 4</a></li>
         </div>
       </div>   
     </footer>
-    
     <script src="js/scroll.js"></script>
   </body>
 </html>
-
-
-

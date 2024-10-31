@@ -1,3 +1,17 @@
+/**
+ * animation.js
+ * 
+ * This file handles the animation and camera movement for the Psyche simulation.
+ * It manages:
+ * - The main animation loop that updates object positions and renders the scene
+ * - Camera transitions when clicking on object labels
+ * - Label position updates to follow their corresponding 3D objects
+ * - Orbital motion of objects
+ * 
+ * The animation can be paused/resumed and includes smooth camera transitions
+ * when focusing on different objects in the scene.
+ */
+
 // Import required modules
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { updateOrbits } from './orbits.js';
@@ -54,6 +68,16 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     }
   });
 
+  // Add resize handler to update renderer and labels when window changes
+  window.addEventListener('resize', () => {
+    const container = document.getElementById('container3D');
+    if (container) {
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+  });
+
   function animate(currentTime) {
     requestAnimationFrame(animate);
 
@@ -63,14 +87,23 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
 
     // Check if objects exist before updating positions
     if (objects) {
-      // Update orbital positions only if objects are loaded
+      // Update orbital positions only if objects are loaded and not paused
       if (objects.psycheObject && objects.sunObject && 
           objects.mercuryObject && objects.venusObject && objects.earthObject) {
-        updateOrbits(objects, deltaTime);
+        
+        // Only update orbits if not paused
+        if (!renderer.domElement.__isAnimationPaused) {
+          updateOrbits(objects, deltaTime);
+        }
 
-        // Update label positions
+        // Always update label positions regardless of state
         const container = document.getElementById('container3D');
-        if (labels) {
+        if (labels && container) {
+          // Force renderer to update size to match container
+          renderer.setSize(container.clientWidth, container.clientHeight);
+          camera.aspect = container.clientWidth / container.clientHeight;
+          camera.updateProjectionMatrix();
+
           if (labels.psycheLabel && objects.psycheObject) {
             updateLabelPosition(labels.psycheLabel, objects.psycheObject, camera, container);
           }
@@ -90,10 +123,10 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
       }
     }
 
-    // Update controls
+    // Always update controls
     controls.update();
 
-    // Render scene
+    // Always render the scene
     renderer.render(scene, camera);
   }
 

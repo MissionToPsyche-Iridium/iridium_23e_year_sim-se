@@ -1,3 +1,18 @@
+/**
+ * controls.js
+ * 
+ * This file controls how the camera moves and how users can interact with the Psyche view.
+ * It handles:
+ * - Setting up camera movement controls
+ * - Keys to change camera views (top, side, front)
+ * - Playing and stopping animation
+ * - Moving the camera back to start
+ * - Limits on zoom, pan and spin speeds
+ * 
+ * The controls let users look around the 3D scene while keeping them from
+ * getting lost or turned around.
+ */
+
 // Import the THREE.js library
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 // To allow for the camera to move around the scene
@@ -27,59 +42,10 @@ export function setupControls(camera, renderer) {
   controls.minPolarAngle = Math.PI * 0.1; // ~18 degrees from top
   controls.maxPolarAngle = Math.PI * 0.9; // ~162 degrees from top
 
-  // Handle label click events
-  document.addEventListener('click', (event) => {
-    // Check if clicked element is a label
-    if (event.target.classList.contains('label')) {
-      const objectName = event.target.textContent.toLowerCase();
-      const objects = {
-        'psyche': { distance: 30, scale: 1 },
-        'sun': { distance: 100, scale: 2 },
-        'mercury': { distance: 15, scale: 0.8 },
-        'venus': { distance: 25, scale: 1 },
-        'earth': { distance: 25, scale: 1 }
-      };
+  // Initialize animation state on the renderer's DOM element
+  renderer.domElement.__isAnimationPaused = false;
 
-      const object = objects[objectName];
-      if (object) {
-        // Get the 3D object position
-        const targetObject = scene.getObjectByName(objectName + 'Object');
-        if (targetObject) {
-          // Calculate camera position based on object size/scale
-          const viewDistance = object.distance * object.scale;
-          
-          // Smoothly move camera to new position
-          const targetPos = targetObject.position.clone();
-          const offset = new THREE.Vector3(viewDistance, 0, viewDistance);
-          const newCameraPos = targetPos.clone().add(offset);
-          
-          // Animate camera movement
-          const duration = 1000; // 1 second
-          const startPos = camera.position.clone();
-          const startTime = Date.now();
-          
-          function animateCamera() {
-            const now = Date.now();
-            const progress = Math.min((now - startTime) / duration, 1);
-            
-            // Use easing function for smooth transition
-            const easeProgress = 1 - Math.pow(1 - progress, 3);
-            
-            camera.position.lerpVectors(startPos, newCameraPos, easeProgress);
-            controls.target.copy(targetPos);
-            
-            if (progress < 1) {
-              requestAnimationFrame(animateCamera);
-            }
-          }
-          
-          animateCamera();
-        }
-      }
-    }
-  });
-
-  // Add keyboard controls for camera views
+  // Add keyboard controls for camera views and animation pause
   document.addEventListener('keydown', (event) => {
     switch(event.key.toLowerCase()) {
       case 'w':
@@ -99,6 +65,17 @@ export function setupControls(camera, renderer) {
         camera.position.set(0, 0, 550);
         camera.lookAt(0, 0, 0);
         controls.target.set(0, 0, 0);
+        break;
+      case 'p':
+        // Toggle animation pause state for planet movements only
+        renderer.domElement.__isAnimationPaused = !renderer.domElement.__isAnimationPaused;
+        break;
+      case 'r':
+        // Reset camera position
+        camera.position.set(0, 200, 550);
+        camera.lookAt(0, 0, 0);
+        controls.target.set(0, 0, 0);
+        controls.update();
         break;
     }
     controls.update();

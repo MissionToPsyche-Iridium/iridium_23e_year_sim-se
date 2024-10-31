@@ -1,3 +1,18 @@
+/**
+ * orbits.js
+ * 
+ * This file handles the orbital mechanics and body movements for the Psyche simulation.
+ * It manages:
+ * - Orbital distances, periods, and angles
+ * - Axial rotation rates and orbital inclinations
+ * - Real-time position updates for objects in orbit
+ * - Dynamic orbit path visualization
+ * - Scaling and timing of orbital motions (needs tweaking)
+ * 
+ * We simplified the orbital paths and speeds to make them easier to see, while keeping
+ * the relative sizes and speeds between objects accurate compared to each other.
+ */
+
 // Import the THREE.js library
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 

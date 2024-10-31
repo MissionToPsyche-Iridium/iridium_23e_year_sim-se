@@ -1,4 +1,16 @@
-
+/**
+ * psyche_model.js
+ * 
+ * This is the main file that sets up and runs the 3D Psyche asteroid simulation.
+ * It handles:
+ * - Setting up the 3D scene, camera, and renderer
+ * - Loading the 3D models for Psyche and other space objects
+ * - Creating labels that float over the objects
+ * - Managing the loading screen and error messages
+ * - Starting the animation loop
+ * - Adjusting the display when the window is resized
+ * - Pausing animation when switching browser tabs
+ */
 
 // Import the THREE.js library
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
