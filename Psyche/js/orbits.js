@@ -25,7 +25,7 @@ export const orbitalDistances = {
 };
 
 // Orbital periods in Earth days
-export const orbitalPeriods = {
+const orbitalPeriods = {
   mercury: 88,
   venus: 225,
   earth: 365,
@@ -33,7 +33,7 @@ export const orbitalPeriods = {
 };
 
 // Initial orbital angles
-export const orbitalAngles = {
+const orbitalAngles = {
   mercury: 0,
   venus: Math.PI / 3,
   earth: Math.PI / 2,

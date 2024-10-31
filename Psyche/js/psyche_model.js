@@ -10,22 +10,25 @@
  * - Starting the animation loop
  * - Adjusting the display when the window is resized
  * - Pausing animation when switching browser tabs
+ * 
+ * Remaining planets to add:
+ * - Mars
+ * - Jupiter 
+ * - Saturn
+ * - Uranus
+ * - Neptune
  */
 
 // Import the THREE.js library
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
-// To allow for the camera to move around the scene
-import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
-// To allow for importing the .gltf file
-import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 
 import { createStarfield } from './starfield.js';
 import { setupScene } from './scene_setup.js';
 import { loadModels } from './model_loader.js';
 import { setupControls } from './controls.js';
 import { setupEventListeners } from './event_listeners.js';
-import { createLabel, updateLabelPosition } from './labels.js';
-import { updateOrbits, orbitalAngles, orbitalDistances, orbitalPeriods } from './orbits.js';
+import { createLabel } from './labels.js';
+import { orbitalDistances } from './orbits.js';
 import { startAnimation } from './animation.js';
 
 // Create a Three.JS Scene

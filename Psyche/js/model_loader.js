@@ -1,3 +1,11 @@
+/**
+ * This file handles loading all the 3D models used in the Psyche space simulation.
+ * It loads models for Psyche, the Sun, Mercury, Venus and Earth using the GLTFLoader.
+ * Each model is loaded with the appropriate scale relative to Earth's size.
+ * The models are added to the scene and stored in a models object that gets passed
+ * to a callback function once all models are loaded.
+ */
+
 // Import the THREE.js library
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 // To allow for importing the .gltf file
