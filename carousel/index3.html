@@ -6,32 +6,41 @@
   <title>Carousel</title>
   <link rel="stylesheet" href="carousel.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@100;400;700&display=swap" />
 </head>
-<style>
-  .material-symbols-outlined {
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
-  }
-  </style>
 <body>
-  <div class="carousel-wrapper">
-    <div class="carousel-container">
-      <div class="carousel-item top-fade"></div>
-      <div class="carousel-item prev"></div>
-      <div class="carousel-item selected">
-        <span class="item-text"></span>
+  <div class="top-container">
+    <div class="carousel-wrapper">
+      <div class="carousel-container" id="top-carousel">
+        <div class="carousel-item top-fade"></div>
+        <div class="carousel-item prev"></div>
+        <div class="carousel-item selected">
+          <span class="item-text"></span>
+        </div>
+        <div class="carousel-item next"></div>
+        <div class="carousel-item bottom-fade"></div>
       </div>
-      <div class="carousel-item next"></div>
-      <div class="carousel-item bottom-fade"></div>
-    </div>
-    <div class=>
-      <span class="indicator material-symbols-outlined">
+      <div class="indicator material-symbols-outlined">
         arrow_left
-        </span>
-    </div> 
+      </div>
+    </div>
+  </div>
+  
+  <div class="bottom-container">
+    <div class="carousel-wrapper">
+      <div class="carousel-container" id="bottom-carousel">
+        <div class="carousel-item top-fade"></div>
+        <div class="carousel-item prev"></div>
+        <div class="carousel-item selected">
+          <span class="item-text"></span>
+        </div>
+        <div class="carousel-item next"></div>
+        <div class="carousel-item bottom-fade"></div>
+      </div>
+      <div class="indicator material-symbols-outlined">
+        arrow_left
+      </div>
+    </div>
   </div>
   
   <script src="script.js"></script>
