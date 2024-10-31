@@ -1,0 +1,178 @@
+$purple: #6a1b9a;
+$white: #ffffff;
+$plorange-3: #ff9800;
+$light-grey: #d3d3d3;
+$font-family-condensed: 'Roboto Condensed', sans-serif;
+$font-family-mono: 'Roboto Mono', monospace;
+$snappy: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out-back-easy: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+// Navigation Styles
+nav {
+    position: fixed;
+    z-index: 1;
+    left: 100%;
+    top: 0;
+    height: 100vh;
+    width: 260px;
+    padding: 20px;
+    background: $purple url("../img/nav-bg.jpg") 50% 50% no-repeat;
+    background-size: cover;
+    overflow: scroll;
+    transform: translateX(0);
+    transition: transform 0.3s $snappy;
+
+    body.admin-bar & {
+        padding-top: 52px;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    li {
+        margin: 0;
+    }
+
+    a {
+        display: block;
+        color: $white;
+
+        &:hover {
+            color: $plorange-3 !important;
+            text-decoration: none;
+        }
+    }
+
+    .current-menu-item > a,
+    .current-menu-ancestor > a {
+        color: $plorange-3 !important;
+    }
+
+    .menu > li > a {
+        padding: 7px 20px 5px;
+        font-family: $font-family-condensed;
+        font-weight: bold;
+        font-size: 26px;
+    }
+
+    .sub-menu > li > a {
+        padding: 5px 30px;
+        font-family: $font-family-mono;
+        font-weight: bold;
+        font-size: 14px;
+        color: $light-grey;
+    }
+
+    .sub-menu .current-menu-item > a {
+        color: $white !important;
+
+        &:hover {
+            color: $plorange-3 !important;
+        }
+    }
+
+    .sub-menu .sub-menu > li > a {
+        &:before {
+            content: "- ";
+        }
+    }
+
+    .menu > .menu-item-has-children {
+        > a:after {
+            content: " ";
+            display: inline-block;
+            width: 12px;
+            height: 7px;
+            margin-left: 10px;
+            vertical-align: middle;
+            background: url("../img/chevron-down.svg") 50% 50% no-repeat;
+            background-size: 12px 7px;
+            transform: rotate(0);
+            transition: transform 0.5s $ease-out-back-easy;
+        }
+
+        > .sub-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.25s $snappy, opacity 0.25s;
+        }
+
+        &.active {
+            > a:after {
+                transform: rotate(180deg);
+            }
+
+            > .sub-menu {
+                opacity: 1;
+                max-height: 1000px;
+            }
+        }
+    }
+
+    @include sm {
+        width: 320px;
+    }
+
+    @include lg {
+        width: 480px;
+        padding: 40px 65px 40px 80px;
+    }
+}
+
+// Main and Other Elements
+main {
+    opacity: 1;
+    transition: transform 0.6s $snappy, opacity 0.3s;
+}
+
+header,
+footer {
+    opacity: 1;
+    transition: transform 0.6s $snappy, opacity 0.3s;
+}
+
+.canvas {
+    position: relative;
+    width: 100vw;
+    height: auto;
+    overflow: hidden;
+}
+
+body.nav-active {
+    nav {
+        transform: translateX(-100%);
+    }
+
+    main {
+        transform: translateX(-260px);
+        opacity: 0.5;
+    }
+
+    header {
+        opacity: 0;
+        transform: translateX(-260px);
+    }
+
+    footer {
+        opacity: 0.5;
+        transform: translateX(-260px);
+    }
+
+    @include sm {
+        main {
+            transform: translateX(-320px);
+        }
+
+        header {
+            transform: translateX(-320px);
+        }
+
+        footer {
+            transform: translateX(-320px);
+        }
+    }
+}
