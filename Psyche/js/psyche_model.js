@@ -15,10 +15,14 @@ const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container
 let controls;
 
 // Keep the 3D object on a global variable so we can access it later
-let object;
+let marsObject;
+let psycheObject;
+let jupiterObject;
 
 // Set which object to render
-let objToRender = 'mars';
+let mars = 'mars';
+let psyche = 'psyche';
+let jupiter = 'jupiter';
 
 // Add raycaster and mouse vector for detecting intersections
 const raycaster = new THREE.Raycaster(); // Raycaster for detecting intersections
@@ -45,21 +49,88 @@ scene.add(ambientLight);
 
 // Load the 3D model using the GLTFLoader
 const loader = new GLTFLoader();
+// Load the Mars model
 loader.load(
-  `models/${objToRender}/mars.glb`,
+  `models/${mars}/mars.glb`,
   function (gltf) {
-    object = gltf.scene;
-    fitObjectToContainer(object); // Call function to fit the object
-    scene.add(object);
-    console.log('Object loaded and added to scene.');
+    marsObject = gltf.scene;
+    fitObjectToContainer(marsObject); // Call function to fit the Mars object
+    marsObject.position.set(-100, 0, 0); // Position Mars to the left
+   
+    // Increase brightness by adjusting emissive color
+    marsObject.traverse((node) => {
+      if (node.isMesh) {
+        node.material.emissive = new THREE.Color(0xff4500); // Subtle orange glow
+        node.material.emissiveIntensity = 0.2; // Adjust intensity as needed
+      }
+    });
+   
+    scene.add(marsObject);
+    console.log('Mars object loaded and added to scene at (-10, 0, 0).');
   },
   function (xhr) {
-    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    console.log((xhr.loaded / xhr.total * 100) + '% Mars loaded');
   },
   function (error) {
-    console.error(error);
+    console.error('Error loading Mars model:', error);
   }
 );
+
+// Load the Psyche model
+loader.load(
+  `models/${psyche}/Psyche.glb`,
+  function (gltf) {
+    psycheObject = gltf.scene;
+    fitObjectToContainer(psycheObject); // Call function to fit the Psyche object
+    psycheObject.position.set(0, 0, 10); // Position Psyche directly in front of the camera
+    
+    // Increase brightness by adjusting emissive color
+    psycheObject.traverse((node) => {
+      if (node.isMesh) {
+        node.material.emissive = new THREE.Color(0xffffff); // Subtle orange glow
+        node.material.emissiveIntensity = -0.2; // Adjust intensity as needed
+      }
+    });
+    
+    scene.add(psycheObject);
+    console.log('Psyche object loaded and added to scene at (0, 0, 10).');
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total * 100) + '% Psyche loaded');
+  },
+  function (error) {
+    console.error('Error loading Psyche model:', error);
+  }
+);
+
+// Load the Jupiter model
+loader.load(
+  `models/${jupiter}/jupiter.glb`,
+  function (gltf) {
+    jupiterObject = gltf.scene;
+    fitObjectToContainer(jupiterObject); // Call function to fit the Psyche object
+    jupiterObject.position.set(0, 0, -100); // Position Psyche directly in front of the camera
+    
+    // Increase brightness by adjusting emissive color
+    jupiterObject.traverse((node) => {
+      if (node.isMesh) {
+        node.material.emissive = new THREE.Color(0xffffff); // Subtle orange glow
+        node.material.emissiveIntensity = -0.1; // Adjust intensity as needed
+      }
+    });
+    
+    scene.add(jupiterObject);
+    console.log('Psyche object loaded and added to scene at (0, 0, 10).');
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total * 100) + '% Psyche loaded');
+  },
+  function (error) {
+    console.error('Error loading Psyche model:', error);
+  }
+);
+
+
 
 // Function to fit the object within the container using bounding box
 function fitObjectToContainer(object) {
@@ -120,10 +191,22 @@ window.addEventListener("resize", function () {
 function animate() {
   requestAnimationFrame(animate);
 
-  // Rotate the object if it exists
-  if (object) {
-    object.rotation.x += 0.001; // Slower rotation on the x-axis
-    object.rotation.y += 0.001; // Slower rotation on the y-axis
+  // Rotate Mars if it exists
+  if (marsObject) {
+    marsObject.rotation.x += 0.005;
+    marsObject.rotation.y += 0.001;
+  }
+
+  // Rotate Psyche if it exists
+  if (psycheObject) {
+    psycheObject.rotation.x += 0.001;
+    psycheObject.rotation.y += 0.001;
+  }
+
+  // Rotate Jupiter if it exists
+  if (jupiterObject) {
+    jupiterObject.rotation.x += 0.001;
+    jupiterObject.rotation.y += 0.001;
   }
 
   controls.update();
@@ -146,7 +229,7 @@ function onDoubleClick(event) {
   raycaster.setFromCamera(mouse, camera);
 
   // Calculate objects intersecting the picking ray
-  const intersects = raycaster.intersectObject(object, true);
+  const intersects = raycaster.intersectObject(psycheObject, true);
 
   if (intersects.length > 0) {
     // Get the point of intersection
