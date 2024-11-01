@@ -7,6 +7,7 @@
  * - Camera transitions when clicking on object labels
  * - Label position updates to follow their corresponding 3D objects
  * - Orbital motion of objects
+ * - Information windows for celestial bodies
  */
 
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
@@ -15,6 +16,8 @@ import { updateLabelPosition } from './labels.js';
 
 export function startAnimation(objects, labels, controls, camera, renderer, scene) {
   let lastTime = 0;
+  let isAnimationPaused = false;
+  let isOrbitPaused = false;
 
   // Add click handlers for labels
   const objectScales = {
@@ -30,11 +33,185 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     // 'neptune': { distance: 75, scale: 1.2 }
   };
 
-  // Add click listeners for labels
+  // Create info labels and windows for each celestial body
+  const infoContent = {
+    'psyche': {
+      pages: [
+        {
+          title: '16 Psyche - Overview',
+          content: `
+            <div>
+              <img src="./images/psyche_popup_images/psyche_path.jpg" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+              <p>Psyche is the name of an asteroid orbiting the Sun between Mars and Jupiter. It is also the name of a NASA space mission to visit that asteroid, led by Arizona State University. Scientists think that Psyche is largely made of metal. If this is true, it could be part of the core of a planetesimal – a small world the size of a city or small country that is the first building block of a planet.</p>
+            </div>`,
+        },
+        {
+          title: '16 Psyche - Connection', 
+          content: `
+            <div>
+              <img src="./images/psyche_popup_images/Psyche_3.jpg" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+              <p>Psyche could help us understand how Earth's core and the cores of other terrestrial planets came to be.</p>
+            
+            </div>`,
+        }
+      ]
+    },
+    'sun': {
+      pages: [
+        {
+          title: 'The Sun - Overview', 
+          content: 'The Sun is a yellow dwarf star, a hot ball of glowing gases at the heart of our solar system. Its gravity holds everything from the biggest planets to tiny particles in its orbit. The Sun\'s core is about 27 million degrees Fahrenheit (15 million degrees Celsius). The Sun\'s surface is about 10,000 degrees Fahrenheit (5,500 degrees Celsius).'
+        },
+        {
+          title: 'The Sun - Connection',
+          content: 'The Sun\'s powerful magnetic field and radiation affects all bodies in the solar system including Psyche.'
+        }
+      ]
+    },
+    'mercury': {
+      pages: [
+        {
+          title: 'Mercury - Overview',
+          content: 'Mercury is the smallest planet in our solar system and nearest to the Sun. Mercury is only slightly larger than Earth\'s Moon. From the surface of Mercury, the Sun would appear more than three times as large as it does when viewed from Earth, and the sunlight would be as much as seven times brighter.'
+        },
+        {
+          title: 'Mercury - Connection',
+          content: 'Like Psyche, Mercury is believed to have a large metallic core, making it relevant for understanding metal-rich bodies in space.'
+        }
+      ]
+    },
+    'venus': {
+      pages: [
+        {
+          title: 'Venus - Overview',
+          content: 'Venus is the second planet from the Sun and is Earth\'s closest planetary neighbor. It\'s one of the four inner, terrestrial (or rocky) planets. Venus spins slowly in the opposite direction from most planets. A thick atmosphere traps heat in a runaway greenhouse effect, making it the hottest planet in our solar system.'
+        },
+        {
+          title: 'Venus - Connection',
+          content: 'Venus and Psyche formed in the same early solar system, providing context for different formation pathways.'
+        }
+      ]
+    },
+    'earth': {
+      pages: [
+        {
+          title: 'Earth - Overview',
+          content: 'Earth is the third planet from the Sun and the only astronomical object known to harbor life. While Earth is only the fifth largest planet in the solar system, it is the only world in our solar system with liquid water on the surface. Just slightly larger than nearby Venus, Earth is the biggest of the four planets closest to the Sun, all of which are made of rock and metal.'
+        },
+        {
+          title: 'Earth - Connection',
+          content: 'Studying Psyche may provide insights into Earth\'s own metallic core formation and composition.'
+        }
+      ]
+    }
+  };
+
+  // Create info windows for each object
   Object.entries(labels).forEach(([key, label]) => {
     if (label) {
+      // Create info icon
+      const infoIcon = document.createElement('span');
+      infoIcon.textContent = 'ⓘ';
+      infoIcon.style.marginLeft = '5px';
+      infoIcon.style.cursor = 'pointer';
+      infoIcon.style.color = '#00ffff';
+      label.appendChild(infoIcon);
+
+      // Create info window
+      const infoWindow = document.createElement('div');
+      infoWindow.className = 'info-window';
+      infoWindow.style.display = 'none';
+      infoWindow.style.position = 'absolute';
+      infoWindow.style.backgroundColor = 'rgba(48, 33, 68, 0.9)'; // Dark purple background
+      infoWindow.style.padding = '20px';
+      infoWindow.style.borderRadius = '12px';
+      infoWindow.style.maxWidth = '400px';
+      infoWindow.style.minWidth = '300px';
+      infoWindow.style.zIndex = '1001';
+      infoWindow.style.color = 'white';
+      infoWindow.style.border = '2px solid #592651'; // Purple border
+      infoWindow.style.boxShadow = '0 0 20px rgba(89, 38, 81, 0.3)'; // Purple glow
+      infoWindow.style.backdropFilter = 'blur(5px)';
+      infoWindow.style.fontFamily = 'Arial, sans-serif';
+
+      const objectKey = key.replace('Label', '');
+      if (infoContent[objectKey]) {
+        let currentPage = 0;
+        const totalPages = infoContent[objectKey].pages.length;
+
+        function updateContent() {
+          const page = infoContent[objectKey].pages[currentPage];
+          infoWindow.innerHTML = `
+            <div style="position: relative;">
+              <h3 style="margin: 0 0 15px 0; color: #a53f5b; font-size: 18px; border-bottom: 1px solid #592651; padding-bottom: 10px;">
+                ${page.title}
+              </h3>
+              <div style="margin: 0 0 20px 0; line-height: 1.6; font-size: 14px;">
+                ${page.content}
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; border-top: 1px solid #592651; padding-top: 15px;">
+                <button class="nav-btn prev" style="background: none; border: 1px solid #592651; color: #a53f5b; padding: 5px 15px; cursor: pointer; border-radius: 4px;" ${currentPage === 0 ? 'disabled' : ''}>Previous</button>
+                <span style="color: #a53f5b;">${currentPage + 1}/${totalPages}</span>
+                <button class="nav-btn next" style="background: none; border: 1px solid #592651; color: #a53f5b; padding: 5px 15px; cursor: pointer; border-radius: 4px;" ${currentPage === totalPages - 1 ? 'disabled' : ''}>Next</button>
+              </div>
+              <button class="close-btn" style="position: absolute; top: -15px; right: -15px; background: #592651; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-weight: bold;">×</button>
+            </div>
+          `;
+
+          // Add event listeners for navigation
+          infoWindow.querySelector('.prev')?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentPage > 0) {
+              currentPage--;
+              updateContent();
+            }
+          });
+
+          infoWindow.querySelector('.next')?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentPage < totalPages - 1) {
+              currentPage++;
+              updateContent();
+            }
+          });
+
+          infoWindow.querySelector('.close-btn')?.addEventListener('click', () => {
+            infoWindow.style.display = 'none';
+            isAnimationPaused = false;
+          });
+        }
+
+        updateContent();
+      }
+
+      document.getElementById('container3D').appendChild(infoWindow);
+
+      // Add click handler for info icon
+      infoIcon.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const rect = infoIcon.getBoundingClientRect();
+        infoWindow.style.left = `${rect.right + 10}px`;
+        infoWindow.style.top = `${rect.top}px`;
+        if (infoWindow.style.display === 'none') {
+          infoWindow.style.display = 'block';
+          isAnimationPaused = true;
+        } else {
+          infoWindow.style.display = 'none';
+          isAnimationPaused = false;
+        }
+      });
+
+      // Close info window when clicking outside
+      document.addEventListener('click', (event) => {
+        if (!infoWindow.contains(event.target) && event.target !== infoIcon) {
+          infoWindow.style.display = 'none';
+          isAnimationPaused = false;
+        }
+      });
+
+      // Add click handler for main label
       label.addEventListener('click', () => {
-        const objectName = label.textContent.toLowerCase();
+        const objectName = label.textContent.toLowerCase().split('ⓘ')[0].trim();
         const objectConfig = objectScales[objectName];
         const targetObject = objects[objectName + 'Object'];
 
@@ -71,6 +248,13 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     }
   });
 
+  // Add keyboard event listener for 'p' key
+  document.addEventListener('keydown', (event) => {
+    if (event.key.toLowerCase() === 'p') {
+      isOrbitPaused = !isOrbitPaused;
+    }
+  });
+
   function animate(currentTime) {
     requestAnimationFrame(animate);
 
@@ -82,7 +266,7 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
         // && objects.marsObject && objects.jupiterObject && objects.saturnObject
         // && objects.uranusObject && objects.neptuneObject) {
       
-      if (!renderer.domElement.__isAnimationPaused) {
+      if (!isAnimationPaused && !isOrbitPaused) {
         updateOrbits(objects, deltaTime);
       }
 

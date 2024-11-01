@@ -188,9 +188,9 @@ export function setupEventListeners(container, camera, renderer, controls) {
   // Handle reference plane visibility and camera positioning
   document.addEventListener('keydown', (event) => {
     const planes = {
-      'w': scene.getObjectByName('xyPlane'),
-      'a': scene.getObjectByName('zyPlane'), 
-      'd': scene.getObjectByName('xzPlane')
+    //   'w': scene.getObjectByName('xyPlane'),
+    //   'a': scene.getObjectByName('zyPlane'), 
+    //   'd': scene.getObjectByName('xzPlane')
     };
 
     const cameraPositions = {

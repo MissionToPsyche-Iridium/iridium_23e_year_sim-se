@@ -66,10 +66,10 @@ export function setupControls(camera, renderer) {
         camera.lookAt(0, 0, 0);
         controls.target.set(0, 0, 0);
         break;
-      case 'p':
-        // Toggle animation pause state for planet movements only
-        renderer.domElement.__isAnimationPaused = !renderer.domElement.__isAnimationPaused;
-        break;
+    //   case 'p':
+    //     // Toggle animation pause state for planet movements only
+    //     renderer.domElement.__isAnimationPaused = !renderer.domElement.__isAnimationPaused;
+    //     break;
       case 'r':
         // Reset camera position
         camera.position.set(0, 200, 550);
