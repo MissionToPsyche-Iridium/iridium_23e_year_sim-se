@@ -1,0 +1,548 @@
+/* ===============================
+  Global Body Styling
+  Sets basic styling for the page body, including font, text color, 
+  alignment, and minimum width for responsive layout.
+  =============================== */
+ body {
+  margin: 0;
+  font-family: "Helvetica", sans-serif;
+  font-size: 1.1875rem;
+  line-height: 1.65;
+  color: #302144;
+  text-align: left;
+  background-color: #fff;
+  min-width: 320px;
+}
+
+/* ===============================
+    Header Styling
+    Defines a fixed-position header at the top of the viewport, with
+    background color, transitions, and centered text alignment.
+    =============================== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+  padding: 16px 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: opacity 0.3s, transform 0.6s cubic-bezier(0.42, 0, 0.05, 0.99);
+  text-align: center;
+}
+
+/* ===============================
+    Header Toggle Button Styling
+    Styles the search and menu toggle buttons in the header with 
+    defined size, cursor pointer, and display properties.
+    =============================== */
+header .search-toggle, header .menu-toggle {
+  display: block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* ===============================
+    Header Container Layout
+    Centers content in the header with defined max width and padding, 
+    using flexbox to align and space items horizontally.
+    =============================== */
+.header-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ===============================
+    Logo Styling
+    Sets logo positioning and layout within the header, with spacing and 
+    vertical alignment for consistent display.
+    =============================== */
+header .logo {
+  position: relative;
+  display: block;
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+header .logo .divider {
+  display: inline-block;
+  width: 1px;
+  height: 46px;
+  margin: 0 14px;
+  vertical-align: middle;
+  background-color: #666;
+}
+
+header .logo img {
+  display: inline-block;
+  width: auto;
+  height: 46px;
+}
+
+/* ===============================
+    Media Styling (Images, Video, SVGs)
+    Ensures media elements scale responsively within containers.
+    =============================== */
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+/* ===============================
+    Link Styling
+    Sets basic link styling to remove default underline decoration.
+    =============================== */
+a {
+  text-decoration: none;
+}
+
+/* ===============================
+    Search and Menu Icon Styling
+    Adds a smooth transition effect to icons in the fixed header for 
+    a visual cue on fixed header state.
+    =============================== */
+header .search-toggle path {
+  transition: fill .5s;
+}
+
+header.fixed .search-toggle path,
+header.fixed .menu-toggle path {
+  fill: #302144 !important;
+}
+
+/* ===============================
+    Navigation Menu Styling
+    Configures the main navigation list with flex layout, spacing,
+    and bold font styling for easy navigation.
+    =============================== */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: #302144;
+  font-weight: bold;
+}
+
+/* ===============================
+    Sticky Footer Layout
+    Uses flexbox layout on the html and body elements to allow a 
+    sticky footer by making the body fill the viewport height.
+    =============================== */
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ===============================
+  Main Container Styling
+  Sets up the main container to be centered with a flexible layout 
+  that adjusts based on available space and offsets for a fixed header.
+  =============================== */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 72px;
+}
+
+/* ===============================
+    3D Container Styling
+    Configures the container for the 3D scene with responsive width and height,
+    a dark background, rounded corners, and overflow control for contained visuals.
+    =============================== */
+#container3D {
+  width: 90%; 
+  height: 60vh;
+  background-color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* ===============================
+    Camera Coordinates Display Styling
+    Aligns and centers coordinate display items horizontally and vertically, 
+    with consistent spacing for readability.
+    =============================== */
+#camera-coords {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===============================
+    Individual Coordinate Text Styling
+    Adjusts text styling for individual coordinate elements to provide 
+    compact padding and a clear font size.
+    =============================== */
+#camera-coords p {
+  margin: 0;
+  padding: 0 5px;
+  font-size: 14px;
+}
+
+/* ===============================
+    Footer Styling
+    Configures the footer appearance with centered alignment, gradient background, 
+    and smooth transition effects for transform and opacity.
+    =============================== */
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  text-align: center;
+  color: #fff;
+  background-image: linear-gradient(to right, #302144, #592651 33%, #a53f5b 66%, #ef5966);
+  background-repeat: repeat-x;
+  opacity: 1;
+  transition: transform 0.6s cubic-bezier(0.42, 0, 0.05, 0.99), opacity 0.3s;
+}
+
+/* ===============================
+    Footer Container Layout
+    Creates a flexible container within the footer for aligning and spacing
+    elements horizontally without wrapping.
+    =============================== */
+footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+/* ===============================
+    HTML5 Footer and Header Display
+    Ensures proper display behavior of footer and header elements in HTML5.
+    =============================== */
+footer, header {
+  display: block;
+}
+
+/* ===============================
+    Sticky Footer Setup
+    Configures the HTML and body elements for flex layout to enable 
+    a sticky footer that stays at the bottom of the viewport.
+    =============================== */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===============================
+    General Container Styling
+    Sets width, padding, and margin for various container classes to 
+    ensure consistent spacing and alignment within the page.
+    =============================== */
+.container, .container-fluid, .container-xl, 
+.container-lg, .container-md, .container-sm {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* ===============================
+    Box Sizing Setup
+    Applies border-box sizing to all elements and their pseudo-elements 
+    to simplify layout calculations and element sizing.
+    =============================== */
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* ===============================
+    Footer Heading Styling
+    Defines specific styling for <h3> headings within the footer,
+    including text-transform, letter-spacing, and color settings.
+    =============================== */
+footer h3 {
+  margin: 0 30px 0 0;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  font-weight: lighter;
+  color: #fff; 
+}
+
+footer h3 strong {
+  font-weight: bold;
+}
+
+/* ===============================
+    Footer Meta and Countdown Styling
+    Sets font size and font family for metadata and countdown labels 
+    within the footer, ensuring readability in smaller text.
+    =============================== */
+footer .meta, footer .countdown-clock .section-label, .countdown-clock footer .section-label {
+  font-size: 11px;
+}
+
+.meta, .countdown-clock .section-label {
+  font-family: "helvetica", sans-serif;
+}
+
+/* ===============================
+    Social Links Styling
+    Configures the social links list for inline display and removes list styling.
+    =============================== */
+ul.social {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.social li {
+  display: inline-block;
+}
+
+/* ===============================
+    Ordered and Unordered List Box Sizing
+    Ensures ordered and unordered lists have consistent box-sizing behavior.
+    =============================== */
+ol, ul {
+  box-sizing: border-box;
+}
+  
+/* ===============================
+    Unordered List Styling
+    Sets base display, margin, padding, and unicode settings for 
+    unordered lists.
+    =============================== */
+ul {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  unicode-bidi: isolate;
+}
+
+/* ===============================
+    List Item Styling
+    Adds consistent spacing between list items in ordered and unordered lists.
+    =============================== */
+ol li, ul li {
+  margin-bottom: 0.75em;
+}
+
+/* ===============================
+    Social Link Styling
+    Defines the appearance and interactive scaling effect for social 
+    media icons within a list.
+    =============================== */
+.social a {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  transform: scale(1);
+  transition: transform 0.35s cubic-bezier(0.29, 0.97, 0, 1.85);
+}
+
+.social a:hover {
+  transform: scale(1.1);
+}
+
+/* ===============================
+    Footer Meta Information Styling
+    Sets font styling for footer metadata, including font family, size, 
+    weight, and letter-spacing for a clean and compact look.
+    =============================== */
+footer .meta {
+  font-family: "Helvetica", sans-serif;
+  font-size: 11px;
+  margin: 0;
+  font-weight: lighter;
+  letter-spacing: 1px;
+}
+
+/* ===============================
+    General Link Styling
+    Removes underline decoration and background color from links.
+    =============================== */
+a {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* ===============================
+    Center Alignment Utility Class
+    Sets alignment properties for center alignment across various browsers.
+    =============================== */
+.align-items-center {
+  -webkit-box-align: center !important;
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+/* ===============================
+    Small Screen Layout Adjustments
+    Media queries for screens up to 320px, adjusting layout and alignment 
+    for header and navigation elements.
+    =============================== */
+@media (max-width: 320px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* ===============================
+    Social Icon Sizing for Medium Screens
+    Reduces social icon size on screens up to 991px width for better fit.
+    =============================== */
+@media (max-width: 991px) {
+  .social li img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+
+/* ===============================
+    Menu Toggle Margin Adjustment
+    Adds margin to the menu toggle icon on screens 375px and above.
+    =============================== */
+@media (min-width: 375px) {
+  header .menu-toggle {
+    margin-left: 30px;
+  }
+}
+
+/* ===============================
+    Flex Display for Medium Screens
+    Ensures flexbox layout for elements with class d-md-flex on screens 
+    768px and above.
+    =============================== */
+@media (min-width: 768px) {
+  .d-md-flex {
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    align-items: center;
+    align-content: flex;
+  }
+}
+
+/* ===============================
+    Container Width Adjustments for Medium Screens
+    Sets maximum container width for various container classes 
+    on screens 768px and above.
+    =============================== */
+@media (min-width: 768px) {
+  .container-md, .container-sm, .container {
+    max-width: 720px;
+  }
+}
+
+/* ===============================
+    Container Width Adjustments for Small Screens
+    Limits container width for smaller containers on screens 576px and above.
+    =============================== */
+@media (min-width: 576px) {
+  .container-sm, .container {
+    max-width: 540px;
+  }
+}
+
+/* ===============================
+    Container Width Adjustments for Large Screens
+    Increases container width on screens 992px and above for larger displays.
+    =============================== */
+@media (min-width: 992px) {
+  .container-lg, .container-md, .container-sm, .container {
+    max-width: 960px;
+  }
+}
+
+/* ===============================
+    Container Width Adjustments for Extra-Large Screens
+    Sets a wider container width for extra-large displays at 1200px and above.
+    =============================== */
+@media (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1140px;
+  }
+}
+
+/* ===============================
+    Social Icon Layout Adjustment for Medium Screens
+    Aligns social icons to the right of the container on screens 768px and above.
+    =============================== */
+@media (min-width: 768px) {
+  .social {
+    margin: 0 0 0 auto;
+  }
+}
+
+/* ===============================
+    Footer and Social Layout for Small Screens
+    Adjusts footer and social icon layout for screens up to 768px, stacking 
+    items vertically and centering text.
+    =============================== */
+@media (max-width: 768px) {
+  footer .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  ul.social {
+    margin: 40px 0 0 0;
+    padding: 0;
+  }
+
+  footer h3 {
+    margin: 0 0 9px 0;
+    padding: 4.5px 0 0 0;
+    font-size: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .social a {
+    display: block;
+    width: 30px;
+    height: 0px;
+    margin: 5px;
+    transform: scale(1);
+    transition: transform 0.35s cubic-bezier(0.29, 0.97, 0, 1.85);
+  }
+}
+  

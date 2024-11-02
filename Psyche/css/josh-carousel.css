@@ -1,0 +1,137 @@
+/* ===============================
+  Global Body and HTML Styling
+  Sets global styling for body and html with height, margin reset, 
+  and base font settings.
+  =============================== */
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  font-weight: lighter;
+}
+
+/* ===============================
+    Carousel Wrapper Styling
+    Positions and aligns the carousel wrapper at the bottom left of 
+    the viewport with flex layout.
+    =============================== */
+.carousel-wrapper {
+  margin: 0 0 10px 10px;
+  bottom: 0px;
+  left: 10px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+/* ===============================
+    Carousel Container Styling
+    Configures the carousel container with flex layout, vertical alignment, 
+    perspective, and font styling for the main carousel items.
+    =============================== */
+.carousel-container {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  perspective: 500px;
+  font-family: 'Orbitron', sans-serif;
+  color: orange;
+}
+
+/* ===============================
+    Carousel Item Styling
+    Defines base styling for each carousel item, including height, alignment, 
+    font size, and transition effects.
+    =============================== */
+.carousel-item {
+  color: orange;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: clamp(0.7rem, 0.3vw + 0.7rem, 0.9rem);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* ===============================
+    Selected Item Styling
+    Applies unique styling to the selected carousel item, including 
+    size increase, bold font, and increased opacity.
+    =============================== */
+.selected {
+  transform: translateY(0) rotateX(0);
+  font-weight: bold;
+  font-size: clamp(0.9rem, 0.5vw + 0.9rem, 1.2rem); 
+  opacity: 90%;
+}
+
+/* ===============================
+    Indicator Styling
+    Sets font styling and color for the carousel indicator.
+    =============================== */
+.indicator {
+  color: orange;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* ===============================
+    Previous Item Styling
+    Adds perspective, reduced opacity, and gradient effect for the 
+    item above the selected item in the carousel.
+    =============================== */
+.prev {
+  height: 12px;
+  transform: translateY(-30%) rotateX(30deg) translateX(-10px); 
+  opacity: 0.6;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6));
+  -webkit-background-clip: text;
+  font-size: clamp(0.8rem, 0.4vw + 0.8rem, 1rem);
+}
+
+/* ===============================
+    Next Item Styling
+    Applies perspective, reduced opacity, and gradient effect to the 
+    item below the selected item in the carousel.
+    =============================== */
+.next {
+  height: 12px;
+  transform: translateY(30%) rotateX(-30deg) translateX(10px);
+  opacity: 0.6;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
+  -webkit-background-clip: text;
+  font-size: clamp(0.8rem, 0.4vw + 0.8rem, 1rem);
+}
+
+/* ===============================
+    Top Fade Item Styling
+    Creates a faded perspective effect for the item above the previous 
+    item, with reduced opacity and gradient background.
+    =============================== */
+.top-fade {
+  height: 15px;
+  transform: translateY(-60%) rotateX(40deg) translateX(-20px); 
+  opacity: 0.3;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+  -webkit-background-clip: text;
+  pointer-events: none;
+  font-size: clamp(0.6rem, 0.2vw + 0.6rem, 0.8rem);
+}
+
+/* ===============================
+    Bottom Fade Item Styling
+    Applies a faded perspective effect for the item below the next 
+    item, with reduced opacity and gradient background.
+    =============================== */
+.bottom-fade {
+  height: 15px;
+  transform: translateY(60%) rotateX(-40deg) translateX(20px); 
+  opacity: 0.3;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+  -webkit-background-clip: text;
+  pointer-events: none;
+  font-size: clamp(0.6rem, 0.2vw + 0.6rem, 0.8rem);
+}

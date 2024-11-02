@@ -1,0 +1,211 @@
+/* ===============================
+   Navigation Styling
+   Configures the main navigation panel as a fixed, full-height sidebar 
+   with background, padding, and transition effects.
+   =============================== */
+ nav {
+  position: fixed;
+  z-index: 1;
+  left: 100%;
+  top: 0;
+  height: 100vh;
+  width: 480px;
+  padding: 20px;
+  background: #6a1b9a url("/public/images/nav_images/nav-bg.jpg") 50% 50% no-repeat;
+  background-size: cover;
+  overflow: scroll;
+  transform: translateX(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+/* ===============================
+    Navigation Padding for Admin Bar
+    Adds padding to the top of the navigation for compatibility with admin toolbar.
+    =============================== */
+body.admin-bar nav {
+  padding-top: 52px;
+}
+
+/* ===============================
+    Navigation List and Item Styling
+    Resets default list and item styles for navigation and adds spacing 
+    and text color to links.
+    =============================== */
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  display: block;
+  color: #ffffff;
+}
+
+nav a:hover {
+  color: #ff9800 !important;
+  text-decoration: none;
+}
+
+/* ===============================
+    Current Menu Item Styling
+    Highlights active or ancestor menu items with a specified color.
+    =============================== */
+nav .current-menu-item > a,
+nav .current-menu-ancestor > a {
+  color: #ff9800 !important;
+}
+
+/* ===============================
+    Main Menu Item Styling
+    Sets font and padding for top-level navigation links.
+    =============================== */
+nav .menu > li > a {
+  padding: 7px 20px 5px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: bold;
+  font-size: 26px;
+}
+
+/* ===============================
+    Sub-Menu Item Styling
+    Styles sub-menu items with smaller font size, padding, and color.
+    =============================== */
+nav .sub-menu > li > a {
+  padding: 5px 30px;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  font-size: 14px;
+  color: #d3d3d3;
+}
+
+/* ===============================
+    Active Sub-Menu Item Styling
+    Highlights active sub-menu items with a specific color on hover.
+    =============================== */
+nav .sub-menu .current-menu-item > a {
+  color: #ffffff !important;
+}
+
+nav .sub-menu .current-menu-item > a:hover {
+  color: #ff9800 !important;
+}
+
+/* ===============================
+    Sub-Menu Indicator Styling
+    Adds a dash symbol before sub-submenu items for a clear hierarchy.
+    =============================== */
+nav .sub-menu .sub-menu > li > a:before {
+  content: "- ";
+}
+
+/* ===============================
+    Dropdown Icon Styling for Menu Items
+    Adds a dropdown chevron icon for items with sub-menus, including
+    rotation animation on expansion.
+    =============================== */
+nav .menu > .menu-item-has-children > a:after {
+  content: " ";
+  display: inline-block;
+  width: 12px;
+  height: 7px;
+  margin-left: 10px;
+  vertical-align: middle;
+  background: url("/public/images/nav_images/chevron-down.svg") 50% 50% no-repeat;
+  background-size: 12px 7px;
+  transform: rotate(0);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ===============================
+    Sub-Menu Toggle Styling
+    Configures the visibility and animation for sub-menus within 
+    dropdown items on expansion or collapse.
+    =============================== */
+nav .menu > .menu-item-has-children > .sub-menu {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+}
+
+nav .menu > .menu-item-has-children.active > a:after {
+  transform: rotate(180deg);
+}
+
+nav .menu > .menu-item-has-children.active > .sub-menu {
+  opacity: 1;
+  max-height: 1000px;
+}
+
+.nav-wrap {
+  display: block;
+  unicode-bidi: isolate;
+}
+
+.nav-wrap a {
+  padding: 7px 20px 5px;
+  width: 320px;
+}
+
+/* ===============================
+    Body Navigation Active State Styling
+    Adjusts layout and opacity for navigation, main content, header, 
+    and footer when the navigation is active.
+    =============================== */
+body.nav-active nav {
+  pointer-events: auto;
+  background-color: red;
+  transform: translateX(-100%);
+}
+
+body.nav-active main {
+  transform: translateX(-260px);
+  opacity: 0.5;
+}
+
+body.nav-active header {
+  opacity: 0;
+  transform: translateX(-260px);
+}
+
+body.nav-active footer {
+  opacity: 0.5;
+  transform: translateX(-260px);
+}
+
+/* ===============================
+    Search Form Styling
+    Sets padding and margin for search form elements within the navigation.
+    =============================== */
+form.search {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+  
+.assistive-text, .sr-only {
+  visibility: hidden;
+}
+
+button.submit {
+  height: 40px;
+  width: 40px;
+  background-color: transparent;
+  decoration
+}
+
+#Layer_1 {
+  height: 24px;
+  width: 20px;
+}
+
+.cls-1 {
+  height: 20px;
+  width: 20px;
+}
+
