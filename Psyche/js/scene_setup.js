@@ -23,6 +23,8 @@ export function setupScene(scene, orbitalDistances) {
     mercury: 7 * Math.PI / 180,  // Mercury tilts 7 degrees
     venus: 3.4 * Math.PI / 180,  // Venus tilts 3.4 degrees
     earth: 23.5 * Math.PI / 180, // Earth tilts 23.5 degrees
+    mars: 1.85 * Math.PI / 180,  // Mars tilts 1.85 degrees
+    jupiter: 1.3 * Math.PI / 180, // Jupiter tilts 1.3 degrees
     psyche: 3 * Math.PI / 180    // Psyche tilts about 3 degrees
   };
 

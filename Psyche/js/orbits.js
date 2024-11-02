@@ -20,7 +20,9 @@ import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module
 export const orbitalDistances = {
   mercury: 150,
   venus: 250,   
-  earth: 325,   
+  earth: 325,
+  mars: 450,
+  jupiter: 600,   
   psyche: 400   
 };
 
@@ -29,6 +31,8 @@ const orbitalPeriods = {
   mercury: 88,
   venus: 225,
   earth: 365,
+  mars: 687,
+  jupiter: 4333,
   psyche: 1825
 };
 
@@ -37,6 +41,8 @@ const orbitalAngles = {
   mercury: 0,
   venus: Math.PI / 3,
   earth: Math.PI / 2,
+  mars: Math.PI / 4,
+  jupiter: Math.PI / 6,
   psyche: Math.PI / 1.5
 };
 
@@ -45,6 +51,8 @@ const orbitalInclinations = {
   mercury: 7 * Math.PI / 180,  // 7 degrees
   venus: 3.4 * Math.PI / 180,  // 3.4 degrees
   earth: 23.5 * Math.PI / 180, // 23.5 degrees
+  mars: 1.85 * Math.PI / 180,  // 1.85 degrees
+  jupiter: 1.3 * Math.PI / 180, // 1.3 degrees
   psyche: 3 * Math.PI / 180    // ~3 degrees
 };
 
@@ -53,6 +61,8 @@ const rotationPeriods = {
   mercury: 58.6,
   venus: -243, // Negative for retrograde rotation
   earth: 1,
+  mars: 1.03,
+  jupiter: 0.41, // ~9.9 hours
   psyche: 0.2739 // ~4.196 hours
 };
 
@@ -64,6 +74,8 @@ export function updateOrbits(objects, deltaTime) {
   orbitalAngles.mercury += (2 * Math.PI * deltaTime) / (orbitalPeriods.mercury * 2000);
   orbitalAngles.venus += (2 * Math.PI * deltaTime) / (orbitalPeriods.venus * 2000);
   orbitalAngles.earth += (2 * Math.PI * deltaTime) / (orbitalPeriods.earth * 2000);
+  orbitalAngles.mars += (2 * Math.PI * deltaTime) / (orbitalPeriods.mars * 2000);
+  orbitalAngles.jupiter += (2 * Math.PI * deltaTime) / (orbitalPeriods.jupiter * 2000);
   orbitalAngles.psyche += (2 * Math.PI * deltaTime) / (orbitalPeriods.psyche * 2000);
 
   // Update object positions with orbital inclination and rotation
@@ -149,6 +161,60 @@ export function updateOrbits(objects, deltaTime) {
         );
       }
       objects.earthOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+    }
+  }
+
+  if (objects.marsObject) {
+    const angle = orbitalAngles.mars;
+    const distance = orbitalDistances.mars;
+    const inclination = orbitalInclinations.mars;
+    
+    objects.marsObject.position.x = Math.cos(angle) * distance;
+    objects.marsObject.position.y = Math.sin(angle) * Math.sin(inclination) * distance;
+    objects.marsObject.position.z = Math.sin(angle) * Math.cos(inclination) * distance;
+    
+    objects.marsObject.rotation.y += (2 * Math.PI * deltaTime) / (rotationPeriods.mars * 2000);
+
+    // Update orbit path
+    if (objects.marsOrbit) {
+      const points = [];
+      const segments = 128;
+      for (let i = 0; i <= segments; i++) {
+        const theta = (i / segments) * Math.PI * 2;
+        points.push(
+          distance * Math.cos(theta),
+          distance * Math.sin(theta) * Math.sin(inclination),
+          distance * Math.sin(theta) * Math.cos(inclination)
+        );
+      }
+      objects.marsOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+    }
+  }
+
+  if (objects.jupiterObject) {
+    const angle = orbitalAngles.jupiter;
+    const distance = orbitalDistances.jupiter;
+    const inclination = orbitalInclinations.jupiter;
+    
+    objects.jupiterObject.position.x = Math.cos(angle) * distance;
+    objects.jupiterObject.position.y = Math.sin(angle) * Math.sin(inclination) * distance;
+    objects.jupiterObject.position.z = Math.sin(angle) * Math.cos(inclination) * distance;
+    
+    objects.jupiterObject.rotation.y += (2 * Math.PI * deltaTime) / (rotationPeriods.jupiter * 2000);
+
+    // Update orbit path
+    if (objects.jupiterOrbit) {
+      const points = [];
+      const segments = 128;
+      for (let i = 0; i <= segments; i++) {
+        const theta = (i / segments) * Math.PI * 2;
+        points.push(
+          distance * Math.cos(theta),
+          distance * Math.sin(theta) * Math.sin(inclination),
+          distance * Math.sin(theta) * Math.cos(inclination)
+        );
+      }
+      objects.jupiterOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
     }
   }
 

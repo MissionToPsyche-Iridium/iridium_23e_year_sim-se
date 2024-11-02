@@ -86,7 +86,9 @@ export function setupEventListeners(container, camera, renderer, controls) {
           'sun': { distance: 100, scale: 2 },       // Sun needs to be viewed from further away due to size
           'mercury': { distance: 15, scale: 0.8 },  // Mercury can be viewed closer due to small size
           'venus': { distance: 25, scale: 1 },      // Default parameters for Venus
-          'earth': { distance: 25, scale: 1 }       // Default parameters for Earth
+          'earth': { distance: 25, scale: 1 },      // Default parameters for Earth
+          'mars': { distance: 30, scale: 0.9 },     // Default parameters for Mars
+          'jupiter': { distance: 45, scale: 1.5 }   // Jupiter needs to be viewed from further away due to size
         };
 
         // Get the viewing parameters for clicked object

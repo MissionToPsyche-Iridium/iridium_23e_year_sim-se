@@ -16,7 +16,7 @@ export function loadModels(scene, callback) {
   const loader = new GLTFLoader();
   const models = {};
   let loadedCount = 0;
-  const totalModels = 5;
+  const totalModels = 7;
 
   // Error handler
   const onError = (error) => {
@@ -84,8 +84,36 @@ export function loadModels(scene, callback) {
     './models/earth/Earth.glb',
     (gltf) => {
       models.earthObject = gltf.scene;
-      models.earthObject.scale.set(0.001, 0.001, 0.001); // Base scale (1)
+      models.earthObject.scale.set(0.005, 0.005, 0.005); // Base scale (1)
       scene.add(models.earthObject);
+      loadedCount++;
+      if (loadedCount === totalModels) callback(models);
+    },
+    undefined,
+    onError
+  );
+
+  // Load Mars model (6,779km diameter)
+  loader.load(
+    './models/Mars/Mars.glb',
+    (gltf) => {
+      models.marsObject = gltf.scene;
+      models.marsObject.scale.set(0.5, 0.5, 0.5); // Scale relative to Earth
+      scene.add(models.marsObject);
+      loadedCount++;
+      if (loadedCount === totalModels) callback(models);
+    },
+    undefined,
+    onError
+  );
+
+  // Load Jupiter model (139,820km diameter)
+  loader.load(
+    './models/jupiter/jupiter.glb',
+    (gltf) => {
+      models.jupiterObject = gltf.scene;
+      models.jupiterObject.scale.set(1.2, 1.2, 1.2); // Scale relative to Earth
+      scene.add(models.jupiterObject);
       loadedCount++;
       if (loadedCount === totalModels) callback(models);
     },

@@ -25,9 +25,9 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     'sun': { distance: 100, scale: 2 }, 
     'mercury': { distance: 15, scale: 0.8 },
     'venus': { distance: 25, scale: 1 },
-    'earth': { distance: 25, scale: 1 }
-    // 'mars': { distance: 30, scale: 0.9 },
-    // 'jupiter': { distance: 45, scale: 1.5 },
+    'earth': { distance: 25, scale: 1 },
+    'mars': { distance: 30, scale: 0.9 },
+    'jupiter': { distance: 45, scale: 1.5 }
     // 'saturn': { distance: 55, scale: 1.4 },
     // 'uranus': { distance: 65, scale: 1.2 },
     // 'neptune': { distance: 75, scale: 1.2 }
@@ -101,6 +101,30 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
         {
           title: 'Earth - Connection',
           content: 'Studying Psyche may provide insights into Earth\'s own metallic core formation and composition.'
+        }
+      ]
+    },
+    'mars': {
+      pages: [
+        {
+          title: 'Mars - Overview',
+          content: 'Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System. Mars is often called the "Red Planet" because of its reddish appearance, which is due to iron oxide (rust) on its surface. Mars has two small moons, Phobos and Deimos.'
+        },
+        {
+          title: 'Mars - Connection',
+          content: 'Mars lies between the asteroid belt (where Psyche is located) and Earth, providing important context for understanding the early solar system.'
+        }
+      ]
+    },
+    'jupiter': {
+      pages: [
+        {
+          title: 'Jupiter - Overview',
+          content: 'Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass more than two and a half times that of all the other planets in the Solar System combined. Jupiter is primarily composed of hydrogen and helium.'
+        },
+        {
+          title: 'Jupiter - Connection',
+          content: 'Jupiter\'s strong gravitational influence affects the asteroid belt where Psyche orbits, and played a key role in shaping the early solar system.'
         }
       ]
     }
@@ -262,9 +286,9 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     lastTime = currentTime;
 
     if (objects && objects.psycheObject && objects.sunObject && 
-        objects.mercuryObject && objects.venusObject && objects.earthObject) {
-        // && objects.marsObject && objects.jupiterObject && objects.saturnObject
-        // && objects.uranusObject && objects.neptuneObject) {
+        objects.mercuryObject && objects.venusObject && objects.earthObject &&
+        objects.marsObject && objects.jupiterObject) {
+        // && objects.saturnObject && objects.uranusObject && objects.neptuneObject) {
       
       if (!isAnimationPaused && !isOrbitPaused) {
         updateOrbits(objects, deltaTime);
@@ -277,8 +301,8 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
         if (labels.mercuryLabel) updateLabelPosition(labels.mercuryLabel, objects.mercuryObject, camera, container);
         if (labels.venusLabel) updateLabelPosition(labels.venusLabel, objects.venusObject, camera, container);
         if (labels.earthLabel) updateLabelPosition(labels.earthLabel, objects.earthObject, camera, container);
-        // if (labels.marsLabel) updateLabelPosition(labels.marsLabel, objects.marsObject, camera, container);
-        // if (labels.jupiterLabel) updateLabelPosition(labels.jupiterLabel, objects.jupiterObject, camera, container);
+        if (labels.marsLabel) updateLabelPosition(labels.marsLabel, objects.marsObject, camera, container);
+        if (labels.jupiterLabel) updateLabelPosition(labels.jupiterLabel, objects.jupiterObject, camera, container);
         // if (labels.saturnLabel) updateLabelPosition(labels.saturnLabel, objects.saturnObject, camera, container);
         // if (labels.uranusLabel) updateLabelPosition(labels.uranusLabel, objects.uranusObject, camera, container);
         // if (labels.neptuneLabel) updateLabelPosition(labels.neptuneLabel, objects.neptuneObject, camera, container);

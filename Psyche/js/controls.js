@@ -50,19 +50,19 @@ export function setupControls(camera, renderer) {
     switch(event.key.toLowerCase()) {
       case 'w':
         // Top view
-        camera.position.set(0, 550, 0);
+        camera.position.set(0, 970, 0);
         camera.lookAt(0, 0, 0);
         controls.target.set(0, 0, 0);
         break;
       case 'a':
         // Side view
-        camera.position.set(550, 0, 0);
+        camera.position.set(790, 0, 0);
         camera.lookAt(0, 0, 0);
         controls.target.set(0, 0, 0);
         break;
       case 'd':
         // Front view
-        camera.position.set(0, 0, 550);
+        camera.position.set(0, 0, 790);
         camera.lookAt(0, 0, 0);
         controls.target.set(0, 0, 0);
         break;
@@ -72,7 +72,7 @@ export function setupControls(camera, renderer) {
     //     break;
       case 'r':
         // Reset camera position
-        camera.position.set(0, 200, 550);
+        camera.position.set(0, 290, 790);
         camera.lookAt(0, 0, 0);
         controls.target.set(0, 0, 0);
         controls.update();

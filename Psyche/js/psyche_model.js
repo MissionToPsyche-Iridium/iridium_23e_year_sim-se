@@ -12,8 +12,6 @@
  * - Pausing animation when switching browser tabs
  * 
  * Remaining planets to add:
- * - Mars
- * - Jupiter 
  * - Saturn
  * - Uranus
  * - Neptune
@@ -63,8 +61,8 @@ setupScene(scene, orbitalDistances);
 createStarfield(scene);
 
 // Keep track of objects and labels
-let psycheObject, sunObject, mercuryObject, venusObject, earthObject;
-let psycheLabel, sunLabel, mercuryLabel, venusLabel, earthLabel;
+let psycheObject, sunObject, mercuryObject, venusObject, earthObject, marsObject, jupiterObject;
+let psycheLabel, sunLabel, mercuryLabel, venusLabel, earthLabel, marsLabel, jupiterLabel;
 
 // Add loading manager to track progress
 const loadingManager = new THREE.LoadingManager();
@@ -96,10 +94,10 @@ try {
             return;
         }
 
-        ({psycheObject, sunObject, mercuryObject, venusObject, earthObject} = loadedObjects);
+        ({psycheObject, sunObject, mercuryObject, venusObject, earthObject, marsObject, jupiterObject} = loadedObjects);
         
         // Verify objects were loaded
-        if (!psycheObject || !sunObject || !mercuryObject || !venusObject || !earthObject) {
+        if (!psycheObject || !sunObject || !mercuryObject || !venusObject || !earthObject || !marsObject || !jupiterObject) {
             console.error('Some objects failed to load:', loadedObjects);
             return;
         }
@@ -110,13 +108,17 @@ try {
         mercuryLabel = createLabel('Mercury');
         venusLabel = createLabel('Venus');
         earthLabel = createLabel('Earth');
+        marsLabel = createLabel('Mars');
+        jupiterLabel = createLabel('Jupiter');
 
         const sceneObjects = {
             psycheObject,
             sunObject,
             mercuryObject,
             venusObject,
-            earthObject
+            earthObject,
+            marsObject,
+            jupiterObject
         };
 
         const labels = {
@@ -124,7 +126,9 @@ try {
             sunLabel,
             mercuryLabel,
             venusLabel,
-            earthLabel
+            earthLabel,
+            marsLabel,
+            jupiterLabel
         };
 
         // Setup controls
