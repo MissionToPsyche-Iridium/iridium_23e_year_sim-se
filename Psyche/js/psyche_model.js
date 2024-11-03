@@ -39,30 +39,36 @@ if (!container) {
     throw new Error('Container element not found');
 }
 
-const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 10000); // Increased far plane
+const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 10000);
 
 // Create renderer
 const renderer = new THREE.WebGLRenderer({ 
     alpha: true,
-    antialias: true // Add antialiasing
+    antialias: true
 });
 renderer.setSize(container.clientWidth, container.clientHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 container.appendChild(renderer.domElement);
 
 // Set initial camera position
 camera.position.set(0, 200, 550);
 camera.lookAt(0, 0, 0);
+camera.name = 'camera';
+scene.add(camera);
+
+// Store initial camera position and rotation
+const initialCameraPosition = camera.position.clone();
+const initialCameraRotation = camera.rotation.clone();
 
 // Setup scene with lights and orbit lines
-setupScene(scene, orbitalDistances);
+const { scene: updatedScene, isRotating: sceneIsRotating, currentModel: sceneCurrentModel } = setupScene(scene, orbitalDistances);
 
 // Add starfield
 createStarfield(scene);
 
 // Keep track of objects and labels
-let psycheObject, sunObject, mercuryObject, venusObject, earthObject, marsObject, jupiterObject;
-let psycheLabel, sunLabel, mercuryLabel, venusLabel, earthLabel, marsLabel, jupiterLabel;
+let psycheObject, sunObject, mercuryObject, venusObject, earthObject, marsObject, jupiterObject, saturnObject, uranusObject, neptuneObject;
+let psycheLabel, sunLabel, mercuryLabel, venusLabel, earthLabel, marsLabel, jupiterLabel, saturnLabel, uranusLabel, neptuneLabel;
 
 // Add loading manager to track progress
 const loadingManager = new THREE.LoadingManager();
@@ -94,7 +100,7 @@ try {
             return;
         }
 
-        ({psycheObject, sunObject, mercuryObject, venusObject, earthObject, marsObject, jupiterObject} = loadedObjects);
+        ({psycheObject, sunObject, mercuryObject, venusObject, earthObject, marsObject, jupiterObject, saturnObject, uranusObject, neptuneObject} = loadedObjects);
         
         // Verify objects were loaded
         if (!psycheObject || !sunObject || !mercuryObject || !venusObject || !earthObject || !marsObject || !jupiterObject) {
@@ -110,6 +116,9 @@ try {
         earthLabel = createLabel('Earth');
         marsLabel = createLabel('Mars');
         jupiterLabel = createLabel('Jupiter');
+        saturnLabel = createLabel('Saturn');
+        uranusLabel = createLabel('Uranus');
+        neptuneLabel = createLabel('Neptune');
 
         const sceneObjects = {
             psycheObject,
@@ -118,7 +127,10 @@ try {
             venusObject,
             earthObject,
             marsObject,
-            jupiterObject
+            jupiterObject,
+            saturnObject,
+            uranusObject,
+            neptuneObject
         };
 
         const labels = {
@@ -128,7 +140,10 @@ try {
             venusLabel,
             earthLabel,
             marsLabel,
-            jupiterLabel
+            jupiterLabel,
+            saturnLabel,
+            uranusLabel,
+            neptuneLabel
         };
 
         // Setup controls
@@ -137,17 +152,18 @@ try {
         // Setup event listeners with error handling
         try {
             setupEventListeners(container, camera, renderer, controls);
+
+            // Start animation loop with all required dependencies
+            startAnimation(sceneObjects, labels, controls, camera, renderer, scene);
+            
+            // Hide loading UI when complete
+            const loadingElement = document.getElementById('loading');
+            if (loadingElement) {
+                loadingElement.style.display = 'none';
+            }
+
         } catch (error) {
             console.error('Error setting up event listeners:', error);
-        }
-
-        // Start animation loop with all required dependencies
-        startAnimation(sceneObjects, labels, controls, camera, renderer, scene);
-        
-        // Hide loading UI when complete
-        const loadingElement = document.getElementById('loading');
-        if (loadingElement) {
-            loadingElement.style.display = 'none';
         }
     });
 } catch (error) {

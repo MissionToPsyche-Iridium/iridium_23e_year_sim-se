@@ -8,6 +8,7 @@
  * - Label position updates to follow their corresponding 3D objects
  * - Orbital motion of objects
  * - Information windows for celestial bodies
+ * - Mouse controls for panning and zooming
  */
 
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
@@ -18,6 +19,61 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
   let lastTime = 0;
   let isAnimationPaused = false;
   let isOrbitPaused = false;
+  let isViewLocked = false;
+  let currentLockedObject = null;
+  let isDragging = false;
+  let previousMousePosition = {
+    x: 0,
+    y: 0
+  };
+
+  // Add mouse event listeners for panning
+  renderer.domElement.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    previousMousePosition = {
+      x: e.clientX,
+      y: e.clientY
+    };
+  });
+
+  renderer.domElement.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    const deltaMove = {
+      x: e.clientX - previousMousePosition.x,
+      y: e.clientY - previousMousePosition.y
+    };
+
+    // Pan camera based on mouse movement
+    camera.position.x -= deltaMove.x * 0.5;
+    camera.position.y += deltaMove.y * 0.5;
+
+    previousMousePosition = {
+      x: e.clientX,
+      y: e.clientY
+    };
+
+    camera.updateProjectionMatrix();
+  });
+
+  renderer.domElement.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  // Add mouse wheel listener for zooming
+  renderer.domElement.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    
+    // Zoom in/out based on scroll direction
+    const zoomSpeed = 30;
+    if (e.deltaY > 0) {
+      camera.position.z += zoomSpeed;
+    } else {
+      camera.position.z -= zoomSpeed;
+    }
+    
+    camera.updateProjectionMatrix();
+  });
 
   // Add click handlers for labels
   const objectScales = {
@@ -32,6 +88,78 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     // 'uranus': { distance: 65, scale: 1.2 },
     // 'neptune': { distance: 75, scale: 1.2 }
   };
+
+  // Add keyboard event listener for ESC key
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isViewLocked) {
+      isViewLocked = false;
+      currentLockedObject = null;
+      controls.enabled = true;
+      
+      // Reset camera position
+      camera.position.set(0, 200, 550);
+      camera.lookAt(0, 0, 0);
+      controls.target.set(0, 0, 0);
+      controls.update();
+    }
+  });
+
+  // Function to handle planet button clicks
+  function handlePlanetClick(planetName) {
+    const objectConfig = objectScales[planetName];
+    const targetObject = objects[planetName + 'Object'];
+
+    if (objectConfig && targetObject) {
+      isViewLocked = true;
+      currentLockedObject = targetObject;
+      controls.enabled = false;
+
+      const viewDistance = objectConfig.distance * objectConfig.scale;
+      const targetPos = targetObject.position.clone();
+      const offset = new THREE.Vector3(viewDistance, viewDistance/2, viewDistance);
+      const newCameraPos = targetPos.clone().add(offset);
+
+      // Setting up animation
+      const duration = 1000;
+      const startPos = camera.position.clone();
+      const startTime = Date.now();
+
+      // Animate camera movement
+      function animateCamera() {
+        const now = Date.now();
+        const progress = Math.min((now - startTime) / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        
+        camera.position.lerpVectors(startPos, newCameraPos, easeProgress);
+        controls.target.copy(targetPos);
+        controls.update();
+
+        if (progress < 1) {
+          requestAnimationFrame(animateCamera);
+        }
+      }
+
+      animateCamera();
+    }
+  }
+
+  // Add click handlers for planet buttons
+  const planetButtons = {
+    'button-sun': 'sun',
+    'button-mercury': 'mercury', 
+    'button-venus': 'venus',
+    'button-earth': 'earth',
+    'button-mars': 'mars',
+    'button-psyche': 'psyche',
+    'button-jupiter': 'jupiter'
+  };
+
+  Object.entries(planetButtons).forEach(([buttonId, planetName]) => {
+    const button = document.getElementById(buttonId);
+    if (button) {
+      button.addEventListener('click', () => handlePlanetClick(planetName));
+    }
+  });
 
   // Create info labels and windows for each celestial body
   const infoContent = {
@@ -236,38 +364,7 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
       // Add click handler for main label
       label.addEventListener('click', () => {
         const objectName = label.textContent.toLowerCase().split('ⓘ')[0].trim();
-        const objectConfig = objectScales[objectName];
-        const targetObject = objects[objectName + 'Object'];
-
-        //camera position
-        if (objectConfig && targetObject) {
-          const viewDistance = objectConfig.distance * objectConfig.scale;
-          const targetPos = targetObject.position.clone();
-          const offset = new THREE.Vector3(viewDistance, viewDistance/2, viewDistance);
-          const newCameraPos = targetPos.clone().add(offset);
-
-          // setting up animation
-          const duration = 1000;
-          const startPos = camera.position.clone();
-          const startTime = Date.now();
-
-          // Animate camera movement
-          function animateCamera() {
-            const now = Date.now();
-            const progress = Math.min((now - startTime) / duration, 1);
-            const easeProgress = 1 - Math.pow(1 - progress, 3);
-            
-            camera.position.lerpVectors(startPos, newCameraPos, easeProgress);
-            controls.target.copy(targetPos);
-            controls.update();
-
-            if (progress < 1) {
-              requestAnimationFrame(animateCamera);
-            }
-          }
-
-          animateCamera();
-        }
+        handlePlanetClick(objectName);
       });
     }
   });
@@ -288,10 +385,18 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     if (objects && objects.psycheObject && objects.sunObject && 
         objects.mercuryObject && objects.venusObject && objects.earthObject &&
         objects.marsObject && objects.jupiterObject) {
-        // && objects.saturnObject && objects.uranusObject && objects.neptuneObject) {
       
       if (!isAnimationPaused && !isOrbitPaused) {
         updateOrbits(objects, deltaTime);
+      }
+
+      // Update camera position to follow locked object
+      if (isViewLocked && currentLockedObject) {
+        const objectName = currentLockedObject.name.replace('Object', '');
+        const objectConfig = objectScales[objectName];
+        if (objectConfig) {
+          const viewDistance = objectConfig.distance * objectConfig.scale;
+        }
       }
 
       const container = document.getElementById('container3D');
