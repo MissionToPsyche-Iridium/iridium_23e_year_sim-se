@@ -93,20 +93,19 @@ const fullscreen_button = document.getElementById('fullscreen');
  * 
  */
 function openPopup() {
-    const overlay = document.createElement('div');
-    fullscreen_button.style.display = 'none';
-    overlay.id = 'popupOverlay';
-    overlay.className = 'popup-overlay';
+  const overlay = document.createElement('div');
+  overlay.id = 'popupOverlay';
+  overlay.className = 'popup-overlay';
+  const popup = document.createElement('div');
+  popup.id = 'myPopup';
+  popup.className = 'popup';
+  popup.innerHTML = `<div class="popup-content"></div>`;
 
-    const popup = document.createElement('div');
-    popup.id = 'myPopup';
-    popup.className = 'popup';
-    popup.innerHTML = `<div class="popup-content"></div>`;
+  // Append overlay and popup to containerOne
+  document.getElementById('containerOne').appendChild(overlay);
+  document.getElementById('containerOne').appendChild(popup);
 
-    document.body.appendChild(overlay);
-    document.body.appendChild(popup);
-
-    firstScreen(); // Initialize with the first screen
+  firstScreen(); // Initialize with the first screen
 }
 
 /*****************************************************
@@ -127,21 +126,27 @@ function openPopup() {
  * 
  */
 function closePopup() {
-    const popup = document.getElementById('myPopup');
-    const overlay = document.getElementById('popupOverlay');
-    if (popup) {
-        document.body.removeChild(popup);
-    }
-    if (overlay) {
-        document.body.removeChild(overlay);
-    }
-    fullscreen_button.style.display = 'block';
-    // Make the 'info' button visible again when the popup is closed
-    const infoButton = document.getElementById('info');
-    if (infoButton) {
-        infoButton.style.display = "inline-block";  
-    }
+  const popup = document.getElementById('myPopup');
+  const overlay = document.getElementById('popupOverlay');
+  
+  if (popup) {
+      popup.remove();  // Safely remove the popup
+  }
+  if (overlay) {
+      overlay.remove(); // Safely remove the overlay
+  }
+
+  const infoButton = document.getElementById('info');
+  if (infoButton) {
+      infoButton.style.display = "inline-block";  // Make the 'info' button visible again
+  }
+
+  const fullscreen_button = document.getElementById('fullscreen');
+  if (fullscreen_button) {
+      fullscreen_button.style.display = 'block';
+  }
 }
+
 
 /*****************************************************
  * firstScreen
@@ -339,12 +344,12 @@ function fourthScreen() {
     popupContent.innerHTML = `
       <div id="screen4">
         <div class="popup-content-header">
-          <h2>Life on Psyche</h2>
+          <h2>No Life on Psyche</h2>
         </div>
         <div class="popup-content-body">
           <p>
             The scientific community believes that comets and asteroids are responsible for delivering key ingredients, including water, 
-            which is the key complex chemistry needed to sustain life on Earth. Some asteroids are believed to have the capability 
+            which is the key complex chemistry needed to sustain life on Earth. Some asteroids are <b><i>believed</i></b> to have the capability 
             of supporting human life.
           <br>
           <br>
@@ -508,46 +513,62 @@ function sixthScreen() {
  * 
  */
 function seventhScreen() {
-    const popupContent = document.querySelector('.popup-content');
-    
-    // Update content for the seventh screen
-    popupContent.innerHTML = `
-    <div id="screen7">
-      <div class="popup-content-header">  
-        <h2>Structure</h2>
-      </div>
-      <div class="popup-content-body" id="video-background">
-        <video autoplay muted loop playsinline id="background_video">
-            <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
-        </video>
-        <p>
-          16 Psyche is classified as a Metallic-type (M-type) asteroid, the third most common type of asteroids in the solar system.
-          These types of asteroids are common, however very little is known about them. 16 Psyche was previously belived to be composed
-          of entirely metal, however, new data on its density points towards a mixture of metal and silicate.
-        <br>
-        <br>
-          Psyche is considered to be very dense. Though measurements are still being made, the current bulk density appears to be 3400 - 4100
-          kilograms per cubic meter (kg/m<sup>3</sup>), composed of rock and metal. The surface is belived to be very porous, with estimates 
-          ranging from 30-70% of the entire surface. The gravity on Psyche is much less than the Earth or 
-          the Moon, where lifting a car on Psyche would be equivalent to lifting a dog on Earth.
-        </p>
-        <video id="video2" controls autoplay muted loop>
-          <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="popup-buttons">
-        <button id="prevButton">Previous</button>
-          <button id="closeButton">Close</button>
-          <button id="nextButton">Next</button>
-      </div>
+  const popupContent = document.querySelector('.popup-content');
+
+  // Update content for the seventh screen
+  popupContent.innerHTML = `
+  <div id="screen7">
+    <div class="popup-content-header">  
+      <h2>Structure</h2>
     </div>
-    `;
-    
-    // Attach event listeners for buttons
-    document.getElementById('prevButton').addEventListener('click', sixthScreen); // Go back to the sixth screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', eighthScreen); // Move to the eighth screen
+    <div class="popup-content-body" id="video-background">
+      <video autoplay muted loop playsinline id="background_video">
+          <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
+      </video>
+      <p>
+        16 Psyche is classified as a Metallic-type (M-type) asteroid, the third most common type of asteroids in the solar system.
+        These types of asteroids are common, however very little is known about them. 16 Psyche was previously believed to be composed
+        of entirely metal, however, new data on its density points towards a mixture of metal and silicate.
+        <br><br>
+        Psyche is considered to be very dense. Though measurements are still being made, the current bulk density appears to be 3400 - 4100
+        kilograms per cubic meter (kg/m<sup>3</sup>), composed of rock and metal. The surface is believed to be very porous, with estimates 
+        ranging from 30-70% of the entire surface. The gravity on Psyche is much less than the Earth or 
+        the Moon, where lifting a car on Psyche would be equivalent to lifting a dog on Earth.
+      </p>
+      <video id="video2" controls autoplay muted loop>
+        <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="popup-buttons">
+      <button id="prevButton">Previous</button>
+      <button id="closeButton">Close</button>
+      <button id="nextButton">Next</button>
+    </div>
+  </div>
+  `;
+
+  // Attach event listeners for buttons
+  document.getElementById('prevButton').addEventListener('click', () => {
+      const video = document.getElementById('background_video');
+      video.pause(); // Pause the video when moving to the previous screen
+      sixthScreen();
+  });
+  document.getElementById('closeButton').addEventListener('click', () => {
+      const video = document.getElementById('background_video');
+      video.pause(); // Pause the video when closing the popup
+      closePopup();
+  });
+  document.getElementById('nextButton').addEventListener('click', () => {
+      const video = document.getElementById('background_video');
+      video.pause(); // Pause the video when moving to the next screen
+      eighthScreen();
+  });
+
+  // Play the video when this screen loads
+  const backgroundVideo = document.getElementById('background_video');
+  backgroundVideo.play();
 }
+
 
 /*****************************************************
  * eighthScreen()
@@ -578,7 +599,7 @@ function eighthScreen() {
     popupContent.innerHTML = `
       <div id="screen8">
         <div class="popup-content-header">
-        <h2>Moons</h2>
+        <h2>No Moons Orbiting 16 Psyche</h2>
         </div>
         <div class="popup-content-body">
           <p>
@@ -632,15 +653,13 @@ function ninthScreen() {
     popupContent.innerHTML = `
     <div id="screen9">
       <div class="popup-content-header">
-        <h2>Rings</h2>
+        <h2>No Rings Around 16 Psyche</h2>
       </div>
       <div class="popup-content-body">
         <p>
           While a few asteroids are known to have rings, 16 Psyche does not possess any.
         </p>
-        <div>
         <img src="images/psyche_popup_images/rings.jpg" id="ring_picture">
-        </div>
       </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
@@ -684,7 +703,7 @@ function tenthScreen() {
     popupContent.innerHTML = `
       <div id="screen10">
         <div class="popup-content-header">
-          <h2>Atmosphere</h2>
+          <h2>16 Psyche has no Atmosphere</h2>
         </div>
         <div class="popup-content-body">
           <p>

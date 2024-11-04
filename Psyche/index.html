@@ -1,148 +1,100 @@
-<!--
-* index.html
-*
-* This file is the driver of the three.js program. It is the root file that is the only open file in the browser window. 
-* This file loads all of the CSS styles and JavaScript files from references.
-* 
-* Class:      SER 401
-* Team:       35
-* Project:    NASA Psyche Mission: Year on Psyche Simulation
-* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
-* Date:       10/17/24
-* Revision:   1.0
-*
-* Files Linked:
-*    css/style.css -  This file defines the presentation aspects of this HTML file
-*    css/popup_style.css -  This file defines the presentation aspects of popup
-*    css/popup_style.css -  This file defines the presentation aspects of the Psyche popup
-*
-*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
-*                     the asteroid model and action listeners to manipulate. 
-*
-*    js/popup.js -    This file 
-*  
--->
-
-<!--
-========================================================================================================
-File Start
-========================================================================================================
---> 
-
-<!-- Defines the document type and version of HTML-->
 <!DOCTYPE html>
-<html>
-  <head>
-     <!-- Defines the character encoding for the document-->
-     <meta charset="utf-8" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Defines the webpage tab title-->
-     <title>Psyche 16</title>
-     <!-- Linking the CSS stylesheet for colors, fonts, spacing, and more-->
-      <!-- Desktop/laptop screens 2560px + -->
-     <link rel="stylesheet" href="css/style.css"/>
-     <link rel="stylesheet" href="css/psyche_style.css"/>
-     <link rel="stylesheet" href="css/popup_style.css"/>
-     <!-- Desktop/laptop screens 1920-2550px -->
-     <link rel="stylesheet" href="css/style_1080.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
-     <link rel="stylesheet" href="css/psyche_style_1080.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
-     <link rel="stylesheet" href="css/popup_style_1080.css" media="screen and (min-width: 1920px) and (max-width: 2559px)"/>
-     <!-- Desktop/laptop screens 1920-2550px -->
-     <link rel="stylesheet" href="css/style_960.css" media="screen and (min-width: 960px) and (max-width: 1919px)"/>
-     <link rel="stylesheet" href="css/psyche_style_960.css" media="screen and (min-width: 960px) and (max-width: 1919px)"/>
-     <link rel="stylesheet" href="css/popup_style_960.css" media="screen and (min-width: 960px) and (max-width: 1919px)"/>
-     <!-- Small Tablets (e.g., iPad Mini) -->
-     <link rel="stylesheet" href="css/style_tablet_small.css" media="screen and (min-width: 600px) and (max-width: 899px)">
-     <link rel="stylesheet" href="css/psyche_style_tablet_small.css" media="screen and (min-width: 600px) and (max-width: 899px)">
-     <link rel="stylesheet" href="css/popup_style_tablet_small.css" media="screen and (min-width: 600px) and (max-width: 899px)">
-     <!-- Large Tablets (e.g., iPad Air, iPad Pro) -->
-     <link rel="stylesheet" href="css/style_tablet_large.css" media="screen and (min-width: 900px) and (max-width: 1199px)">
-     <link rel="stylesheet" href="css/psyche_style_tablet_large.css" media="screen and (min-width: 900px) and (max-width: 1199px)">
-     <link rel="stylesheet" href="css/popup_style_tablet_large.css" media="screen and (min-width: 900px) and (max-width: 1199px)">
-     <!-- larger smartphones -->
-     <link rel="stylesheet" href="css/style_large_smartphone.css" 
-     media="screen and (min-width: 360px) and (max-width: 600px), 
-     screen and (min-width: 480px) and (max-width: 767px)">
-     <link rel="stylesheet" href="css/psyche_style_large_smartphone.css" 
-     media="screen and (min-width: 360px) and (max-width: 600px), 
-     screen and (min-width: 480px) and (max-width: 767px)">
-     <link rel="stylesheet" href="css/popup_style_large_smartphone.css" 
-     media="screen and (min-width: 360px) and (max-width: 600px), 
-     screen and (min-width: 480px) and (max-width: 767px)">
-     <!-- smaller smartphones -->
-     <link rel="stylesheet" href="css/style_small_smartphone.css" 
-     media="screen and (max-width: 400px)">
-     <link rel="stylesheet" href="css/psyche_style_small_smartphone.css" 
-     media="screen and (max-width: 400px)">
-     <link rel="stylesheet" href="css/popup_style_small_smartphone.css" 
-     media="screen and (max-width: 400px)">
-  </head>
-  <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/popup_style.css">
+    <link rel="stylesheet" href="css/psyche_style.css">
+    <title>Document</title>
+</head>
+<body>
     <header id="header">
-      <div id="header_navigation">
-        <div class="center_logo">
-          <a href="index.html"><img src="images/main_images/Psyche_BadgeSolid_Color.png" id="main_logo" class="logos"></a>
-        </div>
-        <div class="right_logos">
-          <a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo" class="logos"></a>
-          <a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo" class="logos"></a>
-        </div>
-      </div>
-      <h1>16 Psyche</h1>
-      <nav id="menu-links" class="menu-links">
-          <ul>
-            <li><a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo_menu" class="logos"></a></li>
-            <li><a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo_menu" class="logos"></a></li>
-          </ul>
-      </nav>
+        <div id="header_navigation">
+            <div class="center_logo">
+              <a href="index.html"><img src="images/main_images/Psyche_BadgeSolid_Color.png" id="main_logo" class="logos"></a>
+            </div>
+            <div class="right_logos">
+              <a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo" class="logos"></a>
+              <a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo" class="logos"></a>
+            </div>
+          </div>
+          <nav id="menu-links" class="menu-links">
+              <ul>
+                <li><a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo_menu" class="logos"></a></li>
+                <li><a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo_menu" class="logos"></a></li>
+              </ul>
+          </nav>
     </header>
     <main>
-      <div id="outer-container">
-        <div id="container3D">
-          <button id="info"><img src="images/main_images/info_button.png" id="info_button"></button>
-          <button id="fullscreen"><img src="images/main_images/full_screen_bracket.png" id="fullscreen_button"></button>
+        <div id="one">
+            <h1>16 Psyche</h1>
         </div>
-      </div>
+        <div id="two">
+            <button id="info"><img src="images/main_images/info_button.png" id="info_button"></button>
+            <button id="fullscreen"><img src="images/main_images/full_screen_bracket.png" id="fullscreen_button"></button>
+            <div class="containerOne" id="containerOne">
+                <div id="horizontal-buttons">
+                    <button id="button-sun" class="horizontal-buttons">Sun</button>
+                    <button id="button-mercury" class="horizontal-buttons">Mercury</button>
+                    <button id="button-venus" class="horizontal-buttons">Venus</button>
+                    <button id="button-earth" class="horizontal-buttons">Earth</button>
+                    <button id="button-mars" class="horizontal-buttons">Mars</button>
+                    <button id="button-psyche" class="horizontal-buttons">Psyche</button>
+                    <button id="button-jupiter" class="horizontal-buttons">Jupiter</button>
+                    <button id="button-saturn" class="horizontal-buttons">Saturn</button>
+                    <button id="button-uranus" class="horizontal-buttons">Uranus</button>
+                    <button id="button-neptune" class="horizontal-buttons">Neptune</button>
+                </div>
+                <div id="vertical-buttons">
+                    <!-- Pan Controls in a "+" design below Zoom In and Zoom Out buttons -->
+                    <div id="pan-controls">
+                        <button id="pan-up" class="pan-button">PAN<br>▲</button>
+                        <div class="horizontal-pan">
+                            <button id="pan-left" class="pan-button">PAN<br>◄</button>
+                            <button id="pan-right" class="pan-button">PAN<br>►</button>
+                        </div>
+                        <button id="pan-down" class="pan-button">PAN<br>▼</button>
+                    </div>
+                    <button id="zoom-in" class="vertical-buttons">Zoom In</button>
+                    <button id="zoom-out" class="vertical-buttons">Zoom Out</button>
+                    <button id="toggle-rotate" class="vertical-buttons">Toggle Rotate</button>
+                    <button id="reset" class="vertical-buttons">Reset</button>
+                </div>
+            </div>
+        </div>
     </main>
-    <script type="module" src="js/psyche_model.js"></script>
-    <script src="js/popup.js"></script>
-    <div id="resolution-display" style="position: fixed; top: 10px; left: 10px; background-color: lightgray;">
-      Screen Resolution: <span id="resolution"></span>
-    </div>
-    <script src="js/screen_testing.js"></script>
     <footer>
-      <div id="footer_container">
-        <div id="left_footer">
-          <h3>Sponsors</h3>
-          
-            <li><a href="https://psyche.asu.edu/" target="_blank">Psyche.ASU</a></li>
-            <li><a href="https://nasa.gov" target="_blank">NASA</a></li>
-          
-        </div>
-        <div id="center_footer">
-          <h3 class="hide">center footer</h3>
-          
-            <li class="hide">link</li>
-            <li class="hide">link</li>
-            <li class="hide">link</li>
-            <li class="hide">link</li>
-          
-          <h4>Copyright&copy 2024</h4>
-        </div>
-        <div id="right_footer">
-          <h3>Resources</h3>
-            <li>link</li>
-            <li>link</li>
-            <li>link</li>
-            <li>link</li>
-          
-        </div>
-      </div>   
-    </footer>
-    
-    <script src="js/scroll.js"></script>
-  </body>
+        <div id="footer_container">
+          <div id="left_footer">
+            <h3>Sponsors</h3>
+            
+              <li><a href="https://psyche.asu.edu/" target="_blank">Psyche.ASU</a></li>
+              <li><a href="https://nasa.gov" target="_blank">NASA</a></li>
+            
+          </div>
+          <div id="center_footer">
+            <h3 class="hide">center footer</h3>
+            
+              <li class="hide">link</li>
+              <li class="hide">link</li>
+              <li class="hide">link</li>
+              <li class="hide">link</li>
+            
+            <h4>Copyright&copy 2024</h4>
+          </div>
+          <div id="right_footer">
+            <h3>Resources</h3>
+              <li>link</li>
+              <li>link</li>
+              <li>link</li>
+              <li>link</li>
+            
+          </div>
+        </div>   
+      </footer>
+    <script type="module" src="js/psyche_model.js"></script>
+    <script type="module" src="js/popup.js"></script>
+    <script type="module" src="js/scroll.js"></script>
+</body>
 </html>
-
-
-
