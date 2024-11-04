@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { initCarousel } from '/public/js/carousel.js';
 
 /* ===============================
    Scene Setup
@@ -144,6 +145,27 @@ window.addEventListener('resize', () => {
   renderer.setSize(width, height);
 });
 
+/* ===============================
+   Nav Active Resize Handler
+   Adjusts the camera and renderer settings when the navigation menu is active
+   =============================== */
+document.addEventListener('navToggle', toggleNav);
+function toggleNav() {
+  if(document.body.classList.contains('nav-active')) {
+    container.style.transform = 'translateX(-20vw)';
+  } else {
+    container.style.transform = 'translateX(0)';
+  }
+  resizeRenderer();
+}
+
+function resizeRenderer() {
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  camera.aspect = container.clientWidth / container.clientHeight;
+  camera.updateProjectionMatrix();
+}
+
+
 /* 
  * animate
  * The main animation loop that continuously renders the scene, updates 
@@ -158,4 +180,5 @@ function animate() {
   updateCameraCoords();
   renderer.render(scene, camera);
 }
+initCarousel(); 
 animate();

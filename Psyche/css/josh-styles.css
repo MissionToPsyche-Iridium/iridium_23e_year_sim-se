@@ -49,7 +49,7 @@ header .search-toggle, header .menu-toggle {
     using flexbox to align and space items horizontally.
     =============================== */
 .header-container {
-  max-width: 960px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0 15px;
   display: flex;
@@ -179,6 +179,7 @@ main {
   overflow: hidden;
   margin-bottom: 10px;
   position: relative;
+  transition: transform .5s ease;
 }
 
 /* ===============================
@@ -219,7 +220,7 @@ footer {
   background-image: linear-gradient(to right, #302144, #592651 33%, #a53f5b 66%, #ef5966);
   background-repeat: repeat-x;
   opacity: 1;
-  transition: transform 0.6s cubic-bezier(0.42, 0, 0.05, 0.99), opacity 0.3s;
+  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); /* Apply smooth transition here */
 }
 
 /* ===============================

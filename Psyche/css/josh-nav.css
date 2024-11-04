@@ -17,6 +17,9 @@
   transform: translateX(0);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: top center;
 }
 
 /* ===============================
@@ -131,7 +134,7 @@ nav .menu > .menu-item-has-children > .sub-menu {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+  transition: max-height 3s cubic-bezier(0.4, 0, 0.2, 1), opacity 3s;
 }
 
 nav .menu > .menu-item-has-children.active > a:after {
@@ -140,7 +143,29 @@ nav .menu > .menu-item-has-children.active > a:after {
 
 nav .menu > .menu-item-has-children.active > .sub-menu {
   opacity: 1;
-  max-height: 1000px;
+  max-height: 300px;
+}
+
+/* ===============================
+   Sub-Menu Link Styling
+   Sets up transition effects for links inside the sub-menu to slide
+   in from above and fade in when the sub-menu is opened.
+   =============================== */
+nav .menu > .menu-item-has-children > .sub-menu > li > a {
+  opacity: 0;
+  transform: translateY(-10px); /* Starts each link slightly above */
+  transition: opacity 0.4s ease, transform 0.4s ease; /* Smoother text slide */
+}
+
+/* ===============================
+   Sub-Menu Link Open State
+   When the sub-menu is visible, each link slides down into view 
+   with opacity and transform reset.
+   =============================== */
+nav .menu > .menu-item-has-children.active > .sub-menu > li > a {
+  opacity: 1;
+  transform: translateY(0); /* Reset to original position */
+  transition-delay: 0.1s;   /* Optional: slight delay for a smoother effect */
 }
 
 .nav-wrap {
@@ -162,10 +187,10 @@ body.nav-active nav {
   pointer-events: auto;
   background-color: red;
   transform: translateX(-100%);
+  overflow: hidden;
 }
 
 body.nav-active main {
-  transform: translateX(-260px);
   opacity: 0.5;
 }
 
@@ -176,36 +201,127 @@ body.nav-active header {
 
 body.nav-active footer {
   opacity: 0.5;
-  transform: translateX(-260px);
+  transform: translateX(-300px);
 }
 
 /* ===============================
     Search Form Styling
     Sets padding and margin for search form elements within the navigation.
     =============================== */
-form.search {
-  margin-bottom: 10px;
-  padding: 5px;
-}
-  
-.assistive-text, .sr-only {
-  visibility: hidden;
-}
-
-button.submit {
-  height: 40px;
-  width: 40px;
+/* Overall container styling */
+/* Overall container styling */
+.nav-wrap .search {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Full width of .nav-wrap */
+  height: 50px;
+  margin-top: 40px; /* Distance from the top of the viewport */
   background-color: transparent;
-  decoration
 }
 
-#Layer_1 {
-  height: 24px;
-  width: 20px;
+/* Input container within the search form */
+.nav-wrap .search input[type="search"] {
+  width: calc(100% - 45px); /* Full width minus space for button */
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid #a53f5b;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
-.cls-1 {
-  height: 20px;
-  width: 20px;
+/* Placeholder styling */
+.nav-wrap .search input[type="search"]::placeholder {
+  color: #9e9e9e;
+}
+
+/* Submit button styling */
+.nav-wrap .search .submit {
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+
+/* SVG icon color and transition */
+.nav-wrap .search .submit svg path {
+  fill: #a53f5b;
+  transition: fill 0.3s ease;
+}
+
+/* Button hover effect */
+.nav-wrap .search .submit:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.nav-wrap .search .submit:hover svg path {
+  fill: #2196f3; /* Icon color change on hover */
+}
+
+/* Accessibility text styling */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.menu-toggle:hover,
+.search-toggle:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s cubic-bezier(0.29, 0.97, 0, 1.85);
+}
+
+.menu-toggle:hover svg path,
+.search-toggle:hover svg path {
+  fill: #CF2E2E !important; 
+  transition: fill 0.5s ease;
+}
+
+
+nav {
+  width: 480px;
+}
+
+.nav-wrap {
+  width: 320px;
+}
+
+@media (max-width: 992px) {
+  nav {
+    width: 320px;
+  }
+
+  .nav-wrap {
+    width: 265px;
+  }
+}
+
+@media (max-width: 576px) {
+  nav {
+    width: 260px;
+  }
+  body.nav-active footer {
+    opacity: 0.5;
+    transform: translateX(-250px);
+  }
+
+  .nav-wrap {
+    width: 205px;
+  }
 }
 
