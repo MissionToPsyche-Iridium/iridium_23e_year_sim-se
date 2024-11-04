@@ -18,11 +18,13 @@ let controls;
 let marsObject;
 let psycheObject;
 let jupiterObject;
+let sunObject;
 
 // Set which object to render
 let mars = 'mars';
 let psyche = 'psyche';
 let jupiter = 'jupiter';
+let sun = 'sun';
 
 // Add raycaster and mouse vector for detecting intersections
 const raycaster = new THREE.Raycaster(); // Raycaster for detecting intersections
@@ -120,6 +122,33 @@ loader.load(
     });
     
     scene.add(jupiterObject);
+    console.log('Psyche object loaded and added to scene at (0, 0, 10).');
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total * 100) + '% Psyche loaded');
+  },
+  function (error) {
+    console.error('Error loading Psyche model:', error);
+  }
+);
+
+// Load the Sun model
+loader.load(
+  `models/${sun}/sun_only.glb`,
+  function (gltf) {
+    sunObject = gltf.scene;
+    fitObjectToContainer(sunObject); // Call function to fit the Psyche object
+    sunObject.position.set(0, 0, -400); // Position Psyche directly in front of the camera
+    
+    // Increase brightness by adjusting emissive color
+    sunObject.traverse((node) => {
+      if (node.isMesh) {
+        node.material.emissive = new THREE.Color(0xffffff); // Subtle orange glow
+        node.material.emissiveIntensity = -0.1; // Adjust intensity as needed
+      }
+    });
+    
+    scene.add(sunObject);
     console.log('Psyche object loaded and added to scene at (0, 0, 10).');
   },
   function (xhr) {
