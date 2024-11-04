@@ -645,7 +645,7 @@ main {
 }
 
 #button-psyche {
-  background-image: url('/images/main_images/psyche_background_gradient.jpg');
+  background-image: url('../images/main_images/psyche_background_gradient.jpg');
   background-size: cover;
   background-color: transparent;
   color: black;
