@@ -83,6 +83,28 @@ function handleScroll(event) {
 }
 
 /* 
+ * handleVerticalSwipe
+ * Determines swipe direction based on start and end touch points.
+ * Updates the carousel index accordingly.
+ *
+ * Parameters:
+ *   touchStartY (Number) - The Y-coordinate where the touch started.
+ *   touchEndY (Number) - The Y-coordinate where the touch ended.
+ *
+ * Returns: None
+ */
+function handleVerticalSwipe(touchStartY, touchEndY) {
+  const swipeThreshold = 30;
+
+  if (touchEndY < touchStartY - swipeThreshold) {
+    currentIndex = (currentIndex + 1) % items.length;
+  } else if (touchEndY > touchStartY + swipeThreshold) {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+  }
+  updateCarousel();
+}
+
+/* 
  * initCarousel
  * Sets up the carousel by initializing width, setting up event listeners, 
  * and updating the display. This function is intended to be called once
@@ -99,47 +121,21 @@ function initCarousel() {
   let touchStartY = 0;
   let touchEndY = 0;
 
-  // Start of touch event to capture initial Y position and prevent page scroll
   carouselContainer.addEventListener('touchstart', (event) => {
     touchStartY = event.changedTouches[0].screenY;
-    event.preventDefault();  // Prevents page scroll on touchstart
-  }, { passive: false });  // Important to set passive to false
+    event.preventDefault();
+  }, { passive: false });
 
-  // Track touchmove and prevent page scroll
   carouselContainer.addEventListener('touchmove', (event) => {
     touchEndY = event.changedTouches[0].screenY;
-    event.preventDefault();  // Prevents page scroll on touchmove
-  }, { passive: false });  // Important to set passive to false
+    event.preventDefault();
+  }, { passive: false });
 
-  // End of touch event to calculate swipe direction
   carouselContainer.addEventListener('touchend', () => {
     handleVerticalSwipe(touchStartY, touchEndY);
   });
 
   updateCarousel();
 }
-
-function handleVerticalSwipe(touchStartY, touchEndY) {
-  const swipeThreshold = 30;
-
-  if (touchEndY < touchStartY - swipeThreshold) {
-    // Swipe up
-    currentIndex = (currentIndex + 1) % items.length;
-  } else if (touchEndY > touchStartY + swipeThreshold) {
-    // Swipe down
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
-  }
-  updateCarousel();
-}
-
-
-
-// original carousel function with no touch handling
-// function initCarousel() {
-//   setCarouselWidth();
-//   window.addEventListener('resize', setCarouselWidth);
-//   carouselContainer.addEventListener('wheel', handleScroll, { passive: true });
-//   updateCarousel();
-// }
 
 export { initCarousel };
