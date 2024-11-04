@@ -1,97 +1,228 @@
 /* 
 * popup.js
-* 
-* This popup.js creates the popup windows that display information to the user. The user
-* can cycle through the pages as needed. 
-* 
-* Class:      SER 401
-* Team:       35
-* Project:    NASA Psyche Mission: Year on Psyche Simulation
-* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
-* Date:       10/17/24
-* Revision:   1.0
-*
-* Functions/Pages:
-*    openPopup() -    This opens the popup page. Called when the "More Information" button
-*                     is clicked. 
-*
-*    closePopup() -   This closes the popup. Called when the "Close" button is pressed on any
-*                     popup page. 
-*
-*    firstScreen() -  This opens the first popup screen. Displays the summary info information
-*                     of Psyche. 
-*    secondScreen()-  This opens the second popup screen. Displays the size and dimensions info.
-*    
-*    thirdScreen() -  This opens the third popup screen. Currently blank. 
-*
-*    fourthScreen()-  This opens the forth popup screen. Currently blank. 
-*
-*    fifthScreen() -  This opens the fifth popup screen. Currently blank. 
-*
-*    sixthScreen()-  This opens the sixth popup screen. Currently blank. 
-*
-*    seventhScreen() -  This opens the seventh popup screen. Currently blank. 
-*
-*    eighthScreen()-  This opens the sixth popup screen. Displays the Moon info. 
-*
-*    ninthScreen() -  This opens the seventh popup screen. Displays the ring info
-*
-*    tenthScreen()-  This opens the sixth popup screen. Displays the atmosphere info. 
-*
+* Creates popup windows to display information to the user.
+* Users can cycle through multiple information pages.
 */
 
-/*
-========================================================================================================
-File Start
-========================================================================================================
-*/
+// Info content for celestial bodies
+const infoContent = {
+  'psyche': {
+    pages: [
+      {
+        title: 'Asteroid 16 Psyche - Overview',
+        content: `<img src="images/psyche_popup_images/Psyche_icon_white.svg" id="logo" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+        16 Psyche is a metal-rich asteroid orbiting between Mars & Jupiter. This asteroid is of particular interest, as it may have started as a core of a planetesimal. If confirmed, this will help scientists better understand the inner layers of planets like Earth. Psyche orbits three times farther from the Sun than Earth, with its distance varying from 186 to 372 million miles.`
+      },
+      {
+        title: 'Quick Facts',
+        content: `<div style="text-align: center; margin-bottom: 15px;">
+          <video id="video1" controls autoplay muted loop style="max-width: 100%; height: auto; margin: 0 auto 15px auto; position: relative; z-index: 1; display: block;">
+            <source src="images/psyche_popup_images/psyche_quick_overview.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        Psyche was the 16th asteroid discovered, hence it is sometimes referred to as 16 Psyche. M-Type Asteroid. Believed to be the core of a planetsimal. 1 Year on Psyche is approximately 5 years on Earth. 1 Day on Psyche is about 4 hours on Earth. Psyche has seasons. Psyche's temperature changes drastically between seasons (>100K / ~180°). The Psyche mission is expected to reach the asteroid in 2029.`
+      },
+      {
+        title: 'Size and Dimensions',
+        content: `<img id="psyche_size" src="images/psyche_popup_images/Psyche_MD_3.jpg" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+        16 Psyche is a potato-like shape, measuring 173 miles (280 kilometers) long at it widest spot, and 144 miles (232 kilometers) long. The total surface area is 64,000 square miles (165,800 square kilometers). NASA Jet Propulsion Laboratory (JPL) has compared its size to the State of Maryland in the United States of America.`
+      },
+      {
+        title: 'No Life on Psyche',
+        content: `<img src="images/psyche_popup_images/ocean.jpg" id="ocean" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+        The scientific community believes that comets and asteroids are responsible for delivering key ingredients, including water, which is the key complex chemistry needed to sustain life on Earth. Some asteroids are believed to have the capability of supporting human life. Currently, 16 Psyche does not show evidence of the critical nutrients of water, a breathable atmosphere, and a hospitable environment to allow for human life.`
+      },
+      {
+        title: 'Surface of Psyche',
+        content: `<img src="images/psyche_popup_images/Psyche_2.jpg" id="psyche_surface" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+        Our information about 16 Psyche comes from radar and optical observations. The surface consists of a mix of metal and silicate, with two crater-like depressions. The asteroid likely contains significant amounts of metal, consistent with being the core of a planetesimal. The NASA Psyche mission aims to study the asteroid to better understand planetary cores and formation. 16 Psyche has survived multiple collisions during the solar system's early history.`
+      },
+      {
+        title: 'Orbit and Rotation',
+        content: `<img src="images/psyche_popup_images/psyche_path.jpg" id="path_picture" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+        16 Psyche is part of the Main Asteroid Belt, sitting between Mars and Jupiter. 16 Psyche completes one rotation around the Sun, a Psyche year, approximately every five Earth years. Psyche rotates along its axis, a Psyche day, about once every four hours.`
+      },
+      {
+        title: 'Structure',
+        content: `<video autoplay muted loop playsinline id="background_video" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+          <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
+        </video>
+        16 Psyche is classified as a Metallic-type (M-type) asteroid. Though previously believed to be entirely metal, new data shows it's a mixture of metal and silicate. The current bulk density is 3400-4100 kg/m3, composed of rock and metal. The surface is very porous, with estimates ranging from 30-70%. The gravity on Psyche is much less than Earth - lifting a car on Psyche would be equivalent to lifting a dog on Earth.`
+      },
+      {
+        title: 'No Moons',
+        content: `<img src="images/psyche_popup_images/moons.jpg" id="moon_picture" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+        NASA has identified more than 150 asteroids that have an orbiting moon, and in some cases more than one moon. Other asteroids can have other asteroids orbiting each other, referred to as binary or triple asteroid systems. 16 Psyche does not believe to have any moons or asteroids orbiting around it, however, more information will be known in 2029 when the Pscyhe mission is expected to reach the asteroid.`
+      },
+      {
+        title: 'No Rings',
+        content: `<img src="images/psyche_popup_images/rings.jpg" id="ring_picture" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+        While a few asteroids are known to have rings, 16 Psyche does not possess any.`
+      },
+      {
+        title: 'No Atmosphere',
+        content: `<img src="images/psyche_popup_images/aurora.jpg" id="atmosphere" style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-bottom: 15px;">
+        Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts. Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris.`
+      }
+    ]
+  },
+  'sun': {
+    pages: [
+      {
+        title: 'The Sun - Connection',
+        content: 'The Sun\'s powerful magnetic field and radiation affects all bodies in the solar system including Psyche.'
+      },
+      {
+        title: 'The Sun - Overview', 
+        content: 'The Sun is a yellow dwarf star, a hot ball of glowing gases at the heart of our solar system. Its gravity holds everything from the biggest planets to tiny particles in its orbit. The Sun\'s core is about 27 million degrees Fahrenheit (15 million degrees Celsius). The Sun\'s surface is about 10,000 degrees Fahrenheit (5,500 degrees Celsius).'
+      }
+    ]
+  },
+  'mercury': {
+    pages: [
+      {
+        title: 'Mercury - Connection',
+        content: 'Like Psyche, Mercury is believed to have a large metallic core, making it relevant for understanding metal-rich bodies in space.'
+      },
+      {
+        title: 'Mercury - Overview',
+        content: 'Mercury is the smallest planet in our solar system and nearest to the Sun. Mercury is only slightly larger than Earth\'s Moon. From the surface of Mercury, the Sun would appear more than three times as large as it does when viewed from Earth, and the sunlight would be as much as seven times brighter.'
+      }
+    ]
+  },
+  'venus': {
+    pages: [
+      {
+        title: 'Venus - Connection',
+        content: 'Venus and Psyche formed in the same early solar system, providing context for different formation pathways.'
+      },
+      {
+        title: 'Venus - Overview',
+        content: 'Venus is the second planet from the Sun and is Earth\'s closest planetary neighbor. It\'s one of the four inner, terrestrial (or rocky) planets. Venus spins slowly in the opposite direction from most planets. A thick atmosphere traps heat in a runaway greenhouse effect, making it the hottest planet in our solar system.'
+      }
+    ]
+  },
+  'earth': {
+    pages: [
+      {
+        title: 'Earth - Connection',
+        content: 'Studying Psyche may provide insights into Earth\'s own metallic core formation and composition.'
+      },
+      {
+        title: 'Earth - Overview',
+        content: 'Earth is the third planet from the Sun and the only astronomical object known to harbor life. While Earth is only the fifth largest planet in the solar system, it is the only world in our solar system with liquid water on the surface. Just slightly larger than nearby Venus, Earth is the biggest of the four planets closest to the Sun, all of which are made of rock and metal.'
+      }
+    ]
+  },
+  'mars': {
+    pages: [
+      {
+        title: 'Mars - Connection',
+        content: 'Mars lies between the asteroid belt (where Psyche is located) and Earth, providing important context for understanding the early solar system.'
+      },
+      {
+        title: 'Mars - Overview',
+        content: 'Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System. Mars is often called the "Red Planet" because of its reddish appearance, which is due to iron oxide (rust) on its surface. Mars has two small moons, Phobos and Deimos.'
+      }
+    ]
+  },
+  'jupiter': {
+    pages: [
+      {
+        title: 'Jupiter - Connection',
+        content: 'Jupiter\'s strong gravitational influence affects the asteroid belt where Psyche orbits, and played a key role in shaping the early solar system.'
+      },
+      {
+        title: 'Jupiter - Overview',
+        content: 'Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass more than two and a half times that of all the other planets in the Solar System combined. Jupiter is primarily composed of hydrogen and helium.'
+      }
+    ]
+  }
+};
 
-/*****************************************************
- * More Information Button Listener
- * 
- * This listener waits for the "More Information" button to be 
- * clicked. Once clicked, it hides the more info button and 
- * it calls the popup function. 
- * 
- * arguments:
- *  'DOMContentLoaded' - this is the event type
- *  function - the callback function that will be called
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  popups will load to the front of the users view
- * 
- */
 document.addEventListener('DOMContentLoaded', function() {
     const infoButton = document.getElementById('info');
-
     if (infoButton) {
         infoButton.addEventListener('click', function() {
-            infoButton.style.display = "none";  // Hide the 'info' button after it's clicked
-            openPopup();  // Call the function to open the popup
+            infoButton.style.display = "none";
+            openPopup();
         });
     }
+
+    // Add click handlers for planet buttons
+    const planetButtons = {
+        'button-sun': 'sun',
+        'button-mercury': 'mercury', 
+        'button-venus': 'venus',
+        'button-earth': 'earth',
+        'button-mars': 'mars',
+        'button-psyche': 'psyche',
+        'button-jupiter': 'jupiter'
+    };
+
+    Object.entries(planetButtons).forEach(([buttonId, planetName]) => {
+        const button = document.getElementById(buttonId);
+        if (button) {
+            button.addEventListener('click', () => handlePlanetClick(planetName));
+      
+
+            // Create and append info window
+            const infoWindow = createInfoWindow(planetName);
+            document.getElementById('container3D').appendChild(infoWindow);
+
+            // Add click handler for info icon
+            infoIcon.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const rect = infoIcon.getBoundingClientRect();
+                infoWindow.style.left = `${rect.right + 10}px`;
+                infoWindow.style.top = `${rect.top}px`;
+                infoWindow.style.display = infoWindow.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Close info window when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!infoWindow.contains(event.target) && event.target !== infoIcon) {
+                    infoWindow.style.display = 'none';
+                }
+            });
+
+            // Add info icon to planet labels
+            const labelId = planetName + 'Label';
+            const label = document.getElementById(labelId);
+            if (label) {
+                const labelInfoWindow = createInfoWindow(planetName);
+                document.getElementById('container3D').appendChild(labelInfoWindow);
+
+                // Add click handler for label info icon
+                label.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const rect = label.getBoundingClientRect();
+                    labelInfoWindow.style.left = `${rect.right + 10}px`; 
+                    labelInfoWindow.style.top = `${rect.top}px`;
+                    labelInfoWindow.style.display = labelInfoWindow.style.display === 'none' ? 'block' : 'none';
+                });
+
+                // Close label info window when clicking outside
+                document.addEventListener('click', (event) => {
+                    if (!labelInfoWindow.contains(event.target) && event.target !== label) {
+                        labelInfoWindow.style.display = 'none';
+                    }
+                });
+            }
+        }
+    });
+
+    // Add keyboard event listener for 'p' key
+    document.addEventListener('keydown', (event) => {
+        if (event.key.toLowerCase() === 'p') {
+            isOrbitPaused = !isOrbitPaused;
+        }
+    });
 });
 
 const fullscreen_button = document.getElementById('fullscreen');
-/*****************************************************
- * openPopup()
- * 
- * This function creates the elements needed to display the popups. Then the
- * firstScreen function is called.
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The first popup screen elements are initialized and firstScreen function is called. 
- * 
- */
+
 function openPopup() {
     const overlay = document.createElement('div');
     fullscreen_button.style.display = 'none';
@@ -106,66 +237,128 @@ function openPopup() {
     document.body.appendChild(overlay);
     document.body.appendChild(popup);
 
-    firstScreen(); // Initialize with the first screen
+    firstScreen();
 }
 
-/*****************************************************
- * closePopup()
- * 
- * This function removes the elements for displaying the popup screens. The
- * More Information button is made visible again. 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The popups care closed, the display elements are removed and the more info button
- *  is made visible again. 
- * 
- */
 function closePopup() {
     const popup = document.getElementById('myPopup');
     const overlay = document.getElementById('popupOverlay');
-    if (popup) {
-        document.body.removeChild(popup);
-    }
-    if (overlay) {
-        document.body.removeChild(overlay);
-    }
+    if (popup) document.body.removeChild(popup);
+    if (overlay) document.body.removeChild(overlay);
     fullscreen_button.style.display = 'block';
-    // Make the 'info' button visible again when the popup is closed
     const infoButton = document.getElementById('info');
-    if (infoButton) {
-        infoButton.style.display = "inline-block";  
+    if (infoButton) infoButton.style.display = "inline-block";
+}
+
+function createInfoWindow(objectKey) {
+    const infoWindow = document.createElement('div');
+    infoWindow.className = 'info-window';
+    infoWindow.style.display = 'none';
+    infoWindow.style.position = 'absolute';
+    infoWindow.style.backgroundColor = 'rgba(48, 33, 68, 0.9)';
+    infoWindow.style.padding = '20px';
+    infoWindow.style.borderRadius = '12px';
+    infoWindow.style.maxWidth = '400px';
+    infoWindow.style.minWidth = '300px';
+    infoWindow.style.zIndex = '1001';
+    infoWindow.style.color = 'white';
+    infoWindow.style.border = '2px solid #592651';
+    infoWindow.style.boxShadow = '0 0 20px rgba(89, 38, 81, 0.3)';
+    infoWindow.style.backdropFilter = 'blur(5px)';
+    infoWindow.style.fontFamily = 'Arial, sans-serif';
+
+    if (infoContent[objectKey]) {
+        let currentPage = 0;
+        const totalPages = infoContent[objectKey].pages.length;
+
+        function updateContent() {
+            const page = infoContent[objectKey].pages[currentPage];
+            infoWindow.innerHTML = `
+                <div style="position: relative;">
+                    <h3 style="margin: 0 0 15px 0; color: #a53f5b; font-size: 18px; border-bottom: 1px solid #592651; padding-bottom: 10px;">
+                        ${page.title}
+                    </h3>
+                    <div style="margin: 0 0 20px 0; line-height: 1.6; font-size: 14px;">
+                        ${page.content}
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; border-top: 1px solid #592651; padding-top: 15px;">
+                        <button class="nav-btn prev" style="background: none; border: 1px solid #592651; color: #a53f5b; padding: 5px 15px; cursor: pointer; border-radius: 4px;" ${currentPage === 0 ? 'disabled' : ''}>Previous</button>
+                        <span style="color: #a53f5b;">${currentPage + 1}/${totalPages}</span>
+                        <button class="nav-btn next" style="background: none; border: 1px solid #592651; color: #a53f5b; padding: 5px 15px; cursor: pointer; border-radius: 4px;" ${currentPage === totalPages - 1 ? 'disabled' : ''}>Next</button>
+                    </div>
+                    <button class="close-btn" style="position: absolute; top: -15px; right: -15px; background: #592651; border: none; color: white; width: 25px; height: 25px; border-radius: 50%; cursor: pointer; font-weight: bold;">×</button>
+                </div>
+            `;
+
+            // Add event listeners for navigation
+            infoWindow.querySelector('.prev')?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (currentPage > 0) {
+                    currentPage--;
+                    updateContent();
+                }
+            });
+
+            infoWindow.querySelector('.next')?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                    updateContent();
+                }
+            });
+
+            infoWindow.querySelector('.close-btn')?.addEventListener('click', () => {
+                infoWindow.style.display = 'none';
+            });
+        }
+
+        updateContent();
+    }
+
+    return infoWindow;
+}
+
+function handlePlanetClick(planetName) {
+    const objectConfig = objectScales[planetName];
+    const targetObject = objects[planetName + 'Object'];
+
+    if (objectConfig && targetObject) {
+        isViewLocked = true;
+        currentLockedObject = targetObject;
+        controls.enabled = false;
+
+        const viewDistance = objectConfig.distance * objectConfig.scale;
+        const targetPos = targetObject.position.clone();
+        const offset = new THREE.Vector3(viewDistance, viewDistance/2, viewDistance);
+        const newCameraPos = targetPos.clone().add(offset);
+
+        // Setting up animation
+        const duration = 1000;
+        const startPos = camera.position.clone();
+        const startTime = Date.now();
+
+        // Animate camera movement
+        function animateCamera() {
+            const now = Date.now();
+            const progress = Math.min((now - startTime) / duration, 1);
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            
+            camera.position.lerpVectors(startPos, newCameraPos, easeProgress);
+            controls.target.copy(targetPos);
+            controls.update();
+
+            if (progress < 1) {
+                requestAnimationFrame(animateCamera);
+            }
+        }
+
+        animateCamera();
     }
 }
 
-/*****************************************************
- * firstScreen
- * 
- * This function populates and displays the first summary information popup for Psyche.
- * Elements that are populated were initialized in the openPopup(). 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The first popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  nextButton - calls secondScreen()
- *  closeButton - calls closePopup()
- * 
- */
+
 function firstScreen() {
     const popupContent = document.querySelector('.popup-content');
-    // Update the content of the first screen
     popupContent.innerHTML = `
     <div  id="screen1">
       <div class="popup-content-header" id="header1">
@@ -192,37 +385,12 @@ function firstScreen() {
     </div>
     `;
     
-    // Attach event listeners for the buttons
-    document.getElementById('nextButton').addEventListener('click', secondScreen); // Navigate to second screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
+    document.getElementById('nextButton').addEventListener('click', secondScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
 }
 
-/*****************************************************
- * secondScreen()
- * 
- * This function populates and displays the second summary information popup for Psyche.
- * Information displayed is the Size and Dimensions of Psyche. 
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The second popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls firstScreen()
- *  closeButton - calls closePopup()
- *  nextButton - calls secondScreen()
- * 
- */
 function secondScreen() {
     const popupContent = document.querySelector('.popup-content');
-    
-    // Update the content of the second screen
     popupContent.innerHTML = `
       <div id="screen2">
         <div class="popup-content-header">
@@ -251,38 +419,13 @@ function secondScreen() {
       </div>
     `;
     
-    // Re-attach event listeners for the new buttons after updating the content
-    document.getElementById('prevButton').addEventListener('click', firstScreen); // Go back to the first screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', thirdScreen); // Move to the third screen
+    document.getElementById('prevButton').addEventListener('click', firstScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', thirdScreen);
 }
 
-/*****************************************************
- * thirdScreen()
- * 
- * This function populates and displays the third summary information popup for Psyche.
- * No information is populated for this screen currently. 
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The third popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls secondScreen()
- *  closeButton - calls closePopup()
- *  nextButton - calls forthScreen()
- * 
- */
 function thirdScreen() {
     const popupContent = document.querySelector('.popup-content');
-    
-    // Update content for the third screen
     popupContent.innerHTML = `
       <div id="screen3">
         <div class="popup-content-header">
@@ -304,38 +447,13 @@ function thirdScreen() {
       </div>
     `;
     
-    // Attach event listeners for buttons
-    document.getElementById('prevButton').addEventListener('click', secondScreen); // Go back to the second screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', fourthScreen); // Move to the fourth screen
+    document.getElementById('prevButton').addEventListener('click', secondScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', fourthScreen);
 }
 
-/*****************************************************
- * forthScreen()
- * 
- * This function populates and displays the forth summary information popup for Psyche.
- * No information is populated for this screen currently. 
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The forth popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls thirdScreen()
- *  closeButton - calls closePopup()
- *  nextButton - calls fifthScreen()
- * 
- */
 function fourthScreen() {
     const popupContent = document.querySelector('.popup-content');
-    
-    // Update content for the fourth screen
     popupContent.innerHTML = `
       <div id="screen4">
         <div class="popup-content-header">
@@ -362,34 +480,11 @@ function fourthScreen() {
       </div>
     `;
     
-    // Attach event listeners for buttons
-    document.getElementById('prevButton').addEventListener('click', thirdScreen); // Go back to the third screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', fifthScreen); // Move to the fifth screen
+    document.getElementById('prevButton').addEventListener('click', thirdScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', fifthScreen);
 }
 
-/*****************************************************
- * fifthScreen()
- * 
- * This function populates and displays the fifth summary information popup for Psyche.
- * No information is populated for this screen currently. 
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The fifth popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls forthScreen()
- *  closeButton - calls closePopup()
- *  nextButton - calls sixthScreen()
- * 
- */
 function fifthScreen() {
     const popupContent = document.querySelector('.popup-content');
     popupContent.innerHTML = `
@@ -421,38 +516,13 @@ function fifthScreen() {
       </div>
     `;
     
-    // Attach event listeners for buttons
-    document.getElementById('prevButton').addEventListener('click', fourthScreen); // Go back to the fourth screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', sixthScreen); // Move to the sixth screen
+    document.getElementById('prevButton').addEventListener('click', fourthScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', sixthScreen);
 }
 
-/*****************************************************
- * sixthScreen()
- * 
- * This function populates and displays the sixth summary information popup for Psyche.
- * No information is populated for this screen currently. 
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The sixth popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls fifthScreen()
- *  closeButton - calls closePopup()
- *  nextButton - calls seventhScreen()
- * 
- */
 function sixthScreen() {
     const popupContent = document.querySelector('.popup-content');
-    
-    // Update content for the sixth screen
     popupContent.innerHTML = `
       <div id="screen6">
         <div class="popup-content-header">  
@@ -479,38 +549,13 @@ function sixthScreen() {
       </div>
     `;
     
-    // Attach event listeners for buttons
-    document.getElementById('prevButton').addEventListener('click', fifthScreen); // Go back to the fifth screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', seventhScreen); // Move to the sixth screen
+    document.getElementById('prevButton').addEventListener('click', fifthScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', seventhScreen);
 }
 
-/*****************************************************
- * seventhScreen()
- * 
- * This function populates and displays the seventh summary information popup for Psyche.
- * No information is populated for this screen currently. 
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The seventh popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls sixthScreen()
- *  closeButton - calls closePopup()
- *  nextButton - calls eighthScreen()
- * 
- */
 function seventhScreen() {
     const popupContent = document.querySelector('.popup-content');
-    
-    // Update content for the seventh screen
     popupContent.innerHTML = `
     <div id="screen7">
       <div class="popup-content-header">  
@@ -543,38 +588,13 @@ function seventhScreen() {
     </div>
     `;
     
-    // Attach event listeners for buttons
-    document.getElementById('prevButton').addEventListener('click', sixthScreen); // Go back to the sixth screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', eighthScreen); // Move to the eighth screen
+    document.getElementById('prevButton').addEventListener('click', sixthScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', eighthScreen);
 }
 
-/*****************************************************
- * eighthScreen()
- * 
- * This function populates and displays the eighth summary information popup for Psyche.
- * The moon information is displayed for Psyche.
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The eighth popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls seventhScreen()
- *  closeButton - calls closePopup()
- *  nextButton - calls ninthScreen()
- * 
- */
 function eighthScreen() {
     const popupContent = document.querySelector('.popup-content');
-    
-    // Update content for the eighth screen
     popupContent.innerHTML = `
       <div id="screen8">
         <div class="popup-content-header">
@@ -584,7 +604,7 @@ function eighthScreen() {
           <p>
             NASA has identified more than 150 asteroids that have an orbiting moon, and in some cases more than one moon.
             Other asteroids can have other asteroids orbiting each other, referred to as binary or triple asteroid systems.<br><br>16 Psyche
-            does not believe to have any moons or asteroids orbiting around it, however, more information will be known in 2029 when the Pscyche
+            does not believe to have any moons or asteroids orbiting around it, however, more information will be known in 2029 when the Pscyhe
             mission is expected to reach the asteroid.
           </p>
           <img src="images/psyche_popup_images/moons.jpg" id="moon_picture">
@@ -597,38 +617,13 @@ function eighthScreen() {
       </div>
     `;
     
-    // Attach event listeners for buttons
-    document.getElementById('prevButton').addEventListener('click', seventhScreen); // Go back to the seventh screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', ninthScreen); // Move to the ninth screen
+    document.getElementById('prevButton').addEventListener('click', seventhScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', ninthScreen);
 }
 
-/*****************************************************
- * ninthScreen()
- * 
- * This function populates and displays the ninth summary information popup for Psyche.
- * The ring information is displayed for Psyche. 
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The ninth popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls eighthScreen()
- *  closeButton - calls closePopup()
- *  nextButton - calls tenthScreen()
- * 
- */
 function ninthScreen() {
     const popupContent = document.querySelector('.popup-content');
-    
-    // Update content for the ninth screen
     popupContent.innerHTML = `
     <div id="screen9">
       <div class="popup-content-header">
@@ -650,37 +645,13 @@ function ninthScreen() {
     </div>
     `;
     
-    // Attach event listeners for buttons
-    document.getElementById('prevButton').addEventListener('click', eighthScreen); // Go back to the eighth screen
-    document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
-    document.getElementById('nextButton').addEventListener('click', tenthScreen); // Move to the tenth screen
+    document.getElementById('prevButton').addEventListener('click', eighthScreen);
+    document.getElementById('closeButton').addEventListener('click', closePopup);
+    document.getElementById('nextButton').addEventListener('click', tenthScreen);
 }
 
-/*****************************************************
- * tenthScreen()
- * 
- * This function populates and displays the tenth summary information popup for Psyche.
- * The atmosphere information is displayed for Psyche. 
- * (Elements that are populated were initialized in the openPopup().) 
- * 
- * arguments:
- *  none
- * 
- * returns:
- *  nothing
- * 
- * changes: 
- *  The tenth popup screen is initialized and displays for the user.
- * 
- * listeners: 
- *  prevButton - calls ninthScreen()
- *  closeButton - calls closePopup()
- * 
- */
 function tenthScreen() {
     const popupContent = document.querySelector('.popup-content');
-    
-    // Update content for the tenth screen
     popupContent.innerHTML = `
       <div id="screen10">
         <div class="popup-content-header">
@@ -706,3 +677,7 @@ function tenthScreen() {
     document.getElementById('prevButton').addEventListener('click', ninthScreen); // Go back to the ninth screen
     document.getElementById('closeButton').addEventListener('click', closePopup); // Close the popup
 }
+
+
+
+ 

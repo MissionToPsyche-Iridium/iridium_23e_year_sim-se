@@ -307,12 +307,14 @@ export function setupScene(scene, orbitalDistances) {
   utilityButtons.style.padding = '10px';
   utilityButtons.style.borderRadius = '10px';
 
-  const toggleRotateBtn = createPanButton('toggle-rotate', 'Toggle Rotate');
+  const toggleAnimationBtn = createPanButton('toggle-animation', 'Toggle Animation');
   const resetBtn = createPanButton('reset', 'Reset');
 
   // Add utility button event listeners
-  toggleRotateBtn.addEventListener('click', () => {
-    isRotating = !isRotating;
+  toggleAnimationBtn.addEventListener('click', () => {
+    // Simulate pressing 'p' key to toggle animation
+    const event = new KeyboardEvent('keydown', { key: 'p' });
+    document.dispatchEvent(event);
   });
 
   resetBtn.addEventListener('click', () => {
@@ -326,7 +328,7 @@ export function setupScene(scene, orbitalDistances) {
     }
   });
 
-  utilityButtons.appendChild(toggleRotateBtn);
+  utilityButtons.appendChild(toggleAnimationBtn);
   utilityButtons.appendChild(resetBtn);
 
   // Add controls to container in new order
