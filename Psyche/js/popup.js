@@ -66,16 +66,17 @@ File Start
  */
 document.addEventListener('DOMContentLoaded', function() {
     const infoButton = document.getElementById('info');
-
+    const fullscreen_button = document.getElementById('fullscreen_button');
     if (infoButton) {
         infoButton.addEventListener('click', function() {
             infoButton.style.display = "none";  // Hide the 'info' button after it's clicked
+            fullscreen_button.style.display = "none";
             openPopup();  // Call the function to open the popup
         });
     }
 });
 
-const fullscreen_button = document.getElementById('fullscreen');
+
 /*****************************************************
  * openPopup()
  * 
@@ -104,6 +105,8 @@ function openPopup() {
   // Append overlay and popup to containerOne
   document.getElementById('containerOne').appendChild(overlay);
   document.getElementById('containerOne').appendChild(popup);
+
+ 
 
   firstScreen(); // Initialize with the first screen
 }
@@ -141,7 +144,7 @@ function closePopup() {
       infoButton.style.display = "inline-block";  // Make the 'info' button visible again
   }
 
-  const fullscreen_button = document.getElementById('fullscreen');
+  const fullscreen_button = document.getElementById('fullscreen_button');
   if (fullscreen_button) {
       fullscreen_button.style.display = 'block';
   }

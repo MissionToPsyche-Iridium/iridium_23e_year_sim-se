@@ -90,7 +90,7 @@ File Start
   *
   */ 
   #logo {
-    width: 15%;
+    width: 25%;
     height: auto;
     opacity: .8;
     padding: 5%;
@@ -115,6 +115,7 @@ File Start
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     text-shadow: 0px 0px 50px antiquewhite;
     align-items: center;
+    font-size: 100px;
   } 
 
   /**************************
@@ -126,7 +127,28 @@ File Start
     opacity: 0.9;
     color: gray; /*Black - HEX #12031d| RGB 18R  3G   29B -> Tints = 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black */
     background-color: transparent;
-    font-size: xx-large !important;
+  }
+
+  #screen1 .popup-content-body {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: flex-start;
+  }
+
+  @media (max-width: 2560px) {
+    #logo {
+      width: 20%;
+    }
+
+    #screen1 h1{
+      font-size: 70px;
+    }
+
+    #screen1 p {
+      font-size: xx-large !important;
+      margin-top: 10%;
+    }
   }
 
   @media (max-width: 1920px) {
@@ -141,17 +163,24 @@ File Start
       width: 20%;
     }
 
-    #header1 {
-      font-size: x-large !important;
+    #screen1 h1{
+      font-size: 40px;
     }
 
     #screen1 p {
-      font-size: x-large !important;
+      font-size: large !important;
       margin-top: 10%;
     }
   }
 
   @media (max-width: 1024px) {
+    #screen1 .popup-content-body {
+      display: flex;
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: flex-start;
+    }
+
     #logo {
       width: 25%;
     }
@@ -163,14 +192,11 @@ File Start
 
     #screen1 p {
       font-size: 26px !important;
-      margin-top: 5%;
+      margin-bottom: -5%;
     }
   }
 
   @media (max-width: 820px) {
-    h2 {
-      font-size: xx-large;
-    }
     #logo {
       width: 20%;
     }
@@ -182,46 +208,39 @@ File Start
     }
 
     #screen1 p {
-      font-size: x-large !important;
+      font-size: 22px !important;
       margin-top: 5%;
     }
   }
 
 
   @media (max-width: 430px) {
-    h2 {
-      font-size: large;
-      margin-right: 10%;
-    }
-
     #logo {
       width: 30%;
       padding: 1%;
     }
 
     #header1 {
+      margin: 0 auto;
       width: 80%;
+      margin-bottom: 20%;
     }
 
     #screen1 h1 {
-      font-size: x-large !important;
+      font-size: large !important;
       margin-bottom: 5%;
-      margin-top: 7.5%;
+      
     }
 
     #screen1 p {
-      font-size: large !important;
+      margin: 0 auto;
+      font-size: 18px !important;
       width: 75%;
-      margin-top: -2%;
+      margin-top: 2%;
     }
   }
 
   @media (max-width: 375px) {
-    h2 {
-      font-size: medium;
-      margin-right: 10%;
-    }
-
     #logo {
       width: 30%;
       padding: 1%;
@@ -251,8 +270,8 @@ File Start
   *
   */ 
   #screen2 ul {
-    margin-top: 25%;
-    font-size: x-large;
+    margin-top: 2.5%;
+    font-size: 50px;
   } 
 
   /**************************
@@ -260,85 +279,82 @@ File Start
   *
   */ 
   #video1 {
-    margin-top: 22.5%;
-    width: 45%;
-    height: auto;
+    width: 60%;
     border-radius: 10px;
-    margin-right: 5%;
   } 
   
-  @media (max-width: 1920px) {
+  @media (max-width: 2560px) {
     #screen2 ul {
-      font-size: x-large !important;
-      margin-top: 20%;
+      font-size: 40px !important;
     }
 
     #video1 {
-      margin-top: 20%;
-      width: 42.5%;
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 1920px) {
+    #screen2 ul {
+      font-size: x-large !important;
+    }
+
+    #video1 {
+      width: 50%;
     }
   }
 
   @media (max-width: 1280px) {
     #screen2 ul {
-      font-size: large !important;
-      margin-top: 17%;
+      font-size: x-large !important;
+      margin-top: 10%;
     }
 
     #video1 {
-      margin-top: 20%;
-      width: 40%;
+      margin-top: 5%;
+      width: 70%;
     }
   }
 
   @media (max-width: 1024px) {
-    .popup-content-body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .popup-content-body ul {
+    ul {
       font-size: x-large !important;
-      margin-top: 25%;
       width: 80%;
     }
   
     #video1 {
       margin-top: 25%;
+      width: 80%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    ul {
+      font-size: large !important;
+      width: 80%;
+    }
+  
+    #video1 {
+      margin-top: 15% !important;
       width: 80%;
     }
   }
 
   @media (max-width: 430px) {
-    .popup-content-body {
-      margin-right: 10%;
-    }
-
-    .popup-content-body ul {
-      font-size: medium !important;
+    #screen2 ul {
+      font-size: 18px !important;
       margin-top: 25%;
-      margin-left: -20%;
       width: 80%;
     }
-
-    
-    .popup-content-body p {
-      margin-right: 10%;
-    }
-
-  
     #video1 {
-      margin-top: 25%;
       width: 80%;
     }
   }
 
   @media (max-width: 375px) {
     #screen2 ul {
-      font-size: medium !important;
+      font-size: small !important;
       margin-top: 10%;
-      margin-left: -20%;
+      margin-left: -10%;
       width: 80%;
     }
 
@@ -361,8 +377,7 @@ File Start
   *
   */ 
   #screen3 p {
-    margin-top: 25%;
-    font-size: x-large !important;
+
   }
 
   /**************************
@@ -370,71 +385,41 @@ File Start
   *
   */ 
   #psyche_size {
-    margin-top: 15%;
-    width: 35%;
-    margin-right: 5%;
+    width: 40%;
     border-radius: 10px;
   } 
 
   @media (max-width: 1920px) {
      #psyche_size {
-      width: 40%;
-      margin-top: 17.5%;
+      width: 30%;
     }
   }
 
-  @media (max-width: 1280px) {
-    #screen3 p {
-      margin-top: 20%;
-      font-size: x-large !important;
-    }
-    
+  @media (max-width: 1280px) {    
     #psyche_size {
-      width: 40%;
-      margin-top: 25%;
+      width: 50%;
     }
   }
 
   @media (max-width: 1024px) {
-    #screen3 p {
-      margin-top: 25%;
-      font-size: x-large !important;
-    }
     
     #psyche_size {
       width: 80%;
-      margin-top: 20%;
     }
   }
 
-  @media (max-width: 1024px) {
-    #screen3 p {
-      margin-top: 15%;
-      font-size: x-large !important;
-    }
-    
+  @media (max-width: 430px) {    
     #psyche_size {
+      margin-top: -15%;
       width: 80%;
-      margin-top: 10%;
-    }
-  }
-
-  @media (max-width: 430px) {
-    #screen3 p {
-      margin-top: 15%;
-      font-size: large !important;
-    }
-    
-    #psyche_size {
-      width: 80%;
-      margin-top: 10%;
     }
   }
 
   @media (max-width: 375px) {
+
     #screen3 p {
-      margin-top: 15%;
-      font-size: medium !important;
+      font-size: 12px !important;
+      margin: 0 auto;
     }
     
     #psyche_size {
@@ -450,8 +435,6 @@ File Start
   *
   */ 
   #screen4 p {
-    margin-top: 25%;
-    font-size: x-large;
   } 
   
   /**************************
@@ -459,80 +442,41 @@ File Start
   *
   */ 
   #ocean {
-    margin-top: 20%;
-    margin-right: 5%;
-    width: 40%;
-    height: auto;
+    width: 50%;
     border-radius: 10px;
   } 
 
   @media (max-width: 1920px) {
-    #screen4 p {
-      font-size: x-large !important;
-      margin-top: 20%;
-    }
-
     #ocean {
-      margin-top: 20%;
       width: 40%;
     }
 }
 
   @media (max-width: 1280px) {
-      #screen4 p {
-        font-size: x-large !important;
-        margin-top: 17%;
-      }
-
       #ocean {
-        margin-top: 32.5%;
-        width: 42.5%;
+        width: 60%;
       }
   }
-
 
   @media (max-width: 1024px) {
-    #screen4 p {
-      font-size: x-large !important;
-      margin-top: 25%;
-    }
-
     #ocean {
-      margin-top: 20%;
       width: 80%;
-    }
-  }
-
-  @media (max-width: 820px) {
-    #screen4 p {
-      font-size: x-large !important;
-      margin-top: 15%;
-    }
-
-    #ocean {
-      margin-top: 10%;
     }
   }
 
   @media (max-width: 430px) {
     #screen4 p {
       font-size: large !important;
-      margin-top: 15%;
-    }
-
-    #ocean {
-      margin-top: 10%;
     }
   }
 
   @media (max-width: 375px) {
     #screen4 p {
-      font-size: medium !important;
-      margin-top: 05%;
+      font-size: 12px !important;
+      margin: 0 auto;
     }
 
     #ocean {
-      margin-top: 10%;
       width: 80%;
     }
   }
@@ -544,8 +488,6 @@ File Start
   *
   */ 
   #screen5 p {
-    margin-top: 15%;
-    font-size: 26px !important;
   }
 
   /**************************
@@ -553,69 +495,54 @@ File Start
   *
   */ 
   #psyche_surface {
-    margin-top: 17%;
-    margin-right: 5%;
-    padding-top: 1%;
-    width: 40%;
+    width: 50%;
     border-radius: 10px;
   }
 
   @media (max-width: 1920px) {
     #screen5 p {
-      margin-top: 5%;
-      font-size: x-large !important;
+      font-size: x-large;
     }
 
     #psyche_surface {
-      width: 50%;
-      margin-top: 17.5%;
+      width: 40%;
     }
   }
 
   @media (max-width: 1280px) {
     #screen5 p {
-      margin-top: 5%;
-      font-size: large !important;
+      font-size: 20px;
     }
 
     #psyche_surface {
       width: 50%;
-      margin-top: 30%;
     }
   }
 
   @media (max-width: 1024px) {
-    #screen5 p {
-      margin-top: 20%;
-      font-size: x-large !important;
-    }
-
     #psyche_surface {
       width: 80%;
-      margin-top: 15%;
     }
   }
 
   @media (max-width: 820px) {
     #screen5 p {
-      margin-top: 5%;
       font-size: 22px !important;
     }
 
     #psyche_surface {
+      margin-top: -5%;
       width: 80%;
-      margin-top: 10%;
     }
   }
 
   @media (max-width: 768px) {
     #screen5 p {
-      margin-top: 5%;
       font-size: 20px !important;
     }
 
     #psyche_surface {
-      margin-top: 5%;
+      margin-top: -10%;
     }
   }
 
@@ -634,11 +561,10 @@ File Start
     #screen5 p {
       margin-top: .5%;
       font-size: 11px !important;
-      line-height: 1.5;
     }
 
     #psyche_surface {
-      margin-top: .5%;
+      margin-top: -.5%;
     }
   }
 
@@ -649,9 +575,6 @@ File Start
   *
   */ 
   #screen6 p {
-    margin-top: 25%;
-    font-size: x-large !important;
-    padding-right: 10%;
   } 
 
   /**************************
@@ -659,70 +582,32 @@ File Start
   *
   */
   #path_picture {
-    margin-top: 20%;
-    margin-right: 5%;
-    width: 50%;
-    height: auto;
+    width: 60%;
     border-radius: 10px;
   }
 
   @media (max-width: 1920px) {
-    #screen6 p {
-      margin-top: 20%;
-      font-size: x-large !important;
-    }
-
     #path_picture {
       width: 50%;
-      margin-top: 20%;
     }
   }
 
   @media (max-width: 1280px) {
-    #screen6 p {
-      margin-top: 19%;
-      font-size: x-large !important;
-    }
-
     #path_picture {
-      width: 45%;
-      margin-top: 30%;
+      width: 65%;
     }
   }
 
   @media (max-width: 1024px) {
-    #screen6 p {
-      margin-top: 20%;
-      font-size: x-large !important;
-    }
-
     #path_picture {
       width: 80%;
-      margin-top: 20%;
-    }
-  }
-
-  @media (max-width: 430px) {
-    #screen6 p {
-      margin-top: 20%;
-      font-size: large !important;
-    }
-
-    #path_picture {
-      margin-top: 20%;
-      margin-right: 10%;
     }
   }
 
   @media (max-width: 375px) {
     #screen6 p {
-      margin-top: 20%;
       font-size: medium !important;
-    }
-
-    #path_picture {
-      margin-top: 20%;
-      margin-right: 10%;
+      margin: 0 auto;
     }
   }
 
@@ -741,8 +626,6 @@ File Start
   *
   */ 
   #screen7 p {
-    margin-top: 20%;
-    font-size: x-large !important;
   } 
 
   /**************************
@@ -750,65 +633,43 @@ File Start
   *
   */ 
   #video2 {
-    width: 40%;
-    max-height: 75%;
+    width: 50%;
     border-radius: 10px;
-    margin-top: 21%;
-    margin-right: 5%;
   }
   
   @media (max-width: 1920px) {
     #screen7 p {
-      font-size: x-large !important;
-      margin-top: 15%;
+      font-size: 25px;
     }
 
     #video2 {
-      margin-top: 20%;
+      width: 40%;
     }
   }
 
   @media (max-width: 1280px) {
     #screen7 p {
-      font-size: large !important;
+      font-size: 20px;
     }
 
     #video2 {
-      margin-top: 30%;
+      width: 60%;
     }
   }
 
   @media (max-width: 1024px) {
-    #screen7 p {
-      font-size: x-large !important;
-    }
-
     #video2 {
-      margin-top: 15%;
-      width: 80%;
-    }
-  }
-
-  @media (max-width: 820px) {
-    #screen7 p {
-      font-size: x-large !important;
-      margin-top: 5%;
-    }
-
-    #video2 {
-      margin-top: 5%;
       width: 80%;
     }
   }
 
   @media (max-width: 768px) {
     #screen7 p {
-      font-size: 22px !important;
-      margin-top: 5%;
+      font-size: 20px !important;
     }
 
     #video2 {
-      margin-top: 3%;
+      margin-top: -5%;
       width: 80%;
     }
   }
@@ -816,27 +677,21 @@ File Start
   @media (max-width: 430px) {
     #screen7 p {
       font-size: medium !important;
-      margin-top: 5%;
-    }
-
-    #video2 {
-      margin-top: 3%;
-      margin-right: 10%;
     }
   }
 
   @media (max-width: 375px) {
     #screen7 p {
       font-size: 11px !important;
-      line-height: 1.5;
       margin-top: 2.5%;
     }
 
     #video2 {
       margin-top: 1%;
-      margin-right: 10%;
     }
   }
+
+  
 
   /************ eigth screen (Moons) ************/
 
@@ -845,8 +700,6 @@ File Start
   *
   */ 
   #screen8 p {
-    margin-top: 25%;
-    font-size: x-large !important;
   } 
 
   /**************************
@@ -854,77 +707,43 @@ File Start
   *
   */ 
   #moon_picture {
-    margin-top: 20%;
-    margin-right: 5%;
     width: 50%;
     border-radius: 10px;
   }  
 
   @media (max-width: 1920px) {
     #screen8 p {
-      margin-top: 20%;
-      font-size: x-large !important;
     }
 
     #moon_picture {
-      margin-top: 20%;
       width: 45%;
     }
   }
 
   @media (max-width: 1280px) {
     #screen8 p {
-      margin-top: 15%;
-      font-size: x-large !important;
     }
 
     #moon_picture {
-      margin-top: 30%;
+      width: 60%;
     }
   }
 
   @media (max-width: 1024px) {
-    #screen8 p {
-      margin-top: 20%;
-      font-size: x-large !important;
-    }
-
     #moon_picture {
-      margin-top: 20%;
-      width: 80%;
-    }
-  }
-
-  @media (max-width: 820px) {
-    #screen8 h2 {
-      font-size: x-large;
-    }
-
-    #screen8 p {
-      margin-top: 10%;
-      font-size: x-large !important;
-    }
-
-    #moon_picture {
-      margin-top: 10%;
       width: 80%;
     }
   }
 
   @media (max-width: 430px) {
     #screen8 p {
-      margin-top: 10%;
       font-size: medium !important;
-    }
-
-    #moon_picture {
-      margin-right: 10%;
     }
   }
 
   @media (max-width: 375px) {
     #screen8 p {
-      margin-top: 10%;
+      margin: 0 auto;
       font-size: small !important;
     }
   }
@@ -937,9 +756,6 @@ File Start
   *
   */ 
   #screen9 p {
-    margin-top: 30%;
-    font-size: x-large !important;
-    width: 90%;
   }
   
   /**************************
@@ -947,40 +763,26 @@ File Start
   *
   */
   #ring_picture {
-    width: 30%;
-    margin-top: 17.5%;
-    margin-right: 5%;
+    width: 50%;
     border-radius: 10px;
-    float: right;
   }
 
-  @media (max-width: 1280px) {
-    #screen9 p {
-      margin-top: 40%;
-      font-size: x-large !important;
-    }
-
+  @media (max-width: 1920px) {
     #ring_picture {
-      margin-top: 25%;
       width: 40%;
     }
   }
 
-  @media (max-width: 1024px) {
-    #screen9 p {
-      margin-top: 20%;
-      font-size: x-large !important;
-    }
-
+  @media (max-width: 1280px) {
     #ring_picture {
-      margin-top: 20%;
-      width: 80%;
+      width: 60%;
     }
   }
 
-  @media (max-width: 820px) {
-    #screen9 h2 {
-      font-size: x-large !important;
+  @media (max-width: 1024px) {
+
+    #ring_picture {
+      width: 80%;
     }
   }
 
@@ -993,6 +795,7 @@ File Start
   @media (max-width: 375px) {
     #screen9 p {
       font-size: small !important;
+      margin: 0 auto;
     }
   }
 
@@ -1003,8 +806,7 @@ File Start
   *
   */ 
   #screen10 p {
-    margin-top: 25%;
-    font-size: x-large !important;
+    
   }
    
   /**************************
@@ -1012,52 +814,25 @@ File Start
   *
   */  
   #atmosphere {
-    width: 35%;
-    margin-top: 17.5%;
-    margin-right: 5%;
-    height: auto;
+    width: 50%;
     border-radius: 10px;
   }  
 
   @media (max-width: 1920px) {
-    #screen10 p {
-      font-size: x-large !important;
-      margin-top: 25%;
-    }
-
     #atmosphere {
       width: 40%;
-      margin-top: 20%;
     }
   }
 
   @media (max-width: 1280px) {
-    #screen10 p {
-      font-size: x-large !important;
-      margin-top: 30%;
-    }
-
     #atmosphere {
-      width: 40%;
-      margin-top: 32.5%;
+      width: 60%;
     }
   }
 
   @media (max-width: 1024px) {
-    #screen10 p {
-      font-size: x-large !important;
-      margin-top: 20%;
-    }
-
     #atmosphere {
       width: 80%;
-      margin-top: 20%;
-    }
-  }
-
-  @media (max-width: 820px) {
-    #screen10 h2 {
-      font-size: x-large !important;
     }
   }
 
@@ -1070,6 +845,7 @@ File Start
   @media (max-width: 375px) {
     #screen10 p {
       font-size: small !important;
+      margin: 0 auto;
     }
   }
    
