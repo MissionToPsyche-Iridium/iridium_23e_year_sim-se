@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scene.add(ambientLight);
 
     const loader = new GLTFLoader();
-    let marsObject, psycheObject, jupiterObject, sunObject;
+    let marsObject, psycheObject, jupiterObject, sunObject, mercuryObject, venusObject;
     let isRotating = true;
     let currentModel = null;
 
@@ -67,6 +67,22 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Sun model loaded.");
     }, undefined, error => console.error('Error loading Sun model:', error));
 
+    loader.load('models/Mercury/Mercury.glb', (gltf) => {
+        mercuryObject = gltf.scene;
+        fitObjectToContainer(mercuryObject);
+        mercuryObject.position.set(200, 0, 0);
+        scene.add(mercuryObject);
+        console.log("Mercury model loaded.");
+    }, undefined, error => console.error('Error loading Mercury model:', error));
+
+    loader.load('models/Venus/Venus.glb', (gltf) => {
+        venusObject = gltf.scene;
+        fitObjectToContainer(venusObject);
+        venusObject.position.set(300, 0, 0);
+        scene.add(venusObject);
+        console.log("Venus model loaded.");
+    }, undefined, error => console.error('Error loading Venus model:', error));
+
     // Utility function to fit model within the container
     function fitObjectToContainer(object) {
         const boundingBox = new THREE.Box3().setFromObject(object);
@@ -95,6 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (marsObject) marsObject.rotation.x += 0.05;
             if (psycheObject) psycheObject.rotation.y += 0.005;
             if (jupiterObject) jupiterObject.rotation.y += 0.005;
+            if (mercuryObject) mercuryObject.rotation.y += 0.005;
+            if (venusObject) venusObject.rotation.y += 0.005;
         }
 
         controls.update();
@@ -213,6 +231,18 @@ document.getElementById("pan-right").addEventListener("click", () => {
         currentModel = sunObject;
         camera.position.set(0, 0, 500);
         controls.target.set(0, 0, 400);
+        controls.update();
+    });
+    document.getElementById("button-mercury").addEventListener("click", () => {
+        currentModel = mercuryObject;
+        camera.position.set(235, 0, 0);
+        controls.target.set(200, 0, 0);
+        controls.update();
+    });
+    document.getElementById("button-venus").addEventListener("click", () => {
+        currentModel = venusObject;
+        camera.position.set(335, 0, 0);
+        controls.target.set(300, 0, 0);
         controls.update();
     });
 
