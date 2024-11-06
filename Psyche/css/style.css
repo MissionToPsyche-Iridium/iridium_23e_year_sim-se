@@ -576,12 +576,12 @@ footer {
 */
 #toggleReferences {
   color: #a53f5b;
+  border: none;
   font-size: large;
   font-weight: bold;
   background-color: transparent;
-  border: none;
-  cursor: pointer;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 #referencesList {
@@ -599,6 +599,7 @@ footer {
 
 #referencesList li {
   font-size: large;
+  color: inherit;
   list-style-type: disc;
 }
 
