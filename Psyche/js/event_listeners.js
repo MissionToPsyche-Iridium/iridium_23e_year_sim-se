@@ -64,10 +64,12 @@ export function setupEventListeners(container, camera, renderer, controls) {
     labels.forEach(label => {
       // Add hover effect
       label.addEventListener('mouseover', () => {
-        label.style.backgroundColor = 'rgba(30,144,255,0.9)'; //blue
+        label.style.backgroundColor = 'orange';
+        label.style.color = 'black';
       });
       label.addEventListener('mouseout', () => {
-        label.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        label.style.backgroundColor = 'black';
+        label.style.color = 'orange';
       });
     });
   };

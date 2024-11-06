@@ -24,9 +24,9 @@ export function createLabel(text) {
   labelDiv.className = 'label';
   labelDiv.textContent = text;
   labelDiv.style.position = 'absolute'; // Absolute positioning allows label to float over scene
-  labelDiv.style.color = 'white';
+  labelDiv.style.color = '#f9a000'; // Mustard color
   labelDiv.style.padding = '5px 10px';
-  labelDiv.style.backgroundColor = 'rgba(0,0,0,0.7)';
+  labelDiv.style.backgroundColor = '#12031d'; // Black background
   labelDiv.style.borderRadius = '5px';
   labelDiv.style.fontSize = '14px';
   labelDiv.style.userSelect = 'none';
@@ -34,6 +34,18 @@ export function createLabel(text) {
   labelDiv.style.zIndex = '1000'; // Ensure labels appear above the 3D scene
   labelDiv.style.transition = 'background-color 0.2s';
   labelDiv.style.display = 'none'; // Initially hide label
+  labelDiv.style.border = 'solid 1px #f9a000'; // Mustard border
+
+  // Add hover effect
+  labelDiv.addEventListener('mouseover', () => {
+    labelDiv.style.backgroundColor = '#f9a000'; // Mustard background on hover
+    labelDiv.style.color = '#12031d'; // Black text on hover
+  });
+
+  labelDiv.addEventListener('mouseout', () => {
+    labelDiv.style.backgroundColor = '#12031d'; // Black background
+    labelDiv.style.color = '#f9a000'; // Mustard text
+  });
 
   // container3D is a div in the HTML that wraps both the THREE.js canvas and the floating labels
   // It needs to have position: relative to serve as the coordinate space for the absolute-positioned labels

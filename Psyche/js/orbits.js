@@ -106,6 +106,7 @@ export function updateOrbits(objects, deltaTime) {
         );
       }
       objects.mercuryOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+      objects.mercuryOrbit.material.color.setStyle('orange');
     }
   }
 
@@ -134,6 +135,7 @@ export function updateOrbits(objects, deltaTime) {
         );
       }
       objects.venusOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+      objects.venusOrbit.material.color.setStyle('orange');
     }
   }
 
@@ -161,6 +163,7 @@ export function updateOrbits(objects, deltaTime) {
         );
       }
       objects.earthOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+      objects.earthOrbit.material.color.setStyle('orange');
     }
   }
 
@@ -188,6 +191,7 @@ export function updateOrbits(objects, deltaTime) {
         );
       }
       objects.marsOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+      objects.marsOrbit.material.color.setStyle('orange');
     }
   }
 
@@ -215,6 +219,7 @@ export function updateOrbits(objects, deltaTime) {
         );
       }
       objects.jupiterOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+      objects.jupiterOrbit.material.color.setStyle('orange');
     }
   }
 
@@ -242,6 +247,7 @@ export function updateOrbits(objects, deltaTime) {
         );
       }
       objects.psycheOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+      objects.psycheOrbit.material.color.setStyle('orange');
     }
   }
 

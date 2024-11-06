@@ -27,7 +27,7 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     y: 0
   };
 
-  // Add mouse event listeners for panning
+  // Add mouse event listeners for free panning
   renderer.domElement.addEventListener('mousedown', (e) => {
     isDragging = true;
     previousMousePosition = {
@@ -44,9 +44,10 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
       y: e.clientY - previousMousePosition.y
     };
 
-    // Pan camera based on mouse movement
-    camera.position.x -= deltaMove.x * 0.5;
-    camera.position.y += deltaMove.y * 0.5;
+    // Pan camera freely based on mouse movement
+    const panSpeed = 0.8;
+    camera.position.x -= deltaMove.x * panSpeed;
+    camera.position.y += deltaMove.y * panSpeed;
 
     previousMousePosition = {
       x: e.clientX,
@@ -60,17 +61,16 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     isDragging = false;
   });
 
-  // Add mouse wheel listener for zooming
+  // Add mouse wheel listener for smooth zooming
   renderer.domElement.addEventListener('wheel', (e) => {
     e.preventDefault();
     
-    // Zoom in/out based on scroll direction
-    const zoomSpeed = 30;
-    if (e.deltaY > 0) {
-      camera.position.z += zoomSpeed;
-    } else {
-      camera.position.z -= zoomSpeed;
-    }
+    // Zoom in/out based on scroll direction with smooth zoom
+    const zoomSpeed = 50;
+    const zoomFactor = e.deltaY > 0 ? 1 + (zoomSpeed/1000) : 1 - (zoomSpeed/1000);
+    
+    // Apply zoom to camera position
+    camera.position.multiplyScalar(zoomFactor);
     
     camera.updateProjectionMatrix();
   });
@@ -161,7 +161,13 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
       infoIcon.textContent = 'ⓘ';
       infoIcon.style.marginLeft = '5px';
       infoIcon.style.cursor = 'pointer';
-      infoIcon.style.color = '#00ffff';
+      infoIcon.style.color = 'orange';
+      infoIcon.addEventListener('mouseover', () => {
+        infoIcon.style.color = 'black';
+      });
+      infoIcon.addEventListener('mouseout', () => {
+        infoIcon.style.color = 'orange';
+      });
       button.appendChild(infoIcon);
 
       // Create and append info window
@@ -207,7 +213,13 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
       const infoIcon = document.createElement('span');
       infoIcon.textContent = ' ⓘ';
       infoIcon.style.cursor = 'pointer';
-      infoIcon.style.color = '#00ffff';
+      infoIcon.style.color = 'orange';
+      infoIcon.addEventListener('mouseover', () => {
+        infoIcon.style.color = 'black';
+      });
+      infoIcon.addEventListener('mouseout', () => {
+        infoIcon.style.color = 'orange';
+      });
       label.appendChild(infoIcon);
       
       // Create and append info window for label

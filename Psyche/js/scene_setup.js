@@ -15,22 +15,30 @@ function createPanButton(id, text, arrow) {
   const textSpan = document.createElement('span');
   textSpan.textContent = text;
   textSpan.style.fontSize = '14px';
-  textSpan.style.color = 'white';
+  textSpan.style.color = 'orange';
   
   const arrowSpan = document.createElement('span');
   arrowSpan.textContent = arrow;
   arrowSpan.style.fontSize = '14px';
-  arrowSpan.style.color = 'white';
+  arrowSpan.style.color = 'orange';
   
   button.id = id;
   button.style.padding = '8px 16px';
   button.style.cursor = 'pointer';
   button.style.borderRadius = '15px';
-  button.style.border = '1px solid #fff';
+  button.style.border = '1px solid orange';
   button.style.backgroundColor = 'transparent';
   button.style.transition = 'all 0.3s';
-  button.onmouseover = () => button.style.backgroundColor = 'rgba(30,144,255,0.9)';
-  button.onmouseout = () => button.style.backgroundColor = 'transparent';
+  button.onmouseover = () => {
+    button.style.backgroundColor = 'orange';
+    textSpan.style.color = 'black';
+    arrowSpan.style.color = 'black';
+  };
+  button.onmouseout = () => {
+    button.style.backgroundColor = 'transparent';
+    textSpan.style.color = 'orange';
+    arrowSpan.style.color = 'orange';
+  };
   
   button.appendChild(textSpan);
   button.appendChild(arrowSpan);
@@ -46,17 +54,17 @@ function createPlanetButton(id, text) {
   button.style.fontSize = '14px';
   button.style.fontWeight = 'normal';
   button.style.borderRadius = '15px';
-  button.style.border = '1px solid #fff';
+  button.style.border = '1px solid orange';
   button.style.backgroundColor = 'transparent';
-  button.style.color = 'white';
+  button.style.color = 'orange';
   button.style.transition = 'all 0.3s';
   button.onmouseover = () => {
-    button.style.backgroundColor = 'rgba(30,144,255,0.9)';
-    button.style.color = '#fff';
+    button.style.backgroundColor = 'orange';
+    button.style.color = 'black';
   };
   button.onmouseout = () => {
     button.style.backgroundColor = 'transparent';
-    button.style.color = 'white';
+    button.style.color = 'orange';
   };
   button.style.whiteSpace = 'nowrap';
   return button;
@@ -137,7 +145,8 @@ export function setupScene(scene, orbitalDistances) {
   planetButtonsContainer.style.display = 'none'; // Hide initially
   planetButtonsContainer.style.flexDirection = 'row';
   planetButtonsContainer.style.gap = '10px';
-  planetButtonsContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  planetButtonsContainer.style.backgroundColor = 'black';
+  planetButtonsContainer.style.border = '1px solid orange';
   planetButtonsContainer.style.padding = '8px';
   planetButtonsContainer.style.borderRadius = '20px';
   planetButtonsContainer.style.zIndex = '1000';
@@ -150,7 +159,8 @@ export function setupScene(scene, orbitalDistances) {
   panControls.style.display = 'flex';
   panControls.style.flexDirection = 'column';
   panControls.style.gap = '5px';
-  panControls.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  panControls.style.backgroundColor = 'black';
+  panControls.style.border = '1px solid orange';
   panControls.style.padding = '10px';
   panControls.style.borderRadius = '10px';
 
@@ -219,7 +229,8 @@ export function setupScene(scene, orbitalDistances) {
   zoomControls.style.display = 'flex';
   zoomControls.style.flexDirection = 'column';
   zoomControls.style.gap = '5px';
-  zoomControls.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  zoomControls.style.backgroundColor = 'black';
+  zoomControls.style.border = '1px solid orange';
   zoomControls.style.padding = '10px';
   zoomControls.style.borderRadius = '10px';
 
@@ -246,7 +257,7 @@ export function setupScene(scene, orbitalDistances) {
   zoomControls.appendChild(zoomIn);
   zoomControls.appendChild(zoomOut);
 
-  // Create planet buttons
+  // Create planet buttons with updated styles
   const sunBtn = createPlanetButton('button-sun', 'Sun');
   const mercuryBtn = createPlanetButton('button-mercury', 'Mercury');
   const venusBtn = createPlanetButton('button-venus', 'Venus');

@@ -83,11 +83,19 @@ const infoContent = {
     pages: [
       {
         title: 'Mercury - Connection',
-        content: 'Like Psyche, Mercury is believed to have a large metallic core, making it relevant for understanding metal-rich bodies in space.'
+        content: 'Like Psyche, Mercury is believed to have a large metallic core, making it relevant for understanding metal-rich bodies in space. Both Mercury and Psyche are frequently impacted by comets and other space debris, as Mercury has a very thin atmosphere and Psyche has none. These impacts help scientists understand the early solar system\'s bombardment history and the role of comets in delivering materials throughout the solar system.'
       },
       {
         title: 'Mercury - Overview',
         content: 'Mercury is the smallest planet in our solar system and nearest to the Sun. Mercury is only slightly larger than Earth\'s Moon. From the surface of Mercury, the Sun would appear more than three times as large as it does when viewed from Earth, and the sunlight would be as much as seven times brighter.'
+      },
+      {
+        title: 'Surface Composition Comparison',
+        content: `While both Mercury and Psyche are metal-rich bodies, their surfaces tell different stories. Mercury's surface is covered with craters, valleys, and plains formed by ancient volcanic activity. Its surface temperature varies dramatically from 800°F (427°C) during the day to -290°F (-179°C) at night. In contrast, Psyche's surface is believed to be mostly exposed metal from a planetary core, providing a unique window into planetary formation that Mercury's more complex surface history has erased.`
+      },
+      {
+        title: 'Core Studies and Formation',
+        content: `Mercury and Psyche represent two different stages of planetary evolution. Mercury's large iron core makes up about 60% of its volume, surrounded by a mantle and crust. Scientists believe Mercury may have lost its outer layers in massive impacts early in its history. Psyche, on the other hand, might be what's left of a planetesimal core after even more violent collisions stripped away all of its outer layers. Together, these bodies help scientists understand how planets form, evolve, and can be dramatically altered by impacts in the early solar system.`
       }
     ]
   },
@@ -255,15 +263,15 @@ function createInfoWindow(objectKey) {
     infoWindow.className = 'info-window';
     infoWindow.style.display = 'none';
     infoWindow.style.position = 'absolute';
-    infoWindow.style.backgroundColor = 'rgba(48, 33, 68, 0.9)';
+    infoWindow.style.backgroundColor = 'black';
     infoWindow.style.padding = '20px';
     infoWindow.style.borderRadius = '12px';
     infoWindow.style.maxWidth = '400px';
     infoWindow.style.minWidth = '300px';
     infoWindow.style.zIndex = '1001';
-    infoWindow.style.color = 'white';
-    infoWindow.style.border = '2px solid #592651';
-    infoWindow.style.boxShadow = '0 0 20px rgba(89, 38, 81, 0.3)';
+    infoWindow.style.color = 'orange';
+    infoWindow.style.border = '2px solid orange';
+    infoWindow.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.3)';
     infoWindow.style.backdropFilter = 'blur(5px)';
     infoWindow.style.fontFamily = 'Arial, sans-serif';
 
