@@ -16,7 +16,7 @@ export function loadModels(scene, callback) {
   const loader = new GLTFLoader();
   const models = {};
   let loadedCount = 0;
-  const totalModels = 7;
+  const totalModels = 8;
 
   // Error handler
   const onError = (error) => {
@@ -114,6 +114,20 @@ export function loadModels(scene, callback) {
       models.jupiterObject = gltf.scene;
       models.jupiterObject.scale.set(1.2, 1.2, 1.2); // Scale relative to Earth
       scene.add(models.jupiterObject);
+      loadedCount++;
+      if (loadedCount === totalModels) callback(models);
+    },
+    undefined,
+    onError
+  );
+
+  // Load Neptune model (49,244km diameter)
+  loader.load(
+    './models/Neptune/Neptune.glb',
+    (gltf) => {
+      models.neptuneObject = gltf.scene;
+      models.neptuneObject.scale.set(.0001, .0001, .0001); // Scale relative to Earth  ~ 4x larger than earth
+      scene.add(models.neptuneObject);
       loadedCount++;
       if (loadedCount === totalModels) callback(models);
     },
