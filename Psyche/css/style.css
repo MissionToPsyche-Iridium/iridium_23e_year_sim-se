@@ -1,3 +1,4 @@
+
 body {
     margin: 0 auto;
 }
@@ -17,7 +18,7 @@ body button {
 header {
     top: 0;
     position: fixed;
-    margin-bottom: 10%;
+    margin-bottom: 0%;
     width: 100%;
     padding: 20px 0;
     color: black;
@@ -48,11 +49,14 @@ header {
     width: 100%;
     padding-right: 5%;
     background-color: transparent; 
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
+  
 
   main h1 {
     font-size: 70px;
+    color: black;
+    text-align: center;
   }
 
   
@@ -298,14 +302,20 @@ footer {
 main {
     width: 100%;
     height: 100%;
-    color: red;
     padding-top: 10%;
     padding-bottom: 10%;
 }
 
+
 #one {
     text-align: center;
     color: black;
+    position: relative;
+    background-color: black;
+    width: 80%;
+    height: 50vh;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 #two {
@@ -315,6 +325,10 @@ main {
     height: 100vh;
     margin: 0 auto;
     padding: 20px;
+}
+
+#two h1 {
+  text-align: center;
 }
 
 #info {
@@ -348,6 +362,21 @@ main {
     position: relative;
     overflow: hidden;
 }
+
+.containerTwo { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: black;
+  border: solid 1px orange;
+  width: 80%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+
 
 #horizontal-buttons {
     display: flex;
@@ -423,6 +452,15 @@ main {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+#containerTwo canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 
