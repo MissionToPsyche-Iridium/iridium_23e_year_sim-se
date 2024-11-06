@@ -145,6 +145,14 @@ export function setupEventListeners(container, camera, renderer, controls) {
   setupLabelHoverEvents();
   setupLabelClickEvents();
 
+  toggleButton.addEventListener('click', function() {
+    if (references.style.display == 'none' || references.style.display == '') {
+        references.style.display = 'block'; 
+    } else {
+        references.style.display = 'none';
+    }
+  });
+
   // Handle fullscreen toggle with 'f' key
   document.addEventListener('keydown', (event) => {
     if (event.key.toLowerCase() === 'f') {
@@ -260,7 +268,7 @@ export function setupEventListeners(container, camera, renderer, controls) {
       }
     }
   });
-
+ 
   // Store scene reference and setup animation loop
   renderer.domElement.__scene = scene;
   function animate() {

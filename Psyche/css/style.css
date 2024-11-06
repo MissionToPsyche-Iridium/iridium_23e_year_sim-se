@@ -489,6 +489,8 @@ footer {
 * #footer_container div
 * 
 */
+
+
 #footer_container div {
   margin: 0 auto;
 }
@@ -513,7 +515,52 @@ footer {
   line-height: 1.5;
   text-align: left;
 }
+#ADDING TO TRY 
+#left_footer, #right_footer {
+  color: #a53f5b;
+  flex: 1;
+}
 
+#center_footer {
+  text-align: center;
+}
+
+#references-list.hide {
+  color: #a53f5b;
+  background-color: transparent;
+  display: none;
+}
+
+#references-list {
+  color: #a53f5b;
+  background-color: transparent;
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+#references-toggle {
+  color: #a53f5b;
+  background-color: transparent;
+  margin-top: 10px;
+  cursor: pointer;
+}
+#references {
+  position: relative;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  width: 300px;
+  padding: 10px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: grey;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+#TO TRY
 /**************************
 * #left_footer
 * 
