@@ -165,7 +165,6 @@ function resizeRenderer() {
   camera.updateProjectionMatrix();
 }
 
-
 /* 
  * animate
  * The main animation loop that continuously renders the scene, updates 

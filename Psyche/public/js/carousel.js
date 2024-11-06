@@ -1,8 +1,10 @@
+import { CameraController } from "./cameraController";
+
 /* ===============================
    Carousel Items and Initial State
    Defines the list of items in the carousel and sets the initial starting index.
    =============================== */
-const items = ["Psyche", "Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"];
+const items = ["Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"];
 let currentIndex = 0;
 
 /* ===============================
@@ -36,6 +38,8 @@ function updateCarousel() {
   selectedDiv.textContent = items[currentIndex];
   nextDiv.textContent = items[nextIndex];
   bottomFadeDiv.textContent = items[bottomFadeIndex];
+
+  CameraController.moveToPlanet(planets[currentIndex]);
 }
 
 /* 
