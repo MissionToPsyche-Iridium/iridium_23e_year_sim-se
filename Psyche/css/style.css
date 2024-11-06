@@ -525,7 +525,7 @@ footer {
   text-align: center;
 }
 
-#references-list.hide {
+/**#references-list.hide {
   color: #a53f5b;
   background-color: transparent;
   display: none;
@@ -538,9 +538,18 @@ footer {
   padding-left: 20px;
   list-style-type: disc;
 }
+#references-list li {
+  font-size: large;
+  color: #a53f5b; 
+  list-style-type: disc;
+}
+
 
 #references-toggle {
   color: #a53f5b;
+  border: none;
+  font-size: large;
+  font-weight: bold;
   background-color: transparent;
   margin-top: 10px;
   cursor: pointer;
@@ -553,9 +562,9 @@ footer {
   width: 300px;
   padding: 10px;
   background-color: transparent;
-  border: 2px solid white;
+  border: none;
   border-radius: 8px;
-  color: grey;
+  color: #a53f5b;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -565,6 +574,35 @@ footer {
 * #left_footer
 * 
 */
+#toggleReferences {
+  color: #a53f5b;
+  font-size: large;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#referencesList {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+/* Hide the references list by default */
+.hide {
+  display: none;
+}
+
+#referencesList li {
+  font-size: large;
+  list-style-type: disc;
+}
+
+
 #left_footer {
   color: #a53f5b;
 }
