@@ -4,7 +4,8 @@ import { CameraController } from "./cameraController";
    Carousel Items and Initial State
    Defines the list of items in the carousel and sets the initial starting index.
    =============================== */
-const items = ["Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"];
+let planets = [];
+let planetNameArray = [];
 let currentIndex = 0;
 
 /* ===============================
@@ -28,16 +29,20 @@ const bottomFadeDiv = document.querySelector('.carousel-item.bottom-fade');
  * Returns: None
  */
 function updateCarousel() {
-  const topFadeIndex = (currentIndex - 2 + items.length) % items.length;
-  const prevIndex = (currentIndex - 1 + items.length) % items.length;
-  const nextIndex = (currentIndex + 1) % items.length;
-  const bottomFadeIndex = (currentIndex + 2) % items.length;
+  if (!planets[currentIndex] || !planets[currentIndex].model) {
+    console.warn(`Planet or model missing for ${planets[currentIndex]?.name || 'Unknown planet'}`);
+    return;
+  }
+  const topFadeIndex = (currentIndex - 2 + planetNameArray.length) % planetNameArray.length;
+  const prevIndex = (currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
+  const nextIndex = (currentIndex + 1) % planetNameArray.length;
+  const bottomFadeIndex = (currentIndex + 2) % planetNameArray.length;
 
-  topFadeDiv.textContent = items[topFadeIndex];
-  prevDiv.textContent = items[prevIndex];
-  selectedDiv.textContent = items[currentIndex];
-  nextDiv.textContent = items[nextIndex];
-  bottomFadeDiv.textContent = items[bottomFadeIndex];
+  topFadeDiv.textContent = planetNameArray[topFadeIndex];
+  prevDiv.textContent = planetNameArray[prevIndex];
+  selectedDiv.textContent = planetNameArray[currentIndex];
+  nextDiv.textContent = planetNameArray[nextIndex];
+  bottomFadeDiv.textContent = planetNameArray[bottomFadeIndex];
 
   CameraController.moveToPlanet(planets[currentIndex]);
 }
@@ -78,11 +83,11 @@ function handleScroll(event) {
   if (Math.abs(event.deltaY) < scrollThreshold) return;
 
   if (event.deltaY > 0) {
-    currentIndex = (currentIndex + 1) % items.length;
+    currentIndex = (currentIndex + 1) % planetNameArray.length;
   } else if (event.deltaY < 0) {
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    currentIndex = (currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
   }
-
+  console.log(`Current Index: ${currentIndex}, Planet: ${planetNameArray[currentIndex]}`);
   updateCarousel();
 }
 
@@ -101,9 +106,9 @@ function handleVerticalSwipe(touchStartY, touchEndY) {
   const swipeThreshold = 30;
 
   if (touchEndY < touchStartY - swipeThreshold) {
-    currentIndex = (currentIndex + 1) % items.length;
+    currentIndex = (currentIndex + 1) % planetNameArray.length;
   } else if (touchEndY > touchStartY + swipeThreshold) {
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    currentIndex = (currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
   }
   updateCarousel();
 }
@@ -114,10 +119,13 @@ function handleVerticalSwipe(touchStartY, touchEndY) {
  * and updating the display. This function is intended to be called once
  * to start the carousel interactions.
  *
- * Parameters: None
+ * Parameters: planetArray (Array) - An array of planet objects.
  * Returns: None
  */
-function initCarousel() {
+function initCarousel(planetArray) {
+  planets = planetArray;
+  planetNameArray = planets.map(planet => planet.name);
+
   setCarouselWidth();
   window.addEventListener('resize', setCarouselWidth);
   carouselContainer.addEventListener('wheel', handleScroll);
