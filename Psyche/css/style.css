@@ -308,6 +308,7 @@ main {
 
 
 #one {
+  display: none;
     text-align: center;
     color: black;
     position: relative;
@@ -364,7 +365,7 @@ main {
 }
 
 .containerTwo { 
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
@@ -463,9 +464,13 @@ main {
   left: 0;
 }
 
+#zoom-in, #zoom-out {
+  display: none;
+}
+
 
 #pan-controls {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 10px;
