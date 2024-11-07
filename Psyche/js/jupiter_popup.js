@@ -94,17 +94,18 @@ document.addEventListener('DOMContentLoaded', function() {
  * 
  */
 function openPopup() {
-  const overlay = document.createElement('div');
-  overlay.id = 'popupOverlay';
-  overlay.className = 'popup-overlay';
-  const popup = document.createElement('div');
-  popup.id = 'myPopup';
-  popup.className = 'popup';
-  popup.innerHTML = `<div class="popup-content"></div>`;
-
-  // Append overlay and popup to containerOne
-  document.getElementById('containerOne').appendChild(overlay);
-  document.getElementById('containerOne').appendChild(popup);
+    const overlay = document.createElement('div');
+    overlay.id = 'popupOverlay';
+    overlay.className = 'popup-overlay';
+    const popup = document.createElement('div');
+    popup.id = 'myPopup';
+    popup.className = 'popup';
+    popup.innerHTML = `<div class="popup-content"></div>`;
+  
+    document.getElementById('containerOne').appendChild(overlay);
+    document.getElementById('containerOne').appendChild(popup);
+  
+    firstScreen();
 
  
 
@@ -131,23 +132,15 @@ function openPopup() {
 function closePopup() {
   const popup = document.getElementById('myPopup');
   const overlay = document.getElementById('popupOverlay');
-  
-  if (popup) {
-      popup.remove();  // Safely remove the popup
-  }
-  if (overlay) {
-      overlay.remove(); // Safely remove the overlay
-  }
+
+  if (popup) popup.remove();
+  if (overlay) overlay.remove();
 
   const infoButton = document.getElementById('info');
-  if (infoButton) {
-      infoButton.style.display = "inline-block";  // Make the 'info' button visible again
-  }
+  if (infoButton) infoButton.style.display = "inline-block";
 
   const fullscreen_button = document.getElementById('fullscreen_button');
-  if (fullscreen_button) {
-      fullscreen_button.style.display = 'block';
-  }
+  if (fullscreen_button) fullscreen_button.style.display = 'block';
 }
 
 
@@ -175,22 +168,12 @@ function firstScreen() {
     const popupContent = document.querySelector('.popup-content');
     // Update the content of the first screen
     popupContent.innerHTML = `
-    <div  id="screen1">
-      <div class="popup-content-header" id="header1">
-        <img src="images/psyche_popup_images/Psyche_icon_white.svg" id="logo">
-        <h1>Asteroid 16 Psyche</h1>
-        <img src="images/psyche_popup_images/Psyche_icon_white.svg" id="logo">
+    <div class="jupiter" id="screen1">
+        <h1>Jupiter</h1>
       </div>
       <div class="popup-content-body">
         <p>
-          16 Psyche is a metal-rich asteroid, contained within the asteroid belt, orbiting the Sun between Mars & Jupiter. This asteroid is of particular
-           interest, as Psyche may have started out as a core of a planetesimal. If Psyche is indeed the core of a planetsimal, this will give scientists 
-           a better understanding of the inner layers of planets like Earth.
-        </p>
-        <p>
-          Psyche was first disovered by Italian astronomer Annibale de Gasparis in 1852, named after the ancient Greek mythology goddess of the soul. Psyche 
-          is currently three times farther from the sun than we are on Earth. Due to Psyche's orbit, the distance between Earth and Psyche varies from 
-          186 million miles to more than 372 million miles.
+          Paragraph about Jupiter
         </p>
       </div>
       <div class="popup-buttons">
@@ -232,24 +215,21 @@ function secondScreen() {
     
     // Update the content of the second screen
     popupContent.innerHTML = `
-      <div id="screen2">
+      <div class="jupiter" id="screen2">
         <div class="popup-content-header">
           <h2>Quick Facts</h2>
         </div>
         <div class="popup-content-body">
           <ul>
-            <li>Psyche was the 16<sup>th</sup> asteroid discovered, hence it is sometimes referred to as 16 Psyche.</li>
-            <li>M-Type Asteroid</li>
-            <li>Believed to be the core of a planetsimal</li>
-            <li>1 Year on Psyche is approximately 5 years on Earth</li>
-            <li>1 Day on Psyche is about 4 hours on Earth</li>
-            <li>Psyche has seasons</li>
-            <li>Psyche's temperature changes drastically between seasons (>100K / ~180&deg)</li>
-            <li>The Psyche mission is expected to reach the asteroid in 2029</li>
+            <li>FACT</li>
+            <li>FACT</li>
+            <li>FACT</li>
+            <li>FACT</li>
+            <li>FACT</li>
+            <li>FACT</li>
+            <li>FACT</li>
+            <li>FACT</li>
           </ul>
-          <video id="video1" controls autoplay muted loop>
-            <source src="images/psyche_popup_images/psyche_quick_overview.mp4" type="video/mp4">
-          </video>
         </div>
         <div class="popup-buttons">
           <button id="prevButton">Previous</button>
@@ -292,17 +272,14 @@ function thirdScreen() {
     
     // Update content for the third screen
     popupContent.innerHTML = `
-      <div id="screen3">
+      <div class="jupiter" id="screen3">
         <div class="popup-content-header">
           <h2>Size and Dimensions</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            16 Psyche is a potato-like shape, measuring 173 miles (280 kilometers) long at it widest spot, and 144 miles (232 kilometers) long. The total surface 
-            area is 64,000 square miles (165,800 square kilometers).<br><br> NASA Jet Propulsion Laboratory (JPL) has compared its size to the State of Maryland 
-            in the United States of America.
+            Jupiter size and dimensions paragraph
           </p>
-          <img id="psyche_size" src = "images/psyche_popup_images/Psyche_MD_3.jpg">
         </div>
         <div class="popup-buttons">
           <button id="prevButton">Previous</button>
@@ -345,21 +322,14 @@ function fourthScreen() {
     
     // Update content for the fourth screen
     popupContent.innerHTML = `
-      <div id="screen4">
+      <div class="jupiter" id="screen4">
         <div class="popup-content-header">
-          <h2>No Life on Psyche</h2>
+          <h2>No Life on Jupiter</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            The scientific community believes that comets and asteroids are responsible for delivering key ingredients, including water, 
-            which is the key complex chemistry needed to sustain life on Earth. Some asteroids are <b><i>believed</i></b> to have the capability 
-            of supporting human life.
-          <br>
-          <br>
-            Currently, 16 Psyche does not show evidence of the critical nutrients of water, a breathable atmosphere, and a hospitable 
-            environment to allow for human life.
+            Paragraph about life on Jupiter
           </p>
-          <img src="images/psyche_popup_images/ocean.jpg" id="ocean">
         </div>
           
         <div class="popup-buttons">
@@ -401,25 +371,14 @@ function fourthScreen() {
 function fifthScreen() {
     const popupContent = document.querySelector('.popup-content');
     popupContent.innerHTML = `
-      <div id="screen5">
+      <div class="jupiter" id="screen5">
         <div class="popup-content-header">
-          <h2>Surface of Psyche</h2>
+          <h2>Surface of Jupiter</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Our information, regarding 16 Psyche, is based on radar and optical observations. The observations have given evidence of a 
-            surface consisting of a mix of metal and silicate. Other observations have led scientists to believe there are two crater-like 
-            depressions. Scientists believe the asteroid may contain significant amounts of metal, consistent with the core of a planetesimal.
-          <br>
-          <br>
-            The NASA Psyche mission, based on the belief that planetesimals are the building blocks of our solar system, aims to provide a deeper 
-            understanding of 16 Psyche, and potentially other planets. This mission is a significant step towards shedding light on Earth's core 
-            and advancing our knowledge of planetary science.
-          <br>
-          <br>
-            16 Psyche is believed to have survived multiple violent collisions during the solar system's formation.
+           Paragraphy about the surface of Jupiter
           </p>
-          <img src="images/psyche_popup_images/Psyche_2.jpg" id="psyche_surface">
         </div>
         <div class="popup-buttons">
           <button id="prevButton">Previous</button>
@@ -462,22 +421,14 @@ function sixthScreen() {
     
     // Update content for the sixth screen
     popupContent.innerHTML = `
-      <div id="screen6">
+      <div class="jupiter" id="screen6">
         <div class="popup-content-header">  
           <h2>Orbit and Rotation</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            16 Psyche is part of the Main Asteroid Belt, sitting between Mars and Jupiter. 
-            <br>
-            <br>
-            16 Psyche completes one rotation around the Sun, a Psyche year, approximately
-            every five Earth years. 
-            <br>
-            <br>
-            Psyche rotates along its axis, a Psyche day, about once every four hours.
+            Paragraph about Jupiter's orbit and rotation
           </p>
-          <img src="images/psyche_popup_images/psyche_path.jpg" id="path_picture">
         </div>
         <div class="popup-buttons">
           <button id="prevButton">Previous</button>
@@ -520,27 +471,14 @@ function seventhScreen() {
 
   // Update content for the seventh screen
   popupContent.innerHTML = `
-  <div id="screen7">
+  <div class="jupiter" id="screen7">
     <div class="popup-content-header">  
-      <h2>Structure</h2>
+      <h2>Structure of Jupiter</h2>
     </div>
-    <div class="popup-content-body" id="video-background">
-      <video autoplay muted loop playsinline id="background_video">
-          <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
-      </video>
+    <div class="popup-content-body">
       <p>
-        16 Psyche is classified as a Metallic-type (M-type) asteroid, the third most common type of asteroids in the solar system.
-        These types of asteroids are common, however very little is known about them. 16 Psyche was previously believed to be composed
-        of entirely metal, however, new data on its density points towards a mixture of metal and silicate.
-        <br><br>
-        Psyche is considered to be very dense. Though measurements are still being made, the current bulk density appears to be 3400 - 4100
-        kilograms per cubic meter (kg/m<sup>3</sup>), composed of rock and metal. The surface is believed to be very porous, with estimates 
-        ranging from 30-70% of the entire surface. The gravity on Psyche is much less than the Earth or 
-        the Moon, where lifting a car on Psyche would be equivalent to lifting a dog on Earth.
+        Paragraph about the Structure of Jupiter
       </p>
-      <video id="video2" controls autoplay muted loop>
-        <source src="images/psyche_popup_images/psyche_video.mp4" type="video/mp4">
-      </video>
     </div>
     <div class="popup-buttons">
       <button id="prevButton">Previous</button>
@@ -552,24 +490,14 @@ function seventhScreen() {
 
   // Attach event listeners for buttons
   document.getElementById('prevButton').addEventListener('click', () => {
-      const video = document.getElementById('background_video');
-      video.pause(); // Pause the video when moving to the previous screen
       sixthScreen();
   });
   document.getElementById('closeButton').addEventListener('click', () => {
-      const video = document.getElementById('background_video');
-      video.pause(); // Pause the video when closing the popup
       closePopup();
   });
   document.getElementById('nextButton').addEventListener('click', () => {
-      const video = document.getElementById('background_video');
-      video.pause(); // Pause the video when moving to the next screen
       eighthScreen();
   });
-
-  // Play the video when this screen loads
-  const backgroundVideo = document.getElementById('background_video');
-  backgroundVideo.play();
 }
 
 
@@ -600,18 +528,14 @@ function eighthScreen() {
     
     // Update content for the eighth screen
     popupContent.innerHTML = `
-      <div id="screen8">
+      <div class="jupiter" id="screen8">
         <div class="popup-content-header">
-        <h2>No Moons Orbiting 16 Psyche</h2>
+        <h2>No Moons Orbiting Jupiter</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            NASA has identified more than 150 asteroids that have an orbiting moon, and in some cases more than one moon.
-            Other asteroids can have other asteroids orbiting each other, referred to as binary or triple asteroid systems.<br><br>16 Psyche
-            does not believe to have any moons or asteroids orbiting around it, however, more information will be known in 2029 when the Pscyche
-            mission is expected to reach the asteroid.
+            Paragraph about the moons orbiting Jupiter
           </p>
-          <img src="images/psyche_popup_images/moons.jpg" id="moon_picture">
         </div>
         <div class="popup-buttons">
           <button id="prevButton">Previous</button>
@@ -654,15 +578,14 @@ function ninthScreen() {
     
     // Update content for the ninth screen
     popupContent.innerHTML = `
-    <div id="screen9">
+    <div class="jupiter" id="screen9">
       <div class="popup-content-header">
-        <h2>No Rings Around 16 Psyche</h2>
+        <h2>Rings of Jupiter</h2>
       </div>
       <div class="popup-content-body">
         <p>
-          While a few asteroids are known to have rings, 16 Psyche does not possess any.
+          Paragraph about the rings of Jupiter
         </p>
-        <img src="images/psyche_popup_images/rings.jpg" id="ring_picture">
       </div>
       <div class="popup-buttons">
         <button id="prevButton">Previous</button>
@@ -704,18 +627,14 @@ function tenthScreen() {
     
     // Update content for the tenth screen
     popupContent.innerHTML = `
-      <div id="screen10">
+      <div class="jupiter" id="screen10">
         <div class="popup-content-header">
-          <h2>16 Psyche has no Atmosphere</h2>
+          <h2>Jupiter's Atmosphere</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Like all asteroids, 16 Psyche does not have an atmosphere. Atmospheric layers are crucial for protecting planets by shielding them from impacts. 
-          <br>
-          <br>
-            Without an atmosphere, 16 Psyche is exposed to collisions with asteroids, comets, and other space debris.
+            Paragraph about the atmosphere of Jupiter
           </p>
-          <img src="images/psyche_popup_images/aurora.jpg" id="atmosphere">
           </div>
         <div class="popup-buttons">
           <button id="prevButton">Previous</button>

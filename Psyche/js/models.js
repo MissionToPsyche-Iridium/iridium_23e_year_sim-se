@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const planets = {};
     let orbitActive = true;
     let isInspecting = false;
+    let activePlanet = "psyche";
 
     const toggleButton = document.getElementById("toggle-rotate");
     const panSpeed = 2;
@@ -121,6 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const selectPlanet = (planetName) => {
+        activePlanet = planetName;
+        console.log(activePlanet + " has been selected");
         if (planets[planetName]) {
             selectedPlanet = planets[planetName];
             isInspecting = false;
@@ -159,10 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add an event listener for the reset button
     document.getElementById("reset").addEventListener("click", () => {
+        
         selectedPlanet = planets["psyche"];
+        activePlanet="psyche";
+        console.log(activePlanet + " has been selected");
         isInspecting = false;
         orbitActive = true;
-
+        
         const psycheZoom = zoomDistances["psyche"];
         camera.position.set(
             selectedPlanet.object.position.x + psycheZoom,
@@ -175,6 +181,139 @@ document.addEventListener("DOMContentLoaded", () => {
         controls.target.copy(selectedPlanet.object.position);
         controls.update();
     });
+
+    
+    
+    document.getElementById("info").addEventListener("click", () => {
+        console.log("Loading information for " + activePlanet);
+        
+        // Remove any existing popup script
+        const existingScript = document.getElementById("planet-popup-script");
+        if (existingScript) {
+            existingScript.remove();
+        }
+        
+        // Load the correct script based on the activePlanet
+        const script = document.createElement("script");
+        script.id = "planet-popup-script";
+        script.src = `js/${activePlanet}_popup.js`;
+        script.onload = () => {
+            console.log(`${activePlanet}_popup.js loaded successfully.`);
+            if (typeof openPopup === "function") {
+                openPopup();
+            } else {
+                console.warn(`openPopup function not found in ${activePlanet}_popup.js`);
+            }
+        };
+        script.onerror = () => {
+            console.error(`Failed to load ${activePlanet}_popup.js`);
+        };
+        
+        document.body.appendChild(script);
+    });
+    
+    
+    
+    
+    
+
+     // Fullscreen button handling
+     const fullscreenButton = document.getElementById('fullscreen');
+     if (fullscreenButton) {
+         fullscreenButton.addEventListener('click', () => {
+             if (!document.fullscreenElement) {
+                 container.requestFullscreen();
+                 renderer.setSize(window.innerWidth, window.innerHeight);
+                 camera.aspect = window.innerWidth / window.innerHeight;
+                 camera.updateProjectionMatrix();
+             } else {
+                 document.exitFullscreen();
+                 renderer.setSize(container.clientWidth, container.clientHeight);
+                 camera.aspect = container.clientWidth / container.clientHeight;
+                 camera.updateProjectionMatrix();
+             }
+         });
+     };
+ 
+ /*****************************************************
+  * listener "mouseover"
+  * 
+  * This listener is invoked when the mouse hovers over the information button. It will change the logo
+  * displaying an alternative colored information button
+  * 
+  * arguments:
+  *  event - mouse hovers over the information button
+  * 
+  * returns:
+  *  nothing
+  * 
+  * changes: 
+  *  The information button will change
+  * 
+  */
+ document.getElementById('info').addEventListener('mouseover', function() {
+     document.getElementById('info_button').src = "images/main_images/info_button_color.png";
+   });
+   
+   /*****************************************************
+    * listener "mouseout"
+    * 
+    * This listener is invoked when the mouse moves away from the information button. It will change the logo
+    * displaying the original information button
+    * 
+    * arguments:
+    *  event - mouse hovers over the information button
+    * 
+    * returns:
+    *  nothing
+    * 
+    * changes: 
+    *  The information button will change
+    * 
+    */
+   document.getElementById('info').addEventListener('mouseout', function() {
+     document.getElementById('info_button').src = "images/main_images/info_button.png";
+   });
+   
+   /*****************************************************
+    * listener "mouseover"
+    * 
+    * This listener is invoked when the mouse hovers over the information button. It will change the logo
+    * displaying an alternative colored information button
+    * 
+    * arguments:
+    *  event - mouse hovers over the information button
+    * 
+    * returns:
+    *  nothing
+    * 
+    * changes: 
+    *  The information button will change
+    * 
+    */
+   document.getElementById('fullscreen').addEventListener('mouseover', function() {
+     document.getElementById('fullscreen_button').src = "images/main_images/full_screen_bracket_color.png";
+   });
+   
+   /*****************************************************
+    * listener "mouseout"
+    * 
+    * This listener is invoked when the mouse moves away from the information button. It will change the logo
+    * displaying the original information button
+    * 
+    * arguments:
+    *  event - mouse hovers over the information button
+    * 
+    * returns:
+    *  nothing
+    * 
+    * changes: 
+    *  The information button will change
+    * 
+    */
+   document.getElementById('fullscreen').addEventListener('mouseout', function() {
+     document.getElementById('fullscreen_button').src = "images/main_images/full_screen_bracket.png";
+   });
 
     // Render loop
     function render() {
