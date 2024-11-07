@@ -83,7 +83,8 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     'venus': { distance: 25, scale: 1 },
     'earth': { distance: 25, scale: 1 },
     'mars': { distance: 30, scale: 0.9 },
-    'jupiter': { distance: 45, scale: 1.5 }
+    'jupiter': { distance: 45, scale: 1.5 },
+    'neptune': { distance: 40, scale: 1 }   
   };
 
   // Add keyboard event listener for ESC key
@@ -148,7 +149,8 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     'button-earth': 'earth',
     'button-mars': 'mars',
     'button-psyche': 'psyche',
-    'button-jupiter': 'jupiter'
+    'button-jupiter': 'jupiter',
+    'button-neptune': 'neptune',
   };
 
   Object.entries(planetButtons).forEach(([buttonId, planetName]) => {
@@ -259,7 +261,7 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
 
     if (objects && objects.psycheObject && objects.sunObject && 
         objects.mercuryObject && objects.venusObject && objects.earthObject &&
-        objects.marsObject && objects.jupiterObject) {
+        objects.marsObject && objects.jupiterObject && objects.neptuneObject) {
       
       if (!isAnimationPaused && !isOrbitPaused) {
         updateOrbits(objects, deltaTime);
@@ -283,6 +285,7 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
         if (labels.earthLabel) updateLabelPosition(labels.earthLabel, objects.earthObject, camera, container);
         if (labels.marsLabel) updateLabelPosition(labels.marsLabel, objects.marsObject, camera, container);
         if (labels.jupiterLabel) updateLabelPosition(labels.jupiterLabel, objects.jupiterObject, camera, container);
+        if (labels.neptuneLabel) updateLabelPosition(labels.neptuneLabel, objects.neptuneObject, camera, container);
       }
     }
 

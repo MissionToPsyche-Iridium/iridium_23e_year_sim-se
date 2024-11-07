@@ -91,10 +91,11 @@ export function setupScene(scene, orbitalDistances) {
   const orbitalInclinations = {
     mercury: 7.004 * Math.PI / 180,  // 7.004 degrees
     venus: 3.394 * Math.PI / 180,    // 3.394 degrees
-    earth: 0.0 * Math.PI / 180,      // 0.0 degrees (reference plane)
+    earth: 0.0 * Math.PI / 180,      // 0.0 degrees (reference plane) // Earth is titled at 23.5 degrees
     mars: 1.850 * Math.PI / 180,     // 1.850 degrees
     jupiter: 1.303 * Math.PI / 180,  // 1.303 degrees
-    psyche: 3.095 * Math.PI / 180    // 3.095 degrees
+    psyche: 3.095 * Math.PI / 180,    // 3.095 degrees
+    neptune: 0 * Math.PI / 180    // 28 degrees // *TODO fix this scale tilt once implemented 
   };
 
   // Draw circular paths for each planet and asteroid
