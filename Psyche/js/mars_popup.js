@@ -168,12 +168,12 @@ function firstScreen() {
     const popupContent = document.querySelector('.popup-content');
     // Update the content of the first screen
     popupContent.innerHTML = `
-    <div class="jupiter" id="screen1">
-        <h1>Jupiter</h1>
+    <div class="mars" id="screen1">
+        <h1>Mars</h1>
       </div>
       <div class="popup-content-body">
         <p>
-          Paragraph about Jupiter
+          Paragraph about Mars
         </p>
       </div>
       <div class="popup-buttons">
@@ -215,7 +215,7 @@ function secondScreen() {
     
     // Update the content of the second screen
     popupContent.innerHTML = `
-      <div class="jupiter" id="screen2">
+      <div class="mars" id="screen2">
         <div class="popup-content-header">
           <h2>Quick Facts</h2>
         </div>
@@ -272,13 +272,13 @@ function thirdScreen() {
     
     // Update content for the third screen
     popupContent.innerHTML = `
-      <div class="jupiter" id="screen3">
+      <div class="mars" id="screen3">
         <div class="popup-content-header">
           <h2>Size and Dimensions</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Jupiter size and dimensions paragraph
+            Mars size and dimensions paragraph
           </p>
         </div>
         <div class="popup-buttons">
@@ -322,13 +322,13 @@ function fourthScreen() {
     
     // Update content for the fourth screen
     popupContent.innerHTML = `
-      <div class="jupiter" id="screen4">
+      <div class="mars" id="screen4">
         <div class="popup-content-header">
-          <h2>No Life on Jupiter</h2>
+          <h2>No Life on Mars</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Paragraph about life on Jupiter
+            Paragraph about life on Mars
           </p>
         </div>
           
@@ -371,13 +371,13 @@ function fourthScreen() {
 function fifthScreen() {
     const popupContent = document.querySelector('.popup-content');
     popupContent.innerHTML = `
-      <div class="jupiter" id="screen5">
+      <div class="mars" id="screen5">
         <div class="popup-content-header">
-          <h2>Surface of Jupiter</h2>
+          <h2>Surface of Mars</h2>
         </div>
         <div class="popup-content-body">
           <p>
-           Paragraph about the surface of Jupiter
+           Paragraph about the surface of Mars
           </p>
         </div>
         <div class="popup-buttons">
@@ -421,13 +421,13 @@ function sixthScreen() {
     
     // Update content for the sixth screen
     popupContent.innerHTML = `
-      <div class="jupiter" id="screen6">
+      <div class="mars" id="screen6">
         <div class="popup-content-header">  
           <h2>Orbit and Rotation</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Paragraph about Jupiter's orbit and rotation
+            Paragraph about Mars orbit and rotation
           </p>
         </div>
         <div class="popup-buttons">
@@ -471,13 +471,13 @@ function seventhScreen() {
 
   // Update content for the seventh screen
   popupContent.innerHTML = `
-  <div class="jupiter" id="screen7">
+  <div class="mars" id="screen7">
     <div class="popup-content-header">  
       <h2>Structure of Jupiter</h2>
     </div>
     <div class="popup-content-body">
       <p>
-        Paragraph about the Structure of Jupiter
+        Paragraph about the Structure of Mars
       </p>
     </div>
     <div class="popup-buttons">
@@ -528,13 +528,13 @@ function eighthScreen() {
     
     // Update content for the eighth screen
     popupContent.innerHTML = `
-      <div class="jupiter" id="screen8">
+      <div class="mars" id="screen8">
         <div class="popup-content-header">
-        <h2>No Moons Orbiting Jupiter</h2>
+        <h2>No Moons Orbiting Mars</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Paragraph about the moons orbiting Jupiter
+            Paragraph about the moons orbiting Mars
           </p>
         </div>
         <div class="popup-buttons">
@@ -578,13 +578,13 @@ function ninthScreen() {
     
     // Update content for the ninth screen
     popupContent.innerHTML = `
-    <div class="jupiter" id="screen9">
+    <div class="mars" id="screen9">
       <div class="popup-content-header">
-        <h2>Rings of Jupiter</h2>
+        <h2>Rings of Mars</h2>
       </div>
       <div class="popup-content-body">
         <p>
-          Paragraph about the rings of Jupiter
+          Paragraph about the rings of Mars
         </p>
       </div>
       <div class="popup-buttons">
@@ -627,13 +627,13 @@ function tenthScreen() {
     
     // Update content for the tenth screen
     popupContent.innerHTML = `
-      <div class="jupiter" id="screen10">
+      <div class="mars" id="screen10">
         <div class="popup-content-header">
-          <h2>Jupiter's Atmosphere</h2>
+          <h2>Mars Atmosphere</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Paragraph about the atmosphere of Jupiter
+            Paragraph about the atmosphere of Mars
           </p>
           </div>
         <div class="popup-buttons">
