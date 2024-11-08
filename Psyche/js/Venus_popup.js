@@ -1,8 +1,8 @@
 /* 
 * Venus_popup.js
 * 
-* This Venus_popup.js creates the popup windows that display information to the user. The user
-* can cycle through the pages as needed. 
+* This Venus_popup.js creates the popup windows that display information about Venus and its 
+* relationship to the Psyche mission. The user can cycle through the pages to learn more.
 * 
 * Class:      SER 401
 * Team:       35
@@ -18,25 +18,24 @@
 *    closePopup() -   This closes the popup. Called when the "Close" button is pressed on any
 *                     popup page. 
 *
-*    firstScreen() -  This opens the first popup screen. Displays the summary info information
-*                     of Venus. 
-*    secondScreen()-  This opens the second popup screen. Displays the size and dimensions info.
+*    firstScreen() -  This opens the first popup screen. Displays overview of Venus and Psyche connection.
+*    secondScreen()-  This opens the second popup screen. Displays key facts about Venus relevant to Psyche.
 *    
-*    thirdScreen() -  This opens the third popup screen. Currently blank. 
+*    thirdScreen() -  This opens the third popup screen. Shows size comparison of Venus and Psyche.
 *
-*    fourthScreen()-  This opens the forth popup screen. Currently blank. 
+*    fourthScreen()-  This opens the fourth popup screen. Discusses lack of life on Venus vs Psyche.
 *
-*    fifthScreen() -  This opens the fifth popup screen. Currently blank. 
+*    fifthScreen() -  This opens the fifth popup screen. Compares surface conditions.
 *
-*    sixthScreen()-  This opens the sixth popup screen. Currently blank. 
+*    sixthScreen()-  This opens the sixth popup screen. Shows orbital relationships.
 *
-*    seventhScreen() -  This opens the seventh popup screen. Currently blank. 
+*    seventhScreen() -  This opens the seventh popup screen. Compares internal structures.
 *
-*    eighthScreen()-  This opens the sixth popup screen. Displays the Moon info. 
+*    eighthScreen()-  This opens the eighth popup screen. Discusses lack of moons.
 *
-*    ninthScreen() -  This opens the seventh popup screen. Displays the ring info
+*    ninthScreen() -  This opens the ninth popup screen. Discusses lack of rings.
 *
-*    tenthScreen()-  This opens the sixth popup screen. Displays the atmosphere info. 
+*    tenthScreen()-  This opens the tenth popup screen. Compares atmospheres.
 *
 */
 
@@ -169,11 +168,11 @@ function firstScreen() {
     // Update the content of the first screen
     popupContent.innerHTML = `
     <div class="venus" id="screen1">
-        <h1>Venus</h1>
+        <h1>Venus and Psyche</h1>
       </div>
       <div class="popup-content-body">
         <p>
-          Paragraph about Venus
+          Venus and the asteroid Psyche represent very different bodies in our solar system. While Venus is a rocky terrestrial planet, Psyche is believed to be the exposed metallic core of an early planetary body. Venus's extreme surface conditions contrast sharply with Psyche's airless, metallic environment. Understanding these differences helps scientists better comprehend planetary formation and evolution.
         </p>
       </div>
       <div class="popup-buttons">
@@ -217,18 +216,18 @@ function secondScreen() {
     popupContent.innerHTML = `
       <div class="venus" id="screen2">
         <div class="popup-content-header">
-          <h2>Quick Facts</h2>
+          <h2>Quick Facts: Venus vs Psyche</h2>
         </div>
         <div class="popup-content-body">
           <ul>
-            <li>FACT</li>
-            <li>FACT</li>
-            <li>FACT</li>
-            <li>FACT</li>
-            <li>FACT</li>
-            <li>FACT</li>
-            <li>FACT</li>
-            <li>FACT</li>
+            <li>Venus is the second planet from the Sun, while Psyche orbits in the asteroid belt between Mars and Jupiter</li>
+            <li>Venus has a diameter of 12,104 km, while Psyche is about 226 km across</li>
+            <li>Venus has crushing atmospheric pressure, while Psyche has no atmosphere</li>
+            <li>Venus has surface temperatures around 462°C, while Psyche's surface varies greatly</li>
+            <li>Venus is primarily rocky, while Psyche is mostly metal</li>
+            <li>Venus rotates backwards compared to most planets, while Psyche rotates normally</li>
+            <li>Venus has no moons, similar to Psyche</li>
+            <li>Venus was named after the Roman goddess of love, while Psyche was named after a Greek mythological princess</li>
           </ul>
         </div>
         <div class="popup-buttons">
@@ -274,11 +273,11 @@ function thirdScreen() {
     popupContent.innerHTML = `
       <div class="venus" id="screen3">
         <div class="popup-content-header">
-          <h2>Size and Dimensions</h2>
+          <h2>Size Comparison</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Venus size and dimensions paragraph
+            Venus is vastly larger than asteroid Psyche. With a diameter of 12,104 km, Venus is about 53 times wider than Psyche's approximately 226 km diameter. This dramatic size difference reflects their different origins - Venus formed as a full planet, while Psyche is thought to be the remnant core of a planetesimal that was stripped of its outer layers through violent collisions early in the solar system's history.
           </p>
         </div>
         <div class="popup-buttons">
@@ -324,11 +323,11 @@ function fourthScreen() {
     popupContent.innerHTML = `
       <div class="venus" id="screen4">
         <div class="popup-content-header">
-          <h2>No Life on Venus</h2>
+          <h2>Life Potential</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Paragraph about life on Venus
+            Neither Venus nor Psyche are considered candidates for life as we know it. Venus's extreme surface temperatures and pressures make it inhospitable, while its thick atmosphere of carbon dioxide creates a runaway greenhouse effect. Psyche, being a metallic asteroid, lacks the necessary ingredients and conditions for life. Both bodies, however, provide valuable insights into planetary evolution and the early solar system.
           </p>
         </div>
           
@@ -373,11 +372,11 @@ function fifthScreen() {
     popupContent.innerHTML = `
       <div class="venus" id="screen5">
         <div class="popup-content-header">
-          <h2>Surface of Venus</h2>
+          <h2>Surface Conditions</h2>
         </div>
         <div class="popup-content-body">
           <p>
-           Paragraphy about the surface of Venus
+           Venus has a hot, rocky surface with temperatures around 462°C and crushing atmospheric pressure. In contrast, Psyche's surface is believed to be mostly iron and nickel metal, exposed after the rocky outer layers were stripped away. While Venus's surface is constantly renewed through volcanic activity, Psyche's metallic surface bears ancient scars from impacts billions of years ago.
           </p>
         </div>
         <div class="popup-buttons">
@@ -447,7 +446,7 @@ function sixthScreen() {
  * seventhScreen()
  * 
  * This function populates and displays the seventh summary information popup for Venus.
- * No information is populated for this screen currently. 
+ * Compares the internal structure of Venus to Psyche.
  * (Elements that are populated were initialized in the openPopup().) 
  * 
  * arguments:
@@ -472,11 +471,14 @@ function seventhScreen() {
   popupContent.innerHTML = `
   <div class="venus" id="screen7">
     <div class="popup-content-header">  
-      <h2>Structure of Venus</h2>
+      <h2>Internal Structure: Venus vs Psyche</h2>
     </div>
     <div class="popup-content-body">
       <p>
-        Paragraph about the Structure of Venus
+        While Venus has a layered internal structure with a core, mantle and crust similar to Earth, 
+        Psyche is believed to be the exposed metallic core of an ancient protoplanet. Studying Venus's 
+        internal structure helps us understand what Psyche's parent body may have looked like before its 
+        outer layers were stripped away in ancient collisions.
       </p>
     </div>
     <div class="popup-buttons">
@@ -504,7 +506,7 @@ function seventhScreen() {
  * eighthScreen()
  * 
  * This function populates and displays the eighth summary information popup for Venus.
- * The moon information is displayed for Venus.
+ * Compares Venus's lack of moons to Psyche.
  * (Elements that are populated were initialized in the openPopup().) 
  * 
  * arguments:
@@ -529,11 +531,14 @@ function eighthScreen() {
     popupContent.innerHTML = `
       <div class="venus" id="screen8">
         <div class="popup-content-header">
-        <h2>No Moons Orbiting Venus</h2>
+        <h2>No Moons: Venus and Psyche</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Paragraph about the moons orbiting Venus
+            Venus and Psyche share the characteristic of having no moons. While Venus likely lacks moons 
+            due to its proximity to the Sun and strong gravitational effects, Psyche's lack of moons is 
+            likely due to its small size and location in the asteroid belt. Understanding why these bodies 
+            lack moons helps us better understand the formation and evolution of the solar system.
           </p>
         </div>
         <div class="popup-buttons">
@@ -554,7 +559,7 @@ function eighthScreen() {
  * ninthScreen()
  * 
  * This function populates and displays the ninth summary information popup for Venus.
- * The ring information is displayed for Venus. 
+ * Compares Venus's lack of rings to Psyche.
  * (Elements that are populated were initialized in the openPopup().) 
  * 
  * arguments:
@@ -579,11 +584,14 @@ function ninthScreen() {
     popupContent.innerHTML = `
     <div class="venus" id="screen9">
       <div class="popup-content-header">
-        <h2>Rings of Venus</h2>
+        <h2>No Rings: Venus and Psyche</h2>
       </div>
       <div class="popup-content-body">
         <p>
-          Paragraph about the rings of Venus
+          Like Psyche, Venus has no ring system. While gas giants tend to have extensive ring systems, 
+          rocky bodies like Venus and metallic asteroids like Psyche typically lack the necessary 
+          conditions and materials to form and maintain rings. This similarity highlights their nature 
+          as solid, compact bodies in our solar system.
         </p>
       </div>
       <div class="popup-buttons">
@@ -604,7 +612,7 @@ function ninthScreen() {
  * tenthScreen()
  * 
  * This function populates and displays the tenth summary information popup for Venus.
- * The atmosphere information is displayed for Venus. 
+ * Compares Venus's atmosphere to Psyche's lack of atmosphere.
  * (Elements that are populated were initialized in the openPopup().) 
  * 
  * arguments:
@@ -628,11 +636,15 @@ function tenthScreen() {
     popupContent.innerHTML = `
       <div class="venus" id="screen10">
         <div class="popup-content-header">
-          <h2>Venus's Atmosphere</h2>
+          <h2>Atmosphere: Venus vs Psyche</h2>
         </div>
         <div class="popup-content-body">
           <p>
-            Paragraph about the atmosphere of Venus
+            Venus has a thick, toxic atmosphere primarily composed of carbon dioxide, while Psyche, 
+            being an asteroid, has no atmosphere at all. This contrast helps scientists understand 
+            how different celestial bodies retain or lose their atmospheres based on their size, 
+            composition, and location in the solar system. The lack of atmosphere on Psyche will 
+            make it easier for the Psyche mission to study its metallic surface directly.
           </p>
           </div>
         <div class="popup-buttons">
