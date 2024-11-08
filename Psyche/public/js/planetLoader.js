@@ -5,7 +5,8 @@ export async function loadPlanets(scene) {
   const planets = [];
   const planetData = [
     { name: "Sun", path: "/models/sun/sun_only.glb", size: 0.091, orbitRadius: 0, orbitSpeed: 0 }, 
-    { name: "Earth", path: "/models/earth/earth.glb", size: 0.1, orbitRadius: 70000, orbitSpeed: 0.1 } 
+    { name: "Earth", path: "/models/earth/earth.glb", size: 0.1, orbitRadius: 70000, orbitSpeed: 0.1 },
+    { name: "Saturn", path: "/models/saturn/saturn.glb", size: 0.1, orbitRadius: 90000, orbitSpeed: 0.3, rotationSpeed: 0.15 } 
   ];
 
   console.log("Iterating over planet data...");
