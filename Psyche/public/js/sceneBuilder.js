@@ -46,19 +46,20 @@ const clock = new THREE.Clock();
  * Loads planets asynchronously, creates orbits, and sets up camera and carousel
  * only after all models are fully loaded.
  */
-console.log("starting planet loading...");
 loadPlanets(scene)
   .then((planets) => {
     console.table(planets);
     planets.forEach((planet) => {
       const position = new THREE.Vector3();
-      planet.model.getWorldPosition(position); // Get the world position of each planet's model
+      planet.model.getWorldPosition(position); 
       console.log(`World position of ${planet.name}:`, position);
       
-      // Optionally, use this position for other purposes, like placing orbits or adjusting camera views
       createOrbit(planet.orbitRadius, scene);
     });
     CameraController.setup(camera, controls, planets);
+
+    console.log("Planets ready for carousel:", planets.map(p => p.name));
+
     initCarousel(planets);
     animate(planets);
   })
@@ -75,6 +76,7 @@ function animate(planetsArray) {
   requestAnimationFrame(() => animate(planetsArray));
   controls.update();
   const deltaTime = clock.getDelta();
-  planetsArray.forEach((planet) => planet.update(0.1, 0.001, deltaTime));
+
+  planetsArray.forEach((planet) => planet.update(.1, planet.orbitSpeed, deltaTime));
   renderer.render(scene, camera);
 }

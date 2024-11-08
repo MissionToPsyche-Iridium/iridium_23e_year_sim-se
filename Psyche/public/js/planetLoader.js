@@ -4,18 +4,20 @@ export async function loadPlanets(scene) {
 
   const planets = [];
   const planetData = [
-    { name: "Sun", path: "/models/sun/sun_only.glb", size: .01, orbitRadius: 0 },
-    { name: "Earth", path: "/models/earth/earth.glb", size: 1, orbitRadius: 60000 }
+    { name: "Sun", path: "/models/sun/sun_only.glb", size: 0.091, orbitRadius: 0, orbitSpeed: 0 }, 
+    { name: "Earth", path: "/models/earth/earth.glb", size: 0.1, orbitRadius: 70000, orbitSpeed: 0.1 } 
   ];
+
   console.log("Iterating over planet data...");
+  
   const loadPromises = planetData.map((data) => {
     return new Promise((resolve, reject) => {
-      const planet = new PlanetHandler(data.name, data.path, data.size, data.orbitRadius, scene);
+      const planet = new PlanetHandler(data.name, data.path, data.size, data.orbitRadius, data.orbitSpeed, scene);
       console.log("planet: " + planet.name);
       planet.onLoad = () => {
         planets.push(planet);
         console.log(`Planet loaded and added: ${planet.name}`);
-        resolve();
+        resolve(planet);
       };
 
       planet.onError = (error) => {
@@ -28,13 +30,3 @@ export async function loadPlanets(scene) {
   await Promise.all(loadPromises);
   return planets;
 }
-
-/*
-Original loadPlanets function, synchronous without promise
-export function loadPlanets(scene) {
-  const planets = [];
-  planets.push(new PlanetHandler("Sun", "/models/sun/sun_only.glb", 1, 0, scene));
-  planets.push(new PlanetHandler("Earth", "/models/earth/earth_only.glb", 0.53, 60000, scene));
-  return planets;
-}
-*/

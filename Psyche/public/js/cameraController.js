@@ -1,7 +1,8 @@
 export class CameraController {
+  
   static setup(camera, controls, planets) {
       let currentPlanet = planets[0]; 
-      camera.position.set(currentPlanet.orbitRadius + 500, 100, 300);
+      camera.position.set(currentPlanet.orbitRadius + 90000, 7000, 300);
       camera.lookAt(currentPlanet.model.position);
       controls.update();
 

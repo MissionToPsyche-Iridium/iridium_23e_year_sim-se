@@ -29,6 +29,7 @@ const bottomFadeDiv = document.querySelector('.carousel-item.bottom-fade');
  * Returns: None
  */
 function updateCarousel() {
+  console.log(`Current Index: ${currentIndex}, Planet: ${planets[currentIndex]?.name || 'Unknown planet'}`);
   if (!planets[currentIndex] || !planets[currentIndex].model) {
     console.warn(`Planet or model missing for ${planets[currentIndex]?.name || 'Unknown planet'}`);
     return;
@@ -87,7 +88,6 @@ function handleScroll(event) {
   } else if (event.deltaY < 0) {
     currentIndex = (currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
   }
-  console.log(`Current Index: ${currentIndex}, Planet: ${planetNameArray[currentIndex]}`);
   updateCarousel();
 }
 
