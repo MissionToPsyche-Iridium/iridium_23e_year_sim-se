@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
         // Create popup
         const popup = document.createElement('div'); // Creates a div element to house the popup content
         popup.id = 'reference-popup';
+        popup.style.fontFamily = 'Helvetica, sans-serif';
+        popup.style.fontSize = '12px';
         popup.style.position = 'relative'; // Allows elements inside the popup to be positioned relative to this container
         popup.style.backgroundColor = 'black';
         popup.style.color = 'black';
@@ -59,18 +61,23 @@ document.addEventListener("DOMContentLoaded", function() {
         // Create the HTML content inside the popup
         popup.innerHTML = `
             <h1>References</h1>
+            
             <p>Developers</p> 
-            <span>Arratia, Armando</span>
-            <span>McNeil, Dan</span>
-            <span>Potocki, Jenny</span>
-            <span>Anselm, Josh</span>
-            <span>Brown, Tyler</span>
-            <li><a href="https://psyche.asu.edu" target="_blank">NASA Psyche Mission</a></li>
-            <li><a href="https://threejs.org/docs/" target="_blank">Three.js Documentation</a></li>
-            <li>Asteroid model by <a href="https://nasa.gov" target="_blank">NASA</a></li>
-            <li>Simulation inspired by <a href="http://blender.org" target ="_blank">Blender</a></li> -->
+            <span>Arratia, Armando</span>,
+            <span>McNeil, Dan</span>,
+            <span>Potocki, Jenny</span>,
+            <span>Anselm, Josh</span>,
+            <span>Brown, Tyler</span>   
+
+            <ul>
+                <li><a href="https://psyche.asu.edu" target="_blank">NASA Psyche Mission</a></li>
+                <li><a href="https://threejs.org/docs/" target="_blank">Three.js Documentation</a></li>
+                <li>Asteroid model by <a href="https://nasa.gov" target="_blank">NASA</a></li>
+                <li>Simulation inspired by <a href="http://blender.org" target ="_blank">Blender</a></li> -->
+            </ul>
             <p>This is a paragraph with references used</p>
             <ul>
+
                 <li>Reference 1</li>
                 <li>Reference 2</li>
                 <li>Reference 3</li>
@@ -78,15 +85,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 <li>Reference 5</li>
                 <li>Reference 6</li>
             </ul>
-            <p>This is another paragraph</p>
-            <ul>
-                <li>Something Else 1</li>
-                <li>Something Else 2</li>
-                <li>Something Else 3</li>
-                <li>Something Else 4</li>
-                <li>Something Else 5</li>
-                <li>Something Else 6</li>
-            </ul>
+            <p class="disclaimer">Disclaimer:</p>
+            <p class="disclaimer">The work that was created in partial fulfillment of Arizona State University Capstone Course "SER 401". The work is a result of the Psyche Student Collaborations component on NASA's Psyche Mission (https://psyche.asu.edu). "Psyche: A Journey to a Metal World" [Contract Number NNM16AA09C] is part of the NASA Discovery Program mission to solar system targets. Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitue an official endorsement, either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA.</p>
 
         `;
 
