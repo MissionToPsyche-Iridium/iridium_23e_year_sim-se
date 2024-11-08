@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const zoomDistances = {
         sun: 35,
-       // mercury: 20,
+        mercury: 20,
+        venus: 20,
         earth: 20,
         mars: 30,
         psyche: 10,
@@ -84,8 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Set Mars and Psyche with different orbits and speeds
-   // loadPlanet("Mercury", "models/mercury/mercury.glb", 38, 1, 0.005);
-  //  loadPlanet("Venus", "models/venus/venus.glb", 67, 6, 0.005);
+    loadPlanet("Mercury", "models/Mercury/Mercury.glb", 57, 0.000003, 0.005);
+    loadPlanet("Venus", "models/Venus/Venus.glb", 108, .000002, 0.005);
     loadPlanet("Earth", "models/earth/earth.glb", 149, 6, 0.005);
     loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, 0.008);
     loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
