@@ -4,8 +4,8 @@ export async function loadPlanets(scene) {
 
   const planets = [];
   const planetData = [
-    { name: "Sun", path: "/models/sun/sun_only.glb", size: 1, orbitRadius: 0 },
-    { name: "Earth", path: "/models/earth/earth_only.glb", size: 0.53, orbitRadius: 60000 }
+    { name: "Sun", path: "/models/sun/sun_only.glb", size: .01, orbitRadius: 0 },
+    { name: "Earth", path: "/models/earth/earth.glb", size: 1, orbitRadius: 60000 }
   ];
   console.log("Iterating over planet data...");
   const loadPromises = planetData.map((data) => {
@@ -24,7 +24,7 @@ export async function loadPlanets(scene) {
       };
     });
   });
-
+  
   await Promise.all(loadPromises);
   return planets;
 }

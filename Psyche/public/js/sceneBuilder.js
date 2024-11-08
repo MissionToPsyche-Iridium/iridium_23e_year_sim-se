@@ -18,7 +18,7 @@ import { createOrbit } from './orbitHandler.js';
  */
 const container = document.getElementById('container3D');
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 2000000);
+const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 1, 2000000);
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
 renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -50,7 +50,14 @@ console.log("starting planet loading...");
 loadPlanets(scene)
   .then((planets) => {
     console.table(planets);
-    planets.forEach((planet) => createOrbit(planet.orbitRadius, scene));
+    planets.forEach((planet) => {
+      const position = new THREE.Vector3();
+      planet.model.getWorldPosition(position); // Get the world position of each planet's model
+      console.log(`World position of ${planet.name}:`, position);
+      
+      // Optionally, use this position for other purposes, like placing orbits or adjusting camera views
+      createOrbit(planet.orbitRadius, scene);
+    });
     CameraController.setup(camera, controls, planets);
     initCarousel(planets);
     animate(planets);
