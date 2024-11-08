@@ -27,18 +27,106 @@ document.addEventListener("DOMContentLoaded", () => {
     const panSpeed = 2;
     const zoomStep = 5;
 
-    const zoomDistances = {
-        sun: 35,
-       // mercury: 20,
-        earth: 20,
-        mars: 30,
-        psyche: 10,
-        jupiter: 20,
-       // saturn: 20,
-       // uranus: 20,
-       // neptune: 20,
-       // pluto: 20
+    const screenWidth = window.innerWidth;
+    const iPhoneSE = 375;
+    const iPhone14ProMax = 430;
+    const iPadMini = 768;
+    const iPadAir = 820;
+    const iPadPro = 1024;
+    const p960 = 1280;
+    const p1080 = 1920;
+    const p1440 = 2560;
+    const p2160 = 3840;
+    const p2160Wide = 5120;
+
+
+
+    const getZoomDistances = () => {
+        const screenWidth = window.innerWidth;
+    
+        if (screenWidth <= iPhoneSE) {
+            return {
+                sun: 80,
+            // mercury: 20,
+                earth: 55,
+                mars: 65,
+                psyche: 25,
+                jupiter: 60,
+            // saturn: 20,
+            // uranus: 20,
+            // neptune: 20,
+            // pluto: 20
+            };
+        } else if (screenWidth <= iPhone14ProMax) {
+            return {
+                sun: 65,
+            // mercury: 20,
+                earth: 30,
+                mars: 50,
+                psyche: 20,
+                jupiter: 45,
+            // saturn: 20,
+            // uranus: 20,
+            // neptune: 20,
+            // pluto: 20
+            };
+        } else if (screenWidth <= iPadMini) {
+            return {
+                sun: 55,
+            // mercury: 20,
+                earth: 30,
+                mars: 40,
+                psyche: 15,
+                jupiter: 40,
+            // saturn: 20,
+            // uranus: 20,
+            // neptune: 20,
+            // pluto: 20
+            };
+        } else if (screenWidth <= iPadAir) {
+            return {
+                sun: 50,
+            // mercury: 20,
+                earth: 35,
+                mars: 45,
+                psyche: 12.5,
+                jupiter: 35,
+            // saturn: 20,
+            // uranus: 20,
+            // neptune: 20,
+            // pluto: 20
+        };
+        } else if (screenWidth <= iPadPro) {
+            return {
+                sun: 45,
+            // mercury: 20,
+                earth: 30,
+                mars: 40,
+                psyche: 12,
+                jupiter: 30,
+            // saturn: 20,
+            // uranus: 20,
+            // neptune: 20,
+            // pluto: 20
+            }
+        } else {
+            return {
+            sun: 35,
+            // mercury: 20,
+                earth: 20,
+                mars: 30,
+                psyche: 10,
+                jupiter: 20,
+            // saturn: 20,
+            // uranus: 20,
+            // neptune: 20,
+            // pluto: 20
+            }
+        }
     };
+    
+    const zoomDistances = getZoomDistances();
+    
 
     // Load Sun Model
     loader.load('models/sun/sun.glb', (gltf) => {
