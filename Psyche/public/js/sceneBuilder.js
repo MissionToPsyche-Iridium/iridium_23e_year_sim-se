@@ -76,7 +76,6 @@ function animate(planetsArray) {
   requestAnimationFrame(() => animate(planetsArray));
   controls.update();
   const deltaTime = clock.getDelta();
-
-  planetsArray.forEach((planet) => planet.update(.1, planet.orbitSpeed, deltaTime));
+  planetsArray.forEach((planet) => planet.update(planet.rotationSpeed, planet.orbitSpeed, deltaTime));
   renderer.render(scene, camera);
 }

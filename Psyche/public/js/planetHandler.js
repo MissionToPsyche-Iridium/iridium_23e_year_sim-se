@@ -1,17 +1,19 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 export class PlanetHandler {
-  constructor(name, modelPath, size, orbitRadius, orbitSpeed, scene) {
+  constructor(name, modelPath, size, orbitRadius, orbitSpeed, rotationSpeed, scene) {
     this.name = name;
     this.size = size;
-    this.orbitRadius = orbitRadius;
-    this.orbitSpeed = orbitSpeed; // Orbit speed for the path around the Sun
+    this.orbitRadius = orbitRadius * 1.22;
+    this.orbitSpeed = orbitSpeed;
+    this.rotationSpeed = rotationSpeed; // Each planet's individual rotation speed
     this.scene = scene;
     this.model = null;
     this.loader = new GLTFLoader();
     this.elapsedTime = 0;
     this.loadModel(modelPath);
 }
+
 
   loadModel(path) {
       this.loader.load(
