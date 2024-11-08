@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // uranus: 20,
             // neptune: 20,
             // pluto: 20
-        };
+            };
         } else if (screenWidth <= iPadPro) {
             return {
                 sun: 45,
@@ -109,19 +109,32 @@ document.addEventListener("DOMContentLoaded", () => {
             // neptune: 20,
             // pluto: 20
             }
+        } else if (screenWidth <= p2160Wide) {
+            return {
+                sun: 30,
+                // mercury: 20,
+                    earth: 15,
+                    mars: 20,
+                    psyche: 7.5,
+                    jupiter: 17.5,
+                // saturn: 20,
+                // uranus: 20,
+                // neptune: 20,
+                // pluto: 20
+                }
         } else {
             return {
-            sun: 35,
-            // mercury: 20,
-                earth: 20,
-                mars: 30,
-                psyche: 10,
-                jupiter: 20,
-            // saturn: 20,
-            // uranus: 20,
-            // neptune: 20,
-            // pluto: 20
-            }
+                sun: 35,
+                // mercury: 20,
+                    earth: 20,
+                    mars: 30,
+                    psyche: 10,
+                    jupiter: 20,
+                // saturn: 20,
+                // uranus: 20,
+                // neptune: 20,
+                // pluto: 20
+                }
         }
     };
     
