@@ -87,7 +87,7 @@ export function setupScene(scene, orbitalDistances) {
     mars: 1.850 * Math.PI / 180,     // 1.850 degrees
     jupiter: 1.303 * Math.PI / 180,  // 1.303 degrees
     psyche: 3.095 * Math.PI / 180,   // 3.095 degrees
-    uranus: 1.303 * Math.PI / 180
+    uranus: 1 * Math.PI / 180
   };
 
   // Draw circular paths for each planet and asteroid

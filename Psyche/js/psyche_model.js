@@ -103,7 +103,7 @@ try {
         ({psycheObject, sunObject, mercuryObject, venusObject, earthObject, marsObject, jupiterObject, saturnObject, uranusObject, neptuneObject} = loadedObjects);
         
         // Verify objects were loaded
-        if (!psycheObject || !sunObject || !mercuryObject || !venusObject || !earthObject || !marsObject || !jupiterObject) {
+        if (!psycheObject || !sunObject || !mercuryObject || !venusObject || !earthObject || !marsObject || !jupiterObject || !uranusObject) {
             console.error('Some objects failed to load:', loadedObjects);
             return;
         }

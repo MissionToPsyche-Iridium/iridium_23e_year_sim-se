@@ -23,7 +23,8 @@ export const orbitalDistances = {
   earth: 325,
   mars: 450,
   jupiter: 600,   
-  psyche: 400   
+  psyche: 400,
+  uranus: 800
 };
 
 // Orbital periods in Earth days
@@ -33,7 +34,8 @@ const orbitalPeriods = {
   earth: 365,
   mars: 687,
   jupiter: 4333,
-  psyche: 1825
+  psyche: 1825,
+  uranus: 30687
 };
 
 // Initial orbital angles
@@ -43,7 +45,8 @@ const orbitalAngles = {
   earth: Math.PI / 2,
   mars: Math.PI / 4,
   jupiter: Math.PI / 6,
-  psyche: Math.PI / 1.5
+  psyche: Math.PI / 1.5,
+  uranus: Math.PI/ 1
 };
 
 // Orbital inclinations in radians (relative to ecliptic plane)
@@ -53,7 +56,8 @@ const orbitalInclinations = {
   earth: 0.0 * Math.PI / 180,      // 0.0 degrees (reference plane)
   mars: 1.850 * Math.PI / 180,     // 1.850 degrees
   jupiter: 1.303 * Math.PI / 180,  // 1.303 degrees
-  psyche: 3.095 * Math.PI / 180    // 3.095 degrees
+  psyche: 3.095 * Math.PI / 180,
+  uranus: 0.8 * Math.PI / 180
 };
 
 // Axial rotation periods in Earth days
@@ -63,7 +67,8 @@ const rotationPeriods = {
   earth: 1,
   mars: 1.03,
   jupiter: 0.41, // ~9.9 hours
-  psyche: 0.2739 // ~4.196 hours
+  psyche: 0.2739, // ~4.196 hours
+  uranus: 0.71833
 };
 
 // Function to update orbital positions and paths
@@ -77,6 +82,8 @@ export function updateOrbits(objects, deltaTime) {
   orbitalAngles.mars += (2 * Math.PI * deltaTime) / (orbitalPeriods.mars * 2000);
   orbitalAngles.jupiter += (2 * Math.PI * deltaTime) / (orbitalPeriods.jupiter * 2000);
   orbitalAngles.psyche += (2 * Math.PI * deltaTime) / (orbitalPeriods.psyche * 2000);
+  orbitalAngles.uranus += (2 * Math.PI * deltaTime) / (orbitalPeriods.uranus * 2000);
+  
 
   // Update object positions with orbital inclination and rotation
   if (objects.mercuryObject) {
@@ -242,6 +249,31 @@ export function updateOrbits(objects, deltaTime) {
         );
       }
       objects.psycheOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+    }
+  }
+  if (objects.uranusObject) {
+    const angle = orbitalAngles.uranus;
+    const distance = orbitalDistances.uranus;
+    const inclination = orbitalInclinations.uranus;
+    
+    objects.uranusObject.position.x = Math.cos(angle) * distance;
+    objects.uranusObject.position.y = Math.sin(angle) * Math.sin(inclination) * distance;
+    objects.uranusObject.position.z = Math.sin(angle) * Math.cos(inclination) * distance;
+    
+    objects.uranusObject.rotation.y += (2 * Math.PI * deltaTime) / (rotationPeriods.uranus * 20000);
+    // Update orbit path
+    if (objects.uranusOrbit) {
+      const points = [];
+      const segments = 128;
+      for (let i = 0; i <= segments; i++) {
+        const theta = (i / segments) * Math.PI * 2;
+        points.push(
+          distance * Math.cos(theta),
+          distance * Math.sin(theta) * Math.sin(inclination),
+          distance * Math.sin(theta) * Math.cos(inclination)
+        );
+      }
+      objects.uranusOrbit.geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3));
     }
   }
 
