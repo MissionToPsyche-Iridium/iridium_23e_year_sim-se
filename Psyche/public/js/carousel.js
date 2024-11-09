@@ -1,10 +1,11 @@
 import { CameraController } from "./cameraController";
-import { camera, controls } from "./sceneBuilder"
+import { camera, controls } from "./sceneBuilder";
 
-/* ===============================
-   Carousel Items and Initial State
-   Defines the list of items in the carousel and sets the initial starting index.
-   =============================== */
+/**
+ * carouselState
+ * 
+ * Maintains the state of the carousel, including the current index for item navigation.
+ */
 export const carouselState = {
   currentIndex: 0
 };
@@ -12,10 +13,12 @@ export const carouselState = {
 let planets = [];
 let planetNameArray = [];
 
-/* ===============================
-   Carousel Element Selectors
-   Selects specific DOM elements representing different carousel positions.
-   =============================== */
+/**
+ * Element Selectors for Carousel
+ * 
+ * Selects specific DOM elements that represent different positions in the carousel 
+ * (top, previous, selected, next, and bottom fade positions).
+ */
 const carouselContainer = document.querySelector('.carousel-container');
 const topFadeDiv = document.querySelector('.carousel-item.top-fade');
 const prevDiv = document.querySelector('.carousel-item.prev');
@@ -23,14 +26,12 @@ const selectedDiv = document.querySelector('.carousel-item.selected .item-text')
 const nextDiv = document.querySelector('.carousel-item.next');
 const bottomFadeDiv = document.querySelector('.carousel-item.bottom-fade');
 
-/* 
+/**
  * updateCarousel
- * Updates the text content of carousel items based on the current index. 
- * Determines each item's position in the carousel (top, previous, selected, next, bottom) 
- * and sets the appropriate text content for each position.
- *
- * Parameters: None
- * Returns: None
+ * 
+ * Updates the displayed text content of the carousel items based on the current index.
+ * Sets each item's content and position in the carousel (top, previous, selected, next, bottom).
+ * Calls the CameraController to move the camera to the currently selected planet.
  */
 function updateCarousel() {
   console.log(`Current Index: ${carouselState.currentIndex}, Planet: ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
@@ -38,6 +39,7 @@ function updateCarousel() {
     console.warn(`Planet or model missing for ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
     return;
   }
+
   const topFadeIndex = (carouselState.currentIndex - 2 + planetNameArray.length) % planetNameArray.length;
   const prevIndex = (carouselState.currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
   const nextIndex = (carouselState.currentIndex + 1) % planetNameArray.length;
@@ -52,13 +54,11 @@ function updateCarousel() {
   CameraController.moveToPlanet(camera, controls, planets[carouselState.currentIndex]);
 }
 
-/* 
+/**
  * setCarouselWidth
- * Dynamically adjusts the width of the carousel container based on viewport width
- * for a responsive and consistent appearance across screen sizes.
- *
- * Parameters: None
- * Returns: None
+ * 
+ * Dynamically adjusts the width of the carousel container based on viewport width.
+ * Provides a responsive appearance across different screen sizes.
  */
 function setCarouselWidth() {
   const minWidth = 73;
@@ -72,16 +72,13 @@ function setCarouselWidth() {
   carouselContainer.style.width = `${width}px`;
 }
 
-/* 
+/**
  * handleScroll
- * Handles the scroll event for the carousel, adjusting the carousel index 
- * based on scroll direction, and updating the display. A threshold is applied
- * to limit rapid scrolling.
- *
- * Parameters:
- *   event (WheelEvent) - The wheel event that triggers the scroll handling.
- *
- * Returns: None
+ * 
+ * Manages the scroll event for the carousel, adjusting the carousel index 
+ * based on the scroll direction. Applies a threshold to control rapid scrolling.
+ * 
+ * @param {WheelEvent} event - The wheel event that triggers scrolling.
  */
 const scrollThreshold = 100;
 function handleScroll(event) {
@@ -95,16 +92,14 @@ function handleScroll(event) {
   updateCarousel();
 }
 
-/* 
+/**
  * handleVerticalSwipe
- * Determines swipe direction based on start and end touch points.
- * Updates the carousel index accordingly.
- *
- * Parameters:
- *   touchStartY (Number) - The Y-coordinate where the touch started.
- *   touchEndY (Number) - The Y-coordinate where the touch ended.
- *
- * Returns: None
+ * 
+ * Determines the swipe direction based on the start and end touch points.
+ * Adjusts the carousel index accordingly to navigate items.
+ * 
+ * @param {number} touchStartY - The Y-coordinate where the touch started.
+ * @param {number} touchEndY - The Y-coordinate where the touch ended.
  */
 function handleVerticalSwipe(touchStartY, touchEndY) {
   const swipeThreshold = 30;
@@ -117,14 +112,13 @@ function handleVerticalSwipe(touchStartY, touchEndY) {
   updateCarousel();
 }
 
-/* 
+/**
  * initCarousel
- * Sets up the carousel by initializing width, setting up event listeners, 
- * and updating the display. This function is intended to be called once
- * to start the carousel interactions.
- *
- * Parameters: planetArray (Array) - An array of planet objects.
- * Returns: None
+ * 
+ * Initializes the carousel by setting up dimensions, event listeners, 
+ * and updating the display. Should be called once to activate carousel interactions.
+ * 
+ * @param {Array} planetArray - An array of planet objects to populate the carousel.
  */
 function initCarousel(planetArray) {
   planets = planetArray;
@@ -150,6 +144,7 @@ function initCarousel(planetArray) {
   carouselContainer.addEventListener('touchend', () => {
     handleVerticalSwipe(touchStartY, touchEndY);
   });
+
   updateCarousel();
 }
 

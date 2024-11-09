@@ -1,8 +1,9 @@
 /**
  * SceneBuilder.js
- * This script sets up a Three.js scene with lighting, camera, and controls.
- * It loads planets asynchronously, creates orbits, and initiates the animation loop
- * after ensuring all models are fully loaded.
+ * 
+ * Sets up a Three.js scene with lighting, camera, and controls.
+ * Loads planets asynchronously, creates orbits, and initiates the 
+ * animation loop once all models are fully loaded.
  */
 
 import * as THREE from 'three';
@@ -12,9 +13,12 @@ import { loadPlanets } from './planetLoader.js';
 import { CameraController } from './cameraController.js';
 import { createOrbit } from './orbitHandler.js';
 import { carouselState } from './carousel.js';
+
 /**
  * Scene and Renderer Setup
- * Initializes the main 3D container, scene, camera, and renderer.
+ * 
+ * Initializes the primary 3D container, scene, camera, and renderer.
+ * Configures the renderer with antialiasing and depth buffering.
  */
 const container = document.getElementById('container3D');
 const scene = new THREE.Scene();
@@ -26,14 +30,16 @@ container.appendChild(renderer.domElement);
 
 /**
  * Lighting Setup
- * Adds ambient lighting to the scene.
+ * 
+ * Adds ambient lighting to illuminate the scene globally.
  */
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambientLight);
 
 /**
  * Orbit Controls Setup
- * Initializes camera orbit controls with damping.
+ * 
+ * Configures camera orbit controls with damping for smooth interaction.
  */
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -45,15 +51,16 @@ export { camera, controls };
 
 /**
  * Load Planets and Setup Dependencies
- * Loads planets asynchronously, creates orbits, and sets up camera and carousel
- * only after all models are fully loaded.
+ * 
+ * Loads planets asynchronously, creates their orbital paths, and sets up 
+ * camera and carousel interactions once all models are loaded.
  */
 loadPlanets(scene)
   .then((planets) => {
     console.table(planets);
     planets.forEach((planet) => {
       const position = new THREE.Vector3();
-      planet.model.getWorldPosition(position); 
+      planet.model.getWorldPosition(position);
       console.log(`World position of ${planet.name}:`, position);
       
       createOrbit(planet.orbitRadius, scene);
@@ -71,7 +78,10 @@ loadPlanets(scene)
 
 /**
  * Animation Loop
- * Updates controls, planet positions, and renders the scene.
+ * 
+ * Runs the main animation loop, updating controls, planet positions, 
+ * and rendering the scene at each frame.
+ * 
  * @param {Array} planetsArray - Array of loaded planet objects for updates.
  */
 function animate(planetsArray) {

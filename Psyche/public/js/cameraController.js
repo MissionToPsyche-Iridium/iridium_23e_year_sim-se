@@ -1,50 +1,74 @@
 import * as THREE from 'three';
 
+/**
+ * CameraController Class
+ * 
+ * Manages the setup and controls for the camera, including positioning for a 
+ * sun-centered view and navigating between planets. Allows smooth transitions 
+ * to a selected planet's view based on user input.
+ */
 export class CameraController {
-  
-  static setup(camera, controls, planets) {
-      // Initial camera position for sun-centered view
-      camera.position.set(80000, 20000, 0); // Adjust to ensure a zoomed-out view
-      controls.target.set(0, 0, 0); // Assuming the sun is at the origin
-      controls.update();
-      
-      let currentPlanet = planets[0]; 
 
-      window.addEventListener('keydown', (event) => {
-          const currentIndex = planets.findIndex(p => p === currentPlanet);
-          if (event.key === 'ArrowUp') {
-              const nextIndex = Math.min(currentIndex + 1, planets.length - 1);
-              currentPlanet = planets[nextIndex];
-              CameraController.moveToPlanet(camera, controls, currentPlanet);
-          } else if (event.key === 'ArrowDown') {
-              const prevIndex = Math.max(currentIndex - 1, 0);
-              currentPlanet = planets[prevIndex];
-              CameraController.moveToPlanet(camera, controls, currentPlanet);
-          }
-      });
+  /**
+   * setup
+   * 
+   * Configures the initial camera position for a zoomed-out, sun-centered view 
+   * and sets up keyboard event listeners to navigate between planets.
+   * 
+   * @param {THREE.Camera} camera - The main camera used for the 3D scene.
+   * @param {Object} controls - Controls to manage the camera movement.
+   * @param {Array} planets - Array of planet objects for navigation.
+   */
+  static setup(camera, controls, planets) {
+    camera.position.set(80000, 20000, 0);
+    controls.target.set(0, 0, 0);
+    controls.update();
+
+    let currentPlanet = planets[0];
+
+    window.addEventListener('keydown', (event) => {
+      const currentIndex = planets.findIndex(p => p === currentPlanet);
+      if (event.key === 'ArrowUp') {
+        const nextIndex = Math.min(currentIndex + 1, planets.length - 1);
+        currentPlanet = planets[nextIndex];
+        CameraController.moveToPlanet(camera, controls, currentPlanet);
+      } else if (event.key === 'ArrowDown') {
+        const prevIndex = Math.max(currentIndex - 1, 0);
+        currentPlanet = planets[prevIndex];
+        CameraController.moveToPlanet(camera, controls, currentPlanet);
+      }
+    });
   }
 
+  /**
+   * moveToPlanet
+   * 
+   * Moves the camera to focus on the specified planet with a smooth transition 
+   * effect. Adjusts the camera position and control target to center on the 
+   * selected planet model.
+   * 
+   * @param {THREE.Camera} camera - The main camera for the 3D scene.
+   * @param {Object} controls - Controls to handle camera movement.
+   * @param {Object} planet - The planet object to move the camera towards.
+   */
   static moveToPlanet(camera, controls, planet) {
-    console.log("Moving to planet:", planet); 
+    console.log("Moving to planet:", planet);
 
     if (!planet || !planet.model) {
       console.warn(`Planet or model missing for ${planet?.name || 'Unknown planet'}`);
       return;
     }
 
-    // Smooth transition to the new planet's position over time
     const targetPosition = new THREE.Vector3(
-      planet.model.position.x + 90000, // Offset for clear view
-      planet.model.position.y + 7000,   // Adjust upward
-      planet.model.position.z + 300     // Slight forward offset
+      planet.model.position.x + 90000,
+      planet.model.position.y + 7000,
+      planet.model.position.z + 300
     );
 
     const animateTransition = () => {
-      // Use lerp for smooth camera movement towards the target position
-      camera.position.lerp(targetPosition, 0.05); // Adjust lerp factor for speed
-      controls.target.copy(planet.model.position); // Make controls orbit the selected planet
+      camera.position.lerp(targetPosition, 0.05);
+      controls.target.copy(planet.model.position);
 
-      // Check if camera is close to the target position
       if (camera.position.distanceTo(targetPosition) > 10) {
         requestAnimationFrame(animateTransition);
       }
