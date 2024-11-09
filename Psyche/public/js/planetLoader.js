@@ -23,7 +23,7 @@ export async function loadPlanets(scene) {
     { name: "Saturn", path: "/models/saturn/saturn.glb", size: 0.1, orbitRadius: 100000, orbitSpeed: 0.3, rotationSpeed: 0.15 }
   ];
 
-  console.log("Iterating over planet data...");
+  // console.log("Iterating over planet data...");
 
   const loadPromises = planetData.map((data) => {
     return new Promise((resolve, reject) => {
@@ -37,16 +37,16 @@ export async function loadPlanets(scene) {
         scene
       );
 
-      console.log("planet: " + planet.name);
+      // console.log("planet: " + planet.name);
 
       planet.onLoad = () => {
         planets.push(planet);
-        console.log(`Planet loaded and added: ${planet.name}`);
+        // console.log(`Planet loaded and added: ${planet.name}`);
         resolve(planet);
       };
 
       planet.onError = (error) => {
-        console.error(`Failed to load planet ${data.name}`, error);
+        // console.error(`Failed to load planet ${data.name}`, error);
         reject(error);
       };
     });

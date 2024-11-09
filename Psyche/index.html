@@ -107,12 +107,21 @@
   </nav>
   <script type="module" src="public/js/sceneBuilder.js"></script>
   <script src="/public/js/nav.js"></script>
+
   <main>
     <div id="container3D">
-      <div class="carousel-wrapper">
-        <div class="indicator material-symbols-outlined">
+      <!-- Overlay Container for Toggle Button and Overlay Content -->
+      <div id="overlay-container">
+        <div id="toggleOverlay" class="indicator material-symbols-outlined">
           arrow_right
         </div>
+        <div id="infoOverlay" class="overlay">
+          <p>Information overlay.</p>
+        </div>
+      </div>
+  
+      <!-- Carousel Wrapper -->
+      <div class="carousel-wrapper">
         <div class="carousel-container" id="top-carousel">
           <div class="carousel-item top-fade"></div>
           <div class="carousel-item prev"></div>
@@ -124,13 +133,8 @@
         </div>
       </div>
     </div>
-    <div id="camera-coords">
-      <p>Camera Coordinates:</p>
-      <p>X: <span id="coord-x">0</span></p>
-      <p>Y: <span id="coord-y">0</span></p>
-      <p>Z: <span id="coord-z">0</span></p>
-    </div>
   </main>
+  
 
   <footer>
     <div class="container d-md-flex align-items-center">

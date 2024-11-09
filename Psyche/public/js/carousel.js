@@ -34,9 +34,9 @@ const bottomFadeDiv = document.querySelector('.carousel-item.bottom-fade');
  * Calls the CameraController to move the camera to the currently selected planet.
  */
 function updateCarousel() {
-  console.log(`Current Index: ${carouselState.currentIndex}, Planet: ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
+  // console.log(`Current Index: ${carouselState.currentIndex}, Planet: ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
   if (!planets[carouselState.currentIndex] || !planets[carouselState.currentIndex].model) {
-    console.warn(`Planet or model missing for ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
+    // console.warn(`Planet or model missing for ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
     return;
   }
 

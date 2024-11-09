@@ -8,11 +8,11 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { initCarousel } from '/public/js/carousel.js';
+import { initCarousel, carouselState } from '/public/js/carousel.js';
 import { loadPlanets } from './planetLoader.js';
 import { CameraController } from './cameraController.js';
 import { createOrbit } from './orbitHandler.js';
-import { carouselState } from './carousel.js';
+import { initOverlay } from './overlayController.js';
 
 /**
  * Scene and Renderer Setup
@@ -48,6 +48,7 @@ controls.dampingFactor = 0.05;
 const clock = new THREE.Clock();
 
 export { camera, controls };
+initOverlay();
 
 /**
  * Load Planets and Setup Dependencies
@@ -57,24 +58,21 @@ export { camera, controls };
  */
 loadPlanets(scene)
   .then((planets) => {
-    console.table(planets);
     planets.forEach((planet) => {
       const position = new THREE.Vector3();
       planet.model.getWorldPosition(position);
-      console.log(`World position of ${planet.name}:`, position);
+      // console.log(`World position of ${planet.name}:`, position);
       
       createOrbit(planet.orbitRadius, scene);
     });
     CameraController.setup(camera, controls, planets);
 
-    console.log("Planets ready for carousel:", planets.map(p => p.name));
-
+    // console.log("Planets ready for carousel:", planets.map(p => p.name));
     initCarousel(planets);
     animate(planets);
   })
   .catch((error) => {
-    console.error("Error loading planets:", error);
-  });
+   });
 
 /**
  * Animation Loop

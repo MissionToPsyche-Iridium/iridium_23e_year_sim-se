@@ -52,10 +52,10 @@ export class CameraController {
    * @param {Object} planet - The planet object to move the camera towards.
    */
   static moveToPlanet(camera, controls, planet) {
-    console.log("Moving to planet:", planet);
+    // console.log("Moving to planet:", planet);
 
     if (!planet || !planet.model) {
-      console.warn(`Planet or model missing for ${planet?.name || 'Unknown planet'}`);
+      // console.warn(`Planet or model missing for ${planet?.name || 'Unknown planet'}`);
       return;
     }
 

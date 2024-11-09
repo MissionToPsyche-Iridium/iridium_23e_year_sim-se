@@ -182,6 +182,56 @@ main {
   transition: transform .5s ease;
 }
 
+#container3D {
+  position: relative;
+}
+
+/* Overlay Styling - Initially Collapsed and Transparent */
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Start fully transparent */
+  color: white;
+  overflow: hidden;
+  padding: 20px;
+  transition: width 0.3s ease, background-color 0.3s ease, opacity 0.3s ease; /* Added opacity for smooth closing */  z-index: 10;
+  opacity: 0; /* Fully transparent initially */
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  text-align: center;
+}
+
+/* Toggle button styling */
+#toggleOverlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: orange;
+  z-index: 11;
+}
+
+/* Expanded overlay styling - controlled by .overlay-open class */
+.overlay-open .overlay {
+  width: 30%; /* Expands to cover 30% of the #container3D width */
+  background-color: rgba(0, 0, 0, 0.5); /* Set to 50% opacity */
+  opacity: 1; /* Make content visible */
+}
+
+/* Toggle button rotation on expand */
+.overlay-open #toggleOverlay {
+  transform: rotate(180deg); /* Rotates the arrow to face left when expanded */
+}
+
+
+
 /* ===============================
     Camera Coordinates Display Styling
     Aligns and centers coordinate display items horizontally and vertically, 

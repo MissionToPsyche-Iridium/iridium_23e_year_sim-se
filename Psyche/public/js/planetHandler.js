@@ -54,7 +54,7 @@ export class PlanetHandler {
       },
       undefined,
       (error) => {
-        console.error(`Error loading model for ${this.name}`, error);
+        // console.error(`Error loading model for ${this.name}`, error);
         if (this.onError) {
           this.onError(error);
         }
