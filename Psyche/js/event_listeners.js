@@ -91,7 +91,8 @@ export function setupEventListeners(container, camera, renderer, controls) {
           'earth': { distance: 25, scale: 1 },      // Default parameters for Earth
           'mars': { distance: 30, scale: 0.9 },     // Default parameters for Mars
           'jupiter': { distance: 45, scale: 1.5 },  // Jupiter needs to be viewed from further away due to size
-          'neptune': { distance: 40, scale: 1 }     // Neptune needs to be viewed from further away due to size
+          'neptune': { distance: 40, scale: 1 },     // Neptune needs to be viewed from further away due to size
+          'uranus' : { distance: 30, scale: 1 }
         };
 
         // Get the viewing parameters for clicked object
