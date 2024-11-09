@@ -1,12 +1,16 @@
 import { CameraController } from "./cameraController";
+import { camera, controls } from "./sceneBuilder"
 
 /* ===============================
    Carousel Items and Initial State
    Defines the list of items in the carousel and sets the initial starting index.
    =============================== */
+export const carouselState = {
+  currentIndex: 0
+};
+
 let planets = [];
 let planetNameArray = [];
-let currentIndex = 0;
 
 /* ===============================
    Carousel Element Selectors
@@ -29,23 +33,23 @@ const bottomFadeDiv = document.querySelector('.carousel-item.bottom-fade');
  * Returns: None
  */
 function updateCarousel() {
-  console.log(`Current Index: ${currentIndex}, Planet: ${planets[currentIndex]?.name || 'Unknown planet'}`);
-  if (!planets[currentIndex] || !planets[currentIndex].model) {
-    console.warn(`Planet or model missing for ${planets[currentIndex]?.name || 'Unknown planet'}`);
+  console.log(`Current Index: ${carouselState.currentIndex}, Planet: ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
+  if (!planets[carouselState.currentIndex] || !planets[carouselState.currentIndex].model) {
+    console.warn(`Planet or model missing for ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
     return;
   }
-  const topFadeIndex = (currentIndex - 2 + planetNameArray.length) % planetNameArray.length;
-  const prevIndex = (currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
-  const nextIndex = (currentIndex + 1) % planetNameArray.length;
-  const bottomFadeIndex = (currentIndex + 2) % planetNameArray.length;
+  const topFadeIndex = (carouselState.currentIndex - 2 + planetNameArray.length) % planetNameArray.length;
+  const prevIndex = (carouselState.currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
+  const nextIndex = (carouselState.currentIndex + 1) % planetNameArray.length;
+  const bottomFadeIndex = (carouselState.currentIndex + 2) % planetNameArray.length;
 
   topFadeDiv.textContent = planetNameArray[topFadeIndex];
   prevDiv.textContent = planetNameArray[prevIndex];
-  selectedDiv.textContent = planetNameArray[currentIndex];
+  selectedDiv.textContent = planetNameArray[carouselState.currentIndex];
   nextDiv.textContent = planetNameArray[nextIndex];
   bottomFadeDiv.textContent = planetNameArray[bottomFadeIndex];
 
-  CameraController.moveToPlanet(planets[currentIndex]);
+  CameraController.moveToPlanet(camera, controls, planets[carouselState.currentIndex]);
 }
 
 /* 
@@ -84,9 +88,9 @@ function handleScroll(event) {
   if (Math.abs(event.deltaY) < scrollThreshold) return;
 
   if (event.deltaY > 0) {
-    currentIndex = (currentIndex + 1) % planetNameArray.length;
+    carouselState.currentIndex = (carouselState.currentIndex + 1) % planetNameArray.length;
   } else if (event.deltaY < 0) {
-    currentIndex = (currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
+    carouselState.currentIndex = (carouselState.currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
   }
   updateCarousel();
 }
@@ -106,9 +110,9 @@ function handleVerticalSwipe(touchStartY, touchEndY) {
   const swipeThreshold = 30;
 
   if (touchEndY < touchStartY - swipeThreshold) {
-    currentIndex = (currentIndex + 1) % planetNameArray.length;
+    carouselState.currentIndex = (carouselState.currentIndex + 1) % planetNameArray.length;
   } else if (touchEndY > touchStartY + swipeThreshold) {
-    currentIndex = (currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
+    carouselState.currentIndex = (carouselState.currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
   }
   updateCarousel();
 }
@@ -146,7 +150,6 @@ function initCarousel(planetArray) {
   carouselContainer.addEventListener('touchend', () => {
     handleVerticalSwipe(touchStartY, touchEndY);
   });
-
   updateCarousel();
 }
 

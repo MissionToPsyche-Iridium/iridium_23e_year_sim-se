@@ -1,10 +1,14 @@
+import * as THREE from 'three';
+
 export class CameraController {
   
   static setup(camera, controls, planets) {
-      let currentPlanet = planets[0]; 
-      camera.position.set(currentPlanet.orbitRadius + 90000, 7000, 300);
-      camera.lookAt(currentPlanet.model.position);
+      // Initial camera position for sun-centered view
+      camera.position.set(80000, 20000, 0); // Adjust to ensure a zoomed-out view
+      controls.target.set(0, 0, 0); // Assuming the sun is at the origin
       controls.update();
+      
+      let currentPlanet = planets[0]; 
 
       window.addEventListener('keydown', (event) => {
           const currentIndex = planets.findIndex(p => p === currentPlanet);
@@ -21,16 +25,32 @@ export class CameraController {
   }
 
   static moveToPlanet(camera, controls, planet) {
+    console.log("Moving to planet:", planet); 
+
     if (!planet || !planet.model) {
       console.warn(`Planet or model missing for ${planet?.name || 'Unknown planet'}`);
       return;
     }
-      camera.position.set(
-          planet.model.position.x + 500,
-          planet.model.position.y + 100,
-          planet.model.position.z + 300
-      );
-      camera.lookAt(planet.model.position);
+
+    // Smooth transition to the new planet's position over time
+    const targetPosition = new THREE.Vector3(
+      planet.model.position.x + 90000, // Offset for clear view
+      planet.model.position.y + 7000,   // Adjust upward
+      planet.model.position.z + 300     // Slight forward offset
+    );
+
+    const animateTransition = () => {
+      // Use lerp for smooth camera movement towards the target position
+      camera.position.lerp(targetPosition, 0.05); // Adjust lerp factor for speed
+      controls.target.copy(planet.model.position); // Make controls orbit the selected planet
+
+      // Check if camera is close to the target position
+      if (camera.position.distanceTo(targetPosition) > 10) {
+        requestAnimationFrame(animateTransition);
+      }
       controls.update();
+    };
+
+    animateTransition();
   }
 }

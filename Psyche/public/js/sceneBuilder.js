@@ -11,7 +11,7 @@ import { initCarousel } from '/public/js/carousel.js';
 import { loadPlanets } from './planetLoader.js';
 import { CameraController } from './cameraController.js';
 import { createOrbit } from './orbitHandler.js';
-
+import { carouselState } from './carousel.js';
 /**
  * Scene and Renderer Setup
  * Initializes the main 3D container, scene, camera, and renderer.
@@ -40,6 +40,8 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.05;
 
 const clock = new THREE.Clock();
+
+export { camera, controls };
 
 /**
  * Load Planets and Setup Dependencies
@@ -75,7 +77,9 @@ loadPlanets(scene)
 function animate(planetsArray) {
   requestAnimationFrame(() => animate(planetsArray));
   controls.update();
+
   const deltaTime = clock.getDelta();
   planetsArray.forEach((planet) => planet.update(planet.rotationSpeed, planet.orbitSpeed, deltaTime));
+
   renderer.render(scene, camera);
 }

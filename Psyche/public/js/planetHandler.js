@@ -39,13 +39,10 @@ export class PlanetHandler {
 
   update(rotationSpeed, orbitSpeed, deltaTime) {
       if (this.model) {
-          // Update rotation
           this.model.rotation.y += rotationSpeed * deltaTime;
 
-          // Accumulate time for orbit calculation
           this.elapsedTime += deltaTime;
 
-          // Calculate orbit position using accumulated time
           this.model.position.x = this.orbitRadius * Math.cos(-orbitSpeed * this.elapsedTime);
           this.model.position.z = this.orbitRadius * Math.sin(-orbitSpeed * this.elapsedTime);
       }
