@@ -34,11 +34,8 @@ const bottomFadeDiv = document.querySelector('.carousel-item.bottom-fade');
  * Calls the CameraController to move the camera to the currently selected planet.
  */
 function updateCarousel() {
-  // console.log(`Current Index: ${carouselState.currentIndex}, Planet: ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
-  if (!planets[carouselState.currentIndex] || !planets[carouselState.currentIndex].model) {
-    // console.warn(`Planet or model missing for ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
-    return;
-  }
+  console.log(`Current Index: ${carouselState.currentIndex}, Planet: ${planets[carouselState.currentIndex]?.name || 'Unknown planet'}`);
+  if (!planets[carouselState.currentIndex] || !planets[carouselState.currentIndex].model) return;
 
   const topFadeIndex = (carouselState.currentIndex - 2 + planetNameArray.length) % planetNameArray.length;
   const prevIndex = (carouselState.currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
@@ -58,7 +55,6 @@ function updateCarousel() {
  * setCarouselWidth
  * 
  * Dynamically adjusts the width of the carousel container based on viewport width.
- * Provides a responsive appearance across different screen sizes.
  */
 function setCarouselWidth() {
   const minWidth = 73;
@@ -72,17 +68,21 @@ function setCarouselWidth() {
   carouselContainer.style.width = `${width}px`;
 }
 
+// Sensitivity and cooldown settings
+const scrollThreshold = 30; // Lower threshold for touchpad responsiveness
+const swipeThreshold = 20;  // Lower threshold for touch input sensitivity
+let canScroll = true;       // Cooldown variable to limit single scroll per gesture
+
 /**
  * handleScroll
  * 
  * Manages the scroll event for the carousel, adjusting the carousel index 
  * based on the scroll direction. Applies a threshold to control rapid scrolling.
- * 
- * @param {WheelEvent} event - The wheel event that triggers scrolling.
  */
-const scrollThreshold = 100;
 function handleScroll(event) {
-  if (Math.abs(event.deltaY) < scrollThreshold) return;
+  if (!canScroll || Math.abs(event.deltaY) < scrollThreshold) return;
+
+  canScroll = false; // Disable further scrolling until cooldown is complete
 
   if (event.deltaY > 0) {
     carouselState.currentIndex = (carouselState.currentIndex + 1) % planetNameArray.length;
@@ -90,19 +90,18 @@ function handleScroll(event) {
     carouselState.currentIndex = (carouselState.currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
   }
   updateCarousel();
+
+  // Enable scrolling again after a short delay
+  setTimeout(() => (canScroll = true), 300);
 }
 
 /**
  * handleVerticalSwipe
  * 
  * Determines the swipe direction based on the start and end touch points.
- * Adjusts the carousel index accordingly to navigate items.
- * 
- * @param {number} touchStartY - The Y-coordinate where the touch started.
- * @param {number} touchEndY - The Y-coordinate where the touch ended.
  */
 function handleVerticalSwipe(touchStartY, touchEndY) {
-  const swipeThreshold = 30;
+  if (!canScroll) return; // Prevent additional scrolls within cooldown
 
   if (touchEndY < touchStartY - swipeThreshold) {
     carouselState.currentIndex = (carouselState.currentIndex + 1) % planetNameArray.length;
@@ -110,15 +109,17 @@ function handleVerticalSwipe(touchStartY, touchEndY) {
     carouselState.currentIndex = (carouselState.currentIndex - 1 + planetNameArray.length) % planetNameArray.length;
   }
   updateCarousel();
+
+  // Apply cooldown after swipe
+  canScroll = false;
+  setTimeout(() => (canScroll = true), 300);
 }
 
 /**
  * initCarousel
  * 
  * Initializes the carousel by setting up dimensions, event listeners, 
- * and updating the display. Should be called once to activate carousel interactions.
- * 
- * @param {Array} planetArray - An array of planet objects to populate the carousel.
+ * and updating the display.
  */
 function initCarousel(planetArray) {
   planets = planetArray;
@@ -126,24 +127,20 @@ function initCarousel(planetArray) {
 
   setCarouselWidth();
   window.addEventListener('resize', setCarouselWidth);
-  carouselContainer.addEventListener('wheel', handleScroll);
+  carouselContainer.addEventListener('wheel', handleScroll, { passive: false });
 
   let touchStartY = 0;
-  let touchEndY = 0;
 
   carouselContainer.addEventListener('touchstart', (event) => {
     touchStartY = event.changedTouches[0].screenY;
     event.preventDefault();
   }, { passive: false });
 
-  carouselContainer.addEventListener('touchmove', (event) => {
-    touchEndY = event.changedTouches[0].screenY;
+  carouselContainer.addEventListener('touchend', (event) => {
+    const touchEndY = event.changedTouches[0].screenY;
+    handleVerticalSwipe(touchStartY, touchEndY);
     event.preventDefault();
   }, { passive: false });
-
-  carouselContainer.addEventListener('touchend', () => {
-    handleVerticalSwipe(touchStartY, touchEndY);
-  });
 
   updateCarousel();
 }

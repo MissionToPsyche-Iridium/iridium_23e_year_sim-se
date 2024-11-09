@@ -48,7 +48,23 @@ controls.dampingFactor = 0.05;
 const clock = new THREE.Clock();
 
 export { camera, controls };
+
+// Add resize event listener to the window
+window.addEventListener("resize", onWindowResize);
+
 initOverlay();
+
+function onWindowResize() {
+  // Get the new dimensions of the container
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+
+  // Update camera aspect ratio and renderer size
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(width, height);
+}
 
 /**
  * Load Planets and Setup Dependencies
@@ -67,7 +83,7 @@ loadPlanets(scene)
     });
     CameraController.setup(camera, controls, planets);
 
-    // console.log("Planets ready for carousel:", planets.map(p => p.name));
+    console.log("Planets ready for carousel:", planets.map(p => p.name));
     initCarousel(planets);
     animate(planets);
   })
@@ -83,6 +99,7 @@ loadPlanets(scene)
  * @param {Array} planetsArray - Array of loaded planet objects for updates.
  */
 function animate(planetsArray) {
+  console.trace();
   requestAnimationFrame(() => animate(planetsArray));
   controls.update();
 

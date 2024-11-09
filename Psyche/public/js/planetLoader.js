@@ -20,8 +20,12 @@ export async function loadPlanets(scene) {
     { name: "Venus", path: "/models/venus/venus.glb", size: 0.095, orbitRadius: 55000, orbitSpeed: 0.18, rotationSpeed: 0.009 },
     { name: "Earth", path: "/models/earth/earth.glb", size: 0.1, orbitRadius: 70000, orbitSpeed: 0.1, rotationSpeed: 0.05 },
     { name: "Mars", path: "/models/mars/mars.glb", size: 0.053, orbitRadius: 85000, orbitSpeed: 0.08, rotationSpeed: 0.03 },
-    { name: "Saturn", path: "/models/saturn/saturn.glb", size: 0.1, orbitRadius: 100000, orbitSpeed: 0.3, rotationSpeed: 0.15 }
+    { name: "Jupiter", path: "/models/jupiter/jupiter.glb", size: 1.12, orbitRadius: 200000, orbitSpeed: 0.04, rotationSpeed: 0.2 },
+    { name: "Saturn", path: "/models/saturn/saturn.glb", size: 0.95, orbitRadius: 300000, orbitSpeed: 0.03, rotationSpeed: 0.17 },
+    { name: "Uranus", path: "/models/uranus/uranus.glb", size: 0.4, orbitRadius: 400000, orbitSpeed: 0.02, rotationSpeed: 0.1 },
+    { name: "Neptune", path: "/models/neptune/neptune.glb", size: 0.39, orbitRadius: 500000, orbitSpeed: 0.01, rotationSpeed: 0.08 }
   ];
+  
 
   // console.log("Iterating over planet data...");
 
@@ -41,7 +45,7 @@ export async function loadPlanets(scene) {
 
       planet.onLoad = () => {
         planets.push(planet);
-        // console.log(`Planet loaded and added: ${planet.name}`);
+        console.log(`Planet loaded and added: ${planet.name}`);
         resolve(planet);
       };
 
@@ -55,3 +59,6 @@ export async function loadPlanets(scene) {
   await Promise.all(loadPromises);
   return planets;
 }
+
+
+

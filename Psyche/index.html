@@ -112,9 +112,10 @@
     <div id="container3D">
       <!-- Overlay Container for Toggle Button and Overlay Content -->
       <div id="overlay-container">
-        <div id="toggleOverlay" class="indicator material-symbols-outlined">
-          arrow_right
-        </div>
+        <!-- Info icon as the toggle for the overlay -->
+        <span id="toggleOverlay" class="material-symbols-outlined overlay-toggle">
+          info
+        </span>
         <div id="infoOverlay" class="overlay">
           <p>Information overlay.</p>
         </div>
@@ -122,6 +123,9 @@
   
       <!-- Carousel Wrapper -->
       <div class="carousel-wrapper">
+        <div class="indicator material-symbols-outlined"> <!-- Arrow pointing to selected carousel item -->
+          arrow_right
+        </div>
         <div class="carousel-container" id="top-carousel">
           <div class="carousel-item top-fade"></div>
           <div class="carousel-item prev"></div>
@@ -134,7 +138,7 @@
       </div>
     </div>
   </main>
-  
+ 
 
   <footer>
     <div class="container d-md-flex align-items-center">

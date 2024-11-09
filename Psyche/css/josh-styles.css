@@ -227,7 +227,7 @@ main {
 
 /* Toggle button rotation on expand */
 .overlay-open #toggleOverlay {
-  transform: rotate(180deg); /* Rotates the arrow to face left when expanded */
+  transform: rotate(360deg); /* Rotates the arrow to face left when expanded */
 }
 
 
