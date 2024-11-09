@@ -1,4 +1,118 @@
+/* 
+* style.css
+*
+* This file defines the presentation aspects of this HTML file
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       10/17/24
+* Revision:   1.0
+*
+* NASA PSYCHE MISSION STYLING GUIDELINES FULL DOCUMENT Link:https://drive.google.com/drive/folders/1MIwxLJ-mtbufn1g5_l8kPB9kicp_dtrM
+* Finding Summary below:
+*   Color Pallette: These are the component colors of the badge, and the larger brand system. They should be used
+*                   sparingly as accents of to create hierarchy. 
+* Mustard -     HEX #f9a000| RGB 250R 160G 0B
+* Gold -        HEX #f47c33| RGB 245R 125G 50B
+* Coral -       HEX #ef5966| RGB 239R 89G  102B
+* Magenta -     HEX #a53f5b| RGB 165R 63G  91B
+* Purple -      HEX #592651| RGB 89R  38G  81B
+* Dark Purple - HEX #302144| RGB 48R  33G  68B
+*
+*   Backgrounds: The primary color pallette can be used to create gradient backgrounds with these 6 following combinations. 
+*                No more than two colors are allowed to be in a single gradient!
+* Dark Purple - Black
+* Purple - Dark Purple
+* Magenta - Purple
+* Coral - Magenta
+* Gold - Coral
+* Mustard - Gold
+*
+*   Neutral Palette: A secondary set of neutral grays can be used to create hierarchy or organization in a layout, and should be based 
+*                    off of the following tints of a rich cool black. 
+* Black - HEX #12031d| RGB 18R  3G   29B 
+* Tints - 75% Black, 50% Black, 25% BLack, 10% Black, 5% Black
+* 
+*   Typography: All messaging should be kept as simple and legible as possible. Use consistent sizes and treatment for headlines, copy,
+*               and any other type element to create a structure and improve readability.
+*   White topography over gradients ensures proper contrast. 
+*   DO NOT use gradients in topography. 
+*   DO NOT use more than one color in topography           
+*
+* Fonts: Kockout - Can be used for titles and short headlines.
+*        Helvetica - Use this font for longer headlines, body copy, and any web applications. **THIS IS OUR MAIN FONT**         
+* 
+*
+*
+* Tips:       (.name) The "."" makes this a class selector and we can apply .name 
+*             to multiple elements. 
+*             (#name1) The "#" makes this a class selector for a specific element. 
+*
+* Styles Defined:
+*     body
+*     body button
+*     header
+*     header h1
+*     #header_navigation
+*     main
+*     main h1
+*     .center_logo
+*     .right_logos
+*     #p_asu_logo
+*     #nasa_logo
+*     #main_logo
+#     .logos
+*     #logo
+*     .hamburger
+*     .hamburger .bar
+*     .menu-links
+*     .menu-links ul
+*     .menu-links li
+*     .menu-links a
+*     .scrolled .center_logo
+*     .scrolled #main_logo
+*     .scrolled .right_logos
+*     .scrolled h1
+*     #p_asu_logo_menu, #nasa_logo_menu
+*     #p_asu_logo_menu
+*     #nasa_logo_menu
+*     .scrolled .hamburger
+*     .menu-active
+*     footer  
+*     #one
+*     #one h1
+*     #info
+*     #fullscreen
+*     #info_button
+*     #fullscreen_button
+*     .containerOne
+*     .containerOne canvas
+*     #horizontal-buttons
+*     #vertical-buttons
+*     .horizontal-buttons, .vertical-buttons
+*     .horizontal-buttons:hover, .vertical-buttons:hover
+*     #button-psyche
+*     #button-psyche:hover
+*     footer
+*     #footer_container
+*     #footer_container div
+*     #footer_container h3
+*     #footer_container li
+*     #left_footer
+*     #center_footer
+*     #center_footer h4
+*     #right_footer
+*     @media elements
+*     
+*/ 
 
+/*
+========================================================================================================
+File Start
+========================================================================================================
+*/
 body {
     margin: 0 auto;
 }
@@ -52,14 +166,27 @@ header {
     margin-bottom: 0px;
   }
   
+  /**************************
+    * main
+    *
+    */
+    main {
+      width: 100%;
+      height: 100%;
+      padding-top: 10%;
+      padding-bottom: 10%;
+  }
 
+  /**************************
+  * main h1
+  *
+  */ 
   main h1 {
     font-size: 70px;
     color: black;
     text-align: center;
   }
 
-  
   /**************************
   * .center_logo
   *
@@ -146,7 +273,6 @@ header {
     cursor: pointer;
   }
 
-  
   /**************************
   * .hamburger .bar
   *
@@ -158,8 +284,6 @@ header {
     margin: 8px 0;
     transition: all 0.3s ease;
   }
-
-  
 
   /**************************
   * .menu-links
@@ -229,7 +353,6 @@ header {
     max-width: 180px; /* Smaller logo size when scrolled */
   }
   
-  
   /**************************
   * .scrolled .right_logos
   *
@@ -275,7 +398,6 @@ header {
   =================== Scrolling Features for Hamburger Menu ===================
   */
   
-  
   /**************************
   * .scrolled .hamburger
   *
@@ -292,113 +414,145 @@ header {
     display: block;
   }
 
-footer {
+  /**************************
+  * footer
+  *
+  */
+  footer {
     text-align: center;
     width: 100%;
     height: 100px;
     padding-top: 1%;
 }
 
-main {
-    width: 100%;
-    height: 100%;
-    padding-top: 10%;
-    padding-bottom: 10%;
-}
-
-
-#one {
-  display: none;
-    text-align: center;
-    color: black;
-    position: relative;
-    background-color: black;
-    width: 80%;
-    height: 50vh;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-#two {
+ /**************************
+  * #one
+  *
+  */
+  #one {
     position: relative;
     background-color: black;
     width: 80%;
     height: 100vh;
     margin: 0 auto;
     padding: 20px;
-}
+  }
 
-#two h1 {
+  /**************************
+  * #one h1
+  *
+  */
+  #one h1 {
   text-align: center;
-}
+  }
 
-#info {
-    background-color: black;
-    border: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 5%;
+  /**************************
+  * #info
+  *
+  */
+  #info {
+      background-color: black;
+      border: none;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 5%;
+      z-index: 3;
+  }
+
+  /**************************
+  * #info_button
+  *
+  */
+  #info_button {
+    width: 120%;
+    background-color: transparent;
     z-index: 3;
-}
+  }
 
-#fullscreen {
-    background-color: black;
-    border: none;
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-    width: 5%;
-}
+  /**************************
+  * #fullscreen
+  *
+  */
+  #fullscreen {
+      background-color: black;
+      border: none;
+      position: absolute;
+      bottom: 15px;
+      right: 20px;
+      width: 5%;
+  }
 
-.containerOne { 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    background-color: black;
-    border: solid 1px orange;
-    width: 80%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
+  /**************************
+  * #fullscreen_button
+  *
+  */
+  #fullscreen_button {
+    width: 90%;
+    background-color: transparent;
+  }
 
-.containerTwo { 
-  display: none;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  background-color: black;
-  border: solid 1px orange;
-  width: 80%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
+  /**************************
+  * .containerOne
+  *
+  */
+  .containerOne { 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      background-color: black;
+      border: solid 1px orange;
+      width: 80%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+  }
 
-
-
-#horizontal-buttons {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 10px;
+  /**************************
+  * #containerOne canvas
+  *
+  */
+  #containerOne canvas {
     width: 100%;
-    z-index: 3;
-}
-
-#vertical-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100%;
+    display: block;
     position: absolute;
-    right: 10px;
-    bottom: 10%;
-    z-index: 2;
-}
+    top: 0;
+    left: 0;
+  }
 
+  /**************************
+    * #horizontal-buttons
+    *
+    */
+  #horizontal-buttons {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      top: 10px;
+      width: 100%;
+      z-index: 3;
+  }
 
+  /**************************
+  * #vertical-buttons
+  *
+  */
+  #vertical-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      right: 10px;
+      bottom: 10%;
+      z-index: 2;
+  }
+
+/**************************
+* .horiztonal-buttons, .vertical-buttons
+*
+*/
 .horizontal-buttons,
 .vertical-buttons {
     margin: 10px;
@@ -411,15 +565,20 @@ main {
     font-size: xx-large;
 }
 
-
-
+/**************************
+* .horiztonal-buttons:hover, .vertical-buttons:hover
+*
+*/
 .horizontal-buttons:hover,
 .vertical-buttons:hover {
     background-color: orange;
     color: black;
-    
 }
 
+/**************************
+* #button-psyche
+*
+*/
 #button-psyche {
   background-image: url('../images/main_images/psyche_background_gradient.jpg');
   background-size: cover;
@@ -427,89 +586,14 @@ main {
   color: black;
 }
 
+/**************************
+* #button-psyche:hover
+*
+*/
 #button-psyche:hover {
   background-image: none;
   background-color: orange;
   color: black;
-}
-
-#fullscreen_button {
-    width: 90%;
-    background-color: transparent;
-}
-
-#info_button {
-    width: 120%;
-    background-color: transparent;
-    z-index: 3;
-}
-
-
-
-#containerOne canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-#containerTwo canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#zoom-in, #zoom-out {
-  display: none;
-}
-
-
-#pan-controls {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    background-color: transparent;
-    padding: 5px;
-}
-
-#pan-controls .horizontal-pan {
-    display: flex;
-    gap: 20px;
-}
-
-.pan-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    color: orange;
-    font-size: xx-large;
-    padding: 12px;
-    width: 80px;
-    height: 80px;
-    border: 1px solid orange;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-
-
-.pan-button:hover {
-  background-color: orange;
-    color: black; /* Lighter background on hover */
-}
-
-.pan-button span {
-    display: block;
-    font-size: 14px;
 }
 
 /*
@@ -561,8 +645,6 @@ footer {
   font-size: 50px;
   font-weight: bolder;
 }
-
-
 
 /**************************
 * #footer_container li
@@ -622,46 +704,18 @@ footer {
 
 
 /*
-=================== Size to Monitor Elements ===================
+=================== Media Elements (monitor size control) ===================
 */
 
 /*
 =================== Header Elements ===================
 */
 
-@media (max-width: 768px) {
-  #header_navigation {
-      flex-direction: column;
-      align-items: center;
-  }
-
-  .center_logo {
-      margin: 0 auto;
-      text-align: center;
-  }
-}
-
 @media (max-width: 2560px) {
   main h1 {
     font-size: 50px;
   }
-}
 
-@media (max-width: 430px) {
-  main h1 {
-    margin-top: 20%;
-    font-size: 30px;
-  }
-}
-
-@media (max-width: 375px) {
-  main h1 {
-    margin-top: 30%;
-    font-size: 30px;
-  }
-}
-
-@media (max-width: 2560px) {
   #main_logo {
     width: 200px;
   }
@@ -727,7 +781,24 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  #header_navigation {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .center_logo {
+      margin: 0 auto;
+      text-align: center;
+  }
+}
+
 @media (max-width: 430px) {
+  main h1 {
+    margin-top: 20%;
+    font-size: 30px;
+  }
+
   #main_logo {
     width: 90px;
     padding-bottom: 5%;
@@ -738,6 +809,11 @@ footer {
 }
 
 @media (max-width: 375px) {
+  main h1 {
+    margin-top: 30%;
+    font-size: 30px;
+  }
+
   #main_logo {
     width: 100px;
     padding-bottom: 7.5%;
@@ -746,6 +822,10 @@ footer {
     display: none;
   }
 }
+
+/*
+=================== HamburgerElements ===================
+*/
 
 @media (max-width: 2560px) {
   .hamburger .bar{
@@ -958,6 +1038,14 @@ footer {
     width: 5%;
     bottom: 2.25%;
   }
+
+  #info_button {
+    width: 220%
+  }
+
+  #fullscreen_button {
+    width: 175%;
+  }
 }
 
 @media (max-width: 820px) {
@@ -992,6 +1080,14 @@ footer {
     width: 5%;
     bottom: 3%;
     right: 5%;
+  }
+
+  #info_button {
+    width: 300%
+  }
+
+  #fullscreen_button {
+    width: 250%;
   }
 }
 
@@ -1032,31 +1128,6 @@ footer {
     bottom: 4%;
   }
 }
-
-@media (max-width: 1024px) {
-  #info_button {
-    width: 220%
-  }
-
-  #fullscreen_button {
-    width: 175%;
-  }
-}
-
-@media (max-width: 768px) {
-  #info_button {
-    width: 300%
-  }
-
-  #fullscreen_button {
-    width: 250%;
-  }
-}
-
-@media (max-width: 375px) {
-  
-}
-
 
 /*
 ===================== vertical and horizontal buttons ==========================
@@ -1236,6 +1307,9 @@ footer {
   }
 }
 
+/*
+===================== Footer Elements ==========================
+*/
 
 @media (max-width: 2560px) {
   #footer_container h3 {

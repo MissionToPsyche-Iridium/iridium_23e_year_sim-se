@@ -55,24 +55,17 @@
 *     #header1
 *     #screen1 h1
 *     #screen1 p
+*     #screen1 .popup-content-body
 *     #screen2 ul
 *     #video1
-*     #screen3 p
-*     #psyche1
-*     #screen4 p
+*     #psyche_size
 *     #ocean
-*     #screen5 p
 *     #psyche_surface
-*     #screen6 p
 *     #path_picture
 *     #background_video
-*     #screen7 p
 *     #video2
-*     #screen8 p
-*     #moons
-*     #screen9p
+*     #moon_picture
 *     #ring_picture
-*     #screen10 p
 *     #atmosphere
 *     
 */ 
@@ -95,7 +88,6 @@ File Start
     opacity: .8;
     padding: 5%;
   }
-  
   
   /**************************
   * #header1
@@ -212,7 +204,6 @@ File Start
       margin-top: 5%;
     }
   }
-
 
   @media (max-width: 430px) {
     #logo {
@@ -371,14 +362,6 @@ File Start
   }
 
   /************ third screen (Size and Dimensions) ************/
-    
-  /**************************
-  * #screen3 p
-  *
-  */ 
-  #screen3 p {
-
-  }
 
   /**************************
   * #psyche_size
@@ -429,14 +412,7 @@ File Start
   }
   
   /************ fourth screen (Life on Psyche) ************/
-  
-  /**************************
-  * #screen4 p
-  *
-  */ 
-  #screen4 p {
-  } 
-  
+    
   /**************************
   * #ocean
   *
@@ -482,13 +458,6 @@ File Start
   }
 
   /************ fifth screen (Surface of Psyche) ************/
-
-  /**************************
-  * #screen5 p
-  *
-  */ 
-  #screen5 p {
-  }
 
   /**************************
   * #psyche_surface
@@ -571,13 +540,6 @@ File Start
   /************ sixth screen (Orbit and Rotation) ************/
   
   /**************************
-  * #screen6 p
-  *
-  */ 
-  #screen6 p {
-  } 
-
-  /**************************
   * #path_picture
   *
   */
@@ -620,13 +582,6 @@ File Start
   #background_video {
     display: none;
   }
-  
-  /**************************
-  * #screen7 p
-  *
-  */ 
-  #screen7 p {
-  } 
 
   /**************************
   * #video2
@@ -691,16 +646,7 @@ File Start
     }
   }
 
-  
-
   /************ eigth screen (Moons) ************/
-
-  /**************************
-  * #screen8 p
-  *
-  */ 
-  #screen8 p {
-  } 
 
   /**************************
   * #moons
@@ -748,15 +694,7 @@ File Start
     }
   }
 
-
   /************ ninth screen (Rings) ************/
-  
-  /**************************
-  * #screen9 p
-  *
-  */ 
-  #screen9 p {
-  }
   
   /**************************
   * #ring_picture
@@ -800,14 +738,6 @@ File Start
   }
 
   /************ tenth screen (Atmosphere) ************/
-
-  /**************************
-  * #screen10 p
-  *
-  */ 
-  #screen10 p {
-    
-  }
    
   /**************************
   * #atmosphere

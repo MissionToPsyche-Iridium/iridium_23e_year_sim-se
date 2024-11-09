@@ -1,3 +1,21 @@
+/*
+* This scroll.js handles the UI when the user is scrolling
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       11/8/24
+* Revision:   1.1
+*
+*
+*/
+
+/*
+========================================================================================================
+File Start
+========================================================================================================
+*/
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('header');
     const fullscreenButton = document.getElementById('fullscreen');

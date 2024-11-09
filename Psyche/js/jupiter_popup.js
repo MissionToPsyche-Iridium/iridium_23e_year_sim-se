@@ -1,5 +1,5 @@
 /* 
-* popup.js
+* jupiter_popup.js
 * 
 * This popup.js creates the popup windows that display information to the user. The user
 * can cycle through the pages as needed. 

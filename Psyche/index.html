@@ -1,3 +1,48 @@
+<!--
+  Name: Psyche 16
+  Team: 35
+  Members: Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+  Version: 1.1
+  Date: 10/14/2024
+* index.html
+*
+* This file is the driver of the three.js program. It is the root file that is the only open file in the browser window. 
+* This file loads all of the CSS styles and JavaScript files from references.
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       11/8/24
+* Revision:   1.1
+*
+* Files Linked:
+*    css/style.css -  This file defines the presentation aspects of this HTML file
+*
+*    css/psyche_style.css -  This file defines the presentation aspects of the model files
+*
+*    css/popup_style.css -  This file defines the presentation aspects of the popup files
+*
+*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
+*                     the asteroid model and action listeners to manipulate. 
+*
+*    js/<planet/asteroid>_popup.js -    This file handles the interactions on the popup screen for the <planet/asteroid>
+*  
+*    js/model.js -    This file handles the interactions with the models
+* 
+*    js/scroll.js -    This file handles the UI while the user scrolls
+* 
+*    js/screen_testing.js -    This file is used for testing purposes only
+* 
+-->
+
+<!--
+========================================================================================================
+File Start
+========================================================================================================
+--> 
+
+<!-- Defines the document type and version of HTML-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +54,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 'header' section for the main navigation of the page-->
     <header id="header">
         <div id="header_navigation">
             <div class="center_logo">
@@ -26,14 +72,10 @@
               </ul>
           </nav>
     </header>
+    <!-- 'Main' section for the dominant content of the page-->
     <main>
-        <div id="one">
-            
-            <div class="containerTwo" id="containerTwo"></div>
-        </div>
         <h1>16 Psyche</h1>
-        <div id="two">
-            
+        <div id="one">
             <button id="info"><img src="images/main_images/info_button.png" id="info_button"></button>
             <button id="fullscreen"><img src="images/main_images/full_screen_bracket.png" id="fullscreen_button"></button>
             <div class="containerOne" id="containerOne">
@@ -50,23 +92,13 @@
                     <button id="button-neptune" class="horizontal-buttons">Neptune</button>
                 </div>
                 <div id="vertical-buttons">
-                    <!-- Pan Controls in a "+" design below Zoom In and Zoom Out buttons -->
-                    <div id="pan-controls">
-                        <button id="pan-up" class="pan-button">PAN<br>▲</button>
-                        <div class="horizontal-pan">
-                            <button id="pan-left" class="pan-button">PAN<br>◄</button>
-                            <button id="pan-right" class="pan-button">PAN<br>►</button>
-                        </div>
-                        <button id="pan-down" class="pan-button">PAN<br>▼</button>
-                    </div>
-                    <button id="zoom-in" class="vertical-buttons">Zoom In</button>
-                    <button id="zoom-out" class="vertical-buttons">Zoom Out</button>
                     <button id="toggle-rotate" class="vertical-buttons">Inspect Psyche</button>
                     <button id="reset" class="vertical-buttons">Reset</button>
                 </div>
             </div>
         </div>
     </main>
+    <!--'footer' section for handling the bottom of the page-->
     <footer>
         <div id="footer_container">
           <div id="left_footer">
@@ -96,10 +128,8 @@
           </div>
         </div>   
       </footer>
-    <!--<script type="module" src="js/psyche_model.js"></script>-->
+      <!--JavaScript Scripts linked to the webpage-->
     <script type ='module' src="js/models.js"></script>
-    <script type="module" src="js/solar_system.js"></script>
-    <!--<script type="module" src="js/psyche_popup.js"></script>-->
     <script type="module" src="js/scroll.js"></script>
 </body>
 </html>

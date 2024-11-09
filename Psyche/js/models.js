@@ -1,3 +1,31 @@
+/*
+* This model.js creates a scene that is rendered and displayed on a webpage. 
+* 
+* Class:      SER 401
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       11/8/24
+* Revision:   1.1
+*
+*
+*/
+
+/*
+========================================================================================================
+File Start
+========================================================================================================
+*/
+
+/*****************************************************
+ * IMPORTS
+ * 
+ * Importing the needed libraries 
+ *  THREE - JavaScript Animation library 
+ *  OrbitalControls - Camera control around scene objects
+ *  GLTFLoader - Loading and displaying 3D models
+ *  
+ */
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
