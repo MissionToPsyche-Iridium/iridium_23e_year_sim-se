@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         jupiter: 20,
        // saturn: 20,
         uranus: 20,
-       // neptune: 20,
+        neptune: 30,
        // pluto: 20
     };
 
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , 0.009);
    // loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 1, 0.005);
     loadPlanet("Uranus", "models/uranus/uranus.glb", 2900, 1, 0.005);
-   // loadPlanet("Neptune", "models/neptune/neptune.glb", 4500, 1, 0.005);
+    loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, 0.005);
    // loadPlanet("Pluto", "models/pluto/pluto.glb", 5900, 1, 0.005);
 
     // Add ambient light
