@@ -151,6 +151,7 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     'button-psyche': 'psyche',
     'button-jupiter': 'jupiter',
     'button-neptune': 'neptune',
+    'button-uranus' : 'uranus'
   };
 
   Object.entries(planetButtons).forEach(([buttonId, planetName]) => {
@@ -261,7 +262,7 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
 
     if (objects && objects.psycheObject && objects.sunObject && 
         objects.mercuryObject && objects.venusObject && objects.earthObject &&
-        objects.marsObject && objects.jupiterObject && objects.neptuneObject) {
+        objects.marsObject && objects.jupiterObject && objects.neptuneObject && objects.uranusObject) {
       
       if (!isAnimationPaused && !isOrbitPaused) {
         updateOrbits(objects, deltaTime);
@@ -286,6 +287,7 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
         if (labels.marsLabel) updateLabelPosition(labels.marsLabel, objects.marsObject, camera, container);
         if (labels.jupiterLabel) updateLabelPosition(labels.jupiterLabel, objects.jupiterObject, camera, container);
         if (labels.neptuneLabel) updateLabelPosition(labels.neptuneLabel, objects.neptuneObject, camera, container);
+        if (labels.uranusLabel) updateLabelPosition(labels.uranusLabel, objects.uranusObject, camera, container);
       }
     }
 

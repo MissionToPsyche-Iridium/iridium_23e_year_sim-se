@@ -16,7 +16,7 @@ export function loadModels(scene, callback) {
   const loader = new GLTFLoader();
   const models = {};
   let loadedCount = 0;
-  const totalModels = 8;
+  const totalModels = 9;
 
   // Error handler
   const onError = (error) => {

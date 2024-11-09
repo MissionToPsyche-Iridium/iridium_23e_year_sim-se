@@ -13,7 +13,7 @@
  * 
  * Remaining planets to add:
  * - Saturn
- * - Uranus
+ * 
  */
 
 // Import the THREE.js library
@@ -102,7 +102,7 @@ try {
         ({psycheObject, sunObject, mercuryObject, venusObject, earthObject, marsObject, jupiterObject, saturnObject, uranusObject, neptuneObject} = loadedObjects);
         
         // Verify objects were loaded
-        if (!psycheObject || !sunObject || !mercuryObject || !venusObject || !earthObject || !marsObject || !jupiterObject || !neptuneObject) {
+        if (!psycheObject || !sunObject || !mercuryObject || !venusObject || !earthObject || !marsObject || !jupiterObject || !neptuneObject || !uranusObject) {
             console.error('Some objects failed to load:', loadedObjects);
             return;
         }
