@@ -75,93 +75,93 @@ document.addEventListener("DOMContentLoaded", () => {
         if (screenWidth <= iPhoneSE) {
             return {
                 sun: 80,
-            // mercury: 20,
+                 mercury: 20,
                 earth: 55,
                 mars: 65,
                 psyche: 25,
                 jupiter: 60,
-            // saturn: 20,
-            // uranus: 20,
-            // neptune: 20,
-            // pluto: 20
+                saturn: 20,
+                uranus: 20,
+                neptune: 20,
+                pluto: 20
             };
         } else if (screenWidth <= iPhone14ProMax) {
             return {
                 sun: 65,
-            // mercury: 20,
+                 mercury: 20,
                 earth: 30,
                 mars: 50,
                 psyche: 20,
                 jupiter: 45,
-            // saturn: 20,
-            // uranus: 20,
-            // neptune: 20,
-            // pluto: 20
+                 saturn: 20,
+                 uranus: 20,
+                 neptune: 20,
+                 pluto: 20
             };
         } else if (screenWidth <= iPadMini) {
             return {
                 sun: 55,
-            // mercury: 20,
+                 mercury: 20,
                 earth: 30,
                 mars: 40,
                 psyche: 15,
                 jupiter: 40,
-            // saturn: 20,
-            // uranus: 20,
-            // neptune: 20,
-            // pluto: 20
+                 saturn: 20,
+                 uranus: 20,
+                 neptune: 20,
+                 pluto: 20
             };
         } else if (screenWidth <= iPadAir) {
             return {
                 sun: 50,
-            // mercury: 20,
+                 mercury: 20,
                 earth: 35,
                 mars: 45,
                 psyche: 12.5,
                 jupiter: 35,
-            // saturn: 20,
-            // uranus: 20,
-            // neptune: 20,
-            // pluto: 20
+                 saturn: 20,
+                 uranus: 20,
+                 neptune: 20,
+                 pluto: 20
             };
         } else if (screenWidth <= iPadPro) {
             return {
                 sun: 45,
-            // mercury: 20,
+                mercury: 20,
                 earth: 30,
                 mars: 40,
                 psyche: 12,
                 jupiter: 30,
-            // saturn: 20,
-            // uranus: 20,
-            // neptune: 20,
-            // pluto: 20
+                saturn: 20,
+                uranus: 20,
+                neptune: 20,
+                pluto: 20
             }
         } else if (screenWidth <= p2160Wide) {
             return {
                 sun: 30,
-                // mercury: 20,
-                    earth: 15,
-                    mars: 20,
-                    psyche: 7.5,
-                    jupiter: 17.5,
-                // saturn: 20,
-                // uranus: 20,
-                // neptune: 20,
-                // pluto: 20
+                mercury: 20,
+                earth: 15,
+                mars: 20,
+                psyche: 7.5,
+                jupiter: 17.5,
+                saturn: 20,
+                uranus: 20,
+                neptune: 20,
+                pluto: 20
                 }
         } else {
             return {
                 sun: 35,
-                // mercury: 20,
-                    earth: 20,
-                    mars: 30,
-                    psyche: 10,
-                    jupiter: 20,
-                // saturn: 20,
-                // uranus: 20,
-                // neptune: 20,
-                // pluto: 20
+                mercury: 20,
+                earth: 20,
+                mars: 30,
+                psyche: 10,
+                jupiter: 20,
+                saturn: 20,
+                uranus: 20,
+                neptune: 20,
+                pluto: 20
                 }
         }
     };
@@ -213,15 +213,15 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Set Mars and Psyche with different orbits and speeds
-   // loadPlanet("Mercury", "models/mercury/mercury.glb", 38, 1, 0.005);
-  //  loadPlanet("Venus", "models/venus/venus.glb", 67, 6, 0.005);
+    loadPlanet("Mercury", "models/Mercury/Mercury.glb", 57, 0.000003, 0.005);
+    loadPlanet("Venus", "models/Venus/Venus.glb", 108, .000002, 0.005);
     loadPlanet("Earth", "models/earth/earth.glb", 149, 6, 0.005);
     loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, 0.008);
     loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
     loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , 0.009);
-   // loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 1, 0.005);
-   // loadPlanet("Uranus", "models/uranus/uranus.glb", 2900, 1, 0.005);
-   // loadPlanet("Neptune", "models/neptune/neptune.glb", 4500, 1, 0.005);
+    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 15, 0.005);
+    loadPlanet("Uranus", "models/Uranus/Uranus.glb", 2900, 1, 0.005);
+    loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, 0.005);
    // loadPlanet("Pluto", "models/pluto/pluto.glb", 5900, 1, 0.005);
 
     // Add ambient light
@@ -300,6 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    let planetMenuWasVisible = screenWidth <= iPadPro;
+
     // Add an event listener for the reset button
     document.getElementById("reset").addEventListener("click", () => {
 
@@ -340,6 +342,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         hideHamburgerButton();
     
+        localStorage.setItem('planetMenuWasVisible', planetMenuWasVisible);
+        
         // Load the popup script for the active planet
         const existingScript = document.getElementById("planet-popup-script");
         if (existingScript) {
