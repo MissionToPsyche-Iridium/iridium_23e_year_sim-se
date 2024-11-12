@@ -74,16 +74,17 @@ document.addEventListener("DOMContentLoaded", () => {
     
         if (screenWidth <= iPhoneSE) {
             return {
-                sun: 80,
-                 mercury: 20,
-                earth: 55,
-                mars: 65,
-                psyche: 25,
-                jupiter: 60,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
-                pluto: 20
+                sun: 50,
+                 mercury: 18,
+                 venus: 27,
+                earth: 18,
+                mars: 33,
+                psyche: 15,
+                jupiter: 34,
+                saturn: 35,
+                uranus: 2.5,
+                neptune: 50,
+           
             };
         } else if (screenWidth <= iPhone14ProMax) {
             return {
