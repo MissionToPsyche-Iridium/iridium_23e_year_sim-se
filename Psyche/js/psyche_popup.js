@@ -148,6 +148,9 @@ function closePopup() {
   if (fullscreen_button) {
       fullscreen_button.style.display = 'block';
   }
+
+  const planet_menu = document.getElementById('planet-hamburger');
+  if (planet_menu) planet_menu.style.display = 'block';
 }
 
 

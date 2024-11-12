@@ -250,6 +250,14 @@ document.addEventListener("DOMContentLoaded", () => {
         controls.update();
     };
 
+    // Close hamburger menu function
+    const closeHamburgerMenu = () => {
+        if (planetMenu.classList.contains("menu-open")) {
+            planetMenu.classList.remove("menu-open");
+            planetHamburger.classList.remove("is-open");
+        }
+    };
+
     const selectPlanet = (planetName) => {
         activePlanet = planetName;
         console.log(activePlanet + " has been selected");
@@ -258,6 +266,9 @@ document.addEventListener("DOMContentLoaded", () => {
             isInspecting = false;
             zoomToPlanet(selectedPlanet);
             toggleButton.textContent = `Inspect ${planetName.charAt(0).toUpperCase() + planetName.slice(1)}`;
+
+             // Close the hamburger menu if it is open
+            closeHamburgerMenu();
         } else {
             console.warn(`Planet ${planetName} not found in planets object.`);
         }
@@ -291,6 +302,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add an event listener for the reset button
     document.getElementById("reset").addEventListener("click", () => {
+
+        closeHamburgerMenu();
         
         selectedPlanet = planets["psyche"];
         activePlanet="psyche";
@@ -311,18 +324,28 @@ document.addEventListener("DOMContentLoaded", () => {
         controls.update();
     });
 
+    const planetHamburgerIcon = document.getElementById('planet-hamburger');
+
+    const hideHamburgerButton = () => {
+        planetHamburgerIcon.style.display = "none"; // Hide the hamburger button
+    };
     
+    // Directly show the hamburger button
+    const showHamburgerButton = () => {
+        planetHamburgerIcon.style.display = "block"; // Show the hamburger button
+    };
     
     document.getElementById("info").addEventListener("click", () => {
         console.log("Loading information for " + activePlanet);
-        
-        // Remove any existing popup script
+
+        hideHamburgerButton();
+    
+        // Load the popup script for the active planet
         const existingScript = document.getElementById("planet-popup-script");
         if (existingScript) {
             existingScript.remove();
         }
-        
-        // Load the correct script based on the activePlanet
+    
         const script = document.createElement("script");
         script.id = "planet-popup-script";
         script.src = `js/${activePlanet}_popup.js`;
@@ -336,33 +359,32 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         script.onerror = () => {
             console.error(`Failed to load ${activePlanet}_popup.js`);
+            showHamburgerButton();
         };
-        
+    
         document.body.appendChild(script);
     });
-    
-    
-    
-    
-    
 
      // Fullscreen button handling
-     const fullscreenButton = document.getElementById('fullscreen');
-     if (fullscreenButton) {
-         fullscreenButton.addEventListener('click', () => {
-             if (!document.fullscreenElement) {
-                 container.requestFullscreen();
-                 renderer.setSize(window.innerWidth, window.innerHeight);
-                 camera.aspect = window.innerWidth / window.innerHeight;
-                 camera.updateProjectionMatrix();
-             } else {
-                 document.exitFullscreen();
-                 renderer.setSize(container.clientWidth, container.clientHeight);
-                 camera.aspect = container.clientWidth / container.clientHeight;
-                 camera.updateProjectionMatrix();
-             }
-         });
-     };
+     fullscreen.addEventListener("click", () => {
+        closeHamburgerMenu();
+    
+        if (!document.fullscreenElement) {
+            container.requestFullscreen().then(() => {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                hideHamburgerButton();
+            });
+        } else {
+            document.exitFullscreen().then(() => {
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                showHamburgerButton();
+            });
+        }
+    });
  
  /*****************************************************
   * listener "mouseover"
@@ -472,4 +494,13 @@ document.addEventListener("DOMContentLoaded", () => {
         renderer.render(scene, camera);
     }
     render();
+
+    const planetHamburger = document.getElementById("planet-hamburger");
+    const planetMenu = document.getElementById("planet-menu");
+
+    planetHamburger.addEventListener("click", () => {
+        // Toggle the menu visibility and the "is-open" class for the hamburger icon
+        planetMenu.classList.toggle("menu-open");
+        planetHamburger.classList.toggle("is-open");
+    });
 });
