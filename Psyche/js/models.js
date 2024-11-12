@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, 0.008);
     loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
     loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , 0.009);
-    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 15, 0.005);
+    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, .00015, 0.005);
     loadPlanet("Uranus", "models/Uranus/Uranus.glb", 2900, 1, 0.005);
     loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, 0.005);
    // loadPlanet("Pluto", "models/pluto/pluto.glb", 5900, 1, 0.005);
