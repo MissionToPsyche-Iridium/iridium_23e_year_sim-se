@@ -121,6 +121,19 @@ export function loadModels(scene, callback) {
     onError
   );
 
+  // Load Uranus model (51,118 km diameter)
+  loader.load(
+    './models/Uranus/Uranus.glb',
+    (gltf) => {
+      models.uranusObject = gltf.scene;
+      models.uranusObject.scale.set(.0001, .0001, .0001); // Scale relative to Earth  ~ 4x larger than earth
+      scene.add(models.uranusObject);
+      loadedCount++;
+      if (loadedCount === totalModels) callback(models);
+    },
+    undefined,
+    onError
+  );
   // Load Neptune model (49,244km diameter)
   loader.load(
     './models/Neptune/Neptune.glb',
