@@ -1,22 +1,22 @@
 {
-  "name": "test",
+  "name": "learnthree",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite --host",
+    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "serve": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.169.0"
+    "three": "^0.170.0"
   },
-  "description": "",
   "devDependencies": {
     "@types/three": "^0.169.0",
-    "vite": "^5.4.10"
+    "vite": "^5.4.11"
   }
 }

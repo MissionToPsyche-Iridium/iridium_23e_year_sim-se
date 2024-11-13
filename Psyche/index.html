@@ -6,6 +6,7 @@
   <title>SER401 TM35, 16 </title>
   <link rel="stylesheet" href="css/josh-styles.css">
   <link rel="stylesheet" href="/css/josh-nav.css">
+  <link rel="stylesheet" href="/css/loading.css">
   <link rel="stylesheet" href="/css/josh-carousel.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@100;400;700&display=swap" />
@@ -19,7 +20,7 @@
         </a>
         <span class="divider" style="left: 40px;"></span>
         <a href="https://psyche.asu.edu/">
-          <img src="/public/images/main_images/psyche_asu.png" alt="Psyche" style="height: 54px;">
+          <img src="/src/assets/images/main_images/psyche_asu.png" alt="Psyche" style="height: 54px;">
         </a>
       </div>
       <a class="search-toggle">
@@ -105,10 +106,18 @@
         </ul>            
     </div>
   </nav>
-  <script type="module" src="public/js/sceneBuilder.js"></script>
-  <script src="/public/js/nav.js"></script>
+  <script type="module" src="src/sceneBuilder.js"></script>
+  <script src="/src/nav.js"></script>
 
   <main>
+    <div id="loadingScreen" class="wrapper">
+      <div class="image-container">
+        <img src="/src/assets/images/main_images/Psyche_BadgeSolid_Color-PNG.png" alt="Rotating Image" class="rotating-image">
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
     <div id="container3D">
       <!-- Overlay Container for Toggle Button and Overlay Content -->
       <div id="overlay-container">
