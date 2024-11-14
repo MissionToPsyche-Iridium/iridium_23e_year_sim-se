@@ -1,4 +1,5 @@
 // planetLoader.js
+import { TextureLoader, Mesh, SphereGeometry, MeshBasicMaterial, BackSide } from 'three';
 import { PlanetHandler } from './planetHandler.js';
 
 /**
@@ -16,43 +17,68 @@ import { PlanetHandler } from './planetHandler.js';
 export async function loadPlanets(scene, onProgress) {
   console.log("Loading Planets...");
   const planets = [];
+  // const planetData = [
+  //   { name: "Sun", path: "src/assets/models/sun/sun_only.glb", size: 0.0091, orbitRadius: 0, orbitSpeed: 0, rotationSpeed: 0.009 },
+  //   { name: "Mercury", path: "src/assets/models/mercury/mercury.glb", size: 0.07, orbitRadius: 4000, orbitSpeed: 0.24, rotationSpeed: 0.01 },
+  //   { name: "Venus", path: "src/assets/models/venus/venus.glb", size: 0.01, orbitRadius: 5500, orbitSpeed: 0.18, rotationSpeed: 0.009 },
+  //   { name: "Earth", path: "src/assets/models/earth/earth.glb", size: 0.03, orbitRadius: 7000, orbitSpeed: 0.1, rotationSpeed: 0.05 },
+  //   { name: "Mars", path: "src/assets/models/mars/mars.glb", size: 0.05, orbitRadius: 8500, orbitSpeed: 0.08, rotationSpeed: 0.03 },
+  //   { name: "Jupiter", path: "src/assets/models/jupiter/jupiter.glb", size: .112, orbitRadius: 10000, orbitSpeed: 0.04, rotationSpeed: 0.2 },
+  //   { name: "Saturn", path: "src/assets/models/saturn/saturn.glb", size: 0.005, orbitRadius: 11500, orbitSpeed: 0.03, rotationSpeed: 0.17 },
+  //   { name: "Uranus", path: "src/assets/models/uranus/uranus.glb", size: .1, orbitRadius: 13000, orbitSpeed: 0.02, rotationSpeed: 0.1 },
+  //   { name: "Neptune", path: "src/assets/models/neptune/neptune.glb", size: .2, orbitRadius: 14500, orbitSpeed: 0.01, rotationSpeed: 0.08 }
+  // ];
   const planetData = [
-    { name: "Sun", path: "src/assets/models/sun/sun_only.glb", size: 0.091, orbitRadius: 0, orbitSpeed: 0, rotationSpeed: 0.009 },
-    { name: "Mercury", path: "src/assets/models/mercury/mercury.glb", size: 0.7, orbitRadius: 40000, orbitSpeed: 0.24, rotationSpeed: 0.01 },
-    { name: "Venus", path: "src/assets/models/venus/venus.glb", size: 0.1, orbitRadius: 55000, orbitSpeed: 0.18, rotationSpeed: 0.009 },
-    { name: "Earth", path: "src/assets/models/earth/earth.glb", size: 0.3, orbitRadius: 70000, orbitSpeed: 0.1, rotationSpeed: 0.05 },
-    { name: "Mars", path: "src/assets/models/mars/mars.glb", size: 0.5, orbitRadius: 85000, orbitSpeed: 0.08, rotationSpeed: 0.03 },
-    { name: "Jupiter", path: "src/assets/models/jupiter/jupiter.glb", size: 1.12, orbitRadius: 100000, orbitSpeed: 0.04, rotationSpeed: 0.2 },
-    { name: "Saturn", path: "src/assets/models/saturn/saturn.glb", size: 0.05, orbitRadius: 115000, orbitSpeed: 0.03, rotationSpeed: 0.17 },
-    { name: "Uranus", path: "src/assets/models/uranus/uranus.glb", size: 1, orbitRadius: 130000, orbitSpeed: 0.02, rotationSpeed: 0.1 },
-    { name: "Neptune", path: "src/assets/models/neptune/neptune.glb", size: 2, orbitRadius: 145000, orbitSpeed: 0.01, rotationSpeed: 0.08 }
+    // { name: "Sun", path: "src/assets/models/sun1/Sun.glb", size: 1, orbitRadius: 0, orbitSpeed: 0, rotationSpeed: 0.009 },
+    { name: "Mercury", path: "src/assets/models/mercury1/Mercury.glb", size: 1, orbitRadius: 4000, orbitSpeed: 0.24, rotationSpeed: 0.01 },
+    { name: "Venus", path: "src/assets/models/venus1/Venus.glb", size: 1, orbitRadius: 5500, orbitSpeed: 0.18, rotationSpeed: 0.009 },
+    { name: "Earth", path: "src/assets/models/earth1/Earth.glb", size: 1, orbitRadius: 7000, orbitSpeed: 0.1, rotationSpeed: 0.05 },
+    { name: "Mars", path: "src/assets/models/mars1/Mars.glb", size: 1, orbitRadius: 8500, orbitSpeed: 0.08, rotationSpeed: 0.03 },
+    { name: "Jupiter", path: "src/assets/models/jupiter1/Jupiter.glb", size: 1, orbitRadius: 10000, orbitSpeed: 0.04, rotationSpeed: 0.2 },
+    { name: "Saturn", path: "src/assets/models/saturn1/Saturn.glb", size: 1, orbitRadius: 11500, orbitSpeed: 0.03, rotationSpeed: 0.17 },
+    { name: "Uranus", path: "src/assets/models/uranus1/Uranus.glb", size: 1, orbitRadius: 13000, orbitSpeed: 0.02, rotationSpeed: 0.1 },
+    { name: "Neptune", path: "src/assets/models/neptune1/Neptune.glb", size: 1, orbitRadius: 14500, orbitSpeed: 0.01, rotationSpeed: 0.08 }
   ];
-
+  
   let loaded = 0;
+  const totalAssets = planetData.length + 1; // Include background
 
+  // Load the background sphere texture
+  const backgroundSphere = await new Promise((resolve, reject) => {
+    const loader = new TextureLoader();
+    loader.load("src/assets/images/textures/8k_stars_milky_way.jpg", 
+      (texture) => {
+        const geometry = new SphereGeometry(10000, 16, 16); // Large radius for background
+        const material = new MeshBasicMaterial({
+          map: texture,
+          side: BackSide,  // Render the inside of the sphere
+        });
+        const sphere = new Mesh(geometry, material);
+        scene.add(sphere);  // Add to scene
+        loaded++;
+        if (onProgress) onProgress((loaded / totalAssets) * 100);
+        resolve(sphere); // Resolve with the created background sphere
+      },
+      undefined,
+      (error) => {
+        console.error("Failed to load background texture", error);
+        reject(error);
+      }
+    );
+  });
+
+  // Load planets (as before)
   for (const data of planetData) {
     try {
       const planet = await new Promise((resolve, reject) => {
         const planetHandler = new PlanetHandler(
-          data.name,
-          data.path,
-          data.size,
-          data.orbitRadius,
-          data.orbitSpeed,
-          data.rotationSpeed,
-          scene
+          data.name, data.path, data.size, data.orbitRadius, data.orbitSpeed, data.rotationSpeed, scene
         );
 
         planetHandler.onLoad = () => {
-          console.log(`Planet loaded and added: ${planetHandler.name}`);
-          resolve(planetHandler);
-
-          // Update the loaded count and progress
           loaded++;
-          const progress = (loaded / planetData.length) * 100;
-
-          // Call the onProgress callback to update the progress bar
-          if (onProgress) onProgress(progress);
+          if (onProgress) onProgress((loaded / totalAssets) * 100);
+          resolve(planetHandler);
         };
 
         planetHandler.onError = (error) => {
@@ -68,5 +94,5 @@ export async function loadPlanets(scene, onProgress) {
     }
   }
 
-  return planets;
+  return { planets, backgroundSphere }; // Return both planets and backgroundSphere
 }

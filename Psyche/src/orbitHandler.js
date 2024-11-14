@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 export function createOrbit(radius, scene) {
     const curve = new THREE.EllipseCurve(0, 0, radius, radius);
-    const points = curve.getPoints(50);
+    const points = curve.getPoints(500);
 
     const pointsXZ = points.map(p => new THREE.Vector3(p.x, 0, p.y));
     const geometry = new THREE.BufferGeometry().setFromPoints(pointsXZ);

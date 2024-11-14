@@ -11,13 +11,13 @@ export class CameraController {
    * @param {Object} controls - Controls to manage the camera movement.
    * @param {Array} planets - Array of planet objects for navigation.
    */
-  static setup(camera, controls, planets) {
-    // Initial camera setup, positioned far from the center
-    camera.position.set(80000, 20000, 0);
+  static setup(camera, controls, planets, backgroundSphere) {
+    camera.position.set(8000, 2000, 0);
     controls.target.set(0, 0, 0);
     controls.update();
 
-    let currentPlanet = planets[0];  
+    let currentPlanet = planets[0];
+    this.backgroundSphere = backgroundSphere;  // Store reference to background sphere
 
     // Keyboard listener for navigating between planets
     window.addEventListener('keydown', (event) => {
@@ -45,12 +45,8 @@ export class CameraController {
    */
   static moveToPlanet(controls, planet) {
     if (!planet || !planet.model) return;
-
-    // Set the controls target to the new planet's position
     const planetPosition = planet.model.position;
     controls.target.copy(planetPosition);
-
-    // Update controls to apply the new target
     controls.update();
   }
 
@@ -64,10 +60,14 @@ export class CameraController {
    */
   static updateTarget(controls) {
     if (this.currentPlanet && this.currentPlanet.model) {
-      // Continuously set the controls target to the planet's current position
       const planetPosition = this.currentPlanet.model.position;
       controls.target.copy(planetPosition);
       controls.update();
+    }
+
+    // Center the background sphere on the camera
+    if (this.backgroundSphere) {
+      this.backgroundSphere.position.copy(controls.object.position);
     }
   }
 }

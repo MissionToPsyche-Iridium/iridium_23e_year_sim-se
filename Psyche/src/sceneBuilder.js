@@ -21,7 +21,7 @@ import { initOverlay } from './overlayController.js';
  */
 const container = document.getElementById('container3D');
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 1, 2000000);
+const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, .1, 200000);
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
 renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -80,33 +80,29 @@ function updateProgressBar(progress) {
  * Loads planets asynchronously, creates their orbital paths, and sets up 
  * camera and carousel interactions once all models are loaded.
  */
-loadPlanets(scene, updateProgressBar)  // Pass updateProgressBar as the onProgress callback
-  .then((planets) => {
+loadPlanets(scene, updateProgressBar)
+  .then(({ planets, backgroundSphere }) => {
     planets.forEach((planet) => {
-      const position = new THREE.Vector3();
-      planet.model.getWorldPosition(position);
-      console.log(`World position of ${planet.name}:`, position);
-
       createOrbit(planet.orbitRadius, scene);
     });
 
-    console.log("Planets ready for carousel:", planets.map(p => p.name));
-
-    // Hide the loading screen once all planets are loaded
+    // Hide loading screen when ready
     loadingScreen.style.opacity = '0';
     setTimeout(() => {
       loadingScreen.style.display = 'none';
     }, 500); 
 
     initCarousel(planets);
-    CameraController.setup(camera, controls, planets);
+
+    // Pass the backgroundSphere to CameraController
+    CameraController.setup(camera, controls, planets, backgroundSphere);
+
     renderer.setAnimationLoop(() => animate(planets));
   })
   .catch((error) => {
     console.error("Error loading planets:", error);
     loadingScreen.innerHTML = "Failed to load resources";
   });
-
 
 /**
  * Animation Loop
