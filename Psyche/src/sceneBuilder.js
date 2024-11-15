@@ -21,7 +21,7 @@ import { initOverlay } from './overlayController.js';
  */
 const container = document.getElementById('container3D');
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, .1, 200000);
+const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.01, 20000);
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
 renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.setPixelRatio(window.devicePixelRatio);

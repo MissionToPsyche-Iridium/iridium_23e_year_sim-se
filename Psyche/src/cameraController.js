@@ -12,7 +12,7 @@ export class CameraController {
    * @param {Array} planets - Array of planet objects for navigation.
    */
   static setup(camera, controls, planets, backgroundSphere) {
-    camera.position.set(8000, 2000, 0);
+    camera.position.set(8, 2, 0);
     controls.target.set(0, 0, 0);
     controls.update();
 

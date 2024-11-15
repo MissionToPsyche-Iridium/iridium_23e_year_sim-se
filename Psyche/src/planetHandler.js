@@ -75,8 +75,13 @@ export class PlanetHandler {
    */
   update(rotationSpeed, orbitSpeed, deltaTime) {
     if (this.model) {
+      // Rotate the model around its local tilted axis (Y-axis relative to tilt)
       this.model.rotation.y += rotationSpeed * deltaTime;
+  
+      // Update elapsed time for orbit calculation
       this.elapsedTime += deltaTime;
+  
+      // Calculate the orbit position on the XZ plane
       this.model.position.x = this.orbitRadius * Math.cos(-orbitSpeed * this.elapsedTime);
       this.model.position.z = this.orbitRadius * Math.sin(-orbitSpeed * this.elapsedTime);
     }

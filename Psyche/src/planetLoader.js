@@ -29,17 +29,28 @@ export async function loadPlanets(scene, onProgress) {
   //   { name: "Neptune", path: "src/assets/models/neptune/neptune.glb", size: .2, orbitRadius: 14500, orbitSpeed: 0.01, rotationSpeed: 0.08 }
   // ];
   const planetData = [
-    // { name: "Sun", path: "src/assets/models/sun1/Sun.glb", size: 1, orbitRadius: 0, orbitSpeed: 0, rotationSpeed: 0.009 },
-    { name: "Mercury", path: "src/assets/models/mercury1/Mercury.glb", size: 1, orbitRadius: 4000, orbitSpeed: 0.24, rotationSpeed: 0.01 },
-    { name: "Venus", path: "src/assets/models/venus1/Venus.glb", size: 1, orbitRadius: 5500, orbitSpeed: 0.18, rotationSpeed: 0.009 },
-    { name: "Earth", path: "src/assets/models/earth1/Earth.glb", size: 1, orbitRadius: 7000, orbitSpeed: 0.1, rotationSpeed: 0.05 },
-    { name: "Mars", path: "src/assets/models/mars1/Mars.glb", size: 1, orbitRadius: 8500, orbitSpeed: 0.08, rotationSpeed: 0.03 },
-    { name: "Jupiter", path: "src/assets/models/jupiter1/Jupiter.glb", size: 1, orbitRadius: 10000, orbitSpeed: 0.04, rotationSpeed: 0.2 },
-    { name: "Saturn", path: "src/assets/models/saturn1/Saturn.glb", size: 1, orbitRadius: 11500, orbitSpeed: 0.03, rotationSpeed: 0.17 },
-    { name: "Uranus", path: "src/assets/models/uranus1/Uranus.glb", size: 1, orbitRadius: 13000, orbitSpeed: 0.02, rotationSpeed: 0.1 },
-    { name: "Neptune", path: "src/assets/models/neptune1/Neptune.glb", size: 1, orbitRadius: 14500, orbitSpeed: 0.01, rotationSpeed: 0.08 }
+    { name: "Sun", path: "src/assets/models/sun1.glb", size: .5, orbitRadius: 0, orbitSpeed: 0, rotationSpeed: 0.009 },
+    { name: "Mercury", path: "src/assets/models/mercury1.glb", size: 5, orbitRadius: 3, orbitSpeed: 0.24, rotationSpeed: 1 },
+    { name: "Venus", path: "src/assets/models/venus1.glb", size: 2, orbitRadius: 4, orbitSpeed: 0.18, rotationSpeed: 1 },
+    { name: "Earth", path: "src/assets/models/earth1.glb", size: 3, orbitRadius: 5, orbitSpeed: 0.1, rotationSpeed: 1 },
+    { name: "Mars", path: "src/assets/models/mars1.glb", size: 2, orbitRadius: 6, orbitSpeed: 0.08, rotationSpeed: 1 },
+    { name: "Jupiter", path: "src/assets/models/jupiter1.glb", size: .5, orbitRadius: 7, orbitSpeed: 0.04, rotationSpeed: 1 },
+    { name: "Saturn", path: "src/assets/models/saturn1.glb", size: .5, orbitRadius: 8, orbitSpeed: 0.03, rotationSpeed: 1 },
+    { name: "Uranus", path: "src/assets/models/uranus1.glb", size: .8, orbitRadius: 9, orbitSpeed: 0.02, rotationSpeed: 1 },
+    { name: "Neptune", path: "src/assets/models/neptune1.glb", size: .8, orbitRadius: 10, orbitSpeed: 0.01, rotationSpeed: 1 }
   ];
-  
+//   const planetData = [
+//     { name: "Sun", path: "src/assets/models/sun1.glb", size: 0.5, orbitRadius: 0, orbitSpeed: 0, rotationSpeed: 0.009, eccentricity: 0, inclination: 0 },
+//     { name: "Mercury", path: "src/assets/models/mercury1.glb", size: 5, orbitRadius: 1.935, orbitSpeed: 0.24, rotationSpeed: 1, eccentricity: 0.205, inclination: 7.01 },
+//     { name: "Venus", path: "src/assets/models/venus1.glb", size: 2, orbitRadius: 3.615, orbitSpeed: 0.18, rotationSpeed: 1, eccentricity: 0.007, inclination: 3.39 },
+//     { name: "Earth", path: "src/assets/models/earth1.glb", size: 3, orbitRadius: 5, orbitSpeed: 0.1, rotationSpeed: 1, eccentricity: 0.017, inclination: 0.00 },
+//     { name: "Mars", path: "src/assets/models/mars1.glb", size: 2, orbitRadius: 7.62, orbitSpeed: 0.08, rotationSpeed: 1, eccentricity: 0.093, inclination: 1.85 },
+//     { name: "Jupiter", path: "src/assets/models/jupiter1.glb", size: 0.5, orbitRadius: 26.015, orbitSpeed: 0.04, rotationSpeed: 1, eccentricity: 0.049, inclination: 1.30 },
+//     { name: "Saturn", path: "src/assets/models/saturn1.glb", size: 0.5, orbitRadius: 38.1485, orbitSpeed: 0.03, rotationSpeed: 1, eccentricity: 0.056, inclination: 2.49 },
+//     { name: "Uranus", path: "src/assets/models/uranus1.glb", size: 0.8, orbitRadius: 59.715, orbitSpeed: 0.02, rotationSpeed: 1, eccentricity: 0.046, inclination: 0.77 },
+//     { name: "Neptune", path: "src/assets/models/neptune1.glb", size: 0.8, orbitRadius: 75.17, orbitSpeed: 0.01, rotationSpeed: 1, eccentricity: 0.010, inclination: 1.77 }
+// ];
+
   let loaded = 0;
   const totalAssets = planetData.length + 1; // Include background
 
