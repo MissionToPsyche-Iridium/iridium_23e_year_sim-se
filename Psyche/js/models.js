@@ -71,11 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const getZoomDistances = () => {
         const screenWidth = window.innerWidth;
+        console.log(screenWidth);
     
         if (screenWidth <= iPhoneSE) {
+            console.log("optimized for an iPhone SE");
             return {
                 sun: 80,
-                 mercury: 20,
+                mercury: 20,
                 earth: 55,
                 mars: 65,
                 psyche: 25,
@@ -86,45 +88,49 @@ document.addEventListener("DOMContentLoaded", () => {
                 pluto: 20
             };
         } else if (screenWidth <= iPhone14ProMax) {
+            console.log("optimized for an iPhone 14 Pro Max");
             return {
                 sun: 65,
-                 mercury: 20,
+                mercury: 20,
                 earth: 30,
                 mars: 50,
                 psyche: 20,
                 jupiter: 45,
-                 saturn: 20,
-                 uranus: 20,
-                 neptune: 20,
-                 pluto: 20
+                saturn: 20,
+                uranus: 20,
+                neptune: 20,
+                pluto: 20
             };
         } else if (screenWidth <= iPadMini) {
+            console.log("optimized for an iPad Mini");
             return {
                 sun: 55,
-                 mercury: 20,
+                mercury: 20,
                 earth: 30,
                 mars: 40,
                 psyche: 15,
                 jupiter: 40,
-                 saturn: 20,
-                 uranus: 20,
-                 neptune: 20,
-                 pluto: 20
+                saturn: 20,
+                uranus: 20,
+                neptune: 20,
+                pluto: 20
             };
         } else if (screenWidth <= iPadAir) {
+            console.log("optimized for an iPad Air");
             return {
                 sun: 50,
-                 mercury: 20,
+                mercury: 20,
                 earth: 35,
                 mars: 45,
                 psyche: 12.5,
                 jupiter: 35,
-                 saturn: 20,
-                 uranus: 20,
-                 neptune: 20,
-                 pluto: 20
+                saturn: 20,
+                uranus: 20,
+                neptune: 20,
+                pluto: 20
             };
         } else if (screenWidth <= iPadPro) {
+            console.log("optimized for an iPad Pro");
             return {
                 sun: 45,
                 mercury: 20,
@@ -138,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 pluto: 20
             }
         } else if (screenWidth <= p2160Wide) {
+            console.log("optimized for a 2k monitor");
             return {
                 sun: 30,
                 mercury: 20,
@@ -209,8 +216,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 toggleButton.textContent = "Inspect Psyche";
             }
-        });
+            planetsLoaded++;
+            console.log("Object", planetsLoaded, "/", totalObjectsToLoad, "have been loaded" );
+
+            checkAllPlanetsLoaded();
+        });  
     };
+
+    let planetsLoaded = 0;
+    let totalObjectsToLoad = 9; 
+
+    function checkAllPlanetsLoaded() {
+        if (planetsLoaded === totalObjectsToLoad) {
+            console.log("All objects have been successfully loaded!");
+        }
+    }
+    
 
     // Set Mars and Psyche with different orbits and speeds
     loadPlanet("Mercury", "models/Mercury/Mercury.glb", 57, 0.000003, 0.005);
@@ -507,4 +528,56 @@ document.addEventListener("DOMContentLoaded", () => {
         planetMenu.classList.toggle("menu-open");
         planetHamburger.classList.toggle("is-open");
     });
+
+
+
+
+
+
+    // Function to update zoom distances and camera settings
+    const updateZoomBasedOnWindowSize = () => {
+        // Recalculate zoom distances
+        const zoomDistances = getZoomDistances();
+
+        if (selectedPlanet) {
+            const planetName = selectedPlanet.object.name.toLowerCase();
+            const zoomDistance = zoomDistances[planetName] || 20;
+
+            console.log("zoom distance is:", zoomDistance);
+
+            // Update the camera's position based on the new zoom distance
+            camera.position.set(
+                selectedPlanet.object.position.x + zoomDistance,
+                selectedPlanet.object.position.y + zoomDistance,
+                selectedPlanet.object.position.z + zoomDistance
+            );
+
+            // Ensure the camera is pointing to the selected planet
+            camera.lookAt(selectedPlanet.object.position);
+            controls.target.copy(selectedPlanet.object.position);
+        }
+
+        // Update renderer size and camera aspect ratio
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+
+        // Ensure the controls are updated
+        controls.update();
+    };
+
+    // Debounce to prevent excessive calls
+    let resizeTimeout;
+    const debounceResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateZoomBasedOnWindowSize, 100);
+    };
+
+    // Attach the resize event listener
+    window.addEventListener("resize", debounceResize);
+
+    // Ensure zoom is updated on page load as well
+    updateZoomBasedOnWindowSize();
+
+    
 });
