@@ -218,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             planetsLoaded++;
             console.log("Object", planetsLoaded, "/", totalObjectsToLoad, "have been loaded" );
+            console.log(name, "is orbiting at a speed of", speed);
 
             checkAllPlanetsLoaded();
         });  
@@ -231,15 +232,31 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("All objects have been successfully loaded!");
         }
     }
-    
+
+    function calculateOrbit(planet_orbit){
+        const full_rotation = 2 * Math.PI;
+        const FPS = 60;
+        const earth_timing = 10;
+        return full_rotation / (planet_orbit * earth_timing * FPS)
+    }
+
+    const mercury_year = .241;
+    const venus_year = 0.616
+    const earth_year = 1;
+    const mars_year = 1.88;
+    const psyche_year = 5.01;
+    const jupiter_year = 11.87;
+    const saturn_year = 29.47;
+    const uranus_year = 84.07;
+    const neptune_year = 164.9;
 
     // Set Mars and Psyche with different orbits and speeds
     loadPlanet("Mercury", "models/Mercury/Mercury.glb", 57, 0.000003, 0.005);
     loadPlanet("Venus", "models/Venus/Venus.glb", 108, .000002, 0.005);
-    loadPlanet("Earth", "models/earth/earth.glb", 149, 6, 0.005);
-    loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, 0.008);
+    loadPlanet("Earth", "models/earth/earth.glb", 149, 6, calculateOrbit(earth_year));
+    loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, .009);
     loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
-    loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , 0.009);
+    loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , calculateOrbit(jupiter_year));
     loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 15, 0.005);
     loadPlanet("Uranus", "models/Uranus/Uranus.glb", 2900, 1, 0.005);
     loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, 0.005);
