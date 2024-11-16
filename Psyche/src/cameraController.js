@@ -25,11 +25,11 @@ export class CameraController {
       if (event.key === 'ArrowUp') {
         const nextIndex = Math.min(currentIndex + 1, planets.length - 1);
         currentPlanet = planets[nextIndex];
-        CameraController.moveToPlanet(controls, currentPlanet);
+        CameraController.moveToPlanet(camera, controls, currentPlanet);
       } else if (event.key === 'ArrowDown') {
         const prevIndex = Math.max(currentIndex - 1, 0);
         currentPlanet = planets[prevIndex];
-        CameraController.moveToPlanet(controls, currentPlanet);
+        CameraController.moveToPlanet(camera, controls, currentPlanet);
       }
     });
   }
@@ -43,9 +43,14 @@ export class CameraController {
    * @param {Object} controls - Controls to handle camera movement.
    * @param {Object} planet - The planet object to look at.
    */
-  static moveToPlanet(controls, planet) {
+  static moveToPlanet(camera, controls, planet) {
     if (!planet || !planet.model) return;
     const planetPosition = planet.model.position;
+    if (planet !== "Sun") {
+      camera.position.set(planetPosition.x + 2, planetPosition.y + 1, planetPosition.z);
+    } else {
+      camera.position.set(planetPosition.x + 4, planetPosition.y + 3, planetPosition.z);
+    }
     controls.target.copy(planetPosition);
     controls.update();
   }

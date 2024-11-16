@@ -113,9 +113,18 @@ loadPlanets(scene, updateProgressBar)
  * @param {Array} planetsArray - Array of loaded planet objects for updates.
  */
 function animate(planetsArray) {
+  const currentPlanet = planetsArray[carouselState.currentIndex];
   const deltaTime = clock.getDelta();
   planetsArray.forEach((planet) => planet.update(planet.rotationSpeed, planet.orbitSpeed, deltaTime));
-  CameraController.updateTarget(controls);
-  controls.update();
+
+  if(currentPlanet != 0) {
+    // create a camera orbit using the planet object's orbit path and 
+    // pre-calculated camera orbit data (add an attribute to the planet class)
+    // add a function in orbitController.js to create the camera orbit
+  }
+
+  CameraController.moveToPlanet(camera, controls,currentPlanet);
+  // CameraController.updateTarget(controls);
+  // controls.update();
   renderer.render(scene, camera);
 }

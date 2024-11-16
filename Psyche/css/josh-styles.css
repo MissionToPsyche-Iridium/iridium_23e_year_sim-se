@@ -197,7 +197,7 @@ main {
   color: white;
   overflow: hidden;
   padding: 20px;
-  transition: width 0.3s ease, background-color 0.3s ease, opacity 0.3s ease; /* Added opacity for smooth closing */  z-index: 10;
+  transition: width 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;  z-index: 10;
   opacity: 0; /* Fully transparent initially */
   display: flex;
   align-items: center; /* Center vertically */
@@ -215,7 +215,7 @@ main {
   font-weight: lighter;
   font-size: 1.5em;
   color: orange;
-  z-index: 11;
+  z-index: 20;
 }
 
 /* Expanded overlay styling - controlled by .overlay-open class */
