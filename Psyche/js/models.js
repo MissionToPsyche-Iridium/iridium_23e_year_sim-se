@@ -115,15 +115,16 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (screenWidth <= iPadAir) {
             return {
                 sun: 50,
-                 mercury: 20,
-                earth: 35,
-                mars: 45,
+                mercury: 20,
+                venus: 30,
+                earth: 20,
+                mars: 30,
                 psyche: 12.5,
                 jupiter: 35,
-                 saturn: 20,
-                 uranus: 20,
-                 neptune: 20,
-                 pluto: 20
+                saturn: 35,
+                uranus: 2.5,
+                neptune: 40,
+                pluto: 20
             };
         } else if (screenWidth <= iPadPro) {
             return {
