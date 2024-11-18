@@ -1,34 +1,5 @@
-/*
-* This model.js creates a scene that is rendered and displayed on a webpage. 
-* 
-* Class:      SER 401
-* Team:       35
-* Project:    NASA Psyche Mission: Year on Psyche Simulation
-* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
-* Date:       11/8/24
-* Revision:   1.1
-*
-*
-*/
-
-/*
-========================================================================================================
-File Start
-========================================================================================================
-*/
-
-/*****************************************************
- * IMPORTS
- * 
- * Importing the needed libraries 
- *  THREE - JavaScript Animation library 
- *  OrbitalControls - Camera control around scene objects
- *  GLTFLoader - Loading and displaying 3D models
- *  
- */
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById('containerOne');
@@ -37,563 +8,510 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    const containers = {};
+    let containerCount = 1;
+    
+    // Make menuContainer clickable by removing pointer-events: none
+    const menuContainer = document.createElement('div');
+    menuContainer.style.position = 'absolute';
+    menuContainer.style.width = '100%';
+    menuContainer.style.height = '100%';
+    menuContainer.style.pointerEvents = 'auto';
+    menuContainer.style.zIndex = '100';
+    container.appendChild(menuContainer);
+
+    // Create initial Psyche display
+    const psycheInitialContainer = document.createElement('div');
+    psycheInitialContainer.style.position = 'absolute';
+    psycheInitialContainer.style.width = '100%';
+    psycheInitialContainer.style.height = '100%';
+    psycheInitialContainer.style.display = 'flex';
+    psycheInitialContainer.style.justifyContent = 'center';
+    psycheInitialContainer.style.alignItems = 'center';
+    container.appendChild(psycheInitialContainer);
+
+    const planetIcons = [
+        { name: 'sun', image: 'images/icons/sun.png' },
+        { name: 'mercury', image: 'images/icons/solarsystem.png', displayName: 'Solar System' },
+        { name: 'venus', image: 'images/icons/daynight.png', displayName: 'Day/Night Cycles' },
+        { name: 'earth', image: 'images/icons/mission.png' },
+        { name: 'gravity', image: 'images/icons/gravity.png' },
+        { name: 'psyche', image: 'images/icons/pickaxe.png' },
+        { name: 'jupiter', image: 'images/icons/disk.png' },
+        { name: 'saturn', image: 'images/icons/helmet.png' },
+        { name: 'uranus', image: 'images/icons/telescope.png' },
+        { name: 'temperature', image: 'images/icons/thermometer.png', displayName: 'Temperature Map' }
+    ];
+
+    planetIcons.forEach(planet => {
+        const planetContainer = document.createElement('div');
+        planetContainer.id = `container${containerCount}`;
+        planetContainer.style.display = 'none';
+        planetContainer.style.position = 'fixed';
+        planetContainer.style.top = '0';
+        planetContainer.style.left = '0';
+        planetContainer.style.width = '100%';
+        planetContainer.style.height = '100%';
+        planetContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        planetContainer.style.zIndex = '1000';
+        planetContainer.style.border = '2px solid #fff';
+        planetContainer.style.borderRadius = '10px';
+        planetContainer.style.padding = '20px';
+        planetContainer.style.boxSizing = 'border-box';
+        planetContainer.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.3)';
+
+        const headerContainer = document.createElement('div');
+        headerContainer.style.display = 'flex';
+        headerContainer.style.justifyContent = 'space-between';
+        headerContainer.style.alignItems = 'center';
+        headerContainer.style.marginBottom = '20px';
+
+        const title = document.createElement('h1');
+        title.textContent = planet.displayName || planet.name.charAt(0).toUpperCase() + planet.name.slice(1);
+        title.style.color = '#fff';
+        title.style.margin = '0';
+        headerContainer.appendChild(title);
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.gap = '10px';
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.innerHTML = '&#x26F6;';
+        fullscreenBtn.style.background = 'none';
+        fullscreenBtn.style.border = 'none';
+        fullscreenBtn.style.color = '#fff';
+        fullscreenBtn.style.fontSize = '20px';
+        fullscreenBtn.style.cursor = 'pointer';
+        fullscreenBtn.style.padding = '5px';
+        fullscreenBtn.onclick = () => {
+            if (!document.fullscreenElement) {
+                planetContainer.requestFullscreen();
+                fullscreenBtn.innerHTML = '&#x26F7;';
+            } else {
+                document.exitFullscreen();
+                fullscreenBtn.innerHTML = '&#x26F6;';
+            }
+        };
+        buttonContainer.appendChild(fullscreenBtn);
+
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '×';
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.color = '#fff';
+        closeBtn.style.fontSize = '24px';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.style.padding = '5px';
+        closeBtn.onclick = () => {
+            planetContainer.style.display = 'none';
+        };
+        buttonContainer.appendChild(closeBtn);
+
+        headerContainer.appendChild(buttonContainer);
+        planetContainer.appendChild(headerContainer);
+
+        document.body.appendChild(planetContainer);
+        containers[planet.name] = {
+            container: planetContainer,
+            id: containerCount++
+        };
+    });
+
+    const radius = Math.min(container.clientWidth, container.clientHeight) * 0.4;
+    const centerX = container.clientWidth / 2;
+    const centerY = container.clientHeight / 2;
+
+    planetIcons.forEach((planet, index) => {
+        const angle = (index / planetIcons.length) * 2 * Math.PI;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+
+        const icon = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = planet.image;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.pointerEvents = 'auto';
+        icon.appendChild(img);
+        
+        icon.style.position = 'absolute';
+        icon.style.width = '40px';
+        icon.style.height = '40px';
+        icon.style.left = `${x - 20}px`;
+        icon.style.top = `${y - 20}px`;
+        icon.style.cursor = 'pointer';
+        icon.style.pointerEvents = 'auto';
+        icon.style.borderRadius = '50%';
+        icon.style.transition = 'transform 0.2s';
+        icon.style.zIndex = '200';
+        icon.id = `button-${planet.name}`;
+        icon.classList.add('planet-icon');
+
+        icon.addEventListener('mouseover', () => {
+            icon.style.transform = 'scale(1.2)';
+            icon.style.cursor = 'pointer';
+        });
+
+        icon.addEventListener('mouseout', () => {
+            icon.style.transform = 'scale(1)';
+        });
+
+        icon.addEventListener('click', (event) => {
+            console.log(`Clicked ${planet.name} icon`);
+            const planetContainer = containers[planet.name].container;
+            planetContainer.style.display = 'block';
+            
+            if (planet.name === 'mercury') {
+                // Create solar system scene
+                const solarSystemScene = new THREE.Scene();
+                const solarSystemCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                
+                const solarSystemRenderer = new THREE.WebGLRenderer({ antialias: true });
+                solarSystemRenderer.setSize(window.innerWidth, window.innerHeight);
+                planetContainer.appendChild(solarSystemRenderer.domElement);
+
+                // Create Sun
+                const sunGeometry = new THREE.SphereGeometry(5, 32, 32);
+                const sunTexture = new THREE.TextureLoader().load('images/textures/sun.jpg');
+                const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture });
+                const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+                solarSystemScene.add(sun);
+
+                // Create planets
+                const planets = [
+                    { name: 'Mercury', size: 0.8, distance: 10, texture: 'mercury.jpg', speed: 0.01 },
+                    { name: 'Venus', size: 1.2, distance: 15, texture: 'venus.jpg', speed: 0.008 },
+                    { name: 'Earth', size: 1.3, distance: 20, texture: 'earth.jpg', speed: 0.006 },
+                    { name: 'Mars', size: 0.9, distance: 25, texture: 'mars.jpg', speed: 0.004 },
+                    { name: 'Jupiter', size: 3, distance: 35, texture: 'jupiter.jpg', speed: 0.002 },
+                    { name: 'Saturn', size: 2.5, distance: 45, texture: 'saturn.jpg', speed: 0.001 },
+                    { name: 'Uranus', size: 1.8, distance: 55, texture: 'uranus.jpg', speed: 0.0008 },
+                    { name: 'Neptune', size: 1.7, distance: 65, texture: 'neptune.jpg', speed: 0.0006 }
+                ];
+
+                const planetMeshes = planets.map(planetData => {
+                    const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
+                    const texture = new THREE.TextureLoader().load(`images/textures/${planetData.texture}`);
+                    const material = new THREE.MeshStandardMaterial({ map: texture });
+                    const planet = new THREE.Mesh(geometry, material);
+                    planet.position.x = planetData.distance;
+                    solarSystemScene.add(planet);
+                    return { mesh: planet, data: planetData };
+                });
+
+                // Add lighting
+                const ambientLight = new THREE.AmbientLight(0x333333);
+                const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
+                solarSystemScene.add(ambientLight);
+                solarSystemScene.add(pointLight);
+                pointLight.position.set(0, 0, 0);
+
+                solarSystemCamera.position.z = 100;
+                solarSystemCamera.position.y = 50;
+
+                const controls = new OrbitControls(solarSystemCamera, solarSystemRenderer.domElement);
+
+                function animateSolarSystem() {
+                    requestAnimationFrame(animateSolarSystem);
+                    
+                    sun.rotation.y += 0.002;
+                    
+                    planetMeshes.forEach(({ mesh, data }) => {
+                        // Orbit around sun
+                        const time = Date.now() * data.speed;
+                        mesh.position.x = Math.cos(time) * data.distance;
+                        mesh.position.z = Math.sin(time) * data.distance;
+                        // Self rotation
+                        mesh.rotation.y += 0.01;
+                    });
+
+                    controls.update();
+                    solarSystemRenderer.render(solarSystemScene, solarSystemCamera);
+                }
+                animateSolarSystem();
+            } else if (planet.name === 'venus') {
+                // Create day/night cycle scene
+                const dayNightScene = new THREE.Scene();
+                const dayNightCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                
+                const dayNightRenderer = new THREE.WebGLRenderer({ antialias: true });
+                dayNightRenderer.setSize(window.innerWidth, window.innerHeight);
+                planetContainer.appendChild(dayNightRenderer.domElement);
+
+                // Add info text
+                const infoDiv = document.createElement('div');
+                infoDiv.style.position = 'absolute';
+                infoDiv.style.top = '80px';
+                infoDiv.style.left = '20px';
+                infoDiv.style.color = 'white';
+                infoDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                infoDiv.style.padding = '20px';
+                infoDiv.style.borderRadius = '10px';
+                infoDiv.innerHTML = `
+                    <h2>Psyche Day/Night Cycle</h2>
+                    <p>Rotation Period (Day Length): ~4.2 Earth hours</p>
+                    <p>Orbital Period (Year Length): ~5 Earth years</p>
+                    <p>Distance from Sun: ~3 AU (Astronomical Units)</p>
+                `;
+                planetContainer.appendChild(infoDiv);
+                
+                // Create Psyche
+                const psycheGeometry = new THREE.SphereGeometry(5, 32, 32);
+                const psycheTexture = new THREE.TextureLoader().load('images/textures/mercury.jpg');
+                const psycheMaterial = new THREE.MeshStandardMaterial({ 
+                    map: psycheTexture,
+                    metalness: 0.7,
+                    roughness: 0.3
+                });
+                const psyche = new THREE.Mesh(psycheGeometry, psycheMaterial);
+                dayNightScene.add(psyche);
+
+                // Add lighting for day/night cycle
+                const ambientLight = new THREE.AmbientLight(0x111111);
+                dayNightScene.add(ambientLight);
+
+                const sunLight = new THREE.DirectionalLight(0xFFFFFF, 1);
+                sunLight.position.set(50, 0, 0);
+                dayNightScene.add(sunLight);
+
+                dayNightCamera.position.z = 15;
+                
+                const controls = new OrbitControls(dayNightCamera, dayNightRenderer.domElement);
+
+                let time = 0;
+                const dayLength = 4.2; // 4.2 Earth hours
+                const yearLength = 1825; // 5 Earth years in days
+
+                function animateDayNight() {
+                    requestAnimationFrame(animateDayNight);
+                    
+                    time += 0.01;
+                    
+                    // Rotate for day/night cycle (faster)
+                    psyche.rotation.y = time * (2 * Math.PI / dayLength);
+                    
+                    // Orbit around sun (slower)
+                    sunLight.position.x = Math.cos(time * (2 * Math.PI / yearLength)) * 50;
+                    sunLight.position.z = Math.sin(time * (2 * Math.PI / yearLength)) * 50;
+                    
+                    controls.update();
+                    dayNightRenderer.render(dayNightScene, dayNightCamera);
+                }
+                animateDayNight();
+            } else if (planet.name === 'gravity') {
+                // Create gravity visualization scene
+                const gravityScene = new THREE.Scene();
+                const gravityCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                
+                const gravityRenderer = new THREE.WebGLRenderer({ antialias: true });
+                gravityRenderer.setSize(window.innerWidth, window.innerHeight);
+                planetContainer.appendChild(gravityRenderer.domElement);
+
+                // Add gravity info text
+                const gravityInfoDiv = document.createElement('div');
+            } else if (planet.name === 'temperature') {
+                // Create temperature visualization scene
+                const tempScene = new THREE.Scene();
+                const tempCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                
+                const tempRenderer = new THREE.WebGLRenderer({ antialias: true });
+                tempRenderer.setSize(window.innerWidth, window.innerHeight);
+                planetContainer.appendChild(tempRenderer.domElement);
+
+                // Create base Psyche sphere
+                const psycheGeometry = new THREE.SphereGeometry(5, 64, 64);
+                
+                // Create temperature gradient using a custom shader material
+                const temperatureMaterial = new THREE.ShaderMaterial({
+                    uniforms: {
+                        sunDirection: { value: new THREE.Vector3(1, 0, 0) },
+                        time: { value: 0 }
+                    },
+                    vertexShader: `
+                        varying vec3 vNormal;
+                        varying vec3 vPosition;
+                        
+                        void main() {
+                            vNormal = normalize(normalMatrix * normal);
+                            vPosition = position;
+                            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                        }
+                    `,
+                    fragmentShader: `
+                        uniform vec3 sunDirection;
+                        uniform float time;
+                        varying vec3 vNormal;
+                        varying vec3 vPosition;
+                        
+                        // Pseudo-random function
+                        float random(vec2 st) {
+                            return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+                        }
+                        
+                        void main() {
+                            // Calculate distance from equator (using y coordinate)
+                            float latitude = asin(normalize(vPosition).y);
+                            float poleEffect = abs(latitude) / (3.14159 / 2.0);
+                            
+                            // Add some random variation
+                            vec2 randomCoord = vPosition.xz * 0.5;
+                            float noise = random(randomCoord) * 5.0;
+                            
+                            // Temperature in Kelvin (88K to 98K)
+                            float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noise;
+                            
+                            vec3 tempColor;
+                            if(temperature > 95.0) {
+                                tempColor = mix(vec3(1.0, 0.0, 0.0), vec3(1.0, 0.5, 0.0), (temperature - 95.0) / 3.0);
+                            } else if(temperature > 92.0) {
+                                tempColor = mix(vec3(0.0, 0.0, 1.0), vec3(0.5, 0.5, 1.0), (temperature - 92.0) / 3.0);
+                            } else {
+                                tempColor = mix(vec3(0.0, 0.0, 0.5), vec3(0.0, 0.0, 1.0), (temperature - 88.0) / 4.0);
+                            }
+                            
+                            gl_FragColor = vec4(tempColor, 1.0);
+                        }
+                    `
+                });
+
+                const psyche = new THREE.Mesh(psycheGeometry, temperatureMaterial);
+                tempScene.add(psyche);
+
+                // Add temperature legend
+                const legendDiv = document.createElement('div');
+                legendDiv.style.position = 'absolute';
+                legendDiv.style.top = '80px';
+                legendDiv.style.right = '20px';
+                legendDiv.style.color = 'white';
+                legendDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                legendDiv.style.padding = '20px';
+                legendDiv.style.borderRadius = '10px';
+                legendDiv.innerHTML = `
+                    <h2>Psyche Temperature Map</h2>
+                    <div style="display: flex; align-items: center; margin: 10px 0;">
+                        <div style="background: linear-gradient(to bottom, #ff0000, #ff8000, #0000ff, #000080); width: 20px; height: 200px; margin-right: 10px;"></div>
+                        <div>
+                            <div>98K (Warmest)</div>
+                            <div style="margin-top: 80px;">93K</div>
+                            <div style="margin-top: 80px;">88K (Coldest)</div>
+                        </div>
+                    </div>
+                    <p>Psyche's temperature variations are due to:</p>
+                    <ul>
+                        <li>Distance from Sun (3 AU)</li>
+                        <li>Equatorial vs Polar regions</li>
+                        <li>Local surface variations</li>
+                        <li>Metallic heat conductivity</li>
+                    </ul>
+                `;
+                planetContainer.appendChild(legendDiv);
+
+                // Add sun light
+                const sunLight = new THREE.DirectionalLight(0xFFFFFF, 2);
+                sunLight.position.set(50, 0, 0);
+                tempScene.add(sunLight);
+
+                // Add ambient light
+                const ambientLight = new THREE.AmbientLight(0x333333);
+                tempScene.add(ambientLight);
+
+                tempCamera.position.z = 15;
+
+                const controls = new OrbitControls(tempCamera, tempRenderer.domElement);
+
+                function animateTemp() {
+                    requestAnimationFrame(animateTemp);
+                    psyche.rotation.y += 0.005;
+                    
+                    // Update sun direction in shader
+                    const time = Date.now() * 0.001;
+                    sunLight.position.x = Math.cos(time * 0.2) * 50;
+                    sunLight.position.z = Math.sin(time * 0.2) * 50;
+                    temperatureMaterial.uniforms.sunDirection.value.copy(sunLight.position).normalize();
+                    
+                    controls.update();
+                    tempRenderer.render(tempScene, tempCamera);
+                }
+                animateTemp();
+
+            } else if (planet.name === 'psyche') {
+                // Create new scene for Psyche model
+                const psycheScene = new THREE.Scene();
+                const psycheCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                
+                const psycheRenderer = new THREE.WebGLRenderer({ antialias: true });
+                psycheRenderer.setSize(window.innerWidth, window.innerHeight);
+                planetContainer.appendChild(psycheRenderer.domElement);
+                
+                // Create a sphere geometry for Psyche with Mercury's texture
+                const psycheGeometry = new THREE.SphereGeometry(5, 32, 32);
+                const psycheTexture = new THREE.TextureLoader().load('images/textures/mercury.jpg');
+                const psycheMaterial = new THREE.MeshStandardMaterial({ map: psycheTexture });
+                const psycheModel = new THREE.Mesh(psycheGeometry, psycheMaterial);
+                psycheScene.add(psycheModel);
+                
+                // Add lighting
+                const psycheAmbientLight = new THREE.AmbientLight(0x333333);
+                const psychePointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
+                psycheScene.add(psycheAmbientLight);
+                psycheScene.add(psychePointLight);
+                psychePointLight.position.set(50, 50, 50);
+                
+                psycheCamera.position.z = 15;
+                
+                const psycheControls = new OrbitControls(psycheCamera, psycheRenderer.domElement);
+                
+                function animatePsyche() {
+                    requestAnimationFrame(animatePsyche);
+                    psycheModel.rotation.y += 0.005;
+                    psycheControls.update();
+                    psycheRenderer.render(psycheScene, psycheCamera);
+                }
+                animatePsyche();
+            }
+            
+            event.stopPropagation();
+        });
+
+        menuContainer.appendChild(icon);
+    });
+
+    // Create scene for Psyche in main container
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 2000);
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.z = 15;
+
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     container.appendChild(renderer.domElement);
 
-    const loader = new GLTFLoader();
-    let Sun, selectedPlanet;
-    const planets = {};
-    let orbitActive = true;
-    let isInspecting = false;
-    let activePlanet = "psyche";
+    // Create Psyche model for main container
+    const psycheGeometry = new THREE.SphereGeometry(5, 32, 32);
+    const psycheTexture = new THREE.TextureLoader().load('images/textures/mercury.jpg');
+    const psycheMaterial = new THREE.MeshStandardMaterial({ map: psycheTexture });
+    const psycheModel = new THREE.Mesh(psycheGeometry, psycheMaterial);
+    scene.add(psycheModel);
 
-    const toggleButton = document.getElementById("toggle-rotate");
-    const panSpeed = 2;
-    const zoomStep = 5;
-
-    const screenWidth = window.innerWidth;
-    const iPhoneSE = 375;
-    const iPhone14ProMax = 430;
-    const iPadMini = 768;
-    const iPadAir = 820;
-    const iPadPro = 1024;
-    const p960 = 1280;
-    const p1080 = 1920;
-    const p1440 = 2560;
-    const p2160 = 3840;
-    const p2160Wide = 5120;
-
-
-
-    const getZoomDistances = () => {
-        const screenWidth = window.innerWidth;
-        console.log(screenWidth);
-    
-        if (screenWidth <= iPhoneSE) {
-            console.log("optimized for an iPhone SE");
-            return {
-                sun: 80,
-                mercury: 20,
-                earth: 55,
-                mars: 65,
-                psyche: 25,
-                jupiter: 60,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
-                pluto: 20
-            };
-        } else if (screenWidth <= iPhone14ProMax) {
-            console.log("optimized for an iPhone 14 Pro Max");
-            return {
-                sun: 65,
-                mercury: 20,
-                earth: 30,
-                mars: 50,
-                psyche: 20,
-                jupiter: 45,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
-                pluto: 20
-            };
-        } else if (screenWidth <= iPadMini) {
-            console.log("optimized for an iPad Mini");
-            return {
-                sun: 55,
-                mercury: 20,
-                earth: 30,
-                mars: 40,
-                psyche: 15,
-                jupiter: 40,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
-                pluto: 20
-            };
-        } else if (screenWidth <= iPadAir) {
-            console.log("optimized for an iPad Air");
-            return {
-                sun: 50,
-                mercury: 20,
-                earth: 35,
-                mars: 45,
-                psyche: 12.5,
-                jupiter: 35,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
-                pluto: 20
-            };
-        } else if (screenWidth <= iPadPro) {
-            console.log("optimized for an iPad Pro");
-            return {
-                sun: 45,
-                mercury: 20,
-                earth: 30,
-                mars: 40,
-                psyche: 12,
-                jupiter: 30,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
-                pluto: 20
-            }
-        } else if (screenWidth <= p2160Wide) {
-            console.log("optimized for a 2k monitor");
-            return {
-                sun: 30,
-                mercury: 20,
-                earth: 15,
-                mars: 20,
-                psyche: 7.5,
-                jupiter: 17.5,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
-                pluto: 20
-                }
-        } else {
-            return {
-                sun: 35,
-                mercury: 20,
-                earth: 20,
-                mars: 30,
-                psyche: 10,
-                jupiter: 20,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
-                pluto: 20
-                }
-        }
-    };
-    
-    const zoomDistances = getZoomDistances();
-    
-
-    // Load Sun Model
-    loader.load('models/sun/sun.glb', (gltf) => {
-        Sun = gltf.scene;
-        Sun.position.set(0, 0, 0);
-        Sun.scale.set(0.0015, 0.0015, 0.0015);
-        Sun.name = "Sun";
-        scene.add(Sun);
-
-        // Add the Sun to the planets object for interaction
-        planets["sun"] = { object: Sun, orbitRadius: 0, angle: 0, speed: 0 };
-
-        // Add a PointLight at the Sun's position to simulate sunlight
-        const sunLight = new THREE.PointLight(0xffffff, 2, 1000);
-        sunLight.position.copy(Sun.position);
-        scene.add(sunLight);
-    });
-
-    const loadPlanet = (name, path, orbitRadius, scale, speed) => {
-        loader.load(path, (gltf) => {
-            const planet = gltf.scene;
-            planet.position.set(orbitRadius, 0, 0);
-            planet.scale.set(scale, scale, scale);
-            planet.name = name;
-            scene.add(planet);
-            planets[name.toLowerCase()] = { object: planet, orbitRadius, angle: 0, speed };
-
-            if (name.toLowerCase() === "psyche") {
-                selectedPlanet = planets["psyche"];
-                isInspecting = false;
-
-                const psycheZoom = zoomDistances["psyche"];
-                camera.position.set(
-                    selectedPlanet.object.position.x + psycheZoom,
-                    selectedPlanet.object.position.y + psycheZoom,
-                    selectedPlanet.object.position.z + psycheZoom
-                );
-                camera.lookAt(selectedPlanet.object.position);
-
-                toggleButton.textContent = "Inspect Psyche";
-            }
-            planetsLoaded++;
-            console.log("Object", planetsLoaded, "/", totalObjectsToLoad, "have been loaded" );
-            console.log(name, "is orbiting at a speed of", speed);
-
-            checkAllPlanetsLoaded();
-        });  
-    };
-
-    let planetsLoaded = 0;
-    let totalObjectsToLoad = 9; 
-
-    function checkAllPlanetsLoaded() {
-        if (planetsLoaded === totalObjectsToLoad) {
-            console.log("All objects have been successfully loaded!");
-        }
-    }
-    function calculateOrbit(planet_orbit){
-        const full_rotation = 2 * Math.PI;
-        const FPS = 60;
-        const earth_timing = 10;
-        return full_rotation / (planet_orbit * earth_timing * FPS)
-    }
-
-    const mercury_year = .241;
-    const venus_year = 0.616
-    const earth_year = 1;
-    const mars_year = 1.88;
-    const psyche_year = 5.01;
-    const jupiter_year = 11.87;
-    const saturn_year = 29.47;
-    const uranus_year = 84.07;
-    const neptune_year = 164.9;
-
-    // Set Mars and Psyche with different orbits and speeds
-    loadPlanet("Mercury", "models/Mercury/Mercury.glb", 57, 0.000003, calculateOrbit(mercury_year));
-    loadPlanet("Venus", "models/Venus/Venus.glb", 108, .000002, 0.005);
-    loadPlanet("Earth", "models/earth/earth.glb", 149, 6, calculateOrbit(earth_year));
-    loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, calculateOrbit(mars_year));
-    loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
-    loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , calculateOrbit(jupiter_year));
-    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 15, 0.005);
-    loadPlanet("Uranus", "models/Uranus/Uranus.glb", 2900, 1, 0.005);
-    loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, 0.005);
-   // loadPlanet("Pluto", "models/pluto/pluto.glb", 5900, 1, 0.005);
-
-    // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+    // Add lighting
+    const ambientLight = new THREE.AmbientLight(0x333333);
+    const pointLight = new THREE.PointLight(0xFFFFFF, 2, 300);
     scene.add(ambientLight);
+    scene.add(pointLight);
+    pointLight.position.set(50, 50, 50);
 
-    // Orbit Controls
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.enableZoom = true;
-    controls.enablePan = true;
+    controls.enableZoom = true; // Enable zooming
+    controls.enablePan = true;  // Enable panning
+    controls.minDistance = 5;   // Set minimum zoom distance
+    controls.maxDistance = 100; // Set maximum zoom distance
 
-    const zoomToPlanet = (planet) => {
-        const planetName = planet.object.name.toLowerCase();
-        const zoomDistance = zoomDistances[planetName] || 20;
-
-        camera.position.set(
-            planet.object.position.x + zoomDistance,
-            planet.object.position.y + zoomDistance,
-            planet.object.position.z + zoomDistance
-        );
-        camera.lookAt(planet.object.position);
-
-        controls.target.copy(planet.object.position);
+    function animate() {
+        requestAnimationFrame(animate);
+        psycheModel.rotation.y += 0.005;
         controls.update();
-    };
-
-    // Close hamburger menu function
-    const closeHamburgerMenu = () => {
-        if (planetMenu.classList.contains("menu-open")) {
-            planetMenu.classList.remove("menu-open");
-            planetHamburger.classList.remove("is-open");
-        }
-    };
-
-    const selectPlanet = (planetName) => {
-        activePlanet = planetName;
-        console.log(activePlanet + " has been selected");
-        if (planets[planetName]) {
-            selectedPlanet = planets[planetName];
-            isInspecting = false;
-            zoomToPlanet(selectedPlanet);
-            toggleButton.textContent = `Inspect ${planetName.charAt(0).toUpperCase() + planetName.slice(1)}`;
-
-             // Close the hamburger menu if it is open
-            closeHamburgerMenu();
-        } else {
-            console.warn(`Planet ${planetName} not found in planets object.`);
-        }
-    };
-
-    // Event listener for planet buttons
-    document.querySelectorAll(".horizontal-buttons").forEach(button => {
-        button.addEventListener("click", () => {
-            const planetName = button.id.replace("button-", "").toLowerCase();
-            selectPlanet(planetName);
-        });
-    });
-
-    // Event listener for the toggle button
-    toggleButton.addEventListener("click", () => {
-        isInspecting = !isInspecting;
-
-        if (isInspecting && selectedPlanet) {
-            orbitActive = false;
-            toggleButton.textContent = "Restart Orbit";
-
-            zoomToPlanet(selectedPlanet);
-        } else if (selectedPlanet) {
-            orbitActive = true;
-            const planetName = selectedPlanet.object.name.charAt(0).toUpperCase() + selectedPlanet.object.name.slice(1);
-            toggleButton.textContent = `Inspect ${planetName}`;
-
-            zoomToPlanet(selectedPlanet);
-        }
-    });
-
-    let planetMenuWasVisible = screenWidth <= iPadPro;
-
-    // Add an event listener for the reset button
-    document.getElementById("reset").addEventListener("click", () => {
-
-        closeHamburgerMenu();
-        
-        selectedPlanet = planets["psyche"];
-        activePlanet="psyche";
-        console.log(activePlanet + " has been selected");
-        isInspecting = false;
-        orbitActive = true;
-        
-        const psycheZoom = zoomDistances["psyche"];
-        camera.position.set(
-            selectedPlanet.object.position.x + psycheZoom,
-            selectedPlanet.object.position.y + psycheZoom,
-            selectedPlanet.object.position.z + psycheZoom
-        );
-        camera.lookAt(selectedPlanet.object.position);
-
-        toggleButton.textContent = "Inspect Psyche";
-        controls.target.copy(selectedPlanet.object.position);
-        controls.update();
-    });
-
-    const planetHamburgerIcon = document.getElementById('planet-hamburger');
-
-    const hideHamburgerButton = () => {
-        planetHamburgerIcon.style.display = "none"; // Hide the hamburger button
-    };
-    
-    // Directly show the hamburger button
-    const showHamburgerButton = () => {
-        planetHamburgerIcon.style.display = "block"; // Show the hamburger button
-    };
-    
-    document.getElementById("info").addEventListener("click", () => {
-        console.log("Loading information for " + activePlanet);
-
-        hideHamburgerButton();
-    
-        localStorage.setItem('planetMenuWasVisible', planetMenuWasVisible);
-        
-        // Load the popup script for the active planet
-        const existingScript = document.getElementById("planet-popup-script");
-        if (existingScript) {
-            existingScript.remove();
-        }
-    
-        const script = document.createElement("script");
-        script.id = "planet-popup-script";
-        script.src = `js/${activePlanet}_popup.js`;
-        script.onload = () => {
-            console.log(`${activePlanet}_popup.js loaded successfully.`);
-            if (typeof openPopup === "function") {
-                openPopup();
-            } else {
-                console.warn(`openPopup function not found in ${activePlanet}_popup.js`);
-            }
-        };
-        script.onerror = () => {
-            console.error(`Failed to load ${activePlanet}_popup.js`);
-            showHamburgerButton();
-        };
-    
-        document.body.appendChild(script);
-    });
-
-     // Fullscreen button handling
-     fullscreen.addEventListener("click", () => {
-        closeHamburgerMenu();
-    
-        if (!document.fullscreenElement) {
-            container.requestFullscreen().then(() => {
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                hideHamburgerButton();
-            });
-        } else {
-            document.exitFullscreen().then(() => {
-                renderer.setSize(container.clientWidth, container.clientHeight);
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                showHamburgerButton();
-            });
-        }
-    });
- 
- /*****************************************************
-  * listener "mouseover"
-  * 
-  * This listener is invoked when the mouse hovers over the information button. It will change the logo
-  * displaying an alternative colored information button
-  * 
-  * arguments:
-  *  event - mouse hovers over the information button
-  * 
-  * returns:
-  *  nothing
-  * 
-  * changes: 
-  *  The information button will change
-  * 
-  */
- document.getElementById('info').addEventListener('mouseover', function() {
-     document.getElementById('info_button').src = "images/main_images/info_button_color.png";
-   });
-   
-   /*****************************************************
-    * listener "mouseout"
-    * 
-    * This listener is invoked when the mouse moves away from the information button. It will change the logo
-    * displaying the original information button
-    * 
-    * arguments:
-    *  event - mouse hovers over the information button
-    * 
-    * returns:
-    *  nothing
-    * 
-    * changes: 
-    *  The information button will change
-    * 
-    */
-   document.getElementById('info').addEventListener('mouseout', function() {
-     document.getElementById('info_button').src = "images/main_images/info_button.png";
-   });
-   
-   /*****************************************************
-    * listener "mouseover"
-    * 
-    * This listener is invoked when the mouse hovers over the information button. It will change the logo
-    * displaying an alternative colored information button
-    * 
-    * arguments:
-    *  event - mouse hovers over the information button
-    * 
-    * returns:
-    *  nothing
-    * 
-    * changes: 
-    *  The information button will change
-    * 
-    */
-   document.getElementById('fullscreen').addEventListener('mouseover', function() {
-     document.getElementById('fullscreen_button').src = "images/main_images/full_screen_bracket_color.png";
-   });
-   
-   /*****************************************************
-    * listener "mouseout"
-    * 
-    * This listener is invoked when the mouse moves away from the information button. It will change the logo
-    * displaying the original information button
-    * 
-    * arguments:
-    *  event - mouse hovers over the information button
-    * 
-    * returns:
-    *  nothing
-    * 
-    * changes: 
-    *  The information button will change
-    * 
-    */
-   document.getElementById('fullscreen').addEventListener('mouseout', function() {
-     document.getElementById('fullscreen_button').src = "images/main_images/full_screen_bracket.png";
-   });
-
-    // Render loop
-    function render() {
-        requestAnimationFrame(render);
-
-        if (Sun && orbitActive) {
-            Sun.rotation.y += 0.01;
-        }
-
-        Object.values(planets).forEach(planetData => {
-            if (orbitActive) {
-                planetData.angle += planetData.speed;
-                planetData.object.position.x = planetData.orbitRadius * Math.cos(planetData.angle);
-                planetData.object.position.z = planetData.orbitRadius * Math.sin(planetData.angle);
-            }
-            if (!isInspecting) {
-                planetData.object.rotation.y += 0.01;
-            }
-        });
-
-        if (!isInspecting && selectedPlanet) {
-            zoomToPlanet(selectedPlanet);
-        } else {
-            controls.update();
-        }
-
         renderer.render(scene, camera);
     }
-    render();
-
-    const planetHamburger = document.getElementById("planet-hamburger");
-    const planetMenu = document.getElementById("planet-menu");
-
-    planetHamburger.addEventListener("click", () => {
-        // Toggle the menu visibility and the "is-open" class for the hamburger icon
-        planetMenu.classList.toggle("menu-open");
-        planetHamburger.classList.toggle("is-open");
-    });
-
-
-
-
-
-
-    // Function to update zoom distances and camera settings
-    const updateZoomBasedOnWindowSize = () => {
-        // Recalculate zoom distances
-        const zoomDistances = getZoomDistances();
-
-        if (selectedPlanet) {
-            const planetName = selectedPlanet.object.name.toLowerCase();
-            const zoomDistance = zoomDistances[planetName] || 20;
-
-            console.log("zoom distance is:", zoomDistance);
-
-            // Update the camera's position based on the new zoom distance
-            camera.position.set(
-                selectedPlanet.object.position.x + zoomDistance,
-                selectedPlanet.object.position.y + zoomDistance,
-                selectedPlanet.object.position.z + zoomDistance
-            );
-
-            // Ensure the camera is pointing to the selected planet
-            camera.lookAt(selectedPlanet.object.position);
-            controls.target.copy(selectedPlanet.object.position);
-        }
-
-        // Update renderer size and camera aspect ratio
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-
-        // Ensure the controls are updated
-        controls.update();
-    };
-
-    // Debounce to prevent excessive calls
-    let resizeTimeout;
-    const debounceResize = () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(updateZoomBasedOnWindowSize, 100);
-    };
-
-    // Attach the resize event listener
-    window.addEventListener("resize", debounceResize);
-
-    // Ensure zoom is updated on page load as well
-    updateZoomBasedOnWindowSize();
-
-    
+    animate();
 });
