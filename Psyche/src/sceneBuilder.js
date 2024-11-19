@@ -10,7 +10,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { initCarousel, carouselState } from './carousel.js';
 import { loadPlanets } from './planetLoader.js';
 import { CameraController } from './cameraController.js';
-import { createOrbit } from './orbitHandler.js';
+import { createOrbit,precomputeOrbit, updateOrbitFromPrecomputed } from './orbitHandler.js';
 import { initOverlay } from './overlayController.js';
 
 /**
@@ -35,6 +35,13 @@ container.appendChild(renderer.domElement);
  */
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambientLight);
+
+/**
+ * configure frame rate
+ */
+let lastTime = 0;
+const desiredFPS = 30;
+const frameInterval = 1000 / desiredFPS;
 
 /**
  * Orbit Controls Setup
@@ -83,21 +90,35 @@ function updateProgressBar(progress) {
 loadPlanets(scene, updateProgressBar)
   .then(({ planets, backgroundSphere }) => {
     planets.forEach((planet) => {
-      createOrbit(planet.orbitRadius, scene);
+      planet.precomputedOrbit = precomputeOrbit(
+        planet.orbitRadius,
+        planet.eccentricity,
+        planet.inclination
+      );
+      createOrbit(
+        planet.orbitRadius,
+        planet.eccentricity,
+        planet.inclination,
+        scene
+      );
     });
 
-    // Hide loading screen when ready
     loadingScreen.style.opacity = '0';
     setTimeout(() => {
       loadingScreen.style.display = 'none';
     }, 500); 
 
     initCarousel(planets);
-
-    // Pass the backgroundSphere to CameraController
     CameraController.setup(camera, controls, planets, backgroundSphere);
-
-    renderer.setAnimationLoop(() => animate(planets));
+    
+    let lastFrameTime = 0;
+    renderer.setAnimationLoop((time) => {
+      if (time - lastTime >= frameInterval) {
+        lastTime = time;
+        console.log(`Frame interval: ${time - lastFrameTime}ms`);
+        animate(planets);
+      }
+    });
   })
   .catch((error) => {
     console.error("Error loading planets:", error);
@@ -115,7 +136,14 @@ loadPlanets(scene, updateProgressBar)
 function animate(planetsArray) {
   const currentPlanet = planetsArray[carouselState.currentIndex];
   const deltaTime = clock.getDelta();
-  planetsArray.forEach((planet) => planet.update(planet.rotationSpeed, planet.orbitSpeed, deltaTime));
+  planetsArray.forEach((planet) => {
+    if (planet.precomputedOrbit) {
+      // Use precomputed orbit for smoother performance
+      updateOrbitFromPrecomputed(planet, planet.elapsedTime, planet.orbitSpeed);
+      planet.elapsedTime += deltaTime; // Update elapsed time for this planet
+    }
+    planet.update(planet.rotationSpeed, planet.orbitSpeed, deltaTime);
+  });
 
   if(currentPlanet != 0) {
     // create a camera orbit using the planet object's orbit path and 
@@ -128,3 +156,5 @@ function animate(planetsArray) {
   // controls.update();
   renderer.render(scene, camera);
 }
+
+
