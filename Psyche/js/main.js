@@ -1,5 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { loadPlanets } from './planetLoader.js';
+import { CameraController } from './cameraController.js';
+import { createOrbit } from './orbitHandler.js';
 
 const canvasContainer = document.getElementById('canvas-container');
 
@@ -18,27 +22,34 @@ canvasContainer.appendChild(renderer2.domElement);
 
 const scene1 = new THREE.Scene();
 const camera1 = new THREE.PerspectiveCamera(75, canvasContainer.offsetWidth / canvasContainer.offsetHeight, 0.1, 1000);
-camera1.position.z = 5;
+camera1.position.z = 1;
 
 const controls1 = new OrbitControls(camera1, renderer1.domElement);
 controls1.enableDamping = true;
 controls1.dampingFactor = 0.05;
 
-const textureLoader = new THREE.TextureLoader();
-const woodTexture = textureLoader.load('/resources/textures/wood.jpg');
+const gltfLoader = new GLTFLoader();
+// loac scene 1
+gltfLoader.load(
+  '/resources/models/sun1.glb', 
+  function (gltf) {
+    const model = gltf.scene;
+    model.position.set(0, 0, 0); 
+    model.scale.set(1, 1, 1); 
+    scene1.add(model); 
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total * 100) + '% loaded'); 
+  },
+  function (error) {
+    console.error('An error occurred:', error); 
+  }
+);
 
-const cubeGeometry = new THREE.BoxGeometry();
-const cubeMaterial = new THREE.MeshStandardMaterial({
-  map: woodTexture,
-  roughness: 0.6,
-  metalness: 0.2,
-});
-
-const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-scene1.add(cube);
-cube.position.set(0, 0, 0);
 
 const scene2 = new THREE.Scene();
+scene2.background = new THREE.Color(0xFFFFFF);
+
 const camera2 = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 camera2.position.z = 3;
 
@@ -46,17 +57,18 @@ const controls2 = new OrbitControls(camera2, renderer2.domElement);
 controls2.enableDamping = true;
 controls2.dampingFactor = 0.05;
 
-const sphereTexture = textureLoader.load('/resources/textures/ds.jpg');
-const sphereGeometry = new THREE.SphereGeometry(0.7, 32, 32);
-const sphereMaterial = new THREE.MeshStandardMaterial({
-  map: sphereTexture,
-  roughness: 0.5,
-  metalness: 0.5,
-});
-
-const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-scene2.add(sphere);
-sphere.position.set(0, 0, 0);
+// load scene 2 solar system
+loadPlanets(scene2)
+  .then(({ planets }) => {
+    planets.forEach((planet) => {
+      createOrbit(planet.orbitRadius, scene2);
+    });
+    CameraController.setup()
+    renderer2.setAnimationLoop(() => animate(planets));
+  })
+  .catch((error) => {
+    console.error("Error loading planets:", error);
+  });
 
 const light1 = new THREE.DirectionalLight(0xffffff, 2);
 light1.position.set(5, 5, 5);
@@ -75,11 +87,6 @@ scene2.add(ambientLight2);
 // Animation loop
 function animate() {
   requestAnimationFrame(animate);
-
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-  sphere.rotation.x -= 0.01;
-  sphere.rotation.y -= 0.01;
 
   controls1.update();
   controls2.update();
