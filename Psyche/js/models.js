@@ -104,15 +104,16 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (screenWidth <= iPadMini) {
             console.log("optimized for an iPad Mini");
             return {
-                sun: 55,
-                mercury: 20,
-                earth: 30,
-                mars: 40,
+                sun: 45,
+                mercury: 15,
+                venus: 25,
+                earth: 15,
+                mars: 30,
                 psyche: 15,
-                jupiter: 40,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
+                jupiter: 30,
+                saturn: 30,
+                uranus: 2,
+                neptune: 40,
                 pluto: 20
             };
         } else if (screenWidth <= iPadAir) {
@@ -257,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, calculateOrbit(mars_year));
     loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
     loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , calculateOrbit(jupiter_year));
-    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 15, 0.005);
+    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, .00015, 0.005);
     loadPlanet("Uranus", "models/Uranus/Uranus.glb", 2900, 1, 0.005);
     loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, 0.005);
    // loadPlanet("Pluto", "models/pluto/pluto.glb", 5900, 1, 0.005);
