@@ -132,12 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 mercury: 20,
                 venus: 30,
                 earth: 20,
-                mars: 30,
-                psyche: 12.5,
-                jupiter: 35,
-                saturn: 35,
-                uranus: 2.5,
-                neptune: 40,
+                mars: 20,
+                psyche: 12,
+                jupiter: 25,
+                saturn: 20,
+                uranus: 20,
+                neptune: 20,
                 pluto: 20
             }
         } else if (screenWidth <= p2160Wide) {
