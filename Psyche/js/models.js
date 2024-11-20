@@ -251,8 +251,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const neptune_year = 164.9;
 
     // Set Mars and Psyche with different orbits and speeds
-    loadPlanet("Mercury", "models/Mercury/Mercury.glb", 57, 0.000003, 0.005);
-    loadPlanet("Venus", "models/Venus/Venus.glb", 108, .000002, 0.005);
+    loadPlanet("Mercury", "models/Mercury/Mercury.glb", 57, 0.000003, calculateOrbit(mercury_year));
+    loadPlanet("Venus", "models/Venus/Venus.glb", 108, .000002, calculateOrbit(venus_year));
     loadPlanet("Earth", "models/earth/earth.glb", 149, 6, calculateOrbit(earth_year));
     loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, calculateOrbit(mars_year));
     loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
