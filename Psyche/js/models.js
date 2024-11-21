@@ -233,6 +233,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    /*****************************************************
+     * calculateOrbit()
+     * 
+     * This function calculates each planets orbit speed based off of earths speed. 
+     * 
+     * arguments:
+     *  planet_orbit
+     * 
+     * returns:
+     *  orbit speed 
+     * 
+     * changes: 
+     *  The planets orbit speed will have changed. 
+     * 
+     */
     function calculateOrbit(planet_orbit){
         const full_rotation = 2 * Math.PI;
         const FPS = 60;
@@ -240,6 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return full_rotation / (planet_orbit * earth_timing * FPS)
     }
 
+    // Orbit years for planets in relation to Earth's yearly orbit length
     const mercury_year = .241;
     const venus_year = 0.616
     const earth_year = 1;
@@ -250,16 +266,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const uranus_year = 84.07;
     const neptune_year = 164.9;
 
-    // Set Mars and Psyche with different orbits and speeds
+    // Set all loaded objects with different orbits and speeds
     loadPlanet("Mercury", "models/Mercury/Mercury.glb", 57, 0.000003, calculateOrbit(mercury_year));
     loadPlanet("Venus", "models/Venus/Venus.glb", 108, .000002, calculateOrbit(venus_year));
     loadPlanet("Earth", "models/earth/earth.glb", 149, 6, calculateOrbit(earth_year));
     loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, calculateOrbit(mars_year));
     loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
     loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , calculateOrbit(jupiter_year));
-    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 15, 0.005);
+    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, 15, calculateOrbit(saturn_year));
     loadPlanet("Uranus", "models/Uranus/Uranus.glb", 2900, 1, 0.005);
-    loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, 0.005);
+    loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, calculateOrbit(neptune_year));
    // loadPlanet("Pluto", "models/pluto/pluto.glb", 5900, 1, 0.005);
 
     // Add ambient light
