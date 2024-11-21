@@ -128,13 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         } else if (screenWidth <= iPadPro) {
             return {
-                sun: 50,
+                sun: 40,
                 mercury: 20,
-                venus: 30,
+                venus: 20,
                 earth: 20,
                 mars: 20,
-                psyche: 12,
-                jupiter: 25,
+                psyche: 8,
+                jupiter: 17,
                 saturn: 20,
                 uranus: 20,
                 neptune: 20,
