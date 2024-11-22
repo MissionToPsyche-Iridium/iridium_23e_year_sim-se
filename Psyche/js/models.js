@@ -152,10 +152,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 earth: 15,
                 mars: 20,
                 psyche: 7.5,
-                jupiter: 17.5,
-                saturn: 20,
-                uranus: 20,
-                neptune: 20,
+                jupiter: 18,
+                saturn: 1.5,
+                uranus:2,
+                neptune: 25,
                 pluto: 20
                 }
         } else {
@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadPlanet("Mars", "models/Mars/Mars.glb", 228, 1, calculateOrbit(mars_year));
     loadPlanet("Psyche", "models/psyche/Psyche.glb", 378, 1, 0.015);
     loadPlanet("Jupiter", "models/jupiter/jupiter.glb", 778, 1 , calculateOrbit(jupiter_year));
-    loadPlanet("Saturn", "models/saturn/saturn.glb", 1400, .00015, 0.005);
+    loadPlanet("Saturn", "models/Saturn/saturn1.glb", 1400, 1, 0.005);
     loadPlanet("Uranus", "models/Uranus/Uranus.glb", 2900, 1, 0.005);
     loadPlanet("Neptune", "models/Neptune/Neptune2.glb", 4500, .04, 0.005);
    // loadPlanet("Pluto", "models/pluto/pluto.glb", 5900, 1, 0.005);
