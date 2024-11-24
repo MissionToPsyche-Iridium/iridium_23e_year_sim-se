@@ -88,16 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         } else if (screenWidth <= iPhone14ProMax) {
             return {
-                sun: 65,
+                sun: 60,
                  mercury: 20,
-                earth: 30,
-                mars: 50,
-                psyche: 20,
-                jupiter: 45,
-                 saturn: 20,
-                 uranus: 20,
-                 neptune: 20,
-                 pluto: 20
+                 venus: 35,
+                earth: 22,
+                mars: 40,
+                psyche: 16,
+                jupiter: 42,
+                 saturn: 40,
+                 uranus: 2.7,
+                 neptune: 55,
             };
         } else if (screenWidth <= iPadMini) {
             return {
