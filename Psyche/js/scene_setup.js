@@ -96,7 +96,7 @@ export function setupScene(scene, orbitalDistances) {
     jupiter: 1.303 * Math.PI / 180,  // 1.303 degrees
     psyche: 3.095 * Math.PI / 180,    // 3.095 degrees
     neptune: 0 * Math.PI / 180,    // 28 degrees // *TODO fix this scale tilt once implemented 
-    uranus: 98 * Math.PI / 180 //98 degrees
+    uranus: 0 * Math.PI / 180 //98 degrees
   };
 
   // Draw circular paths for each planet and asteroid
