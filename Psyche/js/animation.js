@@ -84,7 +84,8 @@ export function startAnimation(objects, labels, controls, camera, renderer, scen
     'earth': { distance: 25, scale: 1 },
     'mars': { distance: 30, scale: 0.9 },
     'jupiter': { distance: 45, scale: 1.5 },
-    'neptune': { distance: 40, scale: 1 }   
+    'neptune': { distance: 40, scale: 1 },
+    'uranus': { distance: 55, scale: 1}   
   };
 
   // Add keyboard event listener for ESC key
