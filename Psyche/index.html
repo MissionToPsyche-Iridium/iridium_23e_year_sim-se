@@ -1,48 +1,3 @@
-<!--
-  Name: Psyche 16
-  Team: 35
-  Members: Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
-  Version: 1.2
-  Date: 11/11/2024
-* index.html
-*
-* This file is the driver of the three.js program. It is the root file that is the only open file in the browser window. 
-* This file loads all of the CSS styles and JavaScript files from references.
-* 
-* Class:      SER 401
-* Team:       35
-* Project:    NASA Psyche Mission: Year on Psyche Simulation
-* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
-* Date:       11/8/24
-* Revision:   1.1
-*
-* Files Linked:
-*    css/style.css -  This file defines the presentation aspects of this HTML file
-*
-*    css/psyche_style.css -  This file defines the presentation aspects of the model files
-*
-*    css/popup_style.css -  This file defines the presentation aspects of the popup files
-*
-*    js/main.js -     This file is the main driver of the Psyche simulation. Contains
-*                     the asteroid model and action listeners to manipulate. 
-*
-*    js/<planet/asteroid>_popup.js -    This file handles the interactions on the popup screen for the <planet/asteroid>
-*  
-*    js/model.js -    This file handles the interactions with the models
-* 
-*    js/scroll.js -    This file handles the UI while the user scrolls
-* 
-*    js/screen_testing.js -    This file is used for testing purposes only
-* 
--->
-
-<!--
-========================================================================================================
-File Start
-========================================================================================================
---> 
-
-<!-- Defines the document type and version of HTML-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,99 +7,55 @@ File Start
     <link rel="stylesheet" href="css/popup_style.css">
     <link rel="stylesheet" href="css/psyche_style.css">
     <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        main {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        #one {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .containerOne {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
 </head>
 <body>
-    <!-- 'header' section for the main navigation of the page-->
-    <header id="header">
-        <div id="header_navigation">
-            <div class="center_logo">
-              <a href="index.html"><img src="images/main_images/Psyche_BadgeSolid_Color.png" id="main_logo" class="logos"></a>
-            </div>
-            <div class="right_logos">
-              <a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo" class="logos"></a>
-              <a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo" class="logos"></a>
-            </div>
-          </div>
-          <nav id="menu-links" class="menu-links">
-              <ul>
-                <li><a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo_menu" class="logos"></a></li>
-                <li><a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo_menu" class="logos"></a></li>
-              </ul>
-          </nav>
-    </header>
-    <!-- 'Main' section for the dominant content of the page-->
     <main>
-        <h1>16 Psyche</h1>
         <div id="one">
             <button id="info"><img src="images/main_images/info_button.png" id="info_button"></button>
             <button id="fullscreen"><img src="images/main_images/full_screen_bracket.png" id="fullscreen_button"></button>
             <div class="containerOne" id="containerOne">
-              <div class="planet-hamburger" id="planet-hamburger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-              </div> 
-              <nav id="planet-menu" class="planet-links">
-                <ul>
-                  <li><button id="button-sun" class="horizontal-buttons">Sun</button></li>
-                  <li><button id="button-mercury" class="horizontal-buttons">Mercury</button></li>
-                  <li><button id="button-venus" class="horizontal-buttons">Venus</button></li>
-                  <li><button id="button-earth" class="horizontal-buttons">Earth</button></li>
-                  <li><button id="button-mars" class="horizontal-buttons">Mars</button></li>
-                  <li><button id="button-psyche" class="horizontal-buttons">Psyche</button></li>
-                  <li><button id="button-jupiter" class="horizontal-buttons">Jupiter</button></li>
-                  <li><button id="button-saturn" class="horizontal-buttons">Saturn</button></li>
-                  <li><button id="button-uranus" class="horizontal-buttons">Uranus</button></li>
-                  <li><button id="button-neptune" class="horizontal-buttons">Neptune</button></li>
-                </ul>
-              </nav>
-              <div id="horizontal-buttons">
-                  <button id="button-sun" class="horizontal-buttons">Sun</button>
-                  <button id="button-mercury" class="horizontal-buttons">Mercury</button>
-                  <button id="button-venus" class="horizontal-buttons">Venus</button>
-                  <button id="button-earth" class="horizontal-buttons">Earth</button>
-                  <button id="button-mars" class="horizontal-buttons">Mars</button>
-                  <button id="button-psyche" class="horizontal-buttons">Psyche</button>
-                  <button id="button-jupiter" class="horizontal-buttons">Jupiter</button>
-                  <button id="button-saturn" class="horizontal-buttons">Saturn</button>
-                  <button id="button-uranus" class="horizontal-buttons">Uranus</button>
-                  <button id="button-neptune" class="horizontal-buttons">Neptune</button>
-                </div>
                 <div id="vertical-buttons">
-                  <button id="toggle-rotate" class="vertical-buttons">Inspect Psyche</button>
-                  <button id="reset" class="vertical-buttons">Reset</button>
+                    <button id="toggle-rotate" class="vertical-buttons">Inspect Psyche</button>
+                    <button id="reset" class="vertical-buttons">Reset</button>
                 </div>
             </div>
         </div>
     </main>
-    <!--'footer' section for handling the bottom of the page-->
-    <footer>
-        <div id="footer_container">
-          <div id="left_footer">
-            <h3>Sponsors</h3>
-              <li><a href="https://psyche.asu.edu/" target="_blank">Psyche.ASU</a></li>
-              <li><a href="https://nasa.gov" target="_blank">NASA</a></li>
-          </div>
-          <div id="center_footer">
-            <h3 class="hide">center footer</h3>
-              <li class="hide">link</li>
-              <li class="hide">link</li>
-              <li class="hide">link</li>
-              <li class="hide">link</li>
-            <h4>Copyright&copy 2024</h4>
-          </div>
-          <div id="right_footer">
-            <h3>Resources</h3>
-              <li>link</li>
-              <li>link</li>
-              <li>link</li>
-              <li>link</li>
-          </div>
-        </div>   
-      </footer>
-      <!--JavaScript Scripts linked to the webpage-->
+    <!--JavaScript Scripts linked to the webpage-->
     <script type ='module' src="js/models.js"></script>
-    <script type="module" src="js/scroll.js"></script>
-    <script src="js/loadingscreen.js"></script>
+    <!-- <script src="js/loadingscreen.js"></script> -->
 </body>
 </html>

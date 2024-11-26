@@ -13,13 +13,18 @@ document.body.appendChild(loadingScreen);
 // Add CSS styles
 const styles = document.createElement('style');
 styles.textContent = `
+  @font-face {
+    font-family: 'Nasa';
+    src: url('https://raw.githubusercontent.com/nasaworldwind/worldwindjs/develop/examples/fonts/Nasa.ttf') format('truetype');
+  }
+
   #loading-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('images/main_images/loadingscreen.png') no-repeat center center fixed;
+    background: url('images/main_images/nasatakeoff.gif') no-repeat center center fixed;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -42,19 +47,24 @@ styles.textContent = `
 
   .loading-text {
     color: #ffffff;
-    font-size: 24px;
+    font-size: 32px;
     margin: 20px 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Nasa', 'Arial', sans-serif;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
+    font-weight: bold;
   }
 
   .loading-progress {
-    width: 200px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
+    width: 300px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .loading-progress::after {
@@ -64,8 +74,9 @@ styles.textContent = `
     left: 0;
     height: 100%;
     width: 0%;
-    background: #00ff9d;
+    background: linear-gradient(90deg, #00ff9d, #00ffcc);
     animation: progress 5s linear forwards;
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
   }
 
   @keyframes float {

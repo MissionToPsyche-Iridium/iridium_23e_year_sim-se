@@ -1,5 +1,6 @@
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById('containerOne');
@@ -7,6 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Container element with ID 'containerOne' not found.");
         return;
     }
+
+    // Calculate base size unit based on viewport size
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    const baseSize = Math.min(vw, vh) * 0.02; // Base size unit is 2% of smallest viewport dimension
+    const dpr = window.devicePixelRatio || 1; // Get device pixel ratio for high DPI displays
+
+    // Adjust base size for high DPI displays
+    const adjustedBaseSize = baseSize * Math.max(1, dpr/2);
 
     const containers = {};
     let containerCount = 1;
@@ -54,36 +64,40 @@ document.addEventListener("DOMContentLoaded", () => {
         planetContainer.style.height = '100%';
         planetContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
         planetContainer.style.zIndex = '1000';
-        planetContainer.style.border = '2px solid #fff';
-        planetContainer.style.borderRadius = '10px';
-        planetContainer.style.padding = '20px';
+        planetContainer.style.border = `${adjustedBaseSize * 0.2}px solid #fff`;
+        planetContainer.style.borderRadius = `${adjustedBaseSize}px`;
+        planetContainer.style.padding = `${adjustedBaseSize * 2}px`;
         planetContainer.style.boxSizing = 'border-box';
-        planetContainer.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.3)';
+        planetContainer.style.boxShadow = `0 0 ${adjustedBaseSize * 2}px rgba(255, 255, 255, 0.3)`;
 
         const headerContainer = document.createElement('div');
         headerContainer.style.display = 'flex';
         headerContainer.style.justifyContent = 'space-between';
         headerContainer.style.alignItems = 'center';
-        headerContainer.style.marginBottom = '20px';
+        headerContainer.style.marginBottom = `${adjustedBaseSize * 2}px`;
 
         const title = document.createElement('h1');
         title.textContent = planet.displayName || planet.name.charAt(0).toUpperCase() + planet.name.slice(1);
         title.style.color = '#fff';
         title.style.margin = '0';
+        title.style.fontSize = `${adjustedBaseSize * 3}px`;
+        title.style.fontWeight = 'bold';
         headerContainer.appendChild(title);
 
         const buttonContainer = document.createElement('div');
         buttonContainer.style.display = 'flex';
-        buttonContainer.style.gap = '10px';
+        buttonContainer.style.gap = `${adjustedBaseSize}px`;
 
         const fullscreenBtn = document.createElement('button');
         fullscreenBtn.innerHTML = '&#x26F6;';
         fullscreenBtn.style.background = 'none';
         fullscreenBtn.style.border = 'none';
         fullscreenBtn.style.color = '#fff';
-        fullscreenBtn.style.fontSize = '20px';
+        fullscreenBtn.style.fontSize = `${adjustedBaseSize * 2}px`;
         fullscreenBtn.style.cursor = 'pointer';
-        fullscreenBtn.style.padding = '5px';
+        fullscreenBtn.style.padding = `${adjustedBaseSize * 0.5}px`;
+        fullscreenBtn.style.width = `${adjustedBaseSize * 4}px`;
+        fullscreenBtn.style.height = `${adjustedBaseSize * 4}px`;
         fullscreenBtn.onclick = () => {
             if (!document.fullscreenElement) {
                 planetContainer.requestFullscreen();
@@ -100,9 +114,11 @@ document.addEventListener("DOMContentLoaded", () => {
         closeBtn.style.background = 'none';
         closeBtn.style.border = 'none';
         closeBtn.style.color = '#fff';
-        closeBtn.style.fontSize = '24px';
+        closeBtn.style.fontSize = `${adjustedBaseSize * 3}px`;
         closeBtn.style.cursor = 'pointer';
-        closeBtn.style.padding = '5px';
+        closeBtn.style.padding = `${adjustedBaseSize * 0.5}px`;
+        closeBtn.style.width = `${adjustedBaseSize * 4}px`;
+        closeBtn.style.height = `${adjustedBaseSize * 4}px`;
         closeBtn.onclick = () => {
             planetContainer.style.display = 'none';
         };
@@ -121,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const radius = Math.min(container.clientWidth, container.clientHeight) * 0.4;
     const centerX = container.clientWidth / 2;
     const centerY = container.clientHeight / 2;
+    const iconSize = adjustedBaseSize * 5; // Make icons 5x the adjusted base size
 
     planetIcons.forEach((planet, index) => {
         const angle = (index / planetIcons.length) * 2 * Math.PI;
@@ -133,28 +150,49 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.width = '100%';
         img.style.height = '100%';
         img.style.pointerEvents = 'auto';
+        img.style.objectFit = 'contain'; // Ensure icon fits properly
         icon.appendChild(img);
         
         icon.style.position = 'absolute';
-        icon.style.width = '40px';
-        icon.style.height = '40px';
-        icon.style.left = `${x - 20}px`;
-        icon.style.top = `${y - 20}px`;
+        icon.style.width = `${iconSize}px`;
+        icon.style.height = `${iconSize}px`;
+        icon.style.left = `${x - iconSize/2}px`;
+        icon.style.top = `${y - iconSize/2}px`;
         icon.style.cursor = 'pointer';
         icon.style.pointerEvents = 'auto';
         icon.style.borderRadius = '50%';
         icon.style.transition = 'transform 0.2s';
         icon.style.zIndex = '200';
+        icon.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+        icon.style.padding = `${adjustedBaseSize}px`;
+        icon.style.boxShadow = `0 0 ${adjustedBaseSize}px rgba(255, 255, 255, 0.3)`;
         icon.id = `button-${planet.name}`;
         icon.classList.add('planet-icon');
+
+        // Add tooltip
+        const tooltip = document.createElement('div');
+        tooltip.textContent = planet.displayName || planet.name.charAt(0).toUpperCase() + planet.name.slice(1);
+        tooltip.style.position = 'absolute';
+        tooltip.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        tooltip.style.color = 'white';
+        tooltip.style.padding = `${adjustedBaseSize * 0.5}px ${adjustedBaseSize}px`;
+        tooltip.style.borderRadius = `${adjustedBaseSize * 0.5}px`;
+        tooltip.style.fontSize = `${adjustedBaseSize * 1.5}px`;
+        tooltip.style.whiteSpace = 'nowrap';
+        tooltip.style.opacity = '0';
+        tooltip.style.transition = 'opacity 0.2s';
+        tooltip.style.pointerEvents = 'none';
+        icon.appendChild(tooltip);
 
         icon.addEventListener('mouseover', () => {
             icon.style.transform = 'scale(1.2)';
             icon.style.cursor = 'pointer';
+            tooltip.style.opacity = '1';
         });
 
         icon.addEventListener('mouseout', () => {
             icon.style.transform = 'scale(1)';
+            tooltip.style.opacity = '0';
         });
 
         icon.addEventListener('click', (event) => {
@@ -257,15 +295,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 planetContainer.appendChild(infoDiv);
                 
                 // Create Psyche
-                const psycheGeometry = new THREE.SphereGeometry(5, 32, 32);
-                const psycheTexture = new THREE.TextureLoader().load('images/textures/mercury.jpg');
-                const psycheMaterial = new THREE.MeshStandardMaterial({ 
-                    map: psycheTexture,
-                    metalness: 0.7,
-                    roughness: 0.3
-                });
-                const psyche = new THREE.Mesh(psycheGeometry, psycheMaterial);
-                dayNightScene.add(psyche);
+                const loader = new GLTFLoader();
+                let psyche;
+                loader.load(
+                    'models/psyche/Psyche.glb',
+                    function (gltf) {
+                        psyche = gltf.scene;
+                        psyche.scale.set(1, 1, 1); // Scale the model to appropriate size
+                        dayNightScene.add(psyche);
+                    },
+                    undefined,
+                    function (error) {
+                        console.error('Error loading Psyche model:', error);
+                    }
+                );
 
                 // Add lighting for day/night cycle
                 const ambientLight = new THREE.AmbientLight(0x111111);
@@ -319,64 +362,77 @@ document.addEventListener("DOMContentLoaded", () => {
                 tempRenderer.setSize(window.innerWidth, window.innerHeight);
                 planetContainer.appendChild(tempRenderer.domElement);
 
-                // Create base Psyche sphere
-                const psycheGeometry = new THREE.SphereGeometry(5, 64, 64);
-                
-                // Create temperature gradient using a custom shader material
-                const temperatureMaterial = new THREE.ShaderMaterial({
-                    uniforms: {
-                        sunDirection: { value: new THREE.Vector3(1, 0, 0) },
-                        time: { value: 0 }
-                    },
-                    vertexShader: `
-                        varying vec3 vNormal;
-                        varying vec3 vPosition;
-                        
-                        void main() {
-                            vNormal = normalize(normalMatrix * normal);
-                            vPosition = position;
-                            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                        }
-                    `,
-                    fragmentShader: `
-                        uniform vec3 sunDirection;
-                        uniform float time;
-                        varying vec3 vNormal;
-                        varying vec3 vPosition;
-                        
-                        // Pseudo-random function
-                        float random(vec2 st) {
-                            return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-                        }
-                        
-                        void main() {
-                            // Calculate distance from equator (using y coordinate)
-                            float latitude = asin(normalize(vPosition).y);
-                            float poleEffect = abs(latitude) / (3.14159 / 2.0);
+                // Load the Psyche GLB model
+                const loader = new GLTFLoader();
+                let psyche;
+                loader.load('models/psyche/Psyche.glb', function(gltf) {
+                    psyche = gltf.scene;
+                    psyche.scale.set(1, 1, 1);
+
+                    // Create temperature gradient using a custom shader material
+                    const temperatureMaterial = new THREE.ShaderMaterial({
+                        uniforms: {
+                            sunDirection: { value: new THREE.Vector3(1, 0, 0) },
+                            time: { value: 0 }
+                        },
+                        vertexShader: `
+                            varying vec3 vNormal;
+                            varying vec3 vPosition;
                             
-                            // Add some random variation
-                            vec2 randomCoord = vPosition.xz * 0.5;
-                            float noise = random(randomCoord) * 5.0;
+                            void main() {
+                                vNormal = normalize(normalMatrix * normal);
+                                vPosition = position;
+                                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                            }
+                        `,
+                        fragmentShader: `
+                            uniform vec3 sunDirection;
+                            uniform float time;
+                            varying vec3 vNormal;
+                            varying vec3 vPosition;
                             
-                            // Temperature in Kelvin (88K to 98K)
-                            float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noise;
-                            
-                            vec3 tempColor;
-                            if(temperature > 95.0) {
-                                tempColor = mix(vec3(1.0, 0.0, 0.0), vec3(1.0, 0.5, 0.0), (temperature - 95.0) / 3.0);
-                            } else if(temperature > 92.0) {
-                                tempColor = mix(vec3(0.0, 0.0, 1.0), vec3(0.5, 0.5, 1.0), (temperature - 92.0) / 3.0);
-                            } else {
-                                tempColor = mix(vec3(0.0, 0.0, 0.5), vec3(0.0, 0.0, 1.0), (temperature - 88.0) / 4.0);
+                            // Pseudo-random function
+                            float random(vec2 st) {
+                                return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
                             }
                             
-                            gl_FragColor = vec4(tempColor, 1.0);
-                        }
-                    `
-                });
+                            void main() {
+                                // Calculate distance from equator (using y coordinate)
+                                float latitude = asin(normalize(vPosition).y);
+                                float poleEffect = abs(latitude) / (3.14159 / 2.0);
+                                
+                                // Add some random variation
+                                vec2 randomCoord = vPosition.xz * 0.5;
+                                float noise = random(randomCoord) * 5.0;
+                                
+                                // Temperature in Kelvin (88K to 98K)
+                                float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noise;
+                                
+                                vec3 tempColor;
+                                if(temperature > 95.0) {
+                                    tempColor = mix(vec3(1.0, 0.0, 0.0), vec3(1.0, 0.5, 0.0), (temperature - 95.0) / 3.0);
+                                } else if(temperature > 92.0) {
+                                    tempColor = mix(vec3(0.0, 0.0, 1.0), vec3(0.5, 0.5, 1.0), (temperature - 92.0) / 3.0);
+                                } else {
+                                    tempColor = mix(vec3(0.0, 0.0, 0.5), vec3(0.0, 0.0, 1.0), (temperature - 88.0) / 4.0);
+                                }
+                                
+                                gl_FragColor = vec4(tempColor, 1.0);
+                            }
+                        `
+                    });
 
-                const psyche = new THREE.Mesh(psycheGeometry, temperatureMaterial);
-                tempScene.add(psyche);
+                    // Apply temperature material to all meshes in the model
+                    psyche.traverse((child) => {
+                        if (child.isMesh) {
+                            child.material = temperatureMaterial;
+                        }
+                    });
+
+                    tempScene.add(psyche);
+                }, undefined, function(error) {
+                    console.error('Error loading Psyche model:', error);
+                });
 
                 // Add temperature legend
                 const legendDiv = document.createElement('div');
@@ -422,13 +478,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 function animateTemp() {
                     requestAnimationFrame(animateTemp);
-                    psyche.rotation.y += 0.005;
+                    if (psyche) {
+                        psyche.rotation.y += 0.005;
+                    }
                     
                     // Update sun direction in shader
                     const time = Date.now() * 0.001;
                     sunLight.position.x = Math.cos(time * 0.2) * 50;
                     sunLight.position.z = Math.sin(time * 0.2) * 50;
-                    temperatureMaterial.uniforms.sunDirection.value.copy(sunLight.position).normalize();
                     
                     controls.update();
                     tempRenderer.render(tempScene, tempCamera);
@@ -444,12 +501,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 psycheRenderer.setSize(window.innerWidth, window.innerHeight);
                 planetContainer.appendChild(psycheRenderer.domElement);
                 
-                // Create a sphere geometry for Psyche with Mercury's texture
-                const psycheGeometry = new THREE.SphereGeometry(5, 32, 32);
-                const psycheTexture = new THREE.TextureLoader().load('images/textures/mercury.jpg');
-                const psycheMaterial = new THREE.MeshStandardMaterial({ map: psycheTexture });
-                const psycheModel = new THREE.Mesh(psycheGeometry, psycheMaterial);
-                psycheScene.add(psycheModel);
+                // Load the Psyche GLB model
+                const loader = new GLTFLoader();
+                loader.load('models/psyche/Psyche.glb', function(gltf) {
+                    const psycheModel = gltf.scene;
+                    psycheModel.scale.set(1, 1, 1); // Scale the model to appropriate size
+                    psycheScene.add(psycheModel);
+                }, undefined, function(error) {
+                    console.error('Error loading Psyche model:', error);
+                });
                 
                 // Add lighting
                 const psycheAmbientLight = new THREE.AmbientLight(0x333333);
@@ -484,15 +544,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
     container.appendChild(renderer.domElement);
 
     // Create Psyche model for main container
-    const psycheGeometry = new THREE.SphereGeometry(5, 32, 32);
-    const psycheTexture = new THREE.TextureLoader().load('images/textures/mercury.jpg');
-    const psycheMaterial = new THREE.MeshStandardMaterial({ map: psycheTexture });
-    const psycheModel = new THREE.Mesh(psycheGeometry, psycheMaterial);
-    scene.add(psycheModel);
+    const loader = new GLTFLoader();
+    let psycheModel;
+    loader.load(
+        'models/psyche/Psyche.glb',
+        function (gltf) {
+            psycheModel = gltf.scene;
+            psycheModel.scale.set(1, 1, 1);
+            scene.add(psycheModel);
+        },
+        undefined,
+        function (error) {
+            console.error('Error loading Psyche model:', error);
+        }
+    );
 
     // Add lighting
     const ambientLight = new THREE.AmbientLight(0x333333);
@@ -502,14 +571,49 @@ document.addEventListener("DOMContentLoaded", () => {
     pointLight.position.set(50, 50, 50);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = true; // Enable zooming
-    controls.enablePan = true;  // Enable panning
-    controls.minDistance = 5;   // Set minimum zoom distance
-    controls.maxDistance = 100; // Set maximum zoom distance
+    controls.enableZoom = true;
+    controls.enablePan = true;
+    controls.minDistance = 5;
+    controls.maxDistance = 100;
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        // Update base sizes
+        const newVw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        const newVh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+        const newBaseSize = Math.min(newVw, newVh) * 0.02;
+        const newAdjustedBaseSize = newBaseSize * Math.max(1, dpr/2);
+
+        // Update camera
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+
+        // Update renderer
+        renderer.setSize(container.clientWidth, container.clientHeight);
+
+        // Update icon positions and sizes
+        const newRadius = Math.min(container.clientWidth, container.clientHeight) * 0.4;
+        const newCenterX = container.clientWidth / 2;
+        const newCenterY = container.clientHeight / 2;
+        const newIconSize = newAdjustedBaseSize * 5;
+
+        document.querySelectorAll('.planet-icon').forEach((icon, index) => {
+            const angle = (index / planetIcons.length) * 2 * Math.PI;
+            const x = newCenterX + newRadius * Math.cos(angle);
+            const y = newCenterY + newRadius * Math.sin(angle);
+
+            icon.style.width = `${newIconSize}px`;
+            icon.style.height = `${newIconSize}px`;
+            icon.style.left = `${x - newIconSize/2}px`;
+            icon.style.top = `${y - newIconSize/2}px`;
+        });
+    });
 
     function animate() {
         requestAnimationFrame(animate);
-        psycheModel.rotation.y += 0.005;
+        if (psycheModel) {
+            psycheModel.rotation.y += 0.005;
+        }
         controls.update();
         renderer.render(scene, camera);
     }
