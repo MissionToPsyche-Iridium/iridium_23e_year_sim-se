@@ -1,5 +1,10 @@
+/* 
+    x - axis: justify-content
+    y-axis: min-height and align-items 
+*/
+
 body {
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     text-align: center;
 }
@@ -18,27 +23,63 @@ body {
 header {
     grid-row: 1 / 2;
     grid-column: 1 / 4;
-    width: 100%;
     border: 3px solid green;
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Vertically align items */
+    justify-content: space-between; /* Space out items */
+    padding: 10px; /* Add some spacing inside the header */
+}
+
+#settings-button {
+    background: none; /* Remove button background */
+    border: none; /* Remove button border */
+    margin: 0; /* Remove any default margins */
+    padding: 0; /* Remove any default padding */
+    cursor: pointer; /* Add pointer cursor for better UX */
+    display: flex; /* Ensure button content aligns properly */
+    align-items: center; /* Center icon vertically */
+    position: absolute; /* Position the button relative to the header */
+    left: 30px; /* Push button all the way to the left */
+    top: 30px; /* Vertically center the button */
+    transform: translateY(-50%); /* Adjust for centering */
+}
+
+/* Settings icon styling */
+#settings-icon {
+    width: 40px; /* Set a fixed width for the icon */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+}
+
+h1 {
+    margin: 0;
+    flex-grow: 1; /* Take up remaining space */
+    text-align: center; /* Center the header text */
 }
 
 #main {
     grid-row: 2 / 3;
     grid-column: 1 / 4;
-    width: 100%;
     border: 3px solid blue;
 }
 
 #sub-one, #sub-two {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 10px;
 }
 
 #sub-one div, #sub-two div {
     margin: 1%;
     border: 3px solid black;
+}
+
+#sub-one h3 {
+    border: 3px solid yellow;
+    max-height: 50px;
+    min-height: 50px;
+    line-height: 50px;
 }
 
 #sub-one p {
@@ -75,6 +116,5 @@ header {
 footer {
     grid-row: 3 / 4;
     grid-column: 1 / 4;
-    width: 100%;
     border: 3px solid red;
 }
