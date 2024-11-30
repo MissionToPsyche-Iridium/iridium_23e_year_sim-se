@@ -1,12 +1,14 @@
 <script setup>
 import { onMounted } from 'vue';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 onMounted(() => {
   const appDiv = document.getElementById('app'); 
   // Scene 1: Fullscreen
   const scene1 = new THREE.Scene();
-  const camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
   const renderer1 = new THREE.WebGLRenderer({ antialias: true });
   renderer1.setSize(window.innerWidth, window.innerHeight);
   renderer1.setClearColor(0x000000); 
@@ -37,6 +39,38 @@ onMounted(() => {
     camera2.updateProjectionMatrix();
     renderer2.setSize(window.innerWidth / 4, window.innerHeight / 2);
   });
+
+  const textureLoader = new THREE.TextureLoader();
+  const space_background = textureLoader.load('/textures/stars.jpg');
+  const sphere_geometry = new THREE.SphereGeometry(1000, 24, 24);
+
+  const sphere_material = new THREE.MeshBasicMaterial({
+    map: space_background,
+    side: THREE.BackSide
+  });
+
+  const background_sphere = new THREE.Mesh(sphere_geometry, sphere_material);
+  background_sphere.position.set(0,0,0);
+  scene1.add(background_sphere);
+
+  const ambient_light = new THREE.AmbientLight(0x404040);
+  scene1.add(ambient_light);
+
+  const controls1 = new OrbitControls( camera1, renderer1.domElement );
+  camera1.position.set( 0, 100, 10 );
+  controls1.update();
+
+  const loader = new GLTFLoader();
+  loader.load('/models/Psyche30Nov.glb', (gltf) => {
+    const psyche = gltf.scene;
+    psyche.position.set(0,0,0);
+    psyche.scale.set(1,1,1);
+    scene1.add(psyche);
+  }, undefined, (error) => {
+    console.error(error);
+  });
+
+
 
   // Animation Loop
   const animate = () => {
