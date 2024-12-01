@@ -45,105 +45,132 @@ File Start
 <!-- Defines the document type and version of HTML-->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/popup_style.css">
     <link rel="stylesheet" href="css/psyche_style.css">
-    <title>Document</title>
+    <title>Explore 16 Psyche</title>
 </head>
+
 <body>
-    <!-- 'header' section for the main navigation of the page-->
+    <!-- Header -->
     <header id="header">
-        <div id="header_navigation">
-            <div class="center_logo">
-              <a href="index.html"><img src="images/main_images/Psyche_BadgeSolid_Color.png" id="main_logo" class="logos"></a>
+        <nav class="header-nav">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="images/main_images/Psyche_BadgeSolid_Color.png" id="main_logo" class="logo" alt="16 Psyche Logo">
+                </a>
             </div>
-            <div class="right_logos">
-              <a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo" class="logos"></a>
-              <a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo" class="logos"></a>
+            <div class="external-links">
+                <a href="https://psyche.asu.edu/" target="_blank" aria-label="Psyche ASU">
+                    <img src="images/main_images/psyche_asu.png" class="logo" alt="Psyche ASU Logo">
+                </a>
+                <a href="https://nasa.gov" target="_blank" aria-label="NASA">
+                    <img src="images/main_images/NASA_logo.png" class="logo" alt="NASA Logo">
+                </a>
             </div>
-          </div>
-          <nav id="menu-links" class="menu-links">
-              <ul>
-                <li><a href="https://psyche.asu.edu/" target="_blank"><img src="images/main_images/psyche_asu.png" id="p_asu_logo_menu" class="logos"></a></li>
-                <li><a href="https://nasa.gov" target="_blank"><img src="images/main_images/NASA_logo.png" id="nasa_logo_menu" class="logos"></a></li>
-              </ul>
-          </nav>
+        </nav>
     </header>
-    <!-- 'Main' section for the dominant content of the page-->
+
+    <!-- Main Content -->
     <main>
-        <h1>16 Psyche</h1>
-        <div id="one">
-            <button id="info"><img src="images/main_images/info_button.png" id="info_button"></button>
-            <button id="fullscreen"><img src="images/main_images/full_screen_bracket.png" id="fullscreen_button"></button>
-            <div class="containerOne" id="containerOne">
-              <div class="planet-hamburger" id="planet-hamburger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-              </div> 
-              <nav id="planet-menu" class="planet-links">
-                <ul>
-                  <li><button id="button-sun" class="horizontal-buttons">Sun</button></li>
-                  <li><button id="button-mercury" class="horizontal-buttons">Mercury</button></li>
-                  <li><button id="button-venus" class="horizontal-buttons">Venus</button></li>
-                  <li><button id="button-earth" class="horizontal-buttons">Earth</button></li>
-                  <li><button id="button-mars" class="horizontal-buttons">Mars</button></li>
-                  <li><button id="button-psyche" class="horizontal-buttons">Psyche</button></li>
-                  <li><button id="button-jupiter" class="horizontal-buttons">Jupiter</button></li>
-                  <li><button id="button-saturn" class="horizontal-buttons">Saturn</button></li>
-                  <li><button id="button-uranus" class="horizontal-buttons">Uranus</button></li>
-                  <li><button id="button-neptune" class="horizontal-buttons">Neptune</button></li>
-                </ul>
-              </nav>
-              <div id="horizontal-buttons">
-                  <button id="button-sun" class="horizontal-buttons">Sun</button>
-                  <button id="button-mercury" class="horizontal-buttons">Mercury</button>
-                  <button id="button-venus" class="horizontal-buttons">Venus</button>
-                  <button id="button-earth" class="horizontal-buttons">Earth</button>
-                  <button id="button-mars" class="horizontal-buttons">Mars</button>
-                  <button id="button-psyche" class="horizontal-buttons">Psyche</button>
-                  <button id="button-jupiter" class="horizontal-buttons">Jupiter</button>
-                  <button id="button-saturn" class="horizontal-buttons">Saturn</button>
-                  <button id="button-uranus" class="horizontal-buttons">Uranus</button>
-                  <button id="button-neptune" class="horizontal-buttons">Neptune</button>
-                </div>
-                <div id="vertical-buttons">
-                  <button id="toggle-rotate" class="vertical-buttons">Inspect Psyche</button>
-                  <button id="reset" class="vertical-buttons">Reset</button>
-                </div>
-            </div>
+        <section class="intro">
+            <h1>16 Psyche</h1>
+            <p>Explore the metal-rich asteroid located in the asteroid belt. Navigate the solar system and inspect 16 Psyche like never before.</p>
+        </section>
+
+        <div class="controls">
+            <button id="info" class="control-button">
+                <img src="images/main_images/info_button.png" alt="Info Button">
+            </button>
+            <button id="fullscreen" class="control-button">
+                <img src="images/main_images/full_screen_bracket.png" alt="Fullscreen Button">
+            </button>
+        </div>
+
+        <div class="planet-menu">
+            <button class="menu-toggle" aria-label="Toggle Planet Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="menu-links">
+                <li><button id="button-sun">Sun</button></li>
+                <li><button id="button-mercury">Mercury</button></li>
+                <li><button id="button-venus">Venus</button></li>
+                <li><button id="button-earth">Earth</button></li>
+                <li><button id="button-mars">Mars</button></li>
+                <li><button id="button-psyche">Psyche</button></li>
+                <li><button id="button-jupiter">Jupiter</button></li>
+                <li><button id="button-saturn">Saturn</button></li>
+                <li><button id="button-uranus">Uranus</button></li>
+                <li><button id="button-neptune">Neptune</button></li>
+            </ul>
+        </div>
+
+        <div class="actions">
+            <button id="toggle-rotate">Inspect Psyche</button>
+            <button id="reset">Reset</button>
         </div>
     </main>
-    <!--'footer' section for handling the bottom of the page-->
+    
+    <!-- Footer -->
     <footer>
-        <div id="footer_container">
-          <div id="left_footer">
-            <h3>Sponsors</h3>
-              <li><a href="https://psyche.asu.edu/" target="_blank">Psyche.ASU</a></li>
-              <li><a href="https://nasa.gov" target="_blank">NASA</a></li>
-          </div>
-          <div id="center_footer">
-            <h3 class="hide">center footer</h3>
-              <li class="hide">link</li>
-              <li class="hide">link</li>
-              <li class="hide">link</li>
-              <li class="hide">link</li>
-            <h4>Copyright&copy 2024</h4>
-          </div>
-          <div id="right_footer">
-            <h3>Resources</h3>
-              <li>link</li>
-              <li>link</li>
-              <li>link</li>
-              <li>link</li>
-          </div>
-        </div>   
-      </footer>
-      <!--JavaScript Scripts linked to the webpage-->
-    <script type ='module' src="js/models.js"></script>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sponsors</h3>
+                <ul>
+                    <li><a href="https://psyche.asu.edu/" target="_blank">Psyche.ASU</a></li>
+                    <li><a href="https://nasa.gov" target="_blank">NASA</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>© 2024 Explore 16 Psyche</h4>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Resource 1</a></li>
+                    <li><a href="#">Resource 2</a></li>
+                    <li><a href="#">Resource 3</a></li>
+                    <li><a href="#">Resource 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- Popup and Overlay -->
+<div class="popup-overlay" id="popup-overlay" style="display: none;"></div>
+<div class="popup" id="popup" style="display: none;">
+    <div class="popup-content-header">
+        Your Title Here
+    </div>
+    <div class="popup-content-body">
+        <p>Your content or message goes here. Keep it concise and user-friendly.</p>
+    </div>
+    <div class="popup-buttons">
+        <button onclick="closePopup()">Confirm</button>
+        <button onclick="closePopup()">Cancel</button>
+    </div>
+</div>
+
+    <script type="module" src="js/models.js"></script>
     <script type="module" src="js/scroll.js"></script>
+    <script>
+      function openPopup() {
+          document.getElementById('popup-overlay').style.display = 'block';
+          document.getElementById('popup').style.display = 'block';
+      }
+  
+      function closePopup() {
+          document.getElementById('popup-overlay').style.display = 'none';
+          document.getElementById('popup').style.display = 'none';
+      }
+  </script>
 </body>
+
 </html>
+
