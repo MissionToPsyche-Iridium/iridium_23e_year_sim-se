@@ -9,7 +9,194 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Create loading overlay
+    // Calculate initial menu dimensions based on screen size
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const menuWidth = Math.min(screenWidth * 0.25, 350); // 25% of screen width up to 350px max
+
+    // Adjust container to make room for menu
+    container.style.marginLeft = `${menuWidth}px`;
+    container.style.width = `calc(100% - ${menuWidth}px)`;
+
+    // Create side menu overlay with updated styling
+    const sideMenu = document.createElement('div');
+    sideMenu.style.position = 'fixed';
+    sideMenu.style.left = '0';
+    sideMenu.style.top = '0';
+    sideMenu.style.width = `${menuWidth}px`;
+    sideMenu.style.height = '100vh'; // Use viewport height
+    sideMenu.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+    sideMenu.style.backdropFilter = 'blur(20px)';
+    sideMenu.style.padding = '20px'; // Reduced padding
+    sideMenu.style.boxSizing = 'border-box';
+    sideMenu.style.zIndex = '1500';
+    sideMenu.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.15)';
+    sideMenu.style.borderRight = '2px solid rgba(255, 255, 255, 0.1)';
+    sideMenu.style.transform = 'translateX(0)'; // Start expanded
+    sideMenu.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+    sideMenu.style.display = 'flex';
+    sideMenu.style.flexDirection = 'column';
+    sideMenu.style.justifyContent = 'flex-start';
+    sideMenu.style.alignItems = 'stretch';
+
+    // Add menu title with enhanced styling
+    const menuTitle = document.createElement('h2');
+    menuTitle.textContent = 'Navigation';
+    menuTitle.style.color = 'white';
+    menuTitle.style.marginBottom = '20px'; // Reduced margin
+    menuTitle.style.fontSize = `${Math.min(28, screenWidth * 0.02)}px`; // Smaller font
+    menuTitle.style.fontWeight = '800';
+    menuTitle.style.textTransform = 'uppercase';
+    menuTitle.style.letterSpacing = '3px';
+    menuTitle.style.textAlign = 'center';
+    menuTitle.style.textShadow = '0 0 15px rgba(255, 255, 255, 0.5)';
+    menuTitle.style.borderBottom = '2px solid rgba(255, 255, 255, 0.1)';
+    menuTitle.style.paddingBottom = '10px';
+    sideMenu.appendChild(menuTitle);
+
+    // Add toggle button that stays visible
+    const toggleButton = document.createElement('button');
+    toggleButton.style.position = 'fixed';
+    toggleButton.style.left = `${menuWidth}px`;
+    toggleButton.style.top = '20px';
+    toggleButton.style.width = '40px';
+    toggleButton.style.height = '40px';
+    toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+    toggleButton.style.border = '2px solid rgba(255, 255, 255, 0.1)';
+    toggleButton.style.borderRadius = '50%';
+    toggleButton.style.color = 'white';
+    toggleButton.style.cursor = 'pointer';
+    toggleButton.style.zIndex = '1600';
+    toggleButton.innerHTML = '←';
+    toggleButton.style.fontSize = '20px';
+    toggleButton.style.transition = 'all 0.5s';
+
+    let isMenuOpen = true;
+    toggleButton.addEventListener('click', () => {
+        if (isMenuOpen) {
+            sideMenu.style.transform = `translateX(-${menuWidth}px)`;
+            container.style.marginLeft = '0';
+            container.style.width = '100%';
+            toggleButton.style.left = '20px';
+            toggleButton.innerHTML = '→';
+            toggleButton.style.transform = 'rotate(180deg)';
+        } else {
+            sideMenu.style.transform = 'translateX(0)';
+            container.style.marginLeft = `${menuWidth}px`;
+            container.style.width = `calc(100% - ${menuWidth}px)`;
+            toggleButton.style.left = `${menuWidth}px`;
+            toggleButton.innerHTML = '←';
+            toggleButton.style.transform = 'rotate(0deg)';
+        }
+        isMenuOpen = !isMenuOpen;
+    });
+
+    document.body.appendChild(toggleButton);
+
+    // Create menu items based on planetIcons array
+    const menuItems = [
+        { name: 'Sun', icon: 'images/icons/sun.png' },
+        { name: 'Solar System', icon: 'images/icons/solarsystem.png' },
+        { name: 'Day/Night Cycles', icon: 'images/icons/daynight.png' },
+        { name: 'Mission', icon: 'images/icons/mission.png' },
+        { name: 'Gravity', icon: 'images/icons/gravity.png' },
+        { name: 'Mining', icon: 'images/icons/pickaxe.png' },
+        { name: 'Disk', icon: 'images/icons/disk.png' },
+        { name: 'Equipment', icon: 'images/icons/helmet.png' },
+        { name: 'Observation', icon: 'images/icons/telescope.png' },
+        { name: 'Temperature Map', icon: 'images/icons/thermometer.png' }
+    ];
+
+    // Add window resize handler for menu responsiveness
+    window.addEventListener('resize', () => {
+        const newScreenWidth = window.innerWidth;
+        const newMenuWidth = Math.min(newScreenWidth * 0.25, 350);
+        
+        if (isMenuOpen) {
+            container.style.marginLeft = `${newMenuWidth}px`;
+            container.style.width = `calc(100% - ${newMenuWidth}px)`;
+            toggleButton.style.left = `${newMenuWidth}px`;
+        } else {
+            container.style.marginLeft = '0';
+            container.style.width = '100%';
+        }
+        
+        sideMenu.style.width = `${newMenuWidth}px`;
+        
+        // Update menu title font size
+        menuTitle.style.fontSize = `${Math.min(28, newScreenWidth * 0.02)}px`;
+        
+        // Update menu items size and spacing
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.style.padding = `${Math.min(15, newScreenWidth * 0.015)}px ${Math.min(10, newScreenWidth * 0.01)}px`;
+            item.style.fontSize = `${Math.min(16, newScreenWidth * 0.012)}px`;
+        });
+    });
+
+    // Create menu items with more compact styling
+    menuItems.forEach((item, index) => {
+        const menuItem = document.createElement('div');
+        menuItem.classList.add('menu-item');
+        menuItem.style.display = 'flex';
+        menuItem.style.alignItems = 'center';
+        menuItem.style.padding = '15px 10px';
+        menuItem.style.margin = '5px 0';
+        menuItem.style.cursor = 'pointer';
+        menuItem.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        menuItem.style.borderRadius = '8px';
+        menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+        menuItem.style.backdropFilter = 'blur(10px)';
+
+        // Add icon
+        const icon = document.createElement('img');
+        icon.src = item.icon;
+        icon.style.width = '24px';
+        icon.style.height = '24px';
+        icon.style.marginRight = '10px';
+        icon.style.filter = 'brightness(0) invert(1)';
+        menuItem.appendChild(icon);
+
+        // Add text
+        const text = document.createElement('span');
+        text.textContent = item.name;
+        text.style.color = 'white';
+        text.style.fontSize = '16px';
+        text.style.fontWeight = '500';
+        text.style.letterSpacing = '0.5px';
+        menuItem.appendChild(text);
+
+        // Add hover effects
+        menuItem.addEventListener('mouseover', () => {
+            menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            menuItem.style.transform = 'translateX(5px)';
+            icon.style.transform = 'rotate(5deg)';
+        });
+
+        menuItem.addEventListener('mouseout', () => {
+            menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+            menuItem.style.transform = 'translateX(0)';
+            icon.style.transform = 'rotate(0deg)';
+        });
+
+        // Add click handler
+        menuItem.addEventListener('click', () => {
+            const planetName = planetIcons[index].name;
+            const planetContainer = containers[planetName].container;
+            showLoading();
+            planetContainer.style.display = 'block';
+            
+            const planetIcon = document.getElementById(`button-${planetName}`);
+            if (planetIcon) {
+                planetIcon.click();
+            }
+        });
+
+        sideMenu.appendChild(menuItem);
+    });
+
+    document.body.appendChild(sideMenu);
+
+   
     const loadingOverlay = document.createElement('div');
     loadingOverlay.style.position = 'fixed';
     loadingOverlay.style.top = '0';
