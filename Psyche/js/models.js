@@ -9,6 +9,65 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // Create loading overlay
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.style.position = 'fixed';
+    loadingOverlay.style.top = '0';
+    loadingOverlay.style.left = '0';
+    loadingOverlay.style.width = '100%';
+    loadingOverlay.style.height = '100%';
+    loadingOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    loadingOverlay.style.display = 'none';
+    loadingOverlay.style.justifyContent = 'center';
+    loadingOverlay.style.alignItems = 'center';
+    loadingOverlay.style.zIndex = '2000';
+
+    const loadingSpinner = document.createElement('div');
+    loadingSpinner.style.width = '50px';
+    loadingSpinner.style.height = '50px';
+    loadingSpinner.style.border = '5px solid #f3f3f3';
+    loadingSpinner.style.borderTop = '5px solid #3498db';
+    loadingSpinner.style.borderRadius = '50%';
+    loadingSpinner.style.animation = 'spin 1s linear infinite';
+
+    const loadingText = document.createElement('div');
+    loadingText.style.color = 'white';
+    loadingText.style.marginTop = '20px';
+    loadingText.style.fontSize = '20px';
+    loadingText.textContent = 'Loading...';
+
+    const spinnerContainer = document.createElement('div');
+    spinnerContainer.style.display = 'flex';
+    spinnerContainer.style.flexDirection = 'column';
+    spinnerContainer.style.alignItems = 'center';
+    spinnerContainer.appendChild(loadingSpinner);
+    spinnerContainer.appendChild(loadingText);
+
+    loadingOverlay.appendChild(spinnerContainer);
+    document.body.appendChild(loadingOverlay);
+
+    // Add spinner animation
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // Function to show/hide loading screen
+    const showLoading = () => {
+        loadingOverlay.style.display = 'flex';
+        setTimeout(() => {
+            hideLoading();
+        }, 1000); // Hide after 3 seconds
+    };
+
+    const hideLoading = () => {
+        loadingOverlay.style.display = 'none';
+    };
+
     // Calculate base size unit based on viewport size
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
@@ -195,8 +254,9 @@ document.addEventListener("DOMContentLoaded", () => {
             tooltip.style.opacity = '0';
         });
 
-        icon.addEventListener('click', (event) => {
+        icon.addEventListener('click', async (event) => {
             console.log(`Clicked ${planet.name} icon`);
+            showLoading();
             const planetContainer = containers[planet.name].container;
             planetContainer.style.display = 'block';
             
@@ -211,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Create Sun
                 const sunGeometry = new THREE.SphereGeometry(5, 32, 32);
-                const sunTexture = new THREE.TextureLoader().load('images/textures/sun.jpg');
+                const sunTexture = await new THREE.TextureLoader().loadAsync('images/textures/sun.jpg');
                 const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture });
                 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
                 solarSystemScene.add(sun);
@@ -227,6 +287,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     { name: 'Uranus', size: 1.8, distance: 55, texture: 'uranus.jpg', speed: 0.0008 },
                     { name: 'Neptune', size: 1.7, distance: 65, texture: 'neptune.jpg', speed: 0.0006 }
                 ];
+
+                // Load all planet textures concurrently
+                const textureLoader = new THREE.TextureLoader();
+                const texturePromises = planets.map(planetData => 
+                    textureLoader.loadAsync(`images/textures/${planetData.texture}`)
+                );
+                const textures = await Promise.all(texturePromises);
 
                 const planetMeshes = planets.map(planetData => {
                     const geometry = new THREE.SphereGeometry(planetData.size, 32, 32);
