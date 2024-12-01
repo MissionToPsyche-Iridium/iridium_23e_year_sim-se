@@ -57,7 +57,7 @@ header {
     align-items: center; /* Center icon vertically */
     position: absolute; /* Position the button relative to the header */
     left: 10px; /* Push button all the way to the left */
-    top: 200px; /* Vertically center the button */
+    top: 370px; /* Vertically center the button */
     transform: translateY(-50%); /* Adjust for centering */
 }
 
