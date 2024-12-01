@@ -113,18 +113,38 @@ document.addEventListener("DOMContentLoaded", function () {
 function darkMode() {
     const darkModeSwitch = document.getElementById('dark-mode-switch');
     const settingsIcon = document.getElementById('settings-icon'); // Assuming an image icon
+    const topElements = document.getElementById('sub-one');
+    const lineElements = document.querySelectorAll('.line');
+    const gridThree = document.querySelectorAll('.grid-three');
+
     if (darkModeSwitch) {
         darkModeSwitch.addEventListener('change', (event) => {
             if (event.target.checked) {
                 dark = true; // Update global state
                 document.body.style.backgroundColor = "black";
                 document.body.style.color = "white";
+                topElements.style.color = "white";
+                lineElements.forEach(element => {
+                    element.style.color = "white";
+                });
+                gridThree.forEach(element => {
+                    element.style.border = "3px solid white";
+                    element.classList.add('.white');
+                });
+
                 console.log('dark mode on');
                 if (settingsIcon) settingsIcon.src = 'img/white_gear.png';
             } else {
                 dark = false; // Update global state
                 document.body.style.backgroundColor = "white";
-                document.body.style.color = "black";
+                document.body.style.color = "greenyellow";
+                topElements.style.color = "greenyellow";
+                lineElements.forEach(element => {
+                    element.style.color = "greenyellow";
+                });
+                gridThree.forEach(element => {
+                    element.style.border = "3px solid greenyellow";
+                });
                 console.log('dark mode off');
                 if (settingsIcon) settingsIcon.src = 'img/black_gear.png';
             }
