@@ -82,13 +82,28 @@ File Start
   * #logo
   *
   */ 
-  #logo {
-    width: 25%;
-    height: auto;
-    opacity: .8;
-    padding: 5%;
-  }
-  
+  :root {
+    --primary-color: #12031d;
+    --text-color: gray;
+    --highlight-color: antiquewhite;
+    --font-large: clamp(2rem, 5vw, 4rem);
+    --padding-default: 5%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+}
+
+#logo {
+    width: 20%;
+    max-width: 300px;
+    padding: var(--padding-default);
+    opacity: 0.8;
+    transition: transform 0.3s ease-in-out, opacity 0.3s;
+}
   /**************************
   * #header1
   *
