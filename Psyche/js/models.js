@@ -39,22 +39,48 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.style.justifyContent = 'flex-start';
     sideMenu.style.alignItems = 'stretch';
 
-    // Add menu title with enhanced styling
+    // Create sticky header
+    const stickyHeader = document.createElement('div');
+    stickyHeader.style.position = 'sticky';
+    stickyHeader.style.top = '0';
+    stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+    stickyHeader.style.backdropFilter = 'blur(10px)';
+    stickyHeader.style.padding = '10px 20px';
+    stickyHeader.style.marginBottom = '10px';
+    stickyHeader.style.marginLeft = '-20px';
+    stickyHeader.style.marginRight = '-20px';
+    stickyHeader.style.marginTop = '-20px';
+    stickyHeader.style.borderBottom = '2px solid rgba(255, 255, 255, 0.1)';
+    stickyHeader.style.zIndex = '1600';
+    stickyHeader.style.transition = 'all 0.3s ease';
+    stickyHeader.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+
+    // Add menu title with enhanced styling to sticky header
     const menuTitle = document.createElement('h2');
-    menuTitle.textContent = 'Navigation';
+    menuTitle.textContent = 'Year On Psyche Simulation';
     menuTitle.style.color = 'white';
-    menuTitle.style.marginBottom = '20px'; // Reduced margin
-    menuTitle.style.fontSize = `${Math.min(28, screenWidth * 0.02)}px`; // Smaller font
+    menuTitle.style.margin = '0';
+    menuTitle.style.fontSize = `${Math.min(24, screenWidth * 0.02)}px`; // Smaller font
     menuTitle.style.fontWeight = '800';
     menuTitle.style.textTransform = 'uppercase';
-    menuTitle.style.letterSpacing = '3px';
+    menuTitle.style.letterSpacing = '2px';
     menuTitle.style.textAlign = 'center';
     menuTitle.style.textShadow = '0 0 15px rgba(255, 255, 255, 0.5)';
-    menuTitle.style.borderBottom = '2px solid rgba(255, 255, 255, 0.1)';
-    menuTitle.style.paddingBottom = '10px';
-    sideMenu.appendChild(menuTitle);
+    stickyHeader.appendChild(menuTitle);
+    sideMenu.appendChild(stickyHeader);
 
-    // Add toggle button that stays visible
+    // Add scroll behavior for sticky header
+    sideMenu.addEventListener('scroll', () => {
+        if (sideMenu.scrollTop > 0) {
+            stickyHeader.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.5)';
+            stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
+        } else {
+            stickyHeader.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+            stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+        }
+    });
+
+    // Add toggle button that stays visible with click animation
     const toggleButton = document.createElement('button');
     toggleButton.style.position = 'fixed';
     toggleButton.style.left = `${menuWidth}px`;
@@ -69,7 +95,29 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleButton.style.zIndex = '1600';
     toggleButton.innerHTML = '←';
     toggleButton.style.fontSize = '20px';
-    toggleButton.style.transition = 'all 0.5s';
+    toggleButton.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+
+    // Add click/tap animation styles
+    toggleButton.addEventListener('mousedown', () => {
+        toggleButton.style.transform = 'scale(0.9)';
+        toggleButton.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+    });
+
+    toggleButton.addEventListener('mouseup', () => {
+        toggleButton.style.transform = 'scale(1)';
+        toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+    });
+
+    toggleButton.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        toggleButton.style.transform = 'scale(0.9)';
+        toggleButton.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+    });
+
+    toggleButton.addEventListener('touchend', () => {
+        toggleButton.style.transform = 'scale(1)';
+        toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+    });
 
     let isMenuOpen = true;
     toggleButton.addEventListener('click', () => {
@@ -93,18 +141,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.appendChild(toggleButton);
 
-    // Create menu items based on planetIcons array
+    // Create scrollable content container with adjusted height
+    const menuContent = document.createElement('div');
+    menuContent.style.flex = '1';
+    menuContent.style.display = 'flex';
+    menuContent.style.flexDirection = 'column';
+    menuContent.style.justifyContent = 'space-between';
+    menuContent.style.height = 'calc(100vh - 80px)'; // Adjust height to fit all items
+    menuContent.style.padding = '0 10px';
+    sideMenu.appendChild(menuContent);
+
+    // Create menu items based on planetIcons array with descriptions
     const menuItems = [
-        { name: 'Sun', icon: 'images/icons/sun.png' },
-        { name: 'Solar System', icon: 'images/icons/solarsystem.png' },
-        { name: 'Day/Night Cycles', icon: 'images/icons/daynight.png' },
-        { name: 'Mission', icon: 'images/icons/mission.png' },
-        { name: 'Gravity', icon: 'images/icons/gravity.png' },
-        { name: 'Mining', icon: 'images/icons/pickaxe.png' },
-        { name: 'Disk', icon: 'images/icons/disk.png' },
-        { name: 'Equipment', icon: 'images/icons/helmet.png' },
-        { name: 'Observation', icon: 'images/icons/telescope.png' },
-        { name: 'Temperature Map', icon: 'images/icons/thermometer.png' }
+        { 
+            name: 'Sun', 
+            icon: 'images/icons/sun.png',
+            description: 'Explore the Sun\'s influence on Psyche'
+        },
+        { 
+            name: 'Solar System', 
+            icon: 'images/icons/solarsystem.png',
+            description: 'View Psyche\'s position in our solar system'
+        },
+        { 
+            name: 'Day/Night Cycles', 
+            icon: 'images/icons/daynight.png',
+            description: 'Experience Psyche\'s 4.2 hour day/night cycle'
+        },
+        { 
+            name: 'Mission', 
+            icon: 'images/icons/mission.png',
+            description: 'Learn about the NASA Psyche mission'
+        },
+        { 
+            name: 'Gravity', 
+            icon: 'images/icons/gravity.png',
+            description: 'Compare gravity effects between Earth and Psyche'
+        },
+        { 
+            name: 'Mining', 
+            icon: 'images/icons/pickaxe.png',
+            description: 'Explore potential mining operations'
+        },
+        { 
+            name: 'Disk', 
+            icon: 'images/icons/disk.png',
+            description: 'Study Psyche\'s unique disk-like features'
+        },
+        { 
+            name: 'Equipment', 
+            icon: 'images/icons/helmet.png',
+            description: 'View specialized equipment for Psyche exploration'
+        },
+        { 
+            name: 'Observation', 
+            icon: 'images/icons/telescope.png',
+            description: 'See how we observe Psyche from Earth'
+        },
+        { 
+            name: 'Temperature Map', 
+            icon: 'images/icons/thermometer.png',
+            description: 'Visualize temperature variations across Psyche'
+        }
     ];
 
     // Add window resize handler for menu responsiveness
@@ -124,58 +222,103 @@ document.addEventListener("DOMContentLoaded", () => {
         sideMenu.style.width = `${newMenuWidth}px`;
         
         // Update menu title font size
-        menuTitle.style.fontSize = `${Math.min(28, newScreenWidth * 0.02)}px`;
+        menuTitle.style.fontSize = `${Math.min(24, newScreenWidth * 0.02)}px`;
         
         // Update menu items size and spacing
         document.querySelectorAll('.menu-item').forEach(item => {
-            item.style.padding = `${Math.min(15, newScreenWidth * 0.015)}px ${Math.min(10, newScreenWidth * 0.01)}px`;
-            item.style.fontSize = `${Math.min(16, newScreenWidth * 0.012)}px`;
+            item.style.padding = `${Math.min(12, newScreenWidth * 0.012)}px ${Math.min(8, newScreenWidth * 0.008)}px`;
+            item.style.fontSize = `${Math.min(14, newScreenWidth * 0.01)}px`;
         });
     });
 
-    // Create menu items with more compact styling
+    // Create menu items with more compact styling and enhanced feedback
     menuItems.forEach((item, index) => {
         const menuItem = document.createElement('div');
         menuItem.classList.add('menu-item');
         menuItem.style.display = 'flex';
-        menuItem.style.alignItems = 'center';
-        menuItem.style.padding = '15px 10px';
-        menuItem.style.margin = '5px 0';
+        menuItem.style.flexDirection = 'column';
+        menuItem.style.padding = '8px';
+        menuItem.style.margin = '4px 0';
         menuItem.style.cursor = 'pointer';
         menuItem.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
         menuItem.style.borderRadius = '8px';
         menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
         menuItem.style.backdropFilter = 'blur(10px)';
+        menuItem.style.position = 'relative';
+        menuItem.style.overflow = 'hidden';
+
+        // Create header container for icon and title
+        const headerContainer = document.createElement('div');
+        headerContainer.style.display = 'flex';
+        headerContainer.style.alignItems = 'center';
+        headerContainer.style.marginBottom = '4px';
 
         // Add icon
         const icon = document.createElement('img');
         icon.src = item.icon;
-        icon.style.width = '24px';
-        icon.style.height = '24px';
-        icon.style.marginRight = '10px';
+        icon.style.width = '20px';
+        icon.style.height = '20px';
+        icon.style.marginRight = '8px';
         icon.style.filter = 'brightness(0) invert(1)';
-        menuItem.appendChild(icon);
+        icon.style.transition = 'transform 0.3s ease';
+        headerContainer.appendChild(icon);
 
         // Add text
         const text = document.createElement('span');
         text.textContent = item.name;
         text.style.color = 'white';
-        text.style.fontSize = '16px';
+        text.style.fontSize = '14px';
         text.style.fontWeight = '500';
         text.style.letterSpacing = '0.5px';
-        menuItem.appendChild(text);
+        headerContainer.appendChild(text);
 
-        // Add hover effects
+        menuItem.appendChild(headerContainer);
+
+        // Add description
+        const description = document.createElement('div');
+        description.textContent = item.description;
+        description.style.color = 'rgba(255, 255, 255, 0.7)';
+        description.style.fontSize = '12px';
+        description.style.marginTop = '4px';
+        description.style.marginLeft = '28px';
+        menuItem.appendChild(description);
+
+        // Add hover effects with enhanced feedback
         menuItem.addEventListener('mouseover', () => {
-            menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)'; // Cornflower blue with transparency
             menuItem.style.transform = 'translateX(5px)';
             icon.style.transform = 'rotate(5deg)';
+            menuItem.style.boxShadow = '0 0 15px rgba(100, 149, 237, 0.3)';
         });
 
         menuItem.addEventListener('mouseout', () => {
             menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
             menuItem.style.transform = 'translateX(0)';
             icon.style.transform = 'rotate(0deg)';
+            menuItem.style.boxShadow = 'none';
+        });
+
+        // Add click/tap animations with enhanced feedback
+        menuItem.addEventListener('mousedown', () => {
+            menuItem.style.transform = 'scale(0.95) translateX(5px)';
+            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.5)';
+            icon.style.transform = 'scale(0.9) rotate(5deg)';
+        });
+
+        menuItem.addEventListener('mouseup', () => {
+            menuItem.style.transform = 'translateX(5px)';
+            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)';
+        });
+
+        menuItem.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            menuItem.style.transform = 'scale(0.95) translateX(5px)';
+            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.5)';
+        });
+
+        menuItem.addEventListener('touchend', () => {
+            menuItem.style.transform = 'translateX(5px)';
+            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)';
         });
 
         // Add click handler
@@ -191,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        sideMenu.appendChild(menuItem);
+        menuContent.appendChild(menuItem);
     });
 
     document.body.appendChild(sideMenu);
@@ -295,9 +438,11 @@ document.addEventListener("DOMContentLoaded", () => {
         { name: 'psyche', image: 'images/icons/pickaxe.png' },
         { name: 'jupiter', image: 'images/icons/disk.png' },
         { name: 'saturn', image: 'images/icons/helmet.png' },
-        { name: 'uranus', image: 'images/icons/telescope.png' },
+        { name: 'psycheView', image: 'images/icons/telescope.png', displayName: 'View of Psyche from Earth' },
         { name: 'temperature', image: 'images/icons/thermometer.png', displayName: 'Temperature Map' }
     ];
+
+
 
     planetIcons.forEach(planet => {
         const planetContainer = document.createElement('div');
@@ -384,7 +529,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const centerX = container.clientWidth / 2;
     const centerY = container.clientHeight / 2;
     const iconSize = adjustedBaseSize * 5; // Make icons 5x the adjusted base size
-
     planetIcons.forEach((planet, index) => {
         const angle = (index / planetIcons.length) * 2 * Math.PI;
         const x = centerX + radius * Math.cos(angle);
@@ -430,6 +574,84 @@ document.addEventListener("DOMContentLoaded", () => {
         tooltip.style.pointerEvents = 'none';
         icon.appendChild(tooltip);
 
+        // Create night sky view function
+        const createPsycheView = (container) => {
+            // Clear any existing content
+            container.innerHTML = '';
+
+            // Create night sky background
+            const skyCanvas = document.createElement('canvas');
+            skyCanvas.style.position = 'absolute';
+            skyCanvas.style.top = '0';
+            skyCanvas.style.left = '0';
+            skyCanvas.style.width = '100%';
+            skyCanvas.style.height = '100%';
+            container.appendChild(skyCanvas);
+
+            // Set canvas size to match container
+            const updateCanvasSize = () => {
+                skyCanvas.width = container.clientWidth;
+                skyCanvas.height = container.clientHeight;
+            };
+            updateCanvasSize();
+            window.addEventListener('resize', updateCanvasSize);
+
+            const ctx = skyCanvas.getContext('2d');
+
+            // Create stars
+            const stars = [];
+            for(let i = 0; i < 500; i++) {
+                stars.push({
+                    x: Math.random() * skyCanvas.width,
+                    y: Math.random() * skyCanvas.height,
+                    size: Math.random() * 2 + 0.5,
+                    brightness: Math.random()
+                });
+            }
+
+            // Create Psyche object
+            const psycheLabel = document.createElement('div');
+            psycheLabel.textContent = 'Psyche';
+            psycheLabel.style.position = 'absolute';
+            psycheLabel.style.color = 'white';
+            psycheLabel.style.padding = '10px 20px';
+            psycheLabel.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            psycheLabel.style.borderRadius = '20px';
+            psycheLabel.style.fontSize = '24px';
+            psycheLabel.style.fontWeight = 'bold';
+            psycheLabel.style.textShadow = '0 0 10px rgba(255,255,255,0.5)';
+            container.appendChild(psycheLabel);
+
+            // Animation function
+            let angle = 0;
+            function animate() {
+                // Clear canvas
+                ctx.fillStyle = '#000033';
+                ctx.fillRect(0, 0, skyCanvas.width, skyCanvas.height);
+
+                // Draw and animate stars
+                ctx.fillStyle = 'white';
+                stars.forEach(star => {
+                    const twinkle = 0.5 + Math.sin(Date.now() * 0.001 + star.brightness * 10) * 0.5;
+                    ctx.globalAlpha = twinkle;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                ctx.globalAlpha = 1;
+
+                // Move Psyche across sky in an elliptical path
+                const x = skyCanvas.width/2 + Math.cos(angle) * (skyCanvas.width/3);
+                const y = skyCanvas.height/2 + Math.sin(angle) * (skyCanvas.height/4);
+                psycheLabel.style.left = `${x - psycheLabel.offsetWidth/2}px`;
+                psycheLabel.style.top = `${y - psycheLabel.offsetHeight/2}px`;
+
+                angle += 0.002;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        };
+
         icon.addEventListener('mouseover', () => {
             icon.style.transform = 'scale(1.2)';
             icon.style.cursor = 'pointer';
@@ -447,7 +669,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const planetContainer = containers[planet.name].container;
             planetContainer.style.display = 'block';
             
-            if (planet.name === 'mercury') {
+            if (planet.name === 'earth') {
+                createPsycheView(planetContainer);
+            } else if (planet.name === 'mercury') {
                 // Create solar system scene
                 const solarSystemScene = new THREE.Scene();
                 const solarSystemCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -474,6 +698,74 @@ document.addEventListener("DOMContentLoaded", () => {
                     { name: 'Uranus', size: 1.8, distance: 55, texture: 'uranus.jpg', speed: 0.0008 },
                     { name: 'Neptune', size: 1.7, distance: 65, texture: 'neptune.jpg', speed: 0.0006 }
                 ];
+
+                // Create orbit paths
+                planets.forEach(planetData => {
+                    const orbitGeometry = new THREE.RingGeometry(planetData.distance - 0.1, planetData.distance + 0.1, 128);
+                    const orbitMaterial = new THREE.MeshBasicMaterial({ 
+                        color: 0x666666,
+                        side: THREE.DoubleSide,
+                        transparent: true,
+                        opacity: 0.3
+                    });
+                    const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
+                    orbit.rotation.x = Math.PI / 2;
+                    solarSystemScene.add(orbit);
+                });
+
+                // Create asteroid belt
+                const asteroidBelt = new THREE.Group();
+                const asteroidGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+                const asteroidMaterial = new THREE.MeshStandardMaterial({ color: 0x888888 });
+                
+                // Create 1000 asteroids in a belt between Mars and Jupiter
+                for(let i = 0; i < 1000; i++) {
+                    const distance = Math.random() * (35 - 25) + 25; // Between Mars and Jupiter's orbits
+                    const angle = Math.random() * Math.PI * 2;
+                    const asteroid = new THREE.Mesh(asteroidGeometry, asteroidMaterial);
+                    
+                    // Position in orbital ring
+                    asteroid.position.x = Math.cos(angle) * distance;
+                    asteroid.position.z = Math.sin(angle) * distance;
+                    
+                    // Add some vertical spread
+                    asteroid.position.y = (Math.random() - 0.5) * 2;
+                    
+                    // Random rotation
+                    asteroid.rotation.x = Math.random() * Math.PI;
+                    asteroid.rotation.y = Math.random() * Math.PI;
+                    asteroid.rotation.z = Math.random() * Math.PI;
+                    
+                    asteroidBelt.add(asteroid);
+                }
+                solarSystemScene.add(asteroidBelt);
+
+                // Create Kuiper Belt
+                const kuiperBelt = new THREE.Group();
+                const kuiperObjectGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+                const kuiperObjectMaterial = new THREE.MeshStandardMaterial({ color: 0x666666 });
+                
+                // Create 2000 Kuiper Belt objects beyond Neptune
+                for(let i = 0; i < 2000; i++) {
+                    const distance = Math.random() * (90 - 65) + 65; // Beyond Neptune's orbit
+                    const angle = Math.random() * Math.PI * 2;
+                    const kuiperObject = new THREE.Mesh(kuiperObjectGeometry, kuiperObjectMaterial);
+                    
+                    // Position in orbital ring
+                    kuiperObject.position.x = Math.cos(angle) * distance;
+                    kuiperObject.position.z = Math.sin(angle) * distance;
+                    
+                    // Add more vertical spread for Kuiper Belt
+                    kuiperObject.position.y = (Math.random() - 0.5) * 4;
+                    
+                    // Random rotation
+                    kuiperObject.rotation.x = Math.random() * Math.PI;
+                    kuiperObject.rotation.y = Math.random() * Math.PI;
+                    kuiperObject.rotation.z = Math.random() * Math.PI;
+                    
+                    kuiperBelt.add(kuiperObject);
+                }
+                solarSystemScene.add(kuiperBelt);
 
                 // Load all planet textures concurrently
                 const textureLoader = new THREE.TextureLoader();
@@ -517,6 +809,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Self rotation
                         mesh.rotation.y += 0.01;
                     });
+
+                    // Rotate asteroid belt and Kuiper belt
+                    asteroidBelt.rotation.y += 0.0005;
+                    kuiperBelt.rotation.y += 0.0003;
 
                     controls.update();
                     solarSystemRenderer.render(solarSystemScene, solarSystemCamera);
@@ -605,8 +901,204 @@ document.addEventListener("DOMContentLoaded", () => {
                 gravityRenderer.setSize(window.innerWidth, window.innerHeight);
                 planetContainer.appendChild(gravityRenderer.domElement);
 
-                // Add gravity info text
+                // Add gravity info text with improved styling
                 const gravityInfoDiv = document.createElement('div');
+                gravityInfoDiv.style.position = 'absolute';
+                gravityInfoDiv.style.top = '20px';
+                gravityInfoDiv.style.left = '20px';
+                gravityInfoDiv.style.color = 'white';
+                gravityInfoDiv.style.fontSize = '18px';
+                gravityInfoDiv.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                gravityInfoDiv.style.padding = '20px';
+                gravityInfoDiv.style.borderRadius = '10px';
+                gravityInfoDiv.style.maxWidth = '400px';
+                planetContainer.appendChild(gravityInfoDiv);
+
+                // Create Earth sphere with texture
+                const earthGeometry = new THREE.SphereGeometry(2.5, 64, 64); // Increased size from 1.5 to 2.5
+                const textureLoader = new THREE.TextureLoader();
+                const earthTexture = textureLoader.load('images/textures/earth.jpg');
+                const earthMaterial = new THREE.MeshStandardMaterial({
+                    map: earthTexture,
+                    metalness: 0.2,
+                    roughness: 0.8
+                });
+                const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+                earth.position.set(-8, 0, 0); // Moved from -4 to -8
+
+                // Load Psyche model
+                const loader = new GLTFLoader();
+                let psyche;
+                loader.load(
+                    'models/psyche/Psyche.glb',
+                    function (gltf) {
+                        psyche = gltf.scene;
+                        psyche.scale.set(1, 1, 1);
+                        psyche.position.set(8, 0, 0); // Moved from 4 to 8
+                        gravityScene.add(psyche);
+                    },
+                    undefined,
+                    function (error) {
+                        console.error('Error loading Psyche model:', error);
+                    }
+                );
+
+                // Add labels for each body
+                const createLabel = (text, position) => {
+                    const label = document.createElement('div');
+                    label.style.position = 'absolute';
+                    label.style.color = 'white';
+                    label.style.fontSize = '16px';
+                    label.style.fontWeight = 'bold';
+                    label.style.padding = '5px';
+                    label.style.background = 'rgba(0,0,0,0.7)';
+                    label.style.borderRadius = '5px';
+                    label.textContent = text;
+                    planetContainer.appendChild(label);
+                    return label;
+                };
+
+                const earthLabel = createLabel('Earth', earth.position);
+                const psycheLabel = createLabel('Psyche', new THREE.Vector3(8, 0, 0)); // Updated to match new position
+
+                gravityScene.add(earth);
+
+                // Enhanced lighting setup with more lights for better visibility
+                const ambientLight = new THREE.AmbientLight(0x404040, 1.2); // Increased intensity
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0); // Increased intensity
+                directionalLight.position.set(5, 5, 5);
+                const pointLight1 = new THREE.PointLight(0x00ff00, 1.5, 15); // Increased intensity and range
+                pointLight1.position.set(-8, 3, 2); // Updated position
+                const pointLight2 = new THREE.PointLight(0xff00ff, 1.5, 15); // Increased intensity and range
+                pointLight2.position.set(8, 3, 2); // Updated position
+                
+                // Add new lights for better earth visibility
+                const earthSpotlight = new THREE.SpotLight(0xffffff, 1.5);
+                earthSpotlight.position.set(-8, 5, 2); // Updated position
+                earthSpotlight.target = earth;
+                
+                gravityScene.add(ambientLight);
+                gravityScene.add(directionalLight);
+                gravityScene.add(pointLight1);
+                gravityScene.add(pointLight2);
+                gravityScene.add(earthSpotlight);
+
+                gravityCamera.position.z = 20; // Increased to show wider view
+
+                const controls = new OrbitControls(gravityCamera, gravityRenderer.domElement);
+
+                // Constants for gravity calculation
+                const G = 6.67430e-11;
+                const earthMass = 5.972e24;
+                const psycheMass = 2.72e19;
+                const earthRadius = 6371000;
+                const psycheRadius = 113000;
+
+                const earthGravity = (G * earthMass) / (earthRadius * earthRadius);
+                const psycheGravity = (G * psycheMass) / (psycheRadius * psycheRadius);
+                const gravityRatio = psycheGravity / earthGravity;
+
+                // Update info text with more relatable comparisons
+                gravityInfoDiv.innerHTML = `
+                    <h2 style="color: #00ff00; margin-bottom: 15px;">Gravity Comparison</h2>
+                    <p><b>Earth:</b> 9.81 m/s² (normal gravity you experience)</p>
+                    <p><b>Psyche:</b> ${(psycheGravity).toFixed(4)} m/s²</p>
+                    <h3 style="color: #00ff00; margin-top: 15px;">Fun Facts on Psyche:</h3>
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li>🍎 An apple would take ${(1/gravityRatio).toFixed(1)}x longer to fall!</li>
+                        <li>🏋️ A 100 lb person would weigh only ${(gravityRatio * 100).toFixed(1)} lbs</li>
+                        <li>🦘 You could jump ${(1/gravityRatio).toFixed(1)}x higher</li>
+                        <li>🎈 A helium balloon would rise ${(1/gravityRatio).toFixed(1)}x faster</li>
+                        <li>☔️ Rain would fall ${gravityRatio.toFixed(1)}x slower</li>
+                        <li>🎾 A tennis serve would travel ${(1/gravityRatio).toFixed(1)}x further</li>
+                        <li>⚡ Walking would feel like being in slow motion</li>
+                    </ul>
+                `;
+
+                // Create basic geometric shapes for gravity demonstration
+                const objects = [];
+                
+                // Create sphere geometry for apple representation
+                const appleGeometry = new THREE.SphereGeometry(0.3, 32, 32);
+                const appleMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0xff0000,
+                    shininess: 100
+                });
+
+                function createFallingApple(startPos) {
+                    const apple = new THREE.Mesh(appleGeometry, appleMaterial);
+                    apple.position.copy(startPos);
+                    apple.userData.startY = startPos.y;
+                    apple.userData.velocity = 0;
+                    apple.userData.startTime = Date.now();
+                    apple.userData.rotationSpeed = {
+                        x: Math.random() * 0.05,
+                        y: Math.random() * 0.05,
+                        z: Math.random() * 0.05
+                    };
+                    return apple;
+                }
+
+                let time = 0;
+                function animateGravity() {
+                    requestAnimationFrame(animateGravity);
+                    
+                    time += 0.016;
+
+                    // Rotate bodies
+                    earth.rotation.y += 0.005;
+                    if (psyche) {
+                        psyche.rotation.y += 0.005;
+                    }
+
+                    // Animate point lights
+                    pointLight1.position.y = 3 + Math.sin(time) * 0.5;
+                    pointLight2.position.y = 3 + Math.cos(time) * 0.5;
+
+                    // Create new apples periodically
+                    if (time % 2 < 0.016) {
+                        const earthApple = createFallingApple(new THREE.Vector3(-8, 3, 0)); // Updated position
+                        const psycheApple = createFallingApple(new THREE.Vector3(8, 3, 0)); // Updated position
+                        objects.push(earthApple, psycheApple);
+                        gravityScene.add(earthApple, psycheApple);
+                    }
+
+                    // Animate existing objects
+                    objects.forEach((obj, index) => {
+                        const elapsed = (Date.now() - obj.userData.startTime) / 1000;
+                        const gravity = obj.position.x < 0 ? 9.81 : psycheGravity;
+                        obj.position.y = obj.userData.startY - (0.5 * gravity * elapsed * elapsed);
+                        
+                        obj.rotation.x += obj.userData.rotationSpeed.x;
+                        obj.rotation.y += obj.userData.rotationSpeed.y;
+                        obj.rotation.z += obj.userData.rotationSpeed.z;
+                        
+                        if (obj.position.y < -3) {
+                            gravityScene.remove(obj);
+                            objects.splice(index, 1);
+                        }
+                    });
+
+                    // Update labels
+                    const vector = new THREE.Vector3();
+                    
+                    vector.setFromMatrixPosition(earth.matrixWorld);
+                    vector.project(gravityCamera);
+                    earthLabel.style.left = (vector.x * .5 + .5) * window.innerWidth + 'px';
+                    earthLabel.style.top = (-vector.y * .5 + .5) * window.innerHeight + 'px';
+                    
+                    if (psyche) {
+                        vector.setFromMatrixPosition(psyche.matrixWorld);
+                        vector.project(gravityCamera);
+                        psycheLabel.style.left = (vector.x * .5 + .5) * window.innerWidth + 'px';
+                        psycheLabel.style.top = (-vector.y * .5 + .5) * window.innerHeight + 'px';
+                    }
+
+                    controls.update();
+                    gravityRenderer.render(gravityScene, gravityCamera);
+                }
+                
+                animateGravity();
             } else if (planet.name === 'temperature') {
                 // Create temperature visualization scene
                 const tempScene = new THREE.Scene();
@@ -622,8 +1114,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 loader.load('models/psyche/Psyche.glb', function(gltf) {
                     psyche = gltf.scene;
                     psyche.scale.set(1, 1, 1);
-
-                    // Create temperature gradient using a custom shader material
                     const temperatureMaterial = new THREE.ShaderMaterial({
                         uniforms: {
                             sunDirection: { value: new THREE.Vector3(1, 0, 0) },
@@ -804,11 +1294,60 @@ document.addEventListener("DOMContentLoaded", () => {
     // Create Psyche model for main container
     const loader = new GLTFLoader();
     let psycheModel;
+    let isDragging = false;
+    let isAutoRotating = true;
+    let previousMousePosition = {
+        x: 0,
+        y: 0
+    };
+
     loader.load(
         'models/psyche/Psyche.glb',
         function (gltf) {
             psycheModel = gltf.scene;
             psycheModel.scale.set(1, 1, 1);
+            // Add rotation controls
+            psycheModel.rotation.x = 0;
+            psycheModel.rotation.y = 0;
+            psycheModel.rotation.z = 0;
+
+            // Add mouse controls
+            renderer.domElement.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                isAutoRotating = false; // Stop auto rotation when dragging starts
+                previousMousePosition = {
+                    x: e.clientX,
+                    y: e.clientY
+                };
+            });
+
+            renderer.domElement.addEventListener('mousemove', function(e) {
+                if(isDragging) {
+                    const deltaMove = {
+                        x: e.clientX - previousMousePosition.x,
+                        y: e.clientY - previousMousePosition.y
+                    };
+
+                    psycheModel.rotation.y += deltaMove.x * 0.01;
+                    psycheModel.rotation.x += deltaMove.y * 0.01;
+
+                    previousMousePosition = {
+                        x: e.clientX,
+                        y: e.clientY
+                    };
+                }
+            });
+
+            renderer.domElement.addEventListener('mouseup', function(e) {
+                isDragging = false;
+                isAutoRotating = true; // Resume auto rotation when mouse is released
+            });
+
+            renderer.domElement.addEventListener('mouseleave', function(e) {
+                isDragging = false;
+                isAutoRotating = true; // Resume auto rotation if mouse leaves the element
+            });
+
             scene.add(psycheModel);
         },
         undefined,
