@@ -378,21 +378,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
         menuItem.addEventListener('touchstart', (e) => {
             e.preventDefault();
-            menuItem.style.transform = 'scale(0.95) translateX(5px)';
-            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.5)';
+            
+            // Get device width
+            const deviceWidth = window.innerWidth;
+            
+            // Apply different transformations based on screen size
+            if (deviceWidth < 768) { // Mobile
+                menuItem.style.transform = 'scale(0.98) translateX(3px)'; // Smaller scale for better touch targets
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.6)'; // Higher opacity for better visibility
+            } else if (deviceWidth >= 768 && deviceWidth < 1024) { // Tablet
+                menuItem.style.transform = 'scale(0.95) translateX(4px)';
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.5)';
+            } else { // Desktop
+                menuItem.style.transform = 'scale(0.95) translateX(5px)';
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.5)';
+            }
         });
 
         menuItem.addEventListener('touchend', () => {
-            menuItem.style.transform = 'translateX(5px)';
-            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)';
+            const deviceWidth = window.innerWidth;
+            
+            if (deviceWidth < 768) {
+                menuItem.style.transform = 'translateX(3px)';
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.4)';
+            } else if (deviceWidth >= 768 && deviceWidth < 1024) {
+                menuItem.style.transform = 'translateX(4px)';
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)';
+            } else {
+                menuItem.style.transform = 'translateX(5px)';
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)';
+            }
         });
 
-        // Add click handler
+        // Add click handler with responsive behavior
         menuItem.addEventListener('click', () => {
+            const deviceWidth = window.innerWidth;
             const planetName = planetIcons[index].name;
             const planetContainer = containers[planetName].container;
             showLoading();
-            planetContainer.style.display = 'block';
+            
+            // Adjust container display based on screen size
+            if (deviceWidth < 768) {
+                planetContainer.style.display = 'block';
+                planetContainer.style.width = '100%';
+                planetContainer.style.height = '100%';
+            } else if (deviceWidth >= 768 && deviceWidth < 1024) {
+                planetContainer.style.display = 'block';
+                planetContainer.style.width = '90%';
+                planetContainer.style.height = '90%';
+                planetContainer.style.margin = 'auto';
+            } else {
+                planetContainer.style.display = 'block';
+                planetContainer.style.width = '80%';
+                planetContainer.style.height = '80%';
+                planetContainer.style.margin = 'auto';
+            }
             
             const planetIcon = document.getElementById(`button-${planetName}`);
             if (planetIcon) {
@@ -485,7 +525,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuContainer.style.zIndex = '100';
     container.appendChild(menuContainer);
 
-    // Create initial Psyche display
+    // Create initial Psyche display with responsive design
     const psycheInitialContainer = document.createElement('div');
     psycheInitialContainer.style.position = 'absolute';
     psycheInitialContainer.style.width = '100%';
@@ -496,16 +536,110 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(psycheInitialContainer);
 
     const planetIcons = [
-        { name: 'sun', image: 'images/icons/sun.png' },
-        { name: 'mercury', image: 'images/icons/solarsystem.png', displayName: 'Solar System' },
-        { name: 'venus', image: 'images/icons/daynight.png', displayName: 'Day/Night Cycles' },
-        { name: 'earth', image: 'images/icons/mission.png' },
-        { name: 'gravity', image: 'images/icons/gravity.png' },
-        { name: 'psyche', image: 'images/icons/pickaxe.png' },
-        { name: 'jupiter', image: 'images/icons/disk.png' },
-        { name: 'saturn', image: 'images/icons/helmet.png' },
-        { name: 'psycheView', image: 'images/icons/telescope.png', displayName: 'View of Psyche from Earth' },
-        { name: 'temperature', image: 'images/icons/thermometer.png', displayName: 'Temperature Map' }
+        { 
+            name: 'sun', 
+            image: 'images/icons/sun.png',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #ffd700, #ff8c00)',
+                width: '8px',
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'mercury', 
+            image: 'images/icons/solarsystem.png', 
+            displayName: 'Solar System',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)', 
+                thumb: 'linear-gradient(to right, #c0c0c0, #808080)',
+                width: '8px',
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'venus', 
+            image: 'images/icons/daynight.png', 
+            displayName: 'Day/Night Cycles',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #ffa500, #ff4500)',
+                width: '8px', 
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'earth', 
+            image: 'images/icons/mission.png',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #4169e1, #000080)',
+                width: '8px',
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'gravity', 
+            image: 'images/icons/gravity.png',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #9932cc, #4b0082)',
+                width: '8px',
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'psyche', 
+            image: 'images/icons/pickaxe.png',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #daa520, #8b4513)',
+                width: '8px',
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'jupiter', 
+            image: 'images/icons/disk.png',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #cd853f, #8b4513)',
+                width: '8px',
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'saturn', 
+            image: 'images/icons/helmet.png',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #f0e68c, #daa520)',
+                width: '8px',
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'psycheView', 
+            image: 'images/icons/telescope.png', 
+            displayName: 'View of Psyche from Earth',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #4682b4, #191970)',
+                width: '8px',
+                radius: '4px'
+            }
+        },
+        { 
+            name: 'temperature', 
+            image: 'images/icons/thermometer.png', 
+            displayName: 'Temperature Map',
+            scrollbarStyle: {
+                track: 'linear-gradient(to right, #000000, #1a1a1a)',
+                thumb: 'linear-gradient(to right, #ff4500, #8b0000)',
+                width: '8px',
+                radius: '4px'
+            }
+        }
     ];
 
 
@@ -517,8 +651,8 @@ document.addEventListener("DOMContentLoaded", () => {
         planetContainer.style.position = 'fixed';
         planetContainer.style.top = '0';
         planetContainer.style.left = '0';
-        planetContainer.style.width = '100%';
-        planetContainer.style.height = '100%';
+        planetContainer.style.width = window.innerWidth < 768 ? '100%' : '90%';
+        planetContainer.style.height = window.innerWidth < 768 ? '100%' : '90%';
         planetContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
         planetContainer.style.zIndex = '1000';
         planetContainer.style.border = `${adjustedBaseSize * 0.2}px solid #fff`;
