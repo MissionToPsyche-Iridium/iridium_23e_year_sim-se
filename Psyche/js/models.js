@@ -24,22 +24,22 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.style.left = '0';
     sideMenu.style.top = '0';
     sideMenu.style.width = `${menuWidth}px`;
-    sideMenu.style.height = '100vh'; // Use viewport height
+    sideMenu.style.height = '100vh';
     sideMenu.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
     sideMenu.style.backdropFilter = 'blur(20px)';
-    sideMenu.style.padding = '20px'; // Reduced padding
+    sideMenu.style.padding = '20px';
     sideMenu.style.boxSizing = 'border-box';
     sideMenu.style.zIndex = '1500';
     sideMenu.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.15)';
     sideMenu.style.borderRight = '2px solid rgba(255, 255, 255, 0.1)';
-    sideMenu.style.transform = 'translateX(0)'; // Start expanded
+    sideMenu.style.transform = 'translateX(0)';
     sideMenu.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
     sideMenu.style.display = 'flex';
     sideMenu.style.flexDirection = 'column';
     sideMenu.style.justifyContent = 'flex-start';
     sideMenu.style.alignItems = 'stretch';
 
-    // Create sticky header
+    // Create sticky header with CSS sticky positioning
     const stickyHeader = document.createElement('div');
     stickyHeader.style.position = 'sticky';
     stickyHeader.style.top = '0';
@@ -60,16 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
     menuTitle.textContent = 'Year On Psyche Simulation';
     menuTitle.style.color = 'white';
     menuTitle.style.margin = '0';
-    menuTitle.style.fontSize = `${Math.min(24, screenWidth * 0.02)}px`; // Smaller font
+    menuTitle.style.fontSize = `${Math.min(24, screenWidth * 0.02)}px`;
     menuTitle.style.fontWeight = '800';
     menuTitle.style.textTransform = 'uppercase';
     menuTitle.style.letterSpacing = '2px';
     menuTitle.style.textAlign = 'center';
     menuTitle.style.textShadow = '0 0 15px rgba(255, 255, 255, 0.5)';
-    stickyHeader.appendChild(menuTitle);
-    sideMenu.appendChild(stickyHeader);
 
-    // Add scroll behavior for sticky header
+    // Add scroll behavior for enhanced visual feedback
     sideMenu.addEventListener('scroll', () => {
         if (sideMenu.scrollTop > 0) {
             stickyHeader.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.5)';
@@ -391,7 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadingOverlay.style.display = 'flex';
         setTimeout(() => {
             hideLoading();
-        }, 1000); // Hide after 3 seconds
+        }, 200); // Hide after 3 seconds
     };
 
     const hideLoading = () => {
@@ -573,7 +571,6 @@ document.addEventListener("DOMContentLoaded", () => {
         tooltip.style.transition = 'opacity 0.2s';
         tooltip.style.pointerEvents = 'none';
         icon.appendChild(tooltip);
-
         // Create night sky view function
         const createPsycheView = (container) => {
             // Clear any existing content
@@ -598,55 +595,184 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const ctx = skyCanvas.getContext('2d');
 
-            // Create stars
+            // Create stars for background
             const stars = [];
-            for(let i = 0; i < 500; i++) {
+            for(let i = 0; i < 800; i++) {
                 stars.push({
                     x: Math.random() * skyCanvas.width,
                     y: Math.random() * skyCanvas.height,
-                    size: Math.random() * 2 + 0.5,
-                    brightness: Math.random()
+                    size: Math.random() * 3 + 1, // Increased star size
+                    brightness: Math.random(),
+                    speed: Math.random() * 2 + 1,
+                    color: `rgb(255,255,${Math.random() * 55 + 200})` // Slightly blue-white stars
                 });
             }
 
-            // Create Psyche object
+            // Create planet labels
+            const planetLabels = [
+                {name: 'Mars', x: skyCanvas.width * 0.8, y: skyCanvas.height * 0.2},
+                {name: 'Jupiter', x: skyCanvas.width * 0.15, y: skyCanvas.height * 0.7},
+                {name: 'Saturn', x: skyCanvas.width * 0.7, y: skyCanvas.height * 0.85}
+            ];
+
+            // Create planet label elements
+            planetLabels.forEach(planet => {
+                const label = document.createElement('div');
+                label.textContent = planet.name;
+                label.style.position = 'absolute';
+                label.style.left = `${planet.x}px`;
+                label.style.top = `${planet.y}px`;
+                label.style.color = '#e0e0ff';
+                label.style.padding = '10px 20px';
+                label.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                label.style.borderRadius = '15px';
+                label.style.fontSize = '20px';
+                label.style.pointerEvents = 'none';
+                container.appendChild(label);
+            });
+
+            // Create Psyche label
             const psycheLabel = document.createElement('div');
             psycheLabel.textContent = 'Psyche';
             psycheLabel.style.position = 'absolute';
-            psycheLabel.style.color = 'white';
-            psycheLabel.style.padding = '10px 20px';
-            psycheLabel.style.backgroundColor = 'rgba(0,0,0,0.7)';
-            psycheLabel.style.borderRadius = '20px';
-            psycheLabel.style.fontSize = '24px';
+            psycheLabel.style.color = '#e0e0ff';
+            psycheLabel.style.padding = '15px 30px';
+            psycheLabel.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            psycheLabel.style.borderRadius = '25px';
+            psycheLabel.style.fontSize = '28px';
             psycheLabel.style.fontWeight = 'bold';
-            psycheLabel.style.textShadow = '0 0 10px rgba(255,255,255,0.5)';
+            psycheLabel.style.textShadow = '0 0 15px rgba(255,255,255,0.7)';
+            psycheLabel.style.cursor = 'pointer';
+            psycheLabel.style.transition = 'all 0.3s ease';
             container.appendChild(psycheLabel);
+
+            // Position Psyche label at 1/3 from left initially
+            psycheLabel.style.left = `${skyCanvas.width/3 - psycheLabel.offsetWidth/2}px`;
+            psycheLabel.style.top = `${skyCanvas.height/2 - psycheLabel.offsetHeight/2}px`;
+
+            // Add hover effect
+            psycheLabel.addEventListener('mouseover', () => {
+                psycheLabel.style.color = '#00ffff';
+                psycheLabel.style.transform = 'scale(1.1)';
+                psycheLabel.style.boxShadow = '0 0 20px rgba(0,255,255,0.5)';
+            });
+
+            psycheLabel.addEventListener('mouseout', () => {
+                psycheLabel.style.color = '#e0e0ff';
+                psycheLabel.style.transform = 'scale(1)';
+                psycheLabel.style.boxShadow = 'none';
+            });
+
+            // Add click handler for warp speed and model
+            psycheLabel.addEventListener('click', async () => {
+                // Create 3D scene early but don't display yet
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color('#000022'); // Match star background
+                const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                
+                // Load Psyche model before starting warp effect
+                const loader = new GLTFLoader();
+                const gltf = await loader.loadAsync('models/psyche/Psyche.glb');
+                scene.add(gltf.scene);
+                camera.position.z = 45; // Start 3x further out
+                
+                // Add lighting
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                const pointLight = new THREE.PointLight(0xffffff, 1);
+                pointLight.position.set(5, 5, 5);
+                scene.add(ambientLight, pointLight);
+
+                // Start warp speed effect
+                let warpSpeed = 0;
+                const warpStart = Date.now();
+                const warpDuration = 3000; // 3 seconds
+
+                const warpAnimation = setInterval(() => {
+                    const elapsed = Date.now() - warpStart;
+                    if (elapsed >= warpDuration) {
+                        clearInterval(warpAnimation);
+                        container.innerHTML = '';
+                        container.appendChild(renderer.domElement);
+                        
+                        // Smooth camera zoom animation
+                        const zoomDuration = 1000; // 1 second zoom
+                        const startZ = camera.position.z;
+                        const targetZ = 15;
+                        const zoomStart = Date.now();
+                        
+                        function zoomIn() {
+                            const zoomElapsed = Date.now() - zoomStart;
+                            if (zoomElapsed < zoomDuration) {
+                                const progress = zoomElapsed / zoomDuration;
+                                camera.position.z = startZ + (targetZ - startZ) * progress;
+                                requestAnimationFrame(zoomIn);
+                            } else {
+                                camera.position.z = targetZ;
+                            }
+                            gltf.scene.rotation.y += 0.005;
+                            renderer.render(scene, camera);
+                        }
+                        zoomIn();
+                        return;
+                    }
+
+                    warpSpeed = elapsed / warpDuration;
+                    stars.forEach(star => {
+                        // Create tunnel effect by moving stars from center outward
+                        const dx = star.x - skyCanvas.width/3; // Move warp center to 1/3 from left
+                        const dy = star.y - skyCanvas.height/2;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        const speed = (distance / 100) * warpSpeed * 15;
+                        
+                        star.x += (dx / distance) * speed;
+                        star.y += (dy / distance) * speed;
+                        
+                        if (star.x < 0 || star.x > skyCanvas.width || 
+                            star.y < 0 || star.y > skyCanvas.height) {
+                            // Reset stars to center when they go off screen
+                            star.x = skyCanvas.width/3 + (Math.random() - 0.5) * 100; // Reset to 1/3 from left
+                            star.y = skyCanvas.height/2 + (Math.random() - 0.5) * 100;
+                        }
+                    });
+                }, 16);
+            });
 
             // Animation function
             let angle = 0;
             function animate() {
                 // Clear canvas
-                ctx.fillStyle = '#000033';
+                ctx.fillStyle = '#000022';
                 ctx.fillRect(0, 0, skyCanvas.width, skyCanvas.height);
 
-                // Draw and animate stars
-                ctx.fillStyle = 'white';
+                // Draw and animate stars with sparkle effect
                 stars.forEach(star => {
-                    const twinkle = 0.5 + Math.sin(Date.now() * 0.001 + star.brightness * 10) * 0.5;
+                    const twinkle = 0.7 + Math.sin(Date.now() * 0.003 + star.brightness * 10) * 0.3;
                     ctx.globalAlpha = twinkle;
+                    
+                    // Draw stars with glow effect
+                    const gradient = ctx.createRadialGradient(
+                        star.x, star.y, 0,
+                        star.x, star.y, star.size * 2
+                    );
+                    gradient.addColorStop(0, star.color);
+                    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+                    
+                    ctx.fillStyle = gradient;
                     ctx.beginPath();
                     ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
                     ctx.fill();
                 });
                 ctx.globalAlpha = 1;
 
-                // Move Psyche across sky in an elliptical path
-                const x = skyCanvas.width/2 + Math.cos(angle) * (skyCanvas.width/3);
-                const y = skyCanvas.height/2 + Math.sin(angle) * (skyCanvas.height/4);
+                // Move Psyche label in elliptical path more slowly
+                const x = skyCanvas.width/3 + Math.cos(angle) * (skyCanvas.width/4); // Center around 1/3 from left
+                const y = skyCanvas.height/2 + Math.sin(angle) * (skyCanvas.height/5);
                 psycheLabel.style.left = `${x - psycheLabel.offsetWidth/2}px`;
                 psycheLabel.style.top = `${y - psycheLabel.offsetHeight/2}px`;
 
-                angle += 0.002;
+                angle += 0.001; // Reduced from 0.002 to 0.001 for slower movement
                 requestAnimationFrame(animate);
             }
             animate();
@@ -1301,11 +1427,19 @@ document.addEventListener("DOMContentLoaded", () => {
         y: 0
     };
 
+    // Calculate initial scale based on screen size
+    const calculateModelScale = () => {
+        const screenSize = Math.min(container.clientWidth, container.clientHeight);
+        return screenSize * 0.0008; // Adjust this multiplier to fine-tune the scale
+    };
+
     loader.load(
         'models/psyche/Psyche.glb',
         function (gltf) {
             psycheModel = gltf.scene;
-            psycheModel.scale.set(1, 1, 1);
+            const initialScale = calculateModelScale();
+            psycheModel.scale.set(initialScale, initialScale, initialScale);
+            
             // Add rotation controls
             psycheModel.rotation.x = 0;
             psycheModel.rotation.y = 0;
@@ -1346,6 +1480,12 @@ document.addEventListener("DOMContentLoaded", () => {
             renderer.domElement.addEventListener('mouseleave', function(e) {
                 isDragging = false;
                 isAutoRotating = true; // Resume auto rotation if mouse leaves the element
+            });
+
+            // Add resize listener specific to model
+            window.addEventListener('resize', () => {
+                const newScale = calculateModelScale();
+                psycheModel.scale.set(newScale, newScale, newScale);
             });
 
             scene.add(psycheModel);
