@@ -71,16 +71,67 @@ document.addEventListener("DOMContentLoaded", () => {
     menuTitle.style.overflow = 'hidden';
     menuTitle.style.textOverflow = 'ellipsis';
 
-    // Add scroll behavior for enhanced mobile visual feedback
+    // Add enhanced smooth scroll behavior
+    let lastScrollTop = 0;
+    let scrollTimeout;
+    const scrollThreshold = 50; // Threshold for scroll direction change
+    const scrollDuration = 500; // Duration of smooth scroll in ms
+
+    const smoothScroll = (target, duration) => {
+        const start = sideMenu.scrollTop;
+        const distance = target - start;
+        let startTime = null;
+
+        const animation = currentTime => {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            
+            // Easing function for smoother animation
+            const ease = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            
+            sideMenu.scrollTop = start + distance * ease(progress);
+
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        };
+
+        requestAnimationFrame(animation);
+    };
+
+    // Enhanced scroll behavior with momentum and direction detection
     sideMenu.addEventListener('scroll', () => {
-        if (sideMenu.scrollTop > 0) {
+        const scrollTop = sideMenu.scrollTop;
+        const scrollDelta = scrollTop - lastScrollTop;
+        
+        // Update header appearance based on scroll
+        if (scrollTop > 0) {
             stickyHeader.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3)';
             stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
         } else {
             stickyHeader.style.boxShadow = 'none';
             stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
         }
-    });
+
+        // Detect rapid direction changes
+        if (Math.abs(scrollDelta) > scrollThreshold) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                // Snap to nearest menu item when rapid scrolling stops
+                const menuItems = Array.from(menuContent.children);
+                const closestItem = menuItems.reduce((closest, item) => {
+                    const itemTop = item.offsetTop;
+                    const distance = Math.abs(itemTop - scrollTop);
+                    return distance < Math.abs(closest.offsetTop - scrollTop) ? item : closest;
+                });
+                
+                smoothScroll(closestItem.offsetTop, scrollDuration);
+            }, 150);
+        }
+
+        lastScrollTop = scrollTop;
+    }, { passive: true });
 
     // Add mobile-friendly toggle button
     const toggleButton = document.createElement('button');
@@ -159,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuContent.style.scrollbarWidth = 'none';
     menuContent.style.msOverflowStyle = 'none';
     menuContent.style.height = 'calc(100vh - 60px)';
+    menuContent.style.scrollBehavior = 'smooth'; // Enable native smooth scrolling
 
     // Hide scrollbar but keep functionality
     menuContent.addEventListener('touchstart', (e) => {
