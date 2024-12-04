@@ -925,15 +925,10 @@ footer {
 }
 
 @media (max-width: 375px) {
-  #footer_container li {
-    font-size: small !important;
-  }
-
-  footer h4 {
+  #footer_container li, footer h4 {
     font-size: small !important;
   }
 }
-
 /**************************
 * #footer_container li
 * 
@@ -992,6 +987,8 @@ footer {
 
 /* Popup content styling */
 #reference-popup {
+  text-align: left;
+  margin: 0 auto;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #ff4500;
   color: #ff4500;
@@ -1024,10 +1021,15 @@ footer {
 #reference-popup ul li {
   font-family: Arial, Helvetica, sans-serif;
   color: #CD5C5C; /* Color for list items */
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
 }
 
 #reference-popup p {
   color: #CD5C5C; /* Color for paragraphs */
+  margin: 10px 0;
+  line-height: 1.6;
 }
 
 /* Close button styling */
