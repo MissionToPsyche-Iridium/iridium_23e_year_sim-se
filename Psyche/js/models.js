@@ -1618,6 +1618,131 @@ document.addEventListener("DOMContentLoaded", () => {
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
     container.appendChild(renderer.domElement);
+    // Create quiz card container with futuristic design
+    const quizContainer = document.createElement('div');
+    quizContainer.style.position = 'absolute';
+    quizContainer.style.right = '20px';
+    quizContainer.style.top = '20px';
+    quizContainer.style.width = '350px';
+    quizContainer.style.zIndex = '1000';
+    container.appendChild(quizContainer);
+
+    // Quiz data
+    const quizCards = [
+        {
+            question: "What is Psyche's estimated diameter?",
+            answer: "About 226 kilometers (140 miles)"
+        },
+        {
+            question: "How far is Psyche from the Sun?", 
+            answer: "About 3 AU (Astronomical Units)"
+        },
+        {
+            question: "What is Psyche primarily made of?",
+            answer: "Mostly metal, primarily nickel and iron"
+        }
+    ];
+
+    // Create and display quiz card with futuristic styling
+    let currentCardIndex = 0;
+    let showingAnswer = false;
+    const card = document.createElement('div');
+    card.style.backgroundColor = 'rgba(0, 20, 40, 0.9)';
+    card.style.padding = '25px';
+    card.style.borderRadius = '20px';
+    card.style.color = '#00ffff';
+    card.style.cursor = 'pointer';
+    card.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.2)';
+    card.style.transition = 'all 0.4s ease';
+    card.style.border = '2px solid rgba(0, 255, 255, 0.3)';
+    card.style.backdropFilter = 'blur(10px)';
+
+    function updateCard() {
+        const currentCard = quizCards[currentCardIndex];
+        card.innerHTML = `
+            <div style="text-align: center;">
+                <div class="question" style="
+                    font-size: 1.3em;
+                    font-weight: bold;
+                    margin-bottom: 15px;
+                    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+                    letter-spacing: 1px;
+                ">
+                    ${currentCard.question}
+                </div>
+                ${showingAnswer ? `
+                    <div class="answer" style="
+                        font-size: 1.2em;
+                        color: #00ff00;
+                        margin: 15px 0;
+                        padding: 10px;
+                        border: 1px solid #00ff00;
+                        border-radius: 10px;
+                    ">
+                        ${currentCard.answer}
+                    </div>
+                ` : ''}
+                <div style="
+                    margin-top: 20px;
+                    font-size: 1em;
+                    color: #00ffff;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                ">
+                    <span class="blink" style="
+                        animation: blink 1.5s infinite;
+                        font-family: 'Courier New', monospace;
+                    ">▶</span>
+                    ${showingAnswer ? 'Next Question' : 'Show Answer'}
+                </div>
+            </div>
+        `;
+    }
+
+    // Add blinking animation style
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    updateCard();
+    quizContainer.appendChild(card);
+
+    // Click handler for showing answer and next question
+    card.addEventListener('click', () => {
+        card.style.transform = 'scale(0.95)';
+        card.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.3)';
+        
+        setTimeout(() => {
+            if (showingAnswer) {
+                currentCardIndex = (currentCardIndex + 1) % quizCards.length;
+                showingAnswer = false;
+            } else {
+                showingAnswer = true;
+            }
+            updateCard();
+            card.style.transform = 'scale(1)';
+            card.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.2)';
+        }, 150);
+    });
+
+    // Hover effects
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'scale(1.02)';
+        card.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.3)';
+        card.style.border = '2px solid rgba(0, 255, 255, 0.5)';
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'scale(1)';
+        card.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.2)';
+        card.style.border = '2px solid rgba(0, 255, 255, 0.3)';
+    });
 
     // Create Psyche model for main container
     const loader = new GLTFLoader();
