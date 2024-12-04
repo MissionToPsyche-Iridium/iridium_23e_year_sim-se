@@ -55,101 +55,119 @@ document.addEventListener("DOMContentLoaded", () => {
     stickyHeader.style.transition = 'all 0.3s ease';
     stickyHeader.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
 
-    // Add menu title with enhanced styling to sticky header
+    // Add menu title with enhanced mobile-friendly styling to sticky header
     const menuTitle = document.createElement('h2');
     menuTitle.textContent = 'Year On Psyche Simulation';
     menuTitle.style.color = 'white';
     menuTitle.style.margin = '0';
-    menuTitle.style.fontSize = `${Math.min(24, screenWidth * 0.02)}px`;
-    menuTitle.style.fontWeight = '800';
+    menuTitle.style.fontSize = `${Math.min(20, screenWidth * 0.018)}px`; // Slightly smaller for mobile
+    menuTitle.style.fontWeight = '700';
     menuTitle.style.textTransform = 'uppercase';
-    menuTitle.style.letterSpacing = '2px';
+    menuTitle.style.letterSpacing = '1px';
     menuTitle.style.textAlign = 'center';
-    menuTitle.style.textShadow = '0 0 15px rgba(255, 255, 255, 0.5)';
+    menuTitle.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.3)';
+    menuTitle.style.padding = '10px 0';
+    menuTitle.style.whiteSpace = 'nowrap';
+    menuTitle.style.overflow = 'hidden';
+    menuTitle.style.textOverflow = 'ellipsis';
 
-    // Add scroll behavior for enhanced visual feedback
+    // Add scroll behavior for enhanced mobile visual feedback
     sideMenu.addEventListener('scroll', () => {
         if (sideMenu.scrollTop > 0) {
-            stickyHeader.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.5)';
-            stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.98)';
-        } else {
-            stickyHeader.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+            stickyHeader.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3)';
             stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+        } else {
+            stickyHeader.style.boxShadow = 'none';
+            stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
         }
     });
 
-    // Add toggle button that stays visible with click animation
+    // Add mobile-friendly toggle button
     const toggleButton = document.createElement('button');
     toggleButton.style.position = 'fixed';
     toggleButton.style.left = `${menuWidth}px`;
-    toggleButton.style.top = '20px';
-    toggleButton.style.width = '40px';
-    toggleButton.style.height = '40px';
-    toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-    toggleButton.style.border = '2px solid rgba(255, 255, 255, 0.1)';
-    toggleButton.style.borderRadius = '50%';
+    toggleButton.style.top = '10px';
+    toggleButton.style.width = '44px'; // Larger touch target
+    toggleButton.style.height = '44px';
+    toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    toggleButton.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+    toggleButton.style.borderRadius = '8px';
     toggleButton.style.color = 'white';
     toggleButton.style.cursor = 'pointer';
     toggleButton.style.zIndex = '1600';
-    toggleButton.innerHTML = '←';
-    toggleButton.style.fontSize = '20px';
-    toggleButton.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    toggleButton.innerHTML = '☰';
+    toggleButton.style.fontSize = '24px';
+    toggleButton.style.transition = 'all 0.2s ease';
+    toggleButton.style.padding = '0';
+    toggleButton.style.display = 'flex';
+    toggleButton.style.alignItems = 'center';
+    toggleButton.style.justifyContent = 'center';
+    toggleButton.style.WebkitTapHighlightColor = 'transparent';
 
-    // Add click/tap animation styles
-    toggleButton.addEventListener('mousedown', () => {
-        toggleButton.style.transform = 'scale(0.9)';
-        toggleButton.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-    });
-
-    toggleButton.addEventListener('mouseup', () => {
-        toggleButton.style.transform = 'scale(1)';
-        toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-    });
-
+    // Enhanced touch feedback
     toggleButton.addEventListener('touchstart', (e) => {
         e.preventDefault();
-        toggleButton.style.transform = 'scale(0.9)';
-        toggleButton.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+        toggleButton.style.transform = 'scale(0.95)';
+        toggleButton.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
     });
 
     toggleButton.addEventListener('touchend', () => {
         toggleButton.style.transform = 'scale(1)';
-        toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    });
+
+    // Mouse feedback
+    toggleButton.addEventListener('mousedown', () => {
+        toggleButton.style.transform = 'scale(0.95)';
+        toggleButton.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+    });
+
+    toggleButton.addEventListener('mouseup', () => {
+        toggleButton.style.transform = 'scale(1)';
+        toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
     });
 
     let isMenuOpen = true;
     toggleButton.addEventListener('click', () => {
         if (isMenuOpen) {
-            sideMenu.style.transform = `translateX(-${menuWidth}px)`;
+            sideMenu.style.transform = 'translateX(-100%)';
             container.style.marginLeft = '0';
             container.style.width = '100%';
-            toggleButton.style.left = '20px';
-            toggleButton.innerHTML = '→';
-            toggleButton.style.transform = 'rotate(180deg)';
+            toggleButton.style.left = '10px';
+            toggleButton.innerHTML = '☰';
         } else {
             sideMenu.style.transform = 'translateX(0)';
             container.style.marginLeft = `${menuWidth}px`;
             container.style.width = `calc(100% - ${menuWidth}px)`;
             toggleButton.style.left = `${menuWidth}px`;
-            toggleButton.innerHTML = '←';
-            toggleButton.style.transform = 'rotate(0deg)';
+            toggleButton.innerHTML = '×';
         }
         isMenuOpen = !isMenuOpen;
     });
 
     document.body.appendChild(toggleButton);
 
-    // Create scrollable content container with adjusted height
+    // Create scrollable content container optimized for mobile
     const menuContent = document.createElement('div');
     menuContent.style.flex = '1';
     menuContent.style.display = 'flex';
     menuContent.style.flexDirection = 'column';
-    menuContent.style.justifyContent = 'space-between';
-    menuContent.style.height = 'calc(100vh - 80px)'; // Adjust height to fit all items
-    menuContent.style.padding = '0 10px';
+    menuContent.style.gap = '8px';
+    menuContent.style.padding = '10px';
+    menuContent.style.overflowY = 'auto';
+    menuContent.style.WebkitOverflowScrolling = 'touch';
+    menuContent.style.scrollbarWidth = 'none';
+    menuContent.style.msOverflowStyle = 'none';
+    menuContent.style.height = 'calc(100vh - 60px)';
+
+    // Hide scrollbar but keep functionality
+    menuContent.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+    }, { passive: true });
+
     sideMenu.appendChild(menuContent);
 
-    // Create menu items based on planetIcons array with descriptions
+    // Mobile-optimized menu items
     const menuItems = [
         { 
             name: 'Sun', 
@@ -203,10 +221,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
-    // Add window resize handler for menu responsiveness
+    // Add responsive design handler
     window.addEventListener('resize', () => {
         const newScreenWidth = window.innerWidth;
-        const newMenuWidth = Math.min(newScreenWidth * 0.25, 350);
+        const newMenuWidth = newScreenWidth < 768 ? newScreenWidth * 0.8 : Math.min(newScreenWidth * 0.25, 350);
         
         if (isMenuOpen) {
             container.style.marginLeft = `${newMenuWidth}px`;
@@ -215,85 +233,83 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             container.style.marginLeft = '0';
             container.style.width = '100%';
+            toggleButton.style.left = '10px';
         }
         
         sideMenu.style.width = `${newMenuWidth}px`;
+        menuTitle.style.fontSize = `${Math.min(20, newScreenWidth * 0.018)}px`;
         
-        // Update menu title font size
-        menuTitle.style.fontSize = `${Math.min(24, newScreenWidth * 0.02)}px`;
-        
-        // Update menu items size and spacing
         document.querySelectorAll('.menu-item').forEach(item => {
-            item.style.padding = `${Math.min(12, newScreenWidth * 0.012)}px ${Math.min(8, newScreenWidth * 0.008)}px`;
-            item.style.fontSize = `${Math.min(14, newScreenWidth * 0.01)}px`;
+            item.style.padding = `${Math.min(16, newScreenWidth * 0.015)}px`;
         });
     });
 
-    // Create menu items with more compact styling and enhanced feedback
+    // Create mobile-optimized menu items
     menuItems.forEach((item, index) => {
         const menuItem = document.createElement('div');
         menuItem.classList.add('menu-item');
         menuItem.style.display = 'flex';
         menuItem.style.flexDirection = 'column';
-        menuItem.style.padding = '8px';
-        menuItem.style.margin = '4px 0';
+        menuItem.style.padding = '12px';
+        menuItem.style.margin = '2px 0';
         menuItem.style.cursor = 'pointer';
-        menuItem.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-        menuItem.style.borderRadius = '8px';
+        menuItem.style.transition = 'all 0.2s ease';
+        menuItem.style.borderRadius = '12px';
         menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-        menuItem.style.backdropFilter = 'blur(10px)';
+        menuItem.style.backdropFilter = 'blur(8px)';
+        menuItem.style.WebkitBackdropFilter = 'blur(8px)';
         menuItem.style.position = 'relative';
-        menuItem.style.overflow = 'hidden';
+        menuItem.style.userSelect = 'none';
+        menuItem.style.WebkitTapHighlightColor = 'transparent';
 
-        // Create header container for icon and title
+        // Create header container
         const headerContainer = document.createElement('div');
         headerContainer.style.display = 'flex';
         headerContainer.style.alignItems = 'center';
-        headerContainer.style.marginBottom = '4px';
+        headerContainer.style.gap = '12px';
 
-        // Add icon
+        // Add icon with mobile optimization
         const icon = document.createElement('img');
         icon.src = item.icon;
-        icon.style.width = '20px';
-        icon.style.height = '20px';
-        icon.style.marginRight = '8px';
+        icon.style.width = '24px';
+        icon.style.height = '24px';
         icon.style.filter = 'brightness(0) invert(1)';
-        icon.style.transition = 'transform 0.3s ease';
+        icon.style.transition = 'transform 0.2s ease';
+        icon.style.flexShrink = '0';
         headerContainer.appendChild(icon);
 
-        // Add text
+        // Add text optimized for mobile
         const text = document.createElement('span');
         text.textContent = item.name;
         text.style.color = 'white';
-        text.style.fontSize = '14px';
+        text.style.fontSize = '16px';
         text.style.fontWeight = '500';
         text.style.letterSpacing = '0.5px';
         headerContainer.appendChild(text);
 
         menuItem.appendChild(headerContainer);
 
-        // Add description
+        // Add description with mobile optimization
         const description = document.createElement('div');
         description.textContent = item.description;
         description.style.color = 'rgba(255, 255, 255, 0.7)';
-        description.style.fontSize = '12px';
-        description.style.marginTop = '4px';
-        description.style.marginLeft = '28px';
+        description.style.fontSize = '14px';
+        description.style.marginTop = '6px';
+        description.style.marginLeft = '36px';
+        description.style.lineHeight = '1.4';
         menuItem.appendChild(description);
 
-        // Add hover effects with enhanced feedback
+        // Add touch-friendly hover effects
         menuItem.addEventListener('mouseover', () => {
-            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)'; // Cornflower blue with transparency
-            menuItem.style.transform = 'translateX(5px)';
+            menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.2)';
+            menuItem.style.transform = 'translateX(4px)';
             icon.style.transform = 'rotate(5deg)';
-            menuItem.style.boxShadow = '0 0 15px rgba(100, 149, 237, 0.3)';
         });
 
         menuItem.addEventListener('mouseout', () => {
             menuItem.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
             menuItem.style.transform = 'translateX(0)';
-            icon.style.transform = 'rotate(0deg)';
-            menuItem.style.boxShadow = 'none';
+            icon.style.transform = 'rotate(0)';
         });
 
         // Add click/tap animations with enhanced feedback
