@@ -72,10 +72,12 @@ document.addEventListener("DOMContentLoaded", function() {
             </p>  
 
             <p>Resources</p>
+            <p>
             <li><a href="https://psyche.asu.edu" target="_blank">NASA Psyche Mission</a></li>
             <li><a href="https://threejs.org/docs/" target="_blank">Three.js Documentation</a></li>
             <li>Asteroid model by <a href="https://nasa.gov" target="_blank">NASA</a></li>
-            <li>Simulation inspired by <a href="http://blender.org" target ="_blank">Blender</a></li> -->
+            <li>Simulation inspired by <a href="http://blender.org" target ="_blank">Blender</a></li>
+            </p>
             
             <p class="disclaimer">Disclaimer:</p>
             <p class="disclaimer">The work that was created in partial fulfillment of Arizona State University Capstone Course "SER 401". The work is a result of the Psyche Student Collaborations component on NASA's Psyche Mission (https://psyche.asu.edu). "Psyche: A Journey to a Metal World" [Contract Number NNM16AA09C] is part of the NASA Discovery Program mission to solar system targets. Trade names and trademarks of ASU and NASA are used in this work for identification only. Their usage does not constitue an official endorsement, either expressed or implied, by Arizona State University or National Aeronautics and Space Administration. The content is solely the responsibility of the authors and does not necessarily represent the official views of ASU or NASA.</p>
