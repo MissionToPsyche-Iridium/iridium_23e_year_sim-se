@@ -59,7 +59,7 @@ function animate() {
 
     // Rotate the model
     if (scene.userData.model) {
-        scene.userData.model.rotation.y += 0.01;
+        scene.userData.model.rotation.y += 0.001;
     }
 
     controls.update(); // Update OrbitControls

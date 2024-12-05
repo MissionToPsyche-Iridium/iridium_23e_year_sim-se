@@ -264,6 +264,28 @@ main h1.white {
     50% { border-color: black; }
 }
 
+/* Ensure all elements are fully visible when animations are disabled */
+html.disable-animations .grid-three {
+    opacity: 1 !important; /* Fully visible */
+    transform: translateY(0) !important; /* Reset position */
+}
 
+html.disable-animations #main h1 {
+    width: 100% !important; /* Show full text without typing effect */
+    border-right: none !important; /* Hide caret */
+}
+
+html.disable-animations #sub-one h3 {
+    width: 100% !important; /* Show full text */
+    border-right: none !important; /* Hide caret */
+}
+
+html.disable-animations #sub-one p .line {
+    width: auto !important; /* Show full text */
+    color: greenyellow !important; /* Ensure text is visible */
+    border-right: none !important; /* Hide caret */
+}
+
+  
 
 

@@ -155,12 +155,26 @@ function darkMode() {
     }
 }
 
-// Animations functionality
 function animationsOff() {
     const animationSwitch = document.getElementById('animation-switch');
     if (animationSwitch) {
         animationSwitch.addEventListener('change', (event) => {
-            console.log(event.target.checked ? 'animations on' : 'animations off');
+            const html = document.documentElement; // Access the <html> element
+            if (event.target.checked) {
+                // Enable animations
+                html.classList.remove('disable-animations');
+                console.log('Animations enabled');
+            } else {
+                // Disable animations
+                html.classList.add('disable-animations');
+                console.log('Animations disabled');
+            }
         });
+
+        // Set the initial state based on whether the `disable-animations` class is present
+        const html = document.documentElement;
+        animationSwitch.checked = !html.classList.contains('disable-animations');
     }
 }
+
+
