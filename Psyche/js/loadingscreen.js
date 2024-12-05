@@ -39,7 +39,7 @@ styles.textContent = `
   .space-ship {
     width: 100px;
     height: 100px;
-    background: url('path/to/spaceship.png') no-repeat center;
+    // background: url('path/to/spaceship.png') no-repeat center;
     background-size: contain;
     margin: 0 auto;
     animation: float 2s ease-in-out infinite;

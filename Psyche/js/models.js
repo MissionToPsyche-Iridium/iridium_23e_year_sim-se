@@ -12,13 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
     // Calculate initial menu dimensions based on screen size
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const menuWidth = Math.min(screenWidth * 0.25, 350); // 25% of screen width up to 350px max
+    const iPhone14ProMaxWidth = 430;
+    const iPhone14ProMaxHeight = 932;
+    
+    // Set viewport meta tag for iPhone 14 Pro Max
+    const viewport = document.querySelector('meta[name="viewport"]');
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+    
+    // Calculate menu width based on device
+    const menuWidth = screenWidth <= iPhone14ProMaxWidth ? 
+        Math.min(screenWidth * 0.2, 280) : // Mobile view - reduced width
+        Math.min(screenWidth * 0.2, 280);  // Desktop view - reduced width
 
-    // Adjust container to make room for menu
-    container.style.marginLeft = `${menuWidth}px`;
+    // Adjust container and content positioning
+    container.style.marginLeft = `${menuWidth}px`; 
     container.style.width = `calc(100% - ${menuWidth}px)`;
+    container.style.position = 'relative';
+    container.style.zIndex = '1';
 
-    // Create side menu overlay with updated styling
+    // Create side menu overlay with updated styling and proper z-index
     const sideMenu = document.createElement('div');
     sideMenu.style.position = 'fixed';
     sideMenu.style.left = '0';
@@ -320,21 +332,23 @@ document.addEventListener("DOMContentLoaded", () => {
         headerContainer.style.alignItems = 'center';
         headerContainer.style.gap = '12px';
 
-        // Add icon with mobile optimization
+        // Add icon with mobile optimization for iPhone 14 Pro Max (430x932)
         const icon = document.createElement('img');
         icon.src = item.icon;
-        icon.style.width = '24px';
-        icon.style.height = '24px';
+        // Adjust icon size based on screen width
+        const iconSize = window.innerWidth <= 430 ? '20px' : '24px'; // Smaller for iPhone 14 Pro Max
+        icon.style.width = iconSize;
+        icon.style.height = iconSize;
         icon.style.filter = 'brightness(0) invert(1)';
         icon.style.transition = 'transform 0.2s ease';
         icon.style.flexShrink = '0';
         headerContainer.appendChild(icon);
 
-        // Add text optimized for mobile
+        // Add text optimized for iPhone 14 Pro Max
         const text = document.createElement('span');
         text.textContent = item.name;
         text.style.color = 'white';
-        text.style.fontSize = '16px';
+        text.style.fontSize = window.innerWidth <= 430 ? '14px' : '16px'; // Smaller font for iPhone 14 Pro Max
         text.style.fontWeight = '500';
         text.style.letterSpacing = '0.5px';
         headerContainer.appendChild(text);
@@ -345,9 +359,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.createElement('div');
         description.textContent = item.description;
         description.style.color = 'rgba(255, 255, 255, 0.7)';
-        description.style.fontSize = '14px';
+        description.style.fontSize = window.innerWidth <= 430 ? '12px' : '14px'; // Smaller font for iPhone 14 Pro Max
         description.style.marginTop = '6px';
-        description.style.marginLeft = '36px';
+        description.style.marginLeft = window.innerWidth <= 430 ? '32px' : '36px'; // Adjusted margin for iPhone 14 Pro Max
         description.style.lineHeight = '1.4';
         menuItem.appendChild(description);
 
@@ -383,9 +397,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const deviceWidth = window.innerWidth;
             
             // Apply different transformations based on screen size
-            if (deviceWidth < 768) { // Mobile
-                menuItem.style.transform = 'scale(0.98) translateX(3px)'; // Smaller scale for better touch targets
-                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.6)'; // Higher opacity for better visibility
+            if (deviceWidth <= 430) { // iPhone 14 Pro Max
+                menuItem.style.transform = 'scale(0.97) translateX(2px)'; // Even smaller scale for better touch targets
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.7)'; // Higher opacity for better visibility
+            } else if (deviceWidth < 768) { // Other mobile devices
+                menuItem.style.transform = 'scale(0.98) translateX(3px)';
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.6)';
             } else if (deviceWidth >= 768 && deviceWidth < 1024) { // Tablet
                 menuItem.style.transform = 'scale(0.95) translateX(4px)';
                 menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.5)';
@@ -398,13 +415,16 @@ document.addEventListener("DOMContentLoaded", () => {
         menuItem.addEventListener('touchend', () => {
             const deviceWidth = window.innerWidth;
             
-            if (deviceWidth < 768) {
+            if (deviceWidth <= 430) { // iPhone 14 Pro Max
+                menuItem.style.transform = 'translateX(2px)';
+                menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.5)';
+            } else if (deviceWidth < 768) { // Other mobile
                 menuItem.style.transform = 'translateX(3px)';
                 menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.4)';
-            } else if (deviceWidth >= 768 && deviceWidth < 1024) {
+            } else if (deviceWidth >= 768 && deviceWidth < 1024) { // Tablet
                 menuItem.style.transform = 'translateX(4px)';
                 menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)';
-            } else {
+            } else { // Desktop
                 menuItem.style.transform = 'translateX(5px)';
                 menuItem.style.backgroundColor = 'rgba(100, 149, 237, 0.3)';
             }
@@ -504,13 +524,19 @@ document.addEventListener("DOMContentLoaded", () => {
         loadingOverlay.style.display = 'none';
     };
 
-    // Calculate base size unit based on viewport size
+    // Calculate base size unit based on viewport size with mobile adjustments
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-    const baseSize = Math.min(vw, vh) * 0.02; // Base size unit is 2% of smallest viewport dimension
-    const dpr = window.devicePixelRatio || 1; // Get device pixel ratio for high DPI displays
-
-    // Adjust base size for high DPI displays
+    
+    // Adjust base size for mobile screens
+    let baseSize;
+    if (vw <= 430) { // iPhone 14 Pro Max width
+        baseSize = Math.min(vw, vh) * 0.015; // Smaller base size for mobile
+    } else {
+        baseSize = Math.min(vw, vh) * 0.02; // Original base size for larger screens
+    }
+    
+    const dpr = window.devicePixelRatio || 1;
     const adjustedBaseSize = baseSize * Math.max(1, dpr/2);
 
     const containers = {};
@@ -725,10 +751,10 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     });
 
-    const radius = Math.min(container.clientWidth, container.clientHeight) * 0.4;
+    const radius = Math.min(container.clientWidth, container.clientHeight) * (vw <= 430 ? 0.3 : 0.4); // Smaller radius for mobile
     const centerX = container.clientWidth / 2;
     const centerY = container.clientHeight / 2;
-    const iconSize = adjustedBaseSize * 5; // Make icons 5x the adjusted base size
+    const iconSize = vw <= 430 ? adjustedBaseSize * 4 : adjustedBaseSize * 5; // Smaller icons for mobile
     planetIcons.forEach((planet, index) => {
         const angle = (index / planetIcons.length) * 2 * Math.PI;
         const x = centerX + radius * Math.cos(angle);
@@ -740,7 +766,7 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.width = '100%';
         img.style.height = '100%';
         img.style.pointerEvents = 'auto';
-        img.style.objectFit = 'contain'; // Ensure icon fits properly
+        img.style.objectFit = 'contain';
         icon.appendChild(img);
         
         icon.style.position = 'absolute';
@@ -759,7 +785,7 @@ document.addEventListener("DOMContentLoaded", () => {
         icon.id = `button-${planet.name}`;
         icon.classList.add('planet-icon');
 
-        // Add tooltip
+        // Add tooltip with mobile-friendly size
         const tooltip = document.createElement('div');
         tooltip.textContent = planet.displayName || planet.name.charAt(0).toUpperCase() + planet.name.slice(1);
         tooltip.style.position = 'absolute';
@@ -767,7 +793,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tooltip.style.color = 'white';
         tooltip.style.padding = `${adjustedBaseSize * 0.5}px ${adjustedBaseSize}px`;
         tooltip.style.borderRadius = `${adjustedBaseSize * 0.5}px`;
-        tooltip.style.fontSize = `${adjustedBaseSize * 1.5}px`;
+        tooltip.style.fontSize = vw <= 430 ? `${adjustedBaseSize * 1.2}px` : `${adjustedBaseSize * 1.5}px`; // Smaller font for mobile
         tooltip.style.whiteSpace = 'nowrap';
         tooltip.style.opacity = '0';
         tooltip.style.transition = 'opacity 0.2s';
@@ -1265,10 +1291,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 gravityInfoDiv.style.padding = '20px';
                 gravityInfoDiv.style.borderRadius = '10px';
                 gravityInfoDiv.style.maxWidth = '400px';
+                gravityInfoDiv.style.transition = 'left 0.5s ease'; // Add transition
                 planetContainer.appendChild(gravityInfoDiv);
 
+                // Update gravity info position based on menu state
+                const updateGravityInfoPosition = () => {
+                    gravityInfoDiv.style.left = isMenuOpen ? `${menuWidth + 20}px` : '20px';
+                };
+                updateGravityInfoPosition();
+                document.addEventListener('menuToggle', updateGravityInfoPosition);
+
                 // Create Earth sphere with texture
-                const earthGeometry = new THREE.SphereGeometry(2.5, 64, 64); // Increased size from 1.5 to 2.5
+                const earthGeometry = new THREE.SphereGeometry(2.5, 64, 64);
                 const textureLoader = new THREE.TextureLoader();
                 const earthTexture = textureLoader.load('images/textures/earth.jpg');
                 const earthMaterial = new THREE.MeshStandardMaterial({
@@ -1277,7 +1311,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     roughness: 0.8
                 });
                 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-                earth.position.set(-8, 0, 0); // Moved from -4 to -8
+                earth.position.set(-8, 0, 0);
 
                 // Load Psyche model
                 const loader = new GLTFLoader();
@@ -1286,8 +1320,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     'models/psyche/Psyche.glb',
                     function (gltf) {
                         psyche = gltf.scene;
-                        psyche.scale.set(1, 1, 1);
-                        psyche.position.set(8, 0, 0); // Moved from 4 to 8
+                        psyche.scale.set(0.5, 0.5, 0.5); // Half the size
+                        psyche.position.set(8, 0, 0);
                         gravityScene.add(psyche);
                     },
                     undefined,
@@ -1312,22 +1346,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
 
                 const earthLabel = createLabel('Earth', earth.position);
-                const psycheLabel = createLabel('Psyche', new THREE.Vector3(8, 0, 0)); // Updated to match new position
+                const psycheLabel = createLabel('Psyche', new THREE.Vector3(8, 0, 0));
 
                 gravityScene.add(earth);
 
                 // Enhanced lighting setup with more lights for better visibility
-                const ambientLight = new THREE.AmbientLight(0x404040, 1.2); // Increased intensity
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0); // Increased intensity
+                const ambientLight = new THREE.AmbientLight(0x404040, 1.2);
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0);
                 directionalLight.position.set(5, 5, 5);
-                const pointLight1 = new THREE.PointLight(0x00ff00, 1.5, 15); // Increased intensity and range
-                pointLight1.position.set(-8, 3, 2); // Updated position
-                const pointLight2 = new THREE.PointLight(0xff00ff, 1.5, 15); // Increased intensity and range
-                pointLight2.position.set(8, 3, 2); // Updated position
+                const pointLight1 = new THREE.PointLight(0x00ff00, 1.5, 15);
+                pointLight1.position.set(-8, 3, 2);
+                const pointLight2 = new THREE.PointLight(0xff00ff, 1.5, 15);
+                pointLight2.position.set(8, 3, 2);
                 
                 // Add new lights for better earth visibility
                 const earthSpotlight = new THREE.SpotLight(0xffffff, 1.5);
-                earthSpotlight.position.set(-8, 5, 2); // Updated position
+                earthSpotlight.position.set(-8, 5, 2);
                 earthSpotlight.target = earth;
                 
                 gravityScene.add(ambientLight);
@@ -1336,7 +1370,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 gravityScene.add(pointLight2);
                 gravityScene.add(earthSpotlight);
 
-                gravityCamera.position.z = 20; // Increased to show wider view
+                gravityCamera.position.z = 20;
 
                 const controls = new OrbitControls(gravityCamera, gravityRenderer.domElement);
 
@@ -1353,11 +1387,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Update info text with more relatable comparisons
                 gravityInfoDiv.innerHTML = `
-                    <h2 style="color: #00ff00; margin-bottom: 15px;">Gravity Comparison</h2>
-                    <p><b>Earth:</b> 9.81 m/s² (normal gravity you experience)</p>
-                    <p><b>Psyche:</b> ${(psycheGravity).toFixed(4)} m/s²</p>
-                    <h3 style="color: #00ff00; margin-top: 15px;">Fun Facts on Psyche:</h3>
-                    <ul style="list-style-type: none; padding-left: 0;">
+                    <h2 style="color: #00ff00; margin-bottom: 15px; transition: margin-left 0.5s;">Gravity Comparison</h2>
+                    <p style="transition: margin-left 0.5s;"><b>Earth:</b> 9.81 m/s² (normal gravity you experience)</p>
+                    <p style="transition: margin-left 0.5s;"><b>Psyche:</b> ${(psycheGravity).toFixed(4)} m/s²</p>
+                    <h3 style="color: #00ff00; margin-top: 15px; transition: margin-left 0.5s;">Fun Facts on Psyche:</h3>
+                    <ul style="list-style-type: none; padding-left: 0; transition: margin-left 0.5s;">
                         <li>🍎 An apple would take ${(1/gravityRatio).toFixed(1)}x longer to fall!</li>
                         <li>🏋️ A 100 lb person would weigh only ${(gravityRatio * 100).toFixed(1)} lbs</li>
                         <li>🦘 You could jump ${(1/gravityRatio).toFixed(1)}x higher</li>
@@ -1410,8 +1444,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     // Create new apples periodically
                     if (time % 2 < 0.016) {
-                        const earthApple = createFallingApple(new THREE.Vector3(-8, 3, 0)); // Updated position
-                        const psycheApple = createFallingApple(new THREE.Vector3(8, 3, 0)); // Updated position
+                        const earthApple = createFallingApple(new THREE.Vector3(-8, 9, 0)); // 3x higher (from 3 to 9)
+                        const psycheApple = createFallingApple(new THREE.Vector3(8, 9, 0)); // 3x higher (from 3 to 9)
                         objects.push(earthApple, psycheApple);
                         gravityScene.add(earthApple, psycheApple);
                     }
@@ -1425,7 +1459,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         obj.rotation.x += obj.userData.rotationSpeed.x;
                         obj.rotation.y += obj.userData.rotationSpeed.y;
                         obj.rotation.z += obj.userData.rotationSpeed.z;
-                        
                         if (obj.position.y < -3) {
                             gravityScene.remove(obj);
                             objects.splice(index, 1);
@@ -1598,12 +1631,93 @@ document.addEventListener("DOMContentLoaded", () => {
                 psycheRenderer.setSize(window.innerWidth, window.innerHeight);
                 planetContainer.appendChild(psycheRenderer.domElement);
                 
-                // Load the Psyche GLB model
+                // Load both high-poly and optimized Psyche models
                 const loader = new GLTFLoader();
+                let highPolyModel, optimizedModel;
+                
+                // Load Psyche model
                 loader.load('models/psyche/Psyche.glb', function(gltf) {
-                    const psycheModel = gltf.scene;
-                    psycheModel.scale.set(1, 1, 1); // Scale the model to appropriate size
-                    psycheScene.add(psycheModel);
+                    // Create two instances of the same model
+                    highPolyModel = gltf.scene.clone();
+                    optimizedModel = gltf.scene.clone();
+
+                    // Position high poly version on left
+                    highPolyModel.scale.set(1, 1, 1);
+                    highPolyModel.position.set(-5, 0, 0);
+                    highPolyModel.visible = true;
+                    psycheScene.add(highPolyModel);
+
+                    // Position optimized version on right with moderately reduced geometry
+                    optimizedModel.scale.set(1, 1, 1); 
+                    optimizedModel.position.set(5, 0, 0);
+                    optimizedModel.visible = false; // Initially hidden
+                    
+                    // Reduce geometry detail for optimized version but maintain good quality
+                    optimizedModel.traverse((child) => {
+                        if (child.isMesh) {
+                            const geometry = child.geometry;
+                            // Create a new BufferGeometry for the simplified mesh
+                            const simplifiedGeometry = new THREE.BufferGeometry();
+                            
+                            // Get position attribute from original geometry
+                            const positions = geometry.attributes.position.array;
+                            const indices = geometry.index ? geometry.index.array : null;
+                            const normals = geometry.attributes.normal ? geometry.attributes.normal.array : null;
+                            const uvs = geometry.attributes.uv ? geometry.attributes.uv.array : null;
+                            
+                            // Reduce vertices by sampling every 1.5th vertex (keeps more detail than before)
+                            const reducedPositions = new Float32Array(Math.floor(positions.length * 0.75));
+                            for (let i = 0; i < reducedPositions.length; i += 3) {
+                                reducedPositions[i] = positions[Math.floor(i * 1.33)];
+                                reducedPositions[i + 1] = positions[Math.floor(i * 1.33) + 1];
+                                reducedPositions[i + 2] = positions[Math.floor(i * 1.33) + 2];
+                            }
+                            
+                            // Set the simplified position attribute
+                            simplifiedGeometry.setAttribute('position', 
+                                new THREE.BufferAttribute(reducedPositions, 3));
+                            
+                            // If there are indices, reduce them proportionally
+                            if (indices) {
+                                const reducedIndices = new Uint16Array(Math.floor(indices.length * 0.75));
+                                for (let i = 0; i < reducedIndices.length; i++) {
+                                    reducedIndices[i] = Math.floor(indices[Math.floor(i * 1.33)] * 0.75);
+                                }
+                                simplifiedGeometry.setIndex(new THREE.BufferAttribute(reducedIndices, 1));
+                            }
+
+                            // Preserve normals for better lighting
+                            if (normals) {
+                                const reducedNormals = new Float32Array(reducedPositions.length);
+                                for (let i = 0; i < reducedNormals.length; i += 3) {
+                                    reducedNormals[i] = normals[Math.floor(i * 1.33)];
+                                    reducedNormals[i + 1] = normals[Math.floor(i * 1.33) + 1];
+                                    reducedNormals[i + 2] = normals[Math.floor(i * 1.33) + 2];
+                                }
+                                simplifiedGeometry.setAttribute('normal',
+                                    new THREE.BufferAttribute(reducedNormals, 3));
+                            }
+
+                            // Preserve UVs for texturing
+                            if (uvs) {
+                                const reducedUVs = new Float32Array(Math.floor(uvs.length * 0.75));
+                                for (let i = 0; i < reducedUVs.length; i += 2) {
+                                    reducedUVs[i] = uvs[Math.floor(i * 1.33)];
+                                    reducedUVs[i + 1] = uvs[Math.floor(i * 1.33) + 1];
+                                }
+                                simplifiedGeometry.setAttribute('uv',
+                                    new THREE.BufferAttribute(reducedUVs, 2));
+                            }
+                            
+                            // Compute vertex normals for proper lighting
+                            simplifiedGeometry.computeVertexNormals();
+                            
+                            // Replace the original geometry with simplified one
+                            child.geometry = simplifiedGeometry;
+                        }
+                    });
+
+                    psycheScene.add(optimizedModel);
                 }, undefined, function(error) {
                     console.error('Error loading Psyche model:', error);
                 });
@@ -1615,13 +1729,59 @@ document.addEventListener("DOMContentLoaded", () => {
                 psycheScene.add(psychePointLight);
                 psychePointLight.position.set(50, 50, 50);
                 
-                psycheCamera.position.z = 15;
+                psycheCamera.position.z = 25; // Move camera back to see both models
                 
                 const psycheControls = new OrbitControls(psycheCamera, psycheRenderer.domElement);
                 
+                // Add quality toggle button
+                const qualityToggle = document.createElement('button');
+                qualityToggle.textContent = 'Toggle Quality';
+                qualityToggle.style.position = 'absolute';
+                qualityToggle.style.top = '10px';
+                qualityToggle.style.right = '10px';
+                qualityToggle.style.padding = '10px';
+                qualityToggle.style.zIndex = '1000';
+                planetContainer.appendChild(qualityToggle);
+
+                // Add labels for models
+                const highPolyLabel = document.createElement('div');
+                highPolyLabel.textContent = 'High Poly Model';
+                highPolyLabel.style.position = 'absolute';
+                highPolyLabel.style.left = '25%';
+                highPolyLabel.style.top = '10px';
+                highPolyLabel.style.color = 'white';
+                planetContainer.appendChild(highPolyLabel);
+
+                const optimizedLabel = document.createElement('div');
+                optimizedLabel.textContent = 'Optimized Model';
+                optimizedLabel.style.position = 'absolute';
+                optimizedLabel.style.right = '25%';
+                optimizedLabel.style.top = '10px';
+                optimizedLabel.style.color = 'white';
+                planetContainer.appendChild(optimizedLabel);
+
+                qualityToggle.addEventListener('click', () => {
+                    if (highPolyModel && optimizedModel) {
+                        highPolyModel.visible = !highPolyModel.visible;
+                        optimizedModel.visible = !optimizedModel.visible;
+                        
+                        // Update labels visibility
+                        highPolyLabel.style.display = highPolyModel.visible ? 'block' : 'none';
+                        optimizedLabel.style.display = optimizedModel.visible ? 'block' : 'none';
+                        
+                        // Update button text
+                        qualityToggle.textContent = highPolyModel.visible ? 'Show Optimized Model' : 'Show High Poly Model';
+                    }
+                });
+                
                 function animatePsyche() {
                     requestAnimationFrame(animatePsyche);
-                    psycheModel.rotation.y += 0.005;
+                    if (highPolyModel) {
+                        highPolyModel.rotation.y += 0.005;
+                    }
+                    if (optimizedModel) {
+                        optimizedModel.rotation.y += 0.005;
+                    }
                     psycheControls.update();
                     psycheRenderer.render(psycheScene, psycheCamera);
                 }
@@ -1650,7 +1810,24 @@ document.addEventListener("DOMContentLoaded", () => {
     quizContainer.style.top = '20px';
     quizContainer.style.width = '350px';
     quizContainer.style.zIndex = '1000';
-    container.appendChild(quizContainer);
+    
+    // Only show quiz on larger screens
+    if (window.innerWidth > 768) {
+        container.appendChild(quizContainer);
+    }
+
+    // Add resize listener to show/hide quiz based on screen size
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            if (!quizContainer.parentElement) {
+                container.appendChild(quizContainer);
+            }
+        } else {
+            if (quizContainer.parentElement) {
+                container.removeChild(quizContainer);
+            }
+        }
+    });
 
     // Quiz data with card templates
     const quizCards = [
