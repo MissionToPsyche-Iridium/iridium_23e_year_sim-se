@@ -19,16 +19,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewport = document.querySelector('meta[name="viewport"]');
     viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
     
-    // Calculate menu width based on device
+    // Calculate menu width based on device and screen size
     const menuWidth = screenWidth <= iPhone14ProMaxWidth ? 
-        Math.min(screenWidth * 0.2, 280) : // Mobile view - reduced width
-        Math.min(screenWidth * 0.2, 280);  // Desktop view - reduced width
+        Math.min(screenWidth * 0.25, 280) : // Mobile view - more compact
+        Math.min(screenWidth * 0.18, 320);  // Desktop view - slightly wider
+        
+    // Create responsive grid layout
+    const gridColumns = screenWidth <= iPhone14ProMaxWidth ? 1 : // Single column for mobile
+                       screenWidth <= 768 ? 2 : // Two columns for tablets
+                       3; // Three columns for desktop
 
-    // Adjust container and content positioning
+    // Adjust container and content positioning with grid support
     container.style.marginLeft = `${menuWidth}px`; 
     container.style.width = `calc(100% - ${menuWidth}px)`;
     container.style.position = 'relative';
     container.style.zIndex = '1';
+    container.style.display = 'grid';
+    container.style.gridTemplateColumns = `repeat(${gridColumns}, 1fr)`;
+    container.style.gap = '20px';
+    container.style.padding = '20px';
 
     // Create side menu overlay with updated styling and proper z-index
     const sideMenu = document.createElement('div');
@@ -39,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.style.height = '100vh';
     sideMenu.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
     sideMenu.style.backdropFilter = 'blur(20px)';
-    sideMenu.style.padding = '20px';
+    sideMenu.style.padding = screenWidth <= iPhone14ProMaxWidth ? '15px' : '20px';
     sideMenu.style.boxSizing = 'border-box';
     sideMenu.style.zIndex = '1500';
     sideMenu.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.15)';
@@ -51,43 +60,43 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.style.justifyContent = 'flex-start';
     sideMenu.style.alignItems = 'stretch';
 
-    // Create sticky header with CSS sticky positioning
+    // Create sticky header with responsive sizing
     const stickyHeader = document.createElement('div');
     stickyHeader.style.position = 'sticky';
     stickyHeader.style.top = '0';
     stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
     stickyHeader.style.backdropFilter = 'blur(10px)';
-    stickyHeader.style.padding = '10px 20px';
+    stickyHeader.style.padding = screenWidth <= iPhone14ProMaxWidth ? '8px 15px' : '10px 20px';
     stickyHeader.style.marginBottom = '10px';
-    stickyHeader.style.marginLeft = '-20px';
-    stickyHeader.style.marginRight = '-20px';
-    stickyHeader.style.marginTop = '-20px';
+    stickyHeader.style.marginLeft = `-${screenWidth <= iPhone14ProMaxWidth ? '15px' : '20px'}`;
+    stickyHeader.style.marginRight = `-${screenWidth <= iPhone14ProMaxWidth ? '15px' : '20px'}`;
+    stickyHeader.style.marginTop = `-${screenWidth <= iPhone14ProMaxWidth ? '15px' : '20px'}`;
     stickyHeader.style.borderBottom = '2px solid rgba(255, 255, 255, 0.1)';
     stickyHeader.style.zIndex = '1600';
     stickyHeader.style.transition = 'all 0.3s ease';
     stickyHeader.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
 
-    // Add menu title with enhanced mobile-friendly styling to sticky header
+    // Add menu title with enhanced responsive styling
     const menuTitle = document.createElement('h2');
     menuTitle.textContent = 'Year On Psyche Simulation';
     menuTitle.style.color = 'white';
     menuTitle.style.margin = '0';
-    menuTitle.style.fontSize = `${Math.min(20, screenWidth * 0.018)}px`; // Slightly smaller for mobile
+    menuTitle.style.fontSize = `${Math.min(18, screenWidth * 0.016)}px`; // More responsive sizing
     menuTitle.style.fontWeight = '700';
     menuTitle.style.textTransform = 'uppercase';
-    menuTitle.style.letterSpacing = '1px';
+    menuTitle.style.letterSpacing = screenWidth <= iPhone14ProMaxWidth ? '0.5px' : '1px';
     menuTitle.style.textAlign = 'center';
     menuTitle.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.3)';
-    menuTitle.style.padding = '10px 0';
+    menuTitle.style.padding = screenWidth <= iPhone14ProMaxWidth ? '8px 0' : '10px 0';
     menuTitle.style.whiteSpace = 'nowrap';
     menuTitle.style.overflow = 'hidden';
     menuTitle.style.textOverflow = 'ellipsis';
 
-    // Add enhanced smooth scroll behavior
+    // Add enhanced smooth scroll behavior with improved performance
     let lastScrollTop = 0;
     let scrollTimeout;
-    const scrollThreshold = 50; // Threshold for scroll direction change
-    const scrollDuration = 500; // Duration of smooth scroll in ms
+    const scrollThreshold = screenWidth <= iPhone14ProMaxWidth ? 30 : 50; // Lower threshold for mobile
+    const scrollDuration = 400; // Slightly faster for better responsiveness
 
     const smoothScroll = (target, duration) => {
         const start = sideMenu.scrollTop;
@@ -99,8 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const timeElapsed = currentTime - startTime;
             const progress = Math.min(timeElapsed / duration, 1);
             
-            // Easing function for smoother animation
-            const ease = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            // Enhanced easing function for smoother animation
+            const ease = t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
             
             sideMenu.scrollTop = start + distance * ease(progress);
 
@@ -112,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(animation);
     };
 
-    // Enhanced scroll behavior with momentum and direction detection
+    // Enhanced scroll behavior with improved momentum and direction detection
     sideMenu.addEventListener('scroll', () => {
         const scrollTop = sideMenu.scrollTop;
         const scrollDelta = scrollTop - lastScrollTop;
@@ -126,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
             stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
         }
 
-        // Detect rapid direction changes
+        // Detect rapid direction changes with improved responsiveness
         if (Math.abs(scrollDelta) > scrollThreshold) {
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
@@ -139,19 +148,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 
                 smoothScroll(closestItem.offsetTop, scrollDuration);
-            }, 150);
+            }, 100); // Reduced timeout for better responsiveness
         }
 
         lastScrollTop = scrollTop;
     }, { passive: true });
 
-    // Add mobile-friendly toggle button
+    // Add mobile-friendly toggle button with improved touch targets
     const toggleButton = document.createElement('button');
     toggleButton.style.position = 'fixed';
     toggleButton.style.left = `${menuWidth}px`;
     toggleButton.style.top = '10px';
-    toggleButton.style.width = '44px'; // Larger touch target
-    toggleButton.style.height = '44px';
+    toggleButton.style.width = screenWidth <= iPhone14ProMaxWidth ? '40px' : '44px';
+    toggleButton.style.height = screenWidth <= iPhone14ProMaxWidth ? '40px' : '44px';
     toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
     toggleButton.style.border = '1px solid rgba(255, 255, 255, 0.2)';
     toggleButton.style.borderRadius = '8px';
@@ -159,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleButton.style.cursor = 'pointer';
     toggleButton.style.zIndex = '1600';
     toggleButton.innerHTML = '☰';
-    toggleButton.style.fontSize = '24px';
+    toggleButton.style.fontSize = screenWidth <= iPhone14ProMaxWidth ? '20px' : '24px';
     toggleButton.style.transition = 'all 0.2s ease';
     toggleButton.style.padding = '0';
     toggleButton.style.display = 'flex';
@@ -167,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleButton.style.justifyContent = 'center';
     toggleButton.style.WebkitTapHighlightColor = 'transparent';
 
-    // Enhanced touch feedback
+    // Enhanced touch feedback with improved responsiveness
     toggleButton.addEventListener('touchstart', (e) => {
         e.preventDefault();
         toggleButton.style.transform = 'scale(0.95)';
@@ -179,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
     });
 
-    // Mouse feedback
+    // Mouse feedback with improved transitions
     toggleButton.addEventListener('mousedown', () => {
         toggleButton.style.transform = 'scale(0.95)';
         toggleButton.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
@@ -210,28 +219,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.appendChild(toggleButton);
 
-    // Create scrollable content container optimized for mobile
+    // Create scrollable content container with improved mobile optimization
     const menuContent = document.createElement('div');
     menuContent.style.flex = '1';
-    menuContent.style.display = 'flex';
-    menuContent.style.flexDirection = 'column';
-    menuContent.style.gap = '8px';
-    menuContent.style.padding = '10px';
+    menuContent.style.display = 'grid';
+    menuContent.style.gridTemplateColumns = '1fr';
+    menuContent.style.gap = screenWidth <= iPhone14ProMaxWidth ? '6px' : '8px';
+    menuContent.style.padding = screenWidth <= iPhone14ProMaxWidth ? '8px' : '10px';
     menuContent.style.overflowY = 'auto';
     menuContent.style.WebkitOverflowScrolling = 'touch';
     menuContent.style.scrollbarWidth = 'none';
     menuContent.style.msOverflowStyle = 'none';
     menuContent.style.height = 'calc(100vh - 60px)';
-    menuContent.style.scrollBehavior = 'smooth'; // Enable native smooth scrolling
+    menuContent.style.scrollBehavior = 'smooth';
 
-    // Hide scrollbar but keep functionality
+    // Improved touch handling
     menuContent.addEventListener('touchstart', (e) => {
         e.stopPropagation();
     }, { passive: true });
 
     sideMenu.appendChild(menuContent);
 
-    // Mobile-optimized menu items
+    // Mobile-optimized menu items with improved responsiveness
     const menuItems = [
         { 
             name: 'Sun', 
@@ -285,10 +294,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
-    // Add responsive design handler
+    // Enhanced responsive design handler
     window.addEventListener('resize', () => {
         const newScreenWidth = window.innerWidth;
-        const newMenuWidth = newScreenWidth < 768 ? newScreenWidth * 0.8 : Math.min(newScreenWidth * 0.25, 350);
+        const newMenuWidth = newScreenWidth < 768 ? 
+            Math.min(newScreenWidth * 0.25, 280) : 
+            Math.min(newScreenWidth * 0.18, 320);
+        
+        // Update grid columns based on screen size
+        const newGridColumns = newScreenWidth <= iPhone14ProMaxWidth ? 1 :
+                             newScreenWidth <= 768 ? 2 :
+                             3;
+        
+        container.style.gridTemplateColumns = `repeat(${newGridColumns}, 1fr)`;
         
         if (isMenuOpen) {
             container.style.marginLeft = `${newMenuWidth}px`;
