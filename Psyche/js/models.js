@@ -41,6 +41,57 @@ document.addEventListener("DOMContentLoaded", () => {
     container.style.overflowX = 'hidden';
     container.style.overflowY = 'auto';
     container.style.WebkitOverflowScrolling = 'touch';
+    container.style.scrollbarWidth = 'thin';
+    container.style.scrollbarColor = 'rgb(128, 128, 128) rgba(0, 0, 0, 0.2)';
+
+    // Custom neon scrollbar styles
+    container.style.cssText += `
+        ::-webkit-scrollbar {
+            width: 1px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 1px;
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgb(128, 128, 128);
+            border-radius: 1px;
+            box-shadow: 
+                0 0 5px rgb(128, 128, 128),
+                0 0 10px rgb(128, 128, 128),
+                0 0 15px rgb(128, 128, 128);
+            animation: neon-pulse 1.5s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgb(128, 128, 128);
+            box-shadow: 
+                0 0 10px rgb(128, 128, 128),
+                0 0 20px rgb(128, 128, 128),
+                0 0 30px rgb(128, 128, 128);
+        }
+        @keyframes neon-pulse {
+            0% {
+                box-shadow: 
+                    0 0 5px rgb(128, 128, 128),
+                    0 0 10px rgb(128, 128, 128),
+                    0 0 15px rgb(128, 128, 128);
+            }
+            50% {
+                box-shadow: 
+                    0 0 10px rgb(128, 128, 128),
+                    0 0 20px rgb(128, 128, 128),
+                    0 0 30px rgb(128, 128, 128);
+            }
+            100% {
+                box-shadow: 
+                    0 0 5px rgb(128, 128, 128),
+                    0 0 10px rgb(128, 128, 128),
+                    0 0 15px rgb(128, 128, 128);
+            }
+        }
+    `;
 
     // Create side menu overlay with updated styling, proper z-index and overflow handling
     const sideMenu = document.createElement('div');
@@ -54,8 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.style.padding = screenWidth <= iPhone14ProMaxWidth ? '15px' : '20px';
     sideMenu.style.boxSizing = 'border-box';
     sideMenu.style.zIndex = '1500';
-    sideMenu.style.boxShadow = '0 0 40px rgba(255, 255, 255, 0.15)';
-    sideMenu.style.borderRight = '2px solid rgba(255, 255, 255, 0.1)';
+    sideMenu.style.boxShadow = '0 0 40px rgba(128, 128, 128, 0.15)';
+    sideMenu.style.borderRight = '1px solid rgba(128, 128, 128, 0.1)';
     sideMenu.style.transform = 'translateX(0)';
     sideMenu.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
     sideMenu.style.display = 'flex';
@@ -65,6 +116,28 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.style.overflowX = 'hidden';
     sideMenu.style.overflowY = 'auto';
     sideMenu.style.WebkitOverflowScrolling = 'touch';
+    sideMenu.style.scrollbarWidth = 'thin';
+    sideMenu.style.scrollbarColor = '#808080 rgba(0, 0, 0, 0.2)';
+    // Custom scrollbar styles for side menu
+    sideMenu.style.cssText += `
+        ::-webkit-scrollbar {
+            width: 2px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 1px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #808080;
+            border-radius: 1px;
+            box-shadow: 0 0 6.67px rgba(128, 128, 128, 0.3);
+            transition: all 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #808080;
+            box-shadow: 0 0 10px rgba(128, 128, 128, 0.3);
+        }
+    `;
 
     // Create sticky header with responsive sizing and overflow handling
     const stickyHeader = document.createElement('div');
@@ -77,24 +150,24 @@ document.addEventListener("DOMContentLoaded", () => {
     stickyHeader.style.marginLeft = `-${screenWidth <= iPhone14ProMaxWidth ? '15px' : '20px'}`;
     stickyHeader.style.marginRight = `-${screenWidth <= iPhone14ProMaxWidth ? '15px' : '20px'}`;
     stickyHeader.style.marginTop = `-${screenWidth <= iPhone14ProMaxWidth ? '15px' : '20px'}`;
-    stickyHeader.style.borderBottom = '2px solid rgba(255, 255, 255, 0.1)';
+    stickyHeader.style.borderBottom = '1px solid rgba(128, 128, 128, 0.1)';
     stickyHeader.style.zIndex = '1600';
     stickyHeader.style.transition = 'all 0.3s ease';
-    stickyHeader.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+    stickyHeader.style.boxShadow = '0 2px 10px rgba(128, 128, 128, 0.3)';
     stickyHeader.style.overflowX = 'hidden';
     stickyHeader.style.overflowY = 'hidden';
 
     // Add menu title with enhanced responsive styling and overflow handling
     const menuTitle = document.createElement('h2');
     menuTitle.textContent = 'Year On Psyche Simulation';
-    menuTitle.style.color = 'white';
+    menuTitle.style.color = '#808080';
     menuTitle.style.margin = '0';
     menuTitle.style.fontSize = `${Math.min(18, screenWidth * 0.016)}px`; // More responsive sizing
     menuTitle.style.fontWeight = '700';
     menuTitle.style.textTransform = 'uppercase';
     menuTitle.style.letterSpacing = screenWidth <= iPhone14ProMaxWidth ? '0.5px' : '1px';
     menuTitle.style.textAlign = 'center';
-    menuTitle.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.3)';
+    menuTitle.style.textShadow = '0 0 10px rgba(128, 128, 128, 0.6)';
     menuTitle.style.padding = screenWidth <= iPhone14ProMaxWidth ? '8px 0' : '10px 0';
     menuTitle.style.whiteSpace = 'nowrap';
     menuTitle.style.overflow = 'hidden';
@@ -136,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Update header appearance based on scroll
         if (scrollTop > 0) {
-            stickyHeader.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3)';
+            stickyHeader.style.boxShadow = '0 2px 8px rgba(128, 128, 128, 0.3)';
             stickyHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
         } else {
             stickyHeader.style.boxShadow = 'none';
@@ -237,11 +310,36 @@ document.addEventListener("DOMContentLoaded", () => {
     menuContent.style.padding = screenWidth <= iPhone14ProMaxWidth ? '8px' : '10px';
     menuContent.style.overflowY = 'auto';
     menuContent.style.WebkitOverflowScrolling = 'touch';
-    menuContent.style.scrollbarWidth = 'none';
+    menuContent.style.scrollbarWidth = 'thin';
+    menuContent.style.scrollbarColor = '#808080 rgba(0, 0, 0, 0.2)';
     menuContent.style.msOverflowStyle = 'none';
     menuContent.style.height = 'calc(100vh - 60px)';
     menuContent.style.scrollBehavior = 'smooth';
     menuContent.style.overflowX = 'hidden';
+
+    // Custom scrollbar styles for menu content
+    menuContent.style.cssText += `
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #808080;
+            border-radius: 2px;
+            box-shadow: 0 0 8px #808080;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #999999;
+            box-shadow: 
+                0 0 15px #999999,
+                0 0 25px #999999,
+                0 0 35px #999999;
+        }
+    `;
 
     // Improved touch handling
     menuContent.addEventListener('touchstart', (e) => {
