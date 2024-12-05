@@ -985,17 +985,42 @@ document.addEventListener("DOMContentLoaded", () => {
             icon.style.cursor = 'pointer';
             tooltip.style.opacity = '1';
         });
-
         icon.addEventListener('mouseout', () => {
             icon.style.transform = 'scale(1)';
             tooltip.style.opacity = '0';
+            tooltip.style.transition = 'opacity 0.3s ease-out';
         });
 
         icon.addEventListener('click', async (event) => {
             console.log(`Clicked ${planet.name} icon`);
             showLoading();
             const planetContainer = containers[planet.name].container;
+            
+            // Set container to exact viewport size
+            planetContainer.style.width = '100vw';
+            planetContainer.style.height = '100vh';
+            planetContainer.style.margin = '0';
+            planetContainer.style.padding = '0';
+            planetContainer.style.position = 'fixed';
+            planetContainer.style.top = '0';
+            planetContainer.style.left = '0';
+            
+            // Fade out current container
+            const currentContainer = document.querySelector('.planet-container[style*="display: block"]');
+            if (currentContainer) {
+                currentContainer.style.opacity = '0';
+                currentContainer.style.transition = 'opacity 0.5s ease-out';
+                await new Promise(resolve => setTimeout(resolve, 500));
+                currentContainer.style.display = 'none';
+            }
+            
+            // Show and fade in new container
+            planetContainer.style.opacity = '0';
             planetContainer.style.display = 'block';
+            planetContainer.style.transition = 'opacity 0.5s ease-in';
+            setTimeout(() => {
+                planetContainer.style.opacity = '1';
+            }, 50);
             
             if (planet.name === 'earth') {
                 createPsycheView(planetContainer);
