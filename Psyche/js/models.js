@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const iPhone14ProMaxWidth = 430;
     const iPhone14ProMaxHeight = 932;
     
-    // Set viewport meta tag for iPhone 14 Pro Max
+    // Set viewport meta tag for iPhone 14 Pro Max with overflow handling
     const viewport = document.querySelector('meta[name="viewport"]');
     viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
     
@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
         Math.min(screenWidth * 0.25, 280) : // Mobile view - more compact
         Math.min(screenWidth * 0.18, 320);  // Desktop view - slightly wider
         
-    // Create responsive grid layout
+    // Create responsive grid layout with overflow handling
     const gridColumns = screenWidth <= iPhone14ProMaxWidth ? 1 : // Single column for mobile
                        screenWidth <= 768 ? 2 : // Two columns for tablets
                        3; // Three columns for desktop
 
-    // Adjust container and content positioning with grid support
+    // Adjust container and content positioning with grid support and overflow
     container.style.marginLeft = `${menuWidth}px`; 
     container.style.width = `calc(100% - ${menuWidth}px)`;
     container.style.position = 'relative';
@@ -38,8 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
     container.style.gridTemplateColumns = `repeat(${gridColumns}, 1fr)`;
     container.style.gap = '20px';
     container.style.padding = '20px';
+    container.style.overflowX = 'hidden';
+    container.style.overflowY = 'auto';
+    container.style.WebkitOverflowScrolling = 'touch';
 
-    // Create side menu overlay with updated styling and proper z-index
+    // Create side menu overlay with updated styling, proper z-index and overflow handling
     const sideMenu = document.createElement('div');
     sideMenu.style.position = 'fixed';
     sideMenu.style.left = '0';
@@ -59,8 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
     sideMenu.style.flexDirection = 'column';
     sideMenu.style.justifyContent = 'flex-start';
     sideMenu.style.alignItems = 'stretch';
+    sideMenu.style.overflowX = 'hidden';
+    sideMenu.style.overflowY = 'auto';
+    sideMenu.style.WebkitOverflowScrolling = 'touch';
 
-    // Create sticky header with responsive sizing
+    // Create sticky header with responsive sizing and overflow handling
     const stickyHeader = document.createElement('div');
     stickyHeader.style.position = 'sticky';
     stickyHeader.style.top = '0';
@@ -75,8 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
     stickyHeader.style.zIndex = '1600';
     stickyHeader.style.transition = 'all 0.3s ease';
     stickyHeader.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+    stickyHeader.style.overflowX = 'hidden';
+    stickyHeader.style.overflowY = 'hidden';
 
-    // Add menu title with enhanced responsive styling
+    // Add menu title with enhanced responsive styling and overflow handling
     const menuTitle = document.createElement('h2');
     menuTitle.textContent = 'Year On Psyche Simulation';
     menuTitle.style.color = 'white';
@@ -175,6 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleButton.style.alignItems = 'center';
     toggleButton.style.justifyContent = 'center';
     toggleButton.style.WebkitTapHighlightColor = 'transparent';
+    toggleButton.style.overflow = 'hidden';
 
     // Enhanced touch feedback with improved responsiveness
     toggleButton.addEventListener('touchstart', (e) => {
@@ -232,6 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuContent.style.msOverflowStyle = 'none';
     menuContent.style.height = 'calc(100vh - 60px)';
     menuContent.style.scrollBehavior = 'smooth';
+    menuContent.style.overflowX = 'hidden';
 
     // Improved touch handling
     menuContent.addEventListener('touchstart', (e) => {
