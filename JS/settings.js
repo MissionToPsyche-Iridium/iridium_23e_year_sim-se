@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Dark mode functionality
 function darkMode() {
     const darkModeSwitch = document.getElementById('dark-mode-switch');
-    const settingsIcon = document.getElementById('settings-icon'); // Assuming an image icon
+    const settingsIcon = document.getElementById('settings-icon'); 
     const topElements = document.getElementById('sub-one');
     const lineElements = document.querySelectorAll('.line');
     const gridThree = document.querySelectorAll('.grid-three');
@@ -150,7 +150,6 @@ function darkMode() {
             }
         });
 
-        // Ensure the switch state matches the `dark` value
         darkModeSwitch.checked = dark;
     }
 }
@@ -159,7 +158,7 @@ function animationsOff() {
     const animationSwitch = document.getElementById('animation-switch');
     if (animationSwitch) {
         animationSwitch.addEventListener('change', (event) => {
-            const html = document.documentElement; // Access the <html> element
+            const html = document.documentElement; 
             if (event.target.checked) {
                 // Enable animations
                 html.classList.remove('disable-animations');
@@ -170,8 +169,6 @@ function animationsOff() {
                 console.log('Animations disabled');
             }
         });
-
-        // Set the initial state based on whether the `disable-animations` class is present
         const html = document.documentElement;
         animationSwitch.checked = !html.classList.contains('disable-animations');
     }
