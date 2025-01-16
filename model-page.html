@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psyche Temperature Model</title>
+    <style>
+        body { margin: 0; }
+        #model-container {
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+        #back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        #back-button:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.skypack.dev/three@0.132.2",
+            "three/examples/jsm/controls/OrbitControls": "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js",
+            "three/examples/jsm/loaders/GLTFLoader": "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/GLTFLoader.js"
+        }
+    }
+    </script>
+    <script type="module" src="JS/model-viewer.js"></script>
+</head>
+<body>
+    <button id="back-button" onclick="window.close()">Back to Main Page</button>
+    <div id="model-container"></div>
+</body>
+</html>

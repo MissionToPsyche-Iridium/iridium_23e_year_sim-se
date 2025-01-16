@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/settings-style.css">
+    <!-- <link rel="stylesheet" href="CSS/settings-style.css"> -->
     <title>Year on Psyche Sim</title>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.skypack.dev/three@0.132.2",
+            "three/examples/jsm/controls/OrbitControls": "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js",
+            "three/examples/jsm/loaders/GLTFLoader": "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/GLTFLoader.js"
+        }
+    }
+    </script>
+    <script type="module" src="JS/model-viewer.js"></script>
 </head>
 
 <body>
@@ -16,9 +26,9 @@
             <img src="img/asteroid.png" id="asteroid">
         </header>
         <div id="main">
-            <button id="settings-button">
+            <!-- <button id="settings-button">
                 <img id="settings-icon" src="img/black_gear.png" alt="Settings Icon">
-            </button>
+            </button> -->
             <h1>A Year on 16 Psyche</h1>
             <div id="section-one">
                 <div id="sub-one">
@@ -38,6 +48,10 @@
                         <h4>Temperatures on Psyche</h4>
                         <p>You will need to dress warm, as Psyche's temperature ranges from X to X</p>
                         <p>Be careful exploring as the dark side of Psyche is the coldest with temperatures believed to get as low as -X</p>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div id="preview-container" class="model-preview" onclick="window.open('model-page.html', '_blank', 'width=800,height=600')"></div>
+                            <p class="preview-caption">Click to view interactive 3D temperature model</p>
+                        </div>
                     </div>
                     <div class="grid-three">
                         <h4>Psyche's surface</h4>
@@ -56,7 +70,7 @@
                     <div class="grid-three">
                         <h4>Psyche's location</h4>
                         <p>Psyche orbits the Sun between Mars and Jupiter at a distance ranging from 235 million to 309 million miles (378 million to 497 million kilometers) from the Sun</p>
-                        <p>That’s 2.5 to 3.3 Astronomical Units (AU), with 1 AU being the distance between Earth and the Sun.</p>
+                        <p>That's 2.5 to 3.3 Astronomical Units (AU), with 1 AU being the distance between Earth and the Sun.</p>
                     </div>
                     <div class="grid-three">
                         <h4>Psyche's name</h4>
@@ -72,7 +86,7 @@
             <h2>This is the footer</h2>
         </footer>
     </div>
-    <script src="JS/settings.js" onload="createPopup()"></script>
+    <!-- <script src="JS/settings.js" onload="createPopup()"></script> -->
     <script src="JS/typewriter.js"></script>
 </body>
 </html>

@@ -97,6 +97,33 @@ footer {
     border: 3px solid red;
 }
 
+/* Model Preview Styles */
+.model-preview {
+    width: 200px;
+    height: 200px;
+    margin: 10px auto;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.model-preview:hover {
+    transform: scale(1.05);
+}
+
+.model-preview canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.preview-caption {
+    color: greenyellow;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
 @keyframes header-move-in {
     from {right: -200px; top: -100px;}
     to {right: -5%; top: -5%;}
@@ -108,40 +135,37 @@ footer {
 }
 
 #main h1 {
-    overflow: hidden; /* Ensures the content is not revealed until animation */
-    border-right: 0.15em solid black; /* Typewriter cursor */
-    white-space: nowrap; /* Prevents wrapping */
-    margin: 0 auto; /* Centers the text */
-    letter-spacing: 0.15em; /* Adjust as needed */
+    overflow: hidden;
+    border-right: 0.15em solid black;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.15em;
     animation: 
-        typing 3.5s steps(40, end) forwards, /* Typing effect */
-        blink-caret 0.75s step-end ; /* Caret blinking */
+        typing 3.5s steps(40, end) forwards,
+        blink-caret 0.75s step-end;
 }
 
 #main h1.typing-complete {
-    animation: none; /* Stops animations */
-    border-right: none; /* Remove caret */
+    animation: none;
+    border-right: none;
 }
 
 main h1.white {
     animation: 
-        typing 3.5s steps(40, end) forwards, /* Typing effect */
-        blink-caret-white 0.75s step-end ; /* Caret blinking */
+        typing 3.5s steps(40, end) forwards,
+        blink-caret-white 0.75s step-end;
 }
 
-/* Typing animation */
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
 }
 
-/* Caret blinking */
 @keyframes blink-caret {
     from, to { border-color: transparent; }
     50% { border-color: black; }
 }
 
-/* Caret blinking */
 @keyframes blink-caret-white {
     from, to { border-color: transparent; }
     50% { border-color: white; }
@@ -166,9 +190,9 @@ main h1.white {
 }
 
 #sub-one h3.start-typing {
-    border-right: 0.15em solid greenyellow; /* Show caret during typing */
-    animation: typing 3s steps(50, end) forwards, /* Typing animation */
-               blink-caret 0.75s step-end ; /* Caret blinking */
+    border-right: 0.15em solid greenyellow;
+    animation: typing 3s steps(50, end) forwards,
+               blink-caret 0.75s step-end;
 }
 
 #sub-one p .line {
@@ -184,21 +208,21 @@ main h1.white {
 }
 
 #sub-one p .line.start-typing {
-    border-right: 0.15em solid greenyellow; /* Show caret during typing */
-    color: greenyellow; /* Make text visible during animation */
-    animation: typing 3s steps(50, end) forwards, /* Typing animation */
-               blink-caret 0.75s step-end ; /* Caret blinking */
+    border-right: 0.15em solid greenyellow;
+    color: greenyellow;
+    animation: typing 3s steps(50, end) forwards,
+               blink-caret 0.75s step-end;
 }
 
 .grid-three {
-    opacity: 0; 
-    transform: translateY(20px); /* Slightly move down */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .grid-three.show {
-    opacity: 1; /* Fully visible */
-    transform: translateY(0); /* Move to original position */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .grid-three p {
@@ -243,35 +267,23 @@ main h1.white {
     cursor: pointer;
 }
 
-/* Typing animation */
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-/* Caret blinking */
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: black; }
-}
-
 html.disable-animations .grid-three {
-    opacity: 1 !important; /* Fully visible */
-    transform: translateY(0) !important; /* Reset position */
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 html.disable-animations #main h1 {
-    width: 100% !important; /* Show full text without typing effect */
-    border-right: none !important; /* Hide caret */
+    width: 100% !important;
+    border-right: none !important;
 }
 
 html.disable-animations #sub-one h3 {
-    width: 100% !important; /* Show full text */
-    border-right: none !important; /* Hide caret */
+    width: 100% !important;
+    border-right: none !important;
 }
 
 html.disable-animations #sub-one p .line {
-    width: auto !important; /* Show full text */
-    color: greenyellow !important; /* Text is visible */
-    border-right: none !important; /* Hide caret */
+    width: auto !important;
+    color: greenyellow !important;
+    border-right: none !important;
 }
