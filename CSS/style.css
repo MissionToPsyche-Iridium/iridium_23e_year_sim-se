@@ -66,7 +66,7 @@ h1 {
     margin: 0;
     flex-grow: 1; 
     text-align: center; 
-    padding-top: 5%;
+    padding-top: 2%;
 }
 
 #main {
@@ -274,4 +274,11 @@ html.disable-animations #sub-one p .line {
     width: auto !important; /* Show full text */
     color: greenyellow !important; /* Text is visible */
     border-right: none !important; /* Hide caret */
+}
+
+/* css added for main page Physics Icon */
+.main-page-link-icon {
+    max-width: 45%; /* Scale the icon to fit within the div */
+    max-height: 45%;
+    cursor: pointer;
 }
