@@ -107,6 +107,7 @@ footer {
     to {left: 3%; top: -5%;}
 }
 
+
 #main h1 {
     overflow: hidden; /* Ensures the content is not revealed until animation */
     border-right: 0.15em solid black; /* Typewriter cursor */
