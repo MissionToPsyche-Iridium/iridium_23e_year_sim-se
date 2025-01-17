@@ -15,15 +15,20 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border: none;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            border: 1px solid #00ff00;
             border-radius: 5px;
             cursor: pointer;
             z-index: 1000;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
         }
         #back-button:hover {
-            background: rgba(255, 255, 255, 1);
+            background: rgba(0, 255, 0, 0.2);
         }
     </style>
     <script type="importmap">
@@ -38,7 +43,7 @@
     <script type="module" src="JS/model-viewer.js"></script>
 </head>
 <body>
-    <button id="back-button" onclick="window.close()">Back to Main Page</button>
+    <button id="back-button" onclick="window.close()">BACK TO MAIN PAGE</button>
     <div id="model-container"></div>
 </body>
 </html>
