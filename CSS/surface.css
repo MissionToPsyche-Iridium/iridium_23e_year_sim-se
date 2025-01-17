@@ -8,3 +8,69 @@
     margin-left: 0;
     line-height: 2;
 }
+
+
+#wide-view {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin-top: 0;
+    min-height: 500px;
+    max-height: 500px;
+    background-color: black;
+    justify-content: center;
+    border: 3px solid greenyellow;
+}
+
+#wide-view h3, p {
+    text-align: center;
+    margin-left: 25%;
+    color: greenyellow;
+}
+
+#wide-view h3 {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+#wide-view p {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+#wide-img {
+    margin-left: 30%;
+    height: 500px;
+    width: 800px;
+    grid-column: 2 / 5;
+    grid-row: 1 / 4;
+}
+
+#main-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+    grid-template-rows: repeat(2, 1fr);  /* 2 equal rows */
+    justify-items: center; /* Centers items horizontally */
+    align-items: center;   /* Centers items vertically */
+    background-color: black;
+    width: 100%;
+    min-height: 30vh; /* Ensures it fills the viewport */
+    border: 3px solid greenyellow;
+}
+
+#main-container h3 {
+    color: greenyellow;
+    grid-column: 1 / 2; /* Places in the first column */
+    grid-row: 1 / 2;    /* Places in the first row */
+    justify-self: center; /* Centers the h3 within its grid cell */
+    align-self: center;   /* Centers the h3 vertically within its grid cell */
+    margin-left: 30%;
+}
+
+#main-container p {
+    color: greenyellow; /* Add a visible color */
+    grid-column: 1 / 2; /* Example placement in the grid */
+    grid-row: 2 / 3; /* Example placement in the second row */
+    text-align: center;
+    margin-left: 30%;
+}
