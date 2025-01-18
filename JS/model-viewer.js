@@ -74,7 +74,7 @@ class ModelViewer {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #00ff00;
+            color: greenyellow;
             font-family: 'Courier New', monospace;
             transition: opacity 0.5s;
             z-index: 1000;
@@ -84,7 +84,7 @@ class ModelViewer {
         const spinnerHTML = `
             <svg width="${spinnerSize}" height="${spinnerSize}" viewBox="0 0 ${spinnerSize} ${spinnerSize}">
                 <circle cx="${spinnerSize/2}" cy="${spinnerSize/2}" r="${spinnerSize/2-10}"
-                    stroke="#00ff00" stroke-width="4" fill="none"
+                    stroke="greenyellow" stroke-width="4" fill="none"
                     style="animation: spin 2s linear infinite;">
                 </circle>
             </svg>
@@ -193,15 +193,27 @@ class ModelViewer {
                     float poleEffect = abs(latitude) / (3.14159 / 2.0);
                     vec2 randomCoord = vPosition.xz * 0.5;
                     float noise = random(randomCoord) * 5.0;
-                    float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noise;
+                    float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noise * 0.5;
+                    float t = (temperature - 88.0) / 10.0; // Normalize to 0-1 range
+                    
+                    vec3 hotColor = vec3(1.0, 0.0, 0.0);    // Red (hot)
+                    vec3 warmColor = vec3(1.0, 0.267, 0.0); // Orange-red
+                    vec3 midColor = vec3(1.0, 0.533, 0.0);  // Orange
+                    vec3 coolColor = vec3(0.0, 0.533, 1.0); // Light blue
+                    vec3 coldColor = vec3(0.0, 0.267, 1.0); // Blue
+                    vec3 freezeColor = vec3(0.0, 0.0, 0.533); // Dark blue
                     
                     vec3 tempColor;
-                    if(temperature > 95.0) {
-                        tempColor = mix(vec3(1.0, 0.0, 0.0), vec3(1.0, 0.5, 0.0), (temperature - 95.0) / 3.0);
-                    } else if(temperature > 92.0) {
-                        tempColor = mix(vec3(0.0, 0.0, 1.0), vec3(0.5, 0.5, 1.0), (temperature - 92.0) / 3.0);
+                    if (t < 0.2) {
+                        tempColor = mix(freezeColor, coldColor, t * 5.0);
+                    } else if (t < 0.4) {
+                        tempColor = mix(coldColor, coolColor, (t - 0.2) * 5.0);
+                    } else if (t < 0.6) {
+                        tempColor = mix(coolColor, midColor, (t - 0.4) * 5.0);
+                    } else if (t < 0.8) {
+                        tempColor = mix(midColor, warmColor, (t - 0.6) * 5.0);
                     } else {
-                        tempColor = mix(vec3(0.0, 0.0, 0.5), vec3(0.0, 0.0, 1.0), (temperature - 88.0) / 4.0);
+                        tempColor = mix(warmColor, hotColor, (t - 0.8) * 5.0);
                     }
                     
                     gl_FragColor = vec4(tempColor, 1.0);
@@ -220,7 +232,7 @@ class ModelViewer {
         this.temperatureUnit = unit;
         const buttons = this.temperatureLegend.querySelectorAll('.temp-unit-btn');
         buttons.forEach(button => {
-            button.style.background = button.textContent === unit ? '#00ff00' : '#333';
+            button.style.background = button.textContent === unit ? 'greenyellow' : '#333';
         });
         this.updateTemperatureLegend();
     }
@@ -242,13 +254,13 @@ class ModelViewer {
             position: absolute;
             top: 20px;
             right: 20px;
-            color: #00ff00;
+            color: greenyellow;
             background-color: rgba(0, 0, 0, 0.8);
             padding: 15px;
             border-radius: 10px;
             font-family: 'Courier New', monospace;
-            border: 1px solid #00ff00;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            border: 1px solid greenyellow;
+            box-shadow: 0 0 10px rgba(173, 255, 47, 0.3);
             z-index: 100;
             transition: all 0.3s ease;
             transform-origin: right;
@@ -293,7 +305,7 @@ class ModelViewer {
 
         const unitButtons = ['K', '°C', '°F'].map(u => `
             <button class="temp-unit-btn" style="
-                background: ${u === unit ? '#00ff00' : '#333'};
+                background: ${u === unit ? 'greenyellow' : '#333'};
                 color: white;
                 border: none;
                 padding: 4px 8px;
@@ -308,7 +320,7 @@ class ModelViewer {
 
         this.temperatureLegend.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <h2 style="margin: 0; color: #00ff00; font-size: ${headerSize};">PSYCHE TEMPERATURE MAP</h2>
+                <h2 style="margin: 0; color: greenyellow; font-size: ${headerSize};">PSYCHE TEMPERATURE MAP</h2>
                 <div style="display: flex; gap: 4px;">${unitButtons}</div>
             </div>
             <button class="collapse-btn" style="
@@ -317,8 +329,8 @@ class ModelViewer {
                 top: 50%;
                 transform: translateY(-50%);
                 background: rgba(0, 0, 0, 0.8);
-                color: #00ff00;
-                border: 1px solid #00ff00;
+                color: greenyellow;
+                border: 1px solid greenyellow;
                 border-radius: 5px 0 0 5px;
                 cursor: pointer;
                 font-size: 16px;
@@ -327,23 +339,61 @@ class ModelViewer {
                 box-shadow: -2px 0 10px rgba(0, 255, 0, 0.3);
                 transition: all 0.3s ease;
             ">◄</button>
-            <div style="display: flex; align-items: center; margin: 10px 0;">
-                <div style="background: linear-gradient(to bottom, #ff0000, #ff8000, #0000ff, #000080);
-                            width: ${gradientWidth}; height: ${gradientHeight}; margin-right: 10px;
-                            border: 1px solid #00ff00;"></div>
-                <div>
-                    <div>${warm}${unit}</div>
-                    <div style="margin-top: ${parseInt(gradientHeight) * 0.4}px;">${mid}${unit}</div>
-                    <div style="margin-top: ${parseInt(gradientHeight) * 0.4}px;">${cold}${unit}</div>
+            <div style="margin: 15px 0;">
+                <div style="display: flex; align-items: stretch; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: stretch;">
+                        <div style="width: ${gradientWidth}; height: ${gradientHeight}; margin-right: 15px; border: 1px solid greenyellow; position: relative; background: linear-gradient(to bottom, #ff0000, #ff4400, #ff8800, #0088ff, #0044ff, #000088);"></div>
+                        <div style="display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
+                            <div class="temp-range">
+                                <span>${warm}${unit}</span>
+                                <span style="color: #ff4444; margin-left: 10px;">Death Valley peak (330K)</span>
+                            </div>
+                            <div class="temp-range">
+                                <span>${this.convertTemperature(96, unit)}${unit}</span>
+                                <span style="color: #ff6644; margin-left: 10px;">Sahara Desert (320K)</span>
+                            </div>
+                            <div class="temp-range">
+                                <span>${this.convertTemperature(94, unit)}${unit}</span>
+                                <span style="color: #ff8844; margin-left: 10px;">Tropical day (310K)</span>
+                            </div>
+                            <div class="temp-range">
+                                <span>${this.convertTemperature(92, unit)}${unit}</span>
+                                <span style="color: #44aaff; margin-left: 10px;">Spring day (290K)</span>
+                            </div>
+                            <div class="temp-range">
+                                <span>${this.convertTemperature(90, unit)}${unit}</span>
+                                <span style="color: #4488ff; margin-left: 10px;">Cool day (280K)</span>
+                            </div>
+                            <div class="temp-range">
+                                <span>${cold}${unit}</span>
+                                <span style="color: #000088; margin-left: 10px;">Winter morning (270K)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="border-top: 1px solid greenyellow; padding-top: 10px;">
+                    <p style="margin: 15px 0 8px 0;">TEMPERATURE GRADIENT:</p>
+                    <ul style="margin: 0; list-style-type: none; padding-left: 0;">
+                        <li style="margin-bottom: 5px;">► CONTINUOUS COLOR SCALE: Smooth transition from hot to cold</li>
+                        <li style="margin-bottom: 5px;">► MATCHES EARTH'S RANGE: From polar to equatorial temperatures</li>
+                        <li style="margin-bottom: 5px;">► METALLIC INFLUENCE: Heat distributes more evenly than on Earth</li>
+                    </ul>
+                    <p style="margin: 15px 0 8px 0;">EARTH VS PSYCHE:</p>
+                    <ul style="margin: 0 0 15px 0; list-style-type: none; padding-left: 0;">
+                        <li style="margin-bottom: 5px;">► Earth's average: 288K (15°C/59°F)</li>
+                        <li style="margin-bottom: 5px;">► Earth's range: 185K to 330K</li>
+                        <li style="margin-bottom: 5px;">► Psyche is warmer due to metallic heat conductivity</li>
+                    </ul>
+
+                    <p style="margin: 0 0 8px 0;">FACTORS AFFECTING TEMPERATURE:</p>
+                    <ul style="margin: 0; list-style-type: none; padding-left: 0;">
+                        <li style="margin-bottom: 5px;">► SOLAR DISTANCE (3 AU)</li>
+                        <li style="margin-bottom: 5px;">► EQUATORIAL VS POLAR REGIONS</li>
+                        <li style="margin-bottom: 5px;">► SURFACE VARIATIONS</li>
+                        <li style="margin-bottom: 5px;">► METALLIC HEAT CONDUCTIVITY</li>
+                    </ul>
                 </div>
             </div>
-            <p style="margin-bottom: 5px;">TEMPERATURE VARIATIONS DUE TO:</p>
-            <ul style="margin-top: 5px; list-style-type: none; padding-left: 0;">
-                <li>► SOLAR DISTANCE (3 AU)</li>
-                <li>► EQUATORIAL VS POLAR REGIONS</li>
-                <li>► SURFACE VARIATIONS</li>
-                <li>► METALLIC HEAT CONDUCTIVITY</li>
-            </ul>
         `;
 
         this.temperatureLegend.querySelectorAll('.temp-unit-btn').forEach(button => {
