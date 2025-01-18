@@ -8,7 +8,7 @@ import { GLTFLoader } from 'three/examples/jsm/Addons.js';
  * Initializes the primary 3D container, scene, camera, and renderer.
  * Configures the renderer with antialiasing and depth buffering.
  */
-const container = document.getElementById('gravity-canvas');
+const container = document.getElementById('canvas-container');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.01, 20000);
 const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
@@ -25,7 +25,7 @@ camera.lookAt(0, 0, 0);
  */
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambientLight);
-scene.background = new THREE.Color(0xffffff);
+// scene.background = new THREE.Color(0xffffff);
 
 /**
  * Orbit Controls Setup
@@ -64,28 +64,28 @@ function updateProgressBar(progress) {
 /**
  * model loading
  */
-// const loader = new GLTFLoader();
-// loader.load(
-//   'models/AstronautOriginalScale.glb',
-//   (gltf) => {
-//     const model = gltf.scene;
-//     scene.add(model);
-//     model.scale.set(1, 1, 1);
-//     model.position.set(0, 0, 0);
-//   },
-//   (xhr) => {
-//     console.log(`Loading: ${(xhr.loaded / xhr.total) * 100}% completed`);
-//   },
-//   (error) => {
-//     console.error('An error occurred while loading the model:', error);
-//   }
-// );
+const loader = new GLTFLoader();
+loader.load(
+  'models/AstronautRoughScale.glb',
+  (gltf) => {
+    const model = gltf.scene;
+    scene.add(model);
+    model.scale.set(1, 1, 1);
+    model.position.set(0, 0, 0);
+  },
+  (xhr) => {
+    console.log(`Loading: ${(xhr.loaded / xhr.total) * 100}% completed`);
+  },
+  (error) => {
+    console.error('An error occurred while loading the model:', error);
+  }
+);
 
-const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-const redSphere = new THREE.Mesh(geometry, material);
-scene.add(redSphere);
-redSphere.position.set(0, 0, 0); 
+// const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+// const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+// const redSphere = new THREE.Mesh(geometry, material);
+// scene.add(redSphere);
+// redSphere.position.set(0, 0, 0); 
 
 /**
  * animation loop

@@ -42,25 +42,40 @@ header {
     animation-duration: 2s;
 }
 
+/* 
+   Site settings button and icon styling
+   Button moved to top-left corner, sticky, fades in 2 seconds after page loads.
+*/
 #settings-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
     background: none;
-    border: none; 
-    margin: 0; 
-    padding: 0; 
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    position: absolute; 
-    left: 10px; 
-    top: 370px; 
-    transform: translateY(-50%); 
-}
-
-#settings-icon {
-    width: 40px; 
-    height: auto; 
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    animation: fade-in 1s ease 2s forwards;
+  }
+  
+  #settings-icon {
+    width: 40px;
+    height: auto;
     display: block;
-}
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
 
 h1 {
     margin: 0;

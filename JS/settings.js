@@ -133,7 +133,7 @@ function darkMode() {
                 });
 
                 console.log('dark mode on');
-                if (settingsIcon) settingsIcon.src = 'img/white_gear.png';
+                if (settingsIcon) settingsIcon.src = 'img/white_gear2.png';
             } else {
                 dark = false; // Update global state
                 document.body.style.backgroundColor = "white";
