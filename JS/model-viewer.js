@@ -251,6 +251,8 @@ class ModelViewer {
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
             z-index: 100;
             transition: all 0.3s ease;
+            transform-origin: right;
+            transform: scaleX(1);
         `;
 
         // Responsive styles based on container width
@@ -305,10 +307,26 @@ class ModelViewer {
         `).join('');
 
         this.temperatureLegend.innerHTML = `
-            <h2 style="margin-top: 0; color: #00ff00; display: flex; justify-content: space-between; align-items: center; font-size: ${headerSize};">
-                <span>PSYCHE TEMPERATURE MAP</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h2 style="margin: 0; color: #00ff00; font-size: ${headerSize};">PSYCHE TEMPERATURE MAP</h2>
                 <div style="display: flex; gap: 4px;">${unitButtons}</div>
-            </h2>
+            </div>
+            <button class="collapse-btn" style="
+                position: absolute;
+                right: 100%;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0, 0, 0, 0.8);
+                color: #00ff00;
+                border: 1px solid #00ff00;
+                border-radius: 5px 0 0 5px;
+                cursor: pointer;
+                font-size: 16px;
+                padding: 8px;
+                margin-right: -1px;
+                box-shadow: -2px 0 10px rgba(0, 255, 0, 0.3);
+                transition: all 0.3s ease;
+            ">◄</button>
             <div style="display: flex; align-items: center; margin: 10px 0;">
                 <div style="background: linear-gradient(to bottom, #ff0000, #ff8000, #0000ff, #000080);
                             width: ${gradientWidth}; height: ${gradientHeight}; margin-right: 10px;
@@ -331,6 +349,16 @@ class ModelViewer {
         this.temperatureLegend.querySelectorAll('.temp-unit-btn').forEach(button => {
             button.onclick = () => this.setTemperatureUnit(button.textContent);
         });
+
+        // Add collapse button functionality
+        const collapseBtn = this.temperatureLegend.querySelector('.collapse-btn');
+        let isCollapsed = false;
+        collapseBtn.onclick = () => {
+            isCollapsed = !isCollapsed;
+            this.temperatureLegend.style.transform = isCollapsed ? 'translateX(calc(100% + 20px))' : 'translateX(0)';
+            collapseBtn.textContent = isCollapsed ? '►' : '◄';
+            collapseBtn.style.borderRadius = isCollapsed ? '5px 0 0 5px' : '5px 0 0 5px';
+        };
     }
 
     onWindowResize() {

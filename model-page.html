@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psyche Temperature Model</title>
     <style>
-        body { margin: 0; }
+        body { margin: 0; font-family: 'Courier New', monospace; }
         #model-container {
             width: 100vw;
             height: 100vh;
@@ -30,6 +30,93 @@
         #back-button:hover {
             background: rgba(0, 255, 0, 0.2);
         }
+
+        #info-button {
+            position: fixed;
+            top: 20px;
+            left: 200px;
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #info-button:hover {
+            background: rgba(0, 255, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            padding: 20px;
+            z-index: 1002;
+            max-width: 500px;
+            border-radius: 5px;
+            color: #00ff00;
+        }
+
+        .modal-content {
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            text-align: right;
+        }
+
+        .modal-close button {
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close button:hover {
+            background: rgba(0, 255, 0, 0.2);
+        }
+
+        .modal h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 10px;
+        }
+
+        .modal ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .modal li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .modal li:before {
+            content: "►";
+            position: absolute;
+            left: 0;
+        }
     </style>
     <script type="importmap">
     {
@@ -44,6 +131,29 @@
 </head>
 <body>
     <button id="back-button" onclick="window.close()">BACK TO MAIN PAGE</button>
+    <button id="info-button">i</button>
     <div id="model-container"></div>
+    
+    <div id="tutorial-modal" class="modal">
+        <h2>TEMPERATURE VISUALIZATION GUIDE</h2>
+        <div class="modal-content">
+            <ul>
+                <li>ROTATE: Click and drag to rotate the asteroid model</li>
+                <li>ZOOM: Use mouse wheel or pinch gesture to zoom in/out</li>
+                <li>TEMPERATURE UNITS: Toggle between Kelvin, Celsius, and Fahrenheit using the buttons in the legend</li>
+                <li>COLOR MAPPING: Red indicates warmer regions, blue indicates cooler regions</li>
+                <li>LEGEND: Reference the temperature scale on the right for exact values</li>
+            </ul>
+        </div>
+        <div class="modal-close">
+            <button onclick="document.getElementById('tutorial-modal').style.display='none'">CLOSE</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('info-button').onclick = function() {
+            document.getElementById('tutorial-modal').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
