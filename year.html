@@ -22,13 +22,86 @@
             <h1>A Year on 16 Psyche</h1>
             <div id="section-one">
                 <div id="sub-one">
-                    <h3 class="line">What would like be like on Psyche? </h3>
+                    <h3 class="line">What would life be like on Psyche? </h3>
                 </div>
             </div>
             <div class="grid-three">
-                <h4>Age in Years</h4>
-                <p>If you were born on Psyche, you will be much younger than those born around the same time on Earth.</p>
-                <p>Calculator to enter your birth year and get ages in Psyche years and earth years </p>
+                <style>
+                    .scroll-wheel {
+                        width: 200px;
+                        height: 150px;
+                        overflow-y: scroll;
+                        border: 1px solid #ccc;
+                        border-radius: 10px;
+                        position: relative;
+                        margin: 20px auto;
+                    }
+                    .scroll-wheel ul {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        width: 100%;
+                    }
+                    .scroll-wheel li {
+                        height: 30px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 18px;
+                    }
+                    .scroll-wheel li.selected {
+                        font-weight: bold;
+                        color: #007aff;
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Select a Year</h1>
+                <div class="scroll-wheel" id="scrollWheel">
+                    <ul id="yearList">
+                        <!-- Years will be added by JavaScript -->
+                    </ul>
+                </div>
+                <p id="result1"></p>
+                <p id="result2"></p>
+            
+                <script>
+                    const yearList = document.getElementById('yearList');
+                    const scrollWheel = document.getElementById('scrollWheel');
+                    const currentYear = new Date().getFullYear();
+            
+                    // Populate the list with years from 2025 to 1900
+                    for (let year = 2025; year >= 1900; year--) {
+                        const li = document.createElement('li');
+                        li.textContent = year;
+                        yearList.appendChild(li);
+                    }
+            
+                    // Add event listener for scrolling
+                    scrollWheel.addEventListener('scroll', () => {
+                        const scrollTop = scrollWheel.scrollTop;
+                        const itemHeight = 30; // Height of each list item
+                        const selectedIndex = Math.round(scrollTop / itemHeight);
+                        const selectedYear = yearList.children[selectedIndex].textContent;
+            
+                        // Update selected class
+                        Array.from(yearList.children).forEach((li, index) => {
+                            li.classList.toggle('selected', index === selectedIndex);
+                        });
+            
+                        // Calculate and display results
+                        const difference = currentYear - selectedYear;
+                        const dividedDifference = difference / 5;
+                        document.getElementById('result1').innerText = `Difference: ${difference}`;
+                        document.getElementById('result2').innerText = `Divided Difference: ${dividedDifference}`;
+                    });
+            
+                    // Set initial selected year
+                    scrollWheel.scrollTop = 0;
+                    yearList.children.classList.add('selected');
+                </script>
+            </body>
+            </div>
             </div>
             <div class="grid-three">
                 <h4>Day Length </h4>
