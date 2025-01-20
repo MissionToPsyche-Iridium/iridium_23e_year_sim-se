@@ -26,6 +26,25 @@ class ModelViewer {
         this.renderer.setClearColor(0x000000);
         this.container.appendChild(this.renderer.domElement);
 
+        // Add click handler for fullscreen
+        if (!this.isPreview) {
+            this.renderer.domElement.addEventListener('click', () => this.toggleFullscreen());
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && document.fullscreenElement) {
+                    document.exitFullscreen();
+                }
+            });
+            
+            // Handle fullscreen change
+            document.addEventListener('fullscreenchange', () => {
+                if (document.fullscreenElement) {
+                    this.onEnterFullscreen();
+                } else {
+                    this.onExitFullscreen();
+                }
+            });
+        }
+
         // Setup camera with initial position
         this.camera.position.copy(this.initialCameraPosition);
         if (this.isPreview) {
@@ -196,12 +215,12 @@ class ModelViewer {
                     float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noise * 0.5;
                     float t = (temperature - 88.0) / 10.0; // Normalize to 0-1 range
                     
-                    vec3 hotColor = vec3(1.0, 0.0, 0.0);    // Red (hot)
-                    vec3 warmColor = vec3(1.0, 0.267, 0.0); // Orange-red
-                    vec3 midColor = vec3(1.0, 0.533, 0.0);  // Orange
-                    vec3 coolColor = vec3(0.0, 0.533, 1.0); // Light blue
-                    vec3 coldColor = vec3(0.0, 0.267, 1.0); // Blue
-                    vec3 freezeColor = vec3(0.0, 0.0, 0.533); // Dark blue
+                    vec3 hotColor = vec3(1.0, 0.4, 0.0);    // Orange-red (hot)
+                    vec3 warmColor = vec3(1.0, 0.8, 0.0);   // Yellow-orange
+                    vec3 midColor = vec3(0.0, 1.0, 0.5);    // Green-cyan
+                    vec3 coolColor = vec3(0.0, 0.8, 1.0);   // Cyan-blue
+                    vec3 coldColor = vec3(0.0, 0.4, 1.0);   // Light blue
+                    vec3 freezeColor = vec3(0.0, 0.2, 0.8); // Blue
                     
                     vec3 tempColor;
                     if (t < 0.2) {
@@ -411,10 +430,29 @@ class ModelViewer {
         };
     }
 
+    toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            this.container.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    onEnterFullscreen() {
+        this.onWindowResize();
+    }
+
+    onExitFullscreen() {
+        this.onWindowResize();
+    }
+
     onWindowResize() {
-        this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+        const width = document.fullscreenElement ? window.innerWidth : this.container.clientWidth;
+        const height = document.fullscreenElement ? window.innerHeight : this.container.clientHeight;
+        
+        this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
-        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+        this.renderer.setSize(width, height);
         
         if (this.temperatureLegend) {
             const containerWidth = this.container.clientWidth;

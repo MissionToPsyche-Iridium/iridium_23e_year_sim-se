@@ -154,6 +154,20 @@
         document.getElementById('info-button').onclick = function() {
             document.getElementById('tutorial-modal').style.display = 'block';
         }
+
+        // Request fullscreen when page loads
+        window.addEventListener('load', function() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        });
+
+        // Handle escape key to close window
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.close();
+            }
+        });
     </script>
 </body>
 </html>
