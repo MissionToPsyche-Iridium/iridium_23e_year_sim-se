@@ -34,12 +34,12 @@ body {
     max-height: 500px;
     background-color: black;
     justify-content: center;
-    border: 3px solid greenyellow;
+    border: 3px solid black;
 }
 #wide-view h3, p {
     text-align: center;
     margin-left: 25%;
-    color: greenyellow;
+    color: black;
 }
 #wide-view h3 {
     grid-column: 1 / 2;
@@ -65,7 +65,7 @@ body {
     background-color: black;
     width: 100%;
     min-height: 30vh; 
-    border: 3px solid greenyellow;
+    border: 3px solid black;
 }
 #main-container h3 {
     color: greenyellow;
@@ -80,7 +80,7 @@ body {
     grid-column: 1 / 2; 
     grid-row: 2 / 3; 
     text-align: center;
-    margin-left: 30%;
+    margin-left: 10%;
 }
 #psyche-container {
     grid-column: 2 / 5; 
@@ -94,8 +94,8 @@ body {
 }
 #top  {
     background-color: black;
-    color: greenyellow;
-    border: 3px solid greenyellow;
+    color: black;
+    border: 3px solid black;
 }
 #top p {
     margin-left: 0;
