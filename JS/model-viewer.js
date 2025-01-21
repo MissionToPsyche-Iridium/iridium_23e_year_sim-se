@@ -16,6 +16,19 @@ class ModelViewer {
         this.temperatureUnit = 'K';
         this.cameraTarget = new THREE.Vector3();
         this.initialCameraPosition = new THREE.Vector3(0, 0, 3);
+        
+        // Environmental effects
+        this.activeWeatherEffect = null;
+        this.weatherParticles = null;
+        this.weatherEffects = {
+            solarFlare: { duration: 10, probability: 0.001 },
+            iceStorm: { duration: 15, probability: 0.001 },
+            dustStorm: { duration: 20, probability: 0.001 }
+        };
+        this.dayNightCycle = {
+            duration: 120, // Full cycle duration in seconds
+            intensity: { min: 0.1, max: 2 }
+        };
 
         this.init();
     }
@@ -62,12 +75,16 @@ class ModelViewer {
             this.controls.enabled = false;
         }
 
-        const ambientLight = new THREE.AmbientLight(0x333333);
-        this.scene.add(ambientLight);
+        // Setup lighting
+        this.ambientLight = new THREE.AmbientLight(0x333333);
+        this.scene.add(this.ambientLight);
 
         this.sunLight = new THREE.DirectionalLight(0xFFFFFF, 2);
         this.sunLight.position.set(50, 0, 0);
         this.scene.add(this.sunLight);
+
+        // Add star field background
+        this.addStarField();
 
         if (!this.isPreview) {
             this.addLoadingAnimation();
@@ -182,6 +199,136 @@ class ModelViewer {
         animate();
     }
 
+    addStarField() {
+        const starGeometry = new THREE.BufferGeometry();
+        const starVertices = [];
+        for (let i = 0; i < 5000; i++) {
+            const x = THREE.MathUtils.randFloatSpread(2000);
+            const y = THREE.MathUtils.randFloatSpread(2000);
+            const z = THREE.MathUtils.randFloatSpread(2000);
+            starVertices.push(x, y, z);
+        }
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+        const starMaterial = new THREE.PointsMaterial({ color: 0xFFFFFF, size: 1 });
+        const starField = new THREE.Points(starGeometry, starMaterial);
+        this.scene.add(starField);
+    }
+
+    initWeatherSystem() {
+        const particleCount = 10000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = THREE.MathUtils.randFloatSpread(100);
+            positions[i + 1] = THREE.MathUtils.randFloatSpread(100);
+            positions[i + 2] = THREE.MathUtils.randFloatSpread(100);
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const material = new THREE.PointsMaterial({
+            size: 0.1,
+            transparent: true,
+            opacity: 0.6,
+            color: 0xFFFFFF,
+            blending: THREE.AdditiveBlending
+        });
+        
+        this.weatherParticles = new THREE.Points(geometry, material);
+        this.scene.add(this.weatherParticles);
+        this.weatherParticles.visible = false;
+    }
+
+    updateWeatherEffects() {
+        if (!this.weatherParticles) {
+            this.initWeatherSystem();
+            return;
+        }
+
+        // Random weather event triggering
+        if (!this.activeWeatherEffect) {
+            for (const [effect, params] of Object.entries(this.weatherEffects)) {
+                if (Math.random() < params.probability) {
+                    this.startWeatherEffect(effect);
+                    break;
+                }
+            }
+        }
+
+        if (this.activeWeatherEffect) {
+            const positions = this.weatherParticles.geometry.attributes.position.array;
+            
+            switch (this.activeWeatherEffect.type) {
+                case 'solarFlare':
+                    this.weatherParticles.material.color.setHex(0xFFAA00);
+                    this.weatherParticles.material.size = 0.2;
+                    for (let i = 0; i < positions.length; i += 3) {
+                        positions[i] += 0.1;
+                        if (positions[i] > 50) positions[i] = -50;
+                    }
+                    break;
+                    
+                case 'iceStorm':
+                    this.weatherParticles.material.color.setHex(0xAAFFFF);
+                    this.weatherParticles.material.size = 0.05;
+                    for (let i = 0; i < positions.length; i += 3) {
+                        positions[i + 1] -= 0.1;
+                        if (positions[i + 1] < -50) positions[i + 1] = 50;
+                    }
+                    break;
+                    
+                case 'dustStorm':
+                    this.weatherParticles.material.color.setHex(0xAA8866);
+                    this.weatherParticles.material.size = 0.08;
+                    for (let i = 0; i < positions.length; i += 3) {
+                        positions[i] += Math.sin(this.time + positions[i + 1]) * 0.1;
+                        positions[i + 2] += Math.cos(this.time + positions[i + 1]) * 0.1;
+                    }
+                    break;
+            }
+            
+            this.weatherParticles.geometry.attributes.position.needsUpdate = true;
+            
+            // Check if weather effect should end
+            if (Date.now() > this.activeWeatherEffect.endTime) {
+                this.endWeatherEffect();
+            }
+        }
+    }
+
+    startWeatherEffect(type) {
+        this.activeWeatherEffect = {
+            type,
+            endTime: Date.now() + this.weatherEffects[type].duration * 1000
+        };
+        this.weatherParticles.visible = true;
+    }
+
+    endWeatherEffect() {
+        this.activeWeatherEffect = null;
+        this.weatherParticles.visible = false;
+    }
+
+    updateDayNightCycle() {
+        const cycleProgress = (this.time % this.dayNightCycle.duration) / this.dayNightCycle.duration;
+        const intensity = THREE.MathUtils.lerp(
+            this.dayNightCycle.intensity.min,
+            this.dayNightCycle.intensity.max,
+            Math.sin(cycleProgress * Math.PI * 2) * 0.5 + 0.5
+        );
+        
+        this.sunLight.intensity = intensity;
+        this.ambientLight.intensity = intensity * 0.2;
+        
+        // Update star visibility based on time of day
+        const stars = this.scene.children.find(child => child instanceof THREE.Points);
+        if (stars) {
+            stars.material.opacity = 1 - (intensity - this.dayNightCycle.intensity.min) / 
+                (this.dayNightCycle.intensity.max - this.dayNightCycle.intensity.min);
+        }
+    }
+
     addTemperatureVisualization() {
         const temperatureMaterial = new THREE.ShaderMaterial({
             uniforms: {
@@ -235,7 +382,21 @@ class ModelViewer {
                         tempColor = mix(warmColor, hotColor, (t - 0.8) * 5.0);
                     }
                     
-                    gl_FragColor = vec4(tempColor, 1.0);
+                // Apply environmental effects
+                if (time > 0.0) {
+                    // Day/night cycle effect
+                    float dayNightCycle = (sin(time * 0.05) * 0.5 + 0.5);
+                    tempColor *= mix(0.5, 1.0, dayNightCycle);
+                    
+                    // Weather effects (passed through uniforms)
+                    float weatherEffect = 0.0;
+                    if (sunDirection.y > 0.9) { // Solar flare condition
+                        weatherEffect = 0.3;
+                        tempColor = mix(tempColor, vec3(1.0, 0.6, 0.0), weatherEffect);
+                    }
+                }
+                
+                gl_FragColor = vec4(tempColor, 1.0);
                 }
             `
         });
@@ -478,6 +639,12 @@ class ModelViewer {
             this.time = Date.now() * 0.001;
             this.sunLight.position.x = Math.cos(this.time * 0.2) * 50;
             this.sunLight.position.z = Math.sin(this.time * 0.2) * 50;
+            
+            // Update environmental effects
+            this.updateDayNightCycle();
+            if (!this.isPreview) {
+                this.updateWeatherEffects();
+            }
             
             this.model.traverse((child) => {
                 if (child.isMesh && child.material.uniforms) {

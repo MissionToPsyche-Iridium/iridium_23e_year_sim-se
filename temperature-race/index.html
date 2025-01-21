@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Race Track</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1a1a1a;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        #gameContainer {
+            position: relative;
+        }
+        canvas {
+            border: 2px solid #333;
+        }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+        }
+        #menu {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button {
+            background: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui">
+            Temperature: <span id="temperature">0°C</span><br>
+            Score: <span id="score">0</span>
+        </div>
+        <div id="menu">
+            <h2>Temperature Race Track</h2>
+            <button onclick="startGame('easy')">Easy</button>
+            <button onclick="startGame('medium')">Medium</button>
+            <button onclick="startGame('hard')">Hard</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
