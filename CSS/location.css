@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/*header image left*/
+#psyche {
+    width: 25%;
+    left: 3%;
+    top: -5%;
+    position: relative;
+    animation: logo-move-in;
+    animation-duration: 2s;
+}
+
+/*header image right*/
+#asteroid {
+    float: right;
+    position: relative;
+    width: 50%;
+    right: -5%;
+    top: -5%;
+    animation: header-move-in;
+    animation-duration: 2s;
+}
+
+@keyframes header-move-in {
+    from {right: -200px; top: -100px;}
+    to {right: -5%; top: -5%;}
+}
+
+@keyframes logo-move-in {
+    from {left: -200px; top: -100px;}
+    to {left: 3%; top: -5%;}
+}
+
+main h1 {
+    margin-top: 5%;
+    text-align: center;
+}
+
+#top  {
+    background-color: black;
+    color: greenyellow;
+    border: 3px solid greenyellow;
+}
+
+#top h3 {
+    padding-top: 5%;
+    text-align: center;
+    margin: 0;
+}
+
+#top p {
+    text-align: center;
+    margin-left: 0;
+    line-height: 2;
+}
+
+footer {
+    text-align: center;
+}
