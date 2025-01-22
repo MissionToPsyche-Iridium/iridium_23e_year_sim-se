@@ -275,3 +275,59 @@ html.disable-animations #sub-one p .line {
     color: greenyellow !important; /* Text is visible */
     border-right: none !important; /* Hide caret */
 }
+
+/* YEAR STYLES*/ 
+
+.year-h1 {
+    margin: 0;
+    font-size: 50px;
+    flex-grow: 1; 
+    text-align: center; 
+    padding-top: 5%;
+    color:#592651
+}
+.year-h2 {
+    margin: 0;
+    font-size: 50px;
+    flex-grow: 1; 
+    text-align: center; 
+    padding-top: 5%;
+    color:#592651
+}
+
+.scroll-wheel {
+    width: 200px;
+    height: 225px;
+    overflow-y: scroll;
+    border: 3px solid #592651;
+    border-radius: 10px;
+    position: relative;
+    margin: 10px auto;
+}
+.scroll-wheel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.scroll-wheel li {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+.scroll-wheel li.selected {
+    font-weight: bold;
+    color: #f9a000;
+}
+.earthAge {
+    font-size: 50px; 
+    font-weight: bold;
+    color: #087f23
+}
+.psycheAge {
+    font-size: 50px; 
+    font-weight: bold;
+    color: #f9a000
+}

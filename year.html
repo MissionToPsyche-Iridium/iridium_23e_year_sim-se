@@ -22,45 +22,15 @@
             <h1>A Year on 16 Psyche</h1>
             <div id="section-one">
                 <div id="sub-one">
-                    <h3 class="line">What would life be like on Psyche? </h3>
+                    <h3 class="year-h1">What would life be like on Psyche? </h3>
                 </div>
             </div>
             <div class="grid-three">
-                <style>
-                    .scroll-wheel {
-                        width: 200px;
-                        height: 150px;
-                        overflow-y: scroll;
-                        border: 1px solid #ccc;
-                        border-radius: 10px;
-                        position: relative;
-                        margin: 20px auto;
-                    }
-                    .scroll-wheel ul {
-                        list-style: none;
-                        padding: 0;
-                        margin: 0;
-                        width: 100%;
-                    }
-                    .scroll-wheel li {
-                        height: 30px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        font-size: 18px;
-                    }
-                    .scroll-wheel li.selected {
-                        font-weight: bold;
-                        color: #007aff;
-                    }
-                </style>
             </head>
             <body>
-                <h1>Select a Year</h1>
+                <h1>Select your birth year to discover your age on Psyche:</h1>
                 <div class="scroll-wheel" id="scrollWheel">
-                    <ul id="yearList">
-                        <!-- Years will be added by JavaScript -->
-                    </ul>
+                    <ul id="yearList"></ul>
                 </div>
                 <p id="result1"></p>
                 <p id="result2"></p>
@@ -71,7 +41,7 @@
                     const currentYear = new Date().getFullYear();
             
                     // Populate the list with years from 2025 to 1900
-                    for (let year = 2025; year >= 1900; year--) {
+                    for (let year = 2025; year >= 1925; year--) {
                         const li = document.createElement('li');
                         li.textContent = year;
                         yearList.appendChild(li);
@@ -90,10 +60,12 @@
                         });
             
                         // Calculate and display results
-                        const difference = currentYear - selectedYear;
-                        const dividedDifference = difference / 5;
-                        document.getElementById('result1').innerText = `Difference: ${difference}`;
-                        document.getElementById('result2').innerText = `Divided Difference: ${dividedDifference}`;
+                        const earthAge = currentYear - selectedYear;
+                        const psycheAge = Math.floor(earthAge / 5);
+                        document.getElementById('result1').innerText = `Age On Earth: ${earthAge}`;
+                        document.getElementById('result1').className = `earthAge`;
+                        document.getElementById('result2').innerText = `Age on Psyche: ${psycheAge}`;
+                        document.getElementById('result2').className = `psycheAge`;
                     });
             
                     // Set initial selected year
