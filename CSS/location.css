@@ -97,6 +97,11 @@ div {
     background-size: cover;
 }
 
+#psyche-location {
+    background-image: url(/img/psyche.jpg);
+    background-size: cover;
+}
+
 #jupiter {
     background-image: url(/img/jupiter.jpg);
     background-size: cover;
