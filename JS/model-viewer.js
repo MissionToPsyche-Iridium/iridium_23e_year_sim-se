@@ -349,54 +349,68 @@ class ModelViewer {
                 uniform float time;
                 varying vec3 vNormal;
                 varying vec3 vPosition;
-                
-                float random(vec2 st) {
-                    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+
+                // Pre-computed noise texture coordinates
+                vec2 hash(vec2 p) {
+                    p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)));
+                    return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+                }
+
+                // Optimized Gradient Noise
+                float noise(vec2 p) {
+                    vec2 i = floor(p);
+                    vec2 f = fract(p);
+                    vec2 u = f * f * (3.0 - 2.0 * f);
+                    return mix(
+                        mix(dot(hash(i + vec2(0.0,0.0)), f - vec2(0.0,0.0)),
+                            dot(hash(i + vec2(1.0,0.0)), f - vec2(1.0,0.0)), u.x),
+                        mix(dot(hash(i + vec2(0.0,1.0)), f - vec2(0.0,1.0)),
+                            dot(hash(i + vec2(1.0,1.0)), f - vec2(1.0,1.0)), u.x),
+                        u.y
+                    );
                 }
                 
                 void main() {
-                    float latitude = asin(normalize(vPosition).y);
+                    // Pre-compute normalized position
+                    vec3 normalizedPos = normalize(vPosition);
+                    float latitude = asin(normalizedPos.y);
                     float poleEffect = abs(latitude) / (3.14159 / 2.0);
-                    vec2 randomCoord = vPosition.xz * 0.5;
-                    float noise = random(randomCoord) * 5.0;
-                    float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noise * 0.5;
-                    float t = (temperature - 88.0) / 10.0; // Normalize to 0-1 range
                     
-                    vec3 hotColor = vec3(1.0, 0.4, 0.0);    // Orange-red (hot)
-                    vec3 warmColor = vec3(1.0, 0.8, 0.0);   // Yellow-orange
-                    vec3 midColor = vec3(0.0, 1.0, 0.5);    // Green-cyan
-                    vec3 coolColor = vec3(0.0, 0.8, 1.0);   // Cyan-blue
-                    vec3 coldColor = vec3(0.0, 0.4, 1.0);   // Light blue
-                    vec3 freezeColor = vec3(0.0, 0.2, 0.8); // Blue
+                    // Optimized noise calculation
+                    vec2 noiseCoord = vPosition.xz * 0.1;
+                    float noiseVal = noise(noiseCoord + time * 0.1) * 0.25;
                     
-                    vec3 tempColor;
-                    if (t < 0.2) {
-                        tempColor = mix(freezeColor, coldColor, t * 5.0);
-                    } else if (t < 0.4) {
-                        tempColor = mix(coldColor, coolColor, (t - 0.2) * 5.0);
-                    } else if (t < 0.6) {
-                        tempColor = mix(coolColor, midColor, (t - 0.4) * 5.0);
-                    } else if (t < 0.8) {
-                        tempColor = mix(midColor, warmColor, (t - 0.6) * 5.0);
-                    } else {
-                        tempColor = mix(warmColor, hotColor, (t - 0.8) * 5.0);
-                    }
+                    // Temperature calculation with cached values
+                    float baseTemp = mix(88.0, 98.0, (1.0 - poleEffect));
+                    float temperature = baseTemp + noiseVal;
+                    float t = clamp((temperature - 88.0) / 10.0, 0.0, 1.0);
                     
-                // Apply environmental effects
-                if (time > 0.0) {
-                    // Day/night cycle effect
+                    // Pre-defined temperature color gradient
+                    const vec3 hotColor = vec3(1.0, 0.4, 0.0);
+                    const vec3 warmColor = vec3(1.0, 0.8, 0.0);
+                    const vec3 midColor = vec3(0.0, 1.0, 0.5);
+                    const vec3 coolColor = vec3(0.0, 0.8, 1.0);
+                    const vec3 coldColor = vec3(0.0, 0.4, 1.0);
+                    const vec3 freezeColor = vec3(0.0, 0.2, 0.8);
+                    
+                    // Optimized color interpolation
+                    vec3 tempColor = 
+                        t < 0.2 ? mix(freezeColor, coldColor, t * 5.0) :
+                        t < 0.4 ? mix(coldColor, coolColor, (t - 0.2) * 5.0) :
+                        t < 0.6 ? mix(coolColor, midColor, (t - 0.4) * 5.0) :
+                        t < 0.8 ? mix(midColor, warmColor, (t - 0.6) * 5.0) :
+                        mix(warmColor, hotColor, (t - 0.8) * 5.0);
+                    
+                    // Optimized environmental effects
                     float dayNightCycle = (sin(time * 0.05) * 0.5 + 0.5);
                     tempColor *= mix(0.5, 1.0, dayNightCycle);
                     
-                    // Weather effects (passed through uniforms)
-                    float weatherEffect = 0.0;
-                    if (sunDirection.y > 0.9) { // Solar flare condition
-                        weatherEffect = 0.3;
-                        tempColor = mix(tempColor, vec3(1.0, 0.6, 0.0), weatherEffect);
+                    // Simplified weather effect
+                    if (sunDirection.y > 0.9) {
+                        tempColor = mix(tempColor, vec3(1.0, 0.6, 0.0), 0.3);
                     }
-                }
-                
-                gl_FragColor = vec4(tempColor, 1.0);
+                    
+                    gl_FragColor = vec4(tempColor, 1.0);
                 }
             `
         });
@@ -526,51 +540,51 @@ class ModelViewer {
                         <div style="display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1;">
                             <div class="temp-range">
                                 <span>${warm}${unit}</span>
-                                <span style="color: #ff4444; margin-left: 10px;">Death Valley peak (330K)</span>
+                                <span style="color: #ff4444; margin-left: 10px;">Colder than Antarctica's lowest (${this.convertTemperature(184, unit)}${unit})</span>
                             </div>
                             <div class="temp-range">
                                 <span>${this.convertTemperature(96, unit)}${unit}</span>
-                                <span style="color: #ff6644; margin-left: 10px;">Sahara Desert (320K)</span>
+                                <span style="color: #ff6644; margin-left: 10px;">Like the surface of Pluto (${this.convertTemperature(44, unit)}${unit})</span>
                             </div>
                             <div class="temp-range">
                                 <span>${this.convertTemperature(94, unit)}${unit}</span>
-                                <span style="color: #ff8844; margin-left: 10px;">Tropical day (310K)</span>
+                                <span style="color: #ff8844; margin-left: 10px;">Colder than dry ice (${this.convertTemperature(195, unit)}${unit})</span>
                             </div>
                             <div class="temp-range">
                                 <span>${this.convertTemperature(92, unit)}${unit}</span>
-                                <span style="color: #44aaff; margin-left: 10px;">Spring day (290K)</span>
+                                <span style="color: #44aaff; margin-left: 10px;">Like liquid nitrogen (${this.convertTemperature(77, unit)}${unit})</span>
                             </div>
                             <div class="temp-range">
                                 <span>${this.convertTemperature(90, unit)}${unit}</span>
-                                <span style="color: #4488ff; margin-left: 10px;">Cool day (280K)</span>
+                                <span style="color: #4488ff; margin-left: 10px;">Almost as cold as liquid oxygen (${this.convertTemperature(90, unit)}${unit})</span>
                             </div>
                             <div class="temp-range">
                                 <span>${cold}${unit}</span>
-                                <span style="color: #000088; margin-left: 10px;">Winter morning (270K)</span>
+                                <span style="color: #000088; margin-left: 10px;">Similar to liquid methane (${this.convertTemperature(112, unit)}${unit})</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div style="border-top: 1px solid greenyellow; padding-top: 10px;">
-                    <p style="margin: 15px 0 8px 0;">TEMPERATURE GRADIENT:</p>
+                    <p style="margin: 15px 0 8px 0;">HOW TEMPERATURE WORKS ON PSYCHE:</p>
                     <ul style="margin: 0; list-style-type: none; padding-left: 0;">
-                        <li style="margin-bottom: 5px;">► CONTINUOUS COLOR SCALE: Smooth transition from hot to cold</li>
-                        <li style="margin-bottom: 5px;">► MATCHES EARTH'S RANGE: From polar to equatorial temperatures</li>
-                        <li style="margin-bottom: 5px;">► METALLIC INFLUENCE: Heat distributes more evenly than on Earth</li>
+                        <li style="margin-bottom: 5px;">► Colors show hot (red) to cold (blue) areas</li>
+                        <li style="margin-bottom: 5px;">► Like Earth, equator is warmer than poles</li>
+                        <li style="margin-bottom: 5px;">► Metal surface spreads heat like a cooking pan!</li>
                     </ul>
                     <p style="margin: 15px 0 8px 0;">EARTH VS PSYCHE:</p>
                     <ul style="margin: 0 0 15px 0; list-style-type: none; padding-left: 0;">
-                        <li style="margin-bottom: 5px;">► Earth's average: 288K (15°C/59°F)</li>
-                        <li style="margin-bottom: 5px;">► Earth's range: 185K to 330K</li>
-                        <li style="margin-bottom: 5px;">► Psyche is warmer due to metallic heat conductivity</li>
+                        <li style="margin-bottom: 5px;">► Earth is warm like a comfortable room (15°C/59°F)</li>
+                        <li style="margin-bottom: 5px;">► Psyche is much colder (like a freezer!) because it's far from the Sun</li>
+                        <li style="margin-bottom: 5px;">► No atmosphere to keep heat in, like a jacket would keep you warm</li>
+                        <li style="margin-bottom: 5px;">► Metal surface spreads the cold evenly, like an ice cube tray</li>
                     </ul>
 
-                    <p style="margin: 0 0 8px 0;">FACTORS AFFECTING TEMPERATURE:</p>
+                    <p style="margin: 0 0 8px 0;">WHAT AFFECTS PSYCHE'S TEMPERATURE?</p>
                     <ul style="margin: 0; list-style-type: none; padding-left: 0;">
-                        <li style="margin-bottom: 5px;">► SOLAR DISTANCE (3 AU)</li>
-                        <li style="margin-bottom: 5px;">► EQUATORIAL VS POLAR REGIONS</li>
-                        <li style="margin-bottom: 5px;">► SURFACE VARIATIONS</li>
-                        <li style="margin-bottom: 5px;">► METALLIC HEAT CONDUCTIVITY</li>
+                        <li style="margin-bottom: 5px;">► Distance from Sun (3x farther than Earth!)</li>
+                        <li style="margin-bottom: 5px;">► Position (equator vs poles, like Earth)</li>
+                        <li style="margin-bottom: 5px;">► Metal surface (conducts heat like a frying pan)</li>
                     </ul>
                 </div>
             </div>
@@ -633,28 +647,46 @@ class ModelViewer {
     }
 
     animate() {
+        // Use performance.now() for more precise timing
+        const currentTime = performance.now() * 0.001;
+        const deltaTime = currentTime - (this.lastTime || currentTime);
+        this.lastTime = currentTime;
+        
         requestAnimationFrame(() => this.animate());
         
         if (this.model) {
-            this.time = Date.now() * 0.001;
-            this.sunLight.position.x = Math.cos(this.time * 0.2) * 50;
-            this.sunLight.position.z = Math.sin(this.time * 0.2) * 50;
+            // Update time at a fixed rate for consistent animations
+            this.time += Math.min(deltaTime, 0.1);
             
-            // Update environmental effects
-            this.updateDayNightCycle();
-            if (!this.isPreview) {
-                this.updateWeatherEffects();
+            // Cache sun position calculations
+            const sunX = Math.cos(this.time * 0.2);
+            const sunZ = Math.sin(this.time * 0.2);
+            this.sunLight.position.set(sunX * 50, 0, sunZ * 50);
+            
+            // Update shared uniforms once
+            const sunDirection = this.sunLight.position.clone().normalize();
+            
+            // Batch mesh updates
+            if (this.temperatureMaterials) {
+                this.temperatureMaterials.forEach(material => {
+                    if (material.uniforms) {
+                        material.uniforms.time.value = this.time;
+                        material.uniforms.sunDirection.value.copy(sunDirection);
+                    }
+                });
             }
             
-            this.model.traverse((child) => {
-                if (child.isMesh && child.material.uniforms) {
-                    child.material.uniforms.time.value = this.time;
-                    child.material.uniforms.sunDirection.value.copy(this.sunLight.position).normalize();
+            // Update environmental effects at reduced frequency
+            if (this.time - (this.lastEffectsUpdate || 0) > 0.1) {
+                this.updateDayNightCycle();
+                if (!this.isPreview) {
+                    this.updateWeatherEffects();
                 }
-            });
+                this.lastEffectsUpdate = this.time;
+            }
 
             if (this.isPreview) {
-                this.model.rotation.y += 0.01;
+                this.model.rotation.y += 0.01 * deltaTime;
             }
         }
         
