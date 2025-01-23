@@ -15,7 +15,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuff
 renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 container.appendChild(renderer.domElement);
-camera.position.set(0, 1, 5);
+camera.position.set(0, 8, 15);
 camera.lookAt(0, 0, 0);
 
 /**
@@ -23,8 +23,15 @@ camera.lookAt(0, 0, 0);
  * 
  * Adds ambient lighting to illuminate the scene globally.
  */
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+// Ambient Light
+const ambientLight = new THREE.AmbientLight(0xffffff, 5);
 scene.add(ambientLight);
+
+// Directional Light
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(10, 10, 10);
+camera.add(directionalLight);
+scene.add(camera);
 // scene.background = new THREE.Color(0xffffff);
 
 /**
@@ -61,37 +68,57 @@ function updateProgressBar(progress) {
   progressBar.style.background = `linear-gradient(to right, purple, yellow ${progress}%)`;
 }
 
+
 /**
  * model loading
  */
 const loader = new GLTFLoader();
-loader.load(
-  'models/AstronautRoughScale.glb',
-  (gltf) => {
-    const model = gltf.scene;
-    scene.add(model);
-    model.scale.set(1, 1, 1);
-    model.position.set(0, 0, 0);
-  },
-  (xhr) => {
-    console.log(`Loading: ${(xhr.loaded / xhr.total) * 100}% completed`);
-  },
-  (error) => {
-    console.error('An error occurred while loading the model:', error);
-  }
-);
+loader.load('models/AstronautRoughScale.glb', (gltfAstronaut) => {
+  const astronaut = gltfAstronaut.scene;
+  scene.add(astronaut);
+  astronaut.scale.set(1, 1, 1);
+  const astronautBox = new THREE.Box3().setFromObject(astronaut);
+  const astronautHelper = new THREE.Box3Helper(astronautBox, 0xff0000);
+  scene.add(astronautHelper);
 
-// const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-// const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-// const redSphere = new THREE.Mesh(geometry, material);
-// scene.add(redSphere);
-// redSphere.position.set(0, 0, 0); 
+  loader.load('models/16psyche_boxFix.glb', (gltfBase) => {
+    const baseModel = gltfBase.scene;
+    scene.add(baseModel);
+    baseModel.scale.set(20, 20, 20);
+    const baseBox = new THREE.Box3().setFromObject(baseModel);
+    const baseHelper = new THREE.Box3Helper(baseBox, 0x00ff00);
+    scene.add(baseHelper);
+    baseModel.position.set(0, -baseBox.max.y, 0);
+    baseBox.setFromObject(baseModel);
+    const adjustedAstronautY = baseBox.max.y - astronautBox.min.y + 0.001;
+    astronaut.position.set(0, adjustedAstronautY, 0);
+    astronautBox.setFromObject(astronaut);
+    astronautHelper.box = astronautBox;
+  });
+});
+
+/**
+ *  Add a background
+ */
+const textureLoader = new THREE.TextureLoader();
+textureLoader.load('/img/textures/8k_stars_milky_way.jpg', (texture) => {
+  const geometry = new THREE.SphereGeometry(5000, 64, 64); // Larger sphere
+  const material = new THREE.MeshBasicMaterial({
+    map: texture,
+    side: THREE.BackSide,
+  });
+  const backgroundSphere = new THREE.Mesh(geometry, material);
+  scene.add(backgroundSphere);
+});
+
+
 
 /**
  * animation loop
  */
 function animate() {
   requestAnimationFrame(animate);
+  controls.update();
   renderer.render(scene, camera);
 }
 animate();
