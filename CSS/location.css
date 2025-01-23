@@ -77,6 +77,11 @@ div {
     padding: 10%;
 }
 
+#solar-system {
+    height: 900px;
+}
+
+
 #mercury {
     background-image: url(/img/mercury.jpg);
     background-size: cover;

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lines.forEach((line, index) => {
             setTimeout(() => {
                 line.classList.add("start-typing");
-            }, index * 3000); // Delay each line's animation
+            }, index * 1000); // Delay each line's animation
         });
 
         // After all lines are done typing, reveal grid-three elements
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     element.classList.add("show"); // Add show class one by one
                 }, index * 1000); // Delay each grid-three by 1 second
             });
-        }, lines.length * 3000); // Delay revealing grid-three until all lines finish
+        }, lines.length * 1500); // Delay revealing grid-three until all lines finish
     });
 });
 
