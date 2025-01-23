@@ -1,3 +1,23 @@
+<!-- /*
+* year.html
+* 
+* This year.html contains the content that the users can interact with to figure out what life would be like on 
+* Psyche for a year. There are other forms of interaction like figuring out your age on Psyche vs Earth.
+* 
+* Class:      SER 403
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       1/22/25
+* Revision:   1.0
+*
+
+
+========================================================================================================
+File Start
+========================================================================================================
+
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,80 +42,88 @@
             <h1>A Year on 16 Psyche</h1>
             <div id="section-one">
                 <div id="sub-one">
-                    <h3 class="year-h1">What would life be like on Psyche? </h3>
+                    <!-- First Sub Header -->
+                    <h3 class="year-h1">What would life be like living on Psyche? </h3>
+                    <div class="grid-three">
+                        <h3>Select your birth year to discover your age on Psyche:</h3>
+                        <div class="scroll-wheel" id="scrollWheel">
+                            <ul id="yearList"></ul>
+                        </div>
+                        <!-- Results not shown until the user scrolls the year scroll -->
+                        <p id="result1"></p>
+                        <p id="result2"></p>
+                        <script>
+                            const yearList = document.getElementById('yearList');
+                            const scrollWheel = document.getElementById('scrollWheel');
+                            const currentYear = new Date().getFullYear();
+                    
+                            // Populate the list with years from 2025 to 1900
+                            for (let year = 2025; year >= 1925; year--) {
+                                const li = document.createElement('li');
+                                li.textContent = year;
+                                yearList.appendChild(li);
+                            }
+                    
+                            // Add event listener for scrolling through years 
+                            scrollWheel.addEventListener('scroll', () => {
+                                const scrollTop = scrollWheel.scrollTop;
+                                const itemHeight = 30; // Height of each list item
+                                const selectedIndex = Math.round(scrollTop / itemHeight);
+                                const selectedYear = yearList.children[selectedIndex].textContent;
+                    
+                                // Update selected class
+                                Array.from(yearList.children).forEach((li, index) => {
+                                    li.classList.toggle('selected', index === selectedIndex);
+                                });
+                    
+                                // Calculate and display results
+                                const earthAge = currentYear - selectedYear;
+                                const psycheAge = Math.floor(earthAge / 5);
+                                document.getElementById('result1').innerText = `Age On Earth: ${earthAge}`;
+                                document.getElementById('result1').className = `earthAge`;
+                                document.getElementById('result2').innerText = `Age on Psyche: ${psycheAge}`;
+                                document.getElementById('result2').className = `psycheAge`;
+                            });
+                    
+                            // Set initial selected year as first year '2025'
+                            scrollWheel.scrollTop = 0;
+                            yearList.children.classList.add('selected');
+                        </script>
+                    </div>
+                    <div class="grid-three">
+                        <h4>Temperatures on Psyche</h4>
+                        <p>You will need to dress warm, as Psyche's temperature ranges from X to X</p>
+                        <p>Be careful exploring as the dark side of Psyche is the coldest with temperatures believed to get as low as -X</p>
+                    </div>
+                    <div class="grid-three">
+                        <h4>Psyche's surface</h4>
+                        <p>Your team is going to need to prepare for long days as the asteroid's surface area is approximately 165,800 square kilometers.</p>
+                        <p>This potato-like asteroid is 173 miles wide, and 144 miles long</p>
+                        <p>Psyche is about the same size as the state of Maryland</p>
+                    </div>
+                    <div class="grid-three">
+                        <h4>Reason for the mission</h4>
+                        <p>Scientists think Psyche may consist of significant amounts of metal from the core of a planetesimal, one of the building blocks
+                            of our solar system.
+                        </p>
+                        <p>The asteroid is most likely a survivor of multiple violent hit-and-run collisions, common when the solar system was forming</p>
+                        <p>Psyche may be able to tell us how Earth's core and the cores of the other rocky, or terrestrial, planets came to be.</p>
+                    </div>
+                    <div class="grid-three">
+                        <h4>Psyche's location</h4>
+                        <p>Psyche orbits the Sun between Mars and Jupiter at a distance ranging from 235 million to 309 million miles (378 million to 497 million kilometers) from the Sun</p>
+                        <p>That’s 2.5 to 3.3 Astronomical Units (AU), with 1 AU being the distance between Earth and the Sun.</p>
+                    </div>
+                    <div class="grid-three">
+                        <h4>Psyche's name</h4>
+                        <p>Psyche was discovered by Italian astronomer Annibale de Gasparis on March 17, 1852.</p>
+                        <p>Psyche, the Greek goddess of the soul who was born mortal and married Eros (Roman Cupid), the god of Love.</p>
+                        <p>Because it was the 16th asteroid to be discovered, it is sometimes referred to as 16 Psyche. </p>
+                    </div>
                 </div>
             </div>
-            <div class="grid-three">
-            </head>
-            <body>
-                <h1>Select your birth year to discover your age on Psyche:</h1>
-                <div class="scroll-wheel" id="scrollWheel">
-                    <ul id="yearList"></ul>
-                </div>
-                <p id="result1"></p>
-                <p id="result2"></p>
-            
-                <script>
-                    const yearList = document.getElementById('yearList');
-                    const scrollWheel = document.getElementById('scrollWheel');
-                    const currentYear = new Date().getFullYear();
-            
-                    // Populate the list with years from 2025 to 1900
-                    for (let year = 2025; year >= 1925; year--) {
-                        const li = document.createElement('li');
-                        li.textContent = year;
-                        yearList.appendChild(li);
-                    }
-            
-                    // Add event listener for scrolling
-                    scrollWheel.addEventListener('scroll', () => {
-                        const scrollTop = scrollWheel.scrollTop;
-                        const itemHeight = 30; // Height of each list item
-                        const selectedIndex = Math.round(scrollTop / itemHeight);
-                        const selectedYear = yearList.children[selectedIndex].textContent;
-            
-                        // Update selected class
-                        Array.from(yearList.children).forEach((li, index) => {
-                            li.classList.toggle('selected', index === selectedIndex);
-                        });
-            
-                        // Calculate and display results
-                        const earthAge = currentYear - selectedYear;
-                        const psycheAge = Math.floor(earthAge / 5);
-                        document.getElementById('result1').innerText = `Age On Earth: ${earthAge}`;
-                        document.getElementById('result1').className = `earthAge`;
-                        document.getElementById('result2').innerText = `Age on Psyche: ${psycheAge}`;
-                        document.getElementById('result2').className = `psycheAge`;
-                    });
-            
-                    // Set initial selected year
-                    scrollWheel.scrollTop = 0;
-                    yearList.children.classList.add('selected');
-                </script>
-            </body>
+           
             </div>
-            </div>
-            <div class="grid-three">
-                <h4>Day Length </h4>
-                <p>The day is only 4.5 horus so you will need to get everything done that you need to do in about 3 hours to save one hour to sleep. </p>
-                <p>If some professions work 12 hour shifts, that would be working three straight days on Psyche without going to sleep. </p>
-            </div>
-            <div class="grid-three">
-                <h4>One meal a day </h4>
-                <p>You might only have time to eat one meal a day on Psyche.</p>
-                <p>If you eat lunch at 12pm noon and then dinner at 5pm, you might have skipped an entire day on Psyche without eating! </p>
-                <p>You might need to eat meals much quicker to save as much time in the day as you can. </p>
-            </div>
-            <div class="grid-three">
-                <h4>School Days</h4>
-                <p>School days on Psyche would be around 1 hour if they were relative to those school days on earth. </p>
-                <p>But, the school year would be 5 earth years long! If you started kindergarden on Psyche as the same time as students on Earth, when you finished 1st grade, the earth students would have finished 5th grade.</p>
-            </div>
-            <div class="grid-three">
-                <h4>TDB</h4>
-                <p> </p>
-            </div>
-        </div>
         <footer id="footer">
             <h2>This is the footer</h2>
         </footer>

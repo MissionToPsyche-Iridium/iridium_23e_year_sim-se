@@ -322,12 +322,25 @@ html.disable-animations #sub-one p .line {
     color: #f9a000;
 }
 .earthAge {
-    font-size: 50px; 
+    font-size: 30px; 
     font-weight: bold;
     color: #087f23
 }
 .psycheAge {
-    font-size: 50px; 
+    font-size: 30px; 
     font-weight: bold;
     color: #f9a000
+}
+
+.year-footer {
+    grid-row: 3 / 4;
+    grid-column: 1 / 4;
+    color: #592651;
+    border: 3px solid #592651;
+}
+
+.year-img-date {
+    display: flex;
+    width: 50%;
+    float: left;
 }
