@@ -16,6 +16,8 @@ class ModelViewer {
         this.temperatureUnit = 'K';
         this.cameraTarget = new THREE.Vector3();
         this.initialCameraPosition = new THREE.Vector3(0, 0, 3);
+        this.temperatureMaterials = []; // Store temperature materials for faster access
+        this.lastFrameTime = 0; // For frame timing
         
         // Environmental effects
         this.activeWeatherEffect = null;
@@ -330,6 +332,9 @@ class ModelViewer {
     }
 
     addTemperatureVisualization() {
+        // Clear existing materials array
+        this.temperatureMaterials = [];
+        
         const temperatureMaterial = new THREE.ShaderMaterial({
             uniforms: {
                 sunDirection: { value: new THREE.Vector3(1, 0, 0) },
@@ -350,65 +355,61 @@ class ModelViewer {
                 varying vec3 vNormal;
                 varying vec3 vPosition;
 
-                // Pre-computed noise texture coordinates
+                // Optimized hash function using fewer operations
                 vec2 hash(vec2 p) {
-                    p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)));
-                    return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+                    vec2 k = vec2(0.3183099, 0.3678794);
+                    p = p * k + k.yx;
+                    return -1.0 + 2.0 * fract(16.0 * k * fract(p.x * p.y * (p.x + p.y)));
                 }
 
-                // Optimized Gradient Noise
+                // Simplified noise function with fewer texture lookups
                 float noise(vec2 p) {
                     vec2 i = floor(p);
                     vec2 f = fract(p);
                     vec2 u = f * f * (3.0 - 2.0 * f);
-                    return mix(
-                        mix(dot(hash(i + vec2(0.0,0.0)), f - vec2(0.0,0.0)),
-                            dot(hash(i + vec2(1.0,0.0)), f - vec2(1.0,0.0)), u.x),
-                        mix(dot(hash(i + vec2(0.0,1.0)), f - vec2(0.0,1.0)),
-                            dot(hash(i + vec2(1.0,1.0)), f - vec2(1.0,1.0)), u.x),
+                    float n = mix(
+                        mix(dot(hash(i), f),
+                            dot(hash(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), u.x),
+                        mix(dot(hash(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)),
+                            dot(hash(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), u.x),
                         u.y
                     );
+                    return n * 0.5 + 0.5; // Normalize to [0,1]
                 }
                 
+                // Pre-computed color values to avoid branching
+                const vec3 COLOR_TABLE[6] = vec3[6](
+                    vec3(0.0, 0.2, 0.8), // freezeColor
+                    vec3(0.0, 0.4, 1.0), // coldColor
+                    vec3(0.0, 0.8, 1.0), // coolColor
+                    vec3(0.0, 1.0, 0.5), // midColor
+                    vec3(1.0, 0.8, 0.0), // warmColor
+                    vec3(1.0, 0.4, 0.0)  // hotColor
+                );
+                
                 void main() {
-                    // Pre-compute normalized position
-                    vec3 normalizedPos = normalize(vPosition);
-                    float latitude = asin(normalizedPos.y);
-                    float poleEffect = abs(latitude) / (3.14159 / 2.0);
+                    // Optimized position calculations
+                    float latitude = asin(normalize(vPosition).y);
+                    float poleEffect = abs(latitude) * 0.636619772; // Pre-computed 2/π
                     
-                    // Optimized noise calculation
-                    vec2 noiseCoord = vPosition.xz * 0.1;
-                    float noiseVal = noise(noiseCoord + time * 0.1) * 0.25;
+                    // Faster noise calculation
+                    float noiseVal = noise(vPosition.xz * 0.1 + time * 0.1) * 0.25;
                     
-                    // Temperature calculation with cached values
-                    float baseTemp = mix(88.0, 98.0, (1.0 - poleEffect));
-                    float temperature = baseTemp + noiseVal;
-                    float t = clamp((temperature - 88.0) / 10.0, 0.0, 1.0);
+                    // Optimized temperature calculation
+                    float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noiseVal;
+                    float t = clamp((temperature - 88.0) * 0.1, 0.0, 1.0); // Pre-computed 1/10
                     
-                    // Pre-defined temperature color gradient
-                    const vec3 hotColor = vec3(1.0, 0.4, 0.0);
-                    const vec3 warmColor = vec3(1.0, 0.8, 0.0);
-                    const vec3 midColor = vec3(0.0, 1.0, 0.5);
-                    const vec3 coolColor = vec3(0.0, 0.8, 1.0);
-                    const vec3 coldColor = vec3(0.0, 0.4, 1.0);
-                    const vec3 freezeColor = vec3(0.0, 0.2, 0.8);
+                    // Fast color interpolation using pre-computed table
+                    int idx = int(t * 5.0);
+                    vec3 tempColor = mix(COLOR_TABLE[idx], COLOR_TABLE[idx + 1], fract(t * 5.0));
                     
-                    // Optimized color interpolation
-                    vec3 tempColor = 
-                        t < 0.2 ? mix(freezeColor, coldColor, t * 5.0) :
-                        t < 0.4 ? mix(coldColor, coolColor, (t - 0.2) * 5.0) :
-                        t < 0.6 ? mix(coolColor, midColor, (t - 0.4) * 5.0) :
-                        t < 0.8 ? mix(midColor, warmColor, (t - 0.6) * 5.0) :
-                        mix(warmColor, hotColor, (t - 0.8) * 5.0);
+                    // Optimized lighting calculation
+                    float dayFactor = sin(time * 0.05) * 0.25 + 0.75; // Pre-computed coefficients
+                    tempColor *= dayFactor;
                     
-                    // Optimized environmental effects
-                    float dayNightCycle = (sin(time * 0.05) * 0.5 + 0.5);
-                    tempColor *= mix(0.5, 1.0, dayNightCycle);
-                    
-                    // Simplified weather effect
-                    if (sunDirection.y > 0.9) {
-                        tempColor = mix(tempColor, vec3(1.0, 0.6, 0.0), 0.3);
-                    }
+                    // Simplified weather effect using dot product
+                    float sunEffect = max(0.0, dot(normalize(vNormal), sunDirection));
+                    tempColor = mix(tempColor, vec3(1.0, 0.6, 0.0), sunEffect * 0.3);
                     
                     gl_FragColor = vec4(tempColor, 1.0);
                 }
@@ -418,6 +419,7 @@ class ModelViewer {
         this.model.traverse((child) => {
             if (child.isMesh) {
                 child.material = temperatureMaterial;
+                this.temperatureMaterials.push(temperatureMaterial);
             }
         });
     }
