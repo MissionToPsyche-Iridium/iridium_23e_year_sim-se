@@ -8,6 +8,7 @@ body {
     width: 25%;
     left: 3%;
     top: -5%;
+    padding-top: 2%;
     position: relative;
     animation: logo-move-in;
     animation-duration: 2s;
@@ -81,6 +82,11 @@ div {
     height: 900px;
 }
 
+#solar-system-map {
+    width: 90%;
+    height: 600px;
+    margin-top: 5%;
+}
 
 #mercury {
     background-image: url(/img/mercury.jpg);

@@ -8,6 +8,7 @@ body {
     width: 25%;
     left: 3%;
     top: -5%;
+    padding-top: 2%;
     position: relative;
     animation: logo-move-in;
     animation-duration: 2s;
