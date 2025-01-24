@@ -1,0 +1,232 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/*header image left*/
+#psyche {
+    width: 25%;
+    left: 3%;
+    top: -5%;
+    padding-top: 2%;
+    position: relative;
+    animation: logo-move-in;
+    animation-duration: 2s;
+}
+
+/*header image right*/
+#asteroid {
+    float: right;
+    position: relative;
+    width: 50%;
+    right: -5%;
+    top: -5%;
+    animation: header-move-in;
+    animation-duration: 2s;
+}
+
+@keyframes header-move-in {
+    from {right: -200px; top: -100px;}
+    to {right: -5%; top: -5%;}
+}
+
+@keyframes logo-move-in {
+    from {left: -200px; top: -100px;}
+    to {left: 3%; top: -5%;}
+}
+
+main h1 {
+    margin: 0;
+    font-size: 50px;
+    flex-grow: 1; 
+    text-align: center; 
+    padding-top: 5%;
+    color:#f9a000
+}
+
+div {
+    background-color: black;
+    color: rgb(249, 249, 249);
+    border: 3px solid #592651;
+    text-align: center;
+    overflow: hidden;
+    
+}
+
+#ss-image {
+    max-width: 100%;
+}
+
+#top h3,
+#top2 h3 {
+    margin: 0;
+    font-size: 50px;
+    flex-grow: 1; 
+    text-align: center; 
+    padding-top: 2%;
+    color:#592651
+}
+
+#top p,
+#top2 p {
+    margin-left: 0;
+    line-height: 2;
+}
+
+#top, #top2 {
+    padding-bottom: 2%;
+}
+
+.year-h1 {
+    margin: 0;
+    font-size: 50px;
+    flex-grow: 1; 
+    text-align: center; 
+    padding-top: 5%;
+    color:#f9a000
+}
+.year-h2 {
+    margin: 0;
+    font-size: 50px;
+    flex-grow: 1; 
+    text-align: center; 
+    padding-top: 5%;
+    color:#592651
+}
+
+.scroll-wheel {
+    width: 75px;
+    height: 100px;
+    overflow-y: scroll;
+    border: 3px solid #592651;
+    border-radius: 10px;
+    position: relative;
+    margin: 10px auto;
+}
+.scroll-wheel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.scroll-wheel li {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.scroll-wheel li.selected {
+    font-weight: bold;
+    color: #f9a000;
+}
+
+.earthAge {
+    font-size: 100px; 
+    font-weight: bold;
+    padding-bottom: 0%;
+    color: #087f23;
+    text-shadow: 
+                2px 2px 0 yellow, 
+                -2px -2px 0 yellow, 
+                2px -2px 0 yellow, 
+                -2px 2px 0 yellow;
+}
+.psycheAge {
+    font-size: 100px; 
+    font-weight: bold;
+    padding-bottom: 0%;
+    color: #f9a000;
+    text-shadow: 
+                2px 2px 0 yellow, 
+                -2px -2px 0 yellow, 
+                2px -2px 0 yellow, 
+                -2px 2px 0 yellow;
+}
+
+.year-footer {
+    grid-row: 3 / 4;
+    grid-column: 1 / 4;
+    color: #592651;
+    border: 3px solid #592651;
+}
+
+.year-img-date {
+    display: flex;
+    width: 50%;
+    float: left;
+}
+
+.year-age {
+    word-wrap: break-word;
+}
+
+#elements {
+    display: grid;
+    margin: 0;
+    font-size: 30px;
+    flex-grow: 1; 
+    text-align: center; 
+    color: #f9a000;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    padding-top: 0%;
+    padding-bottom: 0%;
+
+}
+
+#elements div {
+    padding: 10%;
+}
+
+#solar-system {
+    height: 900px;
+}
+
+#solar-system-map {
+    width: 90%;
+    height: 600px;
+    margin-top: 5%;
+}
+
+#yearselection {
+    background-image: url(/img/calendar.jpeg);
+    background-size: cover;
+    background-position: bottom;
+    color: #f9a000;
+    padding-bottom: 0%;
+    opacity: .75;
+}
+
+#ageOnEarth {
+    background-image: url(/img/Earth.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: .75;
+}
+
+#ageOnPsyche {
+    background-image: url(/img/psyche.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: .75;
+}
+
+#work {
+    background-image: url(/img/work.jpeg);
+    background-size: cover;
+}
+
+#school {
+    background-image: url(/img/school.jpeg);
+    background-size: cover;
+}
+
+#sleep {
+    background-image: url(/img/sleep.jpeg);
+    background-size: cover;
+}
+
+footer {
+    text-align: center;
+}
