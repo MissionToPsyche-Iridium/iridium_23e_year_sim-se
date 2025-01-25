@@ -18,6 +18,8 @@ class ModelViewer {
         this.initialCameraPosition = new THREE.Vector3(0, 0, 3);
         this.temperatureMaterials = []; // Store temperature materials for faster access
         this.lastFrameTime = 0; // For frame timing
+        this.isTemperatureVisible = true; // Track temperature visualization state
+        this.defaultMaterials = new Map(); // Store original materials
         
         // Environmental effects
         this.activeWeatherEffect = null;
@@ -335,6 +337,13 @@ class ModelViewer {
         // Clear existing materials array
         this.temperatureMaterials = [];
         
+        // Store default materials before applying temperature visualization
+        this.model.traverse((child) => {
+            if (child.isMesh) {
+                this.defaultMaterials.set(child.uuid, child.material.clone());
+            }
+        });
+        
         const temperatureMaterial = new THREE.ShaderMaterial({
             uniforms: {
                 sunDirection: { value: new THREE.Vector3(1, 0, 0) },
@@ -441,9 +450,61 @@ class ModelViewer {
         }
     }
 
+    toggleTemperature() {
+        this.isTemperatureVisible = !this.isTemperatureVisible;
+        
+        this.model.traverse((child) => {
+            if (child.isMesh) {
+                if (this.isTemperatureVisible) {
+                    // Apply temperature material
+                    const tempMaterial = this.temperatureMaterials.find(m => m);
+                    if (tempMaterial) child.material = tempMaterial;
+                } else {
+                    // Restore default material
+                    const defaultMaterial = this.defaultMaterials.get(child.uuid);
+                    if (defaultMaterial) child.material = defaultMaterial;
+                }
+            }
+        });
+        
+        // Update toggle button
+        const toggleBtn = this.container.querySelector('.temp-toggle-btn');
+        if (toggleBtn) {
+            toggleBtn.textContent = this.isTemperatureVisible ? 'HIDE TEMPERATURE' : 'SHOW TEMPERATURE';
+            toggleBtn.style.background = this.isTemperatureVisible ? 'greenyellow' : '#333';
+        }
+        
+        // Show/hide legend
+        if (this.temperatureLegend) {
+            this.temperatureLegend.style.display = this.isTemperatureVisible ? 'block' : 'none';
+        }
+    }
+
     createTemperatureLegend() {
         const legendDiv = document.createElement('div');
         legendDiv.className = 'temperature-legend';
+        
+        // Create temperature toggle button
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'temp-toggle-btn';
+        toggleBtn.style.cssText = `
+            position: absolute;
+            top: 20px;
+            left: 375px;
+            background: greenyellow;
+            color: black;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            z-index: 100;
+            transition: all 0.3s ease;
+        `;
+        toggleBtn.textContent = 'HIDE TEMPERATURE';
+        toggleBtn.onclick = () => this.toggleTemperature();
+        this.container.appendChild(toggleBtn);
         
         // Base styles
         const baseLegendStyle = `
