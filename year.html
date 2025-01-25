@@ -44,8 +44,6 @@ File Start
                     <ul id="yearList"></ul>
                 </div>
                 <!-- Results not shown until the user scrolls the year scroll -->
-                <p id="result1"></p>
-                <p id="result2"></p>
                 <script>
                     const yearList = document.getElementById('yearList');
                     const scrollWheel = document.getElementById('scrollWheel');
@@ -78,7 +76,7 @@ File Start
                         //document.getElementById('result2').innerText = `Age on Psyche: ${psycheAge}`;
                         //document.getElementById('result2').className = `psycheAge`;
 
-                         // Update the results in the venus and earth divs
+                         // Update the results 
                          document.getElementById('earthResult').innerText = `${earthAge}`;
                          document.getElementById('earthResult').className = `earthAge`;
                          document.getElementById('psycheResult').innerText = `${psycheAge}`;
@@ -98,22 +96,54 @@ File Start
                 <h3>Age on Psyche</h3>
                 <p id="psycheResult"></p>
             </div>
+        </div>
+            <div id="middle">
+                <h3>Select Earth or Psyche to see other aspects of daily life there.</h3>
+                <div class="wrap">
+                    <input type="radio" id="Earth" name="sort" /><label for="Earth">Earth</label>
+                    <input type="radio" id="Psyche" name="sort" checked /><label for="Psyche">Psyche</label>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const earthRadio = document.getElementById('Earth');
+                        const psycheRadio = document.getElementById('Psyche');
+                        const resultWork = document.getElementById('resultWork');
+                        const resultSchool = document.getElementById('resultSchool');
+                        const resultSleep = document.getElementById('resultSleep');
+            
+                        earthRadio.addEventListener('change', () => {
+                            if (earthRadio.checked) {
+                                resultWork.textContent = 'The normal work day is 8 hours.';
+                                resultSchool.textContent = 'The normal school day is 8 hours.';
+                                resultSleep.textContent = 'On earth everyone tries to get 8 hours of sleep.';
+                            }
+                        });
+            
+                        psycheRadio.addEventListener('change', () => {
+                            if (psycheRadio.checked) {
+                                resultWork.textContent = 'The work day would be 1 hour long!';
+                                resultSchool.textContent = 'Your school day would be about 1 hour a day!';
+                                resultSleep.textContent = 'You would try to sleep for about 1 hour a night!';
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        <div class ="elements">
             <div id="work">
                 <h4>Work</h4>
-                <p>
-                    
-                </p>
+                <p id="resultWork"> </p>
             </div>
             <div id="school">
                 <h4>School</h4>
                 <p>
-                    
+                    <p id="resultSchool"> </p>
                 </p>
             </div>
             <div id="sleep">
                 <h4>Sleep</h4>
                 <p>
-                    
+                    <p id="resultSleep"> </p>
                 </p>
             </div>
         </div>

@@ -1,3 +1,9 @@
+/*
+========================================================================================================
+Headers
+========================================================================================================
+*/
+
 body {
     margin: 0;
     overflow-x: hidden;
@@ -34,6 +40,11 @@ body {
     from {left: -200px; top: -100px;}
     to {left: 3%; top: -5%;}
 }
+/*
+========================================================================================================
+Main Body Style
+========================================================================================================
+*/
 
 main h1 {
     margin: 0;
@@ -77,6 +88,11 @@ div {
     padding-bottom: 2%;
 }
 
+/*
+========================================================================================================
+First Row Age on Earth/Psyche
+========================================================================================================
+*/
 .year-h1 {
     margin: 0;
     font-size: 50px;
@@ -144,6 +160,7 @@ div {
                 -2px 2px 0 yellow;
 }
 
+
 .year-footer {
     grid-row: 3 / 4;
     grid-column: 1 / 4;
@@ -169,14 +186,12 @@ div {
     text-align: center; 
     color: #f9a000;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
     padding-top: 0%;
     padding-bottom: 0%;
-
 }
 
 #elements div {
-    padding: 10%;
+    padding: 5%;
 }
 
 #solar-system {
@@ -212,21 +227,84 @@ div {
     opacity: .75;
 }
 
+/*
+========================================================================================================
+Second Row
+========================================================================================================
+*/
+
 #work {
     background-image: url(/img/work.jpeg);
     background-size: cover;
+    justify-content: center;
+    color:#371d37;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 #school {
     background-image: url(/img/school.jpeg);
     background-size: cover;
+    color:#371d37;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 #sleep {
     background-image: url(/img/sleep.jpeg);
     background-size: cover;
+    color:#371d37;
+    font-size: 40px;
+    font-weight: bold;
 }
 
+#middle {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 40px;
+    flex-grow: 1; 
+    text-align: center; 
+    padding: 5%;
+    color:#592651
+}
+
+/* Toggle Switch for Work */
+.wrap {
+    width: 200px !important;
+    display: flex !important;
+    border-radius: 2rem;
+    overflow: hidden;
+    padding: 0rem;
+    background-color: #e5e5e5;
+    border: 10px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+input[type="radio"] + label {
+    width: 50%;
+    font-size: 1rem;
+    padding: 0.6rem 0;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.5s;
+    z-index: 2;
+    border-radius: 1rem;
+}
+
+input[type="radio"]:checked + label {
+    color: #ffffff;
+    background: #371d37;
+    z-index: 1;
+}
 footer {
     text-align: center;
 }
