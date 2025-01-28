@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psyche Temperature Model</title>
+    <style>
+        body { margin: 0; font-family: 'Courier New', monospace; }
+        #model-container {
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+        .nav-button {
+            position: fixed;
+            top: 20px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.8);
+            color: greenyellow;
+            border: 1px solid greenyellow;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(173, 255, 47, 0.3);
+            transition: all 0.3s ease;
+        }
+        .nav-button:hover {
+            background: rgba(173, 255, 47, 0.2);
+        }
+        #back-button { left: 20px; }
+        #info-button {
+            left: 200px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #game-button { left: 250px; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid greenyellow;
+            box-shadow: 0 0 20px rgba(173, 255, 47, 0.3);
+            padding: 20px;
+            z-index: 1002;
+            border-radius: 5px;
+            color: greenyellow;
+        }
+        #game-modal {
+            max-width: 850px;
+            max-height: 90vh;
+            overflow: auto;
+        }
+        #tutorial-modal {
+            max-width: 500px;
+        }
+        .modal-content {
+            margin-bottom: 20px;
+        }
+        .modal-close {
+            text-align: right;
+        }
+        .modal-close button {
+            background: rgba(0, 0, 0, 0.8);
+            color: greenyellow;
+            border: 1px solid greenyellow;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .modal-close button:hover {
+            background: rgba(173, 255, 47, 0.2);
+        }
+        .modal h2 {
+            margin-top: 0;
+            border-bottom: 1px solid greenyellow;
+            padding-bottom: 10px;
+        }
+        .modal ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .modal li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .modal li:before {
+            content: "►";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Game Specific Styles */
+        #gameCanvas {
+            border: 1px solid greenyellow;
+            box-shadow: 0 0 20px rgba(173, 255, 47, 0.3);
+            background: #000;
+            margin-bottom: 20px;
+        }
+        #game-ui {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            color: greenyellow;
+        }
+        #game-menu {
+            text-align: center;
+        }
+        .game-btn {
+            background: rgba(0, 0, 0, 0.8);
+            color: greenyellow;
+            border: 1px solid greenyellow;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        .game-btn:hover {
+            background: rgba(173, 255, 47, 0.2);
+        }
+        .power-up {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: greenyellow;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(173, 255, 47, 0.7);
+        }
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.skypack.dev/three@0.132.2",
+            "three/examples/jsm/controls/OrbitControls": "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js",
+            "three/examples/jsm/loaders/GLTFLoader": "https://cdn.skypack.dev/three@0.132.2/examples/jsm/loaders/GLTFLoader.js"
+        }
+    }
+    </script>
+    <script type="module" src="JS/model-viewer.js"></script>
+</head>
+<body>
+    <button id="back-button" class="nav-button" onclick="window.close()">BACK TO MAIN PAGE</button>
+    <button id="info-button" class="nav-button">i</button>
+    <button id="game-button" class="nav-button">PLAY GAME</button>
+    <div id="model-container"></div>
+    
+    <div id="game-modal" class="modal">
+        <h2>TEMPERATURE RACE</h2>
+        <div class="modal-content">
+            <canvas id="gameCanvas"></canvas>
+            <div id="game-ui">
+                <div id="temperature">TEMPERATURE: <span>20°C</span></div>
+                <div id="score">SCORE: <span>0</span></div>
+                <div id="power-ups">SHIELDS: <span>0</span></div>
+            </div>
+            <div id="game-menu">
+                <button class="game-btn" onclick="startGame('easy')">EASY MODE</button>
+                <button class="game-btn" onclick="startGame('medium')">MEDIUM MODE</button>
+                <button class="game-btn" onclick="startGame('hard')">HARD MODE</button>
+            </div>
+        </div>
+        <div class="modal-close">
+            <button onclick="closeGame()">CLOSE GAME</button>
+        </div>
+    </div>
+
+    <div id="tutorial-modal" class="modal">
+        <h2>TEMPERATURE VISUALIZATION GUIDE</h2>
+        <div class="modal-content">
+            <ul>
+                <li>ROTATE: Click and drag to rotate the asteroid model</li>
+                <li>ZOOM: Use mouse wheel or pinch gesture to zoom in/out</li>
+                <li>TEMPERATURE UNITS: Toggle between Kelvin, Celsius, and Fahrenheit using the buttons in the legend</li>
+                <li>COLOR MAPPING: Red indicates warmer regions, blue indicates cooler regions</li>
+                <li>LEGEND: Reference the temperature scale on the right for exact values</li>
+            </ul>
+            <h3 style="color: greenyellow; margin-top: 20px;">ENVIRONMENTAL FEATURES</h3>
+            <ul>
+                <li>DAY/NIGHT CYCLE: Watch as lighting changes and stars become visible during night time</li>
+                <li>WEATHER EVENTS:
+                    <ul style="margin-top: 5px; padding-left: 20px;">
+                        <li>SOLAR FLARES: Intense orange particle bursts affecting temperature</li>
+                        <li>ICE STORMS: Blue crystalline particles causing temperature drops</li>
+                        <li>DUST STORMS: Swirling brown particles affecting visibility</li>
+                    </ul>
+                </li>
+                <li>TEMPERATURE EFFECTS: Environmental conditions influence surface temperatures</li>
+            </ul>
+        </div>
+        <div class="modal-close">
+            <button onclick="document.getElementById('tutorial-modal').style.display='none'">CLOSE</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('info-button').onclick = function() {
+            document.getElementById('tutorial-modal').style.display = 'block';
+        }
+
+        document.getElementById('game-button').onclick = function() {
+            document.getElementById('game-modal').style.display = 'block';
+            if (window.game) {
+                window.game.start('easy');
+            }
+        }
+
+        function closeGame() {
+            document.getElementById('game-modal').style.display = 'none';
+            if (window.game) {
+                window.game.stop();
+            }
+        }
+
+        // Request fullscreen when page loads
+        window.addEventListener('load', function() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        });
+
+        // Handle escape key to close window
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.close();
+            }
+        });
+    </script>
+    <script src="JS/temperature-game.js"></script>
+</body>
+</html>
