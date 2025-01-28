@@ -235,23 +235,61 @@ gtag('js', new Date()); gtag('config', 'G-X2BTWB5PE3');
 </picture>
 </div>
 <div class="container">
-<div class="countdown-clock" data-date="2023-10-13T07:19:43-07:00" data-scroll-fade="">
+<div class="countdown-clock" data-scroll-fade="">
 <div class="earth-time">
-<div class="section-label">Countup Since Launch</div>
+<div class="section-label">Your Age Calculator</div>
 <div class="time-components">
-<div class="unit"><span class="days">00</span> <span class="unit-label">Days</span></div>
-<div class="divider">/</div>
-<div class="unit"><span class="hours">00</span> <span class="unit-label">Hours</span></div>
-<div class="divider">/</div>
-<div class="unit"><span class="minutes">00</span> <span class="unit-label">Mins</span></div>
-<div class="divider">/</div>
-<div class="unit"><span class="seconds">00</span> <span class="unit-label">Secs</span></div>
+<div class="unit">
+  <input type="number" id="earthAge" min="0" max="100" value="0" step="1">
+  <span class="unit-label">Earth Years</span>
+</div>
+<div class="divider">=</div>
+<div class="unit">
+  <span id="psycheAge">0.00</span>
+  <span class="unit-label">Psyche Years</span>
+</div>
+</div>
+<div class="section-label" style="font-size: 0.8em; margin-top: 10px;">
+  (1 Psyche Year ≈ 5 Earth Years)
 </div>
 </div>
 </div>
+<script>
+const earthAgeInput = document.getElementById('earthAge');
+
+earthAgeInput.addEventListener('input', function() {
+  let earthYears = parseFloat(this.value);
+  
+  // Enforce min/max bounds
+  if (earthYears < 0) earthYears = 0;
+  if (earthYears > 100) earthYears = 100;
+  
+  // Psyche's orbital period is approximately 5 Earth years
+  const psycheYears = (earthYears / 5).toFixed(2);
+  document.getElementById('psycheAge').textContent = psycheYears;
+});
+
+// Add mouse wheel support
+earthAgeInput.addEventListener('wheel', function(e) {
+  e.preventDefault(); // Prevent page scroll
+  
+  const direction = e.deltaY < 0 ? 1 : -1;
+  const currentValue = parseFloat(this.value) || 0;
+  let newValue = currentValue + direction;
+  
+  // Enforce bounds
+  newValue = Math.min(Math.max(newValue, 0), 100);
+  
+  this.value = newValue;
+  
+  // Trigger the calculation
+  const event = new Event('input');
+  this.dispatchEvent(event);
+}, {passive: false});
+</script>
 <div class="row">
 <div class="col-lg-9">
-<h1>Welcome to a year on Psyche, <br/>where we're making history exploring <em>a metallic world.</em></h1>
+<h1>Welcome to a <em>year on Psyche</em>, <br/>where we're making history exploring <em>a metallic world.</em></h1>
 </div>
 </div>
 </div>

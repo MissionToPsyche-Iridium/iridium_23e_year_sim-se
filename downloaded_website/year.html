@@ -1,0 +1,155 @@
+<!-- /*
+* year.html
+* 
+* This year.html contains the content that the users can interact with to figure out what life would be like on 
+* Psyche for a year. There are other forms of interaction like figuring out your age on Psyche vs Earth.
+* 
+* Class:      SER 403
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       1/22/25
+* Revision:   1.0
+*
+
+
+========================================================================================================
+File Start
+========================================================================================================
+
+-->
+
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/year.css">
+    <title>Year on Psyche Sim</title>
+</head>
+<body>
+    <header id="header">
+        <a href="index.html"><img src="img/psyche.svg" id="psyche"></a>
+        <img src="img/asteroid.png" id="asteroid">
+    </header>
+    <main>
+        <h1></h1>
+        <div id="top">
+            <h3>How old would you be if you were born on Psyche?</h3>
+        </div>
+        <div id="elements">
+            <div id="yearselection">
+                <h3>Select your birth year to discover your age on Psyche:</h3>
+                <div class="scroll-wheel" id="scrollWheel">
+                    <ul id="yearList"></ul>
+                </div>
+                <!-- Results not shown until the user scrolls the year scroll -->
+                <script>
+                    const yearList = document.getElementById('yearList');
+                    const scrollWheel = document.getElementById('scrollWheel');
+                    const currentYear = new Date().getFullYear();
+            
+                    // Populate the list with years from 2025 to 1900
+                    for (let year = 2025; year >= 1925; year--) {
+                        const li = document.createElement('li');
+                        li.textContent = year;
+                        yearList.appendChild(li);
+                    }
+            
+                    // Add event listener for scrolling through years 
+                    scrollWheel.addEventListener('scroll', () => {
+                        const scrollTop = scrollWheel.scrollTop;
+                        const itemHeight = 30; // Height of each list item
+                        const selectedIndex = Math.round(scrollTop / itemHeight);
+                        const selectedYear = yearList.children[selectedIndex].textContent;
+            
+                        // Update selected class
+                        Array.from(yearList.children).forEach((li, index) => {
+                            li.classList.toggle('selected', index === selectedIndex);
+                        });
+            
+                        // Calculate and display results
+                        const earthAge = currentYear - selectedYear;
+                        const psycheAge = Math.floor(earthAge / 5);
+                        //document.getElementById('result1').innerText = `Age On Earth: ${earthAge}`;
+                        //document.getElementById('result1').className = `earthAge`;
+                        //document.getElementById('result2').innerText = `Age on Psyche: ${psycheAge}`;
+                        //document.getElementById('result2').className = `psycheAge`;
+
+                         // Update the results 
+                         document.getElementById('earthResult').innerText = `${earthAge}`;
+                         document.getElementById('earthResult').className = `earthAge`;
+                         document.getElementById('psycheResult').innerText = `${psycheAge}`;
+                         document.getElementById('psycheResult').className = `psycheAge`;
+                    });
+            
+                    // Set initial selected year as first year '2025'
+                    scrollWheel.scrollTop = 0;
+                    yearList.children.classList.add('selected');
+                </script>
+            </div>
+            <div id="ageOnEarth">
+                <h3>Age on Earth</h3>
+                <p id="earthResult"></p>
+            </div>
+            <div id="ageOnPsyche">
+                <h3>Age on Psyche</h3>
+                <p id="psycheResult"></p>
+            </div>
+        </div>
+            <div id="middle">
+                <h3>Select Earth or Psyche to see other aspects of daily life there.</h3>
+                <div class="wrap">
+                    <input type="radio" id="Earth" name="sort" /><label for="Earth">Earth</label>
+                    <input type="radio" id="Psyche" name="sort" checked /><label for="Psyche">Psyche</label>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const earthRadio = document.getElementById('Earth');
+                        const psycheRadio = document.getElementById('Psyche');
+                        const resultWork = document.getElementById('resultWork');
+                        const resultSchool = document.getElementById('resultSchool');
+                        const resultSleep = document.getElementById('resultSleep');
+            
+                        earthRadio.addEventListener('change', () => {
+                            if (earthRadio.checked) {
+                                resultWork.textContent = 'The normal work day is 8 hours.';
+                                resultSchool.textContent = 'The normal school day is 8 hours.';
+                                resultSleep.textContent = 'On earth everyone tries to get 8 hours of sleep.';
+                            }
+                        });
+            
+                        psycheRadio.addEventListener('change', () => {
+                            if (psycheRadio.checked) {
+                                resultWork.textContent = 'The work day would be 1 hour long!';
+                                resultSchool.textContent = 'Your school day would be about 1 hour a day!';
+                                resultSleep.textContent = 'You would try to sleep for about 1 hour a night!';
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        <div class ="elements">
+            <div id="work">
+                <h4>Work</h4>
+                <p id="resultWork"> </p>
+            </div>
+            <div id="school">
+                <h4>School</h4>
+                <p>
+                    <p id="resultSchool"> </p>
+                </p>
+            </div>
+            <div id="sleep">
+                <h4>Sleep</h4>
+                <p>
+                    <p id="resultSleep"> </p>
+                </p>
+            </div>
+        </div>
+    </main>   
+    <footer id="footer">
+        <h2>This is the footer</h2>      
+    </footer>
+</body>
+</html>
