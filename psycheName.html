@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/settings-style.css">
     <link rel="stylesheet" href="CSS/name.css">
-    <title>Year on Psyche Sim</title>
+    <title>The Origin of Psyche's Name</title>
 </head>
 <style>
     body {
@@ -19,6 +19,7 @@
         justify-content: center;
         background-color: #0d1117;
         color: #ffffff;
+        text-emphasis-color: white;
     }
     h1 {
         margin-top: 20px;
@@ -67,164 +68,6 @@
     }
 </style>
 </head>
-<body>
-<h1>Interactive Games</h1>
-
-<div class="game-container">
-    <!-- Match the Facts Game -->
-    <div class="game" id="match-game">
-        <h2>Match the Facts</h2>
-        <p>Drag the facts to their correct matches!</p>
-
-        <div id="draggables">
-            <div class="draggable" draggable="true" data-match="fact1">Discovered Psyche</div>
-            <div class="draggable" draggable="true" data-match="fact2">Metal-rich asteroid</div>
-            <div class="draggable" draggable="true" data-match="fact3">NASA Mission</div>
-        </div>
-
-        <div id="dropzones">
-            <div class="droppable" data-match="fact1">Annibale de Gasparis</div>
-            <div class="droppable" data-match="fact2">Nickel and Iron</div>
-            <div class="droppable" data-match="fact3">Explore Psyche</div>
-        </div>
-
-        <p id="match-message"></p>
-    </div>
-
-    <!-- Asteroid Navigation Game -->
-    <div class="game" id="navigation-game">
-        <h2>Asteroid Navigation</h2>
-        <p>Use arrow keys to navigate your spaceship to Psyche!</p>
-
-        <canvas id="gameCanvas" width="300" height="300"></canvas>
-        <button id="startButton">Start Game</button>
-        <p id="game-message"></p>
-    </div>
-</div>
-
-<script>
-    // Match the Facts Game Logic
-    const draggables = document.querySelectorAll('.draggable');
-    const droppables = document.querySelectorAll('.droppable');
-    const matchMessage = document.getElementById('match-message');
-
-    draggables.forEach(draggable => {
-        draggable.addEventListener('dragstart', () => {
-            draggable.classList.add('dragging');
-        });
-        draggable.addEventListener('dragend', () => {
-            draggable.classList.remove('dragging');
-        });
-    });
-
-    droppables.forEach(droppable => {
-        droppable.addEventListener('dragover', (e) => {
-            e.preventDefault();
-        });
-        droppable.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const dragging = document.querySelector('.dragging');
-            if (dragging.dataset.match === droppable.dataset.match) {
-                droppable.textContent = dragging.textContent;
-                dragging.remove();
-                if (document.querySelectorAll('.draggable').length === 0) {
-                    matchMessage.textContent = 'You matched all the facts correctly!';
-                }
-            } else {
-                matchMessage.textContent = 'Incorrect match. Try again!';
-            }
-        });
-    });
-
-    // Asteroid Navigation Game Logic
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const startButton = document.getElementById('startButton');
-    const gameMessage = document.getElementById('game-message');
-
-    let ship = { x: 150, y: 250, size: 10 };
-    let psyche = { x: 150, y: 50, size: 20 };
-    let obstacles = [];
-    let gameInterval;
-
-    function drawShip() {
-        ctx.fillStyle = 'white';
-        ctx.fillRect(ship.x, ship.y, ship.size, ship.size);
-    }
-
-    function drawPsyche() {
-        ctx.fillStyle = 'gold';
-        ctx.beginPath();
-        ctx.arc(psyche.x, psyche.y, psyche.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-
-    function drawObstacles() {
-        ctx.fillStyle = 'red';
-        obstacles.forEach(obs => {
-            ctx.fillRect(obs.x, obs.y, obs.size, obs.size);
-        });
-    }
-
-    function updateGame() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawShip();
-        drawPsyche();
-        drawObstacles();
-
-        obstacles.forEach(obs => {
-            obs.y += 2;
-            if (
-                ship.x < obs.x + obs.size &&
-                ship.x + ship.size > obs.x &&
-                ship.y < obs.y + obs.size &&
-                ship.y + ship.size > obs.y
-            ) {
-                gameOver();
-            }
-        });
-
-        if (
-            ship.x < psyche.x + psyche.size &&
-            ship.x + ship.size > psyche.x - psyche.size &&
-            ship.y < psyche.y + psyche.size &&
-            ship.y + ship.size > psyche.y - psyche.size
-        ) {
-            gameWin();
-        }
-    }
-
-    function gameOver() {
-        clearInterval(gameInterval);
-        gameMessage.textContent = 'Game Over! Try again!';
-    }
-
-    function gameWin() {
-        clearInterval(gameInterval);
-        gameMessage.textContent = 'Congratulations! You reached Psyche!';
-    }
-
-    function moveShip(e) {
-        if (e.key === 'ArrowUp') ship.y -= 10;
-        if (e.key === 'ArrowDown') ship.y += 10;
-        if (e.key === 'ArrowLeft') ship.x -= 10;
-        if (e.key === 'ArrowRight') ship.x += 10;
-    }
-
-    startButton.addEventListener('click', () => {
-        ship = { x: 150, y: 250, size: 10 };
-        psyche = { x: 150, y: 50, size: 20 };
-        obstacles = Array.from({ length: 5 }, () => ({
-            x: Math.random() * 280 + 10,
-            y: Math.random() * 150,
-            size: 15,
-        }));
-        gameMessage.textContent = '';
-        gameInterval = setInterval(updateGame, 50);
-        document.addEventListener('keydown', moveShip);
-    });
-    </script>
-<body>
         <header id="header">
             <img src="img/psyche.svg" id="psyche">
             <img src="img/asteroid.png" id="asteroid">
@@ -264,7 +107,164 @@
                     <li>Its name means "soul" in Greek mythology.</li>
                 </ul>
             </section>
-            
+            <body>
+                <h1>Test your knowledge about Psyche with our Interactive Games Below</h1>
+                
+                <div class="game-container">
+                    <!-- Match the Facts Game -->
+                    <div class="game" id="match-game">
+                        <h2>Match the Facts</h2>
+                        <p>Drag the facts to their correct matches!</p>
+                
+                        <div id="draggables">
+                            <div class="draggable" draggable="true" data-match="fact1">Discovered Psyche</div>
+                            <div class="draggable" draggable="true" data-match="fact2">Metal-rich asteroid</div>
+                            <div class="draggable" draggable="true" data-match="fact3">NASA Mission</div>
+                        </div>
+                
+                        <div id="dropzones">
+                            <div class="droppable" data-match="fact1">Annibale de Gasparis</div>
+                            <div class="droppable" data-match="fact2">Nickel and Iron</div>
+                            <div class="droppable" data-match="fact3">Explore Psyche</div>
+                        </div>
+                
+                        <p id="match-message"></p>
+                    </div>
+                
+                    <!-- Asteroid Navigation Game -->
+                    <div class="game" id="navigation-game">
+                        <h2>Asteroid Navigation</h2>
+                        <p>Use arrow keys to navigate your spaceship to Psyche!</p>
+                
+                        <canvas id="gameCanvas" width="300" height="300"></canvas>
+                        <button id="startButton">Start Game</button>
+                        <p id="game-message"></p>
+                    </div>
+                </div>
+                
+                <script>
+                    // Match the Facts Game Logic
+                    const draggables = document.querySelectorAll('.draggable');
+                    const droppables = document.querySelectorAll('.droppable');
+                    const matchMessage = document.getElementById('match-message');
+                
+                    draggables.forEach(draggable => {
+                        draggable.addEventListener('dragstart', () => {
+                            draggable.classList.add('dragging');
+                        });
+                        draggable.addEventListener('dragend', () => {
+                            draggable.classList.remove('dragging');
+                        });
+                    });
+                
+                    droppables.forEach(droppable => {
+                        droppable.addEventListener('dragover', (e) => {
+                            e.preventDefault();
+                        });
+                        droppable.addEventListener('drop', (e) => {
+                            e.preventDefault();
+                            const dragging = document.querySelector('.dragging');
+                            if (dragging.dataset.match === droppable.dataset.match) {
+                                droppable.textContent = dragging.textContent;
+                                dragging.remove();
+                                if (document.querySelectorAll('.draggable').length === 0) {
+                                    matchMessage.textContent = 'You matched all the facts correctly!';
+                                }
+                            } else {
+                                matchMessage.textContent = 'Incorrect match. Try again!';
+                            }
+                        });
+                    });
+                
+                    // Asteroid Navigation Game Logic
+                    const canvas = document.getElementById('gameCanvas');
+                    const ctx = canvas.getContext('2d');
+                    const startButton = document.getElementById('startButton');
+                    const gameMessage = document.getElementById('game-message');
+                
+                    let ship = { x: 150, y: 250, size: 10 };
+                    let psyche = { x: 150, y: 50, size: 20 };
+                    let obstacles = [];
+                    let gameInterval;
+                
+                    function drawShip() {
+                        ctx.fillStyle = 'white';
+                        ctx.fillRect(ship.x, ship.y, ship.size, ship.size);
+                    }
+                
+                    function drawPsyche() {
+                        ctx.fillStyle = 'gold';
+                        ctx.beginPath();
+                        ctx.arc(psyche.x, psyche.y, psyche.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                
+                    function drawObstacles() {
+                        ctx.fillStyle = 'red';
+                        obstacles.forEach(obs => {
+                            ctx.fillRect(obs.x, obs.y, obs.size, obs.size);
+                        });
+                    }
+                
+                    function updateGame() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        drawShip();
+                        drawPsyche();
+                        drawObstacles();
+                
+                        obstacles.forEach(obs => {
+                            obs.y += 2;
+                            if (
+                                ship.x < obs.x + obs.size &&
+                                ship.x + ship.size > obs.x &&
+                                ship.y < obs.y + obs.size &&
+                                ship.y + ship.size > obs.y
+                            ) {
+                                gameOver();
+                            }
+                        });
+                
+                        if (
+                            ship.x < psyche.x + psyche.size &&
+                            ship.x + ship.size > psyche.x - psyche.size &&
+                            ship.y < psyche.y + psyche.size &&
+                            ship.y + ship.size > psyche.y - psyche.size
+                        ) {
+                            gameWin();
+                        }
+                    }
+                
+                    function gameOver() {
+                        clearInterval(gameInterval);
+                        gameMessage.textContent = 'Game Over! Try again!';
+                    }
+                
+                    function gameWin() {
+                        clearInterval(gameInterval);
+                        gameMessage.textContent = 'Congratulations! You reached Psyche!';
+                    }
+                
+                    function moveShip(e) {
+                        if (e.key === 'ArrowUp') ship.y -= 10;
+                        if (e.key === 'ArrowDown') ship.y += 10;
+                        if (e.key === 'ArrowLeft') ship.x -= 10;
+                        if (e.key === 'ArrowRight') ship.x += 10;
+                    }
+                
+                    startButton.addEventListener('click', () => {
+                        ship = { x: 150, y: 250, size: 10 };
+                        psyche = { x: 150, y: 50, size: 20 };
+                        obstacles = Array.from({ length: 5 }, () => ({
+                            x: Math.random() * 280 + 10,
+                            y: Math.random() * 150,
+                            size: 15,
+                        }));
+                        gameMessage.textContent = '';
+                        gameInterval = setInterval(updateGame, 50);
+                        document.addEventListener('keydown', moveShip);
+                    });
+                    </script>
+                <body>   
          <!-- Section 5: Learn More -->
          <section id="more-info">
             <h2>Learn More</h2>
