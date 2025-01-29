@@ -2,6 +2,7 @@ body {
     margin: 0 auto;
     text-align: center;
     overflow-x: hidden;
+    
 }
 
 #body-elements {
@@ -51,15 +52,23 @@ header {
     display: flex; 
     align-items: center; 
     position: absolute; 
-    left: 10px; 
+    left: 30px; 
     top: 370px; 
     transform: translateY(-50%); 
 }
 
 #settings-icon {
-    width: 40px; 
+    width: 30px; 
     height: auto; 
     display: block;
+}
+
+#settings-icon:hover {
+    width: 50px;
+}
+
+#main h1 {
+    padding-bottom: 1%;
 }
 
 h1 {
@@ -79,22 +88,30 @@ h1 {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 10px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(95,9,121,0.7931547619047619) 63%, rgba(0,212,255,1) 100%);
 }
 
 #sub-one div {
     margin: 1%;
-    border: 3px solid greenyellow;
+    border: 5px solid #ff5733;
+    box-shadow: 0px 6px #302144;
+    border-radius: 9% 25% 9% 25%;
 }
 
 #sub-one p {
+    margin-top: -20px;
+    padding-bottom: 0;
     grid-row: 2 / 3;
     grid-column: 1 / 4;
+    font-size: large;
+    line-height: 2;
 }
 
 footer {
     grid-row: 3 / 4;
     grid-column: 1 / 4;
-    border: 3px solid red;
+    border: 3px solid #ff5733;
 }
 
 @keyframes header-move-in {
@@ -164,10 +181,13 @@ main h1.white {
     width: 0; 
     animation: none; 
     border: none;
+    font-family: monospace;
+    font-size: 40px;
+    text-shadow: 0px 11px #302144;
 }
 
 #sub-one h3.start-typing {
-    border-right: 0.15em solid greenyellow; /* Show caret during typing */
+    border-right: 0.15em solid #ff5733; /* Show caret during typing */
     animation: typing 3s steps(50, end) forwards, /* Typing animation */
                blink-caret 0.75s step-end ; /* Caret blinking */
 }
@@ -185,8 +205,8 @@ main h1.white {
 }
 
 #sub-one p .line.start-typing {
-    border-right: 0.15em solid greenyellow; /* Show caret during typing */
-    color: greenyellow; /* Make text visible during animation */
+    border-right: 0.15em solid #ff5733; /* Show caret during typing */
+    color: #f47c33; /* Make text visible during animation */
     animation: typing 3s steps(50, end) forwards, /* Typing animation */
                blink-caret 0.75s step-end ; /* Caret blinking */
 }
@@ -215,7 +235,7 @@ main h1.white {
 .empty-grid {
     height: 100px;
     width: 100%;
-    color: greenyellow;
+    color: #ff5733;
     padding-bottom: 15%;
 }
 
@@ -225,8 +245,8 @@ main h1.white {
 }
 
 #sub-one {
-    background-color: black;
-    color: greenyellow;
+    background-color: #592651;
+    color: #ff5733;
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -235,8 +255,7 @@ main h1.white {
 }
 
 #discover-psyche {
-    background-color: black;
-    color: greenyellow;
+    color: #ff5733;
     border: 3px solid greenyellow;
     border-radius: 5px;
     padding: 5px;
