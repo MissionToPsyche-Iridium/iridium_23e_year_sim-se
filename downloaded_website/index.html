@@ -237,11 +237,20 @@ gtag('js', new Date()); gtag('config', 'G-X2BTWB5PE3');
 <div class="container">
 <div class="countdown-clock" data-scroll-fade="">
 <div class="earth-time">
-<div class="section-label">Your Age Calculator</div>
+<div class="section-label">How old would you be if you were born on Psyche?</div>
 <div class="time-components">
 <div class="unit">
-  <input type="number" id="earthAge" min="0" max="100" value="0" step="1">
-  <span class="unit-label">Earth Years</span>
+  <select id="birthYear" style="padding: 5px;">
+    <option value="2025">2025</option>
+  
+    <script>
+      // Generate remaining years from 1999 to 1900
+      for(let year = 2024; year >= 1900; year--) {
+        document.write(`<option value="${year}">${year}</option>`);
+      }
+    </script>
+  </select>
+  <span class="unit-label">Birth Year</span>
 </div>
 <div class="divider">=</div>
 <div class="unit">
@@ -255,37 +264,20 @@ gtag('js', new Date()); gtag('config', 'G-X2BTWB5PE3');
 </div>
 </div>
 <script>
-const earthAgeInput = document.getElementById('earthAge');
+const birthYearSelect = document.getElementById('birthYear');
 
-earthAgeInput.addEventListener('input', function() {
-  let earthYears = parseFloat(this.value);
-  
-  // Enforce min/max bounds
-  if (earthYears < 0) earthYears = 0;
-  if (earthYears > 100) earthYears = 100;
+birthYearSelect.addEventListener('change', function() {
+  const birthYear = parseInt(this.value);
+  const currentYear = new Date().getFullYear();
+  const earthYears = currentYear - birthYear;
   
   // Psyche's orbital period is approximately 5 Earth years
   const psycheYears = (earthYears / 5).toFixed(2);
   document.getElementById('psycheAge').textContent = psycheYears;
 });
 
-// Add mouse wheel support
-earthAgeInput.addEventListener('wheel', function(e) {
-  e.preventDefault(); // Prevent page scroll
-  
-  const direction = e.deltaY < 0 ? 1 : -1;
-  const currentValue = parseFloat(this.value) || 0;
-  let newValue = currentValue + direction;
-  
-  // Enforce bounds
-  newValue = Math.min(Math.max(newValue, 0), 100);
-  
-  this.value = newValue;
-  
-  // Trigger the calculation
-  const event = new Event('input');
-  this.dispatchEvent(event);
-}, {passive: false});
+// Set initial calculation
+birthYearSelect.dispatchEvent(new Event('change'));
 </script>
 <div class="row">
 <div class="col-lg-9">
@@ -350,39 +342,28 @@ earthAgeInput.addEventListener('wheel', function(e) {
 </div>
 </section>
 <div class="content-wrap">
-<section aria-label="" class="content-with-video align-right parallax" id="">
-<div class="container">
-<div class="row align-items-center justify-content-between">
-<div class="image mb-sm mb-md-0 col-md-6">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="600" src="https://eyes.nasa.gov/apps/solar-system/#/16_psyche?time=1" title="NASA Eyes on the Solar System" width="800"></iframe> </div>
-<div class="col-md-5">
-<div class="content">
-<h2>Explore with NASA<br>
-Eyes on the Solar System</br></h2>
-<p>Track Psyche's journey through our solar system in real-time using NASA's Eyes visualization tool. This interactive 3D environment lets you follow the spacecraft as it travels to the metal-rich asteroid Psyche, located in the main asteroid belt between Mars and Jupiter. Zoom in, rotate your view, and watch as this groundbreaking mission unfolds.</p>
-<p>/</p>
-<p><a class="link" href="/mission/">About Psyche Mission</a></p>
-</div>
-</div>
-</div>
-</div>
-</section>
 <section aria-label="" class="image-carousel" id="">
 <div class="carousel">
 <div class="slide">
+<div class="aspect-widescreen" style="position: relative; padding-bottom: 1.25%; height: 0; overflow: hidden;">
+<iframe src="model-page.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0"></iframe>
+</div>
+<div class="caption">3D Model of the Psyche spacecraft</div>
+</div>
+<div class="slide">
 <picture class="aspect-widescreen">
 <img alt="" class="attachment-widescreen size-widescreen" decoding="async" fetchpriority="high" height="1080" src="images/NHQ202310130003-1920x1080.jpg" width="1920"> </img></picture>
-<div class="caption">A SpaceX Falcon Heavy rocket with the Psyche spacecraft onboard is launched from Launch Complex 39A, Friday, Oct. 13, 2023, at NASA’s Kennedy Space Center in Florida. Credit: NASA/Aubrey Gemignani</div>
+<div class="caption">A SpaceX Falcon Heavy rocket with the Psyche spacecraft onboard is launched from Launch Complex 39A, Friday, Oct. 13, 2023, at NASA's Kennedy Space Center in Florida. Credit: NASA/Aubrey Gemignani</div>
 </div>
 <div class="slide">
 <picture class="aspect-widescreen">
 <img alt="" class="attachment-widescreen size-widescreen" decoding="async" height="1080" src="images/Psyche_News_231013-853x1080.jpg" width="853"> </img></picture>
-<div class="caption">NASA’s Psyche spacecraft, atop a SpaceX Falcon Heavy rocket, lifts off from Kennedy Space Center’s historic Launch Complex 39A in Florida at 10:19 a.m. EDT on Friday, Oct. 13, 2023. The Psyche mission will study a metal-rich asteroid with the same name, located in the main asteroid belt between Mars and Jupiter. This is NASA’s first mission to study an asteroid that has more metal than rock or ice. Riding with Psyche is a pioneering technology demonstration – NASA’s Deep Space Optical Communications (DSOC) experiment – which will be the first test of laser communications beyond the Moon.  Photo credit: NASA/Kim Shiflett</div>
+<div class="caption">NASA's Psyche spacecraft, atop a SpaceX Falcon Heavy rocket, lifts off from Kennedy Space Center's historic Launch Complex 39A in Florida at 10:19 a.m. EDT on Friday, Oct. 13, 2023. The Psyche mission will study a metal-rich asteroid with the same name, located in the main asteroid belt between Mars and Jupiter. This is NASA's first mission to study an asteroid that has more metal than rock or ice. Riding with Psyche is a pioneering technology demonstration – NASA's Deep Space Optical Communications (DSOC) experiment – which will be the first test of laser communications beyond the Moon.  Photo credit: NASA/Kim Shiflett</div>
 </div>
 <div class="slide">
 <picture class="aspect-widescreen">
 <img alt="" class="attachment-widescreen size-widescreen" decoding="async" height="800" sizes="(max-width: 1200px) 100vw, 1200px" src="images/Psyche_Blog_231011.jpg" srcset="https://psyche.asu.edu/wp-content/uploads/2023/10/Psyche_Blog_231011.jpg 1200w, https://psyche.asu.edu/wp-content/uploads/2023/10/Psyche_Blog_231011-600x400.jpg 600w, https://psyche.asu.edu/wp-content/uploads/2023/10/Psyche_Blog_231011-1024x683.jpg 1024w, https://psyche.asu.edu/wp-content/uploads/2023/10/Psyche_Blog_231011-768x512.jpg 768w" width="1200"> </img></picture>
-<div class="caption">A SpaceX Falcon Heavy rocket with the Psyche spacecraft onboard is seen at Launch Complex 39A as preparations continue for the Psyche mission, Wednesday, Oct. 11, 2023, at NASA’s Kennedy Space Center in Florida. Photo credit: NASA/Aubrey Gemignani</div>
+<div class="caption">A SpaceX Falcon Heavy rocket with the Psyche spacecraft onboard is seen at Launch Complex 39A as preparations continue for the Psyche mission, Wednesday, Oct. 11, 2023, at NASA's Kennedy Space Center in Florida. Photo credit: NASA/Aubrey Gemignani</div>
 </div>
 <div class="slide">
 <picture class="aspect-widescreen">
@@ -402,17 +383,17 @@ Eyes on the Solar System</br></h2>
 <div class="slide">
 <picture class="aspect-widescreen">
 <img alt="" class="attachment-widescreen size-widescreen" decoding="async" height="1080" src="images/Psyche-gallery-3-1920x1080.jpg" width="1920"/> </picture>
-<div class="caption">Engineers at NASA’s Jet Propulsion Laboratory in Southern California prepare to integrate four Hall thrusters (beneath red protective covers) into the agency’s Psyche spacecraft in July 2021. Credit: NASA/JPL-Caltech</div>
+<div class="caption">Engineers at NASA's Jet Propulsion Laboratory in Southern California prepare to integrate four Hall thrusters (beneath red protective covers) into the agency's Psyche spacecraft in July 2021. Credit: NASA/JPL-Caltech</div>
 </div>
 <div class="slide">
 <picture class="aspect-widescreen">
 <img alt="" class="attachment-widescreen size-widescreen" decoding="async" height="1080" src="images/Psyche-gallery-4-1920x1080.jpg" width="1920"/> </picture>
-<div class="caption">After Maxar Technologies successfully installed Psyche’s High Gain Antenna, their team moved the Psyche Solar Electric Propulsion (SEP) Chassis to the alignment stand at their factory in Palo Alto, CA. Credit: Maxar</div>
+<div class="caption">After Maxar Technologies successfully installed Psyche's High Gain Antenna, their team moved the Psyche Solar Electric Propulsion (SEP) Chassis to the alignment stand at their factory in Palo Alto, CA. Credit: Maxar</div>
 </div>
 <div class="slide">
 <picture class="aspect-widescreen">
 <img alt="" class="attachment-widescreen size-widescreen" decoding="async" height="1080" src="images/Psyche-gallery-5-1920x1080.jpg" width="1920"/> </picture>
-<div class="caption">This illustration, updated as of March 2021, depicts NASA’s Psyche spacecraft. The image was created by Peter Rubin. Credit: NASA/JPL-Caltech/ASU</div>
+<div class="caption">This illustration, updated as of March 2021, depicts NASA's Psyche spacecraft. The image was created by Peter Rubin. Credit: NASA/JPL-Caltech/ASU</div>
 </div>
 <div class="slide">
 <picture class="aspect-widescreen">

@@ -142,6 +142,66 @@
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(173, 255, 47, 0.7);
         }
+
+        /* Temperature Legend Styles */
+        .temperature-legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: greenyellow;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid greenyellow;
+            box-shadow: 0 0 10px rgba(173, 255, 47, 0.3);
+            z-index: 100;
+            transition: all 0.3s ease;
+            transform-origin: right;
+        }
+
+        .temp-toggle-btn {
+            position: absolute;
+            top: 20px;
+            left: 375px;
+            background: greenyellow;
+            color: black;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .temp-unit-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .temp-range {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .temperature-legend {
+                font-size: 12px;
+                padding: 10px;
+                max-width: 250px;
+            }
+        }
     </style>
     <script type="importmap">
     {
@@ -153,6 +213,11 @@
     }
     </script>
     <script type="module" src="js/model-viewer.js"></script>
+    <script type="module">
+        window.addEventListener('load', () => {
+            new ModelViewer('model-container');
+        });
+    </script>
 </head>
 <body>
     <button id="back-button" class="nav-button" onclick="window.close()">BACK TO MAIN PAGE</button>
