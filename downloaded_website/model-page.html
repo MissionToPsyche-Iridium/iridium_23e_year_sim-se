@@ -142,6 +142,57 @@
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(173, 255, 47, 0.7);
         }
+
+        /* Temperature Legend Styles */
+        .temperature-legend {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: greenyellow;
+            padding: 15px;
+            border: 1px solid greenyellow;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(173, 255, 47, 0.3);
+        }
+        .temperature-scale {
+            width: 20px;
+            height: 200px;
+            margin: 10px;
+            background: linear-gradient(to bottom, 
+                #ff0000,  /* Hot */
+                #ff4400,
+                #ff8800,
+                #0088ff,
+                #0044ff,
+                #000088   /* Cold */
+            );
+            border: 1px solid greenyellow;
+        }
+        .temp-labels {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 200px;
+            margin: 10px 0;
+        }
+        .temp-unit-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            margin: 0 2px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: background 0.3s;
+        }
+        .temp-unit-btn.active {
+            background: greenyellow;
+            color: black;
+        }
     </style>
     <script type="importmap">
     {
@@ -173,6 +224,7 @@
 
         // Set up controls
         const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = false; // Disable mouse wheel zoom
         camera.position.z = 15; // Changed from 5 to 25 to zoom out
 
         // Temperature visualization
@@ -329,7 +381,7 @@
         <div class="modal-content">
             <ul>
                 <li>ROTATE: Click and drag to rotate the asteroid model</li>
-                <li>ZOOM: Use mouse wheel or pinch gesture to zoom in/out</li>
+                <li>VIEW: Click and hold to orbit around the asteroid</li>
                 <li>TEMPERATURE UNITS: Toggle between Kelvin, Celsius, and Fahrenheit using the buttons in the legend</li>
                 <li>COLOR MAPPING: Red indicates warmer regions, blue indicates cooler regions</li>
                 <li>LEGEND: Reference the temperature scale on the right for exact values</li>
@@ -349,6 +401,26 @@
         </div>
         <div class="modal-close">
             <button onclick="document.getElementById('tutorial-modal').style.display='none'">CLOSE</button>
+        </div>
+    </div>
+
+    <div class="temperature-legend">
+        <h2 style="margin: 0 0 15px 0;">TEMPERATURE MAP</h2>
+        <div style="display: flex;">
+            <div class="temperature-scale"></div>
+            <div class="temp-labels">
+                <div>98K (Hot)</div>
+                <div>96K</div>
+                <div>94K</div>
+                <div>92K</div>
+                <div>90K</div>
+                <div>88K (Cold)</div>
+            </div>
+        </div>
+        <div style="margin-top: 15px;">
+            <button class="temp-unit-btn active">K</button>
+            <button class="temp-unit-btn">°C</button>
+            <button class="temp-unit-btn">°F</button>
         </div>
     </div>
 

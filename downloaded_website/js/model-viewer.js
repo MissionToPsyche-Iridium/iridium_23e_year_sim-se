@@ -74,6 +74,7 @@ class ModelViewer {
         this.controls.dampingFactor = 0.05;
         this.controls.autoRotate = !this.isPreview;
         this.controls.autoRotateSpeed = 0.5;
+        this.controls.enableZoom = false; // Disable mouse wheel zoom
         
         if (this.isPreview) {
             this.controls.enabled = false;
