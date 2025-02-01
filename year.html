@@ -106,8 +106,8 @@ File Start
             <div id="middle">
               <h3>Select Earth or Psyche to see other aspects of daily life there.</h3>
             <div class="wrap">
-              <input type="radio" id="Earth" name="sort" /><label for="Earth">Earth</label>
-              <input type="radio" id="Psyche" name="sort" checked /><label for="Psyche">Psyche</label>
+              <input type="radio" id="Earth" name="sort" checked /><label for="Earth">Earth</label>
+              <input type="radio" id="Psyche" name="sort" /><label for="Psyche">Psyche</label>
             </div>
 
             <!-- Radio buttons for toggle switch to swap between earth and Psyche metrics -->
@@ -121,23 +121,147 @@ File Start
 
                     earthRadio.addEventListener('change', () => {
                         if (earthRadio.checked) {
+                            // Update the daily metric text sections 
                             resultWork.textContent = 'The normal work day is 8 hours.';
                             resultSchool.textContent = 'The normal school day is 8 hours.';
                             resultSleep.textContent = 'On earth everyone tries to get 8 hours of sleep.';
+                            // Update pie chart
+                            updateChart(earthData);
                         }
                     });
 
                     psycheRadio.addEventListener('change', () => {
                         if (psycheRadio.checked) {
+                            // Update the daily metric text sections 
                             resultWork.textContent = 'The work day would be 1 hour long!';
                             resultSchool.textContent = 'Your school day would be about 1 hour a day!';
                             resultSleep.textContent = 'You would try to sleep for about 1 hour a night!';
+                            // Update pie chart
+                            updateChart(psycheData);
                         }
                     });
                 });
             </script>
-        </div>
 
+        <!-- Start of pie chart showing different elements of the different days -->
+        <div id="piechart"></div>
+        <!-- Library for chart functions used -->
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <!-- Colors for Chart / Implement with CSS in future task -->
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script>
+
+          // Set the dimensions and margins of the graph
+          var width = 550
+              height = 550
+              margin = 40
+          
+          // The radius of the pieplot is half the width or half the height
+          var radius = Math.min(width, height) / 2 - margin
+          
+          // Append the svg object to the div piechart
+          var svg = d3.select("#piechart")
+            .append("svg")
+              .attr("width", width)
+              .attr("height", height)
+            .append("g")
+              .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+          
+          // Create earth and psyche data sets 
+          var earthData = {Sleep: 8, "Work/School": 8, Eat:3, Relax:5}
+          var psycheData = {Sleep: 1, "Work/School": 1, Eat:.5, Relax:2}
+          
+          // Use the set d3 color scales
+          var color = d3.scaleOrdinal()
+            .domain(["a", "b", "c", "d", "e", "f"])
+            .range(d3.schemeDark2);
+
+          var arcGenerator = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
+          
+          // Build and replace the current chart
+          function updateChart(data) {
+          
+            // Compute the position of each group on the pie:
+            var pie = d3.pie()
+              .value(function(d) {return d.value; })
+              .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) 
+            var data_ready = pie(d3.entries(data))
+
+            // Map to data
+            var u = svg.selectAll("path")
+              .data(data_ready)
+          
+             // Build the pie charts
+            u.enter()
+              .append('path')
+              .merge(u)
+              .transition()
+              .duration(1000)
+              .attr('d', arcGenerator)
+              .attr('fill', function(d) { return color(d.data.key); })
+              .attr("stroke", "white")
+              .style("stroke-width", "2px")
+              .style("opacity", 1);
+
+            // Remove the previous data
+            u.exit().remove();
+
+            // Add group elements for text
+            var textGroup = svg.selectAll(".textGroup")
+              .data(data_ready);
+
+            var textGroupEnter = textGroup.enter()
+              .append("g")
+              .attr("class", "textGroup");
+
+            textGroupEnter.merge(textGroup)
+              .transition()
+              .duration(1000)
+              .attr("transform", function(d) { 
+                var _d = arcGenerator.centroid(d);
+                return "translate(" + _d + ")"; 
+              });
+
+            textGroup.exit().remove();
+
+            // Add key name labels
+            textGroupEnter.append("text")
+              .attr("class", "keyText")
+              .attr("dy", "-0.7em")
+              .text(function(d) { return d.data.key; })
+              .attr("text-anchor", "middle")
+              .style("font-size", 25);
+
+            // Add value labels
+            textGroupEnter.append("text")
+              .attr("class", "valueText")
+              .attr("dy", "0.35em")
+              .text(function(d) { return d.data.value; })
+              .attr("text-anchor", "middle")
+              .style("font-size", 25);
+
+            textGroup.select(".keyText")
+              .transition()
+              .duration(1000)
+              .attr("dy", "-0.7em")
+              .text(function(d) { return d.data.key; })
+              .attr("text-anchor", "middle")
+
+            textGroup.select(".valueText")
+              .transition()
+              .duration(1000)
+              .attr("dy", "0.35em")
+              .text(function(d) { return d.data.value; })
+              .attr("text-anchor", "middle")
+
+          }
+          
+          // Initialize the plot with the first dataset
+          updateChart(earthData);
+          </script>
+        </div>
         <!-- Start of the metrics section - al of these are dependant on the toggle switch for the metrics to display -->
         <div class ="elements">
         <!-- Work Section -->
