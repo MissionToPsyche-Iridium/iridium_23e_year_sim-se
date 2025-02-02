@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    height: 300px;
+    border-bottom: 10px double black;
+    border-radius: 15%;
+}
+
+header h1{
+    float: right;
+    width: 50%;
+    margin-top: 9%;
+    margin-right: 25%;
+    text-align: center;
+    animation: colorChange 20s ease-in-out infinite;
+}
+
+#logo {
+    float: left;
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 20%;
+}
+
+#div1 {
+    height: 500px;
+    width: 100%;
+    /*background-color: red;*/
+}
+
+#div1 h1 {
+    text-align: center;
+    padding-top: 10px;
+    animation: colorChange 20s ease-in-out infinite;
+}
+
+@keyframes colorChange{
+    0% {
+        color: gold;
+    }
+    25% {
+        color: goldenrod;
+    }
+    50% {
+        color: gray;
+    }
+    75% {
+        color: goldenrod;
+    }
+    100% {
+        color: gold;
+    }
+}
+
