@@ -18,89 +18,101 @@ File Start
 
 -->
 
+<!-- Declarations  -->
 </html><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="CSS/year.css">
+  <link rel="stylesheet" href="CSS/yearPage.css">
   <title>Year on Psyche Sim</title>
 </head>
 
+<!-- Start of the page body -->
 <body>
-  <!-- Header at the Top of the Page -->
-  <header id="header">
-    <a href="index.html"><img src="img/psyche.svg" id="psyche"></a>
-    <img src="img/asteroid.png" id="asteroid">
-  </header>
+    <!-- Header at the Top of the Page -->
+    <header id="header">
+      <img src="img/psyche.svg" id="psyche">
+      <img src="img/asteroid.png" id="asteroid">
+    </header>
   
-  <!--Top question - How old are you on Psyche? -->
+    <!-- Start of Main section -->
   <main>
-    <!-- <h1></h1> ** Nothing here -->
-    <div id="top">
-      <h3>How old would you be if you were born on Psyche?</h3>
-    </div>
+    <!--Top question - How old are you on Psyche? -->
+    <top id="top">
+      <p>How old would you be if you were born on Psyche?</p>
+    </top>
     
     <!-- First three section with scroll wheel, earth age and psyche age-->
-    <div id="elements">
-      <div id="yearselection">
-        <h3>Select your birth year to discover your age on Psyche:</h3>
-          <div class="scroll-wheel" id="scrollWheel">
-            <ul id="yearList"></ul>
-          </div>
+    <div class="age-container">
           
-          <!-- Results not shown until the user scrolls the year scroll -->
-          <script>
-            const yearList = document.getElementById('yearList');
-            const scrollWheel = document.getElementById('scrollWheel');
-            const currentYear = new Date().getFullYear();
-
-            // Populate the list with years from 2025 to 1900
-            for (let year = 2025; year >= 1925; year--) {
-                const li = document.createElement('li');
-                li.textContent = year;
-                yearList.appendChild(li);
-            }
-
-            // Add event listener for scrolling through years 
-            scrollWheel.addEventListener('scroll', () => {
-                const scrollTop = scrollWheel.scrollTop;
-                const itemHeight = 30; // Height of each list item
-                const selectedIndex = Math.round(scrollTop / itemHeight);
-                const selectedYear = yearList.children[selectedIndex].textContent;
-
-                // Update selected class
-                Array.from(yearList.children).forEach((li, index) => {
-                li.classList.toggle('selected', index === selectedIndex);
-                });
-
-                // Calculate and display results
-                const earthAge = currentYear - selectedYear;
-                const psycheAge = Math.floor(earthAge / 5);
-
-                // Update the results 
-                document.getElementById('earthResult').innerText = `${earthAge}`;
-                document.getElementById('earthResult').className = `earthAge`;
-                document.getElementById('psycheResult').innerText = `${psycheAge}`;
-                document.getElementById('psycheResult').className = `psycheAge`;
-            });
-
-            // Set initial selected year as first year '2025'
-            scrollWheel.scrollTop = 0;
-            yearList.children.classList.add('selected');
-            </script>
-            </div>   <!-- check on this one, do I need it?  -->
-            <!--The age on Earth -->
+      <div class="three-columns">
+            
+            <div class="column" id="yearSelection">
+              <h3>Select your birth year to discover your age on Psyche:</h3>
+              <!-- Results not shown until the user scrolls the year scroll -->
+              <div class="scroll-wheel" id="scrollWheel">
+                <ul id="yearList"></ul>
+              </div>
+            </div>
+            
+            <div class="column">
+              <!--The age on Earth -->
               <div id="ageOnEarth">
-                <h3>Age on Earth</h3>
+                <!-- <h3>Age on Earth</h3> -->
                 <p id="earthResult"></p>
               </div>
+            </div>
+            
+            <div class="column" >
               <!-- The age on Psyche -->
               <div id="ageOnPsyche">
-                <h3>Age on Psyche</h3>
+                <!-- <h3>Age on Psyche</h3> -->
                 <p id="psycheResult"></p>
               </div>
             </div>
+          </div>
+
+            <!-- Results not shown until the user scrolls the year scroll -->
+            <script>
+              const yearList = document.getElementById('yearList');
+              const scrollWheel = document.getElementById('scrollWheel');
+              const currentYear = new Date().getFullYear();
+
+              // Populate the list with years from 2025 to 1900
+              for (let year = 2025; year >= 1925; year--) {
+                  const li = document.createElement('li');
+                  li.textContent = year;
+                  yearList.appendChild(li);
+              }
+
+              // Add event listener for scrolling through years 
+              scrollWheel.addEventListener('scroll', () => {
+                  const scrollTop = scrollWheel.scrollTop;
+                  const itemHeight = 30; // Height of each list item
+                  const selectedIndex = Math.round(scrollTop / itemHeight);
+                  const selectedYear = yearList.children[selectedIndex].textContent;
+
+                  // Update selected class
+                  Array.from(yearList.children).forEach((li, index) => {
+                  li.classList.toggle('selected', index === selectedIndex);
+                  });
+
+                  // Calculate and display results
+                  const earthAge = currentYear - selectedYear;
+                  const psycheAge = Math.floor(earthAge / 5);
+
+                  // Update the results 
+                  document.getElementById('earthResult').innerText = `${earthAge}`;
+                  document.getElementById('earthResult').className = `earthAge`;
+                  document.getElementById('psycheResult').innerText = `${psycheAge}`;
+                  document.getElementById('psycheResult').className = `psycheAge`;
+              });
+
+              // Set initial selected year as first year '2025'
+              scrollWheel.scrollTop = 0;
+              yearList.children.classList.add('selected');
+              </script>
 
             <!-- Middle section - Start of section that uses toggle switch to swap between earth and Psyche metrics -->
             <div id="middle">
@@ -142,7 +154,7 @@ File Start
                     });
                 });
             </script>
-
+        </div>
         <!-- Start of pie chart showing different elements of the different days -->
         <div id="piechart"></div>
         <!-- Library for chart functions used -->
@@ -261,7 +273,6 @@ File Start
           // Initialize the plot with the first dataset
           updateChart(earthData);
           </script>
-        </div>
         <!-- Start of the metrics section - al of these are dependant on the toggle switch for the metrics to display -->
         <div class ="elements">
         <!-- Work Section -->
@@ -282,7 +293,9 @@ File Start
           <p id="resultSleep"> </p>
         </div> 
       </div>
-    </main>  
+      </div>
+    </div>
+  </main>  
 <!-- End of Main Page section  -->
 
 <!-- Footer Section -->

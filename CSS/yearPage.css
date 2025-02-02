@@ -1,0 +1,149 @@
+/*
+========================================================================================================
+Top Page Header
+========================================================================================================
+*/
+
+body {
+    margin: 0 auto;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+header {
+    grid-row: 1 / 2;
+    grid-column: 1 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+#psyche {
+    width: 25%;
+    left: 3%;
+    top: -5%;
+    position: relative;
+    animation: logo-move-in;
+    animation-duration: 2s;
+}
+
+#asteroid {
+    float: right;
+    position: relative;
+    width: 50%;
+    right: -5%;
+    top: -5%;
+    animation: header-move-in;
+    animation-duration: 2s;
+}
+
+@keyframes header-move-in {
+    from {transform: translate(200px, -200px);} /* Move from bottom-right */
+    to {transform: translate(0, 0);} /* Move to original position */
+}
+
+@keyframes logo-move-in {
+    from {transform: translate(-200px, -200px);} /* Move from top-left */
+    to {transform: translate(0, 0);} /* Move to original position */
+}
+/*
+========================================================================================================
+Year Selection Section
+========================================================================================================
+*/
+
+.age-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 20px;
+}
+  
+.single-column {
+    background-color: #f0f0f0;
+    text-align: center;
+}
+  
+.three-columns {
+    background-color: #592651;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px; 
+}
+  
+.column {
+    height: 350px;
+    text-align: center;
+}
+
+.scroll-wheel {
+    width: 75px;
+    height: 150px;
+    overflow-y: scroll;
+    border: 3px solid #592651;
+    border-radius: 10px;
+    position: relative;
+    margin: 10px auto;
+}
+.scroll-wheel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.scroll-wheel li {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.scroll-wheel li.selected {
+    font-weight: bold;
+    color: #f9a000;
+}
+
+#yearSelection {
+    background-image: url(/img/calendar.jpeg);
+    background-size: cover;
+    background-position: center;
+    color: #592651;
+    opacity: .75;
+}
+
+#ageOnEarth {
+    background-image: url(/img/Earth.jpg);
+    background-size: cover;
+    background-position: center;
+    visibility: visible;
+    opacity: .75;
+}
+
+#ageOnPsyche {
+    background-image: url(/img/psyche.jpg);
+    background-size: cover;
+    background-position: center;
+    visibility: visible;
+    opacity: .75;
+}
+
+.earthAge {
+    font-size: 100px; 
+    font-weight: bold;
+    color: #087f23;
+    text-shadow: 
+                2px 2px 0 yellow, 
+                -2px -2px 0 yellow, 
+                2px -2px 0 yellow, 
+                -2px 2px 0 yellow;
+}
+.psycheAge {
+    font-size: 100px; 
+    font-weight: bold;
+    color: #f9a000;
+    text-shadow: 
+                2px 2px 0 yellow, 
+                -2px -2px 0 yellow, 
+                2px -2px 0 yellow, 
+                -2px 2px 0 yellow;
+}

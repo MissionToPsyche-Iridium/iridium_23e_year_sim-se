@@ -5,8 +5,19 @@ Headers
 */
 
 body {
-    margin: 0;
     overflow-x: hidden;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+#body-elements {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: repeat(3, 1fr);
+    align-content: center;
+    justify-content: center;
 }
 
 /*header image left*/
@@ -46,46 +57,23 @@ Main Body Style
 ========================================================================================================
 */
 
-main h1 {
-    margin: 0;
-    font-size: 50px;
+header {
+    grid-row: 1 / 2;
+    grid-column: 1 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px; 
+}
+
+#top {
+    font-size: 70px;
     flex-grow: 1; 
     text-align: center; 
-    padding-top: 5%;
-    color:#f9a000
-}
-
-div {
-    background-color: black;
-    color: rgb(249, 249, 249);
-    border: 3px solid #592651;
-    text-align: center;
-    overflow: hidden;
-    
-}
-
-#ss-image {
-    max-width: 100%;
-}
-
-#top h3,
-#top2 h3 {
-    margin: 0;
-    font-size: 50px;
-    flex-grow: 1; 
-    text-align: center; 
-    padding-top: 2%;
-    color:#592651
-}
-
-#top p,
-#top2 p {
-    margin-left: 0;
-    line-height: 2;
-}
-
-#top, #top2 {
-    padding-bottom: 2%;
+    justify-content: center;
+    align-items: center;
+    color:#592651;
+    font-weight: bold;
 }
 
 /*
@@ -188,20 +176,6 @@ First Row Age on Earth/Psyche
     grid-template-columns: repeat(3, 1fr);
     padding-top: 0%;
     padding-bottom: 0%;
-}
-
-#elements div {
-    padding: 5%;
-}
-
-#solar-system {
-    height: 900px;
-}
-
-#solar-system-map {
-    width: 90%;
-    height: 600px;
-    margin-top: 5%;
 }
 
 #yearselection {
