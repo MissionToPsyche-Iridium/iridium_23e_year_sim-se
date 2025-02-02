@@ -222,10 +222,43 @@
         directionalLight.position.set(5, 5, 5);
         scene.add(directionalLight);
 
+        // Create Sun mesh for visual representation (a bright emissive sphere)
+        const sunGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+        const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffee88, emissive: 0xffee88 });
+        const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
+        // Position the sun at a distance along the light's direction
+        sunMesh.position.copy(directionalLight.position.clone().normalize().multiplyScalar(50));
+        scene.add(sunMesh);
+
+        // Create Sun glare using a sprite to simulate a distant light glare effect
+        function createSunFlare() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 128;
+            canvas.height = 128;
+            const context = canvas.getContext('2d');
+            const gradient = context.createRadialGradient(64, 64, 0, 64, 64, 64);
+            gradient.addColorStop(0, 'rgba(255, 238, 136, 1)');
+            gradient.addColorStop(0.2, 'rgba(255, 238, 136, 0.6)');
+            gradient.addColorStop(0.4, 'rgba(255, 238, 136, 0.3)');
+            gradient.addColorStop(1, 'rgba(255, 238, 136, 0)');
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, 128, 128);
+            const texture = new THREE.CanvasTexture(canvas);
+            return texture;
+        }
+        const sunFlareTexture = createSunFlare();
+        const sunFlareMaterial = new THREE.SpriteMaterial({ map: sunFlareTexture, transparent: true, blending: THREE.AdditiveBlending });
+        const sunFlareSprite = new THREE.Sprite(sunFlareMaterial);
+        sunFlareSprite.scale.set(10, 10, 1);
+        sunFlareSprite.position.copy(directionalLight.position.clone().normalize().multiplyScalar(50));
+        scene.add(sunFlareSprite);
+
         // Set up controls
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableZoom = false; // Disable mouse wheel zoom
-        camera.position.z = 15; // Changed from 5 to 25 to zoom out
+        camera.position.z = 15; // Set camera back so the full model is visible
+        // Ensure camera is aligned with the equatorial view (y = 0)
+        camera.position.y = 0;
 
         // Temperature visualization
         let time = 0;
@@ -255,26 +288,6 @@
                     varying vec3 vNormal;
                     varying vec3 vPosition;
 
-                    vec2 hash(vec2 p) {
-                        vec2 k = vec2(0.3183099, 0.3678794);
-                        p = p * k + k.yx;
-                        return -1.0 + 2.0 * fract(16.0 * k * fract(p.x * p.y * (p.x + p.y)));
-                    }
-
-                    float noise(vec2 p) {
-                        vec2 i = floor(p);
-                        vec2 f = fract(p);
-                        vec2 u = f * f * (3.0 - 2.0 * f);
-                        float n = mix(
-                            mix(dot(hash(i), f),
-                                dot(hash(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), u.x),
-                            mix(dot(hash(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)),
-                                dot(hash(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), u.x),
-                            u.y
-                        );
-                        return n * 0.5 + 0.5;
-                    }
-                    
                     const vec3 COLOR_TABLE[6] = vec3[6](
                         vec3(0.0, 0.2, 0.8),
                         vec3(0.0, 0.4, 1.0),
@@ -285,22 +298,21 @@
                     );
                     
                     void main() {
-                        float latitude = asin(normalize(vPosition).y);
-                        float poleEffect = abs(latitude) * 0.636619772;
+                        // Determine the sun influence from the surface normal and sun direction
+                        float sunInfluence = max(0.0, dot(normalize(vNormal), sunDirection));
+                        // Rapid day/night temperature transition using a power function for sharper contrast
+                        float temperature = mix(80.0, 120.0, pow(sunInfluence, 4.0));
                         
-                        float noiseVal = noise(vPosition.xz * 0.1 + time * 0.1) * 0.25;
-                        
-                        float temperature = mix(88.0, 98.0, (1.0 - poleEffect)) + noiseVal;
-                        float t = clamp((temperature - 88.0) * 0.1, 0.0, 1.0);
+                        // Normalize temperature for color mapping: 80K (0.0) to 120K (1.0)
+                        float t = clamp((temperature - 80.0) / 40.0, 0.0, 1.0);
                         
                         int idx = int(t * 5.0);
                         vec3 tempColor = mix(COLOR_TABLE[idx], COLOR_TABLE[idx + 1], fract(t * 5.0));
                         
-                        float dayFactor = sin(time * 0.05) * 0.25 + 0.75;
-                        tempColor *= dayFactor;
-                        
+                        // Enhanced sun effect with a dramatic highlight
                         float sunEffect = max(0.0, dot(normalize(vNormal), sunDirection));
-                        tempColor = mix(tempColor, vec3(1.0, 0.6, 0.0), sunEffect * 0.3);
+                        float sunHighlight = pow(sunEffect, 3.0) * 0.5;
+                        tempColor = mix(tempColor, vec3(1.0, 0.8, 0.2), sunHighlight);
                         
                         gl_FragColor = vec4(tempColor, 1.0);
                     }
@@ -329,7 +341,26 @@
             requestAnimationFrame(animate);
             time += 0.016; // Approximate for 60fps
             
-            // Update temperature shader uniforms
+            // Rotate the model slowly
+            scene.traverse((object) => {
+                if (object.isMesh) {
+                    object.rotation.y += 0.001;
+                }
+            });
+            
+            // Update sun (directional light) position for dynamic lighting
+            const radius = 5;
+            directionalLight.position.x = Math.cos(time * 0.1) * radius;
+            directionalLight.position.z = Math.sin(time * 0.1) * radius;
+            // Force the sun to be on the same plane as Psyche's equator (y = 0)
+            directionalLight.position.y = 0;
+            
+            // Update the sun mesh and glare sprite to remain in the same direction but at a greater distance
+            const sunPosition = directionalLight.position.clone().normalize().multiplyScalar(50);
+            sunMesh.position.copy(sunPosition);
+            sunFlareSprite.position.copy(sunPosition);
+            
+            // Update temperature shader uniforms using the sun direction
             temperatureMaterials.forEach(material => {
                 if (material.uniforms) {
                     material.uniforms.time.value = time;
@@ -409,12 +440,12 @@
         <div style="display: flex;">
             <div class="temperature-scale"></div>
             <div class="temp-labels">
-                <div>98K (Hot)</div>
+                <div>120K (Hot)</div>
+                <div>112K</div>
+                <div>104K</div>
                 <div>96K</div>
-                <div>94K</div>
-                <div>92K</div>
-                <div>90K</div>
-                <div>88K (Cold)</div>
+                <div>88K</div>
+                <div>80K (Cold)</div>
             </div>
         </div>
         <div style="margin-top: 15px;">

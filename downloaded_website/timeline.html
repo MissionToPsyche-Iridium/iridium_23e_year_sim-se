@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psyche Mission Timeline</title>
+  <style>
+    :root {
+      --primary-color: #302144;
+      --accent-color: #ef5965;
+      --bg-color: #ffffff;
+      --text-color: #5a2752;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #5a2752;
+    }
+
+    /* Title animation */
+    .title {
+      text-align: center;
+      font-size: 3.5em;
+      font-weight: bold;
+      margin: 40px 0;
+      color: var(--accent-color);
+      text-shadow: 0 0 10px var(--accent-color);
+      position: relative;
+      animation: titleFloat 3s ease-in-out infinite;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    @keyframes titleFloat {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        text-shadow: 0 0 10px var(--accent-color);
+      }
+      50% {
+        transform: translateY(-10px) rotate(1deg);
+        text-shadow: 0 0 20px var(--accent-color), 0 0 30px var(--accent-color);
+      }
+      100% {
+        transform: translateY(0) rotate(0deg);
+        text-shadow: 0 0 10px var(--accent-color);
+      }
+    }
+
+    .title::before,
+    .title::after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 0;
+      background: var(--accent-color);
+      top: 50%;
+      transition: width 1s ease;
+      box-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .title::before {
+      right: 55%;
+      margin-right: 20px;
+      animation: lineExtendLeft 2s forwards;
+    }
+
+    .title::after {
+      left: 55%;
+      margin-left: 20px;
+      animation: lineExtendRight 2s forwards;
+    }
+
+    @keyframes lineExtendLeft {
+      to { width: 15%; }
+    }
+
+    @keyframes lineExtendRight {
+      to { width: 15%; }
+    }
+
+    /* Full-screen canvas background for animated starfield */
+    #backgroundCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: black;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      /* Adding perspective for 3D effects */
+      perspective: 800px;
+    }
+
+    .timeline-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: var(--primary-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .event {
+      padding: 10px 20px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+
+    /* Dynamic, 3D event markers with neon glow and rotation */
+    .event::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: var(--accent-color);
+      border: 4px solid var(--primary-color);
+      border-radius: 50%;
+      top: 50%;
+      /* The base transform moves the marker vertically */
+      transform: translateY(-50%);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      animation: pulse 4s infinite;
+    }
+
+    .event:hover::after {
+      background-color: var(--primary-color);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translateY(-50%) scale(1) rotateY(0deg);
+        box-shadow: 0 0 5px var(--accent-color);
+      }
+      50% {
+        transform: translateY(-50%) scale(1.2) rotateY(360deg);
+        box-shadow: 0 0 15px var(--accent-color);
+      }
+      100% {
+        transform: translateY(-50%) scale(1) rotateY(720deg);
+        box-shadow: 0 0 5px var(--accent-color);
+      }
+    }
+
+    /* Place markers at the timeline line */
+    .event-left {
+      left: 0;
+      text-align: right;
+    }
+    .event-right {
+      left: 50%;
+      text-align: left;
+    }
+    .event-left::after {
+      right: -10px; /* Adjusted offset so marker sits on the timeline */
+    }
+    .event-right::after {
+      left: -10px;  /* Adjusted offset so marker sits on the timeline */
+    }
+
+    .event-content {
+      padding: 10px;
+      background-color: rgba(48, 33, 68, 0.1);
+      border-radius: 8px;
+      position: relative;
+      /* Optional: add a subtle 3D effect */
+      transform: translateZ(0);
+    }
+
+    .event-date {
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-bottom: 4px;
+    }
+
+    .event-description {
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    /* Interactive popup with 3D flip and smooth transition */
+    .event-popup {
+      position: absolute;
+      background: var(--bg-color);
+      border: 2px solid var(--primary-color);
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 1000;
+      max-width: 300px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: perspective(600px) rotateY(90deg);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .event-popup.active {
+      opacity: 1;
+      transform: perspective(600px) rotateY(0deg);
+      pointer-events: auto;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline::before {
+        left: 40px;
+      }
+      .event {
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 20px;
+      }
+      .event-left,
+      .event-right {
+        left: 0;
+        text-align: left;
+      }
+      .event-left::after,
+      .event-right::after {
+        left: 28px;
+      }
+      .title::before,
+      .title::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas for animated starfield background -->
+  <canvas id="backgroundCanvas"></canvas>
+
+  <!-- Added animated title -->
+  <h1 class="title">Year on Psyche</h1>
+
+  <div class="timeline-container">
+    <div class="timeline">
+      <div class="event event-left">
+        <div class="event-content">
+          <div class="event-date">Day 1</div>
+          <p class="event-description">Landing on Psyche</p>
+        </div>
+      </div>
+      <div class="event event-right">
+        <div class="event-content">
+          <div class="event-date">Day 150</div>
+          <p class="event-description">First Mining Test</p>
+        </div>
+      </div>
+      <div class="event event-left">
+        <div class="event-content">
+          <div class="event-date">Day 400</div>
+          <p class="event-description">Drilling into Psyche's Core</p>
+        </div>
+      </div>
+      <div class="event event-right">
+        <div class="event-content">
+          <div class="event-date">Day 730</div>
+          <p class="event-description">First Magnetic Field Detection</p>
+        </div>
+      </div>
+      <div class="event event-left">
+        <div class="event-content">
+          <div class="event-date">Day 1,000</div>
+          <p class="event-description">Habitat Expansion</p>
+        </div>
+      </div>
+      <div class="event event-right">
+        <div class="event-content">
+          <div class="event-date">Day 1,300</div>
+          <p class="event-description">Meteorite Impact</p>
+        </div>
+      </div>
+      <div class="event event-left">
+        <div class="event-content">
+          <div class="event-date">Day 1,500</div>
+          <p class="event-description">Unexpected Volatile Detection</p>
+        </div>
+      </div>
+      <div class="event event-right">
+        <div class="event-content">
+          <div class="event-date">Day 1,700</div>
+          <p class="event-description">Final Scientific Report</p>
+        </div>
+      </div>
+      <div class="event event-left">
+        <div class="event-content">
+          <div class="event-date">Day 1,826</div>
+          <p class="event-description">Departure from Psyche</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* === Starfield Animation using Canvas === */
+    const canvas = document.getElementById('backgroundCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 200;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.2,
+          speed: Math.random() * 0.5 + 0.2
+        });
+      }
+    }
+    initStars();
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    /* === Popup / Modal Logic with 3D Flip Transition === */
+    const popup = document.createElement('div');
+    popup.className = 'event-popup';
+    document.body.appendChild(popup);
+
+    // Event details (add multimedia links as needed)
+    const eventDetails = {
+      "Day 1": {
+        title: "Landing on Psyche",
+        description:
+          "The first human to set foot on an iron-rich asteroid. Habitat modules are deployed, and basic systems are established. Gravity is only 1% of Earth's, making movement tricky.",
+        image: "images/landing.jpg",
+        video: "" // Example: "<video src='videos/landing.mp4' controls></video>"
+      },
+      "Day 150": {
+        title: "First Mining Test",
+        description:
+          "Autonomous mining robots begin extracting Psyche's metallic surface to test potential resource utilization. Results show promising nickel-iron deposits but also unexpected challenges due to Psyche's extreme hardness.",
+        image: "images/mining.jpg"
+      },
+      "Day 400": {
+        title: "Drilling into Psyche's Core",
+        description:
+          "Deep core sampling suggests Psyche might have once been part of a protoplanet's core. Evidence of past magnetic activity found, hinting at Psyche's violent history.",
+        image: "images/drilling.jpg"
+      },
+      "Day 730": {
+        title: "First Magnetic Field Detection",
+        description:
+          "Instruments register faint, fluctuating magnetic remnants, suggesting Psyche's core could have been partially molten at some point in its past.",
+        image: "images/magnetic.jpg"
+      },
+      "Day 1,000": {
+        title: "Habitat Expansion",
+        description:
+          "Additional modules are deployed, creating a more sustainable Psyche Research Station. Life-support systems improve, and Psyche's first closed-loop water recycling system is fully operational.",
+        image: "images/habitat.jpg"
+      },
+      "Day 1,300": {
+        title: "Meteorite Impact",
+        description:
+          "A small impactor crashes near the habitat, highlighting the dangers of space debris. This event accelerates efforts to create a protective shielding system using local metals.",
+        image: "images/impact.jpg"
+      },
+      "Day 1,500": {
+        title: "Unexpected Volatile Detection",
+        description:
+          "Traces of sulfur and carbon compounds found beneath Psyche's surface raise new questions: Could Psyche have once had volcanic activity?",
+        image: "images/volatile.jpg"
+      },
+      "Day 1,700": {
+        title: "Final Scientific Report",
+        description:
+          "Data collected suggests Psyche could offer crucial insights into how planetary cores form. Studies on Psyche's material strength contribute to future asteroid mining missions.",
+        image: "images/report.jpg"
+      },
+      "Day 1,826": {
+        title: "Departure from Psyche",
+        description:
+          "After nearly five Earth years, the mission concludes. A time capsule is left behind containing research data, mission logs, and a message for future explorers.",
+        image: "images/departure.jpg"
+      }
+    };
+
+    // Add click event listeners to timeline events
+    document.querySelectorAll('.event').forEach(event => {
+      event.addEventListener('click', (e) => {
+        // Prevent the click from bubbling up to the document
+        e.stopPropagation();
+        const date = event.querySelector('.event-date').textContent;
+        const details = eventDetails[date];
+        if (!details) return;
+
+        // Update popup content (you can embed videos or other media if provided)
+        popup.innerHTML = `
+          <h3>${details.title}</h3>
+          <p>${details.description}</p>
+          ${details.image ? `<img src="${details.image}" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
+          ${details.video ? details.video : ''}
+        `;
+
+        // Give the browser a moment to render the content so we can measure it
+        setTimeout(() => {
+          const popupWidth = popup.offsetWidth;
+          const markerRect = event.getBoundingClientRect();
+          const isLeft = event.classList.contains('event-left');
+          let leftPosition;
+          
+          if (isLeft) {
+            // For left events, place the popup to the right of the event marker
+            leftPosition = markerRect.right + 10;
+          } else {
+            // For right events, place the popup to the left of the event marker
+            leftPosition = markerRect.left - popupWidth - 10;
+          }
+
+          // Ensure the popup does not go offscreen
+          const margin = 10;
+          if (leftPosition < margin) leftPosition = margin;
+          if (leftPosition + popupWidth > window.innerWidth - margin) {
+            leftPosition = window.innerWidth - popupWidth - margin;
+          }
+
+          popup.style.top = `${markerRect.top + window.scrollY}px`;
+          popup.style.left = `${leftPosition}px`;
+
+          // Show the popup with the 3D flip transition
+          popup.classList.add('active');
+        }, 0);
+      });
+    });
+
+    // Close popup when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.event') && !e.target.closest('.event-popup')) {
+        popup.classList.remove('active');
+      }
+    });
+
+    /* === Theme Handling (Light/Dark Mode) === */
+    function updateTheme() {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+    updateTheme();
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme') {
+        updateTheme();
+      }
+    });
+  </script>
+</body>
+</html>
