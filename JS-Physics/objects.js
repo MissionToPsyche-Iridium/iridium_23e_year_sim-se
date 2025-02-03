@@ -6,8 +6,19 @@ let loader = new GLTFLoader();
 let physicsObjects = [];
 
 function createGround(scene) {
+  let textureLoader = new THREE.TextureLoader();
+  let groundTexture = textureLoader.load('/img/textures/grass_texture240.jpg'); 
+
+  groundTexture.wrapS = THREE.RepeatWrapping;
+  groundTexture.wrapT = THREE.RepeatWrapping;
+  groundTexture.repeat.set(10, 10); 
+
   let geometry = new THREE.PlaneGeometry(100, 100);
-  let material = new THREE.MeshStandardMaterial({ color: 0x808080, side: THREE.DoubleSide });
+  let material = new THREE.MeshStandardMaterial({ 
+    map: groundTexture, 
+    side: THREE.DoubleSide 
+  });
+
   let ground = new THREE.Mesh(geometry, material);
   ground.rotation.x = -Math.PI / 2;
   scene.add(ground);
@@ -15,7 +26,7 @@ function createGround(scene) {
   let AmmoLib = getAmmo();
   
   // Reduce collider thickness
-  let shape = new AmmoLib.btBoxShape(new AmmoLib.btVector3(10, 0.01, 10)); 
+  let shape = new AmmoLib.btBoxShape(new AmmoLib.btVector3(50, 0.01, 50)); 
   
   let transform = new AmmoLib.btTransform();
   transform.setIdentity();
@@ -63,9 +74,9 @@ async function loadGLBModel(scene, path, position, scale, isStatic = false, mass
 
 export async function loadSceneModels(scene) {
   createGround(scene);
-  await loadGLBModel(scene, '/models/astronaut.glb', { x: 0, y: 0, z: 0 }, 1, false, 5);
+  await loadGLBModel(scene, '/models/astroguy.glb', { x: 0, y: 0, z: 0 }, 1, false, 5);
   await loadGLBModel(scene, '/models/stopSign.glb', { x: 2, y: 0, z: -3 }, 1, false, 1);
-  await loadGLBModel(scene, '/models/nasaLogo.glb', { x: -2, y: 0, z: 3 }, 1, false, 1);
+  await loadGLBModel(scene, '/models/nasaLogo.glb', { x: 0, y: 0, z: -30}, 1, false, 1);
 }
 
 export function updatePhysicsObjects() {
