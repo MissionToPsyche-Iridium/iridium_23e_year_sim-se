@@ -5,6 +5,30 @@ import { getPhysicsWorld, getAmmo } from './physicsWorld.js';
 let loader = new GLTFLoader();
 let physicsObjects = [];
 
+function createGround(scene) {
+  let geometry = new THREE.PlaneGeometry(100, 100);
+  let material = new THREE.MeshStandardMaterial({ color: 0x808080, side: THREE.DoubleSide });
+  let ground = new THREE.Mesh(geometry, material);
+  ground.rotation.x = -Math.PI / 2;
+  scene.add(ground);
+
+  let AmmoLib = getAmmo();
+  
+  // Reduce collider thickness
+  let shape = new AmmoLib.btBoxShape(new AmmoLib.btVector3(10, 0.01, 10)); 
+  
+  let transform = new AmmoLib.btTransform();
+  transform.setIdentity();
+  
+  // Lower the physics collider slightly
+  transform.setOrigin(new AmmoLib.btVector3(0, -0.02, 0));
+  let motionState = new AmmoLib.btDefaultMotionState(transform);
+  let rbInfo = new AmmoLib.btRigidBodyConstructionInfo(0, motionState, shape);
+  let body = new AmmoLib.btRigidBody(rbInfo);
+  getPhysicsWorld().addRigidBody(body);
+}
+
+
 async function loadGLBModel(scene, path, position, scale, isStatic = false, mass = 1) {
   return new Promise((resolve, reject) => {
     loader.load(path, async (gltf) => {
@@ -13,9 +37,10 @@ async function loadGLBModel(scene, path, position, scale, isStatic = false, mass
       model.scale.set(scale, scale, scale);
       scene.add(model);
 
-      let AmmoLib = getAmmo(); 
+      let AmmoLib = getAmmo();
+
       if (!isStatic) {
-        let shape = new AmmoLib.btBoxShape(new AmmoLib.btVector3(1, 1, 1));
+        let shape = new AmmoLib.btBoxShape(new AmmoLib.btVector3(10, 0.01, 10)); 
         let transform = new AmmoLib.btTransform();
         transform.setIdentity();
         transform.setOrigin(new AmmoLib.btVector3(position.x, position.y, position.z));
@@ -37,9 +62,10 @@ async function loadGLBModel(scene, path, position, scale, isStatic = false, mass
 }
 
 export async function loadSceneModels(scene) {
-  await loadGLBModel(scene, '/models/astronaut.glb', { x: 0, y: 5, z: 0 }, 1, false, 5);
-  await loadGLBModel(scene, '/models/stopSign.glb', { x: 2, y: 5, z: -3 }, 0.5, false, 1);
-  await loadGLBModel(scene, '/models/nasaLogo.glb', { x: -2, y: 5, z: 3 }, 0.5, false, 1);
+  createGround(scene);
+  await loadGLBModel(scene, '/models/astronaut.glb', { x: 0, y: 0, z: 0 }, 1, false, 5);
+  await loadGLBModel(scene, '/models/stopSign.glb', { x: 2, y: 0, z: -3 }, 1, false, 1);
+  await loadGLBModel(scene, '/models/nasaLogo.glb', { x: -2, y: 0, z: 3 }, 1, false, 1);
 }
 
 export function updatePhysicsObjects() {
