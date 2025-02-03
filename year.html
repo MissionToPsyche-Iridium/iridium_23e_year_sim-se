@@ -37,7 +37,7 @@ File Start
     </header>
   
     <!-- Start of Main section -->
-  <main>
+  <main id="main-background">
     <!--Top question - How old are you on Psyche? -->
     <top id="top">
       <p>How old would you be if you were born on Psyche?</p>
@@ -49,27 +49,23 @@ File Start
       <div class="three-columns">
             
             <div class="column" id="yearSelection">
-              <h3>Select your birth year to discover your age on Psyche:</h3>
+              <h3>Scroll to your birth year to discover your age on Psyche:</h3>
               <!-- Results not shown until the user scrolls the year scroll -->
               <div class="scroll-wheel" id="scrollWheel">
                 <ul id="yearList"></ul>
               </div>
             </div>
             
-            <div class="column">
+            <div class="column" id="ageOnEarth">
               <!--The age on Earth -->
-              <div id="ageOnEarth">
-                <!-- <h3>Age on Earth</h3> -->
+                <h3>Age on Earth</h3>
                 <p id="earthResult"></p>
-              </div>
             </div>
             
-            <div class="column" >
+            <div class="column" id="ageOnPsyche">
               <!-- The age on Psyche -->
-              <div id="ageOnPsyche">
-                <!-- <h3>Age on Psyche</h3> -->
+                 <h3>Age on Psyche</h3>
                 <p id="psycheResult"></p>
-              </div>
             </div>
           </div>
 
@@ -113,47 +109,49 @@ File Start
               scrollWheel.scrollTop = 0;
               yearList.children.classList.add('selected');
               </script>
+    </div>
 
-            <!-- Middle section - Start of section that uses toggle switch to swap between earth and Psyche metrics -->
-            <div id="middle">
-              <h3>Select Earth or Psyche to see other aspects of daily life there.</h3>
-            <div class="wrap">
-              <input type="radio" id="Earth" name="sort" checked /><label for="Earth">Earth</label>
-              <input type="radio" id="Psyche" name="sort" /><label for="Psyche">Psyche</label>
-            </div>
+    <!-- Middle section - Start of section that uses toggle switch to swap between earth and Psyche metrics -->
+    <div class="two-columns">
+      <div id="middle">
+        <h3>Select Earth or Psyche to see other aspects of daily life there.</h3>
+      <div class="wrap">
+        <input type="radio" id="Earth" name="sort" checked /><label for="Earth">Earth</label>
+        <input type="radio" id="Psyche" name="sort" /><label for="Psyche">Psyche</label>
+      </div>
 
-            <!-- Radio buttons for toggle switch to swap between earth and Psyche metrics -->
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const earthRadio = document.getElementById('Earth');
-                    const psycheRadio = document.getElementById('Psyche');
-                    const resultWork = document.getElementById('resultWork');
-                    const resultSchool = document.getElementById('resultSchool');
-                    const resultSleep = document.getElementById('resultSleep');
+      <!-- Radio buttons for toggle switch to swap between earth and Psyche metrics -->
+      <script>
+          document.addEventListener('DOMContentLoaded', () => {
+              const earthRadio = document.getElementById('Earth');
+              const psycheRadio = document.getElementById('Psyche');
+              const resultWork = document.getElementById('resultWork');
+              const resultSchool = document.getElementById('resultSchool');
+              const resultSleep = document.getElementById('resultSleep');
 
-                    earthRadio.addEventListener('change', () => {
-                        if (earthRadio.checked) {
-                            // Update the daily metric text sections 
-                            resultWork.textContent = 'The normal work day is 8 hours.';
-                            resultSchool.textContent = 'The normal school day is 8 hours.';
-                            resultSleep.textContent = 'On earth everyone tries to get 8 hours of sleep.';
-                            // Update pie chart
-                            updateChart(earthData);
-                        }
-                    });
+              earthRadio.addEventListener('change', () => {
+                  if (earthRadio.checked) {
+                      // Update the daily metric text sections 
+                      resultWork.textContent = 'The normal work day is 8 hours.';
+                      resultSchool.textContent = 'The normal school day is 8 hours.';
+                      resultSleep.textContent = 'On earth everyone tries to get 8 hours of sleep.';
+                      // Update pie chart
+                      updateChart(earthData);
+                  }
+              });
 
-                    psycheRadio.addEventListener('change', () => {
-                        if (psycheRadio.checked) {
-                            // Update the daily metric text sections 
-                            resultWork.textContent = 'The work day would be 1 hour long!';
-                            resultSchool.textContent = 'Your school day would be about 1 hour a day!';
-                            resultSleep.textContent = 'You would try to sleep for about 1 hour a night!';
-                            // Update pie chart
-                            updateChart(psycheData);
-                        }
-                    });
-                });
-            </script>
+              psycheRadio.addEventListener('change', () => {
+                  if (psycheRadio.checked) {
+                      // Update the daily metric text sections 
+                      resultWork.textContent = 'The work day would be 1 hour long!';
+                      resultSchool.textContent = 'Your school day would be about 1 hour a day!';
+                      resultSleep.textContent = 'You would try to sleep for about 1 hour a night!';
+                      // Update pie chart
+                      updateChart(psycheData);
+                  }
+              });
+          });
+      </script>
         </div>
         <!-- Start of pie chart showing different elements of the different days -->
         <div id="piechart"></div>
@@ -272,7 +270,7 @@ File Start
           
           // Initialize the plot with the first dataset
           updateChart(earthData);
-          </script>
+        </script>
         <!-- Start of the metrics section - al of these are dependant on the toggle switch for the metrics to display -->
         <div class ="elements">
         <!-- Work Section -->
