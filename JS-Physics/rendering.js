@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { initPhysicsWorld, getPhysicsWorld } from './physicsWorld.js';
 import { loadSceneModels, updatePhysicsObjects } from './objects.js';
+import { mixers, switchAstronautAnimation } from './objects.js';
 
 let scene, camera, renderer, controls;
 
@@ -14,6 +15,8 @@ async function init() {
   camera.position.set(0, 5, 10);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   let container = document.getElementById('canvas-container');
   let width = container.clientWidth;
@@ -38,9 +41,25 @@ function addLighting() {
 
   let directionalLight = new THREE.DirectionalLight(0xffffff, 1);
   directionalLight.position.set(5, 10, 5);
-  directionalLight.castShadow = true;
+  directionalLight.castShadow = true; 
+
+  directionalLight.shadow.mapSize.width = 2048;
+  directionalLight.shadow.mapSize.height = 2048;
+  directionalLight.shadow.camera.near = 0.5;
+  directionalLight.shadow.camera.far = 50;
+  directionalLight.shadow.camera.left = -15;
+  directionalLight.shadow.camera.right = 15;
+  directionalLight.shadow.camera.top = 15;
+  directionalLight.shadow.camera.bottom = -15;
+
   scene.add(directionalLight);
 }
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "a") {
+    switchAstronautAnimation();
+  }
+});
 
 function addControls() {
   controls = new OrbitControls(camera, renderer.domElement);
@@ -74,6 +93,7 @@ function animate() {
   let deltaTime = 1 / 60;
   updatePhysics(deltaTime);
   controls.update();
+  mixers.forEach((mixer) => mixer.update(deltaTime));
   renderer.render(scene, camera);
 }
 
