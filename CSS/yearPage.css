@@ -10,7 +10,7 @@ body {
     overflow-x: hidden;
 }
 #main-background{
-    background-image: linear-gradient(135deg,#a53f5b, #592651);
+    background-image: linear-gradient(90deg,#a53f5b, #592651);
     padding-top: 20px;
 }
 
@@ -20,6 +20,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-image: linear-gradient(90deg,#a53f5b, #592651);
 
 }
 
@@ -43,7 +44,7 @@ header {
 }
 
 #top {
-    color:#f9a000;
+    color:#ffffff;
     font-size: 60px;
     font-weight: bold;
 }
@@ -90,6 +91,12 @@ Year Selection Section
     text-align: center;
 }
 
+.columnLarge {
+    height: 1100px;
+    text-align: center;
+    padding-bottom: 100px;
+}
+
 img {
     height: 100%;
     width: auto;
@@ -119,14 +126,14 @@ img {
 }
 .scroll-wheel li.selected {
     font-weight: bold;
-    color: #f9a000;
+    color: #e67a7a;
 }
 
 #yearSelection {
     background-image: url(/img/calendar.jpeg);
     background-size: cover;
     background-position: center;
-    color: #ef5966;
+    color: #ffffff;
     font-size: 32px; 
     font-weight: bold;
 }
@@ -188,4 +195,112 @@ img {
                 -2px -2px 0 yellow, 
                 2px -2px 0 yellow, 
                 -2px 2px 0 yellow;
+}
+
+/*
+========================================================================================================
+Year Metric Section
+========================================================================================================
+*/
+
+/* Toggle Switch for Work */
+.wrap {
+    width: 200px !important;
+    display: flex !important;
+    border-radius: 2rem;
+    overflow: hidden;
+    padding: 0rem;
+    background-color: #e5e5e5;
+    border: 10px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+input[type="radio"] + label {
+    width: 50%;
+    font-size: 1rem;
+    padding: 0.6rem 0;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.5s;
+    z-index: 2;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="radio"]:checked + label {
+    color: #ffffff;
+    background: #371d37;
+    z-index: 1;
+}
+
+#work {
+    background-image: url(/img/work.jpeg);
+    height: 300px;
+    width: 800px;
+    background-size: cover;
+    justify-content: center;
+    color:#ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    text-shadow:
+        0.05em 0 black,
+        0 0.05em black,
+        -0.05em 0 black,
+        0 -0.05em black,
+        -0.05em -0.05em black,
+        -0.05em 0.05em black,
+        0.05em -0.05em black,
+        0.05em 0.05em black;
+}
+
+#school {
+    background-image: url(/img/school.jpeg);
+    height: 300px;
+    width: 800px;
+    background-size: cover;
+    color:#ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    text-shadow:
+        0.05em 0 black,
+        0 0.05em black,
+        -0.05em 0 black,
+        0 -0.05em black,
+        -0.05em -0.05em black,
+        -0.05em 0.05em black,
+        0.05em -0.05em black,
+        0.05em 0.05em black;
+}
+
+#sleep {
+    background-image: url(/img/sleep.jpeg);
+    height: 300px;
+    width: 800px;
+    background-size: cover;
+    color:#ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    text-shadow:
+        0.05em 0 black,
+        0 0.05em black,
+        -0.05em 0 black,
+        0 -0.05em black,
+        -0.05em -0.05em black,
+        -0.05em 0.05em black,
+        0.05em -0.05em black,
+        0.05em 0.05em black;
+    }
+
+#footer {
+    background-image: linear-gradient(90deg,#a53f5b, #592651);
+    background-size: cover;
 }
