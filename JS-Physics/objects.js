@@ -7,6 +7,11 @@ let loader = new GLTFLoader();
 let physicsObjects = [];
 export let mixers = [];
 
+export let characterModel = null;
+export let characterMixer = null;
+export let characterActions = {};
+export let currentAction = null;
+
 function createGround(scene) {
   let textureLoader = new THREE.TextureLoader();
   let groundTexture = textureLoader.load('/img/textures/grass.jpg'); 
@@ -38,11 +43,9 @@ function createGround(scene) {
   getPhysicsWorld().addRigidBody(body);
 }
 
-export let astronautMixer = null;
-export let astronautActions = [];
-export let currentActionIndex = 0;
+export let characterBody = null;
 
-async function loadGLBModel(scene, path, position, scale, isStatic = false, mass = 1) {
+async function loadGLBModel(scene, path, position, scale, isStatic = false, mass = 1, isCharacter = false) {
   return new Promise((resolve, reject) => {
     loader.load(path, async (gltf) => {
       let model = gltf.scene;
@@ -57,36 +60,53 @@ async function loadGLBModel(scene, path, position, scale, isStatic = false, mass
         }
       });
 
-      if (gltf.animations.length > 0) {
-        console.log("Available Animations:", gltf.animations.map(a => a.name));
+      if (isCharacter) {
+        characterModel = model;
+        characterMixer = new AnimationMixer(model);
+        let animationNames = [];
 
-        astronautMixer = new AnimationMixer(model);
-
-        // Store all animations
-        gltf.animations.forEach((clip, index) => {
-          let action = astronautMixer.clipAction(clip);
-          astronautActions.push(action);
-          if (index === 0) action.play(); // Start with first animation
+        gltf.animations.forEach((clip) => {
+          let action = characterMixer.clipAction(clip);
+          characterActions[clip.name] = action;
+          animationNames.push(clip.name);
         });
 
-        mixers.push(astronautMixer);
+        console.log("Available Animations:", animationNames);
+
+        if (characterActions["idle"]) {
+          currentAction = characterActions["idle"];
+          currentAction.play();
+          console.log("Starting animation: idle");
+        } else {
+          console.log("No idle animation found. Defaulting to first animation.");
+          if (animationNames.length > 0) {
+            currentAction = characterActions[animationNames[0]];
+            currentAction.play();
+          }
+        }
+
+        mixers.push(characterMixer);
       }
 
       let AmmoLib = getAmmo();
 
       if (!isStatic) {
-        let shape = new AmmoLib.btBoxShape(new AmmoLib.btVector3(10, 0.01, 10)); 
+        let shape = new AmmoLib.btBoxShape(new AmmoLib.btVector3(0.5, 1, 0.5));
         let transform = new AmmoLib.btTransform();
         transform.setIdentity();
         transform.setOrigin(new AmmoLib.btVector3(position.x, position.y, position.z));
 
         let motionState = new AmmoLib.btDefaultMotionState(transform);
         let localInertia = new AmmoLib.btVector3(0, 0, 0);
-        if (mass > 0) shape.calculateLocalInertia(mass, localInertia);
+        shape.calculateLocalInertia(mass, localInertia);
 
         let rbInfo = new AmmoLib.btRigidBodyConstructionInfo(mass, motionState, shape, localInertia);
         let body = new AmmoLib.btRigidBody(rbInfo);
         getPhysicsWorld().addRigidBody(body);
+
+        if (isCharacter) {
+          characterBody = body; // Store reference to physics body
+        }
 
         physicsObjects.push({ mesh: model, body });
       }
@@ -97,23 +117,43 @@ async function loadGLBModel(scene, path, position, scale, isStatic = false, mass
 }
 
 
+
+// Load all models
 export async function loadSceneModels(scene) {
   createGround(scene);
-  // await loadGLBModel(scene, '/models/astroguy.glb', { x: 0, y: 0, z: 0 }, 4, false, 5);
-  loadGLBModel(scene, '/models/source/walkingAstronaut.glb', { x: 0, y: 0, z: 0 }, 1, false, 5);
+  await loadGLBModel(scene, '/models/charAnim.glb', { x: 0, y: 0, z: 0 }, 1, false, 5, true); 
   await loadGLBModel(scene, '/models/stopSign.glb', { x: 2, y: 0, z: -3 }, 1, false, 1);
   await loadGLBModel(scene, '/models/nasaLogo.glb', { x: 0, y: 0, z: -30}, 2, false, 1);
 }
 
-export function switchAstronautAnimation() {
-  if (astronautActions.length > 0) {
-    astronautActions[currentActionIndex].stop(); // Stop current animation
-    currentActionIndex = (currentActionIndex + 1) % astronautActions.length; // Move to next animation
-    astronautActions[currentActionIndex].play(); // Play next animation
-    console.log("Switched to animation:", astronautActions[currentActionIndex]._clip.name);
+// Switch animations
+export function switchCharacterAnimation(animationName) {
+  console.log("Available animations:", Object.keys(characterActions));
+
+  if (characterActions[animationName]) {
+    console.log(`Switching to animation: ${animationName}`);
+
+    if (currentAction) {
+      currentAction.stop();
+    }
+
+    currentAction = characterActions[animationName];
+    currentAction.reset().play();
+    
+    if (animationName === "jump" || animationName === "backflip") {
+      currentAction.setLoop(THREE.LoopOnce);
+      currentAction.clampWhenFinished = true;
+      currentAction.onFinish = () => switchCharacterAnimation("idle");
+    } else {
+      currentAction.setLoop(THREE.LoopRepeat);
+      currentAction.setEffectiveTimeScale(1);
+    }
+  } else {
+    console.warn(`Animation "${animationName}" not found.`);
   }
 }
 
+// Physics update
 export function updatePhysicsObjects() {
   let transformAux = new (getAmmo().btTransform)();
   for (let obj of physicsObjects) {
@@ -125,3 +165,4 @@ export function updatePhysicsObjects() {
     }
   }
 }
+
