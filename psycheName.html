@@ -12,24 +12,20 @@
     body {
         font-family: Arial, sans-serif;
         margin: 0;
-        overflow: hidden;
         padding: 0;
         display: flex;
-        background: radial-gradient(circle, #0b3d91, #000);
-        text-align: center;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         background-color: #0d1117;
         color: #ffffff;
         text-emphasis-color: white;
+        
     }
     h1 {
         margin-top: 20px;
     }
     .game-container {
-        position: relative;
-        width: 100vw;
         margin: 20px 0;
         display: flex;
         gap: 50px;
@@ -66,20 +62,11 @@
         border-radius: 5px;
     }
     canvas {
-        background: url('space-bg.jpg') no-repeat center center;
         background-color: #000000;
         border: 2px solid #ffffff;
         align-items: center;
     }
-    .controls {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            border-radius: 10px;
-        }
+    
     button {
         padding: 10px;
         background-color: #1d3557;
@@ -205,53 +192,6 @@
 
                     const canvas = document.getElementById('gameCanvas');
                     const ctx = canvas.getContext('2d');
-                  
-                    canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const spaceship = {
-            x: canvas.width / 2,
-            y: canvas.height - 80,
-            width: 50,
-            height: 50,
-            speed: 5,
-            dx: 0,
-            dy: 0
-        };
-        
-        function drawSpaceship() {
-            ctx.fillStyle = "white";
-            ctx.fillRect(spaceship.x, spaceship.y, spaceship.width, spaceship.height);
-        }
-        
-        function update() {
-            spaceship.x += spaceship.dx;
-            spaceship.y += spaceship.dy;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawSpaceship();
-            requestAnimationFrame(update);
-        }
-        
-        function keyDown(e) {
-            if (e.key === "ArrowRight") spaceship.dx = spaceship.speed;
-            else if (e.key === "ArrowLeft") spaceship.dx = -spaceship.speed;
-            else if (e.key === "ArrowUp") spaceship.dy = -spaceship.speed;
-            else if (e.key === "ArrowDown") spaceship.dy = spaceship.speed;
-        }
-        
-        function keyUp(e) {
-            if (["ArrowRight", "ArrowLeft"].includes(e.key)) spaceship.dx = 0;
-            if (["ArrowUp", "ArrowDown"].includes(e.key)) spaceship.dy = 0;
-        }
-        
-        document.addEventListener("keydown", keyDown);
-        document.addEventListener("keyup", keyUp);
-        update();
-
-
-
-
-       
                     const startButton = document.getElementById('startButton');
                     const gameMessage = document.getElementById('game-message');
                 
