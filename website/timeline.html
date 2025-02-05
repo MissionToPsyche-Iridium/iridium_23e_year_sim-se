@@ -105,6 +105,8 @@
       padding: 20px;
       position: relative;
       z-index: 1;
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
     }
 
     .timeline {
@@ -116,11 +118,12 @@
       content: '';
       position: absolute;
       width: 4px;
-      background-color: var(--primary-color);
+      background: linear-gradient(to bottom, var(--primary-color) var(--scroll-progress, 0%), rgba(48, 33, 68, 0.2) var(--scroll-progress, 0%));
       top: 0;
       bottom: 0;
       left: 50%;
       margin-left: -2px;
+      transition: background 0.3s ease;
     }
 
     .event {
@@ -140,15 +143,45 @@
       border: 4px solid var(--primary-color);
       border-radius: 50%;
       top: 50%;
-      /* The base transform moves the marker vertically */
       transform: translateY(-50%);
       cursor: pointer;
       transform-style: preserve-3d;
       animation: pulse 4s infinite;
+      transition: all 0.3s ease;
     }
 
     .event:hover::after {
       background-color: var(--primary-color);
+      transform: translateY(-50%) scale(1.2);
+    }
+
+    /* Ripple effect for event markers */
+    .event::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(239, 89, 101, 0.4);
+      top: 50%;
+      opacity: 0;
+      transform: translateY(-50%) scale(1);
+      pointer-events: none;
+    }
+
+    .event.clicked::before {
+      animation: ripple 0.8s ease-out;
+    }
+
+    @keyframes ripple {
+      0% {
+        transform: translateY(-50%) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-50%) scale(3);
+        opacity: 0;
+      }
     }
 
     @keyframes pulse {
@@ -187,8 +220,49 @@
       background-color: rgba(48, 33, 68, 0.1);
       border-radius: 8px;
       position: relative;
-      /* Optional: add a subtle 3D effect */
       transform: translateZ(0);
+      opacity: 0;
+      transition: all 0.5s ease;
+      cursor: pointer;
+      max-height: 80px;
+      overflow: hidden;
+    }
+
+    .event-content.expanded {
+      max-height: 500px;
+      background-color: rgba(48, 33, 68, 0.2);
+    }
+
+    .event-content::after {
+      content: '↓';
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+      color: var(--accent-color);
+      transition: transform 0.3s ease;
+    }
+
+    .event-content.expanded::after {
+      transform: rotate(180deg);
+    }
+
+    .event.visible .event-content {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .event-left .event-content {
+      transform: translateX(-50px);
+    }
+
+    .event-right .event-content {
+      transform: translateX(50px);
+    }
+
+    .event-content:hover {
+      transform: scale(1.05) translateZ(10px);
+      box-shadow: 0 5px 15px rgba(239, 89, 101, 0.2);
+      background-color: rgba(48, 33, 68, 0.15);
     }
 
     .event-date {
@@ -213,15 +287,41 @@
       max-width: 300px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       opacity: 0;
-      transform: perspective(600px) rotateY(90deg);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: perspective(600px) rotateY(90deg) scale(0.8);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
+      backdrop-filter: blur(5px);
     }
 
     .event-popup.active {
       opacity: 1;
-      transform: perspective(600px) rotateY(0deg);
+      transform: perspective(600px) rotateY(0deg) scale(1);
       pointer-events: auto;
+    }
+
+    .event-popup h3 {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s ease 0.2s;
+    }
+
+    .event-popup p {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease 0.3s;
+    }
+
+    .event-popup img {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.4s ease 0.4s;
+    }
+
+    .event-popup.active h3,
+    .event-popup.active p,
+    .event-popup.active img {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
     @media screen and (max-width: 768px) {
@@ -342,24 +442,104 @@
     }
     initStars();
 
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
     function animateStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let star of stars) {
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "white";
-        ctx.fill();
-        star.y += star.speed;
+        // Add mouse influence to star movement
+        star.x += mouseX * star.speed * 0.5;
+        star.y += star.speed + mouseY * star.speed * 0.5;
+
+        // Wrap stars around screen
         if (star.y > canvas.height) {
           star.y = 0;
           star.x = Math.random() * canvas.width;
         }
+        if (star.y < 0) {
+          star.y = canvas.height;
+          star.x = Math.random() * canvas.width;
+        }
+        if (star.x > canvas.width) {
+          star.x = 0;
+        }
+        if (star.x < 0) {
+          star.x = canvas.width;
+        }
+
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "white";
+        ctx.fill();
       }
       requestAnimationFrame(animateStars);
     }
     animateStars();
 
-    /* === Popup / Modal Logic with 3D Flip Transition === */
+    // Update timeline progress based on scroll
+    function updateTimelineProgress() {
+      const timeline = document.querySelector('.timeline');
+      const rect = timeline.getBoundingClientRect();
+      const total = rect.height;
+      const visible = window.innerHeight;
+      const current = Math.max(0, -rect.top);
+      const progress = Math.min(100, (current / (total - visible)) * 100);
+      document.documentElement.style.setProperty('--scroll-progress', `${progress}%`);
+    }
+
+    window.addEventListener('scroll', updateTimelineProgress);
+    updateTimelineProgress();
+
+    // Parallax effect for timeline
+    document.addEventListener('mousemove', (e) => {
+      const container = document.querySelector('.timeline-container');
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+      container.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+
+    // Add click handlers for event content expansion
+    document.querySelectorAll('.event-content').forEach(content => {
+      content.addEventListener('click', (e) => {
+        // Don't trigger if clicking on a marker
+        if (e.target.closest('.event::after')) return;
+        content.classList.toggle('expanded');
+      });
+    });
+
+    // Add ripple effect to event markers
+    document.querySelectorAll('.event').forEach(event => {
+      event.addEventListener('click', () => {
+        event.classList.remove('clicked');
+        void event.offsetWidth; // Trigger reflow
+        event.classList.add('clicked');
+      });
+    });
+
+    /* === Intersection Observer for Scroll Animations === */
+    // Create Intersection Observer to handle scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all timeline events
+    document.querySelectorAll('.event').forEach(event => {
+      observer.observe(event);
+    });
+
     const popup = document.createElement('div');
     popup.className = 'event-popup';
     document.body.appendChild(popup);

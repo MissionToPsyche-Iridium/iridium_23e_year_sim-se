@@ -301,10 +301,10 @@
                         // Determine the sun influence from the surface normal and sun direction
                         float sunInfluence = max(0.0, dot(normalize(vNormal), sunDirection));
                         // Rapid day/night temperature transition using a power function for sharper contrast
-                        float temperature = mix(80.0, 120.0, pow(sunInfluence, 4.0));
+                        float temperature = mix(-340.0, -100.0, pow(sunInfluence, 4.0));
                         
-                        // Normalize temperature for color mapping: 80K (0.0) to 120K (1.0)
-                        float t = clamp((temperature - 80.0) / 40.0, 0.0, 1.0);
+                        // Normalize temperature for color mapping: -340°F (0.0) to -100°F (1.0)
+                        float t = clamp((temperature + 340.0) / 240.0, 0.0, 1.0);
                         
                         int idx = int(t * 5.0);
                         vec3 tempColor = mix(COLOR_TABLE[idx], COLOR_TABLE[idx + 1], fract(t * 5.0));
@@ -440,12 +440,12 @@
         <div style="display: flex;">
             <div class="temperature-scale"></div>
             <div class="temp-labels">
-                <div>120K (Hot)</div>
-                <div>112K</div>
-                <div>104K</div>
-                <div>96K</div>
-                <div>88K</div>
-                <div>80K (Cold)</div>
+            <div>-100°F (Hot)</div>
+            <div>-156°F</div>
+            <div>-212°F</div>
+            <div>-268°F</div>
+            <div>-324°F</div>
+            <div>-340°F (Cold)</div>
             </div>
         </div>
         <div style="margin-top: 15px;">
