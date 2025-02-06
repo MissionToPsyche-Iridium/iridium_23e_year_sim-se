@@ -57,57 +57,42 @@ function addLighting() {
 
 
 let keys = {}; 
-let moveSpeed = 0.1; 
 
 window.addEventListener("keydown", (event) => {
   keys[event.key.toLowerCase()] = true;
 
   if (!characterBody) return;
 
-  let forwardVector = new Ammo.btVector3(0, 0, -1);
   let transform = new Ammo.btTransform();
   characterBody.getMotionState().getWorldTransform(transform);
   let rotation = transform.getRotation();
   
   let quaternion = new THREE.Quaternion(rotation.x(), rotation.y(), rotation.z(), rotation.w());
   let forward = new THREE.Vector3(0, 0, -1).applyQuaternion(quaternion).normalize();
-  let force = new Ammo.btVector3(forward.x * 5, 0, forward.z * 5);
+
+  let moveSpeed = 20; 
+  let force = new Ammo.btVector3(forward.x * moveSpeed, 0, forward.z * moveSpeed);
 
   if (keys["w"]) {
     characterBody.activate();
-    characterBody.applyCentralImpulse(force);
+    characterBody.applyCentralForce(force);
     switchCharacterAnimation("walk");
-  }
-  if (keys["s"]) {
-    characterBody.activate();
-    characterBody.applyCentralImpulse(new Ammo.btVector3(-force.x, 0, -force.z));
-    switchCharacterAnimation("walk");
-  }
-  if (keys["a"]) {
-    characterModel.rotation.y += 0.05;
-  }
-  if (keys["d"]) {
-    characterModel.rotation.y -= 0.05;
-  }
-  if (keys[" "]) {
-    switchCharacterAnimation("jump");
-  }
-  if (keys["b"]) {
-    switchCharacterAnimation("backflip");
-  }
-  if (keys["w"] && keys["shift"]) {
-    characterBody.applyCentralImpulse(new Ammo.btVector3(forward.x * 10, 0, forward.z * 10));
-    switchCharacterAnimation("mediumRun");
   }
 });
+
 
 window.addEventListener("keyup", (event) => {
   keys[event.key.toLowerCase()] = false;
 
-  if (event.key.toLowerCase() === "w" || event.key.toLowerCase() === "s") {
-    switchCharacterAnimation("idle");
+  if (event.key.toLowerCase() === "w") {
+      if (characterModel.userData.physicsBody) {
+          characterModel.userData.physicsBody.setLinearVelocity(new Ammo.btVector3(0, 0, 0));
+          characterModel.userData.physicsBody.setAngularVelocity(new Ammo.btVector3(0, 0, 0));
+      }
+      switchCharacterAnimation("idle");
   }
 });
+
 
 
 
@@ -145,6 +130,36 @@ function updatePhysics(deltaTime) {
   }
 }
 
+const characterMovement = () => {
+  if (!characterBody || !keys["w"]) return;
+
+  const movementSpeed = 15;
+
+  let transform = new Ammo.btTransform();
+  characterBody.getMotionState().getWorldTransform(transform);
+  let rotation = transform.getRotation();
+
+  let quaternion = new THREE.Quaternion(rotation.x(), rotation.y(), rotation.z(), rotation.w());
+
+  let euler = new THREE.Euler(0, characterModel.rotation.y, 0); 
+  quaternion.setFromEuler(euler);
+
+  let forward = new THREE.Vector3(0, 0, -1).applyQuaternion(quaternion).normalize();
+
+  console.log(`Character Forward Vector: ${forward.x}, ${forward.y}, ${forward.z}`);
+
+  let impulse = new Ammo.btVector3(forward.x * movementSpeed, 0, forward.z * movementSpeed);
+
+  characterBody.activate();
+  characterBody.applyCentralImpulse(impulse);
+
+  console.log(`Applying impulse: ${impulse.x()}, ${impulse.y()}, ${impulse.z()}`);
+
+  switchCharacterAnimation("walk");
+};
+
+
+
 function animate() {
   requestAnimationFrame(animate);
   let deltaTime = 1 / 60;
@@ -156,17 +171,16 @@ function animate() {
     let targetPosition = characterModel.position.clone();
     targetPosition.y += 1; 
     controls.target.copy(targetPosition);
+    characterMovement();
   }
 
   if (mixers.length > 0) {
-    console.log("Updating animation mixer...");
     mixers.forEach((mixer) => mixer.update(deltaTime));
-  } else {
-    console.warn("No animation mixers detected.");
   }
 
   renderer.render(scene, camera);
 }
+
 
 
 

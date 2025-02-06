@@ -2,12 +2,11 @@ let physicsWorld;
 let AmmoLib;
 
 async function loadAmmo() {
-  AmmoLib = await import('/public/ammo/ammo.js');
-  AmmoLib = await AmmoLib.default();
+  AmmoLib = await Ammo(); 
 }
 
 async function initPhysicsWorld() {
-  await loadAmmo();
+  await loadAmmo(); 
 
   let collisionConfiguration = new AmmoLib.btDefaultCollisionConfiguration(),
       dispatcher = new AmmoLib.btCollisionDispatcher(collisionConfiguration),
