@@ -5,13 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/settings-style.css">
-    <link rel="stylesheet" href="CSS/name.css">
+  
     <header id="header">
         <img src="img/psyche.svg" id="psyche">
         <img src="img/asteroid.png" id="asteroid">
     </header>
     <title>The Origin of Psyche's Name</title>
 </head>
+<title>Psyche's Origins: Myth vs. Metal</title>
+<style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    .container { display: flex; justify-content: center; margin-top: 20px; }
+    .box { width: 200px; height: 300px; border: 2px dashed #555; padding: 10px; margin: 10px; }
+    .draggable { padding: 10px; margin: 5px; background-color: lightblue; cursor: grab; }
+    .correct { background-color: lightgreen; }
+    .incorrect { background-color: lightcoral; }
+</style>
+</head>
+<body>
+<h1>Psyche's Origins: Myth vs. Metal</h1>
+<p>Drag the statements to the correct category.</p>
+<div class="container">
+    <div class="box" id="mythology" ondrop="drop(event, 'mythology')" ondragover="allowDrop(event)">
+        <h3>Greek Mythology</h3>
+    </div>
+    <div class="box" id="science" ondrop="drop(event, 'science')" ondragover="allowDrop(event)">
+        <h3>Asteroid Facts</h3>
+    </div>
+</div>
+<div id="facts">
+    <div class="draggable" id="fact1" draggable="true" ondragstart="drag(event)" data-category="science">NASA is sending a mission to study me</div>
+    <div class="draggable" id="fact2" draggable="true" ondragstart="drag(event)" data-category="mythology">I was a mortal who became a goddess</div>
+    <div class="draggable" id="fact3" draggable="true" ondragstart="drag(event)" data-category="science">I'm made of mostly metal</div>
+    <div class="draggable" id="fact4" draggable="true" ondragstart="drag(event)" data-category="mythology">Eros (Cupid) fell in love with me</div>
+</div>
+<script>
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function drop(event, category) {
+        event.preventDefault();
+        let data = event.dataTransfer.getData("text");
+        let draggedElement = document.getElementById(data);
+        
+        if (draggedElement.getAttribute("data-category") === category) {
+            draggedElement.classList.add("correct");
+            document.getElementById(category).appendChild(draggedElement);
+        } else {
+            draggedElement.classList.add("incorrect");
+            setTimeout(() => draggedElement.classList.remove("incorrect"), 1000);
+        }
+    }
+</script>
+</body>
 <style>
     body {
         font-family: Arial, sans-serif;
