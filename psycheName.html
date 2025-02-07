@@ -5,302 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/settings-style.css">
-    <link rel="stylesheet" href="CSS/name.css">
-    <title>The Origin of Psyche's Name</title>
+    <title>Year on Psyche Sim</title>
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background-color: #0d1117;
-        color: #ffffff;
-        text-emphasis-color: white;
-        
-    }
-    h1 {
-        margin-top: 20px;
-    }
-    .game-container {
-        margin: 20px 0;
-        display: flex;
-        gap: 50px;
-        justify-items: center;
-        align-items: center;
-        height: 100vh;
-        text-emphasis-color: white;
-        color: white;
-    }
-    .game {
-        margin: 20px;
-        width: 80%;
-        padding: 20px;
-        border: 1px solid #ffffff;
-        border-radius: 10px;
-        text-align: center;
-        max-width: 600px;
-        text-emphasis-color: white;
-    }
-        
-    .draggable {
-        color: white;
-        padding: 10px;
-        margin: 5px;
-        background-color: #261d57;
-        border: 1px solid #71459d;
-        border-radius: 5px;
-        cursor: grab;
-    }
-    .droppable {
-        margin: 10px 0;
-        padding: 10px;
-        background-color: #8a62bc;
-        border: 1px dashed #ffffff;
-        border-radius: 5px;
-    }
-    #match-message {
-        color: white !important;
-        font-size: 1.2em;
-        margin-top: 20px;
-        text-align: center;
-    }
-    #match-game.game {
-        color: white;
-        margin-top: 20px;
-        text-align: center;
-    }
-    canvas {
-        background-color: #000000;
-        border: 2px solid #ffffff;
-        align-items: center;
-    }
-    
-    button {
-        padding: 10px;
-        background-color: #1d3557;
-        color: #ffffff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #457b9d;
-    }
-</style>
-</head>
+<body>
         <header id="header">
             <img src="img/psyche.svg" id="psyche">
             <img src="img/asteroid.png" id="asteroid">
         </header>
-
         <main>
-            <h1>How Psyche's Name Came To Be</h1>
-            <a href="#more-info" id="infoButton">Learn More</a>
-        
-            <!-- Section 1: Intro -->
-            <section id="introduction" class = "image-container">
-                <h2>Introduction to Psyche</h2>
-                <p>Psyche is a metal-rich asteroid orbiting the Sun between Mars and Jupiter. It was named after the Greek goddess Psyche.</p>
-                <img src="img/goddess.jpg" alt="The Greek Goddess Psyche" class="goddess-image">
-            </section>
-    
-            <!-- Section 2: Historical Background -->
-            <section id="history" class = "image-container">
-                <h2>Historical Background</h2>
-                <p>Psyche was discovered in 1852 by Italian astronomer Annibale de Gasparis and is one of the largest asteroids in our solar system.</p>
-                <img src="img/annibale.jpg" alt="Italian astronomer Annibale de Gasparis" class="historical-image">
-            </section>
-    
-            <!-- Section 3: Mission to Psyche -->
-            <section id="mission" class = "image-container">
-                <h2>NASA's Psyche Mission</h2>
-                <p>The Psyche spacecraft, designed by NASA, aims to study the asteroid to understand more about planetary cores and the history of the solar system.</p>
-                <img src="img/psyche.jpg" alt="Psyche spacecraft" class="spacecraft-image">
-            </section>
-    
-            <!-- Section 4: Fun Facts -->
-            <section id="fun-facts">
-                <h2>Fun Facts About Psyche</h2>
-                <ul>
-                    <li>Psyche is primarily composed of nickel and iron, much like Earth's core.</li>
-                    <li>It is about 226 kilometers (140 miles) in diameter.</li>
-                    <li>Its name means "soul" in Greek mythology.</li>
-                </ul>
-            </section>
-            <body>
-                <h1>Test your knowledge about Psyche with Interactive Games</h1>
-                
-                <div class="game-container">
-                    <!-- Match the Facts Game -->
-                    <div class="game" id="match-game">
-                        <h2>Match the Facts</h2>
-                        <p>Drag the facts to their correct matches!</p>
-                
-                        <div id="draggables">
-                            <div class="draggable" draggable="true" data-match="fact1">Who discovered Psyche?</div>
-                            <div class="draggable" draggable="true" data-match="fact2">Why call it 16 Psyche?</div>
-                            <div class="draggable" draggable="true" data-match="fact3">When is NASA Psyche Mission supposed to reach Psyche?</div>
-                        </div>
-                
-                        <div id="dropzones">
-                            <div class="droppable" data-match="fact1">Italian Astronomer Annibale de Gasparis</div>
-                            <div class="droppable" data-match="fact2">Psyche was the 16th Asteroid to be discovered</div>
-                            <div class="droppable" data-match="fact3">2029</div>
-                        </div>
-                
-                        <p id="match-message"></p>
-                    </div>
-                
-                    <!-- Asteroid Navigation Game -->
-                    <div class="game" id="navigation-game">
-                        <h2>Asteroid Navigation</h2>
-                        <p>Use arrow keys to navigate your spaceship to Psyche!</p>
-                
-                        <canvas id="gameCanvas" width="300" height="300"></canvas>
-                        <button id="startButton">Start Game</button>
-                        <p id="game-message"></p>
-                    </div>
-                </div>
-                
-                <script>
-                    // Match the Facts Game Logic
-                    const draggables = document.querySelectorAll('.draggable');
-                    const droppables = document.querySelectorAll('.droppable');
-                    const matchMessage = document.getElementById('match-message');
-                
-                    draggables.forEach(draggable => {
-                        draggable.addEventListener('dragstart', () => {
-                            draggable.classList.add('dragging');
-                        });
-                        draggable.addEventListener('dragend', () => {
-                            draggable.classList.remove('dragging');
-                        });
-                    });
-                
-                    droppables.forEach(droppable => {
-                        droppable.addEventListener('dragover', (e) => {
-                            e.preventDefault();
-                        });
-                        droppable.addEventListener('drop', (e) => {
-                            e.preventDefault();
-                            const dragging = document.querySelector('.dragging');
-                            if (dragging.dataset.match === droppable.dataset.match) {
-                                droppable.textContent = dragging.textContent;
-                                dragging.remove();
-                                if (document.querySelectorAll('.draggable').length === 0) {
-                                    matchMessage.textContent = 'You matched all the facts correctly!';
-                                }
-                            } else {
-                                matchMessage.textContent = 'Incorrect match. Try again!';
-                            }
-                        });
-                    });
-                
-                    // Asteroid Navigation Game Logic
+            <h1>How Psyche's name came to be</h1>
 
-                    const canvas = document.getElementById('gameCanvas');
-                    const ctx = canvas.getContext('2d');
-                    const startButton = document.getElementById('startButton');
-                    const gameMessage = document.getElementById('game-message');
-                
-                  let ship = { x: 150, y: 250, size: 10 };
-                    let psyche = { x: 150, y: 50, size: 20 };
-                    let obstacles = [];
-                    let gameInterval;
-                
-                    function drawShip() {
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect(ship.x, ship.y, ship.size, ship.size);
-                    }
-                
-                    function drawPsyche() {
-                        ctx.fillStyle = 'gold';
-                        ctx.beginPath();
-                        ctx.arc(psyche.x, psyche.y, psyche.size, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                
-                    function drawObstacles() {
-                        ctx.fillStyle = 'red';
-                        obstacles.forEach(obs => {
-                            ctx.fillRect(obs.x, obs.y, obs.size, obs.size);
-                        });
-                    }
-                
-                    function updateGame() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        drawShip();
-                        drawPsyche();
-                        drawObstacles();
-                
-                        obstacles.forEach(obs => {
-                            obs.y += 2;
-                            if (
-                                ship.x < obs.x + obs.size &&
-                                ship.x + ship.size > obs.x &&
-                                ship.y < obs.y + obs.size &&
-                                ship.y + ship.size > obs.y
-                            ) {
-                                gameOver();
-                            }
-                        });
-                
-                        if (
-                            ship.x < psyche.x + psyche.size &&
-                            ship.x + ship.size > psyche.x - psyche.size &&
-                            ship.y < psyche.y + psyche.size &&
-                            ship.y + ship.size > psyche.y - psyche.size
-                        ) {
-                         gameWin();
-                        }
-                    }
-                
-                    function gameOver() {
-                        clearInterval(gameInterval);
-                        gameMessage.textContent = 'Game Over! Try again!';
-                 }
-                
-                    function gameWin() {
-                        clearInterval(gameInterval);
-                        gameMessage.textContent = 'Congratulations! You reached Psyche!';
-                    }
-                
-                    function moveShip(e) {
-                        if (e.key === 'ArrowUp') ship.y -= 10;
-                        if (e.key === 'ArrowDown') ship.y += 10;
-                        if (e.key === 'ArrowLeft') ship.x -= 10;
-                        if (e.key === 'ArrowRight') ship.x += 10;
-                    }
-                
-                    startButton.addEventListener('click', () => {
-                        ship = { x: 150, y: 250, size: 10 };
-                        psyche = { x: 150, y: 50, size: 20 };
-                        obstacles = Array.from({ length: 5 }, () => ({
-                            x: Math.random() * 280 + 10,
-                           y: Math.random() * 150,
-                            size: 15,
-                        }));
-                        gameMessage.textContent = '';
-                        gameInterval = setInterval(updateGame, 50);
-                        document.addEventListener('keydown', moveShip);
-                    });
-                    </script>
-                <body>   
-         <!-- Section 5: Learn More -->
-         <section id="more-info">
-            <h2>Learn More</h2>
-            <p>Want to dive deeper? Visit the <a href="https://www.nasa.gov/psyche" target="_blank">NASA Psyche Mission Page</a>.</p>
-        </section>
         </main>
-        <footer id="footer">
-            <h2>This is the footer</h2>
-        </footer>
+        <section>
+            <h2>Introduction</h2>
+            <p>Psyche is a metal-rich asteroid named after the Greek goddess of the soul.</p>
+            <img src="img/goddess.jpg" alt="The Greek Goddess Psyche">
+        </section>
+
+        <section>
+            <h2>Historical Background</h2>
+            <p>Discovered in 1852 by Italian astronomer Annibale de Gasparis, Psyche is one of the largest asteroids.</p>
+            <img src="img/annibale.jpg" alt="Italian astronomer Annibale de Gasparis">
+        </section>
+
+        <section>
+            <h2>NASA's Psyche Mission</h2>
+            <p>NASA's Psyche spacecraft will study the asteroid to learn about planetary cores.</p>
+            <img src="img/psyche.jpg" alt="Psyche spacecraft">
+        </section>
+
+        <section>
+            <h2>Fun Facts</h2>
+            <ul>
+                <li>Psyche is primarily composed of nickel and iron.</li>
+                <li>It is about 226 kilometers (140 miles) in diameter.</li>
+                <li>The name "Psyche" means "soul" in Greek.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Test your knowledge about Psyche with Interactive Games</h1>
+
+    <div class="games-container">
+        <!-- Match the Facts Game -->
+        <div class="game-section">
+            <div class="game" id="match-game">
+                <h2>Match the Facts</h2>
+                <p>Drag the facts to their correct matches!</p>
+
+                <div id="draggables">
+                    <div class="draggable" draggable="true" data-match="fact1">Who discovered Psyche?</div>
+                    <div class="draggable" draggable="true" data-match="fact2">Why call it 16 Psyche?</div>
+                    <div class="draggable" draggable="true" data-match="fact3">When is NASA's Psyche Mission supposed to reach Psyche?</div>
+                </div>
+
+                <div id="dropzones">
+                    <div class="droppable" data-match="fact1">Italian Astronomer Annibale de Gasparis</div>
+                    <div class="droppable" data-match="fact2">Psyche was the 16th Asteroid to be discovered</div>
+                    <div class="droppable" data-match="fact3">2029</div>
+                </div>
+
+                <p id="match-message"></p>
+            </div>
+        </div>
+
+        <!-- Asteroid Navigation Game -->
+        <div class="game-section">
+            <div class="game" id="navigation-game">
+                <h2>Asteroid Navigation</h2>
+                <p>Use arrow keys to navigate your spaceship to Psyche!</p>
+
+                <canvas id="gameCanvas" width="300" height="300"></canvas>
+                <button id="startButton">Start Game</button>
+                <p id="game-message"></p>
+            </div>
+        </div>
     </div>
-    <script src="JS/settings.js" onload="createPopup()"></script>
-    <script src="JS/typewriter.js"></script>
 </body>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #6a0dad; /* Beautiful purple */
+            color: white;
+            text-align: center;
+        }
+        header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        main {
+            padding: 20px;
+        }
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #800080;
+        }
+        .games-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin: 50px 0;
+}
+
+.game-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.game {
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #261d57;
+}
+    </style>
 </html>
