@@ -19,14 +19,10 @@ tl.to('body', {background: 'white', delay: 1})
 tl.fromTo(
     '#page-header', 
     {
-        opacity: 0, 
-        x: -400,
-        y: -400
+        opacity: 0
     }, 
     {
-        opacity: 1, 
-        x: 0, 
-        y: 0, 
+        opacity: 1,
         duration: 2
     }
 )
@@ -132,4 +128,78 @@ tl.fromTo(
         }
     }
 );
+
+const tl2 = gsap.timeline(
+    {
+        defaults: {
+            yoyo: true,
+            repeat: -1,
+            duration: 5,
+            repeatDelay: 1
+
+}})
+
+tl2.fromTo(
+    '#bottomLeft',
+    { 
+        x: -75,
+        y: 75,
+        opacity: 1
+    },
+    { 
+        x: -300,
+        y: 300,
+        opacity: 0,
+        duration: 4, 
+        ease: "power2.out"
+    }
+)
+
+tl2.fromTo(
+    '#bottomRight',
+    { 
+        x: -75,
+        y: 75,
+        opacity: 1
+    },
+    { 
+        x: 300,
+        y: 300,
+        opacity: 0,
+        duration: 4, 
+        ease: "power2.out"
+    }, '<'
+)
+
+tl2.fromTo(
+    '#topLeft',
+    { 
+        x: -75,
+        y: 75,
+        opacity: 1
+    },
+    { 
+        x: -300,
+        y: -300,
+        opacity: 0,
+        duration: 4, 
+        ease: "power2.out" 
+    }, '<'
+)
+
+tl2.fromTo(
+    '#topRight',
+    { 
+        x: -75,
+        y: 75,
+        opacity: 1
+    },
+    { 
+        x: 300,
+        y: -300,
+        opacity: 0,
+        duration: 4, 
+        ease: "power2.out"
+    }, '<'
+)
 
