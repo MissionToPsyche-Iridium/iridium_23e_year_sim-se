@@ -1064,6 +1064,47 @@
           </li>
         </ul>
       </div>
+      <!-- Developer Metrics Dashboard (Password Protected) -->
+      <div id="metrics-overlay" class="overlay" style="display: none; position: fixed; top: 20px; left: 20px; width: 20%; height: calc(20% + 20px); background: rgba(0,0,0,0.4); z-index: 1000;">
+        <div class="overlay-content" style="position: relative; width: 100%; height: 100%; margin: 0; background: #fff; padding: 10px; border-radius: 8px;">
+          <button onclick="closeMetricsDashboard()" style="position: absolute; right: 5px; top: 5px; background: none; border: none; font-size: 14px; cursor: pointer;">&times;</button>
+          <iframe id="metrics-dashboard" style="width: 100%; height: calc(100% - 20px); border: none; overflow: hidden;"></iframe>
+        </div>
+      </div>
+      <script>
+        // Only show metrics dashboard to developers
+        const devPassword = '123'; // Change this to a secure password
+        
+        function toggleMetricsDashboard() {
+          const overlay = document.getElementById('metrics-overlay');
+          const dashboard = document.getElementById('metrics-dashboard');
+          const enteredPassword = prompt('Enter developer password to view metrics:');
+          
+          if (enteredPassword === devPassword) {
+            overlay.style.display = 'block';
+            dashboard.src = 'metrics-dashboard.html';
+          } else {
+            alert('Invalid password. Access denied.');
+          }
+        }
+
+        function closeMetricsDashboard() {
+          const overlay = document.getElementById('metrics-overlay');
+          overlay.style.display = 'none';
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+          // Ctrl+Shift+M to toggle dashboard
+          if (e.ctrlKey && e.shiftKey && e.key === 'M') {
+            toggleMetricsDashboard();
+          }
+          // Esc to close dashboard
+          if (e.key === 'Escape') {
+            closeMetricsDashboard();
+          }
+        });
+      </script>
     </footer>
   </div><!-- /.canvas -->
   <!-- JavaScript files -->
@@ -1100,7 +1141,6 @@
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('theme', theme);
     }
-    
     function toggleTheme() {
       const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';

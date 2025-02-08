@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulation Metrics Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 12px;
+        }
+        .dashboard {
+            max-width: 100%;
+            margin: 0;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .metric-card {
+            background: #2d2d2d;
+            padding: 8px;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #00ff00;
+            font-family: monospace;
+            margin: 0 0 8px 0;
+            font-size: 14px;
+        }
+        h2 {
+            color: #fff;
+            font-size: 12px;
+            margin: 0 0 4px 0;
+        }
+        .metric-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #00ff00;
+            margin: 4px 0;
+        }
+        .metric-label {
+            color: #888;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Developer Metrics</h1>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h2>Performance</h2>
+                <div>
+                    <div class="metric-label">FPS</div>
+                    <div class="metric-value" id="fps-counter">60</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <h2>Memory</h2>
+                <div>
+                    <div class="metric-label">Usage (MB)</div>
+                    <div class="metric-value" id="memory-usage">0</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <h2>Objects</h2>
+                <div>
+                    <div class="metric-label">Total</div>
+                    <div class="metric-value" id="active-objects">0</div>
+                </div>
+            </div>
+            <div class="metric-card">
+                <h2>Network</h2>
+                <div>
+                    <div class="metric-label">Latency (ms)</div>
+                    <div class="metric-value" id="latency">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if index.html exists and is accessible
+        fetch('index.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('index.html not found');
+                }
+                return response.text();
+            })
+            .then(() => {
+                // Only run dashboard if index.html exists
+                // Simulate updating metrics
+                function updateMetrics() {
+                    document.getElementById('fps-counter').textContent = Math.floor(Math.random() * 20 + 50);
+                    document.getElementById('memory-usage').textContent = Math.floor(Math.random() * 500 + 100);
+                    document.getElementById('active-objects').textContent = Math.floor(Math.random() * 1000 + 500);
+                    document.getElementById('latency').textContent = Math.floor(Math.random() * 100 + 20);
+                }
+
+                // Update metrics every second
+                setInterval(updateMetrics, 1000);
+            })
+            .catch(() => {
+                document.body.innerHTML = '<h1 style="color: red; text-align: center; margin-top: 8px; font-size: 12px;">Error: index.html not found</h1>';
+            });
+    </script>
+</body>
+</html>
