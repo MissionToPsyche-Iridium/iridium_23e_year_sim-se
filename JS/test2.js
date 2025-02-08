@@ -93,7 +93,7 @@ tl.fromTo(
     '#div4',
     {
         opacity: 0,
-        x: -1000,
+        x: 1000,
         pointerEvents: "none"
     },
     {
@@ -103,6 +103,90 @@ tl.fromTo(
         pointerEvents: "auto",
         scrollTrigger: {
             trigger: '#div4',
+            start: 'top center',
+            end: '50% center',
+            scrub: true
+        }
+    }
+);
+
+tl.fromTo(
+    '#div5',
+    {
+        opacity: 0,
+        x: -1000,
+        pointerEvents: "none"
+    },
+    {
+        opacity: 1,
+        x: 0,
+        duration: 2,
+        pointerEvents: "auto",
+        scrollTrigger: {
+            trigger: '#div5',
+            start: 'top center',
+            end: '50% center',
+            scrub: true
+        }
+    }
+);
+
+tl.fromTo(
+    '#div6',
+    {
+        opacity: 0,
+        x: 1000,
+        pointerEvents: "none"
+    },
+    {
+        opacity: 1,
+        x: 0,
+        duration: 2,
+        pointerEvents: "auto",
+        scrollTrigger: {
+            trigger: '#div6',
+            start: 'top center',
+            end: '50% center',
+            scrub: true
+        }
+    }
+);
+
+tl.fromTo(
+    '#div7',
+    {
+        opacity: 0,
+        x: -1000,
+        pointerEvents: "none"
+    },
+    {
+        opacity: 1,
+        x: 0,
+        duration: 2,
+        pointerEvents: "auto",
+        scrollTrigger: {
+            trigger: '#div7',
+            start: 'top center',
+            end: '50% center',
+            scrub: true
+        }
+    }
+);
+
+tl.fromTo(
+    '#div8',
+    {
+        opacity: 0,
+        y: 100,
+        pointerEvents: "none"
+    },
+    {
+        opacity: 1,
+        y: 0,
+        duration: 4,
+        pointerEvents: "auto",
+        scrollTrigger: {
+            trigger: '#div8',
             start: 'top center',
             end: '50% center',
             scrub: true
@@ -121,7 +205,7 @@ tl.fromTo(
         y: 0,
         duration: 7,
         scrollTrigger: {
-            trigger: '#div4',
+            trigger: '#div8',
             start: '70% center',
             end: '80% center',
             scrub: true
