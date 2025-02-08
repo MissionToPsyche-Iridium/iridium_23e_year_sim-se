@@ -49,7 +49,7 @@ File Start
       <div class="three-columns">
             
             <div class="column" id="yearSelection">
-              <h3>Scroll to your birth year to discover your age on Psyche:</h3>
+              <h3>Scroll to your birth year to find out!</h3>
               <!-- Results not shown until the user scrolls the year scroll -->
               <div class="scroll-wheel" id="scrollWheel">
                 <ul id="yearList"></ul>
@@ -113,13 +113,17 @@ File Start
     </div>
 
     <!-- Middle section - Start of section that uses toggle switch to swap between earth and Psyche metrics -->
+    <top id="middle">
+      <p>Select Earth or Psyche to see a normal day.</p>
+    </top>
+    <div class="wrap">
+      <input type="radio" id="Earth" name="sort" checked /><label for="Earth">Earth Day</label>
+      <input type="radio" id="Psyche" name="sort" /><label for="Psyche">Psyche Day</label>
+    </div>
+    
     <div class="two-columns">
       <div class="columnLarge">
-        <h3>Select Earth or Psyche to see other aspects of daily life there.</h3>
-        <div class="wrap">
-          <input type="radio" id="Earth" name="sort" checked /><label for="Earth">Earth</label>
-          <input type="radio" id="Psyche" name="sort" /><label for="Psyche">Psyche</label>
-        </div>
+        <headerHours id="resultHours"></headerHours>
 
         <!-- Radio buttons for toggle switch to swap between earth and Psyche metrics -->
         <script>
@@ -129,13 +133,25 @@ File Start
               const resultWork = document.getElementById('resultWork');
               const resultSchool = document.getElementById('resultSchool');
               const resultSleep = document.getElementById('resultSleep');
+              const resultEat = document.getElementById('resultEat');
+              const resultRelax = document.getElementById('resultRelax');
+              const resultHours = document.getElementById('resultHours');
 
               earthRadio.addEventListener('change', () => {
                   if (earthRadio.checked) {
                       // Update the daily metric text sections 
-                      resultWork.textContent = 'The normal work day is 8 hours.';
-                      resultSchool.textContent = 'The normal school day is 8 hours.';
-                      resultSleep.textContent = 'On earth everyone tries to get 8 hours of sleep.';
+                      resultWork.textContent = '8 Hours of Work';
+                      resultWork.style.color = '#ffffff';
+                      resultSchool.textContent = '8 hours of School';
+                      resultSchool.style.color = '#ffffff';
+                      resultSleep.textContent = '8 Hours of Sleep';
+                      resultSleep.style.color = '#ffffff';
+                      resultEat.textContent = '3 Hours to Eat';
+                      resultEat.style.color = '#ffffff';
+                      resultRelax.textContent = '5 Hours to Relax';
+                      resultRelax.style.color = '#ffffff';
+                      resultHours.textContent = '24 Hours Each Day';
+                      resultHours.style.color = '#ffffff';
                       // Update pie chart
                       updateChart(earthData);
                   }
@@ -144,9 +160,18 @@ File Start
               psycheRadio.addEventListener('change', () => {
                   if (psycheRadio.checked) {
                       // Update the daily metric text sections 
-                      resultWork.textContent = 'The work day would be 1 hour long!';
-                      resultSchool.textContent = 'Your school day would be about 1 hour a day!';
-                      resultSleep.textContent = 'You would try to sleep for about 1 hour a night!';
+                      resultWork.textContent = '1 Hour of Work';
+                      resultWork.style.color = '#ffffff';
+                      resultSchool.textContent = '1 Hour of School';
+                      resultSchool.style.color = '#ffffff';
+                      resultSleep.textContent = '1 Hour for Sleep';
+                      resultSleep.style.color = '#ffffff';
+                      resultEat.textContent = '45 Mins to Eat';
+                      resultEat.style.color = '#ffffff';
+                      resultRelax.textContent = '1.5 Hours to Relax';
+                      resultRelax.style.color = '#ffffff';
+                      resultHours.textContent = '4.2 Hours Each Day';
+                      resultHours.style.color = '#ffffff';
                       // Update pie chart
                       updateChart(psycheData);
                   }
@@ -162,8 +187,8 @@ File Start
           <script>
 
             // Set the dimensions and margins of the graph
-            var width = 550
-                height = 550
+            var width = 600
+                height = 600
                 margin = 40
             
             // The radius of the pieplot is half the width or half the height
@@ -179,7 +204,7 @@ File Start
             
             // Create earth and psyche data sets 
             var earthData = {Sleep: 8, "Work/School": 8, Eat:3, Relax:5}
-            var psycheData = {Sleep: 1, "Work/School": 1, Eat:.5, Relax:2}
+            var psycheData = {Sleep: 1, "Work/School": 1, Eat:.7, Relax:1.5}
             
             // Use the set d3 color scales
             var color = d3.scaleOrdinal()
@@ -242,7 +267,8 @@ File Start
                 .attr("dy", "-0.7em")
                 .text(function(d) { return d.data.key; })
                 .attr("text-anchor", "middle")
-                .style("font-size", 25);
+                .style("fill", "#ffffff")
+                .style("font-size", 30);
 
               // Add value labels
               textGroupEnter.append("text")
@@ -250,7 +276,8 @@ File Start
                 .attr("dy", "0.35em")
                 .text(function(d) { return d.data.value; })
                 .attr("text-anchor", "middle")
-                .style("font-size", 25);
+                .style("fill", "#ffffff")
+                .style("font-size", 50);
 
               textGroup.select(".keyText")
                 .transition()
@@ -271,36 +298,50 @@ File Start
             // Initialize the plot with the first dataset
             updateChart(earthData);
           </script>
-      <!-- Add metric that shows the avaialble hours in the day here -->
+      <!-- Add metric that shows the available hours in the day here -->
 
 
       </div>
 
-      <div class="column">
+      <div class="columnLarge">
         <!-- Start of the metrics section - al of these are dependant on the toggle switch for the metrics to display -->
-        <div>
-          <!-- Work Section -->
-            <div id="work">
-              <h4>Work</h4>
-              <p id="resultWork"> </p>
-            </div>
+        <div class="two-columns">
+            <!-- Work Section -->
+              <div id="work">
+                
+                <p id="resultWork"> </p>
+              </div>
 
-          <!-- School Section -->
-          <div id="school">
-            <h4>School</h4>
-            <p id="resultSchool"> </p>
+            <!-- School Section -->
+            <div id="school">
+              
+              <p id="resultSchool"> </p>
+            </div>
           </div>
+
+          <div class="two-columns">
+         <!-- Eat Section -->
+         <div id="eat">
+            
+          <p id="resultEat"> </p>
+        </div>
+
+        <!-- Eat Section -->
+        <div id="relax">
+
+          <p id="resultRelax"> </p>
+        </div>
+      </div>
 
           <!-- Sleep Section -->
           <div id="sleep">
-            <h4>Sleep</h4>
+            
             <p id="resultSleep"> </p>
           </div> 
         </div>
 
-      </div>
+        
 
-    </div>
     </div>
   </main>  
 <!-- End of Main Page section  -->
