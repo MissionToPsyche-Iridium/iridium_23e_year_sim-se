@@ -131,7 +131,7 @@
     canvas {
         background-color: #000000;
         border: 2px solid #ffffff;
-        align-items: center;
+       
     }
     
     button {
@@ -253,13 +253,18 @@
                     });
                 
                     // Asteroid Navigation Game Logic
-            <h1>How Psyche's name came to be</h1>
-
                     const canvas = document.getElementById('gameCanvas');
                     const ctx = canvas.getContext('2d');
                     const startButton = document.getElementById('startButton');
                     const gameMessage = document.getElementById('game-message');
-                
+                    const shipImg = new Image();
+                    shipImg.src = 'psychesat.png';  
+
+                    const psycheImg = new Image();
+                    psycheImg.src = 'psycheimage.png'; 
+                    shipImg.onload = psycheImg.onload = function () {
+                     drawGame();
+                    };
                   let ship = { x: 150, y: 250, size: 10 };
                     let psyche = { x: 150, y: 50, size: 20 };
                     let obstacles = [];
