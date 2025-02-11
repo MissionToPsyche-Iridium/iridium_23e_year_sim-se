@@ -32,7 +32,7 @@ tl.fromTo(
     {opacity: 0}, 
     {
         opacity: 1,
-        duration: 2
+        duration: 0.5
     }
 )
 
@@ -43,7 +43,7 @@ tl.fromTo(
     },
     {
         y: 150,
-        duration: 2,
+        duration: 1,
         scrollTrigger: {
             trigger: '#div1',
             start: 'top center',
@@ -206,8 +206,8 @@ tl.fromTo(
         duration: 7,
         scrollTrigger: {
             trigger: '#div8',
-            start: '70% center',
-            end: '80% center',
+            start: '50% center',
+            end: '60% center',
             scrub: true
         }
     }
