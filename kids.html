@@ -182,162 +182,70 @@
                 <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(56724.2,56751.6,-56751.6,56724.2,23848.9,23860.4)"><stop offset="0" style="stop-color:rgb(49,33,70);stop-opacity:1"/><stop offset="0.2" style="stop-color:rgb(90,39,82);stop-opacity:1"/><stop offset="0.6" style="stop-color:rgb(239,89,101);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(249,160,0);stop-opacity:1"/></linearGradient>
             </defs>
         </svg>
+        <div id="div-astronaut">
+            <h4 id="hi">Hi astronaut! What is your name?</h4>
+            <input type="text" id="enter-name">
+            <button id="submit">SUBMIT</button>
+        </div>
+        <p id="welcome-p">
+            Lets get you prepared for your journey to the asteroid Psyche!
+            <br><br>
+            Your launch day is quickly approaching, so lets get to learning ...
+        </p>
     </div>  
+    <div id="div2">
+        <h1>Where are you going?</h1>
+        <p>
+            Psyche is located between Mars and Jupiter, so prepare for a long flight
+            <br><br>
+            You will begin your flight at Kennedy Space Center, FL heading towards Mars.
+            <br><br>
+            Over the next few months you will have some great views of Earth, our Moon, and finally a nice trip around Mars
+            <br><br>
+            And a couple of years later ... you will finally arrive at Psyche!!!
+        </p>
+        <div id="solar">
+            <svg width="600px" height="600px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <g transform="matrix(1,0,0,1,-273.434,-91.4362)">
+                    <g id="Sun" transform="matrix(1,0,0,1,-1.26383,-18.3433)">
+                        <circle cx="323.496" cy="158.578" r="48.798" style="fill:rgb(255,158,0);"/>
+                    </g>
+                    <g id="Earth" transform="matrix(1,0,0,1,-1.26383,-18.3433)">
+                        <circle cx="364.788" cy="309.507" r="20.449" style="fill:url(#_Linear1);"/>
+                    </g>
+                    <g id="Mars" transform="matrix(1,0,0,1,71.7112,-33.0687)">
+                        <circle cx="379.156" cy="391.726" r="14.368" style="fill:rgb(173,99,35);"/>
+                    </g>
+                    <g id="Psyche" transform="matrix(1.98343,0,0,1.98343,-374.319,-477.733)">
+                        <ellipse cx="382.288" cy="470.465" rx="2.949" ry="3.335" style="fill:rgb(88,82,77);"/>
+                    </g>
+                    <g id="Jupiter" transform="matrix(1,0,0,1,-1.26383,-18.3433)">
+                        <circle cx="481.728" cy="570.244" r="29.597" style="fill:url(#_Radial2);"/>
+                    </g>
+                    <g id="Arrow" transform="matrix(1,0,0,2.0319,7.50565,-476.754)">
+                        <path id="ArrowColor" d="M288.248,459.867L288.248,457.552L356.803,457.552L356.803,455.402L363.524,458.709L356.803,462.017L356.803,459.867L288.248,459.867Z" style="fill:url(#_Radial3);"/>
+                    </g>
+                </g>
+                <defs>
+                    <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(40.8976,0,0,40.8976,344.339,309.507)"><stop offset="0" style="stop-color:rgb(0,11,255);stop-opacity:1"/><stop offset="0.28" style="stop-color:rgb(27,181,35);stop-opacity:1"/><stop offset="0.71" style="stop-color:rgb(27,181,35);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(0,0,255);stop-opacity:1"/></linearGradient>
+                    <radialGradient id="_Radial2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(59.1934,0,0,59.1934,452.131,570.244)"><stop offset="0" style="stop-color:rgb(88,82,77);stop-opacity:1"/><stop offset="0" style="stop-color:rgb(250,248,10);stop-opacity:1"/><stop offset="0.16" style="stop-color:rgb(39,146,171);stop-opacity:1"/><stop offset="0.49" style="stop-color:rgb(250,248,10);stop-opacity:1"/><stop offset="0.79" style="stop-color:rgb(39,146,171);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(255,213,0);stop-opacity:1"/></radialGradient>
+                    <radialGradient id="_Radial3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(75.2763,0,0,6.61544,288.248,458.709)"><stop offset="0" style="stop-color:rgb(88,82,77);stop-opacity:1"/><stop offset="0" style="stop-color:rgb(250,248,10);stop-opacity:1"/><stop offset="0.16" style="stop-color:rgb(39,146,171);stop-opacity:1"/><stop offset="0.49" style="stop-color:rgb(250,248,10);stop-opacity:1"/><stop offset="0.79" style="stop-color:rgb(39,146,171);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(255,213,0);stop-opacity:1"/></radialGradient>
+                </defs>
+            </svg>
+        </div>
+
+    </div>
+    <div id="div3">
+        <h1>How old will I be on Psyche?</h1>
+        <h4>Enter your current Earth Age</h4>
+        <input type="text" id="ageText">
+        <button id="ageButton">Find out your age</button>
+        <h4 id="psycheAge"></h4>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script> 
-    <script>
-        const tl = gsap.timeline()
-
-        tl.fromTo(
-            "#sun",
-            {
-                y: -300
-            },
-            {
-                y: -300
-            }
-        );
-
-        tl.fromTo (
-            "#spaceship",
-            {
-                rotate: 0,
-                x: 0, 
-                y: -300
-            },
-            {
-                rotate: 45, 
-                duration: 4
-            }
-    );
-
-    tl.fromTo(
-        "#spaceship",
-        {
-            x: 0, 
-            y: -300
-        },
-        {
-            x: 500,
-            y: -500,
-            duration: 5
-        }
-
-    );
-
-    tl.to (
-        "#flames",
-        {
-            opacity: 0,
-            repeat: 5,
-            yoyo: true
-        }, "<"
-    )
-
-    tl.to(
-        ".flames",
-        {
-            opacity: 1,
-            fill: "orange",
-            repeat: 7,
-            yoyo: true
-        }, "<"
-    );
-
-    
-    tl.to (
-        "#spaceship",
-        {
-            rotate: 140,
-            duration: 2
-        }
-    );
-
-    tl.fromTo(
-        "#spaceship",
-        {
-            x: 500, 
-            y: -300
-        },
-        {
-            x: 3000,
-            y: 3000,
-            duration: 5
-        }
-
-    );
-
-    tl.to (
-        "#flames",
-        {
-            opacity: 0,
-            repeat: 5,
-            yoyo: true
-        }, "<"
-    )
-
-    tl.to(
-        ".flames",
-        {
-            opacity: 1,
-            fill: "orange",
-            repeat: 7,
-            yoyo: true
-        }, "<"
-    );
-
-    tl.fromTo(
-        "#header-img",
-        {
-            visibility: "hidden",
-            scale: 4,
-            y: 400,
-            opacity: 0
-        },
-        {
-            visibility: "visible",
-            delay: 0.2,
-            scale: 1,
-            y: 0,
-            opacity: 1,
-            duration:5
-        }, "<"
-    );
-
-    tl.fromTo (
-        "#sun",
-        {
-            y: -300
-        },
-        {
-            y: 0,
-            duration: 3, 
-            ease: Linear.easeNone, 
-        }, "<30%"
-    );
-
-    tl.to(
-        "header",
-        {
-            visibility: "visible"
-        },"<80%"
-    );
-
-    tl.fromTo(
-        "#spaceship",
-        {
-            x: -300,
-            y: 300
-        },
-        {
-            rotate: 45,
-            x: 0,
-            y:0,
-            duration: 1
-        }, "<"
-    );
-
-    </script>
+    <script src="/JS/kids.js"></script>
 </body>
 </html>
