@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planetary Balance Challenge</title>
+    <style>
+        /* Previous styles remain unchanged */
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #0a0a2a;
+            color: white;
+            font-family: Arial, sans-serif;
+            background-image: radial-gradient(circle at center, #1a1a4a 0%, #0a0a2a 100%);
+        }
+        canvas {
+            border: 2px solid #444;
+            background: #111;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            cursor: grab;
+        }
+        canvas:active {
+            cursor: grabbing;
+        }
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .planet-selects {
+            position: absolute;
+            top: 420px;
+            width: 800px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 100px;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        .planet-control {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: all;
+        }
+        .gravity-select {
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            width: 150px;
+        }
+        .gravity-select:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .calc-weight-btn {
+            padding: 4px 8px;
+            background: rgba(0, 150, 255, 0.3);
+            border: 1px solid rgba(0, 150, 255, 0.4);
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .calc-weight-btn:hover {
+            background: rgba(0, 150, 255, 0.4);
+        }
+        .weight-display {
+            font-size: 12px;
+            color: #4CAF50;
+            min-height: 16px;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+        .multiplier {
+            color: #FFD700;
+        }
+        .hint {
+            color: #4CAF50;
+            font-style: italic;
+            min-height: 20px;
+        }
+        .objects {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .object-btn {
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 4px;
+            cursor: grab;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .object-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .object-btn span {
+            font-size: 14px;
+        }
+        .clear-btn {
+            padding: 8px 20px;
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .clear-btn:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        .instructions {
+            color: #999;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .challenge {
+            color: #FFD700;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Previous HTML structure remains unchanged -->
+    <h1>Interplanetary Balance Challenge</h1>
+    <div style="position: relative;">
+        <canvas id="gameCanvas" width="800" height="500"></canvas>
+        <div class="planet-selects">
+            <div class="planet-control">
+                <select id="leftGravitySelect" class="gravity-select">
+                    <option value="0.22" selected>🌑 Psyche (0.18 m/s²)</option>
+                    <option value="274">☀️ Sun (274 m/s²)</option>
+                    <option value="10.44">🪐 Saturn (10.44 m/s²)</option>
+                    <option value="9.81">🌍 Earth (9.81 m/s²)</option>
+                    <option value="3.72">🔴 Mars (3.72 m/s²)</option>
+                    <option value="1.62">🌙 Moon (1.62 m/s²)</option>
+                </select>
+                <button class="calc-weight-btn" id="leftCalcBtn">Calculate Weight</button>
+                <div class="weight-display" id="leftWeightDisplay"></div>
+            </div>
+            <div class="planet-control">
+                <select id="rightGravitySelect" class="gravity-select">
+                    <option value="274">☀️ Sun (274 m/s²)</option>
+                    <option value="10.44">🪐 Saturn (10.44 m/s²)</option>
+                    <option value="9.81" selected>🌍 Earth (9.81 m/s²)</option>
+                    <option value="3.72">🔴 Mars (3.72 m/s²)</option>
+                    <option value="1.62">🌙 Moon (1.62 m/s²)</option>
+                    <option value="0.22">🌑 Psyche (0.22 m/s²)</option>
+                </select>
+                <button class="calc-weight-btn" id="rightCalcBtn">Calculate Weight</button>
+                <div class="weight-display" id="rightWeightDisplay"></div>
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <div class="objects">
+            <button class="object-btn" data-mass="0.001">🪶 <span>Feather (1g)</span></button>
+            <button class="object-btn" data-mass="0.1">📱 <span>Phone (100g)</span></button>
+            <button class="object-btn" data-mass="0.3">🎸 <span>Guitar (300g)</span></button>
+            <button class="object-btn" data-mass="0.5">📖 <span>Book (500g)</span></button>
+            <button class="object-btn" data-mass="1">🧱 <span>Brick (1kg)</span></button>
+            <button class="object-btn" data-mass="2.5">💻 <span>Laptop (2.5kg)</span></button>
+            <button class="object-btn" data-mass="5">🛹 <span>Skateboard (5kg)</span></button>
+            <button class="object-btn" data-mass="10">⚓ <span>Small Anchor (10kg)</span></button>
+            <button class="object-btn" data-mass="25">🗿 <span>Stone Head (25kg)</span></button>
+            <button class="object-btn" data-mass="50">🏋️ <span>Barbell (50kg)</span></button>
+            <button class="object-btn" data-mass="75">🛋️ <span>Sofa (75kg)</span></button>
+            <button class="object-btn" data-mass="100">🎹 <span>Piano (100kg)</span></button>
+            <button class="object-btn" data-mass="150">🦏 <span>Rhino (150kg)</span></button>
+            <button class="object-btn" data-mass="200">🐘 <span>Elephant (200kg)</span></button>
+            <button class="object-btn" data-mass="300">🚗 <span>Car (300kg)</span></button>
+            <button class="object-btn" data-mass="500">🚌 <span>Bus (500kg)</span></button>
+            <button class="object-btn" data-mass="750">🚂 <span>Train Car (750kg)</span></button>
+            <button class="object-btn" data-mass="1000">🛥️ <span>Yacht (1000kg)</span></button>
+            <button class="object-btn" data-mass="2000">✈️ <span>Small Plane (2000kg)</span></button>
+            <button class="object-btn" data-mass="5000">🚢 <span>Ship (5000kg)</span></button>
+        </div>
+        <div class="hint" id="hint"></div>
+        <div class="stats">
+            <div>Score: <span id="balanceScore">0</span></div>
+            <div class="multiplier">Multiplier: x<span id="multiplier">1</span></div>
+        </div>
+        <div class="challenge" id="challenge"></div>
+        <button class="clear-btn" id="clearBtn">Clear All Objects</button>
+        <div class="instructions">
+            🖱️ Drag objects from buttons to the balance beam • Move objects after placing • Drag outside to delete
+        </div>
+    </div>
+
+    <script>
+        // Previous variable declarations and classes remain unchanged
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const leftGravitySelect = document.getElementById('leftGravitySelect');
+        const rightGravitySelect = document.getElementById('rightGravitySelect');
+        const balanceScoreElement = document.getElementById('balanceScore');
+        const multiplierElement = document.getElementById('multiplier');
+        const hintElement = document.getElementById('hint');
+        const challengeElement = document.getElementById('challenge');
+        const clearBtn = document.getElementById('clearBtn');
+
+        let balance = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            width: 400,
+            height: 10,
+            angle: 0,
+            pivotHeight: 100,
+            planetSize: 80
+        };
+
+        let objects = {
+            left: [],
+            right: []
+        };
+
+        let balanceScore = 0;
+        let scoreMultiplier = 1;
+        let balanceTime = 0;
+        let lastTime = performance.now();
+        let draggedObject = null;
+        let mouseX = 0;
+        let mouseY = 0;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+        let particles = [];
+        let leftWeightEnabled = false;
+        let rightWeightEnabled = false;
+
+        // Previous Particle and BalanceObject classes remain unchanged
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 4;
+                this.vy = (Math.random() - 0.5) * 4;
+                this.life = 1;
+                this.color = `hsl(${Math.random() * 60 + 40}, 100%, 50%)`;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= 0.02;
+            }
+
+            draw(ctx) {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.life;
+                ctx.fillRect(this.x, this.y, 3, 3);
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        class BalanceObject {
+            constructor(x, y, mass, side) {
+                this.x = x;
+                this.y = y;
+                this.mass = mass;
+                this.side = side;
+                this.size = Math.max(25, Math.min(60, Math.sqrt(mass) * 15));
+                this.emoji = this.getEmojiForMass(mass);
+            }
+
+            getEmojiForMass(mass) {
+                const emojis = {
+                    0.001: '🪶',
+                    0.1: '📱',
+                    0.3: '🎸',
+                    0.5: '📖',
+                    1: '🧱',
+                    2.5: '💻',
+                    5: '🛹',
+                    10: '⚓',
+                    25: '🗿',
+                    50: '🏋️',
+                    75: '🛋️',
+                    100: '🎹',
+                    150: '🦏',
+                    200: '🐘',
+                    300: '🚗',
+                    500: '🚌',
+                    750: '🚂',
+                    1000: '🛥️',
+                    2000: '✈️',
+                    5000: '🚢'
+                };
+                return emojis[mass] || '⚪';
+            }
+
+            isPointInside(x, y) {
+                const dx = x - this.x;
+                const dy = y - this.y;
+                return Math.sqrt(dx * dx + dy * dy) < this.size;
+            }
+        }
+
+        function getPlanetEmoji(value) {
+            const planets = {
+                '274': '☀️',
+                '10.44': '🪐',
+                '9.81': '🌍',
+                '3.72': '🔴',
+                '1.62': '🌙',
+                '0.22': '🌑'
+            };
+            return planets[value] || '⚪';
+        }
+
+        function calculateWeights() {
+            const leftGravity = parseFloat(leftGravitySelect.value);
+            const rightGravity = parseFloat(rightGravitySelect.value);
+            
+            const leftTotalMass = objects.left.reduce((sum, obj) => sum + obj.mass, 0);
+            const rightTotalMass = objects.right.reduce((sum, obj) => sum + obj.mass, 0);
+            
+            const leftWeight = leftTotalMass * leftGravity;
+            const rightWeight = rightTotalMass * rightGravity;
+
+            // Update weight displays if enabled
+            if (leftWeightEnabled) {
+                document.getElementById('leftWeightDisplay').textContent = 
+                    `Total Weight: ${leftWeight.toFixed(2)} N (${leftTotalMass.toFixed(2)} kg × ${leftGravity.toFixed(2)} m/s²)`;
+            }
+            if (rightWeightEnabled) {
+                document.getElementById('rightWeightDisplay').textContent = 
+                    `Total Weight: ${rightWeight.toFixed(2)} N (${rightTotalMass.toFixed(2)} kg × ${rightGravity.toFixed(2)} m/s²)`;
+            }
+
+            return { leftWeight, rightWeight };
+        }
+
+        function updatePhysics(deltaTime) {
+            const { leftWeight, rightWeight } = calculateWeights();
+            
+            // Calculate weight difference percentage
+            const maxWeight = Math.max(leftWeight, rightWeight);
+            const minWeight = Math.min(leftWeight, rightWeight);
+            const weightDiff = maxWeight - minWeight;
+            const diffPercentage = maxWeight > 0 ? (weightDiff / maxWeight) * 100 : 0;
+            
+            // Target angle based on weight difference
+            const targetAngle = (rightWeight - leftWeight) / Math.max(leftWeight, rightWeight, 1) * Math.PI / 6;
+            
+            // Smoothly animate to target angle
+            const angleSpeed = 0.005;
+            balance.angle += (targetAngle - balance.angle) * angleSpeed * deltaTime;
+            
+            // Limit angle
+            balance.angle = Math.max(Math.min(balance.angle, Math.PI / 6), -Math.PI / 6);
+
+            // Update balance score and multiplier
+            const isBalanced = diffPercentage <= 5; // 5% tolerance
+            if (isBalanced && objects.left.length > 0 && objects.right.length > 0) {
+                balanceTime += deltaTime / 1000;
+                if (balanceTime >= 1) {
+                    scoreMultiplier = Math.min(10, Math.floor(balanceTime / 2) + 1);
+                    balanceScore += scoreMultiplier;
+                    balanceScoreElement.textContent = balanceScore;
+                    multiplierElement.textContent = scoreMultiplier;
+
+                    // Add particles for visual feedback
+                    if (Math.random() < 0.1) {
+                        for (let i = 0; i < 5; i++) {
+                            particles.push(new Particle(
+                                balance.x,
+                                balance.y + Math.random() * 20 - 10
+                            ));
+                        }
+                    }
+                }
+            } else {
+                balanceTime = 0;
+                scoreMultiplier = 1;
+                multiplierElement.textContent = 1;
+            }
+
+            // Update particles
+            particles = particles.filter(p => p.life > 0);
+            particles.forEach(p => p.update());
+
+            // Update hint based on weight difference
+            if (objects.left.length === 0 && objects.right.length === 0) {
+                hintElement.textContent = "Add objects to both sides to start balancing!";
+            } else if (objects.left.length === 0 || objects.right.length === 0) {
+                hintElement.textContent = "Add objects to the empty side!";
+            } else if (diffPercentage > 20) {
+                hintElement.textContent = "The difference is too large! Try objects with similar weights.";
+            } else if (diffPercentage <= 5) {
+                hintElement.textContent = "Perfect balance! Keep it steady to increase your multiplier!";
+            } else {
+                const heavierSide = leftWeight > rightWeight ? "left" : "right";
+                hintElement.textContent = `The ${heavierSide} side is heavier. Try adjusting the weights.`;
+            }
+        }
+
+        // Previous drawing functions remain unchanged
+        function drawPlanet(ctx, x, y, size, emoji) {
+            ctx.font = `${size}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(emoji, x, y);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw balance beam pivot
+            ctx.fillStyle = '#666';
+            ctx.fillRect(balance.x - 10, balance.y, 20, balance.pivotHeight);
+            
+            // Draw balance beam and planets
+            ctx.save();
+            ctx.translate(balance.x, balance.y);
+            ctx.rotate(balance.angle);
+            
+            // Main beam
+            ctx.fillStyle = '#888';
+            ctx.fillRect(-balance.width / 2, -balance.height / 2, balance.width, balance.height);
+            
+            // Draw planets
+            const leftEmoji = getPlanetEmoji(leftGravitySelect.value);
+            const rightEmoji = getPlanetEmoji(rightGravitySelect.value);
+            
+            drawPlanet(ctx, -balance.width/2, balance.height/2 + 20, balance.planetSize, leftEmoji);
+            drawPlanet(ctx, balance.width/2, balance.height/2 + 20, balance.planetSize, rightEmoji);
+            
+            ctx.restore();
+
+            // Draw particles
+            particles.forEach(p => p.draw(ctx));
+
+            // Draw objects with emojis
+            [...objects.left, ...objects.right].forEach(obj => {
+                if (obj === draggedObject) return;
+
+                ctx.save();
+                ctx.translate(balance.x, balance.y);
+                ctx.rotate(balance.angle);
+                
+                const relativeX = obj.x - balance.x;
+                const relativeY = obj.y - balance.y;
+                
+                ctx.font = `${obj.size}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(obj.emoji, relativeX, relativeY);
+                
+                ctx.fillStyle = '#FFF';
+                ctx.font = '12px Arial';
+                const massText = obj.mass < 1 ? `${obj.mass * 1000}g` : `${obj.mass}kg`;
+                ctx.fillText(massText, relativeX, relativeY + obj.size/2 + 15);
+                
+                ctx.restore();
+            });
+
+            // Draw dragged object last
+            if (draggedObject) {
+                ctx.font = `${draggedObject.size}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(draggedObject.emoji, draggedObject.x, draggedObject.y);
+                
+                ctx.fillStyle = '#FFF';
+                ctx.font = '12px Arial';
+                const massText = draggedObject.mass < 1 ? 
+                    `${draggedObject.mass * 1000}g` : 
+                    `${draggedObject.mass}kg`;
+                ctx.fillText(massText, draggedObject.x, draggedObject.y + draggedObject.size/2 + 15);
+            }
+
+            // Draw gravity strength indicators
+            const leftGravity = parseFloat(leftGravitySelect.value);
+            const rightGravity = parseFloat(rightGravitySelect.value);
+            
+            ctx.fillStyle = `rgba(255, 255, 0, ${Math.min(leftGravity/274, 0.3)})`;
+            ctx.fillRect(0, 0, canvas.width/2, canvas.height);
+            
+            ctx.fillStyle = `rgba(255, 255, 0, ${Math.min(rightGravity/274, 0.3)})`;
+            ctx.fillRect(canvas.width/2, 0, canvas.width/2, canvas.height);
+        }
+
+        function addObject(mass, side) {
+            const xOffset = side === 'left' ? -balance.width/4 : balance.width/4;
+            const yOffset = -50 - (objects[side].length * 30);
+            const newObject = new BalanceObject(
+                balance.x + xOffset,
+                balance.y + yOffset,
+                mass,
+                side
+            );
+            objects[side].push(newObject);
+            if (leftWeightEnabled || rightWeightEnabled) {
+                calculateWeights();
+            }
+        }
+
+        // Previous event handlers remain unchanged
+        function removeObject(obj) {
+            const side = obj.side;
+            const index = objects[side].indexOf(obj);
+            if (index > -1) {
+                objects[side].splice(index, 1);
+                if (leftWeightEnabled || rightWeightEnabled) {
+                    calculateWeights();
+                }
+            }
+        }
+
+        function getObjectAtPosition(x, y) {
+            const allObjects = [...objects.left, ...objects.right].reverse();
+            return allObjects.find(obj => obj.isPointInside(x, y));
+        }
+
+        function getSideAtPosition(x) {
+            return x < balance.x ? 'left' : 'right';
+        }
+
+        // Mouse event handlers
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+            
+            const clickedObject = getObjectAtPosition(mouseX, mouseY);
+            if (clickedObject) {
+                draggedObject = clickedObject;
+                dragOffsetX = mouseX - clickedObject.x;
+                dragOffsetY = mouseY - clickedObject.y;
+                removeObject(clickedObject);
+            }
+        });
+
+        // Track mouse position globally
+        document.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+            
+            if (draggedObject) {
+                draggedObject.x = mouseX - dragOffsetX;
+                draggedObject.y = mouseY - dragOffsetY;
+            }
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (draggedObject) {
+                const rect = canvas.getBoundingClientRect();
+                const canvasX = e.clientX - rect.left;
+                const canvasY = e.clientY - rect.top;
+                
+                if (canvasX >= 0 && canvasX <= canvas.width && 
+                    canvasY >= 0 && canvasY <= canvas.height) {
+                    const side = getSideAtPosition(canvasX);
+                    const isInValidY = canvasY > balance.y - 100 && 
+                                     canvasY < balance.y + balance.planetSize + 50;
+                    const isInValidX = Math.abs(canvasX - balance.x) < balance.width/2 + 50;
+
+                    if (isInValidY && isInValidX) {
+                        draggedObject.side = side;
+                        objects[side].push(draggedObject);
+                        if (leftWeightEnabled || rightWeightEnabled) {
+                            calculateWeights();
+                        }
+                    }
+                }
+                draggedObject = null;
+            }
+        });
+
+        // Handle object button drag start
+        document.querySelectorAll('.object-btn').forEach(btn => {
+            btn.addEventListener('mousedown', (e) => {
+                e.preventDefault(); // Prevent text selection
+                const mass = parseFloat(btn.dataset.mass);
+                const rect = canvas.getBoundingClientRect();
+                const canvasX = e.clientX - rect.left;
+                const canvasY = e.clientY - rect.top;
+                
+                draggedObject = new BalanceObject(
+                    canvasX,
+                    canvasY,
+                    mass,
+                    getSideAtPosition(canvasX)
+                );
+                dragOffsetX = 0;
+                dragOffsetY = 0;
+            });
+        });
+
+        // Clear all objects
+        clearBtn.addEventListener('click', () => {
+            objects.left = [];
+            objects.right = [];
+            balanceScore = 0;
+            scoreMultiplier = 1;
+            balanceTime = 0;
+            balance.angle = 0;
+            particles = [];
+            balanceScoreElement.textContent = '0';
+            multiplierElement.textContent = '1';
+            if (leftWeightEnabled || rightWeightEnabled) {
+                calculateWeights();
+            }
+        });
+
+        // Reset when changing gravity
+        leftGravitySelect.addEventListener('change', () => {
+            objects.left = [];
+            balanceScore = 0;
+            scoreMultiplier = 1;
+            balanceTime = 0;
+            if (leftWeightEnabled) calculateWeights();
+        });
+
+        rightGravitySelect.addEventListener('change', () => {
+            objects.right = [];
+            balanceScore = 0;
+            scoreMultiplier = 1;
+            balanceTime = 0;
+            if (rightWeightEnabled) calculateWeights();
+        });
+
+        // Weight calculation buttons
+        document.getElementById('leftCalcBtn').addEventListener('click', () => {
+            leftWeightEnabled = true;
+            calculateWeights();
+        });
+
+        document.getElementById('rightCalcBtn').addEventListener('click', () => {
+            rightWeightEnabled = true;
+            calculateWeights();
+        });
+
+        function gameLoop(currentTime) {
+            const deltaTime = currentTime - lastTime;
+            lastTime = currentTime;
+            
+            updatePhysics(deltaTime);
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Initialize the game
+        requestAnimationFrame(gameLoop);
+    </script>
+</body>
+</html>
