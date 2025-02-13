@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/settings-style.css">
+    <link rel="stylesheet" href="CSS/name.css">
   
     <header id="header">
         <img src="img/psyche.svg" id="psyche">
@@ -12,18 +13,41 @@
     </header>
     <title>The Origin of Psyche's Name</title>
 </head>
-<title>Psyche's Origins: Myth vs. Metal</title>
+<title>The Origin of Psyche's Name</title>
 <style>
-    body { font-family: Arial, sans-serif; text-align: center; }
-    .container { display: flex; justify-content: center; margin-top: 20px; }
-    .box { width: 200px; height: 300px; border: 2px dashed #555; padding: 10px; margin: 10px; }
-    .draggable { padding: 10px; margin: 5px; background-color: lightblue; cursor: grab; }
-    .correct { background-color: lightgreen; }
-    .incorrect { background-color: lightcoral; }
+    body { 
+        font-family: Arial, sans-serif;
+        text-align: center; 
+    }
+    .container { 
+        display: flex; 
+        justify-content: center; 
+        margin-top: 20px; 
+    }
+    .box { 
+        width: 200px; 
+        height: 300px; 
+        border: 2px outset whitesmoke; 
+        padding: 10px; 
+        margin: 10px; 
+    }
+    .draggable { 
+        padding: 10px; 
+        margin: 5px; 
+        background-color: lightblue; 
+        cursor: grab; 
+    }
+    .correct { 
+        background-color: lightgreen; 
+    }
+    .incorrect { 
+        background-color: lightcoral; 
+        }
 </style>
 </head>
 <body>
-<h1>Psyche's Origins: Myth vs. Metal</h1>
+<h1>The Origin of Psyche's Name</h1>
+<h1>Mythology vs. Metal</h1>
 <p>Drag the statements to the correct category.</p>
 <div class="container">
     <div class="box" id="mythology" ondrop="drop(event, 'mythology')" ondragover="allowDrop(event)">
@@ -157,14 +181,14 @@
             <section id="introduction" class = "image-container">
                 <h2>Introduction to Psyche</h2>
                 <p>Psyche is a metal-rich asteroid orbiting the Sun between Mars and Jupiter. It was named after the Greek goddess Psyche.</p>
-                <img src="img/goddess.jpg" alt="The Greek Goddess Psyche" class="goddess-image">
+              <!--  <img src="img/goddess.jpg" alt="The Greek Goddess Psyche" class="goddess-image"> -->
             </section>
     
             <!-- Section 2: Historical Background -->
             <section id="history" class = "image-container">
                 <h2>Historical Background</h2>
                 <p>Psyche was discovered in 1852 by Italian astronomer Annibale de Gasparis and is one of the largest asteroids in our solar system.</p>
-                <img src="img/annibale.jpg" alt="Italian astronomer Annibale de Gasparis" class="historical-image">
+             <!--- <img src="img/annibale.jpg" alt="Italian astronomer Annibale de Gasparis" class="historical-image"> -->
             </section>
     
             <!-- Section 3: Mission to Psyche -->
@@ -355,5 +379,61 @@
         </section>
         </main>
         <footer id="footer">
-            <h2>This is the footer</h2>
+            <style>
+                footer {
+                    padding: 40px 0;
+                    text-align: center;
+                    color: white;
+                    background: linear-gradient(to right, #333, #666); /* Replace @include gradient-half */
+                }
+        
+                footer h3 {
+                    font-weight: normal;
+                    color: white;
+                }
+        
+                .meta {
+                    font-size: 11px;
+                }
+        
+                .social {
+                    margin: 40px 0 0;
+                    padding: 0;
+                    list-style: none;
+                }
+        
+                .social li {
+                    display: inline-block;
+                }
+        
+                .social a {
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                    margin: 5px;
+                    transform: scale(1);
+                    transition: transform 0.35s ease-out;
+                }
+        
+                .social a:hover {
+                    transform: scale(1.1);
+                }
+        
+                @media (min-width: 768px) {
+                    footer h3 {
+                        margin: 0 30px 0 0;
+                    }
+        
+                    .social {
+                        margin: 0 0 0 auto;
+                    }
+                }
+        
+                @media (min-width: 1024px) {
+                    .social a {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+            </style>
         </footer>

@@ -1,13 +1,20 @@
 body {
     margin: 0;
     overflow-x: hidden;
+    background-image: url('nav-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
 #psyche {
     width: 25%;
     left: 3%;
     top: -5%;
     position: relative;
     animation: logo-move-in;
+    animation-duration: 2s;
 }
 #asteroid {
     float: right;
@@ -16,6 +23,7 @@ body {
     right: -5%;
     top: -5%;
     animation: header-move-in;
+    animation-duration: 2s;
 }
 #findOutButton {
     background-color: greenyellow;
@@ -158,3 +166,27 @@ body {
     margin-left: 0;
     line-height: 2;
 }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
