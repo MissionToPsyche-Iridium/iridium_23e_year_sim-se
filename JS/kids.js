@@ -375,8 +375,8 @@ const tl = gsap.timeline()
         },
         {
             rotate: 150,
-            x: 300,
-            y: 4500,
+            x: 500,
+            y: 4800,
             duration: 6,
             scrollTrigger: {
                 trigger: '#div4',
@@ -498,49 +498,137 @@ const tl = gsap.timeline()
     const button2 = document.getElementById('ageButton');
     const ageInput = document.getElementById('ageText');
     const psycheAge = document.getElementById('psycheAge');
-    
-
-    button2.addEventListener("click", () => {
-        const age = ageInput.value.trim();
-        const calc = age / 5;
-        psycheAge.textContent = 'You are approximately ' + calc + ' years old on Psyche!';
-
-    });
-
     const planetSelect = document.getElementById('ageOnPlanet');
-    
-    function getPlanetInfo(planetName){
-        const mercury = 0.241;
-        const venus = 0.616;
-        const mars = 1.882;
-        const jupiter = 11.871;
-        const saturn = 29.477;
-        const neptune = 164.904;
-        const uranus = 84.074;
-        const pluto = 247.9;
-        if(planetSelect.value == "Mercury"){
-            return mercury;
-        } else if (planetSelect.value == "Venus"){
-            return venus;
-        } else if (planetSelect.value == "Mars"){
-            return mars;
-        } else if (planetSelect.value == "Jupiter"){
-            return jupiter;
-        } else if (planetSelect.value == "Saturn"){
-            return saturn;
-        } else if (planetSelect.value == "Neptune"){
-            return neptune;
-        } else if (planetSelect.value == "Uranus"){
-            return uranus;
-        } else {
-            return pluto;
-        }
-        
+    const showResults = document.getElementById('newAge');
+
+
+    const planetYears = {
+        Mercury: 0.241,
+        Venus: 0.616,
+        Mars: 1.882,
+        Jupiter: 11.871,
+        Saturn: 29.477,
+        Uranus: 84.074,
+        Neptune: 164.904,
+        Pluto: 247.9
+    };
+
+
+    function getPlanetInfo(planetName) {
+        return planetYears[planetName] || 1; 
     }
 
-    planetSelect.addEventListener("change", () => {
-        const age = ageInput.value.trim();
-        const results = age * getPlanetInfo(planetSelect.value);
-        const showResults = document.getElementById('newAge');
-        showResults.textContent = 'If you are ' + age + ' years on ' + planetSelect.value + ', you would be ' + results + ' years old on Earth!';
+
+    function calculateAge() {
+        const age = parseFloat(ageInput.value.trim()); 
+        const selectedPlanet = planetSelect.value; 
+
+        if (!isNaN(age) && age > 0) {
+            // Psyche Age Calculation
+            const psycheCalc = age / 5;
+            psycheAge.textContent = `You are approximately ${psycheCalc.toFixed(2)} years old on Psyche!`;
+
+            // Planet Age Calculation
+            const planetFactor = getPlanetInfo(selectedPlanet);
+            const planetAge = age * planetFactor;
+            showResults.textContent = `If you are ${age} years old on Earth, you would be approximately ${planetAge.toFixed(0)} years old on ${selectedPlanet}!`;
+        } else {
+            psycheAge.textContent = "Please enter a valid age!";
+            showResults.textContent = "";
+        }
+    }
+
+    button2.addEventListener("click", calculateAge); 
+    planetSelect.addEventListener("change", calculateAge);
+
+    gsap.fromTo(
+        ".arrows", 
+        {
+            color: "white",
+            opacity: 0,
+            fontSize: "40px"
+        },
+        { 
+        opacity: 1, 
+        color: "orange",
+        fontSize: "47px",
+        duration: 1, 
+        repeat: -1, 
+        yoyo: true, 
+        ease: "power4.inOut"
     });
+
+    gsap.fromTo(
+        "#findYourAge", 
+        {
+            color: "white",
+            opacity: 0,
+            fontSize: "40px"
+        },
+        { 
+        opacity: 1, 
+        color: "orange",
+        fontSize: "47px",
+        duration: 1, 
+        repeat: -1, 
+        yoyo: true, 
+        ease: "power4.inOut"
+    });
+
+
+    const button3 = document.getElementById("changeColorBtn");
+    const button4 = document.getElementById("changeSquareColor");
+
+    // Corrected input selector
+    const colorPicker = document.getElementById("color");
+
+    // Corrected label selector
+    const colorOutput = document.getElementById("color-output");
+
+    let selectedColor = colorPicker.value;
+
+    // Update color when user picks a color
+    colorPicker.addEventListener("input", (event) => {
+        selectedColor = event.target.value; // Get selected color
+        colorOutput.innerText = selectedColor; // Update label with new color
+    });
+
+    // Change astronaut suit color
+    button3.addEventListener("click", () => {
+        gsap.to(".changeSuitColor", {
+            fill: selectedColor, // Apply selected color
+            duration: 0
+        });
+    });
+
+    // Change car color
+    button4.addEventListener("click", () => {
+        gsap.to(".changeCarColor", {
+            fill: selectedColor, // Apply selected color
+            duration: 0
+        });
+    });
+
+
+        const tl3 = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
+
+        tl3.fromTo(
+            '#ArmLower',
+            { rotate: 30 },
+            { rotate: 0, duration: 4, ease: "power2.out", delay: 3 }
+        )
+
+        // Move the car while the arm moves
+        .fromTo(
+            '#car',
+            { y: -30, x: -50 },
+            { y: -100, x: -15, duration: 4, ease: "power2.out" }, "<" // Syncs start with the arm
+        )
+
+        // Blink the headlights only when arm and car move
+        .fromTo(
+            ".changeHeadlightColor",
+            { fill: "yellow" },
+            { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" // Syncs start with arm
+        );
+

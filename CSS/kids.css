@@ -237,13 +237,15 @@ a {
 }
 
 #ageOnPlanet {
-    margin-top: 3rem;
+    margin-top: 4rem;
+    padding: 1%;
     width: 20%;
-    height: 50px;
+    height: 120px;
     border-radius: 1rem;
     font-size: 40px;
     text-align: center;
     color: black;
+    cursor: pointer;
 }
 
 #ageOnPlanetLabel {
@@ -252,6 +254,95 @@ a {
 
 #newAge {
     font-size: 40px;
-    margin-top: 4rem;
+    margin-top: 6rem;
+    color: #f9a000;
 }
 
+#div5 {
+    margin-top: 5%;
+    text-align: center;
+    color: white;
+    h1 {
+        margin-top: 3rem;
+        font-size: 60px;
+    }
+    p{
+        margin-top: 3rem;
+        line-height: 1.5;
+        font-size: 40px;
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    h3{
+        margin-top: 3rem;
+        font-size: 50px;
+    }
+}
+
+#div6 {
+    text-align: center;
+    color: white;
+
+    h1{
+        font-size: 60px;
+    }
+    h3{
+        font-size: 40px;
+        padding-top: 3rem;
+    }
+}
+
+#container1 {
+    background-color: black;
+}
+
+#container2{
+    background-color: blue;
+    height: 500px;
+}
+
+#astronautCar {
+    padding-top: 3rem;
+}
+
+#changeColorBtn, #changeSquareColor {
+    margin: 0;
+    font-size: large;
+    padding: 1%;
+    border-radius: 1rem;
+    background-color: #7A00DB;
+    color: #f9a000;
+    cursor: pointer;
+}
+
+#changeColorBtn {
+    margin-right: 2%;
+}
+
+#color {
+    transform: scale(2);
+    margin-top: 100px;
+    margin-left: 100px;
+    border: solid black 3px;
+    border-radius: 1rem;
+}
+
+#color-output {
+    color: white;
+    margin-left: 100px;
+    display: none;
+}
+
+input[type="color"] {
+    width: 80px;
+    height: 80px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 5rem;
+}
+
+footer {
+    height: 400px;
+}
