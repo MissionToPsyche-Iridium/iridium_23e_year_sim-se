@@ -34,7 +34,6 @@ const tl = gsap.timeline()
             y: -500,
             duration: 5
         }
-
     );
 
     tl.to (
@@ -255,13 +254,133 @@ const tl = gsap.timeline()
             rotate: 90
         },
         {
-            rotate: 180,
-            x: 1250,
-            y: 1500,
-            duration: 4,
+            rotate: 220,
+            x: 850,
+            y: 2000,
+            duration: 6,
             scrollTrigger: {
                 trigger: '#div2',
-                start: 'top 50%, center',
+                start: 'top center',
+                end: 'bottom center',
+                scrub: true
+            }
+        }
+    );
+
+    tl.to (
+        "#flames",
+        {
+            opacity: 0,
+            repeat: 5,
+            yoyo: true
+        }, "<"
+    )
+
+    tl.to(
+        ".flames",
+        {
+            opacity: 1,
+            fill: "orange",
+            repeat: 7,
+            yoyo: true
+        }, "<"
+    );
+
+    tl.fromTo(
+        "#spaceship",
+        {
+            x: 850,
+            y: 2000,
+            rotate: 220
+        },
+        {
+            rotate: 200,
+            x: 50,
+            y: 3000,
+            duration: 6,
+            scrollTrigger: {
+                trigger: '#div3',
+                start: 'top center',
+                end: 'bottom 60%, center',
+                scrub: true
+            }
+        }
+    );
+
+    tl.to (
+        "#flames",
+        {
+            opacity: 0,
+            repeat: 5,
+            yoyo: true
+        }, "<"
+    )
+
+    tl.to(
+        ".flames",
+        {
+            opacity: 1,
+            fill: "orange",
+            repeat: 7,
+            yoyo: true
+        }, "<"
+    );
+
+    tl.fromTo(
+        "#spaceship",
+        {
+            x: 50,
+            y: 3000,
+            rotate: 200
+        },
+        {
+            rotate: 180,
+            x: 60,
+            y: 3700,
+            duration: 6,
+            scrollTrigger: {
+                trigger: '#div4',
+                start: 'top center',
+                end: 'bottom 60%, center',
+                scrub: true
+            }
+        }
+    );
+
+    tl.to (
+        "#flames",
+        {
+            opacity: 0,
+            repeat: 5,
+            yoyo: true
+        }, "<"
+    )
+
+    tl.to(
+        ".flames",
+        {
+            opacity: 1,
+            fill: "orange",
+            repeat: 7,
+            yoyo: true
+        }, "<"
+    );
+
+    tl.fromTo(
+        "#spaceship",
+        {
+            x: 60,
+            y: 3700,
+            rotate: 180
+        },
+        {
+            rotate: 150,
+            x: 300,
+            y: 4500,
+            duration: 6,
+            scrollTrigger: {
+                trigger: '#div4',
+                start: 'top center',
                 end: 'bottom center',
                 scrub: true
             }
@@ -379,10 +498,49 @@ const tl = gsap.timeline()
     const button2 = document.getElementById('ageButton');
     const ageInput = document.getElementById('ageText');
     const psycheAge = document.getElementById('psycheAge');
+    
 
     button2.addEventListener("click", () => {
         const age = ageInput.value.trim();
-        const calc = age * 4;
-        psycheAge.textContent = 'You are ' + calc + ' on Psyche!';
+        const calc = age / 5;
+        psycheAge.textContent = 'You are approximately ' + calc + ' years old on Psyche!';
 
+    });
+
+    const planetSelect = document.getElementById('ageOnPlanet');
+    
+    function getPlanetInfo(planetName){
+        const mercury = 0.241;
+        const venus = 0.616;
+        const mars = 1.882;
+        const jupiter = 11.871;
+        const saturn = 29.477;
+        const neptune = 164.904;
+        const uranus = 84.074;
+        const pluto = 247.9;
+        if(planetSelect.value == "Mercury"){
+            return mercury;
+        } else if (planetSelect.value == "Venus"){
+            return venus;
+        } else if (planetSelect.value == "Mars"){
+            return mars;
+        } else if (planetSelect.value == "Jupiter"){
+            return jupiter;
+        } else if (planetSelect.value == "Saturn"){
+            return saturn;
+        } else if (planetSelect.value == "Neptune"){
+            return neptune;
+        } else if (planetSelect.value == "Uranus"){
+            return uranus;
+        } else {
+            return pluto;
+        }
+        
+    }
+
+    planetSelect.addEventListener("change", () => {
+        const age = ageInput.value.trim();
+        const results = age * getPlanetInfo(planetSelect.value);
+        const showResults = document.getElementById('newAge');
+        showResults.textContent = 'If you are ' + age + ' years on ' + planetSelect.value + ', you would be ' + results + ' years old on Earth!';
     });
