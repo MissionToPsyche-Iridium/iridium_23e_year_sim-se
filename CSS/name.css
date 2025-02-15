@@ -1,3 +1,5 @@
+@import "nav-bg.jpg";
+
 body {
     margin: 0;
     overflow-x: hidden;
@@ -56,7 +58,7 @@ body {
     margin-top: 0;
     min-height: 500px;
     max-height: 500px;
-    background-color: black;
+    background-image: url('nav-bg.jpg');
     justify-content: center;
     border: 3px solid black;
 }
@@ -64,6 +66,7 @@ body {
     text-align: center;
     margin-left: 25%;
     color: black;
+    background-image: url('nav-bg.jpg');
 }
 #wide-view h3 {
     grid-column: 1 / 2;
@@ -87,6 +90,7 @@ body {
     justify-items: center; 
     align-items: center;  
     background-color: black;
+    background-image: url('nav-bg.jpg');
     width: 100%;
     min-height: 30vh; 
     border: 3px solid black;
@@ -105,6 +109,7 @@ body {
     grid-row: 2 / 3; 
     text-align: center;
     margin-left: 30%;
+    background-image: url('nav-bg.jpg');
 }
 .image-container {
     display: flex;
@@ -161,6 +166,7 @@ body {
     background-color: black;
     color: black;
     border: 3px solid black;
+    background-image: url('nav-bg.jpg');
 }
 #top p {
     margin-left: 0;
