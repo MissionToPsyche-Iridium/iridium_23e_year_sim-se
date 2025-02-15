@@ -578,13 +578,8 @@ const tl = gsap.timeline()
 
     const button3 = document.getElementById("changeColorBtn");
     const button4 = document.getElementById("changeSquareColor");
-
-    // Corrected input selector
     const colorPicker = document.getElementById("color");
-
-    // Corrected label selector
     const colorOutput = document.getElementById("color-output");
-
     let selectedColor = colorPicker.value;
 
     // Update color when user picks a color
@@ -610,25 +605,25 @@ const tl = gsap.timeline()
     });
 
 
-        const tl3 = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
+    const tl3 = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
 
-        tl3.fromTo(
-            '#ArmLower',
-            { rotate: 30 },
-            { rotate: 0, duration: 4, ease: "power2.out", delay: 3 }
-        )
+    tl3.fromTo(
+        '#ArmLower',
+        { rotate: 30 },
+        { rotate: 0, duration: 4, ease: "power2.out", delay: 3 }
+    )
 
-        // Move the car while the arm moves
-        .fromTo(
-            '#car',
-            { y: -30, x: -50 },
-            { y: -100, x: -15, duration: 4, ease: "power2.out" }, "<" // Syncs start with the arm
-        )
+    // Move the car while the arm moves
+    .fromTo(
+        '#car',
+        { y: -30, x: -50 },
+        { y: -100, x: -15, duration: 4, ease: "power2.out" }, "<" 
+    )
 
-        // Blink the headlights only when arm and car move
-        .fromTo(
-            ".changeHeadlightColor",
-            { fill: "yellow" },
-            { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" // Syncs start with arm
-        );
+    // Blink the headlights only when arm and car move
+    .fromTo(
+        ".changeHeadlightColor",
+        { fill: "yellow" },
+        { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" 
+    );
 
