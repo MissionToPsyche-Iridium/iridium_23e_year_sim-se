@@ -1,7 +1,10 @@
+@import "nav-bg.jpg";
+
 body {
     margin: 0 auto;
     text-align: center;
     overflow-x: hidden;
+    background-image:url('nav-bg.jpg');
 }
 
 #body-elements {

@@ -380,17 +380,37 @@
         </section>
         </main>
         <footer id="footer">
+            <h3>YEAR ON PSYCHE SIMULATION</h3>
+            <p class="meta">Some footer information here</p>
+                <ul class="social">
+            <li><a href="#" title="Facebook"><img src="facebook-icon.png" alt="Facebook"></a></li>
+            <li><a href="#" title="Twitter"><img src="twitter-icon.png" alt="Twitter"></a></li>
+            <li><a href="#" title="LinkedIn"><img src="linkedin-icon.png" alt="LinkedIn"></a></li>
+                </ul>
+        </footer>
+
             <style>
                 footer {
                     padding: 40px 0;
                     text-align: center;
                     color: white;
-                    background: linear-gradient(to right, #333, #666); /* Replace @include gradient-half */
+                    background: linear-gradient(to right, #333, #666); 
+                    background-image: url('nav-bg.jpg');
                 }
         
                 footer h3 {
                     font-weight: normal;
                     color: white;
+                }
+                #nav-pattern-footer {
+                    position: absolute;
+                    z-index: 0;
+                    left: 0;
+                    bottom: 0;
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    opacity: 0;
                 }
         
                 .meta {
@@ -401,6 +421,7 @@
                     margin: 40px 0 0;
                     padding: 0;
                     list-style: none;
+                    font-family: "Helvetica", sans-serif;
                 }
         
                 .social li {
@@ -437,4 +458,4 @@
                     }
                 }
             </style>
-        </footer>
+        
