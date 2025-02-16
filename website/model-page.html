@@ -30,6 +30,40 @@
             background: rgba(173, 255, 47, 0.2);
         }
         #back-button { left: 20px; }
+        
+        /* Model Controls Panel */
+        #model-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid greenyellow;
+            box-shadow: 0 0 10px rgba(173, 255, 47, 0.3);
+            z-index: 1000;
+        }
+        .control-button {
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.8);
+            color: greenyellow;
+            border: 1px solid greenyellow;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .control-button:hover {
+            background: rgba(173, 255, 47, 0.2);
+        }
+        .control-button.active {
+            background: rgba(173, 255, 47, 0.2);
+            box-shadow: 0 0 10px rgba(173, 255, 47, 0.5);
+        }
         #info-button {
             left: 200px;
             width: 30px;
@@ -255,10 +289,72 @@
 
         // Set up controls
         const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableZoom = false; // Disable mouse wheel zoom
-        camera.position.z = 15; // Set camera back so the full model is visible
-        // Ensure camera is aligned with the equatorial view (y = 0)
+        controls.enableZoom = true;
+        controls.minDistance = 8;
+        controls.maxDistance = 25;
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.rotateSpeed = 0.5;
+        controls.autoRotate = false;
+        controls.autoRotateSpeed = 2.0;
+        
+        camera.position.z = 15;
         camera.position.y = 0;
+        
+        // Create model controls panel
+        const modelControls = document.createElement('div');
+        modelControls.id = 'model-controls';
+        
+        // Control button factory function
+        const createControlButton = (text, onClick) => {
+            const button = document.createElement('button');
+            button.className = 'control-button';
+            button.textContent = text;
+            button.onclick = onClick;
+            return button;
+        };
+        
+        // Add control buttons
+        const resetViewBtn = createControlButton('RESET VIEW', () => {
+            camera.position.set(0, 0, 15);
+            camera.lookAt(0, 0, 0);
+            controls.reset();
+        });
+        
+        const rotateLeftBtn = createControlButton('◄', () => {
+            scene.rotation.y += 0.1;
+        });
+        
+        const rotateRightBtn = createControlButton('►', () => {
+            scene.rotation.y -= 0.1;
+        });
+        
+        const zoomInBtn = createControlButton('ZOOM +', () => {
+            if (camera.position.length() > controls.minDistance) {
+                camera.position.multiplyScalar(0.9);
+            }
+        });
+        
+        const zoomOutBtn = createControlButton('ZOOM -', () => {
+            if (camera.position.length() < controls.maxDistance) {
+                camera.position.multiplyScalar(1.1);
+            }
+        });
+        
+        const autoRotateBtn = createControlButton('AUTO-ROTATE', () => {
+            controls.autoRotate = !controls.autoRotate;
+            autoRotateBtn.classList.toggle('active');
+        });
+        
+        // Add buttons to controls panel
+        modelControls.appendChild(rotateLeftBtn);
+        modelControls.appendChild(zoomOutBtn);
+        modelControls.appendChild(resetViewBtn);
+        modelControls.appendChild(zoomInBtn);
+        modelControls.appendChild(rotateRightBtn);
+        modelControls.appendChild(autoRotateBtn);
+        
+        document.body.appendChild(modelControls);
 
         // Temperature visualization
         let time = 0;
@@ -411,8 +507,20 @@
         <h2>TEMPERATURE VISUALIZATION GUIDE</h2>
         <div class="modal-content">
             <ul>
-                <li>ROTATE: Click and drag to rotate the asteroid model</li>
-                <li>VIEW: Click and hold to orbit around the asteroid</li>
+            <li>MOUSE CONTROLS:
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li>Click and drag to orbit the model</li>
+                    <li>Mouse wheel to zoom in/out</li>
+                </ul>
+            </li>
+            <li>BUTTON CONTROLS:
+                <ul style="margin-top: 5px; padding-left: 20px;">
+                    <li>Use ◄ ► buttons to rotate left/right</li>
+                    <li>ZOOM +/- buttons to adjust view distance</li>
+                    <li>AUTO-ROTATE to toggle continuous rotation</li>
+                    <li>RESET VIEW to return to default position</li>
+                </ul>
+            </li>
                 <li>TEMPERATURE UNITS: Toggle between Kelvin, Celsius, and Fahrenheit using the buttons in the legend</li>
                 <li>COLOR MAPPING: Red indicates warmer regions, blue indicates cooler regions</li>
                 <li>LEGEND: Reference the temperature scale on the right for exact values</li>
