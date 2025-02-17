@@ -552,7 +552,7 @@
         <div class="container">
           <div class="countdown-clock" data-scroll-fade="">
             <div class="earth-time">
-              <div class="section-label">How old would you be if you were born on Psyche?</div>
+              <div class="section-label" style="color: white;">How old would you be if you were born on Psyche?</div>
               <div class="time-components">
                 <div class="unit">
                   <select id="birthYear" style="padding: 5px;">
@@ -564,15 +564,15 @@
                       }
                     </script>
                   </select>
-                  <span class="unit-label">Birth Year</span>
+                  <span class="unit-label" style="color: white;">Birth Year</span>
                 </div>
-                <div class="divider">=</div>
+                <div class="divider" style="color: white;">=</div>
                 <div class="unit">
-                  <span id="psycheAge">0.00</span>
-                  <span class="unit-label">Psyche Years</span>
+                  <span id="psycheAge" style="color: white;">0.00</span>
+                  <span class="unit-label" style="color: white;">Psyche Years</span>
                 </div>
               </div>
-              <div class="section-label" style="font-size: 0.8em; margin-top: 10px;">
+              <div class="section-label" style="font-size: 0.8em; margin-top: 10px; color: white;">
                 (1 Psyche Year ≈ 5 Earth Years)
               </div>
             </div>
@@ -595,7 +595,7 @@
           </script>
           <div class="row">
             <div class="col-lg-9">
-              <h1>Welcome to a <em>year on Psyche</em>, <br/>where we're making history exploring <em>a metallic world.</em></h1>
+              <h1 style="color: white;">Welcome to a <em style="color: #97252b;">year on Psyche</em>, <br/>where we're making history exploring <em style="color: #97252b;">a metallic world.</em></h1>
             </div>
           </div>
         </div>
@@ -666,15 +666,22 @@
             </div>
             <div class="slide">
               <div class="aspect-widescreen" style="position: relative; padding-bottom: 1.25%; height: 0; overflow: hidden;">
-                <iframe src="escape-velocity.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen></iframe>
+                <div id="game-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
               </div>
-              <div class="caption">Play Escape Velocity - Test your skills escaping Psyche's gravitational pull!</div>
+              <script src="JS/temperature-game.js"></script>
+              <div class="caption">Temperature Game - Learn about Psyche's thermal properties!</div>
             </div>
             <div class="slide">
               <div class="aspect-widescreen" style="position: relative; padding-bottom: 1.25%; height: 0; overflow: hidden;">
                 <iframe src="balance.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen></iframe>
               </div>
               <div class="caption">Interplanetary Balance Challenge - Test your understanding of gravity across different planets!</div>
+            </div>
+            <div class="slide">
+              <div class="aspect-widescreen" style="position: relative; padding-bottom: 1.25%; height: 0; overflow: hidden;">
+                <iframe src="escape-velocity.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <div class="caption">Play Escape Velocity - Test your skills escaping Psyche's gravitational pull!</div>
             </div>
             <div class="slide">
               <div class="aspect-widescreen" style="position: relative; padding-bottom: 1.25%; height: 0; overflow: hidden;">
@@ -755,15 +762,15 @@
             <div class="row align-items-center justify-content-between">
               <div class="col-md-5">
                 <div class="content">
-                  <h2>A Year on Psyche</h2>
-                  <p>One year on Psyche is equivalent to about 5 Earth years, as the asteroid completes its orbit around the Sun between Mars and Jupiter. During this journey, Psyche experiences extreme temperature variations - from scorching heat when closer to the Sun to frigid cold at its furthest point. The asteroid's metallic surface reflects sunlight differently throughout its orbit, creating unique lighting conditions. Its position in the asteroid belt also means it regularly interacts with other space objects and debris, making each orbit a dynamic experience.</p>
-                  <p>/</p>
-                  <p><a class="link" href="/timeline/">Experience the Timeline</a></p>
+                  <h2 style="color: #97252b;">A Year on Psyche</h2>
+                  <p style="color: white;">One year on Psyche is equivalent to about 5 Earth years, as the asteroid completes its orbit around the Sun between Mars and Jupiter. During this journey, Psyche experiences extreme temperature variations - from scorching heat when closer to the Sun to frigid cold at its furthest point. The asteroid's metallic surface reflects sunlight differently throughout its orbit, creating unique lighting conditions. Its position in the asteroid belt also means it regularly interacts with other space objects and debris, making each orbit a dynamic experience.</p>
+                  <p style="color: white;">/</p>
+                  <p><a class="link" style="color: white;" href="timeline.html">Experience the Timeline</a></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="image">
-                  <div class="aspect-widescreen" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                <div class="aspect-widescreen" style="position: relative; padding-bottom: 19.25%; height: 0; overflow: hidden;">
                     <iframe src="timeline.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0"></iframe>
                   </div>
                 </div>
@@ -784,10 +791,10 @@
               <!-- Get Involved section -->
               <div class="col-md-6 col-lg-5 order-md-2">
                 <div class="content">
-                  <h2>A Year on Psyche</h2>
-                  <p>One year on the asteroid Psyche lasts about 5 Earth years as it orbits the Sun between Mars and Jupiter. During this time, Psyche experiences varying levels of solar radiation and temperatures as it travels through space. The mission will help us better understand the asteroid's orbital dynamics and its unique metallic composition.</p>
-                  <p>/</p>
-                  <p><a class="link" href="https://psyche.asu.edu/get-involved/">Learn More</a></p>
+                  <h2 style="color: #97252b;">A Year on Psyche</h2>
+                  <p style="color: white;">One year on the asteroid Psyche lasts about 5 Earth years as it orbits the Sun between Mars and Jupiter. During this time, Psyche experiences varying levels of solar radiation and temperatures as it travels through space. The mission will help us better understand the asteroid's orbital dynamics and its unique metallic composition.</p>
+                  <p style="color: white;">/</p>
+                  <p><a class="link" style="color: white;" href="https://psyche.asu.edu/get-involved/">Learn More</a></p>
                 </div>
               </div>
             </div>
@@ -798,20 +805,20 @@
           <div class="container">
             <div class="row align-items-center">
               <div class="header col-md-3">
-                <h2>News &amp; <br/> Blogs</h2>
+                <h2 style="color: #97252b;">News &amp; <br/> Blogs</h2>
                 <p>/</p>
-                <p><a class="link" href="https://psyche.asu.edu/news">All News</a></p>
+                <p><a class="link" style="color: white;" href="https://psyche.asu.edu/news">All News</a></p>
               </div>
               <!-- News carousel -->
               <div class="col-md-9">
                 <div class="carousel">
                   <!-- Individual news items -->
                   <a class="excerpt slide" href="https://www.nasa.gov/missions/psyche-mission/nasas-psyche-delivers-first-images-and-other-data/">
-                    <div class="thumbnail"><img alt="Psyche mission logo showing a gear with an atom symbol inside" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="images/news1.png" width="640"/></div> <p>Physics on Psyche</p> </a>
+                    <div class="thumbnail"><img alt="Psyche mission logo showing a gear with an atom symbol inside" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="images/news1.png" width="640"/></div> <p style="color: white;">Physics on Psyche</p> </a>
                   <a class="excerpt slide" href="https://psyche.asu.edu/2024/07/18/9-months-into-a-6-year-long-journey-to-a-far-flung-asteroid/">
-                    <div class="thumbnail"><img alt="Purple menu interface showing different mission facts and statistics" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="images/news2.png" width="640"/></div> <p>Match Psyche's facts</p> </a>
+                    <div class="thumbnail"><img alt="Purple menu interface showing different mission facts and statistics" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="images/news2.png" width="640"/></div> <p style="color: white;">Match Psyche's facts</p> </a>
                   <a class="excerpt slide" href="https://psyche.asu.edu/2024/06/24/the-psyche-spacecraft-the-solar-systems-newest-interplanetary-meteorologist/">
-                    <div class="thumbnail"><img alt="Graph showing temperature readings with a cat silhouette against a blue sky" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="images/news3.png" width="640"/></div> <p>Your age on Psyche</p> </a>
+                    <div class="thumbnail"><img alt="Graph showing temperature readings with a cat silhouette against a blue sky" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="images/news3.png" width="640"/></div> <p style="color: white;">Your age on Psyche</p> </a>
                 </div>
               </div>
             </div>
@@ -822,20 +829,20 @@
           <div class="container">
             <div class="row align-items-center">
               <div class="header col-md-3">
-                <h2>Kids Zone</h2>
+                <h2 style="color: #97252b;">Kids Zone</h2>
                 <p>/</p>
-                <p><a class="link" href="https://psyche.asu.edu/kids">Fun Activities</a></p>
+                <p><a class="link" style="color: white;" href="https://psyche.asu.edu/kids">Fun Activities</a></p>
               </div>
               <!-- Kids Zone carousel -->
               <div class="col-md-9">
                 <div class="carousel">
                   <!-- Individual activity items -->
                   <a class="excerpt slide" href="https://psyche-capstone-web-projects.web.app/game_page/?gameId=astroquest:%20psyche%27s%20odyssey">
-                    <div class="thumbnail"><img alt="AstroQuest: Psyche's Odyssey game thumbnail" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="https://psyche-capstone-web-projects.web.app/images/astroquest.png" width="640"/></div> <p>Play AstroQuest: Psyche's Odyssey!</p> </a>
+                    <div class="thumbnail"><img alt="AstroQuest: Psyche's Odyssey game thumbnail" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="https://psyche-capstone-web-projects.web.app/images/astroquest.png" width="640"/></div> <p style="color: white;">Play AstroQuest: Psyche's Odyssey!</p> </a>
                   <a class="excerpt slide" href="https://psyche-capstone-web-projects.web.app/game_page/?gameId=asteriod%20tycoon">
-                    <div class="thumbnail"><img alt="Asteroid Tycoon game thumbnail" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="https://psyche-capstone-web-projects.web.app/images/asteriod%20tycoon.png" width="640"/></div> <p>Build Your Space Empire in Asteroid Tycoon!</p> </a>
+                    <div class="thumbnail"><img alt="Asteroid Tycoon game thumbnail" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="https://psyche-capstone-web-projects.web.app/images/asteriod%20tycoon.png" width="640"/></div> <p style="color: white;">Build Your Space Empire in Asteroid Tycoon!</p> </a>
                   <a class="excerpt slide" href="https://psyche-capstone-web-projects.web.app/game_page/?gameId=asteroid-and-aspirations">
-                    <div class="thumbnail"><img alt="Asteroids and Aspirations game thumbnail" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="https://psyche-capstone-web-projects.web.app/images/asteroid-and-aspirations.png" width="640"/></div> <p>Explore Asteroids and Aspirations!</p> </a>
+                    <div class="thumbnail"><img alt="Asteroids and Aspirations game thumbnail" class="attachment-excerpt size-excerpt wp-post-image" decoding="async" height="420" src="https://psyche-capstone-web-projects.web.app/images/asteroid-and-aspirations.png" width="640"/></div> <p style="color: white;">Explore Asteroids and Aspirations!</p> </a>
                 </div>
               </div>
             </div>

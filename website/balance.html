@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planetary Balance Challenge</title>
-    <style>
-        /* Previous styles remain unchanged */
+    <title>Psyche Balance Challenge</title>
+<style>
+        /* Styles for the main layout and container elements */
         body {
             margin: 0;
             display: flex;
@@ -144,8 +144,8 @@
     </style>
 </head>
 <body>
-    <!-- Previous HTML structure remains unchanged -->
-    <h1>Interplanetary Balance Challenge</h1>
+    
+    <h1>Psyche Balance Challenge</h1>
     <div style="position: relative;">
         <canvas id="gameCanvas" width="800" height="500"></canvas>
         <div class="planet-selects">
@@ -211,7 +211,7 @@
     </div>
 
     <script>
-        // Previous variable declarations and classes remain unchanged
+        // Canvas and UI element references
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const leftGravitySelect = document.getElementById('leftGravitySelect');
@@ -222,6 +222,8 @@
         const challengeElement = document.getElementById('challenge');
         const clearBtn = document.getElementById('clearBtn');
 
+        // Main balance beam configuration object
+        // Defines the physical properties and dimensions of the balance beam
         let balance = {
             x: canvas.width / 2,
             y: canvas.height / 2,
@@ -232,9 +234,11 @@
             planetSize: 80
         };
 
+        // Storage for objects placed on each side of the balance
+        // Arrays hold BalanceObject instances for left and right sides
         let objects = {
-            left: [],
-            right: []
+            left: [], // Objects on the left side
+            right: [] // Objects on the right side
         };
 
         let balanceScore = 0;
@@ -250,7 +254,8 @@
         let leftWeightEnabled = false;
         let rightWeightEnabled = false;
 
-        // Previous Particle and BalanceObject classes remain unchanged
+        // Particle class for visual effects when scoring points
+        // Creates animated particles that add visual feedback
         class Particle {
             constructor(x, y) {
                 this.x = x;
@@ -275,6 +280,8 @@
             }
         }
 
+        // Class representing objects that can be placed on the balance
+        // Handles object properties, appearance, and collision detection
         class BalanceObject {
             constructor(x, y, mass, side) {
                 this.x = x;
@@ -318,6 +325,8 @@
             }
         }
 
+        // Helper function to convert gravity values to corresponding planet emojis
+        // Maps numerical gravity values to their representative planet symbols
         function getPlanetEmoji(value) {
             const planets = {
                 '274': '☀️',
@@ -330,6 +339,8 @@
             return planets[value] || '⚪';
         }
 
+        // Calculates the total weight on each side of the balance
+        // Takes into account object mass and planetary gravity
         function calculateWeights() {
             const leftGravity = parseFloat(leftGravitySelect.value);
             const rightGravity = parseFloat(rightGravitySelect.value);
@@ -353,6 +364,8 @@
             return { leftWeight, rightWeight };
         }
 
+        // Main physics update function
+        // Handles balance beam angle, scoring, and visual feedback
         function updatePhysics(deltaTime) {
             const { leftWeight, rightWeight } = calculateWeights();
             
@@ -373,7 +386,7 @@
             balance.angle = Math.max(Math.min(balance.angle, Math.PI / 6), -Math.PI / 6);
 
             // Update balance score and multiplier
-            const isBalanced = diffPercentage <= 5; // 5% tolerance
+            const isBalanced = diffPercentage <= 10; // 10% tolerance
             if (isBalanced && objects.left.length > 0 && objects.right.length > 0) {
                 balanceTime += deltaTime / 1000;
                 if (balanceTime >= 1) {
@@ -418,6 +431,8 @@
         }
 
         // Previous drawing functions remain unchanged
+        // Helper function to draw planet emojis on the canvas
+        // Handles proper positioning and scaling of planet symbols
         function drawPlanet(ctx, x, y, size, emoji) {
             ctx.font = `${size}px Arial`;
             ctx.textAlign = 'center';
@@ -425,6 +440,8 @@
             ctx.fillText(emoji, x, y);
         }
 
+        // Main rendering function
+        // Handles drawing all visual elements on the canvas
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
@@ -503,6 +520,8 @@
             ctx.fillRect(canvas.width/2, 0, canvas.width/2, canvas.height);
         }
 
+        // Creates and adds a new object to the specified side of the balance
+        // Handles object positioning and weight recalculation
         function addObject(mass, side) {
             const xOffset = side === 'left' ? -balance.width/4 : balance.width/4;
             const yOffset = -50 - (objects[side].length * 30);
@@ -519,6 +538,8 @@
         }
 
         // Previous event handlers remain unchanged
+        // Removes an object from the balance
+        // Updates weights and maintains proper object tracking
         function removeObject(obj) {
             const side = obj.side;
             const index = objects[side].indexOf(obj);
@@ -530,11 +551,15 @@
             }
         }
 
+        // Helper function to find an object at given coordinates
+        // Used for mouse interaction and object selection
         function getObjectAtPosition(x, y) {
             const allObjects = [...objects.left, ...objects.right].reverse();
             return allObjects.find(obj => obj.isPointInside(x, y));
         }
 
+        // Determines which side of the balance a given x-coordinate falls on
+        // Used for object placement and interaction
         function getSideAtPosition(x) {
             return x < balance.x ? 'left' : 'right';
         }
@@ -655,6 +680,8 @@
             calculateWeights();
         });
 
+        // Main game loop function
+        // Handles timing, updates physics, and renders each frame
         function gameLoop(currentTime) {
             const deltaTime = currentTime - lastTime;
             lastTime = currentTime;

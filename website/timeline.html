@@ -20,9 +20,9 @@
     /* Title animation */
     .title {
       text-align: center;
-      font-size: 3.5em;
+      font-size: 2.5em;
       font-weight: bold;
-      margin: 40px 0;
+      margin: 10px 0;
       color: var(--accent-color);
       text-shadow: 0 0 10px var(--accent-color);
       position: relative;
@@ -92,26 +92,33 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
-      /* Adding perspective for 3D effects */
       perspective: 800px;
+      height: 100vh;
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
     }
 
     .timeline-container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 0;
       position: relative;
       z-index: 1;
       transform-style: preserve-3d;
       transform: perspective(1000px);
+      height: calc(100vh - 120px);
+      overflow-y: auto;
     }
 
     .timeline {
       position: relative;
-      padding: 20px 0;
+      padding: 5px 0;
     }
 
     .timeline::before {
@@ -127,7 +134,7 @@
     }
 
     .event {
-      padding: 10px 20px;
+      padding: 6px 12px;
       position: relative;
       width: 50%;
       box-sizing: border-box;
@@ -209,14 +216,14 @@
       text-align: left;
     }
     .event-left::after {
-      right: -10px; /* Adjusted offset so marker sits on the timeline */
+      right: -10px;
     }
     .event-right::after {
-      left: -10px;  /* Adjusted offset so marker sits on the timeline */
+      left: -10px;
     }
 
     .event-content {
-      padding: 10px;
+      padding: 8px;
       background-color: rgba(48, 33, 68, 0.1);
       border-radius: 8px;
       position: relative;
@@ -224,7 +231,7 @@
       opacity: 0;
       transition: all 0.5s ease;
       cursor: pointer;
-      max-height: 80px;
+      max-height: 70px;
       overflow: hidden;
     }
 
@@ -281,7 +288,7 @@
       position: absolute;
       background: var(--bg-color);
       border: 2px solid var(--primary-color);
-      padding: 20px;
+      padding: 15px;
       border-radius: 10px;
       z-index: 1000;
       max-width: 300px;
@@ -303,12 +310,14 @@
       opacity: 0;
       transform: translateY(-20px);
       transition: all 0.4s ease 0.2s;
+      margin-top: 0;
     }
 
     .event-popup p {
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.4s ease 0.3s;
+      margin: 8px 0;
     }
 
     .event-popup img {
@@ -331,7 +340,7 @@
       .event {
         width: 100%;
         padding-left: 60px;
-        padding-right: 20px;
+        padding-right: 15px;
       }
       .event-left,
       .event-right {
@@ -347,15 +356,29 @@
         display: none;
       }
     }
+
+    /* Custom scrollbar */
+    .timeline-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .timeline-container::-webkit-scrollbar-track {
+      background: rgba(48, 33, 68, 0.1);
+    }
+
+    .timeline-container::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+      border-radius: 4px;
+    }
+
+    .timeline-container::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-color);
+    }
   </style>
 </head>
 <body>
-  <!-- Canvas for animated starfield background -->
   <canvas id="backgroundCanvas"></canvas>
-
-  <!-- Added animated title -->
   <h1 class="title">Year on Psyche</h1>
-
   <div class="timeline-container">
     <div class="timeline">
       <div class="event event-left">
@@ -416,7 +439,6 @@
   </div>
 
   <script>
-    /* === Starfield Animation using Canvas === */
     const canvas = document.getElementById('backgroundCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -454,11 +476,9 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let star of stars) {
         ctx.beginPath();
-        // Add mouse influence to star movement
         star.x += mouseX * star.speed * 0.5;
         star.y += star.speed + mouseY * star.speed * 0.5;
 
-        // Wrap stars around screen
         if (star.y > canvas.height) {
           star.y = 0;
           star.x = Math.random() * canvas.width;
@@ -482,21 +502,21 @@
     }
     animateStars();
 
-    // Update timeline progress based on scroll
     function updateTimelineProgress() {
       const timeline = document.querySelector('.timeline');
+      const container = document.querySelector('.timeline-container');
       const rect = timeline.getBoundingClientRect();
       const total = rect.height;
-      const visible = window.innerHeight;
+      const visible = container.clientHeight;
       const current = Math.max(0, -rect.top);
       const progress = Math.min(100, (current / (total - visible)) * 100);
       document.documentElement.style.setProperty('--scroll-progress', `${progress}%`);
     }
 
-    window.addEventListener('scroll', updateTimelineProgress);
+    const container = document.querySelector('.timeline-container');
+    container.addEventListener('scroll', updateTimelineProgress);
     updateTimelineProgress();
 
-    // Parallax effect for timeline
     document.addEventListener('mousemove', (e) => {
       const container = document.querySelector('.timeline-container');
       const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -504,26 +524,21 @@
       container.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
     });
 
-    // Add click handlers for event content expansion
     document.querySelectorAll('.event-content').forEach(content => {
       content.addEventListener('click', (e) => {
-        // Don't trigger if clicking on a marker
         if (e.target.closest('.event::after')) return;
         content.classList.toggle('expanded');
       });
     });
 
-    // Add ripple effect to event markers
     document.querySelectorAll('.event').forEach(event => {
       event.addEventListener('click', () => {
         event.classList.remove('clicked');
-        void event.offsetWidth; // Trigger reflow
+        void event.offsetWidth;
         event.classList.add('clicked');
       });
     });
 
-    /* === Intersection Observer for Scroll Animations === */
-    // Create Intersection Observer to handle scroll animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -535,7 +550,6 @@
       rootMargin: '0px 0px -50px 0px'
     });
 
-    // Observe all timeline events
     document.querySelectorAll('.event').forEach(event => {
       observer.observe(event);
     });
@@ -544,13 +558,11 @@
     popup.className = 'event-popup';
     document.body.appendChild(popup);
 
-    // Event details (add multimedia links as needed)
     const eventDetails = {
       "Day 1": {
         title: "Landing on Psyche",
         description: "Description placeholder for Landing on Psyche",
-        image: "images/landing.jpg",
-        video: "" // Example: "<video src='videos/landing.mp4' controls></video>"
+        image: "images/landing.jpg"
       },
       "Day 150": {
         title: "First Mining Test", 
@@ -594,24 +606,19 @@
       }
     };
 
-    // Add click event listeners to timeline events
     document.querySelectorAll('.event').forEach(event => {
       event.addEventListener('click', (e) => {
-        // Prevent the click from bubbling up to the document
         e.stopPropagation();
         const date = event.querySelector('.event-date').textContent;
         const details = eventDetails[date];
         if (!details) return;
 
-        // Update popup content (you can embed videos or other media if provided)
         popup.innerHTML = `
           <h3>${details.title}</h3>
           <p>${details.description}</p>
           ${details.image ? `<img src="${details.image}" style="max-width: 100%; height: auto; margin-top: 10px;">` : ''}
-          ${details.video ? details.video : ''}
         `;
 
-        // Give the browser a moment to render the content so we can measure it
         setTimeout(() => {
           const popupWidth = popup.offsetWidth;
           const markerRect = event.getBoundingClientRect();
@@ -619,14 +626,11 @@
           let leftPosition;
           
           if (isLeft) {
-            // For left events, place the popup to the right of the event marker
             leftPosition = markerRect.right + 10;
           } else {
-            // For right events, place the popup to the left of the event marker
             leftPosition = markerRect.left - popupWidth - 10;
           }
 
-          // Ensure the popup does not go offscreen
           const margin = 10;
           if (leftPosition < margin) leftPosition = margin;
           if (leftPosition + popupWidth > window.innerWidth - margin) {
@@ -635,21 +639,17 @@
 
           popup.style.top = `${markerRect.top + window.scrollY}px`;
           popup.style.left = `${leftPosition}px`;
-
-          // Show the popup with the 3D flip transition
           popup.classList.add('active');
         }, 0);
       });
     });
 
-    // Close popup when clicking outside
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.event') && !e.target.closest('.event-popup')) {
         popup.classList.remove('active');
       }
     });
 
-    /* === Theme Handling (Light/Dark Mode) === */
     function updateTheme() {
       const theme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', theme);
