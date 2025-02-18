@@ -151,7 +151,7 @@
         <div class="planet-selects">
             <div class="planet-control">
                 <select id="leftGravitySelect" class="gravity-select">
-                    <option value="0.22" selected>🌑 Psyche (0.18 m/s²)</option>
+                    <option value="0.18" selected>🌑 Psyche (0.18 m/s²)</option>
                     <option value="274">☀️ Sun (274 m/s²)</option>
                     <option value="10.44">🪐 Saturn (10.44 m/s²)</option>
                     <option value="9.81">🌍 Earth (9.81 m/s²)</option>
@@ -168,7 +168,7 @@
                     <option value="9.81" selected>🌍 Earth (9.81 m/s²)</option>
                     <option value="3.72">🔴 Mars (3.72 m/s²)</option>
                     <option value="1.62">🌙 Moon (1.62 m/s²)</option>
-                    <option value="0.22">🌑 Psyche (0.22 m/s²)</option>
+                    <option value="0.18">🌑 Psyche (0.18 m/s²)</option>
                 </select>
                 <button class="calc-weight-btn" id="rightCalcBtn">Calculate Weight</button>
                 <div class="weight-display" id="rightWeightDisplay"></div>
@@ -182,21 +182,22 @@
             <button class="object-btn" data-mass="0.3">🎸 <span>Guitar (300g)</span></button>
             <button class="object-btn" data-mass="0.5">📖 <span>Book (500g)</span></button>
             <button class="object-btn" data-mass="1">🧱 <span>Brick (1kg)</span></button>
+            <button class="object-btn" data-mass="1">🎒 <span>Backpack (1kg)</span></button>
             <button class="object-btn" data-mass="2.5">💻 <span>Laptop (2.5kg)</span></button>
             <button class="object-btn" data-mass="5">🛹 <span>Skateboard (5kg)</span></button>
-            <button class="object-btn" data-mass="10">⚓ <span>Small Anchor (10kg)</span></button>
-            <button class="object-btn" data-mass="25">🗿 <span>Stone Head (25kg)</span></button>
-            <button class="object-btn" data-mass="50">🏋️ <span>Barbell (50kg)</span></button>
+            <button class="object-btn" data-mass="10">🚲 <span>Bicycle (10kg)</span></button>
             <button class="object-btn" data-mass="75">🛋️ <span>Sofa (75kg)</span></button>
-            <button class="object-btn" data-mass="100">🎹 <span>Piano (100kg)</span></button>
-            <button class="object-btn" data-mass="150">🦏 <span>Rhino (150kg)</span></button>
-            <button class="object-btn" data-mass="200">🐘 <span>Elephant (200kg)</span></button>
-            <button class="object-btn" data-mass="300">🚗 <span>Car (300kg)</span></button>
-            <button class="object-btn" data-mass="500">🚌 <span>Bus (500kg)</span></button>
-            <button class="object-btn" data-mass="750">🚂 <span>Train Car (750kg)</span></button>
-            <button class="object-btn" data-mass="1000">🛥️ <span>Yacht (1000kg)</span></button>
-            <button class="object-btn" data-mass="2000">✈️ <span>Small Plane (2000kg)</span></button>
-            <button class="object-btn" data-mass="5000">🚢 <span>Ship (5000kg)</span></button>
+            <button class="object-btn" data-mass="80">🐐 <span>Goat (80kg)</span></button>
+            <button class="object-btn" data-mass="100">🛏️ <span>Bed (100kg)</span></button>
+            <button class="object-btn" data-mass="150">🪑 <span>Dining Table (150kg)</span></button>
+            <button class="object-btn" data-mass="250">🌡️ <span>Refrigerator (250kg)</span></button>
+            <button class="object-btn" data-mass="300">🐎 <span>Pony (300kg)</span></button>
+            <button class="object-btn" data-mass="400">🎹 <span>Piano (400kg)</span></button>
+            <button class="object-btn" data-mass="1500">🚗 <span>Car (1500kg)</span></button>
+            <button class="object-btn" data-mass="2300">🦏 <span>Rhino (2300kg)</span></button>
+            <button class="object-btn" data-mass="5000">🐘 <span>Elephant (5000kg)</span></button>
+            <button class="object-btn" data-mass="10000">🚒 <span>Firetruck (10000kg)</span></button>
+            <button class="object-btn" data-mass="12000">🚌 <span>Bus (12000kg)</span></button>
         </div>
         <div class="hint" id="hint"></div>
         <div class="stats">
@@ -299,21 +300,22 @@
                     0.3: '🎸',
                     0.5: '📖',
                     1: '🧱',
+                    1: '🎒',
                     2.5: '💻',
                     5: '🛹',
-                    10: '⚓',
-                    25: '🗿',
-                    50: '🏋️',
+                    10: '🚲',
                     75: '🛋️',
-                    100: '🎹',
-                    150: '🦏',
-                    200: '🐘',
-                    300: '🚗',
-                    500: '🚌',
-                    750: '🚂',
-                    1000: '🛥️',
-                    2000: '✈️',
-                    5000: '🚢'
+                    80: '🐐',
+                    100: '🛏️',
+                    150: '🪑',
+                    250: '🌡️',
+                    300: '🐎',
+                    400: '🎹',
+                    1500: '🚗',
+                    2300: '🦏',
+                    5000: '🐘',
+                    10000: '🚒',
+                    12000: '🚌'
                 };
                 return emojis[mass] || '⚪';
             }
@@ -334,7 +336,7 @@
                 '9.81': '🌍',
                 '3.72': '🔴',
                 '1.62': '🌙',
-                '0.22': '🌑'
+                '0.18': '🌑'
             };
             return planets[value] || '⚪';
         }
@@ -441,7 +443,6 @@
         }
 
         // Main rendering function
-        // Handles drawing all visual elements on the canvas
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
