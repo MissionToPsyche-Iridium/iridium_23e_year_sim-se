@@ -206,8 +206,8 @@ tl.fromTo(
         duration: 7,
         scrollTrigger: {
             trigger: '#div8',
-            start: '50% center',
-            end: '60% center',
+            start: '30% center',
+            end: '50% center',
             scrub: true
         }
     }

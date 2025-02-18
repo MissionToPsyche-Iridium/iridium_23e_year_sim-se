@@ -406,6 +406,46 @@ const tl = gsap.timeline()
         }, "<"
     );
 
+    tl.fromTo(
+        "#spaceship",
+        {
+            x: 500,
+            y: 4800,
+            rotate: 150
+        },
+        {
+            rotate: 120,
+            x: 1000,
+            y: 8600,
+            duration: 6,
+            scrollTrigger: {
+                trigger: '#div5',
+                start: '50% center',
+                end: 'bottom center',
+                scrub: true
+            }
+        }
+    );
+
+    tl.to (
+        "#flames",
+        {
+            opacity: 0,
+            repeat: 5,
+            yoyo: true
+        }, "<"
+    )
+
+    tl.to(
+        ".flames",
+        {
+            opacity: 1,
+            fill: "orange",
+            repeat: 7,
+            yoyo: true
+        }, "<"
+    );
+
     const tl2 = gsap.timeline()
 
     tl2.to(
@@ -510,7 +550,8 @@ const tl = gsap.timeline()
         Saturn: 29.477,
         Uranus: 84.074,
         Neptune: 164.904,
-        Pluto: 247.9
+        Pluto: 247.9,
+        Psyche: 5.008
     };
 
 
@@ -626,4 +667,137 @@ const tl = gsap.timeline()
         { fill: "yellow" },
         { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" 
     );
+
+    const dress = document.getElementById('outfitTwo');
+    const shorts = document.getElementById('outfitOne');
+    const shortHair = document.getElementById('shortHair');
+    const longHair = document.getElementById('longHair');
+    const colorPicker2 = document.getElementById("color2");
+    const skinColor = document.getElementById("changeColorBtnHuman");
+    let chosenColor = colorPicker2.value;
+
+    colorPicker2.addEventListener("input", (event) => {
+        chosenColor = event.target.value; // Get selected color
+        console.log(chosenColor);
+    });
+
+    dress.addEventListener("click", () => {
+        gsap.set("#shirt", {visibility:"hidden"})
+        gsap.set("#shorts", {visibility: "hidden"})
+        gsap.set("#belt", {visibility: "hidden"})
+        gsap.set("#Girls", {visibility: "visible"})
+    });
+
+    shorts.addEventListener("click", () => {
+        gsap.set("#shirt", {visibility: "visible"})
+        gsap.set("#shorts", {visibility: "visible"})
+        gsap.set("#belt", {visibility: "visible"})
+        gsap.set("#Girls", {visibility: "hidden"})
+    });
+
+    shortHair.addEventListener("click", () => {
+        gsap.set("#Short", {visibility: "visible"})
+        gsap.set("#Long", {visibility: "hidden"})
+    });
+
+    longHair.addEventListener("click", () => {
+        gsap.set("#Long", {visibility: "visible"})
+        gsap.set("#Short", {visibility: "hidden"})
+    });
+
+    skinColor.addEventListener("click", () => {
+        gsap.to(
+            "#head1",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+
+        gsap.to(
+            "#hand",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+
+        gsap.to(
+            "#armLower",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+
+        gsap.to(
+            "#legs",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+    });
+
+    changeOutfitColor.addEventListener("click", () => {
+        gsap.to(
+            "#shirtSleeve1",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+
+        gsap.to(
+            "#shirt",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+
+        gsap.to(
+            "#shorts",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+
+        gsap.to(
+            "#dress1",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+
+        gsap.to(
+            "#Shoes",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+    });
+
+    changeHairColor.addEventListener("click", () => {
+        gsap.to(
+            "#Long",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+
+        gsap.to(
+            "#Short",
+            {
+                fill: chosenColor,
+                duration: 0
+            }
+        );
+    });
+
+
 

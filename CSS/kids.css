@@ -295,11 +295,34 @@ a {
 
 #container1 {
     background-color: black;
+    border-radius: 2rem;
 }
 
 #container2{
-    background-color: blue;
-    height: 500px;
+    margin-top: 3rem;
+    background-color: black;
+    border-radius: 2rem;
+}
+
+#human {
+    padding-top: 3rem;
+}
+
+#humanColor, #humanOutfit {
+    button {
+        margin-top: 3rem;
+        padding: 1%;
+        font-size: larger;
+        border-radius: 1rem;
+        margin-left: 1%;
+        cursor: pointer;
+        background-color: #7A00DB;
+        color: #f9a000;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
 }
 
 #astronautCar {
@@ -342,6 +365,11 @@ input[type="color"] {
     position: relative;
     margin-bottom: 5rem;
 }
+
+#shirt, #shorts, #belt, #Short {
+    visibility: hidden;
+}
+
 
 footer {
     height: 400px;
