@@ -52,6 +52,18 @@ header {
     font-size: xx-large;
 }
 
+#astronautNameChoice {
+    text-align: center;
+    color: #f9a000;
+    background-color: #7A00DB;
+    border-color: #f9a000;
+    width: 20%;
+    font-size: xx-large;
+    height: 5%;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
 #enter-name {
     text-align: center;
     font-size: xx-large;

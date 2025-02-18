@@ -163,17 +163,17 @@ const tl = gsap.timeline()
     const button = document.getElementById('submit');
 
     button.addEventListener("click", () => {
-        const textField = document.getElementById("enter-name");
-        const nameInput = textField.value.trim();
+        const nameDDL = document.getElementById("astronautNameChoice");
+        const nameValue = nameDDL.value;
         const hiText = document.getElementById("hi");
         const welcome = document.getElementById("welcome-p");
 
-        if (nameInput) {
+        if (nameValue) {
             hiText.style.fontSize = "50px";
-            hiText.textContent = `Hi astronaut ${nameInput}!`;
+            hiText.textContent = `Hi astronaut ${nameValue}!`;
             button.style.opacity = 0;
             welcome.style.visibility = "visible";
-            textField.style.visibility = "hidden";
+            nameDDL.style.display = "none";
             button.style.visibility = "hidden";
             gsap.to(
                 "#hi",
