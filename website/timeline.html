@@ -8,13 +8,14 @@
     :root {
       --primary-color: #302144;
       --accent-color: #ef5965;
-      --bg-color: #ffffff;
-      --text-color: #5a2752;
+      --bg-color: #ef5965;
+      --text-color: #ffffff;
     }
 
     [data-theme="dark"] {
       --bg-color: #1a1a1a;
-      --text-color: #5a2752;
+      --text-color: #ffffff;
+      --accent-color: #ff7b84;
     }
 
     /* Title animation */
@@ -78,7 +79,6 @@
       to { width: 15%; }
     }
 
-    /* Full-screen canvas background for animated starfield */
     #backgroundCanvas {
       position: fixed;
       top: 0;
@@ -140,7 +140,6 @@
       box-sizing: border-box;
     }
 
-    /* Dynamic, 3D event markers with neon glow and rotation */
     .event::after {
       content: '';
       position: absolute;
@@ -162,7 +161,6 @@
       transform: translateY(-50%) scale(1.2);
     }
 
-    /* Ripple effect for event markers */
     .event::before {
       content: '';
       position: absolute;
@@ -206,7 +204,6 @@
       }
     }
 
-    /* Place markers at the timeline line */
     .event-left {
       left: 0;
       text-align: right;
@@ -224,7 +221,7 @@
 
     .event-content {
       padding: 8px;
-      background-color: rgba(48, 33, 68, 0.1);
+      background-color: rgba(48, 33, 68, 0.2);
       border-radius: 8px;
       position: relative;
       transform: translateZ(0);
@@ -237,7 +234,7 @@
 
     .event-content.expanded {
       max-height: 500px;
-      background-color: rgba(48, 33, 68, 0.2);
+      background-color: rgba(48, 33, 68, 0.3);
     }
 
     .event-content::after {
@@ -269,21 +266,21 @@
     .event-content:hover {
       transform: scale(1.05) translateZ(10px);
       box-shadow: 0 5px 15px rgba(239, 89, 101, 0.2);
-      background-color: rgba(48, 33, 68, 0.15);
+      background-color: rgba(48, 33, 68, 0.25);
     }
 
     .event-date {
       font-weight: bold;
-      color: var(--accent-color);
+      color: #ffffff;
       margin-bottom: 4px;
     }
 
     .event-description {
       margin: 0;
-      line-height: 1.2;
+      line-height: 1.4;
+      font-weight: 500;
     }
 
-    /* Interactive popup with 3D flip and smooth transition */
     .event-popup {
       position: absolute;
       background: var(--bg-color);
@@ -311,6 +308,7 @@
       transform: translateY(-20px);
       transition: all 0.4s ease 0.2s;
       margin-top: 0;
+      color: var(--text-color);
     }
 
     .event-popup p {
@@ -318,6 +316,7 @@
       transform: translateY(20px);
       transition: all 0.4s ease 0.3s;
       margin: 8px 0;
+      color: var(--text-color);
     }
 
     .event-popup img {
@@ -357,7 +356,6 @@
       }
     }
 
-    /* Custom scrollbar */
     .timeline-container::-webkit-scrollbar {
       width: 8px;
     }
@@ -378,61 +376,43 @@
 </head>
 <body>
   <canvas id="backgroundCanvas"></canvas>
-  <h1 class="title">Year on Psyche</h1>
+  <h1 class="title">A Year on Psyche vs Earth</h1>
   <div class="timeline-container">
     <div class="timeline">
       <div class="event event-left">
         <div class="event-content">
           <div class="event-date">Day 1</div>
-          <p class="event-description">Event 1</p>
+          <p class="event-description">While you celebrate 1 birthday on Earth, on Psyche you'd still be waiting... it's only been like 2 months in Psyche time!</p>
         </div>
       </div>
       <div class="event event-right">
         <div class="event-content">
-          <div class="event-date">Day 150</div>
-          <p class="event-description">Event 2</p>
+          <div class="event-date">Day 365</div>
+          <p class="event-description">Happy Earth Birthday! But on Psyche, you're not even a quarter through the year yet - still time for more cake!</p>
         </div>
       </div>
       <div class="event event-left">
-        <div class="event-content">
-          <div class="event-date">Day 400</div>
-          <p class="event-description">Event 3</p>
-        </div>
-      </div>
-      <div class="event event-right">
         <div class="event-content">
           <div class="event-date">Day 730</div>
-          <p class="event-description">Event 4</p>
-        </div>
-      </div>
-      <div class="event event-left">
-        <div class="event-content">
-          <div class="event-date">Day 1,000</div>
-          <p class="event-description">Event 5</p>
+          <p class="event-description">You could have TWO Halloween candy collections on Earth, but on Psyche you're still working on your first year's trick-or-treat bag!</p>
         </div>
       </div>
       <div class="event event-right">
         <div class="event-content">
-          <div class="event-date">Day 1,300</div>
-          <p class="event-description">Event 6</p>
+          <div class="event-date">Day 1,095</div>
+          <p class="event-description">Three Christmas celebrations have passed on Earth! That's three times the presents, while Psyche is still counting down to its first Christmas!</p>
         </div>
       </div>
       <div class="event event-left">
         <div class="event-content">
-          <div class="event-date">Day 1,500</div>
-          <p class="event-description">Event 7</p>
+          <div class="event-date">Day 1,460</div>
+          <p class="event-description">Four summer vacations have happened on Earth - that's a lot of ice cream! Meanwhile, summer hasn't even started on Psyche!</p>
         </div>
       </div>
       <div class="event event-right">
-        <div class="event-content">
-          <div class="event-date">Day 1,700</div>
-          <p class="event-description">Event 8</p>
-        </div>
-      </div>
-      <div class="event event-left">
         <div class="event-content">
           <div class="event-date">Day 1,826</div>
-          <p class="event-description">Event 9</p>
+          <p class="event-description">Finally! Your first Psyche New Year! In the same time, you could have watched 1,826 episodes of your favorite cartoon on Earth! That's a lot of TV!</p>
         </div>
       </div>
     </div>
@@ -560,49 +540,34 @@
 
     const eventDetails = {
       "Day 1": {
-        title: "Landing on Psyche",
-        description: "Description placeholder for Landing on Psyche",
-        image: "images/landing.jpg"
+        title: "Birthday Countdown",
+        description: "On Earth, you're excited for your birthday in a year. But on Psyche, you've got a REALLY long wait - about 5 Earth years! That's like waiting through 1,826 bedtimes!",
+        image: "images/birthday.jpg"
       },
-      "Day 150": {
-        title: "First Mining Test", 
-        description: "Description placeholder for First Mining Test",
-        image: "images/mining.jpg"
-      },
-      "Day 400": {
-        title: "Drilling into Psyche's Core",
-        description: "Description placeholder for Drilling into Psyche's Core",
-        image: "images/drilling.jpg"
+      "Day 365": {
+        title: "Earth's Complete Year",
+        description: "While Earth finishes its first lap around the Sun, Psyche is like 'Wait for me!' - it's only about 20% done with its year. That's because Psyche is taking the scenic route!",
+        image: "images/earth.jpg"
       },
       "Day 730": {
-        title: "First Magnetic Field Detection",
-        description: "Description placeholder for First Magnetic Field Detection",
-        image: "images/magnetic.jpg"
+        title: "Double the Fun",
+        description: "Two Earth years means double the candy on Halloween! While kids on Earth are getting their second batch of treats, Psyche kids are still working on their first year's candy stash!",
+        image: "images/halloween.jpg"
       },
-      "Day 1,000": {
-        title: "Habitat Expansion",
-        description: "Description placeholder for Habitat Expansion",
-        image: "images/habitat.jpg"
+      "Day 1,095": {
+        title: "Triple the Celebrations",
+        description: "Three Christmas celebrations have passed on Earth! That's three times the presents, cookies, and holiday fun. Psyche is still getting ready for its first Christmas!",
+        image: "images/christmas.jpg"
       },
-      "Day 1,300": {
-        title: "Meteorite Impact",
-        description: "Description placeholder for Meteorite Impact",
-        image: "images/impact.jpg"
-      },
-      "Day 1,500": {
-        title: "Unexpected Volatile Detection",
-        description: "Description placeholder for Unexpected Volatile Detection",
-        image: "images/volatile.jpg"
-      },
-      "Day 1,700": {
-        title: "Final Scientific Report",
-        description: "Description placeholder for Final Scientific Report",
-        image: "images/report.jpg"
+      "Day 1,460": {
+        title: "Four Summers of Fun",
+        description: "Earth kids have enjoyed four summer breaks full of swimming, ice cream, and fun in the sun. Meanwhile, Psyche is still counting down to its first summer vacation!",
+        image: "images/summer.jpg"
       },
       "Day 1,826": {
-        title: "Departure from Psyche",
-        description: "Description placeholder for Departure from Psyche",
-        image: "images/departure.jpg"
+        title: "The Big Finish",
+        description: "Finally! Psyche completes its year! In the same time, you could have: watched 1,826 cartoons, eaten 5,478 meals, or had 2,607 playdates on Earth! Now that's a long year!",
+        image: "images/celebration.jpg"
       }
     };
 
