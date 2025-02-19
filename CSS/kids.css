@@ -318,6 +318,7 @@ a {
 
 #human {
     padding-top: 3rem;
+    overflow: visible;
 }
 
 #humanColor, #humanOutfit {

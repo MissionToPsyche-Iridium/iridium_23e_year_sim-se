@@ -668,6 +668,50 @@ const tl = gsap.timeline()
         { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" 
     );
 
+    tl3.fromTo(
+        '#Arm',
+        {
+            y: 0,
+            rotate: 0
+        },
+        {
+            y: -30,
+            rotate: -20,
+            duration: 4, 
+            ease: "power2.out"
+        }, "<"
+    )
+
+    tl3.fromTo(
+        '#sleeve',
+        {
+            y: 0,
+            x: 0,
+            rotate: 0
+        },
+        {
+            y: -18,
+            x: 15,
+            rotate: -20,
+            duration: 4, 
+            ease: "power2.out"
+        }, "<"
+    )
+
+    .fromTo(
+        '#dog',
+        {
+            y: -250,
+            x: -25
+        },
+        {
+            y: -400,
+            x: 30,
+            duration: 4, 
+            ease: "power2.out"
+        }, "<"
+    );
+
     const dress = document.getElementById('outfitTwo');
     const shorts = document.getElementById('outfitOne');
     const shortHair = document.getElementById('shortHair');
