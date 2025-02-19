@@ -112,7 +112,7 @@
       z-index: 1;
       transform-style: preserve-3d;
       transform: perspective(1000px);
-      height: calc(100vh - 120px);
+      height: calc(120vh - 120px);
       overflow-y: auto;
     }
 
@@ -228,26 +228,6 @@
       opacity: 0;
       transition: all 0.5s ease;
       cursor: pointer;
-      max-height: 70px;
-      overflow: hidden;
-    }
-
-    .event-content.expanded {
-      max-height: 500px;
-      background-color: rgba(48, 33, 68, 0.3);
-    }
-
-    .event-content::after {
-      content: '↓';
-      position: absolute;
-      bottom: 5px;
-      right: 10px;
-      color: var(--accent-color);
-      transition: transform 0.3s ease;
-    }
-
-    .event-content.expanded::after {
-      transform: rotate(180deg);
     }
 
     .event.visible .event-content {
@@ -504,12 +484,6 @@
       container.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
     });
 
-    document.querySelectorAll('.event-content').forEach(content => {
-      content.addEventListener('click', (e) => {
-        if (e.target.closest('.event::after')) return;
-        content.classList.toggle('expanded');
-      });
-    });
 
     document.querySelectorAll('.event').forEach(event => {
       event.addEventListener('click', () => {
@@ -541,33 +515,33 @@
     const eventDetails = {
       "Day 1": {
         title: "Birthday Countdown",
-        description: "On Earth, you're excited for your birthday in a year. But on Psyche, you've got a REALLY long wait - about 5 Earth years! That's like waiting through 1,826 bedtimes!",
-        image: "images/birthday.jpg"
+        description: "On Earth, you are excited for your birthday in a year. But on Psyche, you have got a REALLY long wait... about 5 Earth years! That equals waiting through 1,826 bedtimes!",
+        image: "https://images.unsplash.com/photo-1464349153735-7db50ed83c84"
       },
       "Day 365": {
-        title: "Earth's Complete Year",
-        description: "While Earth finishes its first lap around the Sun, Psyche is like 'Wait for me!' - it's only about 20% done with its year. That's because Psyche is taking the scenic route!",
-        image: "images/earth.jpg"
+        title: "Earth's Complete Year", 
+        description: "While Earth finishes its first lap around the Sun, Psyche is like 'Wait for me!' It is only about 20% done with its year because Psyche takes the scenic route!",
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa"
       },
       "Day 730": {
         title: "Double the Fun",
-        description: "Two Earth years means double the candy on Halloween! While kids on Earth are getting their second batch of treats, Psyche kids are still working on their first year's candy stash!",
-        image: "images/halloween.jpg"
+        description: "Two Earth years means double the candy on Halloween! While kids on Earth receive their second batch of treats, Psyche kids continue enjoying their first year's candy stash!",
+        image: "https://images.unsplash.com/photo-1508361001413-7a9dca21d08a"
       },
       "Day 1,095": {
         title: "Triple the Celebrations",
-        description: "Three Christmas celebrations have passed on Earth! That's three times the presents, cookies, and holiday fun. Psyche is still getting ready for its first Christmas!",
-        image: "images/christmas.jpg"
+        description: "Three Christmas celebrations have passed on Earth! That means triple the presents, cookies, and holiday fun. Psyche continues preparing for its first Christmas!",
+        image: "https://images.unsplash.com/photo-1543589077-47d81606c1bf"
       },
       "Day 1,460": {
         title: "Four Summers of Fun",
-        description: "Earth kids have enjoyed four summer breaks full of swimming, ice cream, and fun in the sun. Meanwhile, Psyche is still counting down to its first summer vacation!",
-        image: "images/summer.jpg"
+        description: "Earth kids have enjoyed four summer breaks filled with swimming, ice cream, and fun in the sun. Meanwhile, Psyche continues counting down to its first summer vacation!",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
       },
       "Day 1,826": {
         title: "The Big Finish",
-        description: "Finally! Psyche completes its year! In the same time, you could have: watched 1,826 cartoons, eaten 5,478 meals, or had 2,607 playdates on Earth! Now that's a long year!",
-        image: "images/celebration.jpg"
+        description: "Finally! Psyche completes its year! During this time on Earth, you could have watched 1,826 cartoons and eaten 5,478 meals and had 2,607 playdates! Now that is a long year!",
+        image: "https://images.unsplash.com/photo-1513151233558-d860c5398176"
       }
     };
 
@@ -602,7 +576,12 @@
             leftPosition = window.innerWidth - popupWidth - margin;
           }
 
-          popup.style.top = `${markerRect.top + window.scrollY}px`;
+          // For the last 3 events, position popup above the event
+          const isLateEvent = ["Day 1,095", "Day 1,460", "Day 1,826"].includes(date);
+          const topPosition = isLateEvent 
+            ? markerRect.top - popup.offsetHeight - 10 + window.scrollY
+            : markerRect.top + window.scrollY;
+          popup.style.top = `${topPosition}px`;
           popup.style.left = `${leftPosition}px`;
           popup.classList.add('active');
         }, 0);

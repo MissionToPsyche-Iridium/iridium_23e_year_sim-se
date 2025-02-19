@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Photography - Psyche Mission</title>
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/photo.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Space Photography</h1>
+        <p>Explore Psyche and take amazing space photos! Use the NASA viewer to find the perfect angle, then capture and customize your photos.</p>
+        
+        <div class="photo-section">
+            <div class="viewer-section">
+                <iframe src="https://eyes.nasa.gov/apps/solar-system/#/16_psyche" 
+                        width="100%" 
+                        height="600px" 
+                        frameborder="0"
+                        allowfullscreen></iframe>
+            </div>
+            <div class="tools-section">
+                <button id="captureBtn" class="tool-btn">📸 Capture View</button>
+                <div class="canvas-container">
+                    <h3>Edit Your Photo</h3>
+                    <canvas id="drawingCanvas" width="400" height="300"></canvas>
+                    <div class="drawing-tools">
+                        <input type="color" id="colorPicker">
+                        <button class="tool-btn" id="pencilBtn">✏️ Pencil</button>
+                        <button class="tool-btn" id="textBtn">📝 Add Text</button>
+                        <button class="tool-btn" id="stickerBtn">🌟 Add Sticker</button>
+                        <button class="tool-btn" id="saveBtn">💾 Save Photo</button>
+                        <button class="tool-btn" id="clearBtn">🗑️ Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('drawingCanvas');
+            const ctx = canvas.getContext('2d');
+            const canvasContainer = document.querySelector('.canvas-container');
+            let isDrawing = false;
+            let isDragging = false;
+            let selectedElement = null;
+            let elements = [];
+            let lastX = 0, lastY = 0, offsetX = 0, offsetY = 0;
+            let backgroundImage = null;
+
+            class DrawableElement {
+                constructor(type, x, y, content, color, size = '20px') {
+                    Object.assign(this, {type, x, y, content, color, size});
+                }
+
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.font = `${this.size} Arial`;
+                    ctx.fillText(this.content, this.x, this.y);
+                }
+
+                isPointInside(x, y) {
+                    const metrics = ctx.measureText(this.content);
+                    const height = parseInt(this.size);
+                    return x >= this.x && x <= this.x + metrics.width && 
+                           y >= this.y - height && y <= this.y;
+                }
+            }
+
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+
+            document.getElementById('captureBtn').addEventListener('click', async function() {
+                try {
+                    const iframe = document.querySelector('.viewer-section iframe');
+                    const rect = iframe.getBoundingClientRect();
+                    
+                    const stream = await navigator.mediaDevices.getDisplayMedia({
+                        preferCurrentTab: true,
+                        video: {displaySurface: "browser"}
+                    });
+                    
+                    const video = document.createElement('video');
+                    video.srcObject = stream;
+                    await new Promise(resolve => {
+                        video.onloadedmetadata = resolve;
+                        video.play();
+                    });
+                    
+                    const tempCanvas = document.createElement('canvas');
+                    const tempCtx = tempCanvas.getContext('2d');
+                    tempCanvas.width = video.videoWidth;
+                    tempCanvas.height = video.videoHeight;
+                    tempCtx.drawImage(video, 0, 0);
+                    
+                    const croppedCanvas = document.createElement('canvas');
+                    const croppedCtx = croppedCanvas.getContext('2d');
+                    croppedCanvas.width = rect.width;
+                    croppedCanvas.height = rect.height;
+                    
+                    const scaleX = video.videoWidth / window.innerWidth;
+                    const scaleY = video.videoHeight / window.innerHeight;
+                    
+                    croppedCtx.drawImage(
+                        tempCanvas,
+                        rect.left * scaleX, rect.top * scaleY, 
+                        rect.width * scaleX, rect.height * scaleY,
+                        0, 0, rect.width, rect.height
+                    );
+                    
+                    stream.getTracks().forEach(track => track.stop());
+                    canvasContainer.style.display = 'block';
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    const scale = Math.min(canvas.width / rect.width, canvas.height / rect.height);
+                    const x = (canvas.width - rect.width * scale) / 2;
+                    const y = (canvas.height - rect.height * scale) / 2;
+                    
+                    ctx.drawImage(croppedCanvas, x, y, rect.width * scale, rect.height * scale);
+                    backgroundImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                } catch (error) {
+                    console.error('Error capturing screenshot:', error);
+                    alert('Failed to capture screenshot. Please try again.');
+                }
+            });
+
+            function redrawCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (backgroundImage) ctx.putImageData(backgroundImage, 0, 0);
+                elements.forEach(element => element.draw());
+            }
+
+            canvas.addEventListener('mousedown', function(e) {
+                const rect = canvas.getBoundingClientRect();
+                [lastX, lastY] = [e.clientX - rect.left, e.clientY - rect.top];
+                selectedElement = elements.find(elem => elem.isPointInside(lastX, lastY));
+                if (selectedElement) {
+                    isDragging = true;
+                    [offsetX, offsetY] = [lastX - selectedElement.x, lastY - selectedElement.y];
+                } else isDrawing = true;
+            });
+
+            canvas.addEventListener('mousemove', function(e) {
+                const rect = canvas.getBoundingClientRect();
+                const [x, y] = [e.clientX - rect.left, e.clientY - rect.top];
+                if (isDragging && selectedElement) {
+                    [selectedElement.x, selectedElement.y] = [x - offsetX, y - offsetY];
+                    redrawCanvas();
+                } else if (isDrawing) {
+                    ctx.beginPath();
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                    [lastX, lastY] = [x, y];
+                }
+            });
+
+            canvas.addEventListener('mouseup', () => {isDrawing = isDragging = selectedElement = null});
+            canvas.addEventListener('mouseout', () => {isDrawing = isDragging = selectedElement = null});
+
+            document.getElementById('colorPicker').addEventListener('change', e => ctx.strokeStyle = e.target.value);
+            document.getElementById('clearBtn').addEventListener('click', () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (backgroundImage) ctx.putImageData(backgroundImage, 0, 0);
+                elements = [];
+            });
+
+            document.getElementById('saveBtn').addEventListener('click', () => {
+                const link = document.createElement('a');
+                link.download = 'psyche-photo.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+
+            document.getElementById('textBtn').addEventListener('click', () => {
+                const text = prompt('Enter your text:');
+                if (text) {
+                    elements.push(new DrawableElement('text', lastX, lastY, text, ctx.strokeStyle));
+                    elements[elements.length-1].draw();
+                }
+            });
+
+            document.getElementById('stickerBtn').addEventListener('click', () => {
+                const stickers = ['⭐', '🚀', '🛸', '🌎', '☄️'];
+                elements.push(new DrawableElement('sticker', lastX, lastY, 
+                    stickers[Math.floor(Math.random() * stickers.length)], 
+                    ctx.strokeStyle, '30px'));
+                elements[elements.length-1].draw();
+            });
+        });
+    </script>
+</body>
+</html>
