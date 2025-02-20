@@ -24,7 +24,7 @@
                 <button id="captureBtn" class="tool-btn">📸 Capture View</button>
                 <div class="canvas-container">
                     <h3>Edit Your Photo</h3>
-                    <canvas id="drawingCanvas" width="400" height="300"></canvas>
+                    <canvas id="drawingCanvas" width="800" height="600"></canvas>
                     <div class="drawing-tools">
                         <input type="color" id="colorPicker">
                         <button class="tool-btn" id="pencilBtn">✏️ Pencil</button>
@@ -93,23 +93,23 @@
                     
                     const tempCanvas = document.createElement('canvas');
                     const tempCtx = tempCanvas.getContext('2d');
-                    tempCanvas.width = video.videoWidth;
-                    tempCanvas.height = video.videoHeight;
-                    tempCtx.drawImage(video, 0, 0);
+                    tempCanvas.width = video.videoWidth * 2;  // Double the resolution
+                    tempCanvas.height = video.videoHeight * 2;  // Double the resolution
+                    tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
                     
                     const croppedCanvas = document.createElement('canvas');
                     const croppedCtx = croppedCanvas.getContext('2d');
-                    croppedCanvas.width = rect.width;
-                    croppedCanvas.height = rect.height;
+                    croppedCanvas.width = rect.width * 2;  // Double the resolution
+                    croppedCanvas.height = rect.height * 2;  // Double the resolution
                     
-                    const scaleX = video.videoWidth / window.innerWidth;
-                    const scaleY = video.videoHeight / window.innerHeight;
+                    const scaleX = (video.videoWidth * 2) / window.innerWidth;  // Adjust scale for doubled resolution
+                    const scaleY = (video.videoHeight * 2) / window.innerHeight;  // Adjust scale for doubled resolution
                     
                     croppedCtx.drawImage(
                         tempCanvas,
                         rect.left * scaleX, rect.top * scaleY, 
                         rect.width * scaleX, rect.height * scaleY,
-                        0, 0, rect.width, rect.height
+                        0, 0, croppedCanvas.width, croppedCanvas.height
                     );
                     
                     stream.getTracks().forEach(track => track.stop());
