@@ -3,36 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Photography - Psyche Mission</title>
+    <title>Space Pic</title>
     <link rel="stylesheet" href="css/style.min.css">
     <link rel="stylesheet" href="css/photo.css">
 </head>
 <body>
     <div class="container">
-        <h1>Space Photography</h1>
+        <h1>Space Pic</h1>
         <p>Explore Psyche and take amazing space photos! Use the NASA viewer to find the perfect angle, then capture and customize your photos.</p>
+        <button id="captureBtn" class="tool-btn" style="display: block;">📸 Capture Pic</button>
         
         <div class="photo-section">
-            <div class="viewer-section">
-                <iframe src="https://eyes.nasa.gov/apps/solar-system/#/16_psyche" 
-                        width="100%" 
-                        height="600px" 
-                        frameborder="0"
-                        allowfullscreen></iframe>
-            </div>
-            <div class="tools-section">
-                <button id="captureBtn" class="tool-btn">📸 Capture View</button>
-                <div class="canvas-container">
-                    <h3>Edit Your Photo</h3>
-                    <canvas id="drawingCanvas" width="800" height="600"></canvas>
-                    <div class="drawing-tools">
-                        <input type="color" id="colorPicker">
-                        <button class="tool-btn" id="pencilBtn">✏️ Pencil</button>
-                        <button class="tool-btn" id="textBtn">📝 Add Text</button>
-                        <button class="tool-btn" id="stickerBtn">🌟 Add Sticker</button>
-                        <button class="tool-btn" id="saveBtn">💾 Save Photo</button>
-                        <button class="tool-btn" id="clearBtn">🗑️ Clear</button>
-                    </div>
+        <div class="viewer-section">
+            <iframe src="https://eyes.nasa.gov/apps/solar-system/#/16_psyche" 
+                    width="100%" 
+                    height="780px" 
+                    frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+
+        <div class="canvas-container" style="display: none;">
+            <h3>Edit Your Photo</h3>
+            <div style="display: flex; gap: 20px;">
+                <canvas id="drawingCanvas" width="1100" height="780"></canvas>
+                <div class="drawing-tools" style="display: flex; flex-direction: column; gap: 10px;">
+                    <input type="color" id="colorPicker" style="width: 100%;">
+                    <button class="tool-btn" id="pencilBtn">✏️ Pencil</button>
+                    <button class="tool-btn" id="textBtn">📝 Add Text</button>
+                    <button class="tool-btn" id="stickerBtn">🌟 Add Sticker</button>
+                    <button class="tool-btn" id="saveBtn">💾 Save Photo</button>
+                    <button class="tool-btn" id="clearBtn">🗑️ Clear</button>
+                    <button class="tool-btn" id="backBtn">↩️ Back to Viewer</button>
                 </div>
             </div>
         </div>
@@ -44,10 +45,15 @@
             const canvas = document.getElementById('drawingCanvas');
             const ctx = canvas.getContext('2d');
             const canvasContainer = document.querySelector('.canvas-container');
+            const viewerSection = document.querySelector('.viewer-section');
+            const captureBtn = document.getElementById('captureBtn');
+            const colorPicker = document.getElementById('colorPicker');
             let isDrawing = false;
             let isDragging = false;
             let selectedElement = null;
             let elements = [];
+            let paths = [];
+            let currentPath = [];
             let lastX = 0, lastY = 0, offsetX = 0, offsetY = 0;
             let backgroundImage = null;
 
@@ -70,7 +76,31 @@
                 }
             }
 
-            ctx.strokeStyle = '#000000';
+            class Path {
+                constructor(color, width) {
+                    this.points = [];
+                    this.color = color;
+                    this.width = width;
+                }
+
+                addPoint(x, y) {
+                    this.points.push({x, y});
+                }
+
+                draw() {
+                    if (this.points.length < 2) return;
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = this.width;
+                    ctx.beginPath();
+                    ctx.moveTo(this.points[0].x, this.points[0].y);
+                    for (let i = 1; i < this.points.length; i++) {
+                        ctx.lineTo(this.points[i].x, this.points[i].y);
+                    }
+                    ctx.stroke();
+                }
+            }
+
+            ctx.strokeStyle = colorPicker.value;
             ctx.lineWidth = 2;
             ctx.lineCap = 'round';
 
@@ -93,17 +123,17 @@
                     
                     const tempCanvas = document.createElement('canvas');
                     const tempCtx = tempCanvas.getContext('2d');
-                    tempCanvas.width = video.videoWidth * 2;  // Double the resolution
-                    tempCanvas.height = video.videoHeight * 2;  // Double the resolution
+                    tempCanvas.width = video.videoWidth * 2;
+                    tempCanvas.height = video.videoHeight * 2;
                     tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
                     
                     const croppedCanvas = document.createElement('canvas');
                     const croppedCtx = croppedCanvas.getContext('2d');
-                    croppedCanvas.width = rect.width * 2;  // Double the resolution
-                    croppedCanvas.height = rect.height * 2;  // Double the resolution
+                    croppedCanvas.width = rect.width * 2;
+                    croppedCanvas.height = rect.height * 2;
                     
-                    const scaleX = (video.videoWidth * 2) / window.innerWidth;  // Adjust scale for doubled resolution
-                    const scaleY = (video.videoHeight * 2) / window.innerHeight;  // Adjust scale for doubled resolution
+                    const scaleX = (video.videoWidth * 2) / window.innerWidth;
+                    const scaleY = (video.videoHeight * 2) / window.innerHeight;
                     
                     croppedCtx.drawImage(
                         tempCanvas,
@@ -113,14 +143,13 @@
                     );
                     
                     stream.getTracks().forEach(track => track.stop());
+                    viewerSection.style.display = 'none';
                     canvasContainer.style.display = 'block';
+                    captureBtn.style.display = 'none';
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     
-                    const scale = Math.min(canvas.width / rect.width, canvas.height / rect.height);
-                    const x = (canvas.width - rect.width * scale) / 2;
-                    const y = (canvas.height - rect.height * scale) / 2;
-                    
-                    ctx.drawImage(croppedCanvas, x, y, rect.width * scale, rect.height * scale);
+                    // Draw directly at canvas size without scaling
+                    ctx.drawImage(croppedCanvas, 0, 0, canvas.width, canvas.height);
                     backgroundImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 } catch (error) {
                     console.error('Error capturing screenshot:', error);
@@ -128,9 +157,16 @@
                 }
             });
 
+            document.getElementById('backBtn').addEventListener('click', function() {
+                canvasContainer.style.display = 'none';
+                viewerSection.style.display = 'block';
+                captureBtn.style.display = 'block';
+            });
+
             function redrawCanvas() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 if (backgroundImage) ctx.putImageData(backgroundImage, 0, 0);
+                paths.forEach(path => path.draw());
                 elements.forEach(element => element.draw());
             }
 
@@ -141,7 +177,11 @@
                 if (selectedElement) {
                     isDragging = true;
                     [offsetX, offsetY] = [lastX - selectedElement.x, lastY - selectedElement.y];
-                } else isDrawing = true;
+                } else {
+                    isDrawing = true;
+                    currentPath = new Path(ctx.strokeStyle, ctx.lineWidth);
+                    currentPath.addPoint(lastX, lastY);
+                }
             });
 
             canvas.addEventListener('mousemove', function(e) {
@@ -151,22 +191,39 @@
                     [selectedElement.x, selectedElement.y] = [x - offsetX, y - offsetY];
                     redrawCanvas();
                 } else if (isDrawing) {
-                    ctx.beginPath();
-                    ctx.moveTo(lastX, lastY);
-                    ctx.lineTo(x, y);
-                    ctx.stroke();
-                    [lastX, lastY] = [x, y];
+                    currentPath.addPoint(x, y);
+                    redrawCanvas();
+                    currentPath.draw();
                 }
             });
 
-            canvas.addEventListener('mouseup', () => {isDrawing = isDragging = selectedElement = null});
-            canvas.addEventListener('mouseout', () => {isDrawing = isDragging = selectedElement = null});
+            canvas.addEventListener('mouseup', () => {
+                if (isDrawing && currentPath) {
+                    paths.push(currentPath);
+                }
+                isDrawing = isDragging = false;
+                selectedElement = null;
+                currentPath = null;
+            });
 
-            document.getElementById('colorPicker').addEventListener('change', e => ctx.strokeStyle = e.target.value);
+            canvas.addEventListener('mouseout', () => {
+                if (isDrawing && currentPath) {
+                    paths.push(currentPath);
+                }
+                isDrawing = isDragging = false;
+                selectedElement = null;
+                currentPath = null;
+            });
+
+            colorPicker.addEventListener('input', function(e) {
+                ctx.strokeStyle = e.target.value;
+            });
+
             document.getElementById('clearBtn').addEventListener('click', () => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                if (backgroundImage) ctx.putImageData(backgroundImage, 0, 0);
                 elements = [];
+                paths = [];
+                backgroundImage = null;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
             });
 
             document.getElementById('saveBtn').addEventListener('click', () => {
@@ -180,7 +237,7 @@
                 const text = prompt('Enter your text:');
                 if (text) {
                     elements.push(new DrawableElement('text', lastX, lastY, text, ctx.strokeStyle));
-                    elements[elements.length-1].draw();
+                    redrawCanvas();
                 }
             });
 
@@ -189,7 +246,7 @@
                 elements.push(new DrawableElement('sticker', lastX, lastY, 
                     stickers[Math.floor(Math.random() * stickers.length)], 
                     ctx.strokeStyle, '30px'));
-                elements[elements.length-1].draw();
+                redrawCanvas();
             });
         });
     </script>
