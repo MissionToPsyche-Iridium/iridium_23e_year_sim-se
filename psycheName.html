@@ -282,43 +282,103 @@
                     const ctx = canvas.getContext('2d');
                     const startButton = document.getElementById('startButton');
                     const gameMessage = document.getElementById('game-message');
+                    
+                    // image of satellite
                     const shipImg = new Image();
-                    shipImg.src = 'psychesat.png';  
+                    shipImg.src = 'img/psychesat.jpg';  
 
+                    // image of Psyche
                     const psycheImg = new Image();
-                    psycheImg.src = 'psycheimage.png'; 
-                    shipImg.onload = psycheImg.onload = function () {
-                     drawGame();
-                    };
-                  let ship = { x: 150, y: 250, size: 10 };
-                    let psyche = { x: 150, y: 50, size: 20 };
+                    psycheImg.src = 'img/psycheimage.jpg';
+                    const bgImg = new Image();
+                    //image  of stars
+                    bgImg.src = 'img/stars.jpg';
+
+
+                    // Game objects
+                    let ship = { x: 150, y: 250, width: 50, height: 50 }; // Smaller ship
+                    let psyche = { x: 150, y: 50, width: 50, height: 50 }; // Smaller Psyche
                     let obstacles = [];
                     let gameInterval;
-                
-                    function drawShip() {
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect(ship.x, ship.y, ship.size, ship.size);
-                    }
-                
-                    function drawPsyche() {
-                        ctx.fillStyle = 'gold';
-                        ctx.beginPath();
-                        ctx.arc(psyche.x, psyche.y, psyche.size, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                
-                    function drawObstacles() {
+                    let starts = [];
+
+                    // drawing stars to randomize for each game
+                    function generateStars() {
+                        stars = [];
+                            for (let i = 0; i < 100; i++) {
+                                stars.push({
+                                x: Math.random() * canvas.width,
+                                y: Math.random() * canvas.height,
+                                size: Math.random() * 2,
+                                opacity: Math.random() * 1 // Controls flickering effect
+                                  });
+                            }
+                        }
+
+                 function drawStars() {
+                     stars.forEach(star => {
+                        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`; // Adjust opacity for flickering effect
+                        ctx.fillRect(star.x, star.y, star.size, star.size);
+                    });
+             }
+
+            // Slow down the flickering effect
+            setInterval(() => {
+            stars.forEach(star => {
+            star.opacity = Math.random(); // Change opacity gradually
+                });
+            }, 500); // Adjust interval for slower or faster flickering
+
+            // Call generateStars once when the game starts
+            generateStars();
+             //       bgImg.onload = function () {
+              //          drawGame(); 
+              //      };
+                  //  shipImg.onload = psycheImg.onload = function () {
+                  //      ctx.drawImage(shipImg, ship.x, ship.y, ship.size, ship.size);
+                  //      ctx.drawImage(psycheImg, psyche.x, psyche.y, psyche.size, psyche.size); 
+                  //      drawGame();
+                  //  };
+                    shipImg.onload = function () {
+                         drawGame();
+                    };
+                    
+
+                    function drawGame() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                            // Draw background image
+                        ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+                        // Draw stars first
+                        drawStars();
+                        
+                        // Draw the ship and Psyche
+                        ctx.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
+                        ctx.drawImage(psycheImg, psyche.x, psyche.y, psyche.width, psyche.height);
+                        // Draw obstacles
                         ctx.fillStyle = 'red';
                         obstacles.forEach(obs => {
-                            ctx.fillRect(obs.x, obs.y, obs.size, obs.size);
+                        ctx.fillRect(obs.x, obs.y, obs.size, obs.size);
                         });
                     }
-                
+           
+             
                     function updateGame() {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        drawShip();
-                        drawPsyche();
-                        drawObstacles();
+                        // Draw background first
+         //           ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+
+                        // Redraw ship and Psyche
+          //          ctx.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
+           //         ctx.drawImage(psycheImg, psyche.x, psyche.y, psyche.width, psyche.height);
+
+                        // Draw obstacles
+            //            drawObstacles();
+
+                        drawGame();
+                      //  drawShip();
+                      //  drawPsyche();
+                      //  drawObstacles();
                 
                         obstacles.forEach(obs => {
                             obs.y += 2;
@@ -343,27 +403,47 @@
                     }
                 
                     function gameOver() {
-                        clearInterval(gameInterval);
-                        gameMessage.textContent = 'Game Over! Try again!';
+                        // Clear the screen and draw the background
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+
+                        // Draw "Game Over" text in white
+                        ctx.fillStyle = 'white'; 
+                        ctx.font = '30px Arial'; 
+                        ctx.textAlign = 'center'; 
+                        ctx.fillText('Game Over! Try again!', canvas.width / 2, canvas.height / 2);
                  }
                 
                     function gameWin() {
                         clearInterval(gameInterval);
-                        gameMessage.textContent = 'Congratulations! You reached Psyche!';
-                    }
+                         // Clear the screen and draw the background
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+
+                        // Draw "Congratulations!" text in white
+                        ctx.fillStyle = 'white'; 
+                        ctx.font = '30px Arial'; 
+                        ctx.textAlign = 'center'; 
+                        ctx.fillText('Congratulations! You reached Psyche!', canvas.width / 2, canvas.height / 2);
+                        }
                 
+                    // Move ship
                     function moveShip(e) {
+                        // prevents scrolling on page when arrow key in touched
+                        e.preventDefault();
                         if (e.key === 'ArrowUp') ship.y -= 10;
                         if (e.key === 'ArrowDown') ship.y += 10;
                         if (e.key === 'ArrowLeft') ship.x -= 10;
                         if (e.key === 'ArrowRight') ship.x += 10;
-                    }
-                
+                        }
+
+                        // Attach event listener
+                    document.addEventListener('keydown', moveShip);
                     startButton.addEventListener('click', () => {
                         ship = { x: 150, y: 250, size: 10 };
                         psyche = { x: 150, y: 50, size: 20 };
                         obstacles = Array.from({ length: 5 }, () => ({
-                            x: Math.random() * 280 + 10,
+                            x: Math.random() * (canvas.width - 15),
                            y: Math.random() * 150,
                             size: 15,
                         }));
