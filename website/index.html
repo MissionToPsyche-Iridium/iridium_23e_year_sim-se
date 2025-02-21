@@ -81,6 +81,15 @@
     [data-theme="dark"] {
       --bg-color: #1a1a1a;
       --text-color: #ffffff;
+      /* Updated color presets for accessibility */
+      --wp--preset--color--vivid-red: #d9534f;
+      --wp--preset--color--pale-pink: #e0a3a3;
+      --wp--preset--color--luminous-vivid-orange: #f0ad4e;
+    }
+    [data-theme="dark"] #bg-pattern-footer .cls-2,
+    [data-theme="dark"] #bg-pattern-header .cls-2,
+    [data-theme="dark"] #bg-pattern-home-middle .cls-2 {
+      fill: transparent !important;
     }
     
     body {
@@ -115,6 +124,9 @@
       color: #e0e0e0;
     }
     
+    [data-theme="dark"] h1 {
+        color: var(--text-color) !important;
+    }
     /* Dark mode toggle button */
     .theme-toggle {
       background: none;
