@@ -12,9 +12,9 @@ const tl = gsap.timeline({
 })
 
 tl.fromTo('header', {scale: 10}, {scale: 1, duration: 6})
-tl.fromTo('#logo', {scale: 10, y: 350}, {scale: 3, duration:2}, '<')
+//tl.fromTo('#logo', {scale: 10, y: 350}, {scale: 3, duration:2}, '<')
 tl.to('body', {background: 'linear-gradient(to right, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144)'})
-tl.to('#logo', {scale: 1, y: 0, duration: 2}, '<')
+//tl.to('#logo', {scale: 1, y: 0, duration: 2}, '<')
 tl.to('body', {background: 'white', delay: 1})
 tl.fromTo(
     '#page-header', 
@@ -83,7 +83,7 @@ tl.fromTo(
         scrollTrigger: {
             trigger: '#div3',
             start: 'top center',
-            end: '60% center',
+            end: 'bottom center',
             scrub: true
         }
     }
@@ -205,8 +205,8 @@ tl.fromTo(
         y: 0,
         duration: 7,
         scrollTrigger: {
-            trigger: '#div8',
-            start: '30% center',
+            trigger: '#div4',
+            start: 'top center',
             end: '50% center',
             scrub: true
         }

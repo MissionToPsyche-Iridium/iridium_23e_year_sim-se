@@ -7,15 +7,13 @@ gsap.set([
     "footer"
 ], { opacity: 0 });
 
+
 const tl = gsap.timeline({
     defaults: {duration: .75, ease: "power4.out"}
 })
-
-tl.fromTo('header', {scale: 10}, {scale: 1, duration: 6})
-tl.fromTo('#logo', {scale: 10, y: 350}, {scale: 3, duration:2}, '<')
-tl.to('body', {background: 'linear-gradient(to right, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144)'})
-tl.to('#logo', {scale: 1, y: 0, duration: 2}, '<')
-tl.to('body', {background: 'white', delay: 1})
+tl.to('body', {background: "black"});
+tl.to('#background-video', { opacity: 1, duration: 1.5, ease: "power1.inOut" });
+tl.fromTo('#logo', {scale: 4, y: 500, opacity: 0}, {scale: 1, y: 0, duration: 4, delay: 3, opacity: 1})
 tl.fromTo(
     '#page-header', 
     {
@@ -31,13 +29,15 @@ tl.fromTo(
     }
 )
 
+tl.to('#background-video', { opacity: 0, duration: 2, delay: 3.5, ease: "power1.inOut" });
+
 tl.fromTo(
     '#div1', 
     {opacity: 0}, 
     {
         opacity: 1,
         duration: 2
-    }
+    }, "<50%"
 )
 
 tl.fromTo(
@@ -54,8 +54,12 @@ tl.fromTo(
             end: '50% center',
             scrub: true
         }
-    }
+    }, "<"
 )
+
+
+
+tl.to('body', {background: 'white', delay: 1, opacity: 1})
 
 tl.fromTo(
     '#div2',
@@ -126,8 +130,8 @@ tl.fromTo(
         duration: 7,
         scrollTrigger: {
             trigger: '#div4',
-            start: '70% center',
-            end: '80% center',
+            start: '40% center',
+            end: '60% center',
             scrub: true
         }
     }

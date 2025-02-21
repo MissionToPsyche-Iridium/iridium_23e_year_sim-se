@@ -69,6 +69,9 @@ header {
     color: white;
     background-color: black;
     border-radius: 1rem;
+    p{
+        font-size: 40px;
+    }
 }
 
 #div1 p, #div2 p{
@@ -77,12 +80,77 @@ header {
 }
 
 #div2 {
+    position: relative; 
     margin-top: 2rem;
-    width: 60%;
+    width: 80%;
     text-align: center;
     margin-right: auto;
     margin-left: auto;
+    border-radius: 1rem;
+    overflow: hidden; 
+    background: black; 
+    color: white;
+    z-index: 1; 
+    
+    h3{
+        font-size: 50px;
+    }
+    p{
+    font-size: 40px;
+    }
 }
+
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+#test{
+    padding: 3%;
+    width: 95%;
+    margin-bottom: 5%;
+    margin-top: 3rem;
+    border-radius: 1rem;
+    position: relative;
+    background-color: black;
+    color: white;
+    font-size: 60px;
+    overflow: visible;
+}
+
+#test::after, #test::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), transparent, white);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 10px;
+    border-radius: 1rem;
+    animation: 3s spin linear infinite;
+}
+
+#test::before {
+    filter: blur(1.5rem);
+    opacity: 0.7;
+}
+
+@keyframes spin {
+    from
+    {
+        --angle: 0deg;
+    } 
+    to
+    {
+        --angle:360deg;
+    }
+}
+
 
 #div2 h3 {
     padding-top: 3rem;
@@ -96,6 +164,9 @@ header {
     grid-template-rows: auto;
     color: white;
     text-align: center;
+    div{
+        height: 500px;
+    }
 }
 
 #div3 h1 {
@@ -112,6 +183,15 @@ header {
     margin: 1rem;
     padding: 10%;
     border-radius: 1rem;
+    h4{
+        font-size: 50px;
+        margin-top: 3rem;
+    }
+
+    p{
+        margin-top: 3rem;
+        font-size: 30px;
+    }
 }
 
 #mercury {
@@ -183,4 +263,15 @@ footer {
     height: 30vh;
     width: 100%;
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
+}
+
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; 
+    z-index: -1;
+    opacity: 0; 
 }
