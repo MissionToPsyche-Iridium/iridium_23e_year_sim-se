@@ -843,5 +843,9 @@ const tl = gsap.timeline()
         );
     });
 
+    const tl4 = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
+
+    tl4.fromTo("#abc-section", {opacity: 0}, {opacity: 1, duration: 3})
+    tl4.fromTo("#sleep-section", {opacity: 0}, {opacity: 1, duration: 3}, "<50%")
 
 
