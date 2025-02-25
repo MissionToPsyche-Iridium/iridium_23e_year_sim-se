@@ -646,27 +646,81 @@ const tl = gsap.timeline()
     });
 
 
+    const liftCarButton = document.getElementById("liftCar");
+    let carRaised = false;
+    gsap.set("#ArmLower", {rotate: 30});
+    gsap.set("#car", {y: -30, x: -50});
+
+    liftCarButton.addEventListener("click", () =>{
+        if (!carRaised){
+            carRaised = true;
+            liftCarButton.textContent = "Lower the Car";
+            gsap.fromTo(
+                '#ArmLower',
+                { rotate: 30 },
+                { rotate: 0, duration: 4, ease: "power2.out", delay: 0 }
+            )
+        
+            // Move the car while the arm moves
+            gsap.fromTo(
+                '#car',
+                { y: -30, x: -50 },
+                { y: -100, x: -15, duration: 4, ease: "power2.out" }, "<" 
+            )
+        
+            // Blink the headlights only when arm and car move
+            gsap.fromTo(
+                ".changeHeadlightColor",
+                { fill: "yellow" },
+                { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" 
+            );
+        } else {
+            liftCarButton.textContent = "Lift the Car";
+            carRaised = false;
+            gsap.fromTo(
+                '#ArmLower',
+                { rotate: 0 },
+                { rotate: 30, duration: 4, ease: "power2.out", delay: 0 }
+            )
+        
+            // Move the car while the arm moves
+            gsap.fromTo(
+                '#car',
+                { y: -100, x: -15 },
+                { y: -30, x: -50, duration: 4, ease: "power2.out" }, "<" 
+            )
+        
+            // Blink the headlights only when arm and car move
+            gsap.fromTo(
+                ".changeHeadlightColor",
+                { fill: "yellow" },
+                { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" 
+            );
+        }
+        
+    });
+
     const tl3 = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
 
-    tl3.fromTo(
-        '#ArmLower',
-        { rotate: 30 },
-        { rotate: 0, duration: 4, ease: "power2.out", delay: 3 }
-    )
+    // tl3.fromTo(
+    //     '#ArmLower',
+    //     { rotate: 30 },
+    //     { rotate: 0, duration: 4, ease: "power2.out", delay: 3 }
+    // )
 
-    // Move the car while the arm moves
-    .fromTo(
-        '#car',
-        { y: -30, x: -50 },
-        { y: -100, x: -15, duration: 4, ease: "power2.out" }, "<" 
-    )
+    // // Move the car while the arm moves
+    // .fromTo(
+    //     '#car',
+    //     { y: -30, x: -50 },
+    //     { y: -100, x: -15, duration: 4, ease: "power2.out" }, "<" 
+    // )
 
-    // Blink the headlights only when arm and car move
-    .fromTo(
-        ".changeHeadlightColor",
-        { fill: "yellow" },
-        { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" 
-    );
+    // // Blink the headlights only when arm and car move
+    // .fromTo(
+    //     ".changeHeadlightColor",
+    //     { fill: "yellow" },
+    //     { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" 
+    // );
 
     tl3.fromTo(
         '#Arm',
