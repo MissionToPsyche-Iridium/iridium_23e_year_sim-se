@@ -700,6 +700,7 @@ const tl = gsap.timeline()
         
     });
 
+    //automate the above
     const tl3 = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
 
     // tl3.fromTo(
