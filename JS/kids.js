@@ -700,8 +700,85 @@ const tl = gsap.timeline()
         
     });
 
+    const liftDogButton = document.getElementById("liftDog");
+    let dogRaised = false;
+    gsap.set("#Arm", {rotate: 10, y: 0});
+    gsap.set("#sleeve", {rotate: 15, x: 0, y: 0});
+    gsap.set("#dog", {y: -250, x: -70});
+    
+    liftDogButton.addEventListener("click", () =>{
+        let tl3 = gsap.timeline({ repeat: 0, repeatDelay: 1, yoyo: true });
+        if (!dogRaised) {
+            dogRaised = true;
+            liftDogButton.textContent = "Lower the Dog";
+            tl3.to(
+                '#Arm',
+                {
+                    y: -30,
+                    rotate: -20,
+                    duration: 4, 
+                    ease: "power2.out"
+                }, "<"
+            )
+        
+            tl3.to(
+                '#sleeve',
+                {
+                    y: -18,
+                    x: 15,
+                    rotate: -22,
+                    duration: 4, 
+                    ease: "power2.out"
+                }, "<"
+            )
+        
+            tl3.to(
+                '#dog',
+                {
+                    y: -350,
+                    x: 10,
+                    duration: 4, 
+                    ease: "power2.out"
+                }, "<"
+            );
+        } else {
+            dogRaised = false;
+            liftDogButton.textContent = "Lift the Dog";
+            tl3.to(
+                '#Arm',
+                {
+                    y: 0,
+                    rotate: 10,
+                    duration: 4, 
+                    ease: "power2.out"
+                }, "<"
+            )
+        
+            tl3.to(
+                '#sleeve',
+                {
+                    y: 0,
+                    x: 0,
+                    rotate: 15,
+                    duration: 4, 
+                    ease: "power2.out"
+                }, "<"
+            )
+        
+            tl3.to(
+                '#dog',
+                {
+                    y: -250,
+                    x: -70,
+                    duration: 4, 
+                    ease: "power2.out"
+                }, "<"
+            );
+        }
+    });
+
     //automate the above
-    const tl3 = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
+    // const tl3 = gsap.timeline({ repeat: -1, repeatDelay: 1, yoyo: true });
 
     // tl3.fromTo(
     //     '#ArmLower',
@@ -723,49 +800,49 @@ const tl = gsap.timeline()
     //     { fill: "white", duration: 0.2, repeat: 18, yoyo: true }, "<" 
     // );
 
-    tl3.fromTo(
-        '#Arm',
-        {
-            y: 0,
-            rotate: 0
-        },
-        {
-            y: -30,
-            rotate: -20,
-            duration: 4, 
-            ease: "power2.out"
-        }, "<"
-    )
+    // tl3.fromTo(
+    //     '#Arm',
+    //     {
+    //         y: 0,
+    //         rotate: 0
+    //     },
+    //     {
+    //         y: -30,
+    //         rotate: -20,
+    //         duration: 4, 
+    //         ease: "power2.out"
+    //     }, "<"
+    // )
 
-    tl3.fromTo(
-        '#sleeve',
-        {
-            y: 0,
-            x: 0,
-            rotate: 0
-        },
-        {
-            y: -18,
-            x: 15,
-            rotate: -20,
-            duration: 4, 
-            ease: "power2.out"
-        }, "<"
-    )
+    // tl3.fromTo(
+    //     '#sleeve',
+    //     {
+    //         y: 0,
+    //         x: 0,
+    //         rotate: 0
+    //     },
+    //     {
+    //         y: -18,
+    //         x: 15,
+    //         rotate: -20,
+    //         duration: 4, 
+    //         ease: "power2.out"
+    //     }, "<"
+    // )
 
-    .fromTo(
-        '#dog',
-        {
-            y: -250,
-            x: -25
-        },
-        {
-            y: -400,
-            x: 30,
-            duration: 4, 
-            ease: "power2.out"
-        }, "<"
-    );
+    // .fromTo(
+    //     '#dog',
+    //     {
+    //         y: -250,
+    //         x: -25
+    //     },
+    //     {
+    //         y: -400,
+    //         x: 30,
+    //         duration: 4, 
+    //         ease: "power2.out"
+    //     }, "<"
+    // );
 
     const dress = document.getElementById('outfitTwo');
     const shorts = document.getElementById('outfitOne');
