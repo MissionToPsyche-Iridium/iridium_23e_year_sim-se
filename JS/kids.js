@@ -980,4 +980,74 @@ const tl = gsap.timeline()
     tl4.fromTo("#abc-section", {opacity: 0}, {opacity: 1, duration: 3})
     tl4.fromTo("#sleep-section", {opacity: 0}, {opacity: 1, duration: 3}, "<50%")
 
+    const tl5 = gsap.timeline({repeat: -1, duration: 2});
+    gsap.set("#goddess-cupid", {opacity: 0});
+    gsap.set("#cupid", {opacity: 0});
+
+    tl5.fromTo(
+        "#goddess-alone", 
+        {
+            opacity: 1
+        },
+        {
+            opacity: 0,
+            duration: 8
+        }
+    )
+
+    tl5.fromTo(
+        "#goddess-cupid",
+        {
+            opacity: 0
+        },
+        {
+            opacity: 1,
+            duration: 8
+        }, "<"
+    )
+
+    tl5.fromTo(
+        "#goddess-cupid",
+        {
+            opacity: 1
+        },
+        {
+            opacity: 0,
+            duration: 8
+        }
+    )
+
+    tl5.fromTo(
+        "#cupid",
+        {
+            opacity: 0
+        },
+        {
+            opacity: 1,
+            duration: 8
+        }, "<"
+    )
+
+    tl5.fromTo(
+        "#cupid",
+        {
+            opacity: 1
+        },
+        {
+            opacity: 0,
+            duration: 8
+        }
+    )
+
+    tl5.fromTo(
+        "#goddess-alone",
+        {
+            opacity: 0
+        },
+        {
+            opacity: 1,
+            duration: 8
+        }, "<"
+    )
+
 
