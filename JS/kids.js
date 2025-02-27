@@ -1050,4 +1050,78 @@ const tl = gsap.timeline()
         }, "<"
     )
 
+    const tl6 = gsap.timeline(
+        {
+            defaults: {
+                yoyo: true,
+                repeat: -1,
+                duration: 5,
+                repeatDelay: 1
+    
+    }})
+    
+    tl6.fromTo(
+        '#bottomLeft',
+        { 
+            x: -72,
+            y: 76,
+            opacity: 1
+        },
+        { 
+            x: -300,
+            y: 300,
+            opacity: 0,
+            duration: 4, 
+            ease: "power2.out"
+        }
+    )
+    
+    tl6.fromTo(
+        '#bottomRight',
+        { 
+            x: -80,
+            y: 78,
+            opacity: 1
+        },
+        { 
+            x: 300,
+            y: 300,
+            opacity: 0,
+            duration: 4, 
+            ease: "power2.out"
+        }, '<'
+    )
+    
+    tl6.fromTo(
+        '#topLeft',
+        { 
+            x: -72,
+            y: 85,
+            opacity: 1
+        },
+        { 
+            x: -300,
+            y: -300,
+            opacity: 0,
+            duration: 4, 
+            ease: "power2.out" 
+        }, '<'
+    )
+    
+    tl6.fromTo(
+        '#topRight',
+        { 
+            x: -80,
+            y: 85,
+            opacity: 1
+        },
+        { 
+            x: 300,
+            y: -300,
+            opacity: 0,
+            duration: 4, 
+            ease: "power2.out"
+        }, '<'
+    )
+
 

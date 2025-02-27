@@ -526,6 +526,51 @@ input[type="color"] {
     transform: translateY(50%);
 }
 
+#div9 {
+    padding: 3rem;
+    width: 90%;
+    margin-top: 3%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    color: #7A00DB;
+    background-image: url(/img/star-background.jpg);
+    background-size: cover;
+    background-color: black;
+    border-radius: 1rem;
+
+    h1{
+        font-size: 50px;
+    }
+    p{
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 3%;
+        font-size: 40px;
+        line-height: 1.5;
+        padding-bottom: 3%;
+    }
+}
+
+#sphere {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    transform: scale(0.75);
+    overflow-x: visible;
+    overflow-y: visible;
+}
+
+#sphere-background {
+    background-color: transparent;
+    background-image: url(/img/psyche_surface2.svg);
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position-y: 40%;
+}
 
 footer {
     height: 400px;
