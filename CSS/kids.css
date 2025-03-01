@@ -533,7 +533,7 @@ input[type="color"] {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
-    color: #7A00DB;
+    color: white;
     background-image: url(/img/star-background.jpg);
     background-size: cover;
     background-color: black;
@@ -548,7 +548,7 @@ input[type="color"] {
         margin-left: auto;
         margin-top: 3%;
         font-size: 40px;
-        line-height: 1.5;
+        line-height: 2;
         padding-bottom: 3%;
     }
 }
@@ -570,6 +570,76 @@ input[type="color"] {
     background-repeat: no-repeat;
     background-position: center;
     background-position-y: 40%;
+}
+
+#div10-wrapper {
+    background-image: url(/img/psyche.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 3rem;
+    padding-bottom: 10%;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#div10 {
+    text-align: center;
+    color: #7A00DB;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 3%;
+    padding-bottom: 20%;
+    border-radius: 5rem;
+    h1{
+        font-size: 50px;
+        padding-top: 3rem;
+    }
+    p{
+        margin-top: 3rem;
+        font-size: 40px;
+    }
+}
+
+#div10-part2{
+    background-color: rgba(10, 10, 10, 0.4);
+    color: #f9a000;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 3%;
+    text-align: center;
+    margin-bottom: 20%;
+    border-radius: 2rem;
+    h1{
+        font-size: 50px;
+        padding-top: 3rem;
+    }
+    p{
+        margin-top: 3rem;
+        font-size: 40px;
+    }
+}
+
+#div10-part3{
+    background-color: rgba(10, 10, 10, 0.4);
+    color: #ef5966;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 3%;
+    text-align: center;
+    border-radius: 5rem;
+    h1{
+        font-size: 50px;
+        padding-top: 3rem;
+    }
+    p{
+        margin-top: 3rem;
+        font-size: 40px;
+        line-height: 1.5;
+    }
 }
 
 footer {

@@ -1063,8 +1063,8 @@ const tl = gsap.timeline()
     tl6.fromTo(
         '#bottomLeft',
         { 
-            x: -72,
-            y: 76,
+            x: -52,
+            y: 98,
             opacity: 1
         },
         { 
@@ -1079,8 +1079,8 @@ const tl = gsap.timeline()
     tl6.fromTo(
         '#bottomRight',
         { 
-            x: -80,
-            y: 78,
+            x: -60,
+            y: 98,
             opacity: 1
         },
         { 
@@ -1095,8 +1095,8 @@ const tl = gsap.timeline()
     tl6.fromTo(
         '#topLeft',
         { 
-            x: -72,
-            y: 85,
+            x: -52,
+            y: 105,
             opacity: 1
         },
         { 
@@ -1111,8 +1111,8 @@ const tl = gsap.timeline()
     tl6.fromTo(
         '#topRight',
         { 
-            x: -80,
-            y: 85,
+            x: -60,
+            y: 105,
             opacity: 1
         },
         { 
@@ -1123,5 +1123,3 @@ const tl = gsap.timeline()
             ease: "power2.out"
         }, '<'
     )
-
-
