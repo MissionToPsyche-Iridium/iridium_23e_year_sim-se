@@ -24,7 +24,7 @@ import { initBackgroundSwitcher } from './backgroundManager.js';
 import { createNavMenu } from './nav.js';
 import { loadSection0 } from './section0.js';
 import { loadSection1 } from './section1.js';
-import { loadSection2 } from './section2.js';
+import { loadSection2, renderSection2 } from './section2.js';
 import { loadSection3, renderSection3 } from './section3.js';
 import { loadSection4 } from './section4.js';
 import { loadSection5 } from './section5.js';
@@ -108,6 +108,7 @@ function init() {
     } else {
       renderer.render(scene, camera);
     }    
+    renderSection2(camera,scene);
     renderSection3(camera,scene);
   }
 
