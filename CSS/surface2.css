@@ -28,8 +28,7 @@ div {
     background-image: linear-gradient(#f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
     background-clip: text;
 }
-
-#div1, #div2, #div3, #div4, #div5 {
+ #div3, #div4, #div5 {
     margin-top: 15%;
     text-align: center;
     width: 100%;
@@ -55,7 +54,7 @@ div {
     border-radius: 3rem;
 }
 
-#inner-materials {
+#inner-materials, #inner-features {
     padding-top: 15%;
     padding-bottom: 15%;
     text-align: center;
@@ -80,8 +79,15 @@ div {
     }
 }
 
-#div2 h1 {
-    margin-top: 15%;
+#features {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+    border-radius: 3rem;
+    background-image: url(/img/craters.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 div h2 {
@@ -98,7 +104,7 @@ div h2 {
     margin-left: auto;
 }
 
-#surface-img, #crater-img, #wide-img, #swiss-flag {
+#surface-img, #wide-img, #swiss-flag {
     margin-right: auto;
     margin-left: auto;
     width: 80%;
