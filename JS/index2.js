@@ -287,3 +287,13 @@ tl2.fromTo(
     }, '<'
 )
 
+const surfaceButton = document.getElementById('div8-btn');
+const locationButton = document.getElementById('div4-btn');
+
+surfaceButton.addEventListener("click", () => {
+    window.open("surface2.html")
+});
+
+locationButton.addEventListener("click", () => {
+    window.open("location2.html")
+});

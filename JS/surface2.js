@@ -320,5 +320,3 @@ tl.to(
 
 
 tl.to(["#div3", "#div4", "#div5", "#footer"], {opacity: 1, duration: 4});
-
-

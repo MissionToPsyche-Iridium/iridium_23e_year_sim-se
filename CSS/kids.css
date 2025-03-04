@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -590,8 +591,9 @@ input[type="color"] {
     margin-right: auto;
     margin-left: auto;
     margin-top: 3%;
-    padding-bottom: 20%;
+    margin-bottom: 20%;
     border-radius: 5rem;
+    background-color: rgba(10, 10, 10, 0.7);
     h1{
         font-size: 50px;
         padding-top: 3rem;
@@ -599,11 +601,12 @@ input[type="color"] {
     p{
         margin-top: 3rem;
         font-size: 40px;
+        padding-bottom: 1rem;
     }
 }
 
 #div10-part2{
-    background-color: rgba(10, 10, 10, 0.4);
+    background-color: rgba(10, 10, 10, 0.7);
     color: #f9a000;
     width: 60%;
     margin-right: auto;
@@ -623,7 +626,7 @@ input[type="color"] {
 }
 
 #div10-part3{
-    background-color: rgba(10, 10, 10, 0.4);
+    background-color: rgba(10, 10, 10, 0.7);
     color: #ef5966;
     width: 60%;
     margin-right: auto;
