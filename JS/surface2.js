@@ -3,7 +3,7 @@ gsap.set([
     "#header-h1",
     "#materials", 
     "#features", 
-    "#div3", 
+    "#dimensions", 
     "#div4", 
     "#div5",
     "footer"
@@ -21,7 +21,7 @@ const tl = gsap.timeline({
 // Animate background size without repeating
 tl.fromTo("body", 
     { backgroundSize: "300%"},  // Start large and zoomed in
-    { backgroundSize: "650%", duration: 3 } // Shrink to fit screen properly
+    { backgroundSize: "650%", duration: 2 } // Shrink to fit screen properly
 );
 
 tl.fromTo(
@@ -39,7 +39,7 @@ tl.fromTo(
     }, "<50%"
 );
 
-tl.to("#header-h1", {opacity: 1, duration: 3})
+tl.to("#header-h1", {opacity: 1, duration: 2})
 
 // Smooth transition from background image to black, then to white
 tl.to("body", { backgroundImage: "none", backgroundColor: "black", duration: 1}, "<60%");
@@ -70,7 +70,7 @@ tl.fromTo(
     },
     {
         opacity: 1,
-        duration: 3,
+        duration: 1,
         ease: "power4.in"
     }, "<"
 );
@@ -318,5 +318,110 @@ tl.to(
     }
 )
 
+tl.fromTo(
+    "#dimensions",
+    {
+        x: -1000,
+        y: 300,
+        rotate: 90,
+        opacity: 0
+    },
+    {
+        x: 0,
+        y: 0,
+        rotate: 0,
+        opacity: 1,
+        duration: 4,
+        scrollTrigger: {
+            trigger: '#dimensions',
+            start: 'top center',
+            end: '20% center',
+            scrub: true
+        } 
+    }
+)
 
-tl.to(["#div3", "#div4", "#div5", "#footer"], {opacity: 1, duration: 4});
+tl.fromTo(
+    "#dimensions-h1", 
+    {
+        scale: 1,
+        y: 0
+    },
+    {
+        scale: 2.5,
+        y: -200,
+        duration: 3,
+        ease: "power4.in",  
+        scrollTrigger: {
+            trigger: '#dimensions',
+            start: 'top center',
+            end: '50% center',
+            scrub: true
+        } 
+    }, "<"
+)
+
+
+
+tl.fromTo(
+    "#dimensions-p",
+    {
+        y: 0
+    },
+    {
+        y: 250,
+        paddingBottom: "5%",
+        scrollTrigger: {
+            trigger: '#dimensions',
+            start: '50% center',
+            end: '90% center',
+            scrub: true
+        } 
+    }, "<"
+)
+
+tl.fromTo(
+    "#dimensions-h1",
+    {
+        scale: 2.5,
+        y: -200
+    },
+    {
+        scale: 2,
+        y: 200,
+        duration: 3,
+        ease: "power4.in", 
+        scrollTrigger: {
+            trigger: '#dimensions',
+            start: '50% center',
+            end: '80% center',
+            scrub: true
+        } 
+    }, "<"
+)
+
+
+
+tl.fromTo(
+    "#inner-dimensions",
+    {
+        color: "#f9a000",
+        backgroundColor: "rgba(0, 0, 0, 0.6)",
+
+    },
+    {
+        color: "#592651",
+        backgroundColor: "rgba(0, 0, 0, 1)",
+        duration: 7,
+        ease: "power4.inOut",
+        scrollTrigger: {
+            trigger: '#dimensions',
+            start: '80% center',
+            end: 'bottom center',
+            scrub: true
+        } 
+    }
+)
+
+
+tl.to(["#div4", "#div5", "#footer"], {opacity: 1, duration: 4});
