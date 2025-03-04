@@ -4,7 +4,7 @@ gsap.set([
     "#materials", 
     "#features", 
     "#dimensions", 
-    "#div4", 
+    "#comparable", 
     "#div5",
     "footer"
 ], { opacity: 0 });
@@ -423,5 +423,69 @@ tl.fromTo(
     }
 )
 
+tl.fromTo(
+    "#comparable",
+    {
+        backgroundSize: "300%"
+    },
+    {
+        backgroundSize: "100%",
+        backgroundPosition: "center",
+        duration: 7,
+        ease: "power4.inOut",
+        scrollTrigger: {
+            trigger: '#comparable',
+            start: 'top center',
+            end: '30% center',
+            scrub: true
+        } 
+    }
+)
 
-tl.to(["#div4", "#div5", "#footer"], {opacity: 1, duration: 4});
+tl.fromTo(
+    "#inner-comparable",
+    {
+        color: "#ef5966",
+        scale: 1.25,
+        backgroundColor: "rgba(0, 0, 0, 1)" 
+    },
+    {
+        color: "#f9a000",
+        backgroundColor: "rgba(0, 0, 0, 0.6)",
+        scale: 1,
+        duration: 7,
+        ease: "power4.inOut",
+        scrollTrigger: {
+            trigger: '#comparable',
+            start: 'top center',
+            end: '30% center',
+            scrub: true
+        }
+    }
+)
+
+tl.fromTo(
+    "#inner-comparable",
+    {
+        color: "#f9a000",
+        scale: 1
+    },
+    {
+        color: "white",
+        backgroundColor: "rgba(0, 0, 0, 1)",
+        scale: 1.25,
+        duration: 7,
+        ease: "power4.inOut",
+        scrollTrigger: {
+            trigger: '#comparable',
+            start: '80% center',
+            end: 'bottom center',
+            scrub: true
+        }
+    }
+)
+
+
+
+
+tl.to(["#comparable", "#div5", "#footer"], {opacity: 1, duration: 4});

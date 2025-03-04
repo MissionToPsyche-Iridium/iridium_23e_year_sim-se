@@ -32,7 +32,7 @@ div {
     background-image: linear-gradient(#f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
     background-clip: text;
 }
- #dimensions, #div4, #div5 {
+ #dimensions, #comparable, #div5 {
     margin-top: 15%;
     text-align: center;
     width: 100%;
@@ -58,7 +58,7 @@ div {
     border-radius: 3rem;
 }
 
-#inner-materials, #inner-features, #inner-dimensions {
+#inner-materials, #inner-features, #inner-dimensions, #inner-comparable {
     padding-top: 15%;
     padding-bottom: 15%;
     text-align: center;
@@ -103,21 +103,18 @@ div {
     background-image: url(/img/psyche-wide.png);
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: red;
 }
 
-div h2 {
-    border-bottom: double 10px black;
-    width: 80%;
+#comparable {
+    width: 100%;
     margin-right: auto;
     margin-left: auto;
-    border-radius: 80%;
-}
-
-#div1 p, #div2 p, #div3 p {
-    width: 80%;
-    margin-right: auto;
-    margin-left: auto;
+    margin-top: 10%;
+    border-radius: 3rem;
+    background-image: url(/img/swiss-map.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
 }
 
 #surface-img, #wide-img, #swiss-flag {
@@ -129,7 +126,7 @@ div h2 {
     border-radius: 10px;
 }
 
-#div4 h3 {
+#comparable h3 {
     border-bottom: solid 5px red;
     width: 40%;
     margin-right: auto;
@@ -137,7 +134,7 @@ div h2 {
     font-size: 50px;
 }
 
-#div4 h4 {
+#comparable h4 {
     font-size: 40px;
 }
 
