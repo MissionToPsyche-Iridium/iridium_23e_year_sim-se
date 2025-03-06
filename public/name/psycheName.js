@@ -19,10 +19,10 @@ export function showNameViewport() {
         viewportContainer.style.display = 'flex';
         return;
     }
-    console.log("Creating Year viewport");
+    console.log("Creating Name viewport");
     // Create container for the viewport
     viewportContainer = document.createElement('div');
-    viewportContainer.id = 'year-viewport-container';
+    viewportContainer.id = 'name-viewport-container';
     viewportContainer.style.position = 'fixed';
     viewportContainer.style.top = '50%';
     viewportContainer.style.left = '50%';
@@ -33,7 +33,7 @@ export function showNameViewport() {
     viewportContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
     viewportContainer.style.border = '2px solid #45A049';
     viewportContainer.style.borderRadius = '10px';
-    viewportContainer.style.boxShadow = '0 0 20px rgba(69, 160, 73, 0.5)';
+    viewportContainer.style.boxShadow = '0 0 20px rgba(0, 123, 255, 0.5)';
     viewportContainer.style.zIndex = '1000';
     viewportContainer.style.display = 'flex';
     viewportContainer.style.flexDirection = 'column';
@@ -66,7 +66,7 @@ export function showNameViewport() {
     viewportContainer.appendChild(header);
     // Create iframe to load the balance.html content
     iframe = document.createElement('iframe');
-    iframe.src = './name/psycheName.html';
+    iframe.src = './psycheName.html';
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';
@@ -117,7 +117,7 @@ export function hideNameViewport() {
  */
 function handleKeyDown(e) {
     if (e.key === 'Escape') {
-        hideYearViewport();
+        hideNameViewport();
     }
 }
 /**
@@ -129,7 +129,7 @@ export function destroyNameViewport() {
         document.removeEventListener('keydown', handleKeyDown);
         document.body.removeChild(viewportContainer);
         viewportContainer = null;
-        iframe = nul;
+        iframe = null;
         closeButton = null;
     }
 }
