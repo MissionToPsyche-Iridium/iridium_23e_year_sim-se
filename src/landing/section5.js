@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { getCurrentSection } from './sectionTracking.js';
 import { makeModelClickable } from './utils.js';
 import gsap from 'gsap';
-import { showYearViewport, hideYearViewport } from './name.js';
+import { showNameViewport, hideNameViewport } from './public/name/psycheName.js';
 
 let nameButton;
 let hasShownViewport = false;
