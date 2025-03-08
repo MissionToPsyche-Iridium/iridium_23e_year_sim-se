@@ -644,6 +644,32 @@ input[type="color"] {
         line-height: 1.5;
     }
 }
+#div11 {
+    margin-top: 10%;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 2rem;
+    h1{
+        font-size: 50px;
+        padding-top: 5%;
+    }
+    p{
+        font-size: 40px;
+        padding: 3%;
+        line-height: 1.5;
+    }
+}
+
+#div11-bg {
+    transform: scale(2.5);
+    margin-bottom: -30%;
+}
+
+
 
 footer {
     height: 400px;
