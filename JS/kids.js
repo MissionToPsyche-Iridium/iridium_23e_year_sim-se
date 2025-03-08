@@ -121,7 +121,8 @@ const tl = gsap.timeline()
             y: -300
         },
         {
-            y: 0,
+            y: -200,
+            scale: 0.5,
             duration: 3, 
             ease: Linear.easeNone, 
         }, "<30%"
@@ -178,7 +179,7 @@ const tl = gsap.timeline()
             gsap.to(
                 "#hi",
                 {
-                    y: 300,
+                    y: 100,
                     duration: 1
                 }
             )
@@ -586,13 +587,11 @@ const tl = gsap.timeline()
         ".arrows", 
         {
             color: "white",
-            opacity: 0,
-            fontSize: "40px"
+            opacity: 0
         },
         { 
         opacity: 1, 
         color: "orange",
-        fontSize: "47px",
         duration: 1, 
         repeat: -1, 
         yoyo: true, 
@@ -603,13 +602,11 @@ const tl = gsap.timeline()
         "#findYourAge", 
         {
             color: "white",
-            opacity: 0,
-            fontSize: "40px"
+            opacity: 0
         },
         { 
         opacity: 1, 
         color: "orange",
-        fontSize: "47px",
         duration: 1, 
         repeat: -1, 
         yoyo: true, 
