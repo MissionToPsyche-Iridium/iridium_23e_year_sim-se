@@ -12,22 +12,28 @@
 -->
 
 <!-- Declarations -->
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/name/psycheName.css">
- 
+    <title>Psyche Name Origin</title>
+    <link rel="stylesheet" href="psycheName.css">
+ </head>
+ <!-- Start of body -->
+ <body>
 
   <!-- Header at top of the page -->
+  <header>
+    <h1>Psyche Name Origin</h1>
+    <nav>
+        <ul>
     <header id="header">
-        <img src="img/psyche.svg" id="psyche">
-        <img src="img/asteroid.png" id="asteroid">
-    </header>
-    <title>The Origin of Psyche's Name</title>
-</head>
-<title>The Origin of Psyche's Name</title>
+        <img src="../img/psyche.svg" id="psyche">
+        <img src="../img/asteroid.png" id="asteroid">
+    </ul>
+</nav>
+</header>
 <style>
     body { 
         font-family: Arial, sans-serif;
@@ -58,8 +64,8 @@
         background-color: lightcoral; 
         }
 </style>
-</head>
-<body>
+<main>
+    <section id = "intro">
 <h1>The Origin of Psyche's Name</h1>
 <h1>Mythology vs. Metal</h1>
 <p>Drag the statements to the correct category.</p>
@@ -100,7 +106,7 @@
         }
     }
 </script>
-</body>
+</section>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -187,7 +193,7 @@
 </style>
     <title>Year on Psyche Sim</title>
 </head>
-<body>
+
         <main>
             <h1>How Psyche's Name Came To Be</h1>
             <a href="#more-info" id="infoButton">Learn More</a>
@@ -472,21 +478,22 @@
             <h2>Learn More</h2>
             <p>Want to dive deeper? Visit the <a href="https://www.nasa.gov/psyche" target="_blank">NASA Psyche Mission Page</a>.</p>
         </section>
+        </body>
         </main>
-        <footer id="footer">
-            <div class="'footer-content">
-                <div class="'footer-text">
-            <h3>YEAR ON PSYCHE SIMULATION</h3>
-            <p class="meta">Some footer information here</p>
-            </div>    
-            <ul class="social">
-                <li><a href="#" title="Facebook"><img src="img/facebook.svg" alt="Facebook"></a></li>
-                <li><a href="#" title="Twitter"><img src="img/twitter.svg" alt="Twitter"></a></li>
-                <li><a href="#" title="Instagram"><img src="img/instagram.svg" alt="Instagram"></a></li>
-                <li><a href="#" title="Youtube"><img src="img/youtube.svg" alt="Youtube"></a></li>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <h3>YEAR ON PSYCHE SIMULATION</h3>
+                    <p class="meta">Some footer information here</p>
+                </div>    
+                <ul class="social">
+                    <li><a href="#" title="Facebook"><img src="img/facebook.svg" alt="Facebook"></a></li>
+                    <li><a href="#" title="Twitter"><img src="img/twitter.svg" alt="Twitter"></a></li>
+                    <li><a href="#" title="Instagram"><img src="img/instagram.svg" alt="Instagram"></a></li>
+                    <li><a href="#" title="Youtube"><img src="img/youtube.svg" alt="Youtube"></a></li>
                 </ul>
+            </div>
         </footer>
-
             <style>
                 footer {
                     display: flex;
@@ -559,13 +566,11 @@
                 }
         
                 @media (min-width: 768px) {
-                    footer {
-                        flex-direction: column;
-                        text-align: center;
-                    }
+                
                     .footer-content {
                         flex-direction: column;
                         align-items: center;
+                        text-align: center;
                     }
                     footer h3 {
                         margin: 0 30px 0 0;

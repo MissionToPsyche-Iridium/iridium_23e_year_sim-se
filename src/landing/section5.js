@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { getCurrentSection } from './sectionTracking.js';
 import { makeModelClickable } from './utils.js';
 import gsap from 'gsap';
-import { showNameViewport, hideNameViewport } from './public/name/psycheName.js';
+import { showNameViewport, hideNameViewport } from './psycheName.js';
 
 let nameButton;
 let hasShownViewport = false;
@@ -35,7 +35,8 @@ export function loadSection5(scene, camera) {
     context.fillStyle = 'white';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
-    context.fillText('Year Metrics', canvas.width / 2, canvas.height / 2);
+    context.fillText('Name', canvas.width / 2, canvas.height / 2);
+ //   context.fillText('Game', canvas.width / 2, canvas.height / 2);
     
     const texture = new THREE.CanvasTexture(canvas);
     const labelMaterial = new THREE.MeshBasicMaterial({
@@ -54,15 +55,20 @@ export function loadSection5(scene, camera) {
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
+    
+     // Add directional light for better visibility
+ //    const directionalLight = new THREE.DirectionalLight(0xffffff, 3);
+ //    directionalLight.position.set(0, 100, 0);
+ //    scene.add(directionalLight);
 
     // Make the button clickable
     makeModelClickable(nameButton, () => {
-        showYearViewport();
+        showNameViewport();
     });
     
     // Make the label clickable too
     makeModelClickable(label, () => {
-        showYearViewport();
+        showNameViewport();
     });
 
     // Add hover effect to the button
@@ -70,7 +76,7 @@ export function loadSection5(scene, camera) {
     nameButton.userData.onPointerOver = () => {
         if (!isHovered) {
             gsap.to(nameButton.material.color, {
-                r: 0.271,  // 0x45a049 darker
+                r: 0.271,  // 0x45a049
                 g: 0.627,
                 b: 0.286,
                 duration: 0.3
@@ -97,10 +103,20 @@ export function loadSection5(scene, camera) {
 
 }
 export function renderSection5(camera, scene) {
-    if (!nameButton) return;
+    if (!nameButton)
+      //  console.log("nameButton is not defined");
+        return;
 
     const currentSection = getCurrentSection();
     const isVisible = currentSection === 5;
+  //  nameButton.visible = isVisible;
+ 
+ 
+ // console.log(`Current Section: ${currentSection}, Should be visible: ${isVisible}`);
+
+
+ //   nameButton.visible = isVisible;
+
 
     // Show/hide the button based on current section
     if (nameButton.visible !== isVisible) {
@@ -113,7 +129,7 @@ export function renderSection5(camera, scene) {
             }
         }
     }
-}// Auto-show viewport when entering section 3
+// Auto-show viewport when entering section 3
 if (isVisible && !hasShownViewport) {
     // Add a small delay to ensure the section transition is complete
     setTimeout(() => {
@@ -124,4 +140,5 @@ if (isVisible && !hasShownViewport) {
     // Hide viewport when leaving section 3
     hideNameViewport();
     hasShownViewport = false;
+    }
 }
