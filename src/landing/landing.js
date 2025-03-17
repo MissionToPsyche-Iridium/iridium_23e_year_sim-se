@@ -108,7 +108,7 @@ function init() {
     } else {
       renderer.render(scene, camera);
     }    
-    renderSection2(camera,scene);
+  //  renderSection2(camera,scene);
     renderSection3(camera,scene);
     renderSection5(camera,scene);
   }
