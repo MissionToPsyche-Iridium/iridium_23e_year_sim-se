@@ -43,7 +43,7 @@ export function loadSection4(scene, camera) {
     });
     const labelGeometry = new THREE.PlaneGeometry(50, 25);
     const label = new THREE.Mesh(labelGeometry, labelMaterial);
-    label.position.set(40, 60, -260); // Slightly in front of the button
+    label.position.set(0, 300, -25); // Slightly in front of the button
     label.userData.section4Element = true; // Mark as part of section 4
     scene.add(label);
     

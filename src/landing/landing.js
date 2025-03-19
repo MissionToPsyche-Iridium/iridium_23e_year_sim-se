@@ -8,7 +8,7 @@
  * Description:
  * This script sets up the primary Three.js scene, including camera, renderer,
  * lighting, navigation, and section loading. It integrates additional modules
- * for interactivity and scene enhancements like starfields and sun effects.
+ * for interactivity and scene enhancements like  and sun effects.
  *
  * Functions:
  * - init(): Initializes the entire scene and starts the animation loop.
@@ -42,16 +42,32 @@ function init() {
   let scrollProgress = 1;
   let currentSection = 1;
   
+  /*
+  Attempting to make these sections traverse a circle:
+  x = 150
+  y = 150
+  z = 13
+  
+  S0(-x, -y, z) - Refs
+  S1(0, 0, z)   - Welcome 
+  S2(20, 30, z-1) - Psyche Intro
+  S3(-x, y, z)  - Balance
+  S4(0, 2y, z)  - Age on Psyche
+  S5(x, y, z)   - Deep Space
+  S6(2x, , z)   - Deep Space 2
+  S7(x, -y, z)  - Seven
+  S8(0, -2y, z) - Space Pic
+  */
   const sections = [
-    { name: "References", position: { x: 0, y: 200, z: -60 } },
-    { name: "Welcome", position: { x: 0, y: 0, z: 13 } },
-    { name: "Psyche", position: { x: 20, y: 30, z: 10 } },
-    { name: "Balance", position: { x: 40, y: -60, z: -260 } },
-    { name: "Life  on Psyche", position: { x: 40, y: 60, z: -200 } },
-    { name: "Deep Space", position: { x: 40, y: 100, z: -300 } },
-    { name: "Deep Space2", position: { x: 120, y: -60, z: 60 } },
-    { name: "Seven", position: { x: 200, y: 300, z: -110 } },           // 7
-    { name: "SpacePic", position: { x: 250, y: 250, z: -150 } }         // 8
+    { name: "References", position: { x:-150, y: -150, z: 13 } },   
+    { name: "Welcome", position: { x: 0, y: 0, z: 13 } },               // Did not change due to use of same 3D model with S2
+    { name: "Psyche", position: { x: 20, y: 30, z: 12 } },              // Did not change due to use of same 3D model with S1
+    { name: "Balance", position: { x: -150, y: 150, z: 13 } },
+    { name: "Life  on Psyche", position: { x: 0, y: 300, z: 13 } },
+    { name: "Deep Space", position: { x: 150, y: 150, z: 13 } },
+    { name: "Deep Space2", position: { x: 300, y: 0, z: 13 } },
+    { name: "Seven", position: { x: 150, y: -150, z: 13 } },           // 7
+    { name: "SpacePic", position: { x: 0, y: -300, z: 13 } }           // 8
 ];
 
   setupNavigation(sections);

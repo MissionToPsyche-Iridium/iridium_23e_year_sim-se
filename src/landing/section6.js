@@ -45,7 +45,7 @@ export function loadSection6(scene, camera, sections) {
     null,                                // No animation for now
     scene, 
     (model) => {
-      console.log("NASA Logo loaded into Section 2");
+      console.log("NASA Logo loaded into Section 6");
 
       // Enable frustum culling for performance
       model.frustumCulled = true;

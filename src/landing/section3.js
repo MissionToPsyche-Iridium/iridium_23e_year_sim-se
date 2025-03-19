@@ -19,7 +19,7 @@ export function loadSection3(scene, camera) {
         transparent: false
     });
     balanceButton = new THREE.Mesh(buttonGeometry, buttonMaterial);
-    balanceButton.position.set(40, -60, -360);
+    balanceButton.position.set(-150, 150, 13);
     scene.add(balanceButton);
     
     // Create a text label for the button
