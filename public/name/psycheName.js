@@ -98,30 +98,30 @@ export function showNameViewport() {
  */
 export function hideNameViewport() {
     if (!viewportContainer) return;
-//    viewportContainer.style.button = "-100%";
-//    viewportContainer.style.opacity = "0";
+    viewportContainer.style.button = "-100%";
+    viewportContainer.style.opacity = "0";
 
-//    setTimeout(() => {
-//        document.body.removeChild(viewportContainer);
-//        viewportContainer = null;
-//        iframe = null;
-//        closeButton = null;
-//    }, 500);
-//    };
+    setTimeout(() => {
+        document.body.removeChild(viewportContainer);
+        viewportContainer = null;
+        iframe = null;
+        closeButton = null;
+    }, 500);
+    };
     // Animate closing
-    gsap.to(viewportContainer, {
-        opacity: 0,
-       scale: 0.8,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-            viewportContainer.style.display = 'none';
+//    gsap.to(viewportContainer, {
+//        opacity: 0,
+//       scale: 0.8,
+//        duration: 0.3,
+//        ease: "power2.in",
+//        onComplete: () => {
+//            viewportContainer.style.display = 'none';
             // Reset opacity and scale for next time
-            viewportContainer.style.opacity = 1;
-            viewportContainer.style.transform = 'translate(-50%, -50%) scale(1)';
-        }
-    });
-}
+//            viewportContainer.style.opacity = 1;
+//            viewportContainer.style.transform = 'translate(-50%, -50%) scale(1)';
+//        }
+//    });
+//}
 /**
  * Handles keydown events for the viewport
  */
