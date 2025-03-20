@@ -1,6 +1,17 @@
+document.body.style.zoom = "100%";
+
 let windowWidth = window.outerWidth;
 let dpr = window.devicePixelRatio;
 let trueSize = Math.round(windowWidth * dpr);
+
+console.log("window.innerWidth:", window.innerWidth);
+console.log("window.innerHeight:", window.innerHeight);
+console.log("window.outerWidth:", window.outerWidth);
+console.log("devicePixelRatio:", window.devicePixelRatio);
+console.log("Effective Width:", window.innerWidth * window.devicePixelRatio);
+console.log("Zoom Level:", Math.round(window.outerWidth / window.innerWidth * 100) + "%");
+
+
 
 console.log("width of device:", windowWidth, "dpr:", dpr, "trueSize:", trueSize);
 
@@ -23,11 +34,8 @@ tl.fromTo('header', {scale: 10}, {scale: 1, duration: 6})
 //tl.fromTo('#logo', {scale: 10, y: 350}, {scale: 3, duration:2}, '<')
 tl.to('body', {background: 'linear-gradient(to right, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144)'})
 //tl.to('#logo', {scale: 1, y: 0, duration: 2}, '<')
-if (trueSize == 1921){
-    tl.to('body', {background: 'red', delay: 1})
-} else{
-    tl.to('body', {background: 'white', delay: 1})
-}
+tl.to('body', {background: 'white', delay: 1})
+
 tl.fromTo(
     '#page-header', 
     {
@@ -199,7 +207,7 @@ tl.fromTo(
         pointerEvents: "auto",
         scrollTrigger: {
             trigger: '#div7',
-            start: 'bottom center',
+            start: '80% center',
             end: 'bottom center',
             scrub: true
         }
