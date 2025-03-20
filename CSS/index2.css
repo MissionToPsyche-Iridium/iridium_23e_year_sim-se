@@ -205,15 +205,19 @@ header {
 }
 
 @media (min-width: 1921px) and (max-width: 2560px) {
-    
-    #div2-btn{
-        font-size: large;
+    #div2{
+        background-size: 30%;
+        background-position-y: 40%;
+
     }
-    #div2-btn:hover {
+    #div2-btn{
         font-size: 35px;
     }
+    #div2-btn:hover {
+        font-size: 45px;
+    }
     #div2 h1{
-        font-size: 50px;
+        font-size: 70px;
     }
     #div2 p{
         font-size: 40px;
@@ -229,7 +233,7 @@ header {
         font-size: medium;
     }
     #div2-btn:hover {
-        font-size: 35px;
+        font-size: large;
     }
     #div2 h1{
         font-size: 60px;
@@ -302,11 +306,13 @@ header {
 }
 
 @media (min-width: 1921px) and (max-width: 2560px) {
+    #div3{
+    }
     #div3-btn{
-        font-size: large;
+        font-size: 35px;
     }
     #div3-btn:hover {
-        font-size: 35px;
+        font-size: 45px;
     }
     #div3 h1{
         font-size: 70px;
@@ -433,13 +439,13 @@ header {
 
 @media (min-width:1921px) and (max-width: 2560px) {
     #div4-btn{
-        font-size: large;
+        font-size: 35px;
         padding: 3%;
         margin-top: 8%;
         margin-bottom: 5%;
     }
     #div4-btn:hover {
-        font-size: 35px;
+        font-size: 45px;
     }
     #div4 h1{
         font-size: 70px;
@@ -550,13 +556,13 @@ header {
 
 @media (min-width: 1921px) and (max-width: 2560px) {
     #div5-btn{
-        font-size: large;
+        font-size: 35px;
         padding: 3%;
         margin-top: 8%;
         margin-bottom: 5%;
     }
     #div5-btn:hover {
-        font-size: 35px;
+        font-size: 45px;
     }
     #div5 h1{
         font-size: 70px;
@@ -672,13 +678,13 @@ header {
 
 @media (min-width: 1921px) and (max-width: 2560px) {
     #div6-btn{
-        font-size: large;
+        font-size: 35px;
         padding: 3%;
         margin-top: 8%;
         margin-bottom: 5%;
     }
     #div6-btn:hover {
-        font-size: 35px;
+        font-size: 45px;
     }
     #div6 h1{
         font-size: 70px;
@@ -795,14 +801,17 @@ header {
 }
 
 @media (min-width: 1921px) and (max-width: 2560px) {
+    #div7 {
+        height: 900px;
+    }
     #div7-btn{
-        font-size: large;
+        font-size: 35px;
         padding: 3%;
         margin-top: 5%;
         margin-bottom: 5%;
     }
     #div7-btn:hover {
-        font-size: 35px;
+        font-size: 45px;
     }
     #div7 h1{
         font-size: 70px;
@@ -917,13 +926,13 @@ header {
 
 @media (min-width: 1921px) and (max-width: 2560px) {
     #div8-btn{
-        font-size: large;
+        font-size: 35px;
         padding: 3%;
         margin-top: 2%;
         margin-bottom: 5%;
     }
     #div8-btn:hover {
-        font-size: 35px;
+        font-size: 45px;
     }
     #div8 h1{
         font-size: 70px;

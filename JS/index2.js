@@ -1,6 +1,4 @@
-console.log(window.devicePixelRatio);
-console.log(window.visualViewport.width);
-console.log(window.innerWidth);
+console.log(window.outerWidth);
 
 
 gsap.set([
@@ -191,9 +189,9 @@ tl.fromTo(
         duration: 4,
         pointerEvents: "auto",
         scrollTrigger: {
-            trigger: '#div8',
-            start: 'top center',
-            end: '50% center',
+            trigger: '#div7',
+            start: 'bottom center',
+            end: 'bottom center',
             scrub: true
         }
     }
