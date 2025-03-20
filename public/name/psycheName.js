@@ -31,7 +31,7 @@ export function showNameViewport() {
     viewportContainer.style.maxWidth = '1440px'; // Increased from 1200px to 1440px (20% wider)
     viewportContainer.style.height = '100vh'; // Increased from 85vh to 95vh (10% higher)
     viewportContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-    viewportContainer.style.border = '2px solid #45A049';
+//    viewportContainer.style.border = '2px solid #45A049';
     viewportContainer.style.borderRadius = '10px';
     viewportContainer.style.boxShadow = '0 0 20px rgba(0, 123, 255, 0.5)';
     viewportContainer.style.zIndex = '1000';

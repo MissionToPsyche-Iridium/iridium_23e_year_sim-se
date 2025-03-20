@@ -27,33 +27,37 @@ export function showNameViewport() {
     viewportContainer.style.top = '50%';
     viewportContainer.style.left = '50%';
     viewportContainer.style.transform = 'translate(-50%, -50%)';
-    viewportContainer.style.width = '110%'; // Increased from 90% to 110% (20% wider)
-    viewportContainer.style.maxWidth = '1440px'; // Increased from 1200px to 1440px (20% wider)
-    viewportContainer.style.height = '100vh'; // Increased from 85vh to 95vh (10% higher)
-    viewportContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-    viewportContainer.style.border = '2px solid #45A049';
-    viewportContainer.style.borderRadius = '10px';
-    viewportContainer.style.boxShadow = '0 0 20px rgba(0, 123, 255, 0.5)';
+    viewportContainer.style.width = '80%'; // Increased from 90% to 110% (20% wider)
+    viewportContainer.style.maxWidth = '1200px'; // Increased from 1200px to 1440px (20% wider)
+    viewportContainer.style.height = '70vh'; // Increased from 85vh to 95vh (10% higher)
+    viewportContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
+ //   viewportContainer.style.border = '2px solid #45A049';
+ //   viewportContainer.style.border = 'translucent';
+    viewportContainer.style.borderRadius = '15px';
+ //   viewportContainer.style.boxShadow = '0 0 20px rgba(0, 123, 255, 0.5)';
     viewportContainer.style.zIndex = '1000';
-    viewportContainer.style.display = 'flex';
+    viewportContainer.style.display = 'none';
     viewportContainer.style.flexDirection = 'column';
-    viewportContainer.style.overflow = 'hidden';
+    viewportContainer.style.padding = '20px';
+    viewportContainer.style.overflow = 'auto';
+    viewportContainer.style.position = 'relative';
     // Create header with title and close button
-    const header = document.createElement('div');
-    header.style.display = 'flex';
-    header.style.justifyContent = 'space-between';
-    header.style.alignItems = 'center';
-    header.style.padding = '10px 15px';
-    header.style.backgroundColor = '#45A049';
-    header.style.color = 'white';
-    header.style.borderTopLeftRadius = '8px';
-    header.style.borderTopRightRadius = '8px';
-    const title = document.createElement('h2');
-    title.textContent = 'Psyche Name Origin';
-    title.style.margin = '0';
-    title.style.fontSize = '1.2rem';
+//    const header = document.createElement('div');
+//    header.style.display = 'flex';
+//    header.style.justifyContent = 'space-between';
+//    header.style.alignItems = 'center';
+//    header.style.padding = '10px 15px';
+//    header.style.backgroundColor = '#45A049';
+//    header.style.color = 'white';
+//    header.style.borderTopLeftRadius = '20px';
+//    header.style.borderTopRightRadius = '20px';
+ //   const title = document.createElement('h2');
+//    title.textContent = 'Psyche Name Origin';
+//   title.style.margin = '0';
+ //   title.style.fontSize = '1.2rem';
     closeButton = document.createElement('button');
     closeButton.textContent = '✕';
+
     closeButton.style.background = 'none';
     closeButton.style.border = 'none';
     closeButton.style.color = 'white';
@@ -61,9 +65,10 @@ export function showNameViewport() {
     closeButton.style.cursor = 'pointer';
     closeButton.style.padding = '0 5px';
     closeButton.style.lineHeight = '1';
-    header.appendChild(title);
-    header.appendChild(closeButton);
-    viewportContainer.appendChild(header);
+    
+ //   header.appendChild(title);
+ //   header.appendChild(closeButton);
+ //   viewportContainer.appendChild(header);
     // Create iframe to load the balance.html content
     iframe = document.createElement('iframe');
     iframe.src = './name/psycheName.html';
@@ -71,6 +76,40 @@ export function showNameViewport() {
     iframe.style.height = '100%';
     iframe.style.border = 'none';
     iframe.style.backgroundColor = '#222';
+
+    // Get references to the links and the container
+const introLink = document.getElementById('introLink');
+const historyLink = document.getElementById('historyLink');
+const missionLink = document.getElementById('missionLink');
+const funFactsLink = document.getElementById('funFactsLink');
+const viewportContainer = document.getElementById('viewportContainer');
+const content = document.getElementById('content');
+const closeButton = document.getElementById('closeButton');
+
+// Define the content for each section
+const sectionContent = {
+    introduction: `<h2>Introduction to Psyche</h2><p>Psyche is a metal-rich asteroid orbiting the Sun between Mars and Jupiter. It was named after the Greek goddess Psyche.</p>`,
+    history: `<h2>Historical Background</h2><p>Psyche was discovered in 1852 by Italian astronomer Annibale de Gasparis and is one of the largest asteroids in our solar system.</p>`,
+    mission: `<h2>NASA's Psyche Mission</h2><p>The Psyche spacecraft, designed by NASA, aims to study the asteroid to understand more about planetary cores and the history of the solar system.</p>`,
+    funFacts: `<h2>Fun Facts About Psyche</h2><ul><li>Psyche is primarily composed of nickel and iron, much like Earth's core.</li><li>It is about 226 kilometers (140 miles) in diameter.</li><li>Its name means "soul" in Greek mythology.</li></ul>`
+};
+
+// Function to display content in the container
+function showContent(contentKey) {
+    content.innerHTML = sectionContent[contentKey];  // Load corresponding content
+    viewportContainer.style.display = 'flex';  // Show the container
+}
+
+// Event Listeners for the links
+introLink.addEventListener('click', () => showContent('introduction'));
+historyLink.addEventListener('click', () => showContent('history'));
+missionLink.addEventListener('click', () => showContent('mission'));
+funFactsLink.addEventListener('click', () => showContent('funFacts'));
+
+// Close the container when the close button is clicked
+closeButton.addEventListener('click', () => {
+    viewportContainer.style.display = 'none';  // Hide the container
+});
     // Add event listener for iframe load errors
     iframe.onerror = () => {
         console.error("Failed to load iframe content");
