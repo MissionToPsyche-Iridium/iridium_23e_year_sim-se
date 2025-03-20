@@ -12,7 +12,6 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-    border: 3px solid green;
     max-width: 3840px;
     margin: 0 auto;
 }
@@ -77,11 +76,14 @@ header {
     right: 0;
 }
 
+#welcome, #div2, #div3, #div4, #div5, #div6, #div7, #div8 {
+    width: 90%;
+}
+
 #welcome{
     position: relative;
     text-align: center;
     padding: 3rem;
-    width: 90%;
     color: white;
     background-color: black;
     border-radius: 1rem;
@@ -97,7 +99,6 @@ header {
 }
 
 #div2 {
-    width: 90%;
     margin-top: 2rem;
     text-align: center;
     margin-right: auto;
@@ -194,7 +195,6 @@ header {
 }
 
 #div3 {
-    width: 90%;
     padding: 5rem;
     color: black;
     text-align: center;
@@ -268,7 +268,6 @@ header {
     margin-right: 1rem;
     margin-left: auto;
     margin-top: 2%;
-    width: 90%;
     text-align: center;
     background-color: darkslategray;
     background-image: url(/img/asteroid-field.jpg);
@@ -336,7 +335,6 @@ header {
     background-color: black; 
     color: white;
     margin-top: 2%;
-    width: 90%;
     margin-left: 1rem;
     margin-right: auto;
     text-align: center;
@@ -415,7 +413,6 @@ header {
     color: #95d6dc;
     text-shadow: 3px 3px black;
     margin-top: 2%;
-    width: 90%;
     margin-left: auto;
     margin-right: 1rem;
     margin-left: auto;
@@ -493,7 +490,6 @@ header {
     height: 1400px;
     position: relative;
     margin-top: 2%;
-    width: 90%;
     margin-left: 1rem;
     margin-right: auto;
     text-align: center;
@@ -577,7 +573,6 @@ header {
     color: rgb(184, 145, 73);
     text-shadow: black -5px -5px 8px;
     margin-top: 2%;
-    width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-left: auto;
@@ -635,7 +630,6 @@ header {
 }
 
 #div8-btn::after, #div8-btn::before {
-    
     content: '';
     position: absolute;
     height: 100%;
@@ -679,10 +673,28 @@ footer {
     }
 }
 
-@media  (min-width: 1921px) and (max-width: 2560px) {
+@media (min-width: 2560px) {
+    #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
+        font-size: 35px;
+    } 
+    #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
+        font-size: 45px;
+    } 
+    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
+        font-size: 80px;
+    } 
+    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
+        font-size: 50px;
+    }
+}
+
+@media  (min-width: 2560px){
     #welcome p{
+        width: 80% !important;
         margin-top: 45%;
         font-size: 60px;
+        margin-right: auto;
+        margin-left: auto;
     }
 }
 
@@ -699,24 +711,12 @@ footer {
     }
 }
 
-@media (min-width: 1921px) and (max-width: 2560px) {
+@media (min-width: 2560px) {
     #div2{
         background-size: 30%;
         background-position-y: 40%;
-
     }
-    #div2-btn{
-        font-size: 35px;
-    }
-    #div2-btn:hover {
-        font-size: 45px;
-    }
-    #div2 h1{
-        font-size: 70px;
-    }
-    #div2 p{
-        font-size: 40px;
-    }
+    
 }
 
 @media (min-width: 1920px) {
@@ -745,23 +745,6 @@ footer {
     }
 }
 
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div3{
-    }
-    #div3-btn{
-        font-size: 35px;
-    }
-    #div3-btn:hover {
-        font-size: 45px;
-    }
-    #div3 h1{
-        font-size: 70px;
-    }
-    #div3 p{
-        font-size: 50px;
-    }
-}
-
 @media (min-width: 1920px) {
     #div4-btn{
         padding: 3%;
@@ -770,21 +753,11 @@ footer {
     }
 }
 
-@media (min-width:1921px) and (max-width: 2560px) {
+@media (min-width: 2560px) {
     #div4-btn{
-        font-size: 35px;
         padding: 3%;
         margin-top: 8%;
         margin-bottom: 5%;
-    }
-    #div4-btn:hover {
-        font-size: 45px;
-    }
-    #div4 h1{
-        font-size: 70px;
-    }
-    #div4 p{
-        font-size: 50px;
     }
 }
 
@@ -799,21 +772,11 @@ footer {
     }
 }
 
-@media (min-width: 1921px) and (max-width: 2560px) {
+@media (min-width: 2560px) {
     #div5-btn{
-        font-size: 35px;
         padding: 3%;
         margin-top: 8%;
         margin-bottom: 5%;
-    }
-    #div5-btn:hover {
-        font-size: 45px;
-    }
-    #div5 h1{
-        font-size: 70px;
-    }
-    #div5 p{
-        font-size: 50px;
     }
 }
 
@@ -835,24 +798,6 @@ footer {
     }
 }
 
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div6-btn{
-        font-size: 35px;
-        padding: 3%;
-        margin-top: 8%;
-        margin-bottom: 5%;
-    }
-    #div6-btn:hover {
-        font-size: 45px;
-    }
-    #div6 h1{
-        font-size: 70px;
-    }
-    #div6 p{
-        font-size: 50px;
-    }
-}
-
 @media (min-width: 1920px){
     #div7{
         height: 1200px;
@@ -864,27 +809,6 @@ footer {
     }
 }
 
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div7 {
-        height: 900px;
-    }
-    #div7-btn{
-        font-size: 35px;
-        padding: 3%;
-        margin-top: 5%;
-        margin-bottom: 5%;
-    }
-    #div7-btn:hover {
-        font-size: 45px;
-    }
-    #div7 h1{
-        font-size: 70px;
-    }
-    #div7 p{
-        font-size: 50px;
-    }
-}
-
 @media (min-width: 1920px){
     #div8 h1{
         background-color: rgba(49, 49, 49, 0.5);
@@ -896,23 +820,5 @@ footer {
         padding: 3%;
         margin-top: 5%;
         margin-bottom: 5%;
-    }
-}
-
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div8-btn{
-        font-size: 35px;
-        padding: 3%;
-        margin-top: 2%;
-        margin-bottom: 5%;
-    }
-    #div8-btn:hover {
-        font-size: 45px;
-    }
-    #div8 h1{
-        font-size: 70px;
-    }
-    #div8 p{
-        font-size: 50px;
     }
 }
