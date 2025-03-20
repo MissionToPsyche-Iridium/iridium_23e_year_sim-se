@@ -667,16 +667,31 @@ footer {
 
 @media (min-width: 1280px) {
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
-        font-size: 25px;
+        font-size: 20px;
     } 
     #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
-        font-size: 35px;
+        font-size: 25px;
     } 
     #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
-        font-size: 80px;
+        font-size: 60px;
     } 
     #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
-        font-size: 50px;
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 1440px) {
+    #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
+        font-size: 20px;
+    } 
+    #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
+        font-size: 25px;
+    } 
+    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
+        font-size: 60px;
+    } 
+    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
+        font-size: 30px;
     }
 }
 
@@ -741,22 +756,19 @@ footer {
 }
 
 
-
-
-
 @media (min-width: 1280px) {
     #page-header {
-        height: 30vh !important;
+        height: 10vh !important;
     }
     #page-header h1 {
-        margin-top: 5rem;
+        margin-top: 0rem;
         font-size: 3.5rem;
     }
 }
 
 @media (min-width: 1920px) {
     #page-header h1 {
-        margin-top: 150px;
+        margin-top: 2rem;
     }
 }
 
@@ -783,11 +795,25 @@ footer {
         margin-top: 5%;
     }
     #welcome-p1{
-        margin-top: 30%;
+        margin-top: 35% !important;
     }
     #welcome p{
         margin-top: 10%;
-        font-size: 70px; 
+        font-size: 40px; 
+    }
+}
+
+@media (min-width: 1440px) {
+    #welcome {
+        margin-top: 5%;
+    }
+    #welcome-p1{
+        margin-top: 40% !important;
+        font-size: 40px !important;
+    }
+    #welcome p{
+        margin-top: 10%; 
+        font-size: 40px !important;
     }
 }
 
@@ -836,7 +862,7 @@ footer {
     #welcome p{
         width: 80%;
         margin-top: 5%;
-        font-size: 80px;
+        font-size: 80px !important;
         margin-right: auto;
         margin-left: auto;
     }
@@ -846,8 +872,8 @@ footer {
 
 @media (min-width: 1280px) {
     #div2{
-        background-size: 30%;
-        background-position-y: 45%;
+        background-size: 40%;
+        background-position-y: 55%;
     }
 }
 
@@ -882,7 +908,7 @@ footer {
 @media (min-width: 1280px) {
     #div3{
         background-size: 50%;
-        background-position-y: 30%;
+        background-position-y: 35%;
         background-position-x: -5%;
     }
     #div3-btn{
@@ -891,10 +917,29 @@ footer {
         margin-bottom: 5%;
     }
     #div3 h1{
-        font-size: 90px;
+        font-size: 60px;
     }
-    #div3 p{
-        font-size: 50px;
+    #div3 p {
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 1440px) {
+    #div3{
+        background-size: 50%;
+        background-position-y: 35%;
+        background-position-x: -5%;
+    }
+    #div3-btn{
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    #div3 h1{
+        font-size: 60px;
+    }
+    #div3 p {
+        font-size: 30px;
     }
 }
 
@@ -969,13 +1014,27 @@ footer {
 
 @media (min-width: 1280px){
     #div5{
-        height: 1200px;
+        height: 900px;
     }
     #div5 h1{
         margin-top: 5%;
     }
     #div5 p {
         margin-top: 15%;
+        width: 80%;
+    }
+}
+
+@media (min-width: 1440px){
+    #div5{
+        height: 900px;
+    }
+    #div5 h1{
+        margin-top: 5%;
+    }
+    #div5 p {
+        margin-top: 15%;
+        width: 80%;
     }
 }
 
@@ -1017,7 +1076,29 @@ footer {
 
 @media (min-width: 1280px){
     #div6{
-        height: 1100px;
+        height: 800px;
+    }
+    #div6::before{
+        background-color: black;
+        background-size: contain;
+    }
+    #div6 h1{
+        margin-top: 5%;
+    }
+    #div6 p{
+        background-color: rgba(27, 27, 27, 0.7);
+        margin-top: 15%;
+    }
+    #div6-btn{
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+}
+
+@media (min-width: 1440px){
+    #div6{
+        height: 800px;
     }
     #div6::before{
         background-color: black;
@@ -1083,6 +1164,24 @@ footer {
     }
 }
 
+@media (min-width: 1280px){
+    #div7{
+        height: 700px;
+    }
+    #div7::before{
+        background-size: 25%;
+    }
+}
+
+@media (min-width: 1440px){
+    #div7{
+        height: 700px;
+    }
+    #div7::before{
+        background-size: 25%;
+    }
+}
+
 @media (min-width: 1512px){
     #div7{
         height: 700px;
@@ -1095,7 +1194,7 @@ footer {
 
 @media (min-width: 1920px){
     #div7{
-        height: 1100px;
+        height: 800px;
     }
     #div7-btn{
         padding: 3%;
