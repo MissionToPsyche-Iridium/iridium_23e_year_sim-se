@@ -1,3 +1,8 @@
+console.log(window.devicePixelRatio);
+console.log(window.visualViewport.width);
+console.log(window.innerWidth);
+
+
 gsap.set([
     "#page-header", 
     "#div1", 

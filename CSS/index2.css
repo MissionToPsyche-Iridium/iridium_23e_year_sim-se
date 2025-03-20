@@ -1,12 +1,11 @@
 *{
     margin: 0;
     padding: 0;
+    
 }
 
+
 body {
-    background-image: url(/img/asteroid.png);
-    background-position: center;
-    background-size: cover;
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
     background-size: 1000% 1000%;
     animation: gradient 10s ease 1;
@@ -14,7 +13,11 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    border: 3px solid green;
+    max-width: 3840px;
+    margin: 0 auto;
 }
+
 
 header {
     height: 30vh;
@@ -86,37 +89,47 @@ header {
     background: linear-gradient(-45deg, #f9a000, #f47c33);
     background-clip: text;
     color: transparent;
-    font-size: 70px;
+    font-size: 100px;
     line-height: 1.5;
 }
 
-#div1 p, #div2 p{
-    padding: 3rem;
-    font-weight: 600;
+@media  (min-width: 1921px) and (max-width: 2560px) {
+    #div1 p{
+        margin-top: 45%;
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 1920px) {
+    #div1 p{
+        margin-top: 30%;
+        font-size: 50px;
+    }
 }
 
 #div2 {
-    width: 100%;
+    width: 90%;
     margin-top: 2rem;
     text-align: center;
     margin-right: auto;
     margin-left: auto;
     background-color: black;
     background-image: url(/img/psyche_surface.jpg);
-    background-size: 30%;
+    background-size: 20%;
     background-repeat: no-repeat;
     background-position: center;
-    background-position-y: 40%;
+    background-position-y: 30%;
     color: white;
     font-size: 50px;
     border-radius: 5rem;
 
     h1 {
         padding-top: 4rem;
+        font-size: 120px;
     }
 
     p {
-        font-size: 50px;
+        font-size: 70px;
         margin-left: auto;
         margin-right: auto;
         width: 80%;
@@ -144,12 +157,12 @@ header {
     position: relative;
     background-color: black;
     color: white;
-    font-size: large;
+    font-size: 40px;
 }
 
 #div2-btn:hover {
     color: #f9a000;
-    font-size: 35px;
+    font-size: 55px;
     transition: ease-in-out 1s;
 }
 
@@ -160,7 +173,6 @@ header {
 }
 
 #div2-btn::after, #div2-btn::before {
-    
     content: '';
     position: absolute;
     height: 100%;
@@ -192,6 +204,67 @@ header {
     }
 }
 
+@media (min-width: 1921px) and (max-width: 2560px) {
+    
+    #div2-btn{
+        font-size: large;
+    }
+    #div2-btn:hover {
+        font-size: 35px;
+    }
+    #div2 h1{
+        font-size: 50px;
+    }
+    #div2 p{
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 1920px) {
+    #div2{
+        background-size: 30%;
+        background-position-y: 40%;
+    }
+    #div2-btn{
+        font-size: medium;
+    }
+    #div2-btn:hover {
+        font-size: 35px;
+    }
+    #div2 h1{
+        font-size: 60px;
+    }
+    #div2 p{
+        font-size: 40px;
+    }
+}
+
+#div3 {
+    width: 90%;
+    padding: 5rem;
+    color: black;
+    text-align: center;
+    margin-top: 2%;
+    font-size: 70px;
+    background-image: url(/img/sixteen.svg);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position-y: 65%;
+    background-position-x: -15%;
+
+    h1{
+        font-size: 120px;
+    }
+
+    p {
+        width: 50%;
+        margin-top: 5%;
+        line-height: 1.5;
+        margin-left: auto;
+        padding: 2rem;
+    }
+}
+
 #div3-btn {
     padding: 3%;
     margin-top: 3%;
@@ -201,13 +274,46 @@ header {
     position: relative;
     background-color: f9a000;
     color: #a53f5b;
-    font-size: large;
+    font-size: 40px;
 }
 
 #div3-btn:hover {
     color: #f9a000;
-    font-size: 35px;
+    font-size: 55px;
     transition: ease-in-out 1s;
+}
+
+@media (max-width: 1920px) {
+    #div3-btn{
+        font-size: medium;
+        padding: 3%;
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+    #div3-btn:hover {
+        font-size: large;
+    }
+    #div3 h1{
+        font-size: 50px;
+    }
+    #div3 p{
+        font-size: 30px;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div3-btn{
+        font-size: large;
+    }
+    #div3-btn:hover {
+        font-size: 35px;
+    }
+    #div3 h1{
+        font-size: 70px;
+    }
+    #div3 p{
+        font-size: 50px;
+    }
 }
 
 #div3-btn::after, #div3-btn::before {
@@ -231,28 +337,6 @@ header {
     filter: blur(1.5rem);
 }
 
-#div3 {
-    width: 100%;
-    padding: 5rem;
-    color: black;
-    text-align: center;
-    margin-top: 2%;
-    font-size: 50px;
-    background-image: url(/img/sixteen.svg);
-    background-repeat: no-repeat;
-    background-size: 50%;
-    background-position-y: 65%;
-    background-position-x: -15%;
-
-    p {
-        width: 50%;
-        margin-top: 5%;
-        line-height: 1.5;
-        margin-left: auto;
-        padding: 2rem;
-    }
-}
-
 #grad-text {
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
     background-clip: text;
@@ -260,12 +344,10 @@ header {
 }
 
 #div4 {
-    height: 500px;
     margin-right: 1rem;
     margin-left: auto;
     margin-top: 2%;
-    height: 900px;
-    width: 80%;
+    width: 90%;
     text-align: center;
     background-color: darkslategray;
     background-image: url(/img/asteroid-field.jpg);
@@ -277,6 +359,7 @@ header {
 
     h1 {
         margin-top: 3rem;
+        font-size: 120px;
     }
 
     p{
@@ -285,25 +368,30 @@ header {
         width: 80%;
         margin-right: auto;
         margin-left: auto;
+        font-size: 70px;
     }
 }
 
+
+
 #div4-btn {
     padding: 3%;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 5%;
     border-radius: 1rem;
     cursor: pointer;
     position: relative;
     background-color: #483B1B;
     color: white;
-    font-size: large;
-
+    font-size: 40px;
 }
+
+
+
 
 #div4-btn:hover {
     color: #f9a000;
-    font-size: 35px;
+    font-size: 55px;
     transition: ease-in-out 1s;
 }
 
@@ -328,21 +416,54 @@ header {
     filter: blur(1.5rem);
 }
 
+@media (max-width: 1920px) {
+    #div4-btn{
+        font-size: medium;
+        padding: 3%;
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+    #div4 h1{
+        font-size: 50px;
+    }
+    #div4 p{
+        font-size: 30px;
+    }
+}
+
+@media (min-width:1921px) and (max-width: 2560px) {
+    #div4-btn{
+        font-size: large;
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+    #div4-btn:hover {
+        font-size: 35px;
+    }
+    #div4 h1{
+        font-size: 70px;
+    }
+    #div4 p{
+        font-size: 50px;
+    }
+}
+
 #div5 {
     position: relative; 
     background-color: black; 
     color: white;
     margin-top: 2%;
-    width: 80%;
+    width: 90%;
     margin-left: 1rem;
     margin-right: auto;
     text-align: center;
-    font-size: 50px;
     z-index: 1; 
     border-radius: 11rem;
 
     h1 {
         margin-top: 3rem;
+        font-size: 120px;
     }
 
     p {
@@ -350,8 +471,11 @@ header {
         width: 80%;
         margin-left: auto;
         margin-right: auto;
+        font-size: 70px;
     }
 }
+
+
 
 #div5::before {
     content: '';
@@ -376,12 +500,12 @@ header {
     position: relative;
     background-color: black;
     color: white;
-    font-size: large;
+    font-size: 40px;
 }
 
 #div5-btn:hover {
     color: blue;
-    font-size: 35px;
+    font-size: 55px;
     transition: ease-in-out 1s;
 }
 
@@ -406,22 +530,58 @@ header {
     filter: blur(1.5rem);
 }
 
+@media (max-width: 1920px){
+    #div5{
+        height: 700px;
+    }
+    #div5 h1{
+        font-size: 50px;
+    }
+    #div5 p{
+        font-size: 30px;
+    }
+    #div5-btn{
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+        font-size: medium;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div5-btn{
+        font-size: large;
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+    #div5-btn:hover {
+        font-size: 35px;
+    }
+    #div5 h1{
+        font-size: 70px;
+    }
+    #div5 p{
+        font-size: 50px;
+    }
+}
+
 
 #div6 {
     position: relative; 
     color: #95d6dc;
     text-shadow: 3px 3px black;
     margin-top: 2%;
-    width: 70%;
+    width: 90%;
     margin-left: auto;
     margin-right: 1rem;
     margin-left: auto;
     text-align: center;
-    font-size: 50px;
     z-index: 1; 
 
     h1 {
         margin-top: 3rem;
+        font-size: 120px;
     }
 
     p {
@@ -429,8 +589,11 @@ header {
         margin-top: 5%;
         margin-right: auto;
         margin-left: auto;
+        font-size: 70px;
     }
 }
+
+
 
 #div6::before {
     content: '';
@@ -457,12 +620,12 @@ header {
     position: relative;
     background-color: black;
     color: #95d6dc;
-    font-size: large;
+    font-size: 40px;
 }
 
 #div6-btn:hover {
     color: #95d6dc;
-    font-size: 35px;
+    font-size: 55px;
     transition: ease-in-out 1s;
 }
 
@@ -486,14 +649,52 @@ header {
     filter: blur(1.5rem);
 }
 
+@media (max-width: 1920px){
+    #div6{
+        height: 700px;
+    }
+    #div6 h1{
+        font-size: 50px;
+    }
+    #div6 p{
+        font-size: 30px;
+    }
+    #div6-btn{
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+        font-size: medium;
+    }
+    #div6-btn:hover {
+        font-size: large;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div6-btn{
+        font-size: large;
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+    #div6-btn:hover {
+        font-size: 35px;
+    }
+    #div6 h1{
+        font-size: 70px;
+    }
+    #div6 p{
+        font-size: 50px;
+    }
+}
+
 #div7 {
-    height: 800px;
+    height: 1400px;
     position: relative;
     margin-top: 2%;
-    width: 70%;
+    width: 90%;
     margin-left: 1rem;
     margin-right: auto;
-    font-size: 50px;
     text-align: center;
     border-radius: 3rem;
     color: white;
@@ -501,6 +702,7 @@ header {
 
     h1 {
         margin-top: 3rem;
+        font-size: 120px;
     }
 
     p {
@@ -509,6 +711,7 @@ header {
         margin-left: auto;
         margin-right: auto;
         line-height: 1.5;
+        font-size: 70px;
     }
 }
 
@@ -533,20 +736,22 @@ header {
 
 #div7-btn {
     padding: 3%;
-    margin-top: 5%;
+    margin-top: 7%;
     margin-bottom: 5%;
     border-radius: 1rem;
     cursor: pointer;
     position: relative;
     background-color: black;
     color: white;
-    font-size: large;
+    font-size: 40px;
     grid-row: 3;
 }
 
+
+
 #div7-btn:hover {
     color: green;
-    font-size: 35px;
+    font-size: 55px;
     transition: ease-in-out 1s;
 }
 
@@ -564,11 +769,47 @@ header {
     z-index: -1;
     padding: 6px;
     border-radius: 1rem;
-    animation: 2s spin infinite;
+    animation: 0.5s spin infinite;
 }
 
 #div7-btn::before {
     filter: blur(1.5rem);
+}
+
+@media (max-width: 1920px){
+    #div7{
+        height: 800px;
+    }
+    #div7 h1{
+        font-size: 50px;
+    }
+    #div7 p{
+        font-size: 30px;
+    }
+    #div7-btn{
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        font-size: medium;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div7-btn{
+        font-size: large;
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    #div7-btn:hover {
+        font-size: 35px;
+    }
+    #div7 h1{
+        font-size: 70px;
+    }
+    #div7 p{
+        font-size: 50px;
+    }
 }
 
 #div8 {
@@ -582,11 +823,11 @@ header {
     margin-left: auto;
     text-align: center;
     border-radius: 3rem;
-    font-size: 50px;
     z-index: 1; 
 
     h1 {
         margin-top: 3rem;
+        font-size: 120px;
     }
 
     p {
@@ -594,8 +835,11 @@ header {
         margin-top: 5%;
         margin-right: auto;
         margin-left: auto;
+        font-size: 70px;
     }
 }
+
+
 
 #div8::before {
     content: '';
@@ -622,13 +866,13 @@ header {
     position: relative;
     background-color: black;
     color: rgb(184, 145, 73);
-    font-size: large;
+    font-size: 40px;
     grid-row: 3;
 }
 
 #div8-btn:hover {
     color: rgb(184, 145, 73);
-    font-size: 35px;
+    font-size: 55px;
     transition: ease-in-out 1s;
 }
 
@@ -646,11 +890,47 @@ header {
     z-index: -1;
     padding: 6px;
     border-radius: 1rem;
-    animation: 2s spin infinite;
+    animation: 1s spin infinite;
 }
 
 #div8-btn::before {
     filter: blur(1.5rem);
+}
+
+@media (max-width: 1920px){
+    #div8 h1{
+        font-size: 50px;
+    }
+    #div8 p{
+        font-size: 30px;
+    }
+    #div8-btn{
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        font-size: medium;
+    }
+    #div8-btn:hover {
+        font-size: large;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div8-btn{
+        font-size: large;
+        padding: 3%;
+        margin-top: 2%;
+        margin-bottom: 5%;
+    }
+    #div8-btn:hover {
+        font-size: 35px;
+    }
+    #div8 h1{
+        font-size: 70px;
+    }
+    #div8 p{
+        font-size: 50px;
+    }
 }
 
 footer {
