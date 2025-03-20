@@ -1,4 +1,16 @@
-document.body.style.zoom = "100%";
+function updateScreenWidth() {
+    const box = document.getElementById("screen-width-box");
+    box.textContent = `Width: ${window.innerWidth}px`;
+}
+
+// Update on resize
+window.addEventListener("resize", updateScreenWidth);
+
+// Initial update
+updateScreenWidth();
+
+
+
 
 let windowWidth = window.outerWidth;
 let dpr = window.devicePixelRatio;
@@ -10,9 +22,6 @@ console.log("window.outerWidth:", window.outerWidth);
 console.log("devicePixelRatio:", window.devicePixelRatio);
 console.log("Effective Width:", window.innerWidth * window.devicePixelRatio);
 console.log("Zoom Level:", Math.round(window.outerWidth / window.innerWidth * 100) + "%");
-
-
-
 console.log("width of device:", windowWidth, "dpr:", dpr, "trueSize:", trueSize);
 
 
@@ -212,13 +221,6 @@ tl.fromTo(
         y: 0,
         duration: 4,
         pointerEvents: "auto",
-        scrollTrigger: {
-            trigger: '#div7',
-            start: '50% center',
-            end: 'bottom center',
-            scrub: true,
-once: true
-        }
     }
 );
 

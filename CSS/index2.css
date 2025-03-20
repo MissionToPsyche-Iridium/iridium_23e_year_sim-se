@@ -1,9 +1,13 @@
-html {
-    transform: scale(1);
-    transform-origin: top left;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
+#screen-width-box {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 9999;
 }
 
 
@@ -21,7 +25,7 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-    max-width: 3840px;
+    max-width: 2560px;
     margin: 0 auto;
 }
 
@@ -97,7 +101,7 @@ header {
     background: linear-gradient(-45deg, #f9a000, #f47c33);
     background-clip: text;
     color: transparent;
-    font-size: 100px;
+   /* font-size: 100px; */
     line-height: 1.5;
 }
 
@@ -335,7 +339,6 @@ header {
 
 #div5 {
     position: relative; 
-    background-color: black; 
     color: white;
     margin-top: 2%;
     margin-left: 1rem;
@@ -366,9 +369,10 @@ header {
     width: 100%;
     height: 100%;
     background: url(/img/sun-clock.jpg);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 3rem;
     z-index: -1; 
 }
 
@@ -676,6 +680,21 @@ footer {
     }
 }
 
+@media (min-width: 1512px) {
+    #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
+        font-size: 20px;
+    } 
+    #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
+        font-size: 25px;
+    } 
+    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
+        font-size: 60px;
+    } 
+    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
+        font-size: 30px;
+    }
+}
+
 @media (min-width: 1920px) {
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 25px;
@@ -746,16 +765,7 @@ footer {
         height: 20vh !important;
     }
     #page-header h1 {
-        margin-top: 200px;
-    }
-}
-
-@media (min-width: 2510px) {
-    #page-header {
-        height: 40vh !important;
-    }
-    #page-header h1 {
-        margin-top: 200px;
+        margin-top: 100px;
     }
 }
 
@@ -768,18 +778,30 @@ footer {
     }
 }
 
-
-
 @media (min-width: 1280px) {
     #welcome {
         margin-top: 5%;
     }
     #welcome-p1{
-        margin-top: 30% !important;
+        margin-top: 30%;
     }
     #welcome p{
         margin-top: 10%;
-        font-size: 70px !important; 
+        font-size: 70px; 
+    }
+}
+
+@media (min-width: 1512px) {
+    #welcome {
+        margin-top: 5%;
+    }
+    #welcome-p1{
+        margin-top: 40% !important;
+        font-size: 40px !important;
+    }
+    #welcome p{
+        margin-top: 10%; 
+        font-size: 40px !important;
     }
 }
 
@@ -790,17 +812,16 @@ footer {
     }
     #welcome-p1{
         margin-top: 30%;
-        background-color: red;
     }
     #welcome p{
         margin-top: 10%;
-        font-size: 50px !important; 
+        font-size: 50px; 
     }
 }
 
 @media  (min-width: 2048px) {
     #welcome p{
-        width: 80% !important;
+        width: 80%;
         margin-top: 5%;
         font-size: 70px;
         margin-right: auto;
@@ -810,10 +831,10 @@ footer {
 
 @media  (min-width: 2560px) {
     #welcome-p1{
-        margin-top: 35% !important;
+        margin-top: 35%;
     }
     #welcome p{
-        width: 80% !important;
+        width: 80%;
         margin-top: 5%;
         font-size: 80px;
         margin-right: auto;
@@ -827,6 +848,13 @@ footer {
     #div2{
         background-size: 30%;
         background-position-y: 45%;
+    }
+}
+
+@media (min-width: 1512px) {
+    #div2{
+        background-size: 30%;
+        background-position-y: 50%;
     }
 }
 
@@ -867,6 +895,25 @@ footer {
     }
     #div3 p{
         font-size: 50px;
+    }
+}
+
+@media (min-width: 1512px) {
+    #div3{
+        background-size: 50%;
+        background-position-y: 35%;
+        background-position-x: -5%;
+    }
+    #div3-btn{
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    #div3 h1{
+        font-size: 60px;
+    }
+    #div3 p {
+        font-size: 30px;
     }
 }
 
@@ -932,6 +979,19 @@ footer {
     }
 }
 
+@media (min-width: 1512px){
+    #div5{
+        height: 900px;
+    }
+    #div5 h1{
+        margin-top: 5%;
+    }
+    #div5 p {
+        margin-top: 15%;
+        width: 80%;
+    }
+}
+
 @media (min-width: 1920px){
     #div5{
         height: 1000px;
@@ -977,6 +1037,28 @@ footer {
     }
 }
 
+@media (min-width: 1512px){
+    #div6{
+        height: 800px;
+    }
+    #div6::before{
+        background-color: black;
+        background-size: contain;
+    }
+    #div6 h1{
+        margin-top: 5%;
+    }
+    #div6 p{
+        background-color: rgba(27, 27, 27, 0.7);
+        margin-top: 15%;
+    }
+    #div6-btn{
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+}
+
 @media (min-width: 1920px){
     #div6{
         height: 1100px;
@@ -1001,6 +1083,14 @@ footer {
     }
 }
 
+@media (min-width: 1512px){
+    #div7{
+        height: 700px;
+    }
+    #div7::before{
+        background-size: 25%;
+    }
+}
 
 
 @media (min-width: 1920px){
