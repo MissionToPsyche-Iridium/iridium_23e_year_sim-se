@@ -68,7 +68,8 @@ tl.fromTo(
             trigger: '#welcome',
             start: 'top center',
             end: '50% center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 )
@@ -87,7 +88,8 @@ tl.fromTo(
             trigger: '#div2',
             start: 'top center',
             end: '40% center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 );
@@ -104,7 +106,8 @@ tl.fromTo(
             trigger: '#div3',
             start: 'top center',
             end: 'bottom center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 );
@@ -125,7 +128,8 @@ tl.fromTo(
             trigger: '#div4',
             start: 'top center',
             end: '50% center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 );
@@ -146,7 +150,8 @@ tl.fromTo(
             trigger: '#div5',
             start: 'top center',
             end: '50% center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 );
@@ -167,7 +172,8 @@ tl.fromTo(
             trigger: '#div6',
             start: 'top center',
             end: '50% center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 );
@@ -188,7 +194,8 @@ tl.fromTo(
             trigger: '#div7',
             start: 'top center',
             end: '50% center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 );
@@ -207,9 +214,10 @@ tl.fromTo(
         pointerEvents: "auto",
         scrollTrigger: {
             trigger: '#div7',
-            start: '80% center',
+            start: '50% center',
             end: 'bottom center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 );
@@ -228,7 +236,8 @@ tl.fromTo(
             trigger: '#div4',
             start: 'top center',
             end: '50% center',
-            scrub: true
+            scrub: true,
+once: true
         }
     }
 );
