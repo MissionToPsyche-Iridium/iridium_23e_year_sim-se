@@ -4,7 +4,6 @@
     
 }
 
-
 body {
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
     background-size: 1000% 1000%;
@@ -17,7 +16,6 @@ body {
     max-width: 3840px;
     margin: 0 auto;
 }
-
 
 header {
     height: 30vh;
@@ -41,7 +39,7 @@ header {
     text-align: center;
     margin-top: 1rem;
     background: none;
-    height: 20vh !important;
+    height: 30vh !important;
     position: relative;
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
     background-clip:text;
@@ -50,6 +48,12 @@ header {
 #page-header h1 {
     color: transparent;
     font-size: 100px;
+}
+
+@media (min-width: 1920px) {
+    #page-header h1 {
+        margin-top: 300px;
+    }
 }
 
 #logo {
@@ -73,8 +77,7 @@ header {
     right: 0;
 }
 
-
-#div1{
+#welcome{
     position: relative;
     text-align: center;
     padding: 3rem;
@@ -84,27 +87,13 @@ header {
     border-radius: 1rem;
 }
 
-#div1 p {
+#welcome p {
     margin-top: 25%;
     background: linear-gradient(-45deg, #f9a000, #f47c33);
     background-clip: text;
     color: transparent;
     font-size: 100px;
     line-height: 1.5;
-}
-
-@media  (min-width: 1921px) and (max-width: 2560px) {
-    #div1 p{
-        margin-top: 45%;
-        font-size: 60px;
-    }
-}
-
-@media (max-width: 1920px) {
-    #div1 p{
-        margin-top: 30%;
-        font-size: 50px;
-    }
 }
 
 #div2 {
@@ -204,45 +193,6 @@ header {
     }
 }
 
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div2{
-        background-size: 30%;
-        background-position-y: 40%;
-
-    }
-    #div2-btn{
-        font-size: 35px;
-    }
-    #div2-btn:hover {
-        font-size: 45px;
-    }
-    #div2 h1{
-        font-size: 70px;
-    }
-    #div2 p{
-        font-size: 40px;
-    }
-}
-
-@media (max-width: 1920px) {
-    #div2{
-        background-size: 30%;
-        background-position-y: 40%;
-    }
-    #div2-btn{
-        font-size: medium;
-    }
-    #div2-btn:hover {
-        font-size: large;
-    }
-    #div2 h1{
-        font-size: 60px;
-    }
-    #div2 p{
-        font-size: 40px;
-    }
-}
-
 #div3 {
     width: 90%;
     padding: 5rem;
@@ -285,41 +235,6 @@ header {
     color: #f9a000;
     font-size: 55px;
     transition: ease-in-out 1s;
-}
-
-@media (max-width: 1920px) {
-    #div3-btn{
-        font-size: medium;
-        padding: 3%;
-        margin-top: 10%;
-        margin-bottom: 5%;
-    }
-    #div3-btn:hover {
-        font-size: large;
-    }
-    #div3 h1{
-        font-size: 50px;
-    }
-    #div3 p{
-        font-size: 30px;
-    }
-}
-
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div3{
-    }
-    #div3-btn{
-        font-size: 35px;
-    }
-    #div3-btn:hover {
-        font-size: 45px;
-    }
-    #div3 h1{
-        font-size: 70px;
-    }
-    #div3 p{
-        font-size: 50px;
-    }
 }
 
 #div3-btn::after, #div3-btn::before {
@@ -378,8 +293,6 @@ header {
     }
 }
 
-
-
 #div4-btn {
     padding: 3%;
     margin-top: 5%;
@@ -392,9 +305,6 @@ header {
     font-size: 40px;
 }
 
-
-
-
 #div4-btn:hover {
     color: #f9a000;
     font-size: 55px;
@@ -402,7 +312,6 @@ header {
 }
 
 #div4-btn::after, #div4-btn::before {
-    
     content: '';
     position: absolute;
     height: 100%;
@@ -420,39 +329,6 @@ header {
 
 #div4-btn::before {
     filter: blur(1.5rem);
-}
-
-@media (max-width: 1920px) {
-    #div4-btn{
-        font-size: medium;
-        padding: 3%;
-        margin-top: 10%;
-        margin-bottom: 5%;
-    }
-    #div4 h1{
-        font-size: 50px;
-    }
-    #div4 p{
-        font-size: 30px;
-    }
-}
-
-@media (min-width:1921px) and (max-width: 2560px) {
-    #div4-btn{
-        font-size: 35px;
-        padding: 3%;
-        margin-top: 8%;
-        margin-bottom: 5%;
-    }
-    #div4-btn:hover {
-        font-size: 45px;
-    }
-    #div4 h1{
-        font-size: 70px;
-    }
-    #div4 p{
-        font-size: 50px;
-    }
 }
 
 #div5 {
@@ -480,8 +356,6 @@ header {
         font-size: 70px;
     }
 }
-
-
 
 #div5::before {
     content: '';
@@ -516,7 +390,7 @@ header {
 }
 
 #div5-btn::after, #div5-btn::before {
-    
+ 
     content: '';
     position: absolute;
     height: 100%;
@@ -535,43 +409,6 @@ header {
 #div5-btn::before {
     filter: blur(1.5rem);
 }
-
-@media (max-width: 1920px){
-    #div5{
-        height: 700px;
-    }
-    #div5 h1{
-        font-size: 50px;
-    }
-    #div5 p{
-        font-size: 30px;
-    }
-    #div5-btn{
-        padding: 3%;
-        margin-top: 8%;
-        margin-bottom: 5%;
-        font-size: medium;
-    }
-}
-
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div5-btn{
-        font-size: 35px;
-        padding: 3%;
-        margin-top: 8%;
-        margin-bottom: 5%;
-    }
-    #div5-btn:hover {
-        font-size: 45px;
-    }
-    #div5 h1{
-        font-size: 70px;
-    }
-    #div5 p{
-        font-size: 50px;
-    }
-}
-
 
 #div6 {
     position: relative; 
@@ -599,8 +436,6 @@ header {
     }
 }
 
-
-
 #div6::before {
     content: '';
     position: absolute;
@@ -611,7 +446,7 @@ header {
     background: url(/img/temp-psyche.svg);
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
     border-radius: 2rem;
     opacity: 0.9;
     z-index: -1; 
@@ -636,7 +471,6 @@ header {
 }
 
 #div6-btn::after, #div6-btn::before {
-    
     content: '';
     position: absolute;
     height: 100%;
@@ -653,45 +487,6 @@ header {
 
 #div6-btn::before {
     filter: blur(1.5rem);
-}
-
-@media (max-width: 1920px){
-    #div6{
-        height: 700px;
-    }
-    #div6 h1{
-        font-size: 50px;
-    }
-    #div6 p{
-        font-size: 30px;
-    }
-    #div6-btn{
-        padding: 3%;
-        margin-top: 8%;
-        margin-bottom: 5%;
-        font-size: medium;
-    }
-    #div6-btn:hover {
-        font-size: large;
-    }
-}
-
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div6-btn{
-        font-size: 35px;
-        padding: 3%;
-        margin-top: 8%;
-        margin-bottom: 5%;
-    }
-    #div6-btn:hover {
-        font-size: 45px;
-    }
-    #div6 h1{
-        font-size: 70px;
-    }
-    #div6 p{
-        font-size: 50px;
-    }
 }
 
 #div7 {
@@ -721,8 +516,6 @@ header {
     }
 }
 
-
-
 #div7::before {
     background-color: black;
     background-image: url(/img/lift-car.svg);
@@ -739,7 +532,6 @@ header {
     z-index: -1; 
 }
 
-
 #div7-btn {
     padding: 3%;
     margin-top: 7%;
@@ -752,8 +544,6 @@ header {
     font-size: 40px;
     grid-row: 3;
 }
-
-
 
 #div7-btn:hover {
     color: green;
@@ -782,45 +572,6 @@ header {
     filter: blur(1.5rem);
 }
 
-@media (max-width: 1920px){
-    #div7{
-        height: 800px;
-    }
-    #div7 h1{
-        font-size: 50px;
-    }
-    #div7 p{
-        font-size: 30px;
-    }
-    #div7-btn{
-        padding: 3%;
-        margin-top: 5%;
-        margin-bottom: 5%;
-        font-size: medium;
-    }
-}
-
-@media (min-width: 1921px) and (max-width: 2560px) {
-    #div7 {
-        height: 900px;
-    }
-    #div7-btn{
-        font-size: 35px;
-        padding: 3%;
-        margin-top: 5%;
-        margin-bottom: 5%;
-    }
-    #div7-btn:hover {
-        font-size: 45px;
-    }
-    #div7 h1{
-        font-size: 70px;
-    }
-    #div7 p{
-        font-size: 50px;
-    }
-}
-
 #div8 {
     position: relative; 
     color: rgb(184, 145, 73);
@@ -847,8 +598,6 @@ header {
         font-size: 70px;
     }
 }
-
-
 
 #div8::before {
     content: '';
@@ -906,21 +655,247 @@ header {
     filter: blur(1.5rem);
 }
 
-@media (max-width: 1920px){
-    #div8 h1{
+footer {
+    margin-top: 3%;
+    height: 30vh;
+    width: 100%;
+    background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
+}
+
+/*media queries*/
+
+@media (min-width: 1920px) {
+    #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
+        font-size: 35px;
+    } 
+    #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
+        font-size: 45px;
+    } 
+    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
+        font-size: 70px;
+    } 
+    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
+        font-size: 40px;
+    }
+}
+
+@media  (min-width: 1921px) and (max-width: 2560px) {
+    #welcome p{
+        margin-top: 45%;
+        font-size: 60px;
+    }
+}
+
+@media (min-width: 1920px) {
+    #welcome {
+        margin-top: 5%;
+    }
+    #welcome-p1{
+        margin-top: 20% !important;
+    }
+    #welcome p{
+        margin-top: 10%;
+        font-size: 70px !important; 
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div2{
+        background-size: 30%;
+        background-position-y: 40%;
+
+    }
+    #div2-btn{
+        font-size: 35px;
+    }
+    #div2-btn:hover {
+        font-size: 45px;
+    }
+    #div2 h1{
+        font-size: 70px;
+    }
+    #div2 p{
+        font-size: 40px;
+    }
+}
+
+@media (min-width: 1920px) {
+    #div2{
+        background-size: 20%;
+        background-position-y: 35%;
+    }
+}
+
+@media (min-width: 1920px) {
+    #div3{
+        background-size: 60%;
+        background-position-y: 20%;
+        background-position-x: -15%;
+    }
+    #div3-btn{
+        padding: 3%;
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+    #div3 h1{
+        font-size: 90px;
+    }
+    #div3 p{
+        font-size: 60px;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div3{
+    }
+    #div3-btn{
+        font-size: 35px;
+    }
+    #div3-btn:hover {
+        font-size: 45px;
+    }
+    #div3 h1{
+        font-size: 70px;
+    }
+    #div3 p{
         font-size: 50px;
     }
+}
+
+@media (min-width: 1920px) {
+    #div4-btn{
+        padding: 3%;
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+}
+
+@media (min-width:1921px) and (max-width: 2560px) {
+    #div4-btn{
+        font-size: 35px;
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+    #div4-btn:hover {
+        font-size: 45px;
+    }
+    #div4 h1{
+        font-size: 70px;
+    }
+    #div4 p{
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 1920px){
+    #div5{
+        height: 1200px;
+    }
+    #div5-btn{
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div5-btn{
+        font-size: 35px;
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+    #div5-btn:hover {
+        font-size: 45px;
+    }
+    #div5 h1{
+        font-size: 70px;
+    }
+    #div5 p{
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 1920px){
+    #div6{
+        height: 1100px;
+    }
+    #div6::before{
+        background-color: black;
+        background-size: contain;
+    }
+    #div6 p{
+        background-color: rgba(27, 27, 27, 0.7);
+    }
+    #div6-btn{
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div6-btn{
+        font-size: 35px;
+        padding: 3%;
+        margin-top: 8%;
+        margin-bottom: 5%;
+    }
+    #div6-btn:hover {
+        font-size: 45px;
+    }
+    #div6 h1{
+        font-size: 70px;
+    }
+    #div6 p{
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 1920px){
+    #div7{
+        height: 1200px;
+    }
+    #div7-btn{
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+}
+
+@media (min-width: 1921px) and (max-width: 2560px) {
+    #div7 {
+        height: 900px;
+    }
+    #div7-btn{
+        font-size: 35px;
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    #div7-btn:hover {
+        font-size: 45px;
+    }
+    #div7 h1{
+        font-size: 70px;
+    }
+    #div7 p{
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 1920px){
+    #div8 h1{
+        background-color: rgba(49, 49, 49, 0.5);
+    }
     #div8 p{
-        font-size: 30px;
+        background-color: rgba(49, 49, 49, 0.5);
     }
     #div8-btn{
         padding: 3%;
         margin-top: 5%;
         margin-bottom: 5%;
-        font-size: medium;
-    }
-    #div8-btn:hover {
-        font-size: large;
     }
 }
 
@@ -940,11 +915,4 @@ header {
     #div8 p{
         font-size: 50px;
     }
-}
-
-footer {
-    margin-top: 3%;
-    height: 30vh;
-    width: 100%;
-    background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
 }

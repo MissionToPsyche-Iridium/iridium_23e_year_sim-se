@@ -1,9 +1,14 @@
-console.log(window.outerWidth);
+let windowWidth = window.outerWidth;
+let dpr = window.devicePixelRatio;
+let trueSize = Math.round(windowWidth * dpr);
+
+console.log("width of device:", windowWidth, "dpr:", dpr, "trueSize:", trueSize);
+
 
 
 gsap.set([
     "#page-header", 
-    "#div1", 
+    "#welcome", 
     "#div2", 
     "#div3", 
     "#div4", 
@@ -18,7 +23,11 @@ tl.fromTo('header', {scale: 10}, {scale: 1, duration: 6})
 //tl.fromTo('#logo', {scale: 10, y: 350}, {scale: 3, duration:2}, '<')
 tl.to('body', {background: 'linear-gradient(to right, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144)'})
 //tl.to('#logo', {scale: 1, y: 0, duration: 2}, '<')
-tl.to('body', {background: 'white', delay: 1})
+if (trueSize == 1921){
+    tl.to('body', {background: 'red', delay: 1})
+} else{
+    tl.to('body', {background: 'white', delay: 1})
+}
 tl.fromTo(
     '#page-header', 
     {
@@ -31,7 +40,7 @@ tl.fromTo(
 )
 
 tl.fromTo(
-    '#div1', 
+    '#welcome', 
     {opacity: 0}, 
     {
         opacity: 1,
@@ -48,7 +57,7 @@ tl.fromTo(
         y: 150,
         duration: 1,
         scrollTrigger: {
-            trigger: '#div1',
+            trigger: '#welcome',
             start: 'top center',
             end: '50% center',
             scrub: true
