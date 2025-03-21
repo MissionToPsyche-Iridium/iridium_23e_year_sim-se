@@ -3,10 +3,8 @@ function updateScreenWidth() {
     box.textContent = `Width: ${window.innerWidth}px`;
 }
 
-// Update on resize
 window.addEventListener("resize", updateScreenWidth);
 
-// Initial update
 updateScreenWidth();
 
 
@@ -40,9 +38,7 @@ const tl = gsap.timeline({
 })
 
 tl.fromTo('header', {scale: 10}, {scale: 1, duration: 6})
-//tl.fromTo('#logo', {scale: 10, y: 350}, {scale: 3, duration:2}, '<')
 tl.to('body', {background: 'linear-gradient(to right, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144)'})
-//tl.to('#logo', {scale: 1, y: 0, duration: 2}, '<')
 tl.to('body', {background: 'white', delay: 1})
 
 tl.fromTo(
