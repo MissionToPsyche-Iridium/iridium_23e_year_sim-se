@@ -1,3 +1,5 @@
+/*For Testing Delete before production*/
+
 #screen-width-box {
     position: fixed;
     top: 10px;
@@ -10,6 +12,12 @@
     z-index: 9999;
 }
 
+
+
+
+/** body elements
+*
+*/
 
 *{
     margin: 0;
@@ -29,21 +37,13 @@ body {
     margin: 0 auto;
 }
 
+/** Header Elements
+*
+*/
+
 header {
     height: 30vh;
     width: 100%;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
 }
 
 #page-header {
@@ -68,6 +68,7 @@ header {
     margin-left: auto;
     margin-right: auto;
 }
+
 #asteroid {
     position: absolute;
     top: 0;
@@ -76,9 +77,17 @@ header {
     right: 0;
 }
 
+/** Multi-element styling
+*
+*/
+
 #welcome, #div2, #div3, #div4, #div5, #div6, #div7, #div8 {
     width: 90%;
 }
+
+/** welcome / div 1 elements
+*
+*/
 
 #welcome{
     position: relative;
@@ -97,6 +106,10 @@ header {
    /* font-size: 100px; */
     line-height: 1.5;
 }
+
+/** div 2 elements
+*
+*/
 
 #div2 {
     margin-top: 2rem;
@@ -183,16 +196,9 @@ header {
     opacity: 0.7;
 }
 
-@keyframes spin {
-    from
-    {
-        --angle: 0deg;
-    } 
-    to
-    {
-        --angle:360deg;
-    }
-}
+/** div3 elements
+*
+*/
 
 #div3 {
     padding: 5rem;
@@ -264,6 +270,10 @@ header {
     color: transparent;
 }
 
+/** div4 elements
+*
+*/
+
 #div4 {
     margin-right: 1rem;
     margin-left: auto;
@@ -329,6 +339,10 @@ header {
 #div4-btn::before {
     filter: blur(1.5rem);
 }
+
+/** div 5 elements
+*
+*/
 
 #div5 {
     position: relative; 
@@ -408,6 +422,10 @@ header {
     filter: blur(1.5rem);
 }
 
+/** div 6 elements
+*
+*/
+
 #div6 {
     position: relative; 
     color: #95d6dc;
@@ -485,6 +503,10 @@ header {
 #div6-btn::before {
     filter: blur(1.5rem);
 }
+
+/** div 7 elements
+*
+*/
 
 #div7 {
     height: 1400px;
@@ -568,6 +590,10 @@ header {
     filter: blur(1.5rem);
 }
 
+/** div 8 elements
+*
+*/
+
 #div8 {
     position: relative; 
     color: rgb(184, 145, 73);
@@ -649,6 +675,10 @@ header {
     filter: blur(1.5rem);
 }
 
+/** footer elements
+*
+*/
+
 footer {
     margin-top: 3%;
     height: 30vh;
@@ -656,9 +686,37 @@ footer {
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
 }
 
+/*Animations*/
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes spin {
+    from
+    {
+        --angle: 0deg;
+    } 
+    to
+    {
+        --angle:360deg;
+    }
+}
+
+
 /*media queries*/
 /*Mobile Phone*/
 @media (min-width: 375px) {
+    /** mulit-element styling
+    *
+    */
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 0.75rem;
     } 
@@ -668,15 +726,13 @@ footer {
     #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
         font-size: 1rem;
     }
-}
 
-@media (min-width: 375px) {
+    /** header elements
+    *
+    */
     header{
         height: 5vh !important;
     }
-}
-
-@media (min-width: 375px) {
     #page-header {
         position: relative;
         height: 10vh !important;
@@ -685,9 +741,10 @@ footer {
         margin-top: 1.5rem;
         font-size: 1rem;
     }
-}
 
-@media (min-width: 375px) {
+    /** welcome / div 1 elements
+    *
+    */
     #welcome {
         margin-top: 1rem;
     }
@@ -698,9 +755,10 @@ footer {
         margin-top: 10%;
         font-size: 1rem; 
     }
-}
 
-@media (min-width: 375px) {
+    /** div 2 elements
+    *
+    */
     #div2{
         background-size: 60%;
         background-position-y: 55%;
@@ -713,9 +771,10 @@ footer {
     #sphere{
         transform: scale(0.25) translateY(-60%) translateX(-120%);
     }
-}
 
-@media (min-width: 375px) {
+    /** div 3 elements
+    *
+    */
     #div3{
         background-size: 50%;
         background-position-y: 45%;
@@ -731,9 +790,10 @@ footer {
         margin-top: 5%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 375px) {
+    /** div 4 elements
+    *
+    */
     #div4{
         margin-top: -5rem;
         border-radius: 1rem;
@@ -746,18 +806,20 @@ footer {
     #div4 p {
         margin-top: 4rem;
     }
-}
 
-@media (min-width: 375px){
+    /** div 5 elements
+    *
+    */
     #div5 h1{
         margin-top: 1rem;
     }
     #div5 p {
         margin-top: 3rem;
     }
-}
 
-@media (min-width: 375px){
+    /** div 6 elements
+    *
+    */
     #div6::before{
         background-size: cover;
     }
@@ -767,9 +829,10 @@ footer {
     #div6 p {
         margin-top: 3rem;
     }
-}
 
-@media (min-width: 375px){
+    /** div 7 elements
+    *
+    */
     #div7{
         height: 700px;
     }
@@ -782,9 +845,10 @@ footer {
     #div7 p {
         margin-top: 3rem;
     }
-}
 
-@media (min-width: 375px){
+    /** div 8 elements
+    *
+    */
     #div8::before{
         border-radius: 0rem;
     }
@@ -801,6 +865,9 @@ footer {
 
 /*Tablets*/
 @media (min-width: 768px) {
+    /** header elements
+    *
+    */
     #page-header {
         position: relative;
         height: 10vh !important;
@@ -809,9 +876,10 @@ footer {
         margin-top: 4rem;
         font-size: 1rem;
     }
-}
 
-@media (min-width: 768px) {
+    /** div 2 elements
+    *
+    */
     #div2{
         background-size: 60%;
         background-position-y: 45%;
@@ -824,9 +892,10 @@ footer {
     #sphere{
         transform: scale(0.5) translateY(-20%) translateX(-20%);
     }
-}
 
-@media (min-width: 768px) {
+    /** div 3 elements
+    *
+    */
     #div3{
         background-size: 50%;
         background-position-y: 45%;
@@ -842,9 +911,10 @@ footer {
         margin-top: 5%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 768px){
+    /** div 5 elements
+    *
+    */
     #div5{
         margin-left: auto;
         margin-right: auto;
@@ -855,16 +925,18 @@ footer {
     #div5 p {
         margin-top: 3rem;
     }
-}
 
-@media (min-width: 768px){
+    /** div 6 elements
+    *
+    */
     #div6{
         margin-right: auto;
         margin-left: auto;
     }
-}
 
-@media (min-width: 768px){
+    /** div 7 elements
+    *
+    */
     #div7{
         margin-right: auto;
         margin-left: auto;
@@ -877,6 +949,9 @@ footer {
 
 /*1024px*/
 @media (min-width: 1024px) {
+    /** header elements
+    *
+    */
     #page-header {
         position: relative;
         height: 15vh !important;
@@ -885,9 +960,10 @@ footer {
         margin-top: 6rem;
         font-size: 1rem;
     }
-}
 
-@media (min-width: 1024px) {
+    /** div 2 elements
+    *
+    */
     #div2{
         background-size: 60%;
         background-position-y: 45%;
@@ -900,9 +976,10 @@ footer {
     #sphere{
         transform: scale(0.7) translateY(-10%) translateX(0%);
     }
-}
 
-@media (min-width: 1024px) {
+    /** div 3 elements
+    *
+    */
     #div3{
         background-size: 50%;
         background-position-y: 35%;
@@ -922,6 +999,9 @@ footer {
 
 /*1280px*/
 @media (min-width: 1280px) {
+    /** multi-element styling
+    *
+    */
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 20px;
     } 
@@ -934,9 +1014,10 @@ footer {
     #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
         font-size: 30px;
     }
-}
 
-@media (min-width: 1280px) {
+    /** header elements
+    *
+    */
     #page-header {
         height: 20vh !important;
     }
@@ -944,9 +1025,10 @@ footer {
         margin-top: 2rem;
         font-size: 3.5rem;
     }
-}
 
-@media (min-width: 1280px) {
+    /** welcome / div 1 elements
+    *
+    */
     #welcome {
         margin-top: 5%;
     }
@@ -957,16 +1039,18 @@ footer {
         margin-top: 10%;
         font-size: 40px; 
     }
-}
 
-@media (min-width: 1280px) {
+    /** div 2 elements
+    *
+    */
     #div2{
         background-size: 40%;
         background-position-y: 55%;
     }
-}
 
-@media (min-width: 1280px) {
+    /** div 3 elements
+    *
+    */
     #div3{
         background-size: 50%;
         background-position-y: 35%;
@@ -983,9 +1067,10 @@ footer {
     #div3 p {
         font-size: 30px;
     }
-}
 
-@media (min-width: 1280px){
+    /** div 5 elements
+    *
+    */
     #div5{
         height: 900px;
     }
@@ -996,9 +1081,10 @@ footer {
         margin-top: 15%;
         width: 80%;
     }
-}
 
-@media (min-width: 1280px){
+    /** div 6 elements
+    *
+    */
     #div6{
         height: 800px;
     }
@@ -1018,9 +1104,10 @@ footer {
         margin-top: 8%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 1280px){
+    /** div 7 elements
+    *
+    */
     #div7{
         height: 700px;
     }
@@ -1031,6 +1118,9 @@ footer {
 
 /*1440px*/
 @media (min-width: 1440px) {
+    /** multi-element styling
+    *
+    */
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 20px;
     } 
@@ -1043,9 +1133,10 @@ footer {
     #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
         font-size: 30px;
     }
-}
 
-@media (min-width: 1440px) {
+    /** welcome / div 1 elements
+    *
+    */
     #welcome {
         margin-top: 5%;
     }
@@ -1057,9 +1148,10 @@ footer {
         margin-top: 10%; 
         font-size: 40px !important;
     }
-}
 
-@media (min-width: 1440px) {
+    /** div 3 elements
+    *
+    */
     #div3{
         background-size: 50%;
         background-position-y: 35%;
@@ -1076,9 +1168,10 @@ footer {
     #div3 p {
         font-size: 30px;
     }
-}
 
-@media (min-width: 1440px){
+    /** div 5 elements
+    *
+    */
     #div5{
         height: 900px;
     }
@@ -1089,9 +1182,10 @@ footer {
         margin-top: 15%;
         width: 80%;
     }
-}
 
-@media (min-width: 1440px){
+    /** div 6 elements
+    *
+    */
     #div6{
         height: 800px;
     }
@@ -1111,9 +1205,10 @@ footer {
         margin-top: 8%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 1440px){
+    /** div 7 elements
+    *
+    */
     #div7{
         height: 700px;
     }
@@ -1124,6 +1219,9 @@ footer {
 
 /*1512px*/
 @media (min-width: 1512px) {
+    /** multi-element styling
+    *
+    */
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 20px;
     } 
@@ -1136,9 +1234,10 @@ footer {
     #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
         font-size: 30px;
     }
-}
 
-@media (min-width: 1512px) {
+    /** welcome / div 1 elements
+    *
+    */
     #welcome {
         margin-top: 5%;
     }
@@ -1150,16 +1249,18 @@ footer {
         margin-top: 10%; 
         font-size: 40px !important;
     }
-}
 
-@media (min-width: 1512px) {
+    /** div 2 elements
+    *
+    */
     #div2{
         background-size: 30%;
         background-position-y: 50%;
     }
-}
 
-@media (min-width: 1512px) {
+    /** div 3 elements
+    *
+    */
     #div3{
         background-size: 50%;
         background-position-y: 35%;
@@ -1176,9 +1277,10 @@ footer {
     #div3 p {
         font-size: 30px;
     }
-}
 
-@media (min-width: 1512px){
+    /** div 5 elements
+    *
+    */
     #div5{
         height: 900px;
     }
@@ -1189,9 +1291,10 @@ footer {
         margin-top: 15%;
         width: 80%;
     }
-}
 
-@media (min-width: 1512px){
+    /** div 6 elements
+    *
+    */
     #div6{
         height: 800px;
     }
@@ -1211,9 +1314,10 @@ footer {
         margin-top: 8%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 1512px){
+    /** div 7 elements
+    *
+    */
     #div7{
         height: 700px;
     }
@@ -1224,6 +1328,9 @@ footer {
 
 /*1536px*/
 @media (min-width: 1536px) {
+    /** header elements
+    *
+    */
     #page-header {
         height: 20vh !important;
     }
@@ -1235,6 +1342,9 @@ footer {
 
 /*Full HD*/
 @media (min-width: 1920px) {
+    /** multi-element styling
+    *
+    */
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 25px;
     } 
@@ -1247,18 +1357,20 @@ footer {
     #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
         font-size: 40px;
     }
-}
 
-@media (min-width: 1920px) {
+    /** header elements
+    *
+    */
     #page-header{
         height: 20vh !important;
     }
     #page-header h1 {
         margin-top: 5rem;
     }
-}
 
-@media (min-width: 1920px) {
+    /** welcome / div 1 elements
+    *
+    */
     #welcome {
         margin-top: 5%;
         font-size: 20px;
@@ -1270,16 +1382,18 @@ footer {
         margin-top: 10%;
         font-size: 50px; 
     }
-}
 
-@media (min-width: 1920px) {
+    /** div 2 elements
+    *
+    */
     #div2{
         background-size: 30%;
         background-position-y: 45%;
     }
-}
 
-@media (min-width: 1920px) {
+    /** div 3 elements
+    *
+    */
     #div3{
         background-size: 50%;
         background-position-y: 40%;
@@ -1296,17 +1410,19 @@ footer {
     #div3 p{
         font-size: 40px;
     }
-}
 
-@media (min-width: 1920px) {
+    /** div 4 elements
+    *
+    */
     #div4-btn{
         padding: 3%;
         margin-top: 10%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 1920px){
+    /** div 5 elements
+    *
+    */
     #div5{
         height: 1000px;
     }
@@ -1315,9 +1431,10 @@ footer {
         margin-top: 8%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 1920px){
+    /** div 6 elements
+    *
+    */
     #div6{
         height: 1100px;
     }
@@ -1333,9 +1450,10 @@ footer {
         margin-top: 8%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 1920px){
+    /** div 7 elements
+    *
+    */
     #div7{
         height: 800px;
     }
@@ -1345,9 +1463,10 @@ footer {
         margin-bottom: 5%;
         margin-left: 5%;
     }
-}
 
-@media (min-width: 1920px){
+    /** div 8 elements
+    *
+    */
     #div8 h1{
         background-color: rgba(49, 49, 49, 0.5);
     }
@@ -1363,15 +1482,19 @@ footer {
 
 /*2048px*/
 @media (min-width: 2048px) {
+    /** header elements
+    *
+    */
     #page-header {
         height: 20vh !important;
     }
     #page-header h1 {
         margin-top: 100px;
     }
-}
 
-@media  (min-width: 2048px) {
+    /** welcome / div 1 elements
+    *
+    */
     #welcome p{
         width: 80%;
         margin-top: 5%;
@@ -1383,6 +1506,9 @@ footer {
 
 /*2510px*/
 @media (min-width: 2510px) {
+    /** multi-element styling
+    *
+    */
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 30px;
     } 
@@ -1395,9 +1521,10 @@ footer {
     #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
         font-size: 50px;
     }
-}
 
-@media (min-width: 2510px) {
+    /** div2 elements
+    *
+    */
     #div2{
         background-size: 20%;
         background-position-y: 40%;
@@ -1406,6 +1533,9 @@ footer {
 
 /*2560px*/
 @media (min-width: 2560px) {
+    /** multi-element styling
+    *
+    */
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 30px;
     } 
@@ -1418,18 +1548,20 @@ footer {
     #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
         font-size: 50px;
     }
-}
 
-@media (min-width: 2560px) {
+    /** page header elements
+    *
+    */
     #page-header {
         height: 20vh !important;
     }
     #page-header h1 {
         margin-top: 150px;
     }
-}
 
-@media  (min-width: 2560px) {
+    /** welcome / div 1 elements
+    *
+    */
     #welcome-p1{
         margin-top: 35%;
     }
@@ -1440,16 +1572,18 @@ footer {
         margin-right: auto;
         margin-left: auto;
     }
-}
 
-@media (min-width: 2560px) {
+    /** div 2 elements
+    *
+    */
     #div2{
         background-size: 30%;
         background-position-y: 40%;
     } 
-}
 
-@media (min-width: 2560px) {
+    /** div 3 elements
+    *
+    */
     #div3{
         background-size: 50%;
         background-position-y: 30%;
@@ -1460,17 +1594,19 @@ footer {
         margin-top: 10%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 2560px) {
+    /** div 4 elements
+    *
+    */
     #div4-btn{
         padding: 3%;
         margin-top: 8%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 2560px) {
+    /** div 5 elements
+    *
+    */
     #div5 p{
         margin-top: 10%;
     }
@@ -1479,11 +1615,11 @@ footer {
         margin-top: 5%;
         margin-bottom: 5%;
     }
-}
 
-@media (min-width: 2560px){
+    /** div 6 elements
+    *
+    */
     #div6 p {
         margin-top: 10%;
     }
 }
-
