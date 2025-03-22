@@ -300,6 +300,45 @@ footer {
     opacity: 0; 
 }
 
+@media (min-width: 1100px){
+    #page-header{
+        margin-top: -25%;
+        height: 25vh !important;
+    }
+
+    #div1 p {
+        font-size: 1.25rem !important;
+    }
+
+    #test {
+        font-size: 1.5rem !important;
+    }
+
+    #div2 p {
+        font-size: 1.25rem;
+        line-height: 1.75;
+    }
+
+    #div3 h1, #div4 h3{
+        font-size: 2rem;
+    }
+
+    #div3 div {
+        height: 300px;
+        margin: 0.5rem;
+        padding: 5%;
+    }
+    #div3 div h4{
+        font-size: 1.5rem;
+    }
+    #div3 div p {
+        font-size: 1rem;
+    }
+    #solar-system-map {
+        height: 600px;
+    }
+}
+
 @media (min-width: 1280px){
     #page-header{
         margin-top: -20%;
