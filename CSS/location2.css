@@ -13,7 +13,9 @@
 }
 
 
-
+/** body elements
+*
+*/
 *{
     margin: 0;
     padding: 0;
@@ -32,9 +34,11 @@ body {
     overflow-x: hidden;
     max-width: 2560px;
     margin: 0 auto;
-
 }
 
+/** header elements
+*
+*/
 header {
     height: 30vh;
     width: 100%;
@@ -69,6 +73,9 @@ header {
     margin-right: auto;
 }
 
+/** div1 elements
+*
+*/
 #ss-image {
     max-width: 100%;
 }
@@ -77,7 +84,6 @@ header {
     width: 40%;
     margin-top: -15%;
 }
-
 
 #div1{
     text-align: center;
@@ -98,6 +104,9 @@ header {
     font-weight: 600;
 }
 
+/** div2 elements
+*
+*/
 #div2 {
     position: relative; 
     margin-top: 2rem;
@@ -118,7 +127,6 @@ header {
     font-size: 40px;
     }
 }
-
 
 @property --angle {
     syntax: "<angle>";
@@ -170,11 +178,9 @@ header {
     }
 }
 
-
-#div2 h3 {
-    padding-top: 3rem;
-}
-
+/** div3 elements
+*
+*/
 #div3 {
     width: 100%;
     padding: 5rem;
@@ -193,6 +199,10 @@ header {
     font-size: 3rem;
     grid-column: 1 / 4;
     grid-row: 1;
+}
+
+#div2 h3 {
+    padding-top: 3rem;
 }
 
 #div3 h4 {
@@ -214,6 +224,7 @@ header {
     }
 }
 
+/*grid content*/
 #mercury {
     background-image: url(/img/mercury.jpg);
     background-size: cover;
@@ -264,6 +275,9 @@ header {
     background-size: cover;
 }
 
+/** div4 elements
+*
+*/
 #div4 {
     margin-right: auto;
     margin-left: auto;
@@ -274,7 +288,6 @@ header {
     font-size: 3rem;
 }
 
-
 #solar-system-map {
     width: 100%;
     height: 800px;
@@ -282,6 +295,9 @@ header {
     border-radius: 1rem;
 }
 
+/** footer elements
+*
+*/
 footer {
     margin-top: 3rem;
     height: 30vh;
@@ -289,6 +305,9 @@ footer {
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
 }
 
+/** loading animation
+*
+*/
 #background-video {
     position: fixed;
     top: 0;
@@ -299,6 +318,8 @@ footer {
     z-index: -1;
     opacity: 0; 
 }
+
+/* Media Queries */
 
 @media (min-width: 375px){
     #logo {
