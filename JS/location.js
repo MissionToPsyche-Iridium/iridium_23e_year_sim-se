@@ -1,10 +1,36 @@
+function updateScreenWidth() {
+    const box = document.getElementById("screen-width-box");
+    box.textContent = `Width: ${window.innerWidth}px`;
+}
+
+window.addEventListener("resize", updateScreenWidth);
+
+updateScreenWidth();
+
+
+
+
+let windowWidth = window.outerWidth;
+let dpr = window.devicePixelRatio;
+let trueSize = Math.round(windowWidth * dpr);
+
+console.log("window.innerWidth:", window.innerWidth);
+console.log("window.innerHeight:", window.innerHeight);
+console.log("window.outerWidth:", window.outerWidth);
+console.log("devicePixelRatio:", window.devicePixelRatio);
+console.log("Effective Width:", window.innerWidth * window.devicePixelRatio);
+console.log("Zoom Level:", Math.round(window.outerWidth / window.innerWidth * 100) + "%");
+console.log("width of device:", windowWidth, "dpr:", dpr, "trueSize:", trueSize);
+
+
+
+
 gsap.set([
     "#page-header", 
     "#div1", 
     "#div2", 
     "#div3", 
     "#div4", 
-    "footer"
 ], { opacity: 0 });
 
 
@@ -13,7 +39,7 @@ const tl = gsap.timeline({
 })
 tl.to('body', {background: "black"});
 tl.to('#background-video', { opacity: 1, duration: 1.5, ease: "power1.inOut" });
-tl.fromTo('#logo', {scale: 4, y: 500, opacity: 0}, {scale: 1, y: 0, duration: 4, delay: 3, opacity: 1})
+tl.fromTo('#logo', {scale: 4, y: 500, opacity: 0}, {scale: 1, y: 0, duration: 2, delay: 1, opacity: 1})
 tl.fromTo(
     '#page-header', 
     {
@@ -25,18 +51,18 @@ tl.fromTo(
         opacity: 1, 
         x: 0, 
         y: 0, 
-        duration: 2
+        duration: 1
     }
 )
 
-tl.to('#background-video', { opacity: 0, duration: 2, delay: 3.5, ease: "power1.inOut" });
+tl.to('#background-video', { opacity: 0, duration: 2, delay: 0, ease: "power1.inOut" });
 
 tl.fromTo(
     '#div1', 
     {opacity: 0}, 
     {
         opacity: 1,
-        duration: 2
+        duration: 1
     }, "<50%"
 )
 
@@ -47,7 +73,7 @@ tl.fromTo(
     },
     {
         y: 150,
-        duration: 2,
+        duration: 1,
         scrollTrigger: {
             trigger: '#div1',
             start: 'top center',
@@ -59,7 +85,7 @@ tl.fromTo(
 
 
 
-tl.to('body', {background: 'white', delay: 1, opacity: 1})
+tl.to('body', {background: 'white', delay: 0, opacity: 1})
 
 tl.fromTo(
     '#div2',
@@ -111,7 +137,7 @@ tl.fromTo(
         pointerEvents: "auto",
         scrollTrigger: {
             trigger: '#div4',
-            start: 'top center',
+            start: '-50% center',
             end: '50% center',
             scrub: true
         }
