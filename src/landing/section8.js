@@ -117,16 +117,16 @@ export function renderSection8(camera, scene) {
         }
     });
 
-    // Auto-show viewport when entering section 8
-    if (isVisible && !hasShownViewport) {
-        // Add a small delay to ensure the section transition is complete
-        setTimeout(() => {
-            showSpacePicViewport();
-            hasShownViewport = true;
-        }, 500);
-    } else if (!isVisible && hasShownViewport) {
-        // Hide viewport when leaving section 8
-        hideSpacePicViewport();
-        hasShownViewport = false;
-    }
+    // // Auto-show viewport when entering section 8
+    // if (isVisible && !hasShownViewport) {
+    //     // Add a small delay to ensure the section transition is complete
+    //     setTimeout(() => {
+    //         showSpacePicViewport();
+    //         hasShownViewport = true;
+    //     }, 500);
+    // } else if (!isVisible && hasShownViewport) {
+    //     // Hide viewport when leaving section 8
+    //     hideSpacePicViewport();
+    //     hasShownViewport = false;
+    // }
 }

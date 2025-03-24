@@ -111,16 +111,16 @@ export function renderSection3(camera, scene) {
         }
     }
 
-    // Auto-show viewport when entering section 3
-    if (isVisible && !hasShownViewport) {
-        // Add a small delay to ensure the section transition is complete
-        setTimeout(() => {
-            showBalanceViewport();
-            hasShownViewport = true;
-        }, 1000);
-    } else if (!isVisible && hasShownViewport) {
-        // Hide viewport when leaving section 3
-        hideBalanceViewport();
-        hasShownViewport = false;
-    }
+    // // Auto-show viewport when entering section 3
+    // if (isVisible && !hasShownViewport) {
+    //     // Add a small delay to ensure the section transition is complete
+    //     setTimeout(() => {
+    //         showBalanceViewport();
+    //         hasShownViewport = true;
+    //     }, 1000);
+    // } else if (!isVisible && hasShownViewport) {
+    //     // Hide viewport when leaving section 3
+    //     hideBalanceViewport();
+    //     hasShownViewport = false;
+    // }
 }
