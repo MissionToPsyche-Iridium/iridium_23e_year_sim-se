@@ -33,7 +33,7 @@ div {
 }
 
 #logo {
-    padding-top: 1rem;
+    padding-top: 2rem !important;
     display: block;
     width: 30%;
     margin-left: auto;
@@ -571,4 +571,11 @@ footer {
         width: 100%;
         background-color: blue;
     }
+}
+
+@media (min-width: 2560px) {
+    #logo {
+        padding-top: 3rem !important;
+    }
+    
 }
