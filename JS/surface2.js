@@ -94,22 +94,53 @@ if (window.innerWidth >= 2560){
         { backgroundSize: "1200%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.7, y: 80 })
+} else if (window.innerWidth >= 400){
+    console.log(true, window.innerWidth)
+    tl.fromTo("body", 
+        { backgroundSize: "600%"},  // Start large and zoomed in
+        { backgroundSize: "800%", duration: 2 } // Shrink to fit screen properly
+    )
+    tl.to("#header-h1", { scale: 0.5, scale: 0.5, y: -100 })
+} else if (window.innerWidth >= 350){
+    console.log(true, window.innerWidth)
+    tl.fromTo("body", 
+        { backgroundSize: "800%"},  // Start large and zoomed in
+        { backgroundSize: "1000%", duration: 2 } // Shrink to fit screen properly
+    )
+    tl.to("#header-h1", { scale: 0.5, scale: 0.3, y: -100 })
 }
 
-tl.fromTo(
-    "#logo",
-    {
-        opacity: 0,
-        scale: 3,
-        y: 400
-    },
-    {
-        opacity: 1,
-        scale: 1,
-        duration: 3,
-        y: 0
-    }, "<50%"
-);
+if(window.width >= 700){
+    tl.fromTo(
+        "#logo",
+        {
+            opacity: 0,
+            scale: 3,
+            y: 400
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            duration: 3,
+            y: 0
+        }, "<50%"
+    );
+} else {
+    tl.fromTo(
+        "#logo",
+        {
+            opacity: 0,
+            scale: 3,
+            y: 400
+        },
+        {
+            opacity: 1,
+            scale: 1.25,
+            duration: 3,
+            y: 0
+        }, "<50%"
+    );
+}
 
 tl.to("#header-h1", {opacity: 1, duration: 2})
 
@@ -2258,5 +2289,154 @@ if (window.innerWidth >= 1600){
             }
         }
     )
-}
+} else {
+    tl.to(
+        "body",
+        {
+            backgroundColor: "black"
+        }
+    )
 
+    tl.to(
+        "#materials",
+        {
+            backgroundPosition: "center",
+            backgroundSize: "cover"
+        }
+    )
+
+    tl.to(
+        "#materials-h1",
+        {
+            scale: 0.8
+        }
+    )
+
+    tl.to(
+        "#materials-p",
+        {
+            scale: 0.7,
+            y: -190,
+            width: "100%",
+            color: "white",
+            ease: "power4.inOut",
+            druation: 3
+        }
+    )
+
+    tl.to(
+        "#features",
+        {
+            opacity: 1,
+            backgroundColor: "black",
+            backgroundPosition: "center"
+        }
+    )
+
+    tl.to(
+        "#features-h1",
+        {
+            scale: 0.8
+        }
+    )
+
+    tl.to(
+        "#features-p",
+        {
+            scale: 0.7,
+            y: -190,
+            width: "100%",
+            ease: "power4.inOut",
+            druation: 3,
+            color: "white",
+            marginBottom: "5px"
+        }
+    )
+
+    tl.to(
+        "#dimensions",
+        {
+            backgroundPosition: "center",
+            backgroundSize: "contain",
+            opacity: 1,
+            backgroundColor: "black"
+        }
+    )
+
+    tl.to(
+        "#dimensions-h1",
+        {
+            scale: 0.8
+        }
+    )
+
+    tl.to(
+        "#dimensions-p",
+        {
+            scale: 0.7,
+            y: -160,
+            width: "100%",
+            color: "white",
+            ease: "power4.inOut",
+            druation: 3
+        }
+    )
+
+    tl.to(
+        "#comparable",
+        {
+            backgroundPosition: "center",
+            backgroundSize: "contain",
+            opacity: 1,
+            backgroundColor: "black"
+        }
+    )
+
+    tl.to(
+        "#comparable-h1, #comparable-h3, .comparable-h4",
+        {
+            scale: 0.8
+        }
+    )
+
+    tl.to(
+        ".comparable-p",
+        {
+            scale: 0.6,
+            y: -140,
+            width: "100%",
+            color: "white",
+            ease: "power4.inOut",
+            druation: 3
+        }
+    )
+
+    tl.to(
+        "#explore",
+        {
+            backgroundPosition: "center",
+            backgroundSize: "contain",
+            opacity: 1,
+            backgroundColor: "black"
+        }
+    )
+
+    tl.to(
+        "#explore-h1",
+        {
+            scale: 0.8
+        }
+    )
+
+    tl.to(
+        "#explore-p",
+        {
+            scale: 0.7,
+            y: -160,
+            width: "100%",
+            color: "white",
+            ease: "power4.inOut",
+            druation: 3
+        }
+    )
+}
