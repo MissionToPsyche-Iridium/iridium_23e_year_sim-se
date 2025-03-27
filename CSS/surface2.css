@@ -12,7 +12,9 @@
     z-index: 9999;
 }
 
-
+/** body elements
+*
+*/
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -23,13 +25,16 @@ body {
     max-width: 2560px;
 }
 
+div {
+    background-color: white;
+}
+
+/** header elements
+*
+*/
 header {
     height: 30vh;
     width: 100%;
-}
-
-div {
-    background-color: white;
 }
 
 #logo {
@@ -63,6 +68,9 @@ div {
     }
 }
 
+/** div1/materials elements
+*
+*/
 #materials{
     width: 90%;
     margin-right: auto;
@@ -104,6 +112,9 @@ div {
     padding-bottom: 10% !important;
 }
 
+/** div2/features elements
+*
+*/
 #features {
     width: 90%;
     margin-right: auto;
@@ -116,6 +127,9 @@ div {
     background-repeat: no-repeat;
 }
 
+/** div3/dimensions elements
+*
+*/
 #dimensions {
     width: 90%;
     margin-right: auto;
@@ -148,6 +162,9 @@ div {
     border-radius: 10px;
 }
 
+/** div4/comparable elements
+*
+*/
 #comparable h3 {
     border-bottom: solid 5px red;
     width: 40%;
@@ -160,6 +177,10 @@ div {
     font-size: 40px;
 }
 
+
+/** div5/explore elements
+*
+*/
 #explore{
     background-color: black;
     height: 100vh;
@@ -220,7 +241,9 @@ div {
     opacity: 0.7;
 }
 
-
+/** footer elements
+*
+*/
 footer {
     bottom: 0;
     margin-top: 10%;
@@ -230,8 +253,6 @@ footer {
     width: 100%;
     background-color: blue;
 }
-
-
 
 @keyframes colorChange{
     0% {
@@ -251,6 +272,10 @@ footer {
     }
 }
 
+
+/** media elements
+*
+*/
 @media (min-width: 350px) {
     #comparable {
         width: 100%;
