@@ -1,4 +1,16 @@
+/*For Testing Delete before production*/
 
+#screen-width-box {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 9999;
+}
 
 
 
@@ -38,7 +50,7 @@ header {
     width: 100%;
     text-align: center;
     margin-top: 1rem;
-    height: 30vh !important;
+    height: 30vh;
     position: relative;
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
     background-clip:text;
@@ -47,6 +59,7 @@ header {
 #page-header h1 {
     color: transparent;
     font-size: 100px;
+    padding-top: 5rem;
 }
 
 #logo {
@@ -91,7 +104,8 @@ header {
     background: linear-gradient(-45deg, #f9a000, #f47c33);
     background-clip: text;
     color: transparent;
-   /* font-size: 100px; */
+    padding-top: 5rem;
+    font-size: 80px;
     line-height: 1.5;
 }
 
@@ -135,7 +149,7 @@ header {
     margin-left: auto;
     margin-top: auto;
     margin-bottom: auto;
-    transform: scale(0.75) translateY(40%);
+    transform: scale(0.75) translateY(10%);
     overflow-x: visible;
     overflow-y: visible;
 }
@@ -197,8 +211,9 @@ header {
     background-image: url(/img/sixteen.svg);
     background-repeat: no-repeat;
     background-size: 50%;
-    background-position-y: 65%;
+    background-position-y: 45%;
     background-position-x: -15%;
+    background-color: white;
 
     h1{
         font-size: 120px;
@@ -432,7 +447,7 @@ header {
 
     p {
         width: 80%;
-        margin-top: 5%;
+        margin-top: 20%;
         margin-right: auto;
         margin-left: auto;
         font-size: 70px;
@@ -527,7 +542,7 @@ header {
     background-image: url(/img/lift-car.svg);
     background-repeat: no-repeat;
     background-position-x: 5%;
-    background-position-y: 18rem;
+    background-position-y: 25rem;
     border-radius: 1rem 1rem 9rem 9rem;
     content: '';
     position: absolute;
@@ -542,6 +557,7 @@ header {
     padding: 3%;
     margin-top: 7%;
     margin-bottom: 5%;
+    margin-left: 15rem;
     border-radius: 1rem;
     cursor: pointer;
     position: relative;
@@ -701,19 +717,19 @@ footer {
 
 /*media queries*/
 /*Mobile Phone*/
-@media (min-width: 375px) {
+@media (min-width: 360px) and (max-width: 767px) {
     /** mulit-element styling
     *
     */
+    h1{
+        font-size: 2rem !important;
+    }
+    p {
+        font-size: 1rem !important;
+    }
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 0.75rem;
     } 
-    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
-        font-size: 2rem;
-    } 
-    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
-        font-size: 1rem;
-    }
 
     /** header elements
     *
@@ -723,11 +739,11 @@ footer {
     }
     #page-header {
         position: relative;
-        height: 10vh !important;
+        height: 20vh !important;
     }
     #page-header h1 {
-        margin-top: 1.5rem;
-        font-size: 1rem;
+        margin-top: -3rem;
+        font-size: 1.5rem !important;
     }
 
     /** welcome / div 1 elements
@@ -737,7 +753,7 @@ footer {
         margin-top: 1rem;
     }
     #welcome-p1{
-        margin-top: 35% !important;
+        margin-top: 15% !important;
     }
     #welcome p{
         margin-top: 10%;
@@ -749,7 +765,7 @@ footer {
     */
     #div2{
         background-size: 60%;
-        background-position-y: 55%;
+        background-position-y: 45%;
         border-radius: 1rem;
         margin-top: 0.5rem;
     }
@@ -757,7 +773,7 @@ footer {
         margin-top: -20rem;
     }
     #sphere{
-        transform: scale(0.25) translateY(-60%) translateX(-120%);
+        transform: scale(0.25) translateY(-100%) translateX(-120%);
     }
 
     /** div 3 elements
@@ -826,12 +842,20 @@ footer {
     }
     #div7::before{
         border-radius: 1rem;
+        background-position-x: 5%;
+        background-position-y: 17rem;
+        background-size: 70%;
     }
     #div7 h1{
         margin-top: 1rem;
     }
     #div7 p {
         margin-top: 3rem;
+    }
+    #div7-btn{
+        margin-top: 70% !important;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     /** div 8 elements
@@ -852,17 +876,46 @@ footer {
 }
 
 /*Tablets*/
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+    h1{
+        font-size: 50px !important;
+    }
+    p{
+        font-size: 25px !important;
+    }
+    button{
+        font-size: 20px !important;
+    }
+    button:hover {
+        font-size: 22px !important;
+    }
+    
     /** header elements
     *
     */
+    header{
+        height: 10vh;
+    }
     #page-header {
         position: relative;
         height: 10vh !important;
     }
     #page-header h1 {
-        margin-top: 4rem;
-        font-size: 1rem;
+        margin-top: -4rem;
+        font-size: 2.5rem !important;
+    }
+
+    /** welcome / div 1 elements
+    *
+    */
+    #welcome {
+        margin-top: 1%;
+    }
+    #welcome-p1{
+        margin-top: 25% !important;
+    }
+    #welcome p{
+        margin-top: 10%;
     }
 
     /** div 2 elements
@@ -886,9 +939,10 @@ footer {
     */
     #div3{
         background-size: 50%;
-        background-position-y: 45%;
+        background-position-y: 40%;
         background-position-x: 5%;
-        margin-top: -4rem;
+        margin-top: 1rem;
+        padding-bottom: 0.5rem;
     }
     #div3 p{
         font-size: 0.75rem;
@@ -897,7 +951,7 @@ footer {
     #div3-btn{
         padding: 3%;
         margin-top: 5%;
-        margin-bottom: 5%;
+        margin-bottom: 0%;
     }
 
     /** div 5 elements
@@ -928,33 +982,67 @@ footer {
     #div7{
         margin-right: auto;
         margin-left: auto;
+        
+        height: 600px;
     }
     #div7::before{
-        background-position-x: 7rem;
-        background-position-y: 15rem; 
+        border-radius: 1rem !important;
+        background-position-x: 0rem;
+        background-position-y: 12rem; 
+    }
+    #div7-btn {
+        margin-left: 16rem;
     }
 }
 
 /*1024px*/
-@media (min-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1279px) {
+    /** body elements
+    *
+    */
+    h1{
+        font-size: 60px !important;
+    }
+    p{
+        font-size: 30px !important;
+    }
+    button{
+        font-size: 25px !important;
+    }
     /** header elements
     *
     */
+    header{
+        height: 20vh;
+    }
     #page-header {
         position: relative;
-        height: 15vh !important;
+        height: 20vh;
     }
     #page-header h1 {
-        margin-top: 6rem;
-        font-size: 1rem;
+        margin-top: -5rem;
+        font-size: 3.5rem;
+    }
+
+    /** welcome / div 1 elements
+    *
+    */
+    #welcome {
+        margin-top: 1%;
+    }
+    #welcome-p1{
+        margin-top: 25% !important;
+    }
+    #welcome p{
+        margin-top: 10%;
     }
 
     /** div 2 elements
     *
     */
     #div2{
-        background-size: 60%;
-        background-position-y: 45%;
+        background-size: 40%;
+        background-position-y: 40%;
         border-radius: 1rem;
         margin-top: 0.5rem;
     }
@@ -962,7 +1050,7 @@ footer {
         margin-top: -10rem;
     }
     #sphere{
-        transform: scale(0.7) translateY(-10%) translateX(0%);
+        transform: scale(0.5) translateY(-20%);
     }
 
     /** div 3 elements
@@ -975,7 +1063,6 @@ footer {
         margin-top: -4rem;
     }
     #div3 p{
-        font-size: 0.75rem;
         margin-left: 20rem;
     }
     #div3-btn{
@@ -983,10 +1070,22 @@ footer {
         margin-top: 5rem;
         margin-bottom: 5%;
     }
+
+    /** div 7 elements
+    *
+    */
+    #div7{
+        height: 700px;
+    }
+    #div7::before{
+        background-size: 40%;
+        background-position-x: 5%;
+        background-position-y: 15rem;
+    }
 }
 
 /*1280px*/
-@media (min-width: 1280px) {
+@media (min-width: 1280px) and (max-width: 1439px) {
     /** multi-element styling
     *
     */
@@ -1007,10 +1106,10 @@ footer {
     *
     */
     #page-header {
-        height: 20vh !important;
+        height: 20vh;
     }
     #page-header h1 {
-        margin-top: 2rem;
+        margin-top: -5rem;
         font-size: 3.5rem;
     }
 
@@ -1018,10 +1117,10 @@ footer {
     *
     */
     #welcome {
-        margin-top: 5%;
+        margin-top: 1%;
     }
     #welcome-p1{
-        margin-top: 35% !important;
+        margin-top: 25% !important;
     }
     #welcome p{
         margin-top: 10%;
@@ -1032,8 +1131,11 @@ footer {
     *
     */
     #div2{
-        background-size: 40%;
-        background-position-y: 55%;
+        background-size: 50%;
+        background-position-y: 35%;
+    }
+    #sphere {
+        transform: scale(0.75) translateY(0%);
     }
 
     /** div 3 elements
@@ -1041,7 +1143,7 @@ footer {
     */
     #div3{
         background-size: 50%;
-        background-position-y: 35%;
+        background-position-y: 40%;
         background-position-x: -5%;
     }
     #div3-btn{
@@ -1100,137 +1202,49 @@ footer {
         height: 700px;
     }
     #div7::before{
-        background-size: 25%;
+        background-size: 35%;
+        background-position-y: 12rem;
     }
 }
 
 /*1440px*/
-@media (min-width: 1440px) {
+@media (min-width: 1440px) and (max-width: 1511px) {
     /** multi-element styling
     *
     */
+    h1 {
+        font-size: 60px !important;
+    }
+    p{
+        font-size: 30px !important;
+    }
+
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 20px;
     } 
     #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
         font-size: 25px;
     } 
-    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
-        font-size: 60px;
-    } 
-    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
-        font-size: 30px;
+
+    /** header elements
+    *
+    */
+    #page-header{
+        height: 20vh;
+    }
+    #page-header h1 {
+        font-size: 80px !important;
+        margin-top: -5rem;
     }
 
     /** welcome / div 1 elements
     *
     */
     #welcome {
-        margin-top: 5%;
+        margin-top: 0%;
     }
     #welcome-p1{
-        margin-top: 40% !important;
-        font-size: 40px !important;
-    }
-    #welcome p{
-        margin-top: 10%; 
-        font-size: 40px !important;
-    }
-
-    /** div 3 elements
-    *
-    */
-    #div3{
-        background-size: 50%;
-        background-position-y: 35%;
-        background-position-x: -5%;
-    }
-    #div3-btn{
-        padding: 3%;
-        margin-top: 5%;
-        margin-bottom: 5%;
-    }
-    #div3 h1{
-        font-size: 60px;
-    }
-    #div3 p {
-        font-size: 30px;
-    }
-
-    /** div 5 elements
-    *
-    */
-    #div5{
-        height: 900px;
-    }
-    #div5 h1{
-        margin-top: 5%;
-    }
-    #div5 p {
-        margin-top: 15%;
-        width: 80%;
-    }
-
-    /** div 6 elements
-    *
-    */
-    #div6{
-        height: 800px;
-    }
-    #div6::before{
-        background-color: black;
-        background-size: contain;
-    }
-    #div6 h1{
-        margin-top: 5%;
-    }
-    #div6 p{
-        background-color: rgba(27, 27, 27, 0.7);
-        margin-top: 15%;
-    }
-    #div6-btn{
-        padding: 3%;
-        margin-top: 8%;
-        margin-bottom: 5%;
-    }
-
-    /** div 7 elements
-    *
-    */
-    #div7{
-        height: 700px;
-    }
-    #div7::before{
-        background-size: 25%;
-    }
-}
-
-/*1512px*/
-@media (min-width: 1512px) {
-    /** multi-element styling
-    *
-    */
-    #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
-        font-size: 20px;
-    } 
-    #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
-        font-size: 25px;
-    } 
-    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
-        font-size: 60px;
-    } 
-    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
-        font-size: 30px;
-    }
-
-    /** welcome / div 1 elements
-    *
-    */
-    #welcome {
-        margin-top: 5%;
-    }
-    #welcome-p1{
-        margin-top: 40% !important;
+        margin-top: 20% !important;
         font-size: 40px !important;
     }
     #welcome p{
@@ -1241,11 +1255,10 @@ footer {
     /** div 2 elements
     *
     */
-    #div2{
-        background-size: 30%;
-        background-position-y: 50%;
+    #div2 {
+        background-size: 40%;
+        background-position-y: 40%;
     }
-
     /** div 3 elements
     *
     */
@@ -1311,49 +1324,36 @@ footer {
     }
     #div7::before{
         background-size: 25%;
-    }
-}
-
-/*1536px*/
-@media (min-width: 1536px) {
-    /** header elements
-    *
-    */
-    #page-header {
-        height: 20vh !important;
-    }
-    #page-header h1 {
-        margin-top: 4rem;
-        font-size: 3.5rem;
+        background-position-y: 15rem;
     }
 }
 
 /*Full HD*/
-@media (min-width: 1920px) {
+@media (min-width: 1512px) and (max-width: 2047px) {
     /** multi-element styling
     *
     */
+    h1{
+        font-size: 90px !important;
+    }
+    p{
+        font-size: 40px !important;
+    }
     #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
         font-size: 25px;
     } 
     #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
         font-size: 30px;
     } 
-    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
-        font-size: 70px;
-    } 
-    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
-        font-size: 40px;
-    }
 
     /** header elements
     *
     */
     #page-header{
-        height: 20vh !important;
+        height: 20vh;
     }
     #page-header h1 {
-        margin-top: 5rem;
+        margin-top: -1rem;
     }
 
     /** welcome / div 1 elements
@@ -1361,14 +1361,12 @@ footer {
     */
     #welcome {
         margin-top: 5%;
-        font-size: 20px;
     }
     #welcome-p1{
-        margin-top: 30%;
+        margin-top: 30% !important;
     }
     #welcome p{
         margin-top: 10%;
-        font-size: 50px; 
     }
 
     /** div 2 elements
@@ -1377,6 +1375,10 @@ footer {
     #div2{
         background-size: 30%;
         background-position-y: 45%;
+    }
+
+    #sphere {
+        transform: scale(0.75) translateY(30%);
     }
 
     /** div 3 elements
@@ -1391,12 +1393,6 @@ footer {
         padding: 3%;
         margin-top: 10%;
         margin-bottom: 5%;
-    }
-    #div3 h1{
-        font-size: 90px;
-    }
-    #div3 p{
-        font-size: 40px;
     }
 
     /** div 4 elements
@@ -1451,6 +1447,9 @@ footer {
         margin-bottom: 5%;
         margin-left: 5%;
     }
+    #div7::before{
+        background-position-y: 15rem; 
+    }
 
     /** div 8 elements
     *
@@ -1469,31 +1468,88 @@ footer {
 }
 
 /*2048px*/
-@media (min-width: 2048px) {
+@media (min-width: 2048px) and (max-width: 2509px) {
+
+    h1{
+        font-size: 80px !important;
+    }
+
+    p {
+        font-size: 50px !important;
+    }
+
+    button {
+        font-size: 35px !important;
+    }
+
+    button:hover {
+        font-size: 40px !important;
+    }
     /** header elements
     *
     */
     #page-header {
-        height: 20vh !important;
+        height: 20vh;
     }
     #page-header h1 {
-        margin-top: 100px;
+        margin-top: -4rem;
     }
 
     /** welcome / div 1 elements
     *
     */
-    #welcome p{
-        width: 80%;
-        margin-top: 5%;
-        font-size: 70px;
-        margin-right: auto;
-        margin-left: auto;
+    #welcome-p1{
+        padding-top: 10rem !important;
     }
+
+    #welcome p {
+        padding-top: 1rem;
+    }
+
+    /** div 2 elements
+    *
+    */
+    #div2 {
+        background-size: 30%;
+        background-position-y: 40%;
+    }
+    #sphere {
+        transform: scale(1) translateY(20%);
+    }
+
+    /** div3 elements
+    *
+    */
+
+    /** div4 elements
+    *
+    */
+
+    /** div5 elements
+    *
+    */
+
+    /** div6 elements
+    *
+    */
+
+    /** div7 elements
+    *
+    */
+    #div7::before{
+        background-position-y: 15rem;
+    }
+    #div7-btn {
+        margin-left: 20rem;
+    }
+    /** div8 elements
+    *
+    */
+
 }
 
 /*2510px*/
-@media (min-width: 2510px) {
+@media (min-width: 2510px) and (max-width: 2559px) {
     /** multi-element styling
     *
     */
@@ -1517,97 +1573,8 @@ footer {
         background-size: 20%;
         background-position-y: 40%;
     } 
-}
 
-/*2560px*/
-@media (min-width: 2560px) {
-    /** multi-element styling
-    *
-    */
-    #div2-btn, #div3-btn, #div4-btn, #div5-btn, #div6-btn, #div7-btn, #div8-btn {
-        font-size: 30px;
-    } 
-    #div2-btn:hover, #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div6-btn:hover, #div7-btn:hover, #div8-btn:hover {
-        font-size: 35px;
-    } 
-    #div2 h1, #div3 h1, #div4 h1, #div5 h1, #div6 h1, #div7 h1, #div8 h1 {
-        font-size: 80px;
-    } 
-    #div2 p, #div3 p, #div4 p, #div5 p, #div6 p, #div7 p, #div8 p  {
-        font-size: 50px;
-    }
-
-    /** page header elements
-    *
-    */
-    #page-header {
-        height: 20vh !important;
-    }
-    #page-header h1 {
-        margin-top: 150px;
-    }
-
-    /** welcome / div 1 elements
-    *
-    */
-    #welcome-p1{
-        margin-top: 35%;
-    }
-    #welcome p{
-        width: 80%;
-        margin-top: 5%;
-        font-size: 80px !important;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    /** div 2 elements
-    *
-    */
-    #div2{
-        background-size: 30%;
-        background-position-y: 40%;
-    } 
-
-    /** div 3 elements
-    *
-    */
-    #div3{
-        background-size: 50%;
-        background-position-y: 30%;
-        background-position-x: -15%;
-    }
-    #div3-btn{
-        padding: 3%;
-        margin-top: 10%;
-        margin-bottom: 5%;
-    }
-
-    /** div 4 elements
-    *
-    */
-    #div4-btn{
-        padding: 3%;
-        margin-top: 8%;
-        margin-bottom: 5%;
-    }
-
-    /** div 5 elements
-    *
-    */
-    #div5 p{
-        margin-top: 10%;
-    }
-    #div5-btn{
-        padding: 3%;
-        margin-top: 5%;
-        margin-bottom: 5%;
-    }
-
-    /** div 6 elements
-    *
-    */
-    #div6 p {
-        margin-top: 10%;
+    #sphere {
+        transform: scale(0.75) translateY(40%);
     }
 }
