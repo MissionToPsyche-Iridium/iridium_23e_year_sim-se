@@ -87,18 +87,22 @@ export function onResize(camera, renderer) {
 
 /*
 * Handles scroll and touchmove events to update the camera's scroll progress.
-* Triggers section transitions when crossing section thresholds.
-*
-* Parameters:
-* - event: The scroll or touchmove event triggering navigation.
-*/
-export function onScroll(event) {
-  if (isAnimating) return;
+* Triggers section transitions when crossing section thresholds. 
+* Update: There was issues when scrolling with a track pad. Josh's latest fix has corrected that issue. 
+Removed this code: 
   scrollProgress += event.deltaY * 0.005;
   scrollProgress = Math.max(0, Math.min(scrollProgress, sections.length - 1));
 
   const newSection = Math.round(scrollProgress);
   if (newSection !== currentSection) {
+* Parameters:
+* - event: The scroll or touchmove event triggering navigation.
+*/
+export function onScroll(event) {
+  if (isAnimating) return;
+  const direction = event.deltaY > 0 ? 1 : -1;
+  const newSection = currentSection + direction;
+  if (newSection >= 0 && newSection < sections.length) {
     isAnimating = true;
     moveToSection(newSection);
   }
