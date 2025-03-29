@@ -94,10 +94,15 @@ function updateViewportSize() {
     console.log(`Viewport resized to: width=${width}, maxWidth=${maxWidth}, height=${height}`);
 }
 
+let storedGamesButtonMeshes = null;
+let viewportOpen = false;
 /**
  * Creates and shows the games viewport with animations.
  */
-export function showGamesViewport() {
+export function showGamesViewport(gamesButtonMeshes) {
+
+    console.log(" showGamesViewport called.");
+
     // If viewport already exists, just show it
     if (viewportContainer) {
         viewportContainer.style.display = 'flex';
@@ -106,6 +111,9 @@ export function showGamesViewport() {
     }
 
     console.log("Creating games viewport");
+
+    // Store the button meshes
+    storedGamesButtonMeshes = gamesButtonMeshes; 
 
     // Create container for the viewport
     viewportContainer = document.createElement('div');
@@ -175,7 +183,10 @@ export function showGamesViewport() {
     ViewportStyling.addPulsingGlowEffect(viewportContainer);
     
     // Add event listener for close button
-    closeButton.addEventListener('click', hideGamesViewport);
+    closeButton.addEventListener('click', () => {
+        viewportOpen = false;
+        hideGamesViewport()
+    });
     
     // Add event listener for Escape key
     document.addEventListener('keydown', handleKeyDown);
@@ -193,21 +204,29 @@ export function showGamesViewport() {
     resizeObserver.observe(document.body);
 }
 
-/**
- * Hides the games viewport with closing animation.
- */
 export function hideGamesViewport() {
     if (!viewportContainer) return;
-    
-    // Animate closing effect
+
     ViewportStyling.createClosingAnimation(viewportContainer, () => {
         viewportContainer.style.display = 'none';
-        // Reset opacity and scale for next time
-        viewportContainer.style.opacity = 1;
-        viewportContainer.style.transform = 'translate(-50%, -50%) scale(1)';
-        
-        // Show the menu when viewport is closed
-        document.body.classList.add("overlay-open");
+
+        if (storedGamesButtonMeshes) {
+            console.log("Restoring button visibility:", storedGamesButtonMeshes);
+
+            if (storedGamesButtonMeshes.textMesh) {
+                storedGamesButtonMeshes.textMesh.visible = true;
+            } else {
+                console.warn("textMesh is missing");
+            }
+
+            if (storedGamesButtonMeshes.buttonMesh) {
+                storedGamesButtonMeshes.buttonMesh.visible = true;
+            } else {
+                console.warn("buttonMesh is missing");
+            }
+        } else {
+            console.warn("storedGamesButtonMeshes is null or undefined");
+        }
     });
 }
 

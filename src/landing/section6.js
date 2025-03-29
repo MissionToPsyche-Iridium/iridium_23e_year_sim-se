@@ -18,6 +18,7 @@ import { showGamesViewport, hideGamesViewport } from '../../public/games/gamesVi
 let hasShownViewport = false;
 let sectionInitialized = false;
 let gameControllerModel = null;
+let buttonMesh;
 
 /**
  * Loads and initializes Section 6 by adding a game controller model.
@@ -29,65 +30,50 @@ let gameControllerModel = null;
  * - sections: Array containing camera positions for each section.
  * - renderer: The renderer used for mouse interaction.
  */
+let gamesButtonMeshes = null; // Store button meshes
+let viewportOpen = false; // Flag for viewport 
+
 export function loadSection6(scene, camera, sections, renderer) {
   return new Promise((resolve, reject) => {
-    const cameraPosition = sections[6];
-    const modelOffset = 30;
-    const modelPosition = {
-      x: cameraPosition.x,
-      y: cameraPosition.y,
-      z: cameraPosition.z - modelOffset,
-    };
-
-    // Removed legacy model loading code.
-
     const section6Coords = sections[6]?.position;
     if (!section6Coords) {
       console.error("Section 6 position not found.");
       return reject("Section 6 position not found.");
     }
-    
+
     const buttonPos = {
       x: section6Coords.x,
       y: section6Coords.y + 2,
       z: section6Coords.z - 12,
     };
-    
+
     const rotation = { x: 0.2, y: 0, z: 0 };
-    
+
     try {
-      const { buttonMesh } = triggerButton3D(
+      triggerButton3D(
         "Try some Psyche inspired games!",
         buttonPos,
         rotation,
         0.7,
         scene,
         () => {
-          showGamesViewport();
-          console.log("Games button clicked.");
-        }
-      );
-  
-      applyGlowEffect(buttonMesh, {
-        color: '#ff9900',
-        intensity: 2.0
+          if (viewportOpen) return; // Prevent multiple open at once 
+          viewportOpen = true;
+
+          showGamesViewport(gamesButtonMeshes);
+          console.log("Games button clicked. Viewport opening...");
+
+          if (gamesButtonMeshes) {
+            gamesButtonMeshes.textMesh.visible = false;
+            gamesButtonMeshes.buttonMesh.visible = false;
+          }
+        },
+        true
+      ).then(meshes => {
+        gamesButtonMeshes = meshes;
+        console.log("Games button meshes stored:", gamesButtonMeshes);
       });
-  
-      const raycaster = new THREE.Raycaster();
-      const mouse = new THREE.Vector2();
-  
-      window.addEventListener("mousemove", (event) => {
-        const rect = renderer.domElement.getBoundingClientRect();
-        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-  
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(clickableModels);
-  
-        renderer.domElement.style.cursor = intersects.length > 0 ? "pointer" : "default";
-      });
-  
-      sectionInitialized = true;
+
       resolve();
     } catch (err) {
       reject(err);

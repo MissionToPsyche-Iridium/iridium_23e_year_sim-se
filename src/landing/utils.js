@@ -620,7 +620,7 @@ export function enableModelClick(camera, renderer) {
  * - Wraps text with a transparent BoxGeometry to increase interactive area.
  * - Fully raycast-compatible via `makeModelClickable()` for click detection.
  */
-export async function triggerButton3D(label, position, rotation, size = 0.7, scene, onClick) {
+export async function triggerButton3D(label, position, rotation, size = 0.7, scene, onClick, isVisible = true) {
   return new Promise((resolve, reject) => {
     const fontLoader = new FontLoader();
 
@@ -670,7 +670,7 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
           color: 0x000000,
           transparent: true,
           opacity: 0.05,
-          emissive: new THREE.Color(0x000000), // default base
+          emissive: new THREE.Color(0x000000),
           emissiveIntensity: 1.0
         });
 
@@ -678,9 +678,14 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
         buttonMesh.position.set(position.x, position.y, position.z);
         buttonMesh.rotation.set(rotation.x, rotation.y, rotation.z);
         buttonMesh.name = `button-${label.replace(/\s+/g, '-')}`;
+        buttonMesh.visible = isVisible;
 
         if (onClick) {
-          makeModelClickable(buttonMesh, onClick);
+          makeModelClickable(buttonMesh, () => {
+            onClick();
+            buttonMesh.visible = false;
+            textMesh.visible = false;
+          });
         }
 
         scene.add(buttonMesh);

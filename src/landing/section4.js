@@ -24,7 +24,7 @@ import {
 
 // Button for the section
 // let yearButton;
-// let yearLabel;
+let buttonMesh;
 let hasShownViewport = false;
 
 // Keep track of the viewport DOM elements
@@ -126,6 +126,9 @@ export function showYearViewport() {
     
     // Add event listener for Escape key
     document.addEventListener('keydown', handleKeyDown);
+
+    // Hide the Trigger Text Button while Viewport is open
+    buttonMesh.visible = false; 
 }
 
 /**
@@ -155,6 +158,9 @@ export function hideYearViewport() {
             pulseAnimation.pause();
         }
     }).play();
+
+    // Show buttonMesh trigger text again when closing viewport. 
+    buttonMesh.visible = true;
 }
 
 /**
@@ -215,7 +221,7 @@ export function loadSection4(scene, camera, sections, renderer) {
   return new Promise((resolve, reject) => {
     try {
       const { buttonMesh } = triggerButton3D(
-        "Explore the Cosmic Comparison between Earth and Psyche",
+        "The Cosmic Comparison of Earth and Psyche",
         buttonPos,
         rotation,
         0.7,

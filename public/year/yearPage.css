@@ -11,7 +11,7 @@ body {
     font-family: Arial, sans-serif;
 }
 #main-background{
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
+    /* background-image: linear-gradient(90deg,#a53f5b, #592651); */
     padding-top: 20px;
 }
 
@@ -21,7 +21,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
+    /* background-image: linear-gradient(90deg,#a53f5b, #592651); */
 
 }
 
@@ -391,6 +391,6 @@ input[type="radio"]#Psyche:checked + label {
     }
 
 #footer {
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
+    /* background-image: linear-gradient(90deg,#a53f5b, #592651); */
     background-size: cover;
 }
