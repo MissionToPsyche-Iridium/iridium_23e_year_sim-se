@@ -144,7 +144,7 @@ export function showGamesViewport() {
     
     // Create iframe to load the games content
     iframe = document.createElement('iframe');
-    iframe.src = '/public/games/games.html';  // Use absolute path from project root
+    iframe.src = '/games/games.html';  // Use absolute path from project root
     ViewportStyling.applyIframeStyles(iframe, {
         backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
     });
