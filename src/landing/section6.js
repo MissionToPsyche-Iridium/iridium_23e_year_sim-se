@@ -11,7 +11,7 @@
  */
 
 import * as THREE from 'three';
-import { triggerButton3D, clickableModels, applyGlowEffect } from './utils.js';
+import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from './utils.js';
 import { getCurrentSection } from './sectionTracking.js';
 import { showGamesViewport, hideGamesViewport } from '../../public/games/gamesViewport.js';
 
@@ -47,10 +47,28 @@ export function loadSection6(scene, camera, sections, renderer) {
       z: section6Coords.z - 12,
     };
 
+    const modelPosition = {
+      x:section6Coords.x,
+      y:section6Coords.y - 5,
+      z:section6Coords.z - 12
+    }
+    
     const rotation = { x: 0.2, y: 0, z: 0 };
-
+    const objRotation = { x: 0.2, y: 0.5, z: 0 };
+    
     try {
-      triggerButton3D(
+      loadModel(
+        "controller",
+        "/res/models/arcade_controller.glb",
+        modelPosition, // position
+        2, // scale
+        objRotation, // rotation
+        null, // animation
+        scene, // scene
+        () => {  // callback fx
+          console.log("loaded model");
+        });
+      const { buttonMesh } = triggerButton3D(
         "Try some Psyche inspired games!",
         buttonPos,
         rotation,

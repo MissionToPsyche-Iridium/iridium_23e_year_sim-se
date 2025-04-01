@@ -1,7 +1,7 @@
 /**
- * Games Viewport Module
+ * Location2 Viewport Module
  * 
- * This module handles loading the public/games/games.html content in an iframe
+ * This module handles loading the public/PsycheJR/location2.html content in an iframe
  * that appears on top of the Three.js scene.
  * 
  * Optimized for responsive design across various screen sizes including:
@@ -10,9 +10,8 @@
  * - Custom sizes set via developer tools
  */
 
-import gsap from 'gsap';
+import * as THREE from 'three';
 import * as ViewportStyling from '../../src/landing/viewportStyling.js';
-import { showTemperatureGameViewport } from './viewporttemperaturegame.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;
@@ -94,15 +93,10 @@ function updateViewportSize() {
     console.log(`Viewport resized to: width=${width}, maxWidth=${maxWidth}, height=${height}`);
 }
 
-let storedGamesButtonMeshes = null;
-let viewportOpen = false;
 /**
- * Creates and shows the games viewport with animations.
+ * Creates and shows the location2 viewport with animations.
  */
-export function showGamesViewport(gamesButtonMeshes) {
-
-    console.log(" showGamesViewport called.");
-
+export function showLocation2Viewport() {
     // If viewport already exists, just show it
     if (viewportContainer) {
         viewportContainer.style.display = 'flex';
@@ -110,14 +104,11 @@ export function showGamesViewport(gamesButtonMeshes) {
         return;
     }
 
-    console.log("Creating games viewport");
-
-    // Store the button meshes
-    storedGamesButtonMeshes = gamesButtonMeshes; 
+    console.log("Creating location2 viewport");
 
     // Create container for the viewport
     viewportContainer = document.createElement('div');
-    viewportContainer.id = 'games-viewport-container';
+    viewportContainer.id = 'location2-viewport-container';
     ViewportStyling.applyViewportContainerStyles(viewportContainer, {
         backgroundColor: 'rgba(0, 0, 0, 0.05)', // Very transparent background
         borderColor: 'rgba(122, 95, 62, 0.3)',  // Semi-transparent border
@@ -139,34 +130,20 @@ export function showGamesViewport(gamesButtonMeshes) {
     });
     
     const title = document.createElement('h2');
-    title.textContent = 'Psyche Mission Games';
+    title.textContent = 'Psyche\'s Location in Space';
     ViewportStyling.applyTitleStyles(title);
-    
-    // Create a container for the buttons
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.style.display = 'flex';
-    buttonsContainer.style.alignItems = 'center';
-    
-    // Create return button
-    const returnButton = document.createElement('button');
-    returnButton.textContent = '↩';
-    ViewportStyling.applyReturnButtonStyles(returnButton);
     
     closeButton = document.createElement('button');
     closeButton.textContent = '✕';
     ViewportStyling.applyCloseButtonStyles(closeButton);
     
-    // Add buttons to the container
-    buttonsContainer.appendChild(returnButton);
-    buttonsContainer.appendChild(closeButton);
-    
     header.appendChild(title);
-    header.appendChild(buttonsContainer);
+    header.appendChild(closeButton);
     viewportContainer.appendChild(header);
     
-    // Create iframe to load the games content
+    // Create iframe to load the location2 content
     iframe = document.createElement('iframe');
-    iframe.src = '/public/games/games.html';  // Use absolute path from project root
+    iframe.src = '/public/PsycheJR/location2.html';  // Use absolute path from project root
     ViewportStyling.applyIframeStyles(iframe, {
         backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
     });
@@ -176,12 +153,12 @@ export function showGamesViewport(gamesButtonMeshes) {
     
     // Add event listener for iframe load errors
     iframe.onerror = () => {
-        console.error("Failed to load games iframe content");
+        console.error("Failed to load location2 iframe content");
     };
     
     // Add event listener for iframe load success
     iframe.onload = () => {
-        console.log("Games iframe loaded successfully");
+        console.log("Location2 iframe loaded successfully");
         ViewportStyling.injectScrollbarHidingStyles(iframe);
     };
     
@@ -197,14 +174,7 @@ export function showGamesViewport(gamesButtonMeshes) {
     ViewportStyling.addPulsingGlowEffect(viewportContainer);
     
     // Add event listener for close button
-    closeButton.addEventListener('click', () => {
-        viewportOpen = false;
-        hideGamesViewport()
-    });
-    
-    // Add event listener for return button - in this case, just hide the games viewport
-    // since this is the main games menu
-    returnButton.addEventListener('click', hideGamesViewport);
+    closeButton.addEventListener('click', hideLocation2Viewport);
     
     // Add event listener for Escape key
     document.addEventListener('keydown', handleKeyDown);
@@ -222,29 +192,21 @@ export function showGamesViewport(gamesButtonMeshes) {
     resizeObserver.observe(document.body);
 }
 
-export function hideGamesViewport() {
+/**
+ * Hides the location2 viewport with closing animation.
+ */
+export function hideLocation2Viewport() {
     if (!viewportContainer) return;
-
+    
+    // Animate closing effect
     ViewportStyling.createClosingAnimation(viewportContainer, () => {
         viewportContainer.style.display = 'none';
-
-        if (storedGamesButtonMeshes) {
-            console.log("Restoring button visibility:", storedGamesButtonMeshes);
-
-            if (storedGamesButtonMeshes.textMesh) {
-                storedGamesButtonMeshes.textMesh.visible = true;
-            } else {
-                console.warn("textMesh is missing");
-            }
-
-            if (storedGamesButtonMeshes.buttonMesh) {
-                storedGamesButtonMeshes.buttonMesh.visible = true;
-            } else {
-                console.warn("buttonMesh is missing");
-            }
-        } else {
-            console.warn("storedGamesButtonMeshes is null or undefined");
-        }
+        // Reset opacity and scale for next time
+        viewportContainer.style.opacity = 1;
+        viewportContainer.style.transform = 'translate(-50%, -50%) scale(1)';
+        
+        // Show the menu when viewport is closed
+        document.body.classList.add("overlay-open");
     });
 }
 
@@ -253,16 +215,16 @@ export function hideGamesViewport() {
  */
 function handleKeyDown(e) {
     if (e.key === 'Escape') {
-        hideGamesViewport();
+        hideLocation2Viewport();
     }
 }
 
 /**
  * Removes the viewport completely.
  */
-export function destroyGamesViewport() {
+export function destroyLocation2Viewport() {
     if (viewportContainer) {
-        closeButton.removeEventListener('click', hideGamesViewport);
+        closeButton.removeEventListener('click', hideLocation2Viewport);
         document.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('resize', updateViewportSize);
         
@@ -284,9 +246,9 @@ export function destroyGamesViewport() {
  * @param {number} width - Width in pixels
  * @param {number} height - Height in pixels
  */
-window.setGamesViewportSize = function(width, height) {
+window.setLocation2ViewportSize = function(width, height) {
     if (!viewportContainer) {
-        console.warn("Games viewport is not currently active");
+        console.warn("Location2 viewport is not currently active");
         return;
     }
     
@@ -306,9 +268,9 @@ window.setGamesViewportSize = function(width, height) {
  * Reset the viewport to responsive sizing
  * This can be called from the console in developer tools (F12)
  */
-window.resetGamesViewportSize = function() {
+window.resetLocation2ViewportSize = function() {
     if (!viewportContainer) {
-        console.warn("Games viewport is not currently active");
+        console.warn("Location2 viewport is not currently active");
         return;
     }
     

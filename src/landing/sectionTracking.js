@@ -27,6 +27,7 @@ import { destroyGamesViewport } from '../../public/games/gamesViewport.js';
 
 let camera, renderer, sections, currentSection = 1, scrollProgress = 1;
 let isAnimating = false; // Scroll lock flag
+let lastTouchY = 0;
 
 const destroyHandlers = {   // format = sectionNumver: functionName
   2: destroyPsycheNameViewport,
@@ -36,6 +37,17 @@ const destroyHandlers = {   // format = sectionNumver: functionName
 
 let lastSection = currentSection;
 
+function onTouchStart(event) {
+  lastTouchY = event.touches[0].clientY;
+}
+
+function onTouchMove(event) {
+  const newY = event. touches[0].clientY;
+  const deltaY = lastTouchY - newY;
+  lastTouchY = newY;
+  onScroll({ deltaY: deltaY }); 
+  event.preventDefault();
+}
 
 /*
 * Initializes section tracking by assigning the camera, section list,
@@ -50,8 +62,8 @@ export function initSectionTracking(cam, sectionList, rend) {
   camera = cam;
   renderer = rend;
   sections = sectionList;
-  window.addEventListener("wheel", onScroll);
-  window.addEventListener("touchmove", onScroll);
+  window.addEventListener("wheel", onScroll, { passive: false });  window.addEventListener("touchstart", onTouchStart, { passive: false });
+  window.addEventListener("touchmove", onTouchMove, { passive: false });
   window.addEventListener('resize', () => onResize(camera, renderer));
 }
 
@@ -87,26 +99,27 @@ export function onResize(camera, renderer) {
 
 /*
 * Handles scroll and touchmove events to update the camera's scroll progress.
-* Triggers section transitions when crossing section thresholds. 
-* Update: There was issues when scrolling with a track pad. Josh's latest fix has corrected that issue. 
-Removed this code: 
-  scrollProgress += event.deltaY * 0.005;
-  scrollProgress = Math.max(0, Math.min(scrollProgress, sections.length - 1));
-
-  const newSection = Math.round(scrollProgress);
-  if (newSection !== currentSection) {
+* Triggers section transitions when crossing section thresholds.
+*
 * Parameters:
 * - event: The scroll or touchmove event triggering navigation.
 */
 export function onScroll(event) {
   if (isAnimating) return;
+
   const direction = event.deltaY > 0 ? 1 : -1;
   const newSection = currentSection + direction;
-  if (newSection >= 0 && newSection < sections.length) {
-    isAnimating = true;
-    moveToSection(newSection);
+  console.log("Swipe Direction: ", direction);
+
+  if (newSection > 8) {
+    newSection = 1;
+  } else if (newSection < 1) {
+    newSection = 8;
   }
+  isAnimating = true;
+  moveToSection(newSection);
 }
+
 
 /*
 * Smoothly transitions the camera to the specified section using GSAP.
