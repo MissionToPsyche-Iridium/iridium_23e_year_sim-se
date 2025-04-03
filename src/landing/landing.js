@@ -49,21 +49,21 @@ function init() {
     { name: "REFERENCES", position: { x: -150, y: -150, z: 13 } },
     { name: "WELCOME", position: { x: 0, y: 0, z: 13 } },
     { name: "16 PSYCHE", position: { x: 20, y: 30, z: 10 } },
-    { name: "PSYCHE Jr", position: { x: -150, y: 150, z: 13 } },
-    { name: "COSMIC COMPARISON", position: { x: 0, y: 300, z: 13 } },
-    { name: "MISSION", position: { x: 150, y: 150, z: 13 } },
+    { name: "PSYCHE Jr", position: { x: -20, y: 0, z: 13 } },
+    { name: "COSMIC COMPARISON", position: { x: -10, y: 15, z: 13 } },
+    { name: "MISSION", position: { x: 10, y: 0, z: 13 } },
     {
       name: "GAMES",
-      position: { x: 300, y: 0, z: 13 },
+      position: { x: 20, y: -15, z: 13 },
       subsections: [
-        { name: "Temperature Control", position: { x: 300, y: 0, z: 13 } },
-        { name: "Balance Game",        position: { x: 300, y: 0, z: 13 } },
-        { name: "Escape Velocity",     position: { x: 300, y: 0, z: 13 } },
-        { name: "SpacePic",            position: { x: 300, y: 0, z: 13 } }
+        { name: "Temperature Control", position: { x: 20, y: -15, z: 13 } },
+        { name: "Balance Game",        position: { x: 20, y: -15, z: 13 } },
+        { name: "Escape Velocity",     position: { x: 20, y: -15, z: 13 } },
+        { name: "SpacePic",            position: { x: 20, y: -15, z: 13 } }
       ]
     },
-    { name: "SURFACE OF PSYCHE", position: { x: 150, y: -150, z: 13 } },
-    { name: "LOCATION OF PYSCHE", position: { x: 0, y: -300, z: 13 } }
+    { name: "SURFACE OF PSYCHE", position: { x: 10, y: -30, z: 13 } },
+    { name: "LOCATION OF PYSCHE", position: { x: -10, y: -15, z: 13 } }
   ];
   
 
