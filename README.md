@@ -2,7 +2,7 @@
 
 ## GitHub Pages Deployment
 
-This project is configured for easy deployment to GitHub Pages directly from the repository root.
+This project is configured for easy deployment to GitHub Pages from the dist directory.
 
 ### Deployment Options
 
@@ -10,7 +10,7 @@ This project is configured for easy deployment to GitHub Pages directly from the
 The project includes a GitHub Actions workflow that automatically builds and deploys the site when you push to the merge2-Armandov3 branch:
 
 1. Push your changes to the merge2-Armandov3 branch
-2. GitHub Actions will automatically build and deploy your site back to the same branch
+2. GitHub Actions will automatically build the site and deploy the dist directory to the same branch
 3. Your site will be available at `https://missiontopsyche-iridium.github.io/iridium_23e_year_sim-se/`
 
 #### Option 2: Manual Deployment
@@ -21,7 +21,7 @@ You can also deploy manually using the npm scripts:
    npm install
    ```
 
-2. Deploy to GitHub Pages (this will deploy to the merge2-Armandov3 branch):
+2. Deploy to GitHub Pages (this will deploy the dist directory to the merge2-Armandov3 branch):
    ```
    npm run deploy
    ```
@@ -38,7 +38,7 @@ You can also deploy manually using the npm scripts:
    npm run build
    ```
 
-3. Clean build artifacts from the root directory:
+3. Clean build artifacts:
    ```
    npm run clean
    ```
@@ -50,6 +50,7 @@ You can also deploy manually using the npm scripts:
 - `css/` - Stylesheets
 - `img/` - Images
 - `res/` - Resources (fonts, models, shaders, textures)
+- `dist/` - Build output directory
 
 ## Known Issues
 

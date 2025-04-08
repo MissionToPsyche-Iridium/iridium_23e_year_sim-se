@@ -7,8 +7,8 @@
     "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d . -b merge2-Armandov3",
-    "clean": "rimraf assets index.html"
+    "deploy": "gh-pages -d dist -b merge2-Armandov3",
+    "clean": "rimraf dist"
   },
   "keywords": [],
   "author": "",

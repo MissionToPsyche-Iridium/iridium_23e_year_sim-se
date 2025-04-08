@@ -30,15 +30,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: .  # Deploy the root folder
-          branch: merge2-Armandov3  # Changed: Deploy to the same branch
-          clean: true  # Automatically remove deleted files from the deployment
-          clean-exclude: |
-            .git
-            .github
-            node_modules
-            src
-            public
-            css
-            img
-            res
+          folder: dist  # Changed: Deploy from the dist folder
+          branch: merge2-Armandov3  # Deploy to the same branch
+          clean: false  # Changed: Don't clean the branch to preserve source files
