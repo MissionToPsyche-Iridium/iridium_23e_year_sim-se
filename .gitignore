@@ -8,5 +8,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Old dist directory (no longer used but kept for reference)
 dist/
 .vscode/settings.json
+
+# Build artifacts in root (be specific to avoid ignoring source files)
+/assets/
+/index.html
+
+# Temporary files
+.temp/
+.cache/

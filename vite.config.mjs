@@ -20,6 +20,7 @@ export default defineConfig({
     },
     build: {
         assetsDir: "assets",
-        outDir: "dist"
+        outDir: ".",  // Changed from "dist" to "." to build to root
+        emptyOutDir: false  // Important: prevents deleting your source files!
     }
 });

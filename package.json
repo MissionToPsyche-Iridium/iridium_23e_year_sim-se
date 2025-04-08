@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d .",
+    "clean": "rimraf assets index.html"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +26,8 @@
     "vite-plugin-wasm": "^3.4.1"
   },
   "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "rimraf": "^5.0.5",
     "vite-plugin-static-copy": "^2.3.0",
     "vite-plugin-top-level-await": "^1.4.4"
   }
