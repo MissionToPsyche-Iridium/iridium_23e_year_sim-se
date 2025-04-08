@@ -26,8 +26,8 @@
     "vite-plugin-wasm": "^3.4.1"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
-    "rimraf": "^5.0.5",
+    "gh-pages": "^6.3.0",
+    "rimraf": "^5.0.10",
     "vite-plugin-static-copy": "^2.3.0",
     "vite-plugin-top-level-await": "^1.4.4"
   }
