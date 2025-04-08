@@ -329,11 +329,29 @@ body::before {
     color: white;
     transform: scale(1.2);
 }
+.btn, .quiz-button {
+    background-color: #1e1e2f;
+    color: #00eaff;
+    border: 2px solid #00bbff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: 0 0 8px rgba(0, 187, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover, .quiz-button:hover {
+    background-color: #00bbff;
+    color: white;
+    box-shadow: 0 0 16px rgba(0, 255, 255, 0.5);
+    transform: scale(1.05);
+  }
+  
 #nextQuestion {
     margin-top: 20px;
     padding: 10px 20px;
     background: #007BFF;
-    color: white;
+    color: cyan;
     border: 2px solid #00bbff;
     border-radius: 8px;
     font-size: 0.8rem;
@@ -348,3 +366,4 @@ body::before {
     transform: translateY(-3px);
     box-shadow: 0 0 15px #00ffff;
 }
+  
