@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]  # Change this to your main branch name if different
+    branches: [ merge2-Armandov3 ]  # Changed to your specific branch
   workflow_dispatch:    # Allows manual triggering
 
 permissions:
@@ -31,7 +31,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: .  # Deploy the root folder
-          branch: gh-pages  # The branch the action should deploy to
+          branch: merge2-Armandov3  # Changed: Deploy to the same branch
           clean: true  # Automatically remove deleted files from the deployment
           clean-exclude: |
             .git
