@@ -1,0 +1,204 @@
+{
+    "rewrites": [
+      {
+        "source": "/public/psycheName/public/name/psycheName",
+        "destination": "/psycheName/public/name/psycheName.html"
+      },
+      {
+        "source": "/public/psycheName/public/name/psycheName.css",
+        "destination": "/psycheName/public/name/psycheName.css"
+      },
+      {
+        "source": "/public/psycheName/public/name/psycheName.js",
+        "destination": "/psycheName/public/name/psycheName.js"
+      },
+      {
+        "source": "/public/psycheName/public/name/:file",
+        "destination": "/psycheName/public/name/:file"
+      },
+      {
+        "source": "/public/psycheName/public/name/res/textures/8k_stars_milky_way.jpg",
+        "destination": "/res/textures/8k_stars_milky_way.jpg"
+      },
+      {
+        "source": "/public/psycheName/public/name/res/textures/:file",
+        "destination": "/psycheName/res/textures/:file"
+      },
+      {
+        "source": "/public/psycheName/public/:path*",
+        "destination": "/psycheName/public/:path*"
+      },
+      {
+        "source": "/public/psycheName/:path*",
+        "destination": "/psycheName/:path*"
+      },
+      {
+        "source": "/public/PsycheJR/index2",
+        "destination": "/PsycheJR/index2.html"
+      },
+      {
+        "source": "/public/PsycheJR/name",
+        "destination": "/PsycheJR/name.html"
+      },
+      {
+        "source": "/public/PsycheJR/kids",
+        "destination": "/PsycheJR/kids.html"
+      },
+      {
+        "source": "/public/PsycheJR/location2",
+        "destination": "/PsycheJR/location2.html"
+      },
+      {
+        "source": "/public/PsycheJR/surface2",
+        "destination": "/PsycheJR/surface2.html"
+      },
+      {
+        "source": "/public/PsycheJR/year",
+        "destination": "/PsycheJR/year.html"
+      },
+      {
+        "source": "/public/PsycheJR/script.js",
+        "destination": "/PsycheJR/JS/typewriter.js"
+      },
+      {
+        "source": "/public/PsycheJR/asteroid",
+        "destination": "/PsycheJR/img/asteroid.png"
+      },
+      {
+        "source": "/public/PsycheJR/CSS/res/textures/8k_stars_milky_way.jpg",
+        "destination": "/res/textures/8k_stars_milky_way.jpg"
+      },
+      {
+        "source": "/public/games/games",
+        "destination": "/games/games.html"
+      },
+      {
+        "source": "/public/website/js/temperature-game",
+        "destination": "/dist/games/temperature-game.js"
+      },
+      {
+        "source": "/public/year/year",
+        "destination": "/year/year.html"
+      },
+      {
+        "source": "/public/PsycheJR/models/psyche_new.glb",
+        "destination": "/res/models/psyche_new.glb"
+      },
+      {
+        "source": "/public/PsycheJR/models/:file",
+        "destination": "/PsycheJR/models/:file"
+      },
+      {
+        "source": "/public/PsycheJR/CSS/:file",
+        "destination": "/PsycheJR/CSS/:file"
+      },
+      {
+        "source": "/public/PsycheJR/img/:file",
+        "destination": "/PsycheJR/img/:file"
+      },
+      {
+        "source": "/public/PsycheJR/JS/:file",
+        "destination": "/PsycheJR/JS/:file"
+      },
+      {
+        "source": "/public/PsycheJR/:path*",
+        "destination": "/PsycheJR/:path*"
+      },
+      {
+        "source": "/escapeVelocity/images/Earth.jpg",
+        "destination": "/img/Earth.jpg"
+      },
+      {
+        "source": "/escapeVelocity/images/psyche.jpg",
+        "destination": "/img/psyche.jpg"
+      },
+      {
+        "source": "/img/star-background.jpg",
+        "destination": "/PsycheJR/img/star-background.jpg"
+      },
+      {
+        "source": "/img/psyche_surface2.svg",
+        "destination": "/PsycheJR/img/psyche_surface2.svg"
+      },
+      {
+        "source": "/favicon.ico",
+        "destination": "/website/css/favicon.ico"
+      },
+      {
+        "source": "/public/website",
+        "destination": "/website/index.html"
+      },
+      {
+        "source": "/public/website/:file",
+        "destination": "/website/:file"
+      },
+      {
+        "source": "/public/css/:file",
+        "destination": "/website/css/:file"
+      },
+      {
+        "source": "/public/js/:file",
+        "destination": "/website/js/:file"
+      },
+      {
+        "source": "/public/images/:file",
+        "destination": "/website/images/:file"
+      },
+      {
+        "source": "/public/fonts/:file",
+        "destination": "/website/fonts/:file"
+      },
+      {
+        "source": "/public/img/:file",
+        "destination": "/website/images/:file"
+      },
+      {
+        "source": "/public/models/:file",
+        "destination": "/website/models/:file"
+      },
+      {
+        "source": "/public/escapeVelocity/escape-velocity",
+        "destination": "/escapeVelocity/escape-velocity.html"
+      },
+      {
+        "source": "/public/model-page",
+        "destination": "/website/model-page.html"
+      },
+      {
+        "source": "/public/timeline",
+        "destination": "/website/timeline.html"
+      },
+      {
+        "source": "/public/timeline.html",
+        "destination": "/website/timeline.html"
+      },
+      {
+        "source": "/public/model-page.html",
+        "destination": "/website/model-page.html"
+      },
+      {
+        "source": "/public/js/temperature-game.js",
+        "destination": "/dist/games/temperature-game.js"
+      },
+      {
+        "source": "/public/js/temperature-game",
+        "destination": "/dist/games/temperature-game.js"
+      },
+      {
+        "source": "/public/js/temperature-game/",
+        "destination": "/dist/games/temperature-game.js"
+      },
+      {
+        "source": "/public/css/model-page.css",
+        "destination": "/website/css/model-page.css"
+      },
+      {
+        "source": "/public/css/timeline.css",
+        "destination": "/website/css/timeline.css"
+      },
+      {
+        "source": "/public/:path*",
+        "destination": "/:path*"
+      }
+    ]
+  }
