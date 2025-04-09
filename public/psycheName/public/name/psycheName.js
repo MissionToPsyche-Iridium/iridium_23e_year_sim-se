@@ -1,9 +1,23 @@
 /**
- * Name Viewport Module
- *
- * This module handles loading the psycheName.html content in an iframe
- * that appears on top of the Three.js scene
- */
+* psycheName Viewport Module
+* 
+*This module handles loading the psycheName.html content in an iframe
+* that appears on top of the Three.js scene
+* 
+* Class:      SER 402
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       4/09/25
+* Revision:   1.0
+*
+
+========================================================================================================
+File Start
+========================================================================================================
+
+*/
+
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -50,8 +64,6 @@ export function showNameViewport() {
     header.style.borderTopLeftRadius = '20px';
     header.style.borderTopRightRadius = '20px';
     const title = document.createElement('h2');
-//    title.textContent = 'Psyche Name Origin';
-//   title.style.margin = '0';
     title.style.fontSize = '1.2rem';
     closeButton = document.createElement('button');
     closeButton.textContent = '✕';
@@ -62,7 +74,6 @@ export function showNameViewport() {
     closeButton.style.cursor = 'pointer';
     closeButton.style.padding = '0 5px';
     closeButton.style.lineHeight = '1';
- //   header.appendChild(title);
     header.appendChild(closeButton);
     viewportContainer.appendChild(header);
     // Create iframe to load the balance.html content
@@ -151,17 +162,6 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 export function hideNameViewport() {
     if (!viewportContainer) return;
-//    viewportContainer.style.button = "-100%";
-//    viewportContainer.style.opacity = "0";
-
-//    setTimeout(() => {
-//        document.body.removeChild(viewportContainer);
-//        viewportContainer = null;
-//        iframe = null;
-//        closeButton = null;
-//    }, 500);
-//    };
-    // Animate closing
     gsap.to(viewportContainer, {
         opacity: 0,
         scale: 0.8,

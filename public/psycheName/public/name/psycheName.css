@@ -1,3 +1,21 @@
+/*
+* psycheName.css
+* 
+* This psycheName.css contains all styling for the Psyche's Name origin section. 
+* 
+* Class:      SER 402
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       4/09/25
+* Revision:   1.0
+*
+
+========================================================================================================
+File Start
+========================================================================================================
+*/
+
 body {
     font-family: 'Arial', 'Helvetica', sans-serif;
     background: radial-gradient(circle,black,black); /* Deep space gradient */
@@ -7,6 +25,7 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
+/* Animation container that fill the entire screen behind element*/
 #animation-container {
     position: absolute;
     z-index: 1;  /* Lower z-index for the 3D scene */
@@ -15,7 +34,8 @@ body {
     width: 100%;
     height: 100%;
 }
-/* Container */
+
+/* Container with transparent black background with soft shadow for depth */
 .container {
     max-width: 800px;
     margin: 40px auto;
@@ -42,6 +62,7 @@ h2 {
     border-bottom: 2px solid #0077cc;
     padding-bottom: 5px;
 }
+
 /* Specific styling for headers inside the sections */
 #content h2 {
     font-size: 18px;  /* Smaller heading size */
@@ -69,7 +90,7 @@ h2 {
     text-align: center;
     transition: 0.3s ease;
 }
-
+/* Button hover transparent */ 
 .btn:hover {
     background: transparent;
 }
@@ -132,6 +153,8 @@ ul li a:hover {
 ul li:last-child {
     border-bottom: none;
 }
+
+/* Menu overlay */
 #menuOverlay {
     position: fixed;
     top: 0;
@@ -162,6 +185,7 @@ ul li:last-child {
     cursor: pointer;
 }
 
+/* Central pop up container for displaying name origin content*/
 #viewportContainer {
     display: none;
     color: white;
@@ -184,6 +208,7 @@ ul li:last-child {
     z-index: 2;
 }
 
+/* Adds the star texture as a fixed background */ 
 body::before {
     content: "";
     position: fixed;
@@ -195,8 +220,8 @@ body::before {
     background-blend-mode: overlay; 
     pointer-events: none;  
     z-index: -1;
- 
 }
+/* Scrollable content for name origin information */
 #content {
     font-family: Arial, sans-serif;
     color: white;
@@ -207,7 +232,7 @@ body::before {
     max-height: 70vh;  
     overflow-y: auto; 
 }
-
+/* Close button for container */ 
 #closeButton {
     position: absolute; /* Position it absolutely within the container */
     top: 10px; /* 10px from the top */
@@ -272,7 +297,8 @@ body::before {
     text-decoration: none;
     cursor: pointer;
 }
-/* quiz styling */
+
+/* QUIZ STYLING */
 #quizButton {
     display: inline-block;
     padding: 12px 24px;
@@ -378,3 +404,4 @@ body::before {
     cursor: pointer;
     transition: 0.3s ease-in-out;
 }
+/* END OF QUIZ STYLING */
