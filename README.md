@@ -43,6 +43,31 @@ You can also deploy manually using the npm scripts:
    npm run clean
    ```
 
+### Testing with serve and test-links.js
+
+The project includes a link testing utility that works with the `serve` package to verify that all website resources are loading correctly.
+
+1. Start the server using the serve package:
+  ```
+  npx serve dist
+  ```
+  Note the port number in the output (e.g., `http://localhost:49347`).
+
+2. Update the port number in the `test-links.js` file:
+  ```javascript
+  // Base URL of the website (using the actual port from the serve output)
+  const baseUrl = 'http://localhost:49347';
+  ```
+
+3. Run the link testing script:
+  ```
+  node test-links.js
+  ```
+
+4. Review the results to identify any broken links or resources.
+
+The `serve.json` file in the dist directory contains rewrite rules that ensure paths like `/public/website` correctly redirect to the appropriate files. If you encounter 404 errors, you may need to update the rewrite rules in `serve.json`.
+
 ## Project Structure
 
 - `src/` - Source code
@@ -64,3 +89,11 @@ The following items need attention:
 * 2d page content loads in vite server. fails to load in live server
 
 * iFrames do not close when navigating away from a section.
+
+* Some font files referenced in the website HTML are missing from the project, resulting in 404 errors for:
+  - subset-RobotoMono-Light.woff2
+  - subset-RobotoMono-Regular.woff2
+  - subset-Helvetica-Light.woff2
+  - subset-TradeGothicLTStd-BdCn20.woff2
+  - subset-TradeGothicLTStd-Cn18.woff2
+  These errors don't affect the website's functionality but will appear in browser console logs.
