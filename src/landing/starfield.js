@@ -34,14 +34,12 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 export function createStarfield(scene, options = { density: 1.0 }) {
   const starGeometry = new THREE.BufferGeometry();
   const starVertices = [];
-  const starSizes = [];
-  const starColors = [];
-  
+
   const minDistance = 4000; // Minimum distance from the center
   const maxDistance = 6000; // Maximum distance for star distribution
 
   const starCount = Math.floor(5000 * options.density);
-
+  
   for (let i = 0; i < starCount; i++) {
     let x, y, z, distance;
 
@@ -53,50 +51,23 @@ export function createStarfield(scene, options = { density: 1.0 }) {
       distance = Math.sqrt(x * x + y * y + z * z);
     } while (distance < minDistance); // Reject stars that are too close
 
-    // Add position data
     starVertices.push(x, y, z);
-
-    // Add size and color variation
-    const size = Math.random() * 3 + 1; // Stars will range from size 1 to 4
-    const color = new THREE.Color(Math.random(), Math.random(), Math.random()); // Random color
-
-    starSizes.push(size);
-    starColors.push(color.r, color.g, color.b);
   }
 
-  // Set attributes for positions, sizes, and colors
   starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-  starGeometry.setAttribute('size', new THREE.Float32BufferAttribute(starSizes, 1));
-  starGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 3));
 
-  const starMaterial = new THREE.PointsMaterial({
-    size: 1.0,       
+  const starMaterial = new THREE.PointsMaterial({ 
+    color: 0xffffcc, 
+    size: 3.0,       
     sizeAttenuation: true,
     transparent: true, 
     opacity: 1.0,     
-    blending: THREE.AdditiveBlending,
-    vertexColors: true // Enable vertex color mapping
-  });
+    blending: THREE.AdditiveBlending
+});
 
   const starField = new THREE.Points(starGeometry, starMaterial);
   scene.add(starField);
-
-  // Optionally, animate the stars for dynamic movement
-  function animateStars() {
-    starGeometry.attributes.position.needsUpdate = true; // Ensure we can update the positions
-    for (let i = 0; i < starCount; i++) {
-      // Apply a small drift to each star
-      starGeometry.attributes.position.array[i * 3] += Math.random() * 0.1 - 0.05; // Small random movement along X
-      starGeometry.attributes.position.array[i * 3 + 1] += Math.random() * 0.1 - 0.05; // Small random movement along Y
-      starGeometry.attributes.position.array[i * 3 + 2] += Math.random() * 0.1 - 0.05; // Small random movement along Z
-    }
-  }
-
-  // Call the animate function in the render loop
-  scene.add({ animate: animateStars });
-
 }
-
 
 
 /*
@@ -143,3 +114,6 @@ export function loadSun(scene, renderer, camera, bloomStrength = 2.0) {
 
   return composer;
 }
+
+
+

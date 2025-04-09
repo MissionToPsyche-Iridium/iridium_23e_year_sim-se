@@ -2,7 +2,9 @@
 ├── css
 │   ├── circleNav.css
 │   ├── landing.css
-│   └── loadingScreen.css
+│   ├── loadingScreen.css
+│   ├── name.css
+│   └── style.css
 ├── img
 │   ├── asteroid.png
 │   ├── balance-preview.png
@@ -29,7 +31,16 @@
 │   ├── escapeVelocity
 │   │   └── escape-velocity.html
 │   ├── games
-│   │   └── games.html
+│   │   ├── balanceViewport.js
+│   │   ├── games.html
+│   │   ├── gamesViewport.js
+│   │   ├── temperature-game.js
+│   │   ├── tempgame
+│   │   ├── viewportescapevelocity.js
+│   │   ├── viewportspacepic.js
+│   │   └── viewporttemperaturegame.js
+│   ├── name
+│   │   └── psycheName.js
 │   ├── PsycheJR
 │   │   ├── CSS
 │   │   ├── img
@@ -39,22 +50,19 @@
 │   │   ├── kids.html
 │   │   ├── kidsViewport.js
 │   │   ├── location2.html
+│   │   ├── location2Viewport.js
 │   │   ├── location.html
 │   │   ├── models
+│   │   ├── name.html
 │   │   ├── README.md
 │   │   ├── surface2.html
+│   │   ├── surface2Viewport.js
 │   │   ├── surface.html
 │   │   ├── test3.html
-│   │   └── test.html
+│   │   ├── test.html
+│   │   └── year.html
 │   ├── psycheName
-│   │   ├── CSS
-│   │   ├── index.html
-│   │   ├── package.json
-│   │   ├── public
-│   │   ├── README.md
-│   │   ├── res
-│   │   ├── src
-│   │   └── vite.config.mjs
+│   │   └── public
 │   ├── spacepic
 │   │   ├── css
 │   │   ├── js
@@ -75,7 +83,8 @@
 │   │   ├── model-page.html
 │   │   ├── models
 │   │   ├── photo.html
-│   │   └── timeline.html
+│   │   ├── timeline.html
+│   │   └── websiteViewport.js
 │   └── year
 │       ├── year.html
 │       ├── yearPage.css
@@ -96,8 +105,11 @@
 │   │   └── white_gear2.png
 │   ├── models
 │   │   ├── 16psyche.glb
+│   │   ├── arcade_controller.glb
 │   │   ├── nasaLogo.glb
-│   │   └── psyche_new.glb
+│   │   ├── navigation_pin.glb
+│   │   ├── psyche_new.glb
+│   │   └── retro_camera_fed_2.glb
 │   ├── shaders
 │   │   ├── originalFragmentShader.glsl
 │   │   ├── originalVertexShader.glsl
@@ -106,23 +118,10 @@
 │   └── textures
 │       ├── 2k_sun.jpg
 │       ├── 8k_stars_milky_way.jpg
-│       ├── bbct.png
-│       ├── bbtx1.png
-│       ├── bbtx2.jpg
-│       ├── bbtx3.jpg
-│       ├── bbtx4.jpg
-│       ├── grass.jpg
-│       ├── grass_texture240.jpg
-│       ├── halfCourt.jpg
-│       ├── smoke1.png
-│       ├── terrain_texture.png
-│       ├── woodFloor2.jpg
-│       ├── woodFloor3.jpg
-│       └── woodFloor.jpg
+│       └── smoke.png
 ├── src
+│   ├── gallery-filters.js
 │   └── landing
-│       ├── balanceViewport.js
-│       ├── gamesViewport.js
 │       ├── landing.js
 │       ├── nav.js
 │       ├── psycheNameViewport.js
@@ -139,11 +138,9 @@
 │       ├── sectionTracking.js
 │       ├── starfield.js
 │       ├── utils.js
-│       ├── viewportescapevelocity.js
-│       ├── viewportspacepic.js
 │       ├── viewportStyling.js
 │       └── websiteViewport.js
 ├── structure.txt
 └── vite.config.mjs
 
-36 directories, 111 files
+35 directories, 109 files
