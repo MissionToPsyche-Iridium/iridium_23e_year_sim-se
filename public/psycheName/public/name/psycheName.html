@@ -92,21 +92,20 @@ File Start
             <li><a href="javascript:void(0)" id="funFactsLink">Fun Facts</a></li>
 
         </ul>
-         <!-- for the quiz -->
-         <button id="quizButton" style="margin: 20px;">Test your knowledge!</button>
+
+        <!-- for the quiz -->
+        <button id="quizButton" style="margin: 20px;">Test your knowledge!</button>
         <!-- The Container for Detailed Content (Initially Hidden) -->
         <div id="viewportContainer" style="display: none;">
             <button id="closeButton">x Close</button>
             <div id="content"></div>
         </div>
-
         <div class="popup" id="quizPopup" style="display: none;">
             <span class="close-btn" id="quizClose">x</span>
             <h2>Welcome to the Psyche Quiz!</h2>
             <div id="quizContent"></div>
             <button id="nextQuestion">Next</button>
         </div>
-
     </main>
 
     <script>
@@ -160,6 +159,7 @@ File Start
                 if (currentQuestion < quiz.length) {
                     loadQuestion();
                 } else {
+
                     quizContent.innerHTML = "<h3>⭐ Great job! You finished the quiz ⭐</h3>";
                     nextButton.style.display = "none";
                 }
@@ -182,7 +182,7 @@ File Start
             });
         });
     </script>
-  
+
     <!-- Three.js Scene -->
     <script>
         // DOM Content Loaded Event

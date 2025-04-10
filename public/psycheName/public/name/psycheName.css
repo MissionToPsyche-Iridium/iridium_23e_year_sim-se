@@ -298,6 +298,7 @@ body::before {
     cursor: pointer;
 }
 
+
 /* QUIZ STYLING */
 #quizButton {
     display: inline-block;
@@ -319,6 +320,7 @@ body::before {
     transform: translateY(-5px);
     box-shadow: 0 0 20px #007BFF;
 }
+
 #quizPopup {
     position: fixed;
     top: 50%;
@@ -331,7 +333,11 @@ body::before {
     color: white;
     padding: 20px;
     border-radius: 12px;
+
     box-shadow: 0 0 25px #007BFF;
+
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+
     z-index: 3;
     display: none;
     overflow-y: auto;
@@ -378,6 +384,7 @@ body::before {
     padding: 10px 20px;
     background: #007BFF;
     color: cyan;
+    color: white;
     border: 2px solid #00bbff;
     border-radius: 8px;
     font-size: 0.8rem;
@@ -405,3 +412,4 @@ body::before {
     transition: 0.3s ease-in-out;
 }
 /* END OF QUIZ STYLING */
+

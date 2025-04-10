@@ -13,6 +13,7 @@
 import gsap from 'gsap';
 import * as ViewportStyling from '../../src/landing/viewportStyling.js';
 import { showTemperatureGameViewport } from './viewporttemperaturegame.js';
+import { savedCameraPosition, savedCameraRotation } from '../../src/landing/section6.js'
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;
@@ -97,7 +98,7 @@ function updateViewportSize() {
 /**
  * Creates and shows the games viewport with animations.
  */
-export function showGamesViewport() {
+export function showGamesViewport(camera) {
     // If viewport already exists, just show it
     if (viewportContainer) {
         viewportContainer.style.display = 'flex';
@@ -189,11 +190,14 @@ export function showGamesViewport() {
     ViewportStyling.addPulsingGlowEffect(viewportContainer);
     
     // Add event listener for close button
-    closeButton.addEventListener('click', hideGamesViewport);
+    closeButton.addEventListener('click', () => {
+        closeGamesViewport(camera);
+    });
     
-    // Add event listener for return button - in this case, just hide the games viewport
-    // since this is the main games menu
-    returnButton.addEventListener('click', hideGamesViewport);
+    // Add event listener for return button
+    returnButton.addEventListener('click', () => {
+        destroyGamesViewport();
+    });
     
     // Add event listener for Escape key
     document.addEventListener('keydown', handleKeyDown);
@@ -202,7 +206,6 @@ export function showGamesViewport() {
     window.addEventListener('resize', updateViewportSize);
     
     // Set up ResizeObserver for more accurate size monitoring
-    // This is especially useful for detecting size changes in developer tools
     resizeObserver = new ResizeObserver(entries => {
         console.log("ResizeObserver detected size change");
         updateViewportSize();
@@ -214,20 +217,42 @@ export function showGamesViewport() {
 /**
  * Hides the games viewport with closing animation.
  */
-export function hideGamesViewport() {
-    if (!viewportContainer) return;
-    
-    // Animate closing effect
-    ViewportStyling.createClosingAnimation(viewportContainer, () => {
+
+export function hideGamesViewport(camera, viewportContainer) {
+    // Animate the viewport out (fade out and scale down)
+    gsap.to(viewportContainer, {
+      duration: 1.5,    // The same as camera 
+      opacity: 0,       // Fade out 
+      scale: 0.5,       // Scale it down for a disappearing effect
+      transformOrigin: "center", // Scales from the center
+      ease: "power2.inOut", // Smooth easing for the transition
+      onComplete: () => {
+        // Start animating the camera back
+        gsap.to(camera.position, {
+          duration: 1.5,
+          x: savedCameraPosition.x,  // Return to saved position
+          y: savedCameraPosition.y,
+          z: savedCameraPosition.z,
+          ease: "power2.out",
+          onUpdate: () => {
+            camera.lookAt(savedCameraPosition);  // Continuously look at the saved position
+          }
+        });
+  
+        gsap.to(camera.rotation, {
+          duration: 1.5,
+          y: savedCameraRotation.y,  // Return to saved rotation
+          ease: "power2.out",
+          onComplete: () => {
+            console.log("Camera reset to initial position and rotation.");
+          }
+        });
+  
+        // Hide the viewport container
         viewportContainer.style.display = 'none';
-        // Reset opacity and scale for next time
-        viewportContainer.style.opacity = 1;
-        viewportContainer.style.transform = 'translate(-50%, -50%) scale(1)';
-        
-        // Show the menu when viewport is closed
-        document.body.classList.add("overlay-open");
+      }
     });
-}
+  }
 
 /**
  * Handles keydown events for the viewport.
@@ -243,19 +268,32 @@ function handleKeyDown(e) {
  */
 export function destroyGamesViewport() {
     if (viewportContainer) {
-        closeButton.removeEventListener('click', hideGamesViewport);
+        // Remove event listeners to prevent memory leaks
+        if (closeButton) {
+            closeButton.removeEventListener('click', hideGamesViewport);
+        }
         document.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('resize', updateViewportSize);
-        
+
+        // Disconnect ResizeObserver if it's used
         if (resizeObserver) {
             resizeObserver.disconnect();
             resizeObserver = null;
         }
-        
-        document.body.removeChild(viewportContainer);
-        viewportContainer = null;
-        iframe = null;
-        closeButton = null;
+
+        // Fade out the viewport before removing it from the DOM
+        viewportContainer.style.transition = 'opacity 0.5s ease';
+        viewportContainer.style.opacity = '0';
+
+        setTimeout(() => {
+            // Completely remove the viewport after fading out
+            document.body.removeChild(viewportContainer);
+
+            // Clear all references
+            viewportContainer = null;
+            iframe = null;
+            closeButton = null;
+        }, 500); // Ensure this matches the fade-out time
     }
 }
 
@@ -296,3 +334,32 @@ window.resetGamesViewportSize = function() {
     updateViewportSize();
     return "Viewport size reset to responsive mode";
 };
+
+// Hide and destroy the viewport first, then animate the camera back to its saved position.
+export function closeGamesViewport(camera) {
+    // Destroy the viewport
+    destroyGamesViewport();
+  
+    // Animate the camera position back to the saved position
+    // Position is staying the same here
+    gsap.to(camera.position, {
+      duration: 1.5,
+      x: savedCameraPosition.x,
+      y: savedCameraPosition.y,
+      z: savedCameraPosition.z,
+      ease: "power2.out",
+      onUpdate: () => {
+        camera.lookAt(savedCameraPosition); 
+      }
+    });
+    
+    // Animate camera rotation back to the saved rotation 
+    gsap.to(camera.rotation, {
+      duration: 1.5,
+      y: savedCameraRotation.y,
+      ease: "power2.out",
+      onComplete: () => {
+        console.log("Camera reset to initial position and rotation.");
+      }
+    });
+  }

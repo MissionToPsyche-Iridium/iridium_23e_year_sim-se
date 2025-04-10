@@ -6,7 +6,7 @@
  */
 import * as THREE from 'three';
 import { getCurrentSection } from './sectionTracking.js';
-import { triggerButton3D, clickableModels } from './utils.js';
+import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from './utils.js';
 import {
     applyViewportContainerStyles,
     applyHeaderStyles,
@@ -86,7 +86,7 @@ export function showYearViewport() {
     
     // Create iframe to load the year.html content
     iframe = document.createElement('iframe');
-    iframe.src = './year/year.html';  // Updated path to point to the year.html file in public/year
+    iframe.src = './../../public/year/year.html';  // Updated path to point to the year.html file in public/year
     applyIframeStyles(iframe, {
         backgroundColor: '#222'
     });
@@ -107,7 +107,7 @@ export function showYearViewport() {
     
     // Add visual effects
     addShimmerEffect(viewportContainer);
-    starsContainer = addStarParticles(viewportContainer, 15);
+    starsContainer = addStarParticles(viewportContainer, 80);
     
     // Add opening animations
     addOpeningAnimations(viewportContainer, headerElement, iframe);
@@ -169,27 +169,37 @@ function handleKeyDown(e) {
 /**
  * Removes the viewport completely
  */
+import gsap from 'gsap';
+
 export function destroyYearViewport() {
     if (viewportContainer) {
-        // Kill any active animations
         if (pulseAnimation) {
             pulseAnimation.kill();
         }
-        
-        closeButton.removeEventListener('click', hideYearViewport);
-        document.removeEventListener('keydown', handleKeyDown);
-        document.body.removeChild(viewportContainer);
-        
-        // Reset all references
-        viewportContainer = null;
-        iframe = null;
-        closeButton = null;
-        headerElement = null;
-        titleElement = null;
-        starsContainer = null;
-        pulseAnimation = null;
+
+        gsap.to(viewportContainer, {
+            y: '100%',
+            duration: 0.5,
+            ease: "power1.in",
+            onComplete: () => {
+                closeButton.removeEventListener('click', hideYearViewport);
+                document.removeEventListener('keydown', handleKeyDown);
+                document.body.removeChild(viewportContainer);
+                
+                viewportContainer = null;
+                iframe = null;
+                closeButton = null;
+                headerElement = null;
+                titleElement = null;
+                starsContainer = null;
+                pulseAnimation = null;
+            }
+        });
+    } else {
+        console.log("No viewport container found to destroy.");
     }
 }
+
 
 /**
  * Loads the Year on Psyche section with a clickable button
@@ -210,12 +220,33 @@ export function loadSection4(scene, camera, sections, renderer) {
     z: section4Coords.z - 12,
   };
 
+  const modelPosition = {
+    x: section4Coords.x,
+    y: section4Coords.y - 6,
+    z: section4Coords.z - 12,
+  };
+
   const rotation = { x: 0.2, y: 0, z: 0 };
+  const objRotation = { x: .2, y: 0, z: 0 };
 
   return new Promise((resolve, reject) => {
     try {
+
+        loadModel(
+            "balance",
+            "./../../res/models/balance_scale.glb",
+            modelPosition,
+            .9,
+            objRotation,
+            null,
+            scene,
+            () => {
+                console.log("loaded model");
+            }
+        );
+
       const { buttonMesh } = triggerButton3D(
-        "Explore the Cosmic Comparison\nbetween Earth and Psyche",
+        "The Cosmic Comparison of Earth and Psyche",
         buttonPos,
         rotation,
         0.7,

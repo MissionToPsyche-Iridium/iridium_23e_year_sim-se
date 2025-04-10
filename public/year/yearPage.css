@@ -11,7 +11,7 @@ body {
     font-family: Arial, sans-serif;
 }
 #main-background{
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
+    background: black;
     padding-top: 20px;
 }
 
@@ -21,7 +21,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
+    background: black;
 
 }
 
@@ -166,7 +166,7 @@ img {
 }
 .scroll-wheel li.selected {
     font-weight: bold;
-    color: #000000;
+    color: #f9a000;
 }
 
 #yearSelection {
@@ -391,6 +391,6 @@ input[type="radio"]#Psyche:checked + label {
     }
 
 #footer {
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
+    background: black;
     background-size: cover;
 }

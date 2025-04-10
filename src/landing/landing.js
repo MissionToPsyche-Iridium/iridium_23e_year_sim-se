@@ -31,8 +31,8 @@ import { loadSection6, renderSection6 } from './section6.js';
 import { loadSection7 } from './section7.js';
 import { loadSection8, renderSection8 } from './section8.js';
 import { loadSection9, renderSection9 } from './section9.js';
-import { initGalleryFilters } from '../gallery-filters.js'; // Import the new function
 
+let camera; 
 
 /*
 * Initializes the Three.js scene, camera, renderer, and UI elements.
@@ -41,9 +41,6 @@ import { initGalleryFilters } from '../gallery-filters.js'; // Import the new fu
 function init() {
   const loadingScreen = document.getElementById('loading-screen');
   const progressBar = document.getElementById('progress-bar');
-
-  let scrollProgress = 1;
-  let currentSection = 1;
 
   const sections = [
     { name: "REFERENCES", position: { x: -150, y: -150, z: 13 } },
