@@ -32,6 +32,7 @@ import { loadSection7 } from './section7.js';
 import { loadSection8, renderSection8 } from './section8.js';
 import { loadSection9, renderSection9 } from './section9.js';
 
+let camera; 
 
 /*
 * Initializes the Three.js scene, camera, renderer, and UI elements.
