@@ -1,14 +1,21 @@
-<!-- 
- * psycheName.html
- *
- *
- *This contains content for the name origin of Psyche information.
- *
- * Class: SER 402
- * Team: 35
- * Project: NASA Psyche Mission: Year on Psyche Simulation
- * Authors: Armanda Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
- *
+<!-- /*
+* psycheName.html
+* 
+* This psycheName.html contains the content for all information regarding 
+Psyche's Name origin.
+* 
+* Class:      SER 402
+* Team:       35
+* Project:    NASA Psyche Mission: Year on Psyche Simulation
+* Authors:    Armando Arratia, Dan McNeil, Jenny Potocki, Josh Anselm, Tyler Brown
+* Date:       4/09/25
+* Revision:   1.0
+*
+
+========================================================================================================
+File Start
+========================================================================================================
+
 -->
 
 <!-- Declarations -->
@@ -85,6 +92,7 @@
             <li><a href="javascript:void(0)" id="funFactsLink">Fun Facts</a></li>
 
         </ul>
+
         <!-- for the quiz -->
         <button id="quizButton" style="margin: 20px;">Test your knowledge!</button>
         <!-- The Container for Detailed Content (Initially Hidden) -->
@@ -151,7 +159,8 @@
                 if (currentQuestion < quiz.length) {
                     loadQuestion();
                 } else {
-                    quizContent.innerHTML = "<h3>🎉 Great job! You finished the quiz.</h3>";
+
+                    quizContent.innerHTML = "<h3>⭐ Great job! You finished the quiz ⭐</h3>";
                     nextButton.style.display = "none";
                 }
             });
@@ -173,6 +182,7 @@
             });
         });
     </script>
+
     <!-- Three.js Scene -->
     <script>
         // DOM Content Loaded Event
