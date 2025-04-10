@@ -6,7 +6,7 @@
  */
 import * as THREE from 'three';
 import { getCurrentSection } from './sectionTracking.js';
-import { triggerButton3D, clickableModels } from './utils.js';
+import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from './utils.js';
 import {
     applyViewportContainerStyles,
     applyHeaderStyles,
@@ -107,7 +107,7 @@ export function showYearViewport() {
     
     // Add visual effects
     addShimmerEffect(viewportContainer);
-    starsContainer = addStarParticles(viewportContainer, 15);
+    starsContainer = addStarParticles(viewportContainer, 80);
     
     // Add opening animations
     addOpeningAnimations(viewportContainer, headerElement, iframe);
@@ -220,12 +220,33 @@ export function loadSection4(scene, camera, sections, renderer) {
     z: section4Coords.z - 12,
   };
 
+  const modelPosition = {
+    x: section4Coords.x,
+    y: section4Coords.y - 6,
+    z: section4Coords.z - 12,
+  };
+
   const rotation = { x: 0.2, y: 0, z: 0 };
+  const objRotation = { x: .2, y: 0, z: 0 };
 
   return new Promise((resolve, reject) => {
     try {
+
+        loadModel(
+            "balance",
+            "./../../res/models/balance_scale.glb",
+            modelPosition,
+            .9,
+            objRotation,
+            null,
+            scene,
+            () => {
+                console.log("loaded model");
+            }
+        );
+
       const { buttonMesh } = triggerButton3D(
-        "Explore the Cosmic Comparison\nbetween Earth and Psyche",
+        "The Cosmic Comparison of Earth and Psyche",
         buttonPos,
         rotation,
         0.7,
