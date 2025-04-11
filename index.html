@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Year On Psyche</title>
+  <!-- Preload critical assets -->
+  <%- preloadLinks.map(link => `<link ${Object.entries(link).map(([key, value]) => `${key}="${value}"`).join(' ')}>`).join('\n    ') %>
   <link rel="icon" type="image/svg+xml" href="/assets/psyche_badge-DgbJMAPd-DgbJMAPd-DgbJMAPd.svg">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
