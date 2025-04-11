@@ -114,3 +114,6 @@ export function loadSun(scene, renderer, camera, bloomStrength = 2.0) {
 
   return composer;
 }
+
+
+
