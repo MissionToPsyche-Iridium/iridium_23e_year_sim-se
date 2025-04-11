@@ -114,7 +114,14 @@ async function loadShader(url) {
  * - The vertex shader handles positioning and UV mapping.
  * - The fragment shader calculates color blending across six defined colors based on UV coordinates.
  */
-export async function createTextMesh(text, position, rotation, size = 1.5, scene) {
+export async function createTextMesh(
+  text,
+  position,
+  rotation,
+  size = 1.5,
+  scene,
+  bev_size = 0.02,
+  color = '#F99F00') {  
   return new Promise((resolve, reject) => {
     const fontLoader = new FontLoader();
     fontLoader.load('./../../res/font/GenosThin_Regular.json', async (font) => {
@@ -126,17 +133,16 @@ export async function createTextMesh(text, position, rotation, size = 1.5, scene
           curveSegments: 12,
           bevelEnabled: true,
           bevelThickness: 0.03,
-          bevelSize: 0.02,
+          bevelSize: bev_size,
           bevelOffset: 0,
           bevelSegments: 5
         });
 
         const vertexShader = await loadShader('./../../res/shaders/textVertexShader.glsl');
         const fragmentShader = await loadShader('./../../res/shaders/textFragmentShader.glsl');
-
         const textMaterial = new THREE.ShaderMaterial({
           uniforms: {
-            textColor: { value: new THREE.Color(249 / 255, 159 / 255, 0 / 255) },
+            textColor: { value: new THREE.Color(color) },
             opacity: { value: 1.0 }
           },
           vertexShader: vertexShader,

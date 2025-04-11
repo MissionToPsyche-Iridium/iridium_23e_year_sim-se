@@ -15,8 +15,7 @@
  *   and sets up the navigation menu.
  */
 
-import { createTextMesh, loadModel, makeModelClickable } from './utils.js';
-import { moveToSection } from './sectionTracking.js';
+import { createTextMesh, loadModel } from './utils.js';
 import { gsap } from 'gsap';
 
 let asteroidModel = null;
@@ -46,14 +45,21 @@ export function loadSection1(scene, camera, sections) {
   const psycheTextRotation = { x: 0, y: Math.PI / 12, z: 0 };
 
   return new Promise(async (resolve, reject) => {
-    createTextMesh("YEAR ON PSYCHE", mainTextPosition, mainTextRotation, 1.5, scene);
+    createTextMesh("YEAR ON PSYCHE", mainTextPosition, mainTextRotation, 1.5, scene, 0.09, '#96A9C7');
   
     const psycheText = 
       "16 Psyche is a giant asteroid in our solar system!\n" +
       "    Explore this site to learn about 16 Psyche,\n" +
       "     its origin, orbit, and what makes it unique!\n";
   
-    const textMesh = await createTextMesh(psycheText, psycheTextPosition, psycheTextRotation, 0.5, scene);
+    const textMesh = await createTextMesh(
+      psycheText, 
+      psycheTextPosition, 
+      psycheTextRotation, 
+      0.5, 
+      scene,
+      null,
+      '#3d077a');
     textMesh.material.uniforms.opacity.value = 0;
   
     gsap.to(textMesh.material.uniforms.opacity, {

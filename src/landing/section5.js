@@ -85,18 +85,4 @@ export function renderSection5(camera, scene) {
     
     const currentSection = getCurrentSection();
     const isVisible = currentSection === 5;
-
-    // Rmoving for now
-    // // Auto-show viewport when entering section 5
-    // if (isVisible && !hasShownViewport) {
-    //     // Add a small delay to ensure the section transition is complete
-    //     setTimeout(() => {
-    //         showWebsiteViewport();
-    //         hasShownViewport = true;
-    //     }, 500);
-    // } else if (!isVisible && hasShownViewport) {
-    //     // Hide viewport when leaving section 5
-    //     hideWebsiteViewport();
-    //     hasShownViewport = false;
-    // }
 }
