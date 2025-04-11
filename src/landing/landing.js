@@ -28,7 +28,7 @@ import { loadSection3, renderSection3 } from './section3.js';
 import { loadSection4, renderSection4 } from './section4.js';
 import { loadSection5, renderSection5 } from './section5.js';
 import { loadSection6, renderSection6 } from './section6.js';
-import { loadSection7 } from './section7.js';
+import { loadSection7, renderSection7 } from './section7.js';
 import { loadSection8, renderSection8 } from './section8.js';
 import { loadSection9, renderSection9 } from './section9.js';
 
@@ -134,6 +134,7 @@ function init() {
     renderSection5(camera,scene);
     renderSection6(camera,scene);
     renderSection8(camera,scene);
+    renderSection7(camera,scene);
     renderSection9(camera,scene);
   }
 
@@ -148,7 +149,7 @@ function init() {
     loadSection0(scene, camera, sections),
     loadSection1(scene, camera, sections),
     loadSection2(scene, camera, sections, renderer),
-    loadSection3(scene, camera, sections,renderer),
+    loadSection3(scene, camera, sections, renderer),
     loadSection4(scene, camera, sections, renderer),
     loadSection5(scene, camera, sections, renderer),
     loadSection6(scene, camera, sections, renderer),

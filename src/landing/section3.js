@@ -7,7 +7,7 @@
 
 import * as THREE from 'three';
 import { getCurrentSection } from './sectionTracking.js';
-import { triggerButton3D, clickableModels, applyGlowEffect } from './utils.js';
+import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from './utils.js';
 import { showKidsViewport, hideKidsViewport } from './../../public/PsycheJR/kidsViewport.js';
 
 //let yearButton;
@@ -71,6 +71,20 @@ export function loadSection3(scene, camera, sections, renderer) {
           return;
       }
 
+			// Lighting 
+			//const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+			//scene.add(ambientLight);
+
+			const directionalLight = new THREE.DirectionalLight(0x7a5f3e, 15);
+			directionalLight.position.set(-150, 150, 13);
+
+			const target = new THREE.Object3D();
+      target.position.set(-150, 145, -20); // Set the target position
+
+      // Set the target of the light
+      directionalLight.target = target;
+			scene.add(directionalLight);
+
       const { posX, posY, posZ, buttonScale, labelScale } = calculateResponsiveValues();
 
       const buttonPos = {
@@ -79,9 +93,29 @@ export function loadSection3(scene, camera, sections, renderer) {
         z: section3Coords.z - 12,
       };
 
+      const modelPosition = {
+        x: section3Coords.x,
+        y: section3Coords.y - 5,
+        z: section3Coords.z - 15,
+      };
+
       const rotation = { x: 0.2, y: 0, z: 0 };
+      const objRotation = { x: 0.2, y: 0, z: 0 };
 
       try {
+
+        loadModel(
+            "Jr",
+            "./../../res/models/Jr.glb",
+            modelPosition, // position
+            10, // scale
+            objRotation, // rotation
+            null, // animation
+            scene, // scene
+            () => {  // callback fx
+            console.log("loaded model");
+            });
+
           triggerButton3D(
               "Explore the Psyche Jr Kids Experience",
               buttonPos,
