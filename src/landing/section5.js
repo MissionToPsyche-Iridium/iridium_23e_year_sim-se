@@ -26,19 +26,19 @@ export function loadSection5(scene, camera, sections, renderer) {
     const modelPosition = {
       x: section5Coords.x,
       y: section5Coords.y - 3,
-      z: section5Coords.z - 20,
+      z: section5Coords.z - 25,
     };
     
     const rotation = { x: 0.2, y: 0, z: 0 };
-    const objRotation = { x: 0.2, y: 0, z: 0 };
+    const objRotation = { x: 0, y: 90, z: 0 };
 
     return new Promise((resolve, reject) => {
       try {
         loadModel(
-          "probe",
-          "./../../res/models/nasaLogo.glb",
+          "Satellite",
+          "./../../res/models/satellite.glb",
           modelPosition, // position
-          .7, // scale
+          .75, // scale
           objRotation, // rotation
           null, // animation
           scene, // scene
