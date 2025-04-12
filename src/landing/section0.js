@@ -28,7 +28,7 @@ export function loadSection0(scene, camera, sections) {
 
     const mainTextRotation = { x: 0, y: 0.1, z: 0 };
 
-    createTextMesh("REFERENCES", textMeshPosition, mainTextRotation, 1, scene);
+    createTextMesh("REFERENCES", textMeshPosition, mainTextRotation, 1, scene, 0.02, null, 0.05);
 
     const menuItems = [
       { text: "Disclaimer", onClick: () => console.log("Show Disclaimer") },

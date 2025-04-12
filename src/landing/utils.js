@@ -106,7 +106,10 @@ async function loadShader(url) {
  * @param {Object} rotation - The { x, y, z } rotation angles for orienting the text.
  * @param {number} [size=1.5] - The size of the text (default is 1.5).
  * @param {THREE.Scene} scene - The Three.js scene to which the text mesh will be added.
- *
+ * @param {number} bev_size - The bevel size of the text geometry; controls the thickness of the beveled edge for a more dimensional look.
+ * @param {string} color - The base color used in the vertical gradient applied via the shader.
+ * @param {number} depth - The desired depth of the 3D text.
+ * 
  * How it works:
  * - Loads the specified font using FontLoader.
  * - Creates a TextGeometry with depth, bevels, and curve segments for smooth edges.
@@ -115,24 +118,26 @@ async function loadShader(url) {
  * - The fragment shader calculates color blending across six defined colors based on UV coordinates.
  */
 export async function createTextMesh(
-  text,
-  position,
-  rotation,
-  size = 1.5,
-  scene,
-  bev_size = 0.02,
-  color = '#F99F00') {  
+    text,
+    position,
+    rotation,
+    size = 1.5,
+    scene,
+    bev_size = 0.02,
+    color = '#F99F00',
+    depth = 0.05,
+    bev_thickness = 0.03) {  
   return new Promise((resolve, reject) => {
     const fontLoader = new FontLoader();
-    fontLoader.load('./../../res/font/GenosThin_Regular.json', async (font) => {
+    fontLoader.load('./../../res/font/LibreFranklin-Black.json', async (font) => {
       try {
         const textGeometry = new TextGeometry(text, {
           font: font,
           size: size,
-          depth: 0.05,
+          depth: depth,
           curveSegments: 12,
           bevelEnabled: true,
-          bevelThickness: 0.03,
+          bevelThickness: bev_thickness,
           bevelSize: bev_size,
           bevelOffset: 0,
           bevelSegments: 5

@@ -45,21 +45,29 @@ export function loadSection1(scene, camera, sections) {
   const psycheTextRotation = { x: 0, y: Math.PI / 12, z: 0 };
 
   return new Promise(async (resolve, reject) => {
-    createTextMesh("YEAR ON PSYCHE", mainTextPosition, mainTextRotation, 1.5, scene, 0.09, '#96A9C7');
+    createTextMesh("YEAR ON PSYCHE", 
+      mainTextPosition, 
+      mainTextRotation, 
+      1.5, // size
+      scene, // scene
+      0.02, // bevel size
+      '#FFA500', // color
+      0.07,  //depth
+      0.03); // bevel thickness
   
     const psycheText = 
-      "16 Psyche is a giant asteroid in our solar system!\n" +
-      "    Explore this site to learn about 16 Psyche,\n" +
-      "     its origin, orbit, and what makes it unique!\n";
+      "16 PSYCHE IS AN ASTEROID IN OUR SOLAR SYSTEM\n" +
+      "    EXPLORE THIS SITE TO LEARN ABOUT PSYCHE,,\n" +
+      "     ITS ORIGIN, ORBIT, AND WHAT MAKES IT UNIQUE\n";
   
     const textMesh = await createTextMesh(
       psycheText, 
       psycheTextPosition, 
       psycheTextRotation, 
-      0.5, 
+      0.4, 
       scene,
       null,
-      '#3d077a');
+      '#FFA500');
     textMesh.material.uniforms.opacity.value = 0;
   
     gsap.to(textMesh.material.uniforms.opacity, {

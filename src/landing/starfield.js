@@ -91,7 +91,7 @@ export function loadSun(scene, renderer, camera, bloomStrength = 2.0) {
   });
 
   const sun = new THREE.Mesh(sunGeometry, sunMaterial);
-  sun.position.set(-100, 250, -500);
+  sun.position.set(-400, 250, -500);
   scene.add(sun);
 
   // point light at sun's position
