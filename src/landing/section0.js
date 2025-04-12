@@ -31,11 +31,15 @@ export function loadSection0(scene, camera, sections) {
     createTextMesh("REFERENCES", textMeshPosition, mainTextRotation, 1, scene);
 
     const menuItems = [
-      { text: "Development Team", onClick: () => console.log("DevTeam Clicked") },
-      { text: "Sponsor", onClick: () => console.log("Sponsor Clicked") },
-      { text: "Code", onClick: () => console.log("Explore Clicked") },
-      { text: "Images", onClick: () => console.log("Surface Clicked") }
+      { text: "Disclaimer", onClick: () => console.log("Show Disclaimer") },
+      { text: "Dev & Contributors", onClick: () => console.log("Show Dev Profiles") },
+      { text: "Acknowledgments", onClick: () => console.log("Show Acknowledgments") },
+      { text: "Licensing", onClick: () => console.log("Show Licensing Info") },
+      { text: "Third-Party Assets", onClick: () => console.log("Show Third-Party Assets") },
+      { text: "Technical References", onClick: () => console.log("Show Technical References") },
+      { text: "Contact / Support", onClick: () => console.log("Show Contact Info") },
     ];
+    
 
     createMenu(menuItems, textMeshPosition, mainTextRotation, scene);
     loadBadge(scene);
