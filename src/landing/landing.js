@@ -194,13 +194,17 @@ function fadeOutLoadingScreen() {
 }
 
 
-  window.addEventListener('resize', () => {
-    if (camera && renderer) {
-        onResize(camera, renderer);
-    } else {
-        console.warn("Resize event fired, but camera or renderer is not defined.");
-    }
-});
-
+setupResizeListener();
 
 init();
+
+
+function setupResizeListener() {
+  window.addEventListener('resize', () => {
+      if (camera && renderer) {
+          onResize(camera, renderer);
+      } else {
+          console.warn("Resize event fired, but camera or renderer is not defined.");
+      }
+  });
+}

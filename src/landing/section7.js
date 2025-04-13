@@ -73,7 +73,7 @@ export function loadSection7(scene, camera, sections, renderer) {
             reject("Section 7 position not found.");
             return;
         }
-        const { posX, posY, posZ, buttonScale, labelScale } = calculateResponsiveValues();
+        // const { posX, posY, posZ, buttonScale, labelScale } = calculateResponsiveValues();
 
             const buttonPos = {
               x: section7Coords.x,
@@ -108,7 +108,7 @@ export function loadSection7(scene, camera, sections, renderer) {
                     "Explore the Surface of Psyche",
                     buttonPos,
                     rotation,
-                    buttonScale,
+                    .7,
                     scene,
                     () => {
                         showKidsViewport();

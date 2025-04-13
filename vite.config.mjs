@@ -6,14 +6,7 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 export default defineConfig({
     plugins: [
         wasm(),
-        topLevelAwait(),
-        viteStaticCopy({ 
-            targets: [
-                { src: "res", dest: "" },  
-                { src: "css", dest: "" },  
-                { src: "img", dest: "" }   
-            ]
-        })
+        topLevelAwait()
     ],
     base: '/', 
     optimizeDeps: {

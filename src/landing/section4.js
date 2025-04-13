@@ -246,7 +246,7 @@ export function loadSection4(scene, camera, sections, renderer) {
         );
 
       const { buttonMesh } = triggerButton3D(
-        "The Cosmic Comparison of Earth and Psyche",
+        "THE COSMIC COMPARISON OF EARTH AND PSYCHE",
         buttonPos,
         rotation,
         0.7,

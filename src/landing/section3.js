@@ -7,8 +7,8 @@
 
 import * as THREE from 'three';
 import { getCurrentSection } from './sectionTracking.js';
-import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from './utils.js';
-import { showKidsViewport, hideKidsViewport } from './../../public/PsycheJR/kidsViewport.js';
+import { triggerButton3D, createTextMesh, loadModel } from './utils.js';
+import { showKidsViewport, } from './../../public/PsycheJR/kidsViewport.js';
 
 //let yearButton;
 //let buttonLabel;
@@ -71,24 +71,20 @@ export function loadSection3(scene, camera, sections, renderer) {
           return;
       }
 
-			// Lighting 
-			//const ambientLight = new THREE.AmbientLight(0xffffff, 2);
-			//scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0x7a5f3e, 15);
+        directionalLight.position.set(-150, 150, 13);
 
-			const directionalLight = new THREE.DirectionalLight(0x7a5f3e, 15);
-			directionalLight.position.set(-150, 150, 13);
-
-			const target = new THREE.Object3D();
+        const target = new THREE.Object3D();
       target.position.set(-150, 145, -20); // Set the target position
 
       // Set the target of the light
       directionalLight.target = target;
 			scene.add(directionalLight);
 
-      const { posX, posY, posZ, buttonScale, labelScale } = calculateResponsiveValues();
+      // const { posX, posY, posZ, buttonScale, labelScale } = calculateResponsiveValues();
 
       const buttonPos = {
-        x: section3Coords.x,
+        x: section3Coords.x,createTextMesh,
         y: section3Coords.y + 2,
         z: section3Coords.z - 12,
       };
@@ -108,7 +104,7 @@ export function loadSection3(scene, camera, sections, renderer) {
             "Jr",
             "./../../res/models/Jr.glb",
             modelPosition, // position
-            10, // scale
+            9, // scale
             objRotation, // rotation
             null, // animation
             scene, // scene
@@ -117,10 +113,10 @@ export function loadSection3(scene, camera, sections, renderer) {
             });
 
           triggerButton3D(
-              "Explore the Psyche Jr Kids Experience",
+              "EXPLORE THE PSYCHE Jr KIDS EXPERIENCE",
               buttonPos,
               rotation,
-              buttonScale,
+              .7,
               scene,
               () => {
                   showKidsViewport();
@@ -128,35 +124,26 @@ export function loadSection3(scene, camera, sections, renderer) {
               }
           ).then(({ textMesh, buttonMesh }) => {
               // Store original material properties to restore when not hovering
-              const originalEmissive = buttonMesh.material.emissive.clone();
-              const originalEmissiveIntensity = buttonMesh.material.emissiveIntensity;
               
-              const raycaster = new THREE.Raycaster();
-              const mouse = new THREE.Vector2();
+              // const raycaster = new THREE.Raycaster();
+              // const mouse = new THREE.Vector2();
 
-              window.addEventListener("mousemove", (event) => {
-                  const rect = renderer.domElement.getBoundingClientRect();
-                  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-                  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-                  raycaster.setFromCamera(mouse, camera);
-                  const intersects = raycaster.intersectObjects([buttonMesh]);
-
-                  if (intersects.length > 0) {
-                      // Apply glow effect on hover
-                      applyGlowEffect(buttonMesh, {
-                          color: '#ff9900',
-                          intensity: 2.0
-                      });
-                      renderer.domElement.style.cursor = "pointer";
-                  } else {
-                      // Remove glow effect when not hovering
-                      buttonMesh.material.emissive = originalEmissive;
-                      buttonMesh.material.emissiveIntensity = originalEmissiveIntensity;
-                      buttonMesh.material.needsUpdate = true;
-                      renderer.domElement.style.cursor = "default";
-                  }
-              });
+              // window.addEventListener("mousemove", (event) => {
+              //   const rect = renderer.domElement.getBoundingClientRect();
+              //   mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+              //   mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+              
+              //   raycaster.setFromCamera(mouse, camera);
+              //   const intersects = raycaster.intersectObjects([buttonMesh]);
+              
+              //   if (intersects.length > 0) {
+              //     applyScaleEffect(textMesh, true); // hover in
+              //     renderer.domElement.style.cursor = "pointer";
+              //   } else {
+              //     applyScaleEffect(textMesh, false); // hover out
+              //     renderer.domElement.style.cursor = "default";
+              //   }              
+              // });
           });
 
           resolve(); // Resolve the promise when setup is complete

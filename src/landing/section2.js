@@ -12,7 +12,7 @@
  * - loadSection2(): Creates 3D text mesh to display a message
  */
 
-import { createTextMesh, triggerButton3D, clickableModels, applyGlowEffect, makeModelClickable } from './utils.js';
+import { triggerButton3D, clickableModels } from './utils.js';
 import { showNameViewport } from './psycheNameViewport.js';
 import * as THREE from 'three';
 import gsap from 'gsap';

@@ -58,7 +58,7 @@ export function createStarfield(scene, options = { density: 1.0 }) {
 
   const starMaterial = new THREE.PointsMaterial({ 
     color: 0xffffcc, 
-    size: 3.0,       
+    size: 5.5,       
     sizeAttenuation: true,
     transparent: true, 
     opacity: 1.0,     

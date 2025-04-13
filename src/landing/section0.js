@@ -13,7 +13,8 @@
  * - loadSection0(): Initializes the "References" section with text, menu, and badge.
  */
 
-import { createTextMesh, loadModel, createMenu, loadBadge } from './utils.js';
+import { createTextMesh, createMenu } from './utils.js';
+import { showRefsViewport, loadRefContent } from './../../public/refsViewport/referencesViewport.js';
 
 export function loadSection0(scene, camera, sections) {
   return new Promise(resolve => {
@@ -28,23 +29,29 @@ export function loadSection0(scene, camera, sections) {
 
     const mainTextRotation = { x: 0, y: 0.1, z: 0 };
 
-    createTextMesh("REFERENCES", textMeshPosition, mainTextRotation, 1, scene, 0.02, null, 0.05);
+    createTextMesh("REFERENCES", 
+      textMeshPosition, 
+      mainTextRotation, 
+      1, // size
+      scene, // scene
+      0.02, // bevel size
+      '#FFA500', // color
+      0.07,  //depth
+      0.03); // bevel thickness
 
     const menuItems = [
-      { text: "Disclaimer", onClick: () => console.log("Show Disclaimer") },
-      { text: "Dev & Contributors", onClick: () => console.log("Show Dev Profiles") },
-      { text: "Acknowledgments", onClick: () => console.log("Show Acknowledgments") },
-      { text: "Licensing", onClick: () => console.log("Show Licensing Info") },
-      { text: "Third-Party Assets", onClick: () => console.log("Show Third-Party Assets") },
-      { text: "Technical References", onClick: () => console.log("Show Technical References") },
-      { text: "Contact / Support", onClick: () => console.log("Show Contact Info") },
+      { text: "Disclaimer", onClick: () => loadRefContent("./../../public/refsViewport/disclaimer.html") },
+      { text: "Dev & Contributors", onClick: () => loadRefContent("./../../public/refsViewport/dev.html") },
+      { text: "Acknowledgments", onClick: () => loadRefContent("ifra./../../public/refsViewport/thanks.html") },
+      { text: "Licensing", onClick: () => loadRefContent("./../../public/refsViewport/license.html") },
+      { text: "Third-Party Assets", onClick: () => loadRefContent("./../../public/refsViewport/assets.html") },
+      { text: "Technical References", onClick: () => loadRefContent("./../../public/refsViewport/technical.html") },
+      { text: "Contact / Support", onClick: () => loadRefContent("./../../public/refsViewport/contact.html") },
     ];
-    
-
+      
     createMenu(menuItems, textMeshPosition, mainTextRotation, scene);
-    loadBadge(scene);
 
-    resolve(); // Done
+    resolve(); 
   });
 }
 

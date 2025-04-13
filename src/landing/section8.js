@@ -59,7 +59,7 @@ export function loadSection8(scene, camera, sections, renderer) {
             console.log("loaded model");
           });
         const { buttonMesh } = triggerButton3D(
-          "Explore Psyche's Location!",
+          "EXPLORE PSYCHE'S LOCATION",
           buttonPos,
           rotation,
           0.7,

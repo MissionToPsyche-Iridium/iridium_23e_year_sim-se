@@ -47,7 +47,7 @@ export function loadSection5(scene, camera, sections, renderer) {
           });
         
         const { buttonMesh } = triggerButton3D(
-          "Explore the Mission Website",
+          "EXPLORE THE MISSION WEBSITE",
           buttonPos,
           rotation,
           0.7,

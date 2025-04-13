@@ -129,7 +129,7 @@ export async function createTextMesh(
     bev_thickness = 0.03) {  
   return new Promise((resolve, reject) => {
     const fontLoader = new FontLoader();
-    fontLoader.load('./../../res/font/LibreFranklin-Black.json', async (font) => {
+    fontLoader.load('./../../res/font/Genos_Bold.json', async (font) => {
       try {
         const textGeometry = new TextGeometry(text, {
           font: font,
@@ -366,7 +366,7 @@ export function createMenuItem(text, position, scene, onClick, size = 0.5) {
 
     // Create a standard material with transparency and basic lighting properties
     const textMaterial = new THREE.MeshStandardMaterial({
-      color: 0xffffff,      // White text color
+      color: 0XFFA500,      // White text color
       transparent: true,    // Enable opacity control
       opacity: 1,           // Fully opaque at start
       emissive: 0x000000,   // No self-illumination
@@ -404,7 +404,7 @@ export function createMenuItem(text, position, scene, onClick, size = 0.5) {
 /**
  * Handles mouse movement over the canvas, enabling hover effects on interactive text meshes.
  * Uses raycasting to detect intersections between the mouse pointer and text meshes,
- * and applies visual feedback (color change and scaling) on hover.
+ * and applies visual feedback (scaling) on hover.
  *
  * @param {MouseEvent} event - The mousemove event from the browser.
  * @param {THREE.Camera} camera - The active Three.js camera used for raycasting.
@@ -413,74 +413,44 @@ export function createMenuItem(text, position, scene, onClick, size = 0.5) {
  * How It Works:
  * - Converts the mouse's pixel coordinates to normalized device coordinates (NDC) for raycasting.
  * - Uses `THREE.Raycaster` to detect intersections between the mouse pointer and `interactiveTextMeshes`.
- * - Applies hover effects (color change and scaling) using GSAP when a text mesh is hovered.
- * - Restores the original color and scale when the mouse leaves the mesh.
+ * - Applies hover effects (scaling) using GSAP when a text mesh is hovered.
+ * - Restores the original scale when the mouse leaves the mesh.
  *
  * Hover Effects:
- * - **Color Change:** On hover, the text turns orange (r: 1, g: 0.5, b: 0).
- * - **Scaling:** The text scales up by 20% for a subtle hover effect.
- * - **Reversion:** When no longer hovered, the text reverts to its original color and scale.
+ * - **Scaling:** On hover, the text scales up by 10% for a subtle effect.
+ * - **Reversion:** When no longer hovered, the text reverts to its original scale.
  */
+
 function onMouseMove(event, camera, renderer) {
-  // Convert mouse coordinates to Normalized Device Coordinates (NDC)
   const rect = renderer.domElement.getBoundingClientRect();
-  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1; // NDC X: [-1, 1]
-  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1; // NDC Y: [-1, 1] (inverted Y)
+  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-  // Cast a ray from the camera through the mouse position
   raycaster.setFromCamera(mouse, camera);
-
-  // Find intersections with interactive text meshes
   const intersects = raycaster.intersectObjects(interactiveTextMeshes);
 
   if (intersects.length > 0) {
-    // Get the closest intersected text mesh
     const intersectedText = intersects[0].object;
 
-    // If hovering over a new text mesh, reset the previous one
     if (hoveredText !== intersectedText) {
       if (hoveredText) {
-        // Revert the color and scale of the previously hovered text
-        gsap.to(hoveredText.material.color, { 
-          r: (hoveredText.userData.originalColor >> 16 & 255) / 255,
-          g: (hoveredText.userData.originalColor >> 8 & 255) / 255,
-          b: (hoveredText.userData.originalColor & 255) / 255,
-          duration: 0.3
-        });
         gsap.to(hoveredText.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
       }
 
-      // Update hovered text to the new intersected object
       hoveredText = intersectedText;
       document.body.style.cursor = "pointer";
-      // Store the original color if not already stored
-      if (!hoveredText.userData.originalColorStored) {
-        hoveredText.userData.originalColor = hoveredText.material.color.getHex();
-        hoveredText.userData.originalColorStored = true;
-      }
 
-      // Apply hover effects: color change and scaling
-      gsap.to(hoveredText.material.color, { 
-        r: 1, g: 0.5, b: 0, // Change color to orange
-        duration: 0.3
-      });
-      // gsap.to(hoveredText.scale, { x: 1.2, y: 1.2, z: 1.2, duration: 0.3 }); // Slight scale-up
+      gsap.to(hoveredText.scale, { x: 1.1, y: 1.1, z: 1.1, duration: 0.3 });
     }
   } else {
-    // If no text is hovered, reset the previously hovered text
     if (hoveredText) {
-      gsap.to(hoveredText.material.color, { 
-        r: (hoveredText.userData.originalColor >> 16 & 255) / 255,
-        g: (hoveredText.userData.originalColor >> 8 & 255) / 255,
-        b: (hoveredText.userData.originalColor & 255) / 255,
-        duration: 0.3
-      });
       gsap.to(hoveredText.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
-      hoveredText = null; // Clear hovered state
+      hoveredText = null;
     }
-    document.body.style.cursor = "default"; 
+    document.body.style.cursor = "default";
   }
 }
+
 
 /**
  * Handles mouse click events on interactive text meshes.
@@ -635,7 +605,7 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
   return new Promise((resolve, reject) => {
     const fontLoader = new FontLoader();
 
-    fontLoader.load('/res/font/Roboto_Regular.json', async (font) => {
+    fontLoader.load('./../../res/font/GenosThin_Regular.json', async (font) => {
       try {
         const textGeometry = new TextGeometry(label, {
           font: font,
@@ -736,7 +706,47 @@ export function applyGlowEffect(mesh, options = {}) {
   mesh.material.needsUpdate = true;
 }
 
+/*
+ * Function: applyScaleEffect
+ * Purpose: Applies a scaling effect to a mesh using GSAP animation.
+ * Author(s): 
+ * Date: 21 MAR 2025
+ * Version: 1.0
+ *
+ * Parameters:
+ * - mesh (THREE.Mesh): The mesh to which the scale effect will be applied.
+ * - isHovered (boolean): Indicates whether the mesh is being hovered (true to scale up, false to reset).
+ * - options (Object): Optional settings for the scale effect.
+ *     - scale (number): Target scale factor when hovered (default: 1.1).
+ *     - baseScale (number): Scale to revert to when not hovered (default: 1.0).
+ *     - duration (number): Duration of the scaling animation in seconds (default: 0.25).
+ *     - ease (string): GSAP easing function name (default: 'power2.out').
+ *
+ * Description:
+ * Uses GSAP to smoothly animate the scale of a mesh on hover events. 
+ * The function allows for customizable scale targets and animation behavior 
+ * via an optional configuration object. Suitable for interactive 3D text or buttons.
+ */
+export function applyScaleEffect(mesh, isHovered, options = {}) {
+  if (!mesh || !mesh.scale) return;
 
+  const {
+    scale = 1.01,
+    baseScale = 1.0,
+    duration = 0.25,
+    ease = "power2.out"
+  } = options;
+
+  const targetScale = isHovered ? scale : baseScale;
+
+  gsap.to(mesh.scale, {
+    x: targetScale,
+    y: targetScale,
+    z: targetScale,
+    duration,
+    ease
+  });
+}
 
 /**
  * Calculates responsive spacing based on camera FOV, viewport size, and depth.

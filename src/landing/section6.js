@@ -71,7 +71,7 @@ export function loadSection6(scene, camera, sections, renderer) {
       );
 
       const { buttonMesh } = triggerButton3D(
-        "Try some Psyche inspired games!",
+        "TRY SOME PSYCHE INSPIRED GAMES!",
         buttonPos,
         rotation,
         0.7,
