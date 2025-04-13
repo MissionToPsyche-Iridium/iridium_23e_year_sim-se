@@ -12,7 +12,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@dimforge/rapier3d": "^0.14.0",
     "@types/jquery": "^3.5.32",
     "classie": "^1.0.0",
     "gsap": "^3.12.7",
