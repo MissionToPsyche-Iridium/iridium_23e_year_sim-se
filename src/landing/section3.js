@@ -84,7 +84,7 @@ export function loadSection3(scene, camera, sections, renderer) {
       // const { posX, posY, posZ, buttonScale, labelScale } = calculateResponsiveValues();
 
       const buttonPos = {
-        x: section3Coords.x,createTextMesh,
+        x: section3Coords.x,
         y: section3Coords.y + 2,
         z: section3Coords.z - 12,
       };

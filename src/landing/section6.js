@@ -63,7 +63,9 @@ export function loadSection6(scene, camera, sections, renderer) {
         modelPosition,
         2,
         objRotation,
-        null,
+        {
+          rotation: { x: 0, y: -40, z: 0, duration: 200, ease: "linear", repeat: -1 }
+        },
         scene,
         () => {
           console.log("loaded model");

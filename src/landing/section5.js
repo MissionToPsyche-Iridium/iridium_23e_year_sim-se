@@ -40,7 +40,9 @@ export function loadSection5(scene, camera, sections, renderer) {
           modelPosition, // position
           .75, // scale
           objRotation, // rotation
-          null, // animation
+          {            
+            rotation: { x: 20, y: 0, z: 10, duration: 205, ease: "linear", repeat: -1 }
+          }, // animation
           scene, // scene
           () => {  // callback fx
             console.log("loaded model");
