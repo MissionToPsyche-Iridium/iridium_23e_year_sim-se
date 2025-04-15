@@ -3,7 +3,7 @@ import wasm from 'vite-plugin-wasm';
 import topLevelAwait from 'vite-plugin-top-level-await';
 
 export default defineConfig({
-  base: '/', 
+  base: '/iridium_23e_year_sim-se/', 
   plugins: [
     wasm(),
     topLevelAwait()
