@@ -1,6 +1,5 @@
-import * as THREE from 'three';
 import gsap from 'gsap';
-import { handleReturnToGames, monkeyPatchReturnButtons } from '../../src/landing/viewportStyling.js';
+import { handleReturnToGames, monkeyPatchReturnButtons } from './viewportStyling.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;

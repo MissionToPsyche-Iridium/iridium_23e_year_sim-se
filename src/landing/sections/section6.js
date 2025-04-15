@@ -12,9 +12,9 @@
 
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from './utils.js';
-import { getCurrentSection } from './sectionTracking.js';
-import { showGamesViewport, hideGamesViewport } from './../../public/games/gamesViewport.js';
+import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from '../utils/utils.js';
+import { getCurrentSection } from '../utils/sectionTracking.js';
+import { showGamesViewport, hideGamesViewport } from '../ui/gamesViewport.js';
 
 let hasShownViewport = false;
 let sectionInitialized = false;

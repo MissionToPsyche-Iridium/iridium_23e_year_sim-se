@@ -6,9 +6,9 @@
  */
 
 import * as THREE from 'three';
-import { getCurrentSection } from './sectionTracking.js';
-import { triggerButton3D, createTextMesh, loadModel } from './utils.js';
-import { showKidsViewport, } from './../../public/PsycheJR/kidsViewport.js';
+import { getCurrentSection } from '../utils/sectionTracking.js';
+import { triggerButton3D, createTextMesh, loadModel } from '../utils/utils.js';
+import { showKidsViewport, } from '../ui/kidsViewport.js'
 
 //let yearButton;
 //let buttonLabel;

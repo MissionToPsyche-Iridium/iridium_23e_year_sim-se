@@ -5,8 +5,8 @@
  * that appears on top of the Three.js scene
  */
 import * as THREE from 'three';
-import { getCurrentSection } from './sectionTracking.js';
-import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from './utils.js';
+import { getCurrentSection } from '../utils/sectionTracking.js';
+import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from '../utils/utils.js';
 import {
     applyViewportContainerStyles,
     applyHeaderStyles,
@@ -20,7 +20,7 @@ import {
     addOpeningAnimations,
     addPulsingGlowEffect,
     createClosingAnimation
-} from './viewportStyling.js';
+} from '../ui/viewportStyling.js';
 
 // Button for the section
 // let yearButton;
@@ -86,7 +86,7 @@ export function showYearViewport() {
     
     // Create iframe to load the year.html content
     iframe = document.createElement('iframe');
-    iframe.src = './../../public/year/year.html';  // Updated path to point to the year.html file in public/year
+    iframe.src = '/year/year.html';  // Updated path to point to the year.html file in public/year
     applyIframeStyles(iframe, {
         backgroundColor: '#222'
     });

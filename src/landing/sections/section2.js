@@ -12,10 +12,9 @@
  * - loadSection2(): Creates 3D text mesh to display a message
  */
 
-import { triggerButton3D, clickableModels } from './utils.js';
-import { showNameViewport } from './psycheNameViewport.js';
+import { triggerButton3D, clickableModels } from '../utils/utils.js';
+import { showNameViewport } from '../ui/psycheName.js';
 import * as THREE from 'three';
-import gsap from 'gsap';
 
 export function loadSection2(scene, camera, sections, renderer) {
   const section2Coords = sections[2]?.position;

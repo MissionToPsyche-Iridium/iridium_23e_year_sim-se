@@ -14,9 +14,9 @@
  */
 
 import * as THREE from 'three';
-import { getCurrentSection } from './sectionTracking.js';
-import { createMenuItem, loadModel, triggerButton3D, applyGlowEffect } from './utils.js';
-import { showSurface2Viewport } from './../../public/PsycheJR/surface2Viewport.js';
+import { getCurrentSection } from '../utils/sectionTracking.js';
+import { createMenuItem, loadModel, triggerButton3D, applyGlowEffect } from '../utils/utils.js';
+import { showSurface2Viewport } from '../ui/surface2Viewport.js';
 
 /**
  * Calculate responsive positioning based on screen width

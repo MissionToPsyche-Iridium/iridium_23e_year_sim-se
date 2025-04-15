@@ -1,4 +1,4 @@
-import { moveToSection } from './sectionTracking.js';
+import { moveToSection } from './../utils/sectionTracking.js';
 
 export function animateScrollIndicator() {
     const smi = document.getElementById("mouse-scroll-indicator");
@@ -169,18 +169,18 @@ export function setupNavigation(sections) {
                     
                     // Import and use the appropriate viewport based on the game
                     if (game.name === "PsycheJR") {
-                        import('../../public/PsycheJR/kidsViewport.js').then(module => {
+                        import('../ui/kidsViewport.js').then(module => {
                             module.showKidsViewport();
                         });
                     } else if (game.name === "Escape Velocity") {
-                        import('../../public/games/viewportescapevelocity.js').then(module => {
+                        import('../../../public/escapeVelocity/viewportescapevelocity.js').then(module => {
                             module.showEscapeVelocityViewport();
                         });
                     } else if (game.name === "SpacePic") {
-                        import('../../public/games/viewportspacepic.js').then(module => {
+                        import('../ui/viewportspacepic.js').then(module => {
                             module.showSpacePicViewport();
                         });
-                    }
+                    }                    
                     
                     // Hide the menu
                     document.body.classList.remove("overlay-open");

@@ -17,20 +17,21 @@
  */
 
 import * as THREE from 'three';
-import { enableTextInteractivity, enableModelClick } from './utils.js';
-import { createStarfield, loadSun } from './starfield.js';
-import { initSectionTracking, getCurrentSection, onResize } from './sectionTracking.js';
-import { animateScrollIndicator, setupNavigation } from './nav.js';
-import { loadSection0 } from './section0.js';
-import { loadSection1 } from './section1.js';
-import { loadSection2 } from './section2.js';
-import { loadSection3, renderSection3 } from './section3.js';
-import { loadSection4, renderSection4 } from './section4.js';
-import { loadSection5, renderSection5 } from './section5.js';
-import { loadSection6, renderSection6 } from './section6.js';
-import { loadSection7, renderSection7 } from './section7.js';
-import { loadSection8, renderSection8 } from './section8.js';
-import { loadSection9, renderSection9 } from './section9.js';
+import { enableTextInteractivity, enableModelClick } from './utils/utils.js';
+import { createStarfield, loadSun } from './scene/starfield.js';
+import { initSectionTracking, getCurrentSection, onResize } from './utils/sectionTracking.js';
+import { animateScrollIndicator, setupNavigation } from './ui/nav.js';
+
+import { loadSection0 } from './sections/section0.js';
+import { loadSection1 } from './sections/section1.js';
+import { loadSection2 } from './sections/section2.js';
+import { loadSection3, renderSection3 } from './sections/section3.js';
+import { loadSection4, renderSection4 } from './sections/section4.js';
+import { loadSection5, renderSection5 } from './sections/section5.js';
+import { loadSection6, renderSection6 } from './sections/section6.js';
+import { loadSection7, renderSection7 } from './sections/section7.js';
+import { loadSection8, renderSection8 } from './sections/section8.js';
+import { loadSection9, renderSection9 } from './sections/section9.js';
 
 /**
  * Global scope camera and renderer required for 

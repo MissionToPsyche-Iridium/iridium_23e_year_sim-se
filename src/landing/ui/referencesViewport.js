@@ -32,9 +32,6 @@ export function loadRefContent(newSrc) {
     }, 1000);
 }
   
-  
-
-
 export function showRefsViewport() {
   if (document.getElementById(containerId)) return;
 
@@ -74,7 +71,7 @@ export function showRefsViewport() {
   // Create iframe
   const iframe = document.createElement('iframe');
   iframe.id = iframeId;
-  iframe.src = './../../public/refsViewport/disclaimer.html';
+  iframe.src = '/refsViewport/disclaimer.html';
   iframe.style.width = '100%';
   iframe.style.height = '100%';
   iframe.style.border = 'none';

@@ -1,7 +1,7 @@
 /**
- * Website Viewport Module
+ * Location2 Viewport Module
  * 
- * This module handles loading the website/index.html content in an iframe
+ * This module handles loading the public/PsycheJR/location2.html content in an iframe
  * that appears on top of the Three.js scene.
  * 
  * Optimized for responsive design across various screen sizes including:
@@ -10,8 +10,7 @@
  * - Custom sizes set via developer tools
  */
 
-import gsap from 'gsap';
-import * as ViewportStyling from '../../src/landing/viewportStyling.js';
+import * as ViewportStyling from '../ui/viewportStyling.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;
@@ -94,9 +93,9 @@ function updateViewportSize() {
 }
 
 /**
- * Creates and shows the website viewport with animations.
+ * Creates and shows the location2 viewport with animations.
  */
-export function showWebsiteViewport() {
+export function showLocation2Viewport() {
     // If viewport already exists, just show it
     if (viewportContainer) {
         viewportContainer.style.display = 'flex';
@@ -104,11 +103,11 @@ export function showWebsiteViewport() {
         return;
     }
 
-    console.log("Creating website viewport");
+    console.log("Creating location2 viewport");
 
     // Create container for the viewport
     viewportContainer = document.createElement('div');
-    viewportContainer.id = 'website-viewport-container';
+    viewportContainer.id = 'location2-viewport-container';
     ViewportStyling.applyViewportContainerStyles(viewportContainer, {
         backgroundColor: 'rgba(0, 0, 0, 0.05)', // Very transparent background
         borderColor: 'rgba(122, 95, 62, 0.3)',  // Semi-transparent border
@@ -130,35 +129,20 @@ export function showWebsiteViewport() {
     });
     
     const title = document.createElement('h2');
-    title.textContent = 'Psyche Mission Website';
+    title.textContent = 'Psyche\'s Location in Space';
     ViewportStyling.applyTitleStyles(title);
-    
-    // Create a container for the buttons
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.style.display = 'flex';
-    buttonsContainer.style.alignItems = 'center';
-    buttonsContainer.style.gap = '10px';
-    
-    // Create return button with arrow character
-    const returnButton = document.createElement('button');
-    returnButton.textContent = '↩';
-    ViewportStyling.applyReturnButtonStyles(returnButton);
     
     closeButton = document.createElement('button');
     closeButton.textContent = '✕';
     ViewportStyling.applyCloseButtonStyles(closeButton);
     
-    // Add buttons to the container
-    buttonsContainer.appendChild(returnButton);
-    buttonsContainer.appendChild(closeButton);
-    
     header.appendChild(title);
-    header.appendChild(buttonsContainer);
+    header.appendChild(closeButton);
     viewportContainer.appendChild(header);
     
-    // Create iframe to load the website content
+    // Create iframe to load the location2 content
     iframe = document.createElement('iframe');
-    iframe.src = '/website/index.html';  // Path relative to the server root
+    iframe.src = '/PsycheJR/location2.html';  // Use absolute path from project root
     ViewportStyling.applyIframeStyles(iframe, {
         backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
     });
@@ -168,12 +152,12 @@ export function showWebsiteViewport() {
     
     // Add event listener for iframe load errors
     iframe.onerror = () => {
-        console.error("Failed to load website iframe content");
+        console.error("Failed to load location2 iframe content");
     };
     
     // Add event listener for iframe load success
     iframe.onload = () => {
-        console.log("Website iframe loaded successfully");
+        console.log("Location2 iframe loaded successfully");
         ViewportStyling.injectScrollbarHidingStyles(iframe);
     };
     
@@ -188,15 +172,8 @@ export function showWebsiteViewport() {
     ViewportStyling.addOpeningAnimations(viewportContainer, header, iframe);
     ViewportStyling.addPulsingGlowEffect(viewportContainer);
     
-    // Add event listeners for buttons
-    closeButton.addEventListener('click', hideWebsiteViewport);
-    returnButton.addEventListener('click', () => {
-        // Navigate directly to the website index page
-        if (iframe) {
-            iframe.src = '/website/index.html';
-            console.log("Navigating to website index page");
-        }
-    });
+    // Add event listener for close button
+    closeButton.addEventListener('click', hideLocation2Viewport);
     
     // Add event listener for Escape key
     document.addEventListener('keydown', handleKeyDown);
@@ -215,9 +192,9 @@ export function showWebsiteViewport() {
 }
 
 /**
- * Hides the website viewport with closing animation.
+ * Hides the location2 viewport with closing animation.
  */
-export function hideWebsiteViewport() {
+export function hideLocation2Viewport() {
     if (!viewportContainer) return;
     
     // Animate closing effect
@@ -237,16 +214,16 @@ export function hideWebsiteViewport() {
  */
 function handleKeyDown(e) {
     if (e.key === 'Escape') {
-        hideWebsiteViewport();
+        hideLocation2Viewport();
     }
 }
 
 /**
  * Removes the viewport completely.
  */
-export function destroyWebsiteViewport() {
+export function destroyLocation2Viewport() {
     if (viewportContainer) {
-        closeButton.removeEventListener('click', hideWebsiteViewport);
+        closeButton.removeEventListener('click', hideLocation2Viewport);
         document.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('resize', updateViewportSize);
         
@@ -268,9 +245,9 @@ export function destroyWebsiteViewport() {
  * @param {number} width - Width in pixels
  * @param {number} height - Height in pixels
  */
-window.setWebsiteViewportSize = function(width, height) {
+window.setLocation2ViewportSize = function(width, height) {
     if (!viewportContainer) {
-        console.warn("Website viewport is not currently active");
+        console.warn("Location2 viewport is not currently active");
         return;
     }
     
@@ -290,9 +267,9 @@ window.setWebsiteViewportSize = function(width, height) {
  * Reset the viewport to responsive sizing
  * This can be called from the console in developer tools (F12)
  */
-window.resetWebsiteViewportSize = function() {
+window.resetLocation2ViewportSize = function() {
     if (!viewportContainer) {
-        console.warn("Website viewport is not currently active");
+        console.warn("Location2 viewport is not currently active");
         return;
     }
     

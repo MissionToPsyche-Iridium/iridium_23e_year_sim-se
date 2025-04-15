@@ -1,7 +1,7 @@
 /**
- * Games Viewport Module
+ * Website Viewport Module
  * 
- * This module handles loading the public/games/games.html content in an iframe
+ * This module handles loading the website/index.html content in an iframe
  * that appears on top of the Three.js scene.
  * 
  * Optimized for responsive design across various screen sizes including:
@@ -10,10 +10,7 @@
  * - Custom sizes set via developer tools
  */
 
-import gsap from 'gsap';
-import * as ViewportStyling from '../../src/landing/viewportStyling.js';
-import { showTemperatureGameViewport } from './viewporttemperaturegame.js';
-import { savedCameraPosition, savedCameraRotation } from '../../src/landing/section6.js'
+import * as ViewportStyling from './viewportStyling.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;
@@ -96,9 +93,9 @@ function updateViewportSize() {
 }
 
 /**
- * Creates and shows the games viewport with animations.
+ * Creates and shows the website viewport with animations.
  */
-export function showGamesViewport(camera) {
+export function showWebsiteViewport() {
     // If viewport already exists, just show it
     if (viewportContainer) {
         viewportContainer.style.display = 'flex';
@@ -106,11 +103,11 @@ export function showGamesViewport(camera) {
         return;
     }
 
-    console.log("Creating games viewport");
+    console.log("Creating website viewport");
 
     // Create container for the viewport
     viewportContainer = document.createElement('div');
-    viewportContainer.id = 'games-viewport-container';
+    viewportContainer.id = 'website-viewport-container';
     ViewportStyling.applyViewportContainerStyles(viewportContainer, {
         backgroundColor: 'rgba(0, 0, 0, 0.05)', // Very transparent background
         borderColor: 'rgba(122, 95, 62, 0.3)',  // Semi-transparent border
@@ -132,15 +129,16 @@ export function showGamesViewport(camera) {
     });
     
     const title = document.createElement('h2');
-    title.textContent = 'Psyche Mission Games';
+    title.textContent = 'Psyche Mission Website';
     ViewportStyling.applyTitleStyles(title);
     
     // Create a container for the buttons
     const buttonsContainer = document.createElement('div');
     buttonsContainer.style.display = 'flex';
     buttonsContainer.style.alignItems = 'center';
+    buttonsContainer.style.gap = '10px';
     
-    // Create return button
+    // Create return button with arrow character
     const returnButton = document.createElement('button');
     returnButton.textContent = '↩';
     ViewportStyling.applyReturnButtonStyles(returnButton);
@@ -157,9 +155,9 @@ export function showGamesViewport(camera) {
     header.appendChild(buttonsContainer);
     viewportContainer.appendChild(header);
     
-    // Create iframe to load the games content
+    // Create iframe to load the website content
     iframe = document.createElement('iframe');
-    iframe.src = '/public/games/games.html';  // Use absolute path from project root
+    iframe.src = '/website/index.html';  // Path relative to the server root
     ViewportStyling.applyIframeStyles(iframe, {
         backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
     });
@@ -169,12 +167,12 @@ export function showGamesViewport(camera) {
     
     // Add event listener for iframe load errors
     iframe.onerror = () => {
-        console.error("Failed to load games iframe content");
+        console.error("Failed to load website iframe content");
     };
     
     // Add event listener for iframe load success
     iframe.onload = () => {
-        console.log("Games iframe loaded successfully");
+        console.log("Website iframe loaded successfully");
         ViewportStyling.injectScrollbarHidingStyles(iframe);
     };
     
@@ -189,14 +187,14 @@ export function showGamesViewport(camera) {
     ViewportStyling.addOpeningAnimations(viewportContainer, header, iframe);
     ViewportStyling.addPulsingGlowEffect(viewportContainer);
     
-    // Add event listener for close button
-    closeButton.addEventListener('click', () => {
-        closeGamesViewport(camera);
-    });
-    
-    // Add event listener for return button
+    // Add event listeners for buttons
+    closeButton.addEventListener('click', hideWebsiteViewport);
     returnButton.addEventListener('click', () => {
-        destroyGamesViewport();
+        // Navigate directly to the website index page
+        if (iframe) {
+            iframe.src = '/website/index.html';
+            console.log("Navigating to website index page");
+        }
     });
     
     // Add event listener for Escape key
@@ -206,6 +204,7 @@ export function showGamesViewport(camera) {
     window.addEventListener('resize', updateViewportSize);
     
     // Set up ResizeObserver for more accurate size monitoring
+    // This is especially useful for detecting size changes in developer tools
     resizeObserver = new ResizeObserver(entries => {
         console.log("ResizeObserver detected size change");
         updateViewportSize();
@@ -215,85 +214,50 @@ export function showGamesViewport(camera) {
 }
 
 /**
- * Hides the games viewport with closing animation.
+ * Hides the website viewport with closing animation.
  */
-
-export function hideGamesViewport(camera, viewportContainer) {
-    // Animate the viewport out (fade out and scale down)
-    gsap.to(viewportContainer, {
-      duration: 1.5,    // The same as camera 
-      opacity: 0,       // Fade out 
-      scale: 0.5,       // Scale it down for a disappearing effect
-      transformOrigin: "center", // Scales from the center
-      ease: "power2.inOut", // Smooth easing for the transition
-      onComplete: () => {
-        // Start animating the camera back
-        gsap.to(camera.position, {
-          duration: 1.5,
-          x: savedCameraPosition.x,  // Return to saved position
-          y: savedCameraPosition.y,
-          z: savedCameraPosition.z,
-          ease: "power2.out",
-          onUpdate: () => {
-            camera.lookAt(savedCameraPosition);  // Continuously look at the saved position
-          }
-        });
-  
-        gsap.to(camera.rotation, {
-          duration: 1.5,
-          y: savedCameraRotation.y,  // Return to saved rotation
-          ease: "power2.out",
-          onComplete: () => {
-            console.log("Camera reset to initial position and rotation.");
-          }
-        });
-  
-        // Hide the viewport container
+export function hideWebsiteViewport() {
+    if (!viewportContainer) return;
+    
+    // Animate closing effect
+    ViewportStyling.createClosingAnimation(viewportContainer, () => {
         viewportContainer.style.display = 'none';
-      }
+        // Reset opacity and scale for next time
+        viewportContainer.style.opacity = 1;
+        viewportContainer.style.transform = 'translate(-50%, -50%) scale(1)';
+        
+        // Show the menu when viewport is closed
+        document.body.classList.add("overlay-open");
     });
-  }
+}
 
 /**
  * Handles keydown events for the viewport.
  */
 function handleKeyDown(e) {
     if (e.key === 'Escape') {
-        hideGamesViewport();
+        hideWebsiteViewport();
     }
 }
 
 /**
  * Removes the viewport completely.
  */
-export function destroyGamesViewport() {
+export function destroyWebsiteViewport() {
     if (viewportContainer) {
-        // Remove event listeners to prevent memory leaks
-        if (closeButton) {
-            closeButton.removeEventListener('click', hideGamesViewport);
-        }
+        closeButton.removeEventListener('click', hideWebsiteViewport);
         document.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('resize', updateViewportSize);
-
-        // Disconnect ResizeObserver if it's used
+        
         if (resizeObserver) {
             resizeObserver.disconnect();
             resizeObserver = null;
         }
-
-        // Fade out the viewport before removing it from the DOM
-        viewportContainer.style.transition = 'opacity 0.5s ease';
-        viewportContainer.style.opacity = '0';
-
-        setTimeout(() => {
-            // Completely remove the viewport after fading out
-            document.body.removeChild(viewportContainer);
-
-            // Clear all references
-            viewportContainer = null;
-            iframe = null;
-            closeButton = null;
-        }, 500); // Ensure this matches the fade-out time
+        
+        document.body.removeChild(viewportContainer);
+        viewportContainer = null;
+        iframe = null;
+        closeButton = null;
     }
 }
 
@@ -303,9 +267,9 @@ export function destroyGamesViewport() {
  * @param {number} width - Width in pixels
  * @param {number} height - Height in pixels
  */
-window.setGamesViewportSize = function(width, height) {
+window.setWebsiteViewportSize = function(width, height) {
     if (!viewportContainer) {
-        console.warn("Games viewport is not currently active");
+        console.warn("Website viewport is not currently active");
         return;
     }
     
@@ -325,41 +289,12 @@ window.setGamesViewportSize = function(width, height) {
  * Reset the viewport to responsive sizing
  * This can be called from the console in developer tools (F12)
  */
-window.resetGamesViewportSize = function() {
+window.resetWebsiteViewportSize = function() {
     if (!viewportContainer) {
-        console.warn("Games viewport is not currently active");
+        console.warn("Website viewport is not currently active");
         return;
     }
     
     updateViewportSize();
     return "Viewport size reset to responsive mode";
 };
-
-// Hide and destroy the viewport first, then animate the camera back to its saved position.
-export function closeGamesViewport(camera) {
-    // Destroy the viewport
-    destroyGamesViewport();
-  
-    // Animate the camera position back to the saved position
-    // Position is staying the same here
-    gsap.to(camera.position, {
-      duration: 1.5,
-      x: savedCameraPosition.x,
-      y: savedCameraPosition.y,
-      z: savedCameraPosition.z,
-      ease: "power2.out",
-      onUpdate: () => {
-        camera.lookAt(savedCameraPosition); 
-      }
-    });
-    
-    // Animate camera rotation back to the saved rotation 
-    gsap.to(camera.rotation, {
-      duration: 1.5,
-      y: savedCameraRotation.y,
-      ease: "power2.out",
-      onComplete: () => {
-        console.log("Camera reset to initial position and rotation.");
-      }
-    });
-  }

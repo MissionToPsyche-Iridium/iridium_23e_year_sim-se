@@ -1,7 +1,7 @@
 /**
- * Surface2 Viewport Module
+ * Kids Viewport Module
  * 
- * This module handles loading the public/PsycheJR/surface2.html content in an iframe
+ * This module handles loading the public/PsycheJR/kids.html content in an iframe
  * that appears on top of the Three.js scene.
  * 
  * Optimized for responsive design across various screen sizes including:
@@ -10,8 +10,7 @@
  * - Custom sizes set via developer tools
  */
 
-import * as THREE from 'three';
-import * as ViewportStyling from '../../src/landing/viewportStyling.js';
+import * as ViewportStyling from '../ui/viewportStyling.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;
@@ -80,7 +79,6 @@ function calculateViewportSize() {
 
 /**
  * Updates the viewport container size based on current screen dimensions
- * and applies dynamic scaling to content within the iframe
  */
 function updateViewportSize() {
     if (!viewportContainer) return;
@@ -93,16 +91,15 @@ function updateViewportSize() {
     
     console.log(`Viewport resized to: width=${width}, maxWidth=${maxWidth}, height=${height}`);
     
-    // Apply dynamic scaling to content within the iframe
+    // Inject CSS to ensure container1 with astronautcar scales properly
     if (iframe && iframe.contentDocument) {
         try {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            const psycheContainer = iframeDoc.getElementById('psyche-container');
+            const container1 = iframeDoc.getElementById('container1');
             
-            if (psycheContainer) {
-                // Calculate scale based on viewport width
-                const viewportWidth = parseInt(width) || window.innerWidth * (parseInt(width) / 100);
-                const scale = Math.min(1, viewportWidth / 1920); // Base scale on a 1920px reference
+            if (container1) {
+                // Apply scaling based on viewport width
+                const scale = Math.min(1, window.innerWidth / 1920); // Base scale on a 1920px reference
                 
                 // Create or update the style element for responsive adjustments
                 let styleEl = iframeDoc.getElementById('responsive-scaling');
@@ -114,54 +111,21 @@ function updateViewportSize() {
                 
                 // Update the scaling styles
                 styleEl.textContent = `
-                    /* Responsive scaling for surface2 content */
-                    #psyche-container {
-                        width: 100% !important;
-                        height: ${Math.max(300, 50 * scale)}vh !important;
-                        max-width: 100% !important;
+                    #container1 {
+                        transform: scale(${scale});
+                        transform-origin: center top;
+                        width: calc(100% / ${scale});
+                        margin-left: auto;
+                        margin-right: auto;
                     }
                     
-                    #header-h1 {
-                        font-size: ${Math.max(40, 90 * scale)}px !important;
-                    }
-                    
-                    #materials, #features, #dimensions, #comparable, #explore {
-                        width: 90% !important;
-                    }
-                    
-                    #inner-materials h1, #inner-features h1, #inner-dimensions h1, 
-                    #inner-comparable h1, #inner-explore h1 {
-                        font-size: ${Math.max(30, 60 * scale)}px !important;
-                    }
-                    
-                    #inner-materials p, #inner-features p, #inner-dimensions p, 
-                    #inner-comparable p, #inner-explore p {
-                        font-size: ${Math.max(18, 40 * scale)}px !important;
-                    }
-                    
-                    #comparable h3 {
-                        font-size: ${Math.max(25, 50 * scale)}px !important;
-                    }
-                    
-                    #comparable h4 {
-                        font-size: ${Math.max(20, 40 * scale)}px !important;
-                    }
-                    
-                    /* Ensure content is scrollable */
-                    body {
-                        overflow-y: auto !important;
+                    #astronautCar {
+                        max-width: 100%;
+                        height: auto;
                     }
                 `;
                 
                 console.log(`Applied responsive scaling: ${scale}`);
-                
-                // Trigger the 3D model resize if the function exists
-                if (iframe.contentWindow.updatePsycheModelSize) {
-                    setTimeout(() => {
-                        iframe.contentWindow.updatePsycheModelSize();
-                        console.log("Triggered 3D model resize");
-                    }, 100); // Small delay to ensure styles are applied first
-                }
             }
         } catch (e) {
             console.error("Could not modify iframe content:", e);
@@ -170,9 +134,9 @@ function updateViewportSize() {
 }
 
 /**
- * Creates and shows the surface2 viewport with animations.
+ * Creates and shows the kids viewport with animations.
  */
-export function showSurface2Viewport() {
+export function showKidsViewport() {
     // If viewport already exists, just show it
     if (viewportContainer) {
         viewportContainer.style.display = 'flex';
@@ -180,16 +144,12 @@ export function showSurface2Viewport() {
         return;
     }
 
-    console.log("Creating surface2 viewport");
+    console.log("Creating kids viewport");
 
     // Create container for the viewport
     viewportContainer = document.createElement('div');
-    viewportContainer.id = 'surface2-viewport-container';
-    ViewportStyling.applyViewportContainerStyles(viewportContainer, {
-        backgroundColor: 'rgba(0, 0, 0, 0.05)', // Very transparent background
-        borderColor: 'rgba(122, 95, 62, 0.3)',  // Semi-transparent border
-        boxShadow: '0 0 15px rgba(122, 95, 62, 0.3)' // Subtle glow
-    });
+    viewportContainer.id = 'kids-viewport-container';
+    ViewportStyling.applyViewportContainerStyles(viewportContainer);
     
     // Set responsive dimensions
     const { width, maxWidth, height } = calculateViewportSize();
@@ -199,14 +159,10 @@ export function showSurface2Viewport() {
     
     // Create header with title and close button
     const header = document.createElement('div');
-    ViewportStyling.applyHeaderStyles(header, {
-        backgroundColor: 'rgba(10, 10, 20, 0.2)',
-        gradientStart: 'rgba(10, 10, 20, 0.2)',
-        gradientEnd: 'rgba(20, 20, 40, 0.2)'
-    });
+    ViewportStyling.applyHeaderStyles(header);
     
     const title = document.createElement('h2');
-    title.textContent = 'The Surface of Psyche';
+    title.textContent = 'Psyche Jr - Kids Space Explorer';
     ViewportStyling.applyTitleStyles(title);
     
     closeButton = document.createElement('button');
@@ -217,27 +173,25 @@ export function showSurface2Viewport() {
     header.appendChild(closeButton);
     viewportContainer.appendChild(header);
     
-    // Create iframe to load the surface2 content
+    // Create iframe to load the kids content
     iframe = document.createElement('iframe');
-    iframe.src = '/public/PsycheJR/surface2.html';  // Use absolute path from project root
-    ViewportStyling.applyIframeStyles(iframe, {
-        backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
-    });
+    iframe.src = '/PsycheJR/kids.html';  // Use absolute path from project root
+    ViewportStyling.applyIframeStyles(iframe);
     
     // Add scrollbar hiding styles
     ViewportStyling.addScrollbarHidingStyles(document);
     
     // Add event listener for iframe load errors
     iframe.onerror = () => {
-        console.error("Failed to load surface2 iframe content");
+        console.error("Failed to load kids iframe content");
     };
     
     // Add event listener for iframe load success
     iframe.onload = () => {
-        console.log("Surface2 iframe loaded successfully");
+        console.log("Kids iframe loaded successfully");
         ViewportStyling.injectScrollbarHidingStyles(iframe);
         
-        // Apply responsive scaling to content after iframe loads
+        // Apply responsive scaling to container1 after iframe loads
         updateViewportSize();
         
         // Add a MutationObserver to detect changes in the iframe content
@@ -253,20 +207,6 @@ export function showSurface2Viewport() {
                 childList: true, 
                 subtree: true 
             });
-            
-            // Also observe the psyche-container specifically for the 3D model
-            const psycheContainer = iframeDoc.getElementById('psyche-container');
-            if (psycheContainer) {
-                observer.observe(psycheContainer, {
-                    childList: true,
-                    subtree: true,
-                    attributes: true
-                });
-                
-                // Ensure the 3D renderer resizes properly
-                const resizeEvent = new Event('resize');
-                window.dispatchEvent(resizeEvent);
-            }
         } catch (e) {
             console.error("Could not set up MutationObserver:", e);
         }
@@ -284,8 +224,10 @@ export function showSurface2Viewport() {
     ViewportStyling.addPulsingGlowEffect(viewportContainer);
     
     // Add event listener for close button
-    closeButton.addEventListener('click', hideSurface2Viewport);
-    
+    closeButton.addEventListener('click', () => {
+        ViewportStyling.createClosingAnimation(viewportContainer, destroyKidsViewport);
+    });
+        
     // Add event listener for Escape key
     document.addEventListener('keydown', handleKeyDown);
     
@@ -303,9 +245,9 @@ export function showSurface2Viewport() {
 }
 
 /**
- * Hides the surface2 viewport with closing animation.
+ * Hides the kids viewport with closing animation.
  */
-export function hideSurface2Viewport() {
+export function hideKidsViewport() {
     if (!viewportContainer) return;
     
     // Animate closing effect
@@ -314,9 +256,6 @@ export function hideSurface2Viewport() {
         // Reset opacity and scale for next time
         viewportContainer.style.opacity = 1;
         viewportContainer.style.transform = 'translate(-50%, -50%) scale(1)';
-        
-        // Show the menu when viewport is closed
-        document.body.classList.add("overlay-open");
     });
 }
 
@@ -325,16 +264,16 @@ export function hideSurface2Viewport() {
  */
 function handleKeyDown(e) {
     if (e.key === 'Escape') {
-        hideSurface2Viewport();
+        ViewportStyling.createClosingAnimation(viewportContainer, destroyKidsViewport);
     }
 }
 
 /**
  * Removes the viewport completely.
  */
-export function destroySurface2Viewport() {
+export function destroyKidsViewport() {
     if (viewportContainer) {
-        closeButton.removeEventListener('click', hideSurface2Viewport);
+        closeButton.removeEventListener('click', hideKidsViewport);
         document.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('resize', updateViewportSize);
         
@@ -356,9 +295,9 @@ export function destroySurface2Viewport() {
  * @param {number} width - Width in pixels
  * @param {number} height - Height in pixels
  */
-window.setSurface2ViewportSize = function(width, height) {
+window.setKidsViewportSize = function(width, height) {
     if (!viewportContainer) {
-        console.warn("Surface2 viewport is not currently active");
+        console.warn("Kids viewport is not currently active");
         return;
     }
     
@@ -371,65 +310,19 @@ window.setSurface2ViewportSize = function(width, height) {
     // Center the viewport
     viewportContainer.style.transform = 'translate(-50%, -50%)';
     
-    // Apply responsive scaling to content within the iframe
+    // Apply responsive scaling to container1
     if (iframe && iframe.contentDocument) {
         try {
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            const psycheContainer = iframeDoc.getElementById('psyche-container');
+            const container1 = iframeDoc.getElementById('container1');
             
-            if (psycheContainer) {
+            if (container1) {
                 // Apply scaling based on viewport width
                 const scale = Math.min(1, width / 1920); // Base scale on a 1920px reference
-                
-                // Create or update the style element
-                let styleEl = iframeDoc.getElementById('responsive-scaling');
-                if (!styleEl) {
-                    styleEl = iframeDoc.createElement('style');
-                    styleEl.id = 'responsive-scaling';
-                    iframeDoc.head.appendChild(styleEl);
-                }
-                
-                // Update the scaling styles
-                styleEl.textContent = `
-                    /* Responsive scaling for surface2 content */
-                    #psyche-container {
-                        width: 100% !important;
-                        height: ${Math.max(300, 50 * scale)}vh !important;
-                        max-width: 100% !important;
-                    }
-                    
-                    #header-h1 {
-                        font-size: ${Math.max(40, 90 * scale)}px !important;
-                    }
-                    
-                    #materials, #features, #dimensions, #comparable, #explore {
-                        width: 90% !important;
-                    }
-                    
-                    #inner-materials h1, #inner-features h1, #inner-dimensions h1, 
-                    #inner-comparable h1, #inner-explore h1 {
-                        font-size: ${Math.max(30, 60 * scale)}px !important;
-                    }
-                    
-                    #inner-materials p, #inner-features p, #inner-dimensions p, 
-                    #inner-comparable p, #inner-explore p {
-                        font-size: ${Math.max(18, 40 * scale)}px !important;
-                    }
-                    
-                    #comparable h3 {
-                        font-size: ${Math.max(25, 50 * scale)}px !important;
-                    }
-                    
-                    #comparable h4 {
-                        font-size: ${Math.max(20, 40 * scale)}px !important;
-                    }
-                `;
-                
+                container1.style.transform = `scale(${scale})`;
+                container1.style.transformOrigin = 'center top';
+                container1.style.width = `calc(100% / ${scale})`;
                 console.log(`Applied manual scaling: ${scale}`);
-                
-                // Trigger resize event for the 3D renderer
-                const resizeEvent = new Event('resize');
-                window.dispatchEvent(resizeEvent);
             }
         } catch (e) {
             console.error("Could not modify iframe content:", e);
@@ -443,9 +336,9 @@ window.setSurface2ViewportSize = function(width, height) {
  * Reset the viewport to responsive sizing
  * This can be called from the console in developer tools (F12)
  */
-window.resetSurface2ViewportSize = function() {
+window.resetKidsViewportSize = function() {
     if (!viewportContainer) {
-        console.warn("Surface2 viewport is not currently active");
+        console.warn("Kids viewport is not currently active");
         return;
     }
     

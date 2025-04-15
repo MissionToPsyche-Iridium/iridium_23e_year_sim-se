@@ -1,13 +1,13 @@
 /**
- * Escape Velocity Viewport Module
+ * Space Pic Viewport Module
  * 
- * This module handles loading the escape-velocity.html content in an iframe
+ * This module handles loading the photo.html content in an iframe
  * that appears on top of the Three.js scene.
  */
 
 import * as THREE from 'three';
 import gsap from 'gsap';
-import { handleReturnToGames, monkeyPatchReturnButtons } from '../../src/landing/viewportStyling.js';
+import { handleReturnToGames, monkeyPatchReturnButtons } from './viewportStyling.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;
@@ -15,26 +15,26 @@ let iframe = null;
 let closeButton = null;
 
 /**
- * Creates and shows the escape velocity game viewport with futuristic animations.
+ * Creates and shows the space pic viewport with futuristic animations.
  */
-export function showEscapeVelocityViewport() {
+export function showSpacePicViewport() {
     // If viewport already exists, just show it
     if (viewportContainer) {
         viewportContainer.style.display = 'flex';
         return;
     }
 
-    console.log("Creating escape velocity viewport");
+    console.log("Creating space pic viewport");
 
     // Create container for the viewport
     viewportContainer = document.createElement('div');
-    viewportContainer.id = 'escape-velocity-viewport-container';
+    viewportContainer.id = 'space-pic-viewport-container';
     viewportContainer.style.position = 'fixed';
     viewportContainer.style.top = '50%';
     viewportContainer.style.left = '50%';
     viewportContainer.style.transform = 'translate(-50%, -50%)';
     viewportContainer.style.width = '80%';
-    viewportContainer.style.maxWidth = '1440px';
+    viewportContainer.style.maxWidth = '1200px';
     viewportContainer.style.height = '80vh';
     viewportContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
     viewportContainer.style.border = '2px solid #007bff';
@@ -57,7 +57,7 @@ export function showEscapeVelocityViewport() {
     header.style.borderTopRightRadius = '8px';
     
     const title = document.createElement('h2');
-    title.textContent = 'Escape Velocity Game';
+    title.textContent = 'Psyche Space Pic';
     title.style.margin = '0';
     title.style.fontSize = '1.2rem';
     
@@ -97,9 +97,9 @@ export function showEscapeVelocityViewport() {
     header.appendChild(buttonsContainer);
     viewportContainer.appendChild(header);
     
-    // Create iframe to load the escape-velocity.html content
+    // Create iframe to load the photo.html content
     iframe = document.createElement('iframe');
-    iframe.src = './escapeVelocity/escape-velocity.html';
+    iframe.src = './spacepic/photo.html';
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';
@@ -139,7 +139,7 @@ export function showEscapeVelocityViewport() {
     }, "-=0.1");
     
     // Add event listener for close button
-    closeButton.addEventListener('click', hideEscapeVelocityViewport);
+    closeButton.addEventListener('click', hideSpacePicViewport);
     
     // Add event listener for return button to load games HTML in the current iframe
     returnButton.addEventListener('click', function(event) {
@@ -151,7 +151,7 @@ export function showEscapeVelocityViewport() {
         
         // Load the games HTML in the iframe
         iframe.src = './games/games.html';
-        console.log("Loading games HTML in escape velocity viewport");
+        console.log("Loading games HTML in space pic viewport");
     });
     
     // Add event listener for Escape key
@@ -162,18 +162,24 @@ export function showEscapeVelocityViewport() {
 }
 
 /**
- * Hides the escape velocity viewport with closing animation.
+ * Hides the space pic viewport with closing animation.
  */
-export function hideEscapeVelocityViewport() {
+export function hideSpacePicViewport() {
     if (!viewportContainer) return;
-
+    
+    // Animate closing
     gsap.to(viewportContainer, {
         opacity: 0,
         scale: 0.8,
         duration: 0.3,
         ease: "power2.in",
         onComplete: () => {
-            destroyEscapeVelocityViewport();
+            viewportContainer.style.display = 'none';
+            // Reset opacity and scale for next time
+            viewportContainer.style.opacity = 1;
+            viewportContainer.style.transform = 'translate(-50%, -50%) scale(1)';
+            
+            // Show the menu when viewport is closed
             document.body.classList.add("overlay-open");
         }
     });
@@ -184,16 +190,16 @@ export function hideEscapeVelocityViewport() {
  */
 function handleKeyDown(e) {
     if (e.key === 'Escape') {
-        hideEscapeVelocityViewport();
+        hideSpacePicViewport();
     }
 }
 
 /**
  * Removes the viewport completely.
  */
-export function destroyEscapeVelocityViewport() {
+export function destroySpacePicViewport() {
     if (viewportContainer) {
-        closeButton.removeEventListener('click', hideEscapeVelocityViewport);
+        closeButton.removeEventListener('click', hideSpacePicViewport);
         document.removeEventListener('keydown', handleKeyDown);
         document.body.removeChild(viewportContainer);
         viewportContainer = null;

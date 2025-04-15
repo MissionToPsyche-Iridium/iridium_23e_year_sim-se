@@ -15,7 +15,7 @@
  *   and sets up the navigation menu.
  */
 
-import { createTextMesh, loadModel } from './utils.js';
+import { createTextMesh, loadModel } from '../utils/utils.js';
 import { gsap } from 'gsap';
 
 let asteroidModel = null;

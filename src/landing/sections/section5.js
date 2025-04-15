@@ -2,9 +2,9 @@
  * Section 5 - Psyche Website Viewport
  */
 
-import { triggerButton3D, clickableModels, loadModel } from './utils.js';
-import { showWebsiteViewport } from '../../public/website/websiteViewport.js';
-import { getCurrentSection } from './sectionTracking.js';
+import { triggerButton3D, clickableModels, loadModel } from '../utils/utils.js';
+import { showWebsiteViewport } from '../ui/websiteViewport.js';
+import { getCurrentSection } from '../utils/sectionTracking.js';
 import * as THREE from 'three';
 
 let hasShownViewport = false;
