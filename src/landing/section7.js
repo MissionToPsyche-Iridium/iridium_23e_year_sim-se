@@ -111,7 +111,7 @@ export function loadSection7(scene, camera, sections, renderer) {
                     .7,
                     scene,
                     () => {
-                        showKidsViewport();
+                        showSurface2Viewport();
                         console.log("Surface button clicked.");
                     }
                 ).then(({ textMesh, buttonMesh }) => {
