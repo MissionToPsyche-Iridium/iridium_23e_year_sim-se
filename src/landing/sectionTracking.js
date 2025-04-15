@@ -25,7 +25,7 @@ import { hideNameViewport } from './psycheNameViewport.js';
 import { destroyGamesViewport } from './../../public/games/gamesViewport.js';
 import { hideKidsViewport } from './../../public/PsycheJR/kidsViewport.js';
 import { destroyYearViewport } from './section4.js';
-import { destroyWebsiteViewport } from '/src/landing/websiteViewport.js'
+import { destroyWebsiteViewport } from '../../public/website/websiteViewport.js'
 import { destroySurface2Viewport } from './../../public/PsycheJR/surface2Viewport.js'
 import { destroyLocation2Viewport } from './../../public/PsycheJR/location2Viewport.js'
 
