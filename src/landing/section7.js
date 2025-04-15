@@ -15,7 +15,7 @@
 
 import * as THREE from 'three';
 import { getCurrentSection } from './sectionTracking.js';
-import { createMenuItem, loadModel, triggerButton3D} from './utils.js';
+import { createMenuItem, loadModel, triggerButton3D, applyGlowEffect } from './utils.js';
 import { showSurface2Viewport } from './../../public/PsycheJR/surface2Viewport.js';
 
 /**
@@ -111,7 +111,7 @@ export function loadSection7(scene, camera, sections, renderer) {
                     .7,
                     scene,
                     () => {
-                        showKidsViewport();
+                        showSurface2Viewport();
                         console.log("Surface button clicked.");
                     }
                 ).then(({ textMesh, buttonMesh }) => {
