@@ -196,7 +196,6 @@ header {
     font-size: 40px;
 }
 
-
 /** div5/explore elements
 *
 */
@@ -270,7 +269,6 @@ footer {
     color: red;
     height: 30vh;
     width: 100%;
-    background-color: blue;
 }
 
 @keyframes colorChange{
@@ -290,7 +288,6 @@ footer {
         color: gold;
     }
 }
-
 
 /** media elements
 *
@@ -613,7 +610,6 @@ footer {
         color: red;
         height: 30vh;
         width: 100%;
-        background-color: blue;
     }
 }
 
@@ -629,3 +625,4 @@ footer {
     }
     
 }
+
