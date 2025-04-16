@@ -328,9 +328,6 @@
     </style>
 </head>
 <body>
-    <button id="back-button" class="nav-button" onclick="window.close()">BACK TO MAIN PAGE</button>
-    <button id="info-button" class="nav-button">i</button>
-    <button id="game-button" class="nav-button">PLAY GAME</button>
     <div id="model-container"></div>
     
     <div id="game-modal" class="modal">
@@ -415,17 +412,6 @@
     </div>
 
     <script>
-        document.getElementById('info-button').onclick = function() {
-            document.getElementById('tutorial-modal').style.display = 'block';
-        }
-
-        document.getElementById('game-button').onclick = function() {
-            document.getElementById('game-modal').style.display = 'block';
-            if (window.game) {
-                window.game.start('easy');
-            }
-        }
-
         function closeGame() {
             document.getElementById('game-modal').style.display = 'none';
             if (window.game) {

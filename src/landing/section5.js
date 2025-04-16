@@ -3,7 +3,7 @@
  */
 
 import { triggerButton3D, clickableModels, loadModel } from './utils.js';
-import { showWebsiteViewport } from './websiteViewport.js';
+import { showWebsiteViewport } from '../../public/website/websiteViewport.js';
 import { getCurrentSection } from './sectionTracking.js';
 import * as THREE from 'three';
 

@@ -459,8 +459,12 @@ export function monkeyPatchReturnButtons() {
     const returnButtons = document.querySelectorAll('button');
     
     // Filter to only return buttons (those with the ↩ character)
-    const actualReturnButtons = Array.from(returnButtons).filter(button => 
-        button.textContent === '↩' || button.innerHTML === '↩'
+    // Exclude buttons in the website-viewport-container
+    const actualReturnButtons = Array.from(returnButtons).filter(button => {
+        const isReturnButton = button.textContent === '↩' || button.innerHTML === '↩';
+        const isInWebsiteViewport = button.closest('#website-viewport-container') !== null;
+        return isReturnButton && !isInWebsiteViewport;
+    }
     );
     
     console.log("Found return buttons:", actualReturnButtons.length);
