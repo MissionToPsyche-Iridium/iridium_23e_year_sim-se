@@ -31,10 +31,12 @@ import { destroyWebsiteViewport } from '../../public/website/websiteViewport.js'
 import { destroySurface2Viewport } from './../../public/PsycheJR/surface2Viewport.js'
 import { destroyLocation2Viewport } from './../../public/PsycheJR/location2Viewport.js'
 import { destroyRefsViewport } from './../../public/refsViewport/referencesViewport.js'
+import { savedCameraPosition, savedCameraRotation } from '../../src/landing/section6.js'
 
 let camera, renderer, sections, currentSection = 1, scrollProgress = 1;
 let isAnimating = false; // Scroll lock flag
 let lastTouchY = 0;
+let currentCameraRotation = new THREE.Euler();
 
 const destroyHandlers = {   // format = sectionNumber: functionName
   0: destroyRefsViewport,
@@ -155,6 +157,26 @@ export function moveToSection(sectionIndex, lookAt = null) {
 
   const sectionPos = sections[sectionIndex].position;
   const duration = 2;
+  
+  // Camera rotation fix if traveling away from Section 6 with Iframe Open (by scrolling)
+  // Rotating back 90 degrees around y axis
+  // Check if traveling from section 6 to either 5 or 7
+  if( sectionIndex == 7 || sectionIndex == 5) {
+    // save rotation 
+    currentCameraRotation.copy(camera.rotation);
+    // check if the same or need to swap
+    if (currentCameraRotation != savedCameraRotation ){
+      // Animate camera rotation back to the saved rotation 
+      gsap.to(camera.rotation, {
+      duration: 1.5,
+      y: savedCameraRotation.y,
+      ease: "power2.out",
+      onComplete: () => {
+        console.log("Camera reset to initial position and rotation.");
+      }
+    });
+    }
+  }
 
   gsap.to(camera.position, {
     x: sectionPos.x,
