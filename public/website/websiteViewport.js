@@ -109,7 +109,11 @@ export function showWebsiteViewport() {
     // Create container for the viewport
     viewportContainer = document.createElement('div');
     viewportContainer.id = 'website-viewport-container';
-    ViewportStyling.applyViewportContainerStyles(viewportContainer);
+    ViewportStyling.applyViewportContainerStyles(viewportContainer, {
+        backgroundColor: 'rgba(0, 0, 0, 0.05)', // Very transparent background
+        borderColor: 'rgba(122, 95, 62, 0.3)',  // Semi-transparent border
+        boxShadow: '0 0 15px rgba(122, 95, 62, 0.3)' // Subtle glow
+    });
     
     // Set responsive dimensions
     const { width, maxWidth, height } = calculateViewportSize();
@@ -119,24 +123,45 @@ export function showWebsiteViewport() {
     
     // Create header with title and close button
     const header = document.createElement('div');
-    ViewportStyling.applyHeaderStyles(header);
+    ViewportStyling.applyHeaderStyles(header, {
+        backgroundColor: 'rgba(10, 10, 20, 0.2)',
+        gradientStart: 'rgba(10, 10, 20, 0.2)',
+        gradientEnd: 'rgba(20, 20, 40, 0.2)'
+    });
     
     const title = document.createElement('h2');
     title.textContent = 'Psyche Mission Website';
     ViewportStyling.applyTitleStyles(title);
     
+    // Create a container for the buttons
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.style.display = 'flex';
+    buttonsContainer.style.alignItems = 'center';
+    buttonsContainer.style.gap = '10px';
+    
+    // Create return button with arrow character
+    const returnButton = document.createElement('button');
+    returnButton.textContent = '↩';
+    ViewportStyling.applyReturnButtonStyles(returnButton);
+    
     closeButton = document.createElement('button');
     closeButton.textContent = '✕';
     ViewportStyling.applyCloseButtonStyles(closeButton);
     
+    // Add buttons to the container
+    buttonsContainer.appendChild(returnButton);
+    buttonsContainer.appendChild(closeButton);
+    
     header.appendChild(title);
-    header.appendChild(closeButton);
+    header.appendChild(buttonsContainer);
     viewportContainer.appendChild(header);
     
     // Create iframe to load the website content
     iframe = document.createElement('iframe');
-    iframe.src = '/public/website/index.html';  // Use absolute path from project root
-    ViewportStyling.applyIframeStyles(iframe);
+    iframe.src = '/website/index.html';  // Path relative to the server root
+    ViewportStyling.applyIframeStyles(iframe, {
+        backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
+    });
     
     // Add scrollbar hiding styles
     ViewportStyling.addScrollbarHidingStyles(document);
@@ -163,8 +188,15 @@ export function showWebsiteViewport() {
     ViewportStyling.addOpeningAnimations(viewportContainer, header, iframe);
     ViewportStyling.addPulsingGlowEffect(viewportContainer);
     
-    // Add event listener for close button
+    // Add event listeners for buttons
     closeButton.addEventListener('click', hideWebsiteViewport);
+    returnButton.addEventListener('click', () => {
+        // Navigate directly to the website index page
+        if (iframe) {
+            iframe.src = '/website/index.html';
+            console.log("Navigating to website index page");
+        }
+    });
     
     // Add event listener for Escape key
     document.addEventListener('keydown', handleKeyDown);

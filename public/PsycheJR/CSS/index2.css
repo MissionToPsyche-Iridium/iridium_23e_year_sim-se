@@ -17,7 +17,6 @@ File Start
 
 -->
 
-
 /*For Testing Delete before production*/
 
 #screen-width-box {
@@ -31,7 +30,6 @@ File Start
     border-radius: 5px;
     z-index: 9999;
 }
-
 
 
 
@@ -519,7 +517,6 @@ footer {
     }
 }
 
-
 /*media queries*/
 /*Mobile Phone*/
 @media (min-width: 360px) and (max-width: 767px) {
@@ -535,6 +532,9 @@ footer {
     #div3-btn, #div4-btn, #div5-btn, #div8-btn {
         font-size: 0.75rem;
     } 
+    button:hover {
+        font-size: 1rem !important;
+    }
 
     /** header elements
     *
@@ -547,7 +547,7 @@ footer {
         height: 20vh !important;
     }
     #page-header h1 {
-        margin-top: -3rem;
+        margin-top: 3rem;
         font-size: 1.5rem !important;
     }
 
@@ -577,6 +577,7 @@ footer {
     #div3 p{
         font-size: 0.75rem;
         margin-left: 7rem;
+        background-color: rgb(255, 255, 255, 0.6);
     }
     #div3-btn{
         padding: 3%;
@@ -650,10 +651,10 @@ footer {
     }
     #page-header {
         position: relative;
-        height: 10vh !important;
+        height: 15vh !important;
     }
     #page-header h1 {
-        margin-top: -4rem;
+        margin-top: 0rem;
         font-size: 2.5rem !important;
     }
 
@@ -1074,3 +1075,4 @@ footer {
         font-size: 50px;
     }
 }
+
