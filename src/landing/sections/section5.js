@@ -55,7 +55,8 @@ export function loadSection5(scene, camera, sections, renderer) {
           0.7,
           scene,
           () => {
-            showWebsiteViewport();
+            //showWebsiteViewport();
+            window.open('https://psyche.asu.edu/', '_blank');
             console.log("Psyche Jr button clicked.");
           }
         );

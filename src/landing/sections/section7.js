@@ -111,7 +111,8 @@ export function loadSection7(scene, camera, sections, renderer) {
                     .7,
                     scene,
                     () => {
-                        showSurface2Viewport();
+                        //showSurface2Viewport();
+                        window.open(resolvePath('/PsycheJR/surface2.html'));
                         console.log("Surface button clicked.");
                     }
                 ).then(({ textMesh, buttonMesh }) => {
