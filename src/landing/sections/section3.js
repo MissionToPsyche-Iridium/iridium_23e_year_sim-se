@@ -7,7 +7,7 @@
 
 import * as THREE from 'three';
 import { getCurrentSection } from '../utils/sectionTracking.js';
-import { triggerButton3D, createTextMesh, loadModel } from '../utils/utils.js';
+import { triggerButton3D, resolvePath, loadModel } from '../utils/utils.js';
 import { showKidsViewport, } from '../ui/kidsViewport.js'
 
 //let yearButton;
@@ -102,7 +102,7 @@ export function loadSection3(scene, camera, sections, renderer) {
 
         loadModel(
             "Jr",
-            "./../../res/models/Jr.glb",
+            resolvePath("res/models/Jr.glb"),
             modelPosition, // position
             9, // scale
             objRotation, // rotation
@@ -123,27 +123,6 @@ export function loadSection3(scene, camera, sections, renderer) {
                   console.log("Psyche Jr button clicked.");
               }
           ).then(({ textMesh, buttonMesh }) => {
-              // Store original material properties to restore when not hovering
-              
-              // const raycaster = new THREE.Raycaster();
-              // const mouse = new THREE.Vector2();
-
-              // window.addEventListener("mousemove", (event) => {
-              //   const rect = renderer.domElement.getBoundingClientRect();
-              //   mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-              //   mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-              
-              //   raycaster.setFromCamera(mouse, camera);
-              //   const intersects = raycaster.intersectObjects([buttonMesh]);
-              
-              //   if (intersects.length > 0) {
-              //     applyScaleEffect(textMesh, true); // hover in
-              //     renderer.domElement.style.cursor = "pointer";
-              //   } else {
-              //     applyScaleEffect(textMesh, false); // hover out
-              //     renderer.domElement.style.cursor = "default";
-              //   }              
-              // });
           });
 
           resolve(); // Resolve the promise when setup is complete

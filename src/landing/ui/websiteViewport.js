@@ -11,6 +11,7 @@
  */
 
 import * as ViewportStyling from './viewportStyling.js';
+import { resolvePath } from '../utils/utils.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;
@@ -157,7 +158,7 @@ export function showWebsiteViewport() {
     
     // Create iframe to load the website content
     iframe = document.createElement('iframe');
-    iframe.src = '/website/index.html';  // Path relative to the server root
+    iframe.src = resolvePath("website/index.html");  // Path relative to the server root
     ViewportStyling.applyIframeStyles(iframe, {
         backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
     });
@@ -192,7 +193,7 @@ export function showWebsiteViewport() {
     returnButton.addEventListener('click', () => {
         // Navigate directly to the website index page
         if (iframe) {
-            iframe.src = '/website/index.html';
+            iframe.src = resolvePath("website/index.html");
             console.log("Navigating to website index page");
         }
     });

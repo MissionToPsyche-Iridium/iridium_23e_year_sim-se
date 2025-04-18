@@ -6,7 +6,7 @@
  */
 import * as THREE from 'three';
 import { getCurrentSection } from '../utils/sectionTracking.js';
-import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from '../utils/utils.js';
+import { triggerButton3D, clickableModels, resolvePath, loadModel } from '../utils/utils.js';
 import {
     applyViewportContainerStyles,
     applyHeaderStyles,
@@ -234,7 +234,7 @@ export function loadSection4(scene, camera, sections, renderer) {
 
         loadModel(
             "balance",
-            "./../../res/models/balance_scale.glb",
+            resolvePath("res/models/balance_scale.glb"),
             modelPosition,
             .9,
             objRotation,

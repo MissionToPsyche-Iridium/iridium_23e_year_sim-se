@@ -1,3 +1,6 @@
+import { resolvePath } from '../utils/utils.js';
+
+
 let containerId = 'refs-viewport';
 let wrapperId = 'refs-wrapper'; 
 let iframeId = 'refs-iframe';   
@@ -71,7 +74,7 @@ export function showRefsViewport() {
   // Create iframe
   const iframe = document.createElement('iframe');
   iframe.id = iframeId;
-  iframe.src = '/refsViewport/disclaimer.html';
+  iframe.src = resolvePath("refsViewport/disclaimer.html");
   iframe.style.width = '100%';
   iframe.style.height = '100%';
   iframe.style.border = 'none';

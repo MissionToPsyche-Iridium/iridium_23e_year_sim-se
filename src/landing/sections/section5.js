@@ -2,7 +2,7 @@
  * Section 5 - Psyche Website Viewport
  */
 
-import { triggerButton3D, clickableModels, loadModel } from '../utils/utils.js';
+import { triggerButton3D, clickableModels, loadModel, resolvePath } from '../utils/utils.js';
 import { showWebsiteViewport } from '../ui/websiteViewport.js';
 import { getCurrentSection } from '../utils/sectionTracking.js';
 import * as THREE from 'three';
@@ -36,7 +36,7 @@ export function loadSection5(scene, camera, sections, renderer) {
       try {
         loadModel(
           "Satellite",
-          "./../../res/models/satellite.glb",
+          resolvePath("res/models/satellite.glb"),
           modelPosition, // position
           .75, // scale
           objRotation, // rotation

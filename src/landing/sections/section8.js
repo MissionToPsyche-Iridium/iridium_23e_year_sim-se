@@ -16,7 +16,7 @@
 
 import * as THREE from 'three';
 import { getCurrentSection } from '../utils/sectionTracking.js';
-import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from '../utils/utils.js';
+import { triggerButton3D, clickableModels, applyGlowEffect, loadModel,resolvePath } from '../utils/utils.js';
 import { showLocation2Viewport } from '../ui/location2Viewport.js';
 
 let hasShownViewport = false;
@@ -39,15 +39,14 @@ export function loadSection8(scene, camera, sections, renderer) {
       y:section8Coords.y - 3,
       z:section8Coords.z - 12
     }
-    console.log("map pin location: ", modelPosition);
     const rotation = { x: 0.2, y: 0, z: 0 };
     const objRotation = { x: -0.02, y: 0.5, z: 0 };
 
     return new Promise((resolve, reject) => {
       try {
         loadModel(
-          "controller",
-          "/res/models/navigation_pin.glb",
+          "location pin",
+          resolvePath("res/models/navigation_pin.glb"),
           modelPosition, // position
           1, // scale
           objRotation, // rotation

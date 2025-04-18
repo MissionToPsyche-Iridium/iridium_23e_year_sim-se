@@ -15,7 +15,7 @@
 
 import * as THREE from 'three';
 import { getCurrentSection } from '../utils/sectionTracking.js';
-import { createMenuItem, loadModel, triggerButton3D, applyGlowEffect } from '../utils/utils.js';
+import { resolvePath, loadModel, triggerButton3D, applyGlowEffect } from '../utils/utils.js';
 import { showSurface2Viewport } from '../ui/surface2Viewport.js';
 
 /**
@@ -93,8 +93,8 @@ export function loadSection7(scene, camera, sections, renderer) {
             try {
       
               loadModel(
-                  "Jr",
-                  "./../../res/models/PsycheSlice.glb",
+                  "Surface Slice",
+                  resolvePath("res/models/PsycheSlice.glb"),
                   modelPosition, // position
                   1.4, // scale
                   objRotation, // rotation

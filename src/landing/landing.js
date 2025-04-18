@@ -15,6 +15,7 @@
  * - updateDebugPanel(): Updates the on-screen debug panel with current camera data.
  * - animate(): Animation loop handling frame updates and rendering.
  */
+import '../imports.js';
 
 import * as THREE from 'three';
 import { enableTextInteractivity, enableModelClick } from './utils/utils.js';
@@ -165,9 +166,10 @@ function init() {
 
   let loadedCount = 0;
   const totalSections = loaders.length;
-
-  loaders.forEach(p => {
+  
+  loaders.forEach((p, i) => {
       p.then(() => {
+        console.log(`Section ${i} loaded`);
           loadedCount++;
           const progress = (loadedCount / totalSections) * 100;
           progressBar.style.width = `${progress}%`;
@@ -182,7 +184,7 @@ function init() {
               document.getElementById("cn-icon-wrapper").style.display = "flex";
           }
       }).catch(error => {
-          console.error("Error loading a section:", error);
+        console.error(`Error loading section ${i}:`, error);
       });
   });
 }

@@ -43,8 +43,30 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
 import gsap from 'gsap';
+
+
+/**
+ * Resolves a relative path using the base URL provided by Vite at runtime.
+ *
+ * Vite uses a base path that is configured in vite config. This is especially important
+ * when the application is deployed to a subdirectory, such as on GitHub Pages. In those
+ * environments, absolute paths like slash res slash models slash file will break unless 
+ * the correct base path is included.
+ *
+ * This function takes a relative path and prepends the base path automatically by using
+ * import dot meta dot env dot BASE_URL. This ensures all file references work correctly
+ * across development, preview, and production.
+ *
+ * Use this for iframe sources, font files, shader files, model loaders, and any other 
+ * asset referenced by string paths in JavaScript.
+ *
+ * @param {string} relativePath A path relative to the public root, such as res slash fonts slash font dot json
+ * @returns {string} A complete path with the correct base prepended
+ */
+export function resolvePath(relativePath) {
+  return `${import.meta.env.BASE_URL}${relativePath}`;
+}
 
 /*
  * modelCache (Map): Caches loaded 3D models to optimize performance and resource usage.
@@ -129,7 +151,7 @@ export async function createTextMesh(
     bev_thickness = 0.03) {  
   return new Promise((resolve, reject) => {
     const fontLoader = new FontLoader();
-    fontLoader.load('./../../res/font/Genos_Bold.json', async (font) => {
+    fontLoader.load(resolvePath("res/font/Genos_Bold.json"), async (font) => {
       try {
         const textGeometry = new TextGeometry(text, {
           font: font,
@@ -143,8 +165,8 @@ export async function createTextMesh(
           bevelSegments: 5
         });
 
-        const vertexShader = await loadShader('./../../res/shaders/textVertexShader.glsl');
-        const fragmentShader = await loadShader('./../../res/shaders/textFragmentShader.glsl');
+        const vertexShader = await loadShader(resolvePath("res/shaders/textVertexShader.glsl"));
+        const fragmentShader = await loadShader(resolvePath("res/shaders/textFragmentShader.glsl"));
         const textMaterial = new THREE.ShaderMaterial({
           uniforms: {
             textColor: { value: new THREE.Color(color) },
@@ -350,7 +372,7 @@ export function createMenuItem(text, position, scene, onClick, size = 0.5) {
   const textMesh = new THREE.Mesh();
 
   // Load the custom font for text geometry
-  fontLoader.load('./../../res/font/GenosThin_Regular.json', (font) => {
+  fontLoader.load(resolvePath("res/font/GenosThin_Regular.json"), (font) => {
     // Create text geometry with beveling and depth for a 3D look
     const textGeometry = new TextGeometry(text, {
       font: font,
@@ -605,7 +627,7 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
   return new Promise((resolve, reject) => {
     const fontLoader = new FontLoader();
 
-    fontLoader.load('./../../res/font/GenosThin_Regular.json', async (font) => {
+    fontLoader.load(resolvePath("res/font/GenosThin_Regular.json"), async (font) => {
       try {
         const textGeometry = new TextGeometry(label, {
           font: font,
@@ -622,8 +644,9 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
         textGeometry.computeBoundingBox();
         textGeometry.center();
 
-        const vertexShader = await loadShader('/res/shaders/textVertexShader.glsl');
-        const fragmentShader = await loadShader('/res/shaders/textFragmentShader.glsl');
+        const vertexShader = await loadShader(resolvePath("res/shaders/textVertexShader.glsl"));
+        const fragmentShader = await loadShader(resolvePath("res/shaders/textFragmentShader.glsl"));
+        
 
         const textMaterial = new THREE.ShaderMaterial({
           uniforms: {

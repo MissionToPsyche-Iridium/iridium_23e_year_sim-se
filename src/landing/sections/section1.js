@@ -15,7 +15,7 @@
  *   and sets up the navigation menu.
  */
 
-import { createTextMesh, loadModel } from '../utils/utils.js';
+import { createTextMesh, loadModel,resolvePath } from '../utils/utils.js';
 import { gsap } from 'gsap';
 
 let asteroidModel = null;
@@ -78,7 +78,7 @@ export function loadSection1(scene, camera, sections) {
 
     loadModel(
       "asteroid",
-      "/res/models/psyche_new.glb",
+      resolvePath("res/models/psyche_new.glb"),
       { x: 80, y: 60, z: 20 },
       6,
       { x: 0, y: 0, z: 0 },

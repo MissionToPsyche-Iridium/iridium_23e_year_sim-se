@@ -78,7 +78,7 @@ export function showNameViewport() {
     viewportContainer.appendChild(header);
     // Create iframe to load the balance.html content
     iframe = document.createElement('iframe');
-    iframe.src = '/psycheName/psycheName.html';
+    iframe.src = `${import.meta.env.BASE_URL}psycheName/psycheName.html`;
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';

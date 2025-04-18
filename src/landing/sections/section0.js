@@ -13,7 +13,7 @@
  * - loadSection0(): Initializes the "References" section with text, menu, and badge.
  */
 
-import { createTextMesh, createMenu } from '../utils/utils.js';
+import { createTextMesh, createMenu, resolvePath } from '../utils/utils.js';
 import { showRefsViewport, loadRefContent } from '../ui/referencesViewport.js';
 
 export function loadSection0(scene, camera, sections) {
@@ -25,7 +25,6 @@ export function loadSection0(scene, camera, sections) {
       y: refCoords.y + 6, 
       z: refCoords.z - 13
     }
-    console.log("TMP", textMeshPosition);
 
     const mainTextRotation = { x: 0, y: 0.1, z: 0 };
 
@@ -40,13 +39,13 @@ export function loadSection0(scene, camera, sections) {
       0.03); // bevel thickness
 
       const menuItems = [
-        { text: "Disclaimer", onClick: () => loadRefContent("/refsViewport/disclaimer.html") },
-        { text: "Dev & Contributors", onClick: () => loadRefContent("/refsViewport/dev.html") },
-        { text: "Acknowledgments", onClick: () => loadRefContent("/refsViewport/thanks.html") },
-        { text: "Licensing", onClick: () => loadRefContent("/refsViewport/license.html") },
-        { text: "Third-Party Assets", onClick: () => loadRefContent("/refsViewport/assets.html") },
-        { text: "Technical References", onClick: () => loadRefContent("/refsViewport/technical.html") },
-        { text: "Contact / Support", onClick: () => loadRefContent("/refsViewport/contact.html") },
+        { text: "Disclaimer", onClick: () => loadRefContent(resolvePath("refsViewport/disclaimer.html")) },
+        { text: "Dev & Contributors", onClick: () => loadRefContent(resolvePath("refsViewport/dev.html")) },
+        { text: "Acknowledgments", onClick: () => loadRefContent(resolvePath("refsViewport/thanks.html")) },
+        { text: "Licensing", onClick: () => loadRefContent(resolvePath("refsViewport/license.html")) },
+        { text: "Third Party Assets", onClick: () => loadRefContent(resolvePath("refsViewport/assets.html")) },
+        { text: "Technical References", onClick: () => loadRefContent(resolvePath("refsViewport/technical.html")) },
+        { text: "Contact / Support", onClick: () => loadRefContent(resolvePath("refsViewport/contact.html")) },
       ];
       
     createMenu(menuItems, textMeshPosition, mainTextRotation, scene);

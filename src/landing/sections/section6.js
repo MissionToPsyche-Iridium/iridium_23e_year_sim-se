@@ -12,7 +12,7 @@
 
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import { triggerButton3D, clickableModels, applyGlowEffect, loadModel } from '../utils/utils.js';
+import { triggerButton3D, clickableModels, applyGlowEffect, loadModel, resolvePath } from '../utils/utils.js';
 import { getCurrentSection } from '../utils/sectionTracking.js';
 import { showGamesViewport, hideGamesViewport } from '../ui/gamesViewport.js';
 
@@ -59,7 +59,7 @@ export function loadSection6(scene, camera, sections, renderer) {
     try {
       loadModel(
         "controller",
-        "./../../res/models/arcade_controller.glb",
+        resolvePath("res/models/arcade_controller.glb"),
         modelPosition,
         2,
         objRotation,
