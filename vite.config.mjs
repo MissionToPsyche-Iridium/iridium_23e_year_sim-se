@@ -3,7 +3,7 @@ import wasm from 'vite-plugin-wasm';
 import topLevelAwait from 'vite-plugin-top-level-await';
 
 export default defineConfig({
-  base: '/iridium_23e_year_sim-se/', 
+  base: '/hosttest/', 
   plugins: [
     wasm(),
     topLevelAwait()
@@ -15,6 +15,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     emptyOutDir: true,
-    chunkSizeWarningLimit: 1500 
+    chunkSizeWarningLimit: 1500, 
+    sourcemap: true
   }
 });
