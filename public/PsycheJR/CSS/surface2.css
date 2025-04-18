@@ -155,7 +155,7 @@ header {
     margin-left: auto;
     margin-top: 10%;
     border-radius: 3rem;
-    background-image: url(/img/psyche-wide.png);
+    background-image: url(../img/psyche-wide.png);
     background-size: cover;
     background-repeat: no-repeat;
 }

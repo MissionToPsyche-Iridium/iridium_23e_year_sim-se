@@ -143,7 +143,8 @@ export function showLocation2Viewport() {
     
     // Create iframe to load the location2 content
     iframe = document.createElement('iframe');
-    iframe.src = '/PsycheJR/location2.html';  // Use absolute path from project root
+    iframe.src = resolvePath("/PsycheJR/location2.html"); 
+    //iframe.src = '/PsycheJR/location2.html';  // Use absolute path from project root
     ViewportStyling.applyIframeStyles(iframe, {
         backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
     });

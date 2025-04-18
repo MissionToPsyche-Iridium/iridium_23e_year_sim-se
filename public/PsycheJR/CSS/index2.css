@@ -484,6 +484,44 @@ header {
     filter: blur(1.5rem);
 }
 
+#psycheJr {
+    height: 700px;
+    background-color: purple;
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
+    width: 90%;
+    border-radius: 3rem;
+    background-image: url(../img/Rocket.svg);
+    background-size: 50%;
+    background-position-y: -160px;
+    background-repeat: no-repeat;
+}
+
+#psycheJr p {
+    margin-top: 2rem;
+}
+
+#psycheJr-btn {
+    padding: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 1rem;
+    cursor: pointer;
+    position: relative;
+    background-color: Purple;
+    border: 0.25rem solid #f9a000;
+    color: white;
+    font-size: 40px;
+    grid-row: 3;
+}
+
+#psycheJr-btn:hover {
+    color: #f9a000;
+    font-size: 55px;
+    transition: ease-in-out 1s;
+}
+
 /** footer elements
 *
 */
