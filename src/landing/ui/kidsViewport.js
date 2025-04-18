@@ -176,7 +176,7 @@ export function showKidsViewport() {
     
     // Create iframe to load the kids content
     iframe = document.createElement('iframe');
-    iframe.src = '/PsycheJR/kids.html';  // Use absolute path from project root
+    iframe.src = resolvePath("/PsycheJR/kids.html");  // Use absolute path from project root
     ViewportStyling.applyIframeStyles(iframe);
     
     // Add scrollbar hiding styles

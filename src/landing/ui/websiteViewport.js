@@ -158,7 +158,10 @@ export function showWebsiteViewport() {
     
     // Create iframe to load the website content
     iframe = document.createElement('iframe');
-    iframe.src = resolvePath("website/index.html");  // Path relative to the server root
+    //iframe.src = resolvePath("website/index.html");  // Path relative to the server root
+    //iframe.src = resolvePath("https://psyche.asu.edu/"); //corrected path to psyche.asu.edu
+    window.open('https://psyche.asu.edu/', '_blank');
+
     ViewportStyling.applyIframeStyles(iframe, {
         backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
     });
