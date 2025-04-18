@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
 import { handleReturnToGames, monkeyPatchReturnButtons } from '../../src/landing/viewportStyling.js';
+import { resolvePath } from '../utils/utils.js';
 
 let viewportContainer = null;
 let iframe = null;
@@ -97,7 +98,7 @@ export function showBalanceViewport() {
 
     // Create iframe
     iframe = document.createElement('iframe');
-    iframe.src = './PsycheJR/kids.html';
+    iframe.src = resolvePath("PsycheJR/kids.html");
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     iframe.style.border = 'none';

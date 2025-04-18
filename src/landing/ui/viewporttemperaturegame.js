@@ -1,5 +1,6 @@
 import gsap from 'gsap';
 import { handleReturnToGames, monkeyPatchReturnButtons } from './viewportStyling.js';
+import { resolvePath } from '../utils/utils.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;

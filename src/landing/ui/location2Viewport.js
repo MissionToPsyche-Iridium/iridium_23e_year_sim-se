@@ -11,6 +11,7 @@
  */
 
 import * as ViewportStyling from '../ui/viewportStyling.js';
+import { resolvePath } from '../utils/utils.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;

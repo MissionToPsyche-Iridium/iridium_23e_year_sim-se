@@ -14,6 +14,7 @@ import gsap from 'gsap';
 import * as ViewportStyling from './viewportStyling.js';
 import { showTemperatureGameViewport } from './viewporttemperaturegame.js';
 import { savedCameraPosition, savedCameraRotation } from '../sections/section6.js';
+import { resolvePath } from '../utils/utils.js';
 
 // Keep track of the viewport DOM elements
 let viewportContainer = null;
@@ -159,7 +160,7 @@ export function showGamesViewport(camera) {
     
     // Create iframe to load the games content
     iframe = document.createElement('iframe');
-    iframe.src = '/games/games.html';  // Use absolute path from project root
+    iframe.src = resolvePath("/games/games.html");  // Use absolute path from project root
     ViewportStyling.applyIframeStyles(iframe, {
         backgroundColor: 'rgba(0, 0, 0, 0.0)' // Completely transparent background
     });

@@ -6,6 +6,7 @@
  */
 
 import gsap from 'gsap';
+import { resolvePath } from '../utils/utils.js';
 
 /**
  * Applies common styles to a viewport container
