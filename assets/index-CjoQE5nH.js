@@ -20565,7 +20565,7 @@ void main() {
   ft = ln.registerPlugin(um) || ln;
   ft.core.Tween;
   ht = function(r) {
-    return `/hosttest/${r}`;
+    return `/iridium_23e_year_sim-se/${r}`;
   };
   const Bl = /* @__PURE__ */ new Map(), Ku = [], Ts = new br(), xa = new ee();
   let Li = null;
@@ -20822,7 +20822,7 @@ void main() {
     const r = document.createElement("div");
     r.style.display = "flex", r.style.justifyContent = "space-between", r.style.alignItems = "center", r.style.padding = "1px 2px", r.style.backgroundColor = "rbga(0, 0, 0, 0.3)", r.style.color = "white", r.style.borderTopLeftRadius = "20px", r.style.borderTopRightRadius = "20px";
     const e = document.createElement("h2");
-    e.style.fontSize = "1.2rem", Vt = document.createElement("button"), Vt.textContent = "\u2715", Vt.style.background = "none", Vt.style.border = "none", Vt.style.color = "white", Vt.style.fontSize = "1.5rem", Vt.style.cursor = "pointer", Vt.style.padding = "0 5px", Vt.style.lineHeight = "1", r.appendChild(Vt), at.appendChild(r), tn = document.createElement("iframe"), tn.src = "/hosttest/psycheName/psycheName.html", tn.style.width = "100%", tn.style.height = "100%", tn.style.border = "none", tn.style.backgroundColor = "#222", tn.onerror = () => {
+    e.style.fontSize = "1.2rem", Vt = document.createElement("button"), Vt.textContent = "\u2715", Vt.style.background = "none", Vt.style.border = "none", Vt.style.color = "white", Vt.style.fontSize = "1.5rem", Vt.style.cursor = "pointer", Vt.style.padding = "0 5px", Vt.style.lineHeight = "1", r.appendChild(Vt), at.appendChild(r), tn = document.createElement("iframe"), tn.src = "/iridium_23e_year_sim-se/psycheName/psycheName.html", tn.style.width = "100%", tn.style.height = "100%", tn.style.border = "none", tn.style.backgroundColor = "#222", tn.onerror = () => {
       console.error("Failed to load iframe content");
     }, tn.onload = () => {
       console.log("Iframe loaded successfully");
@@ -20880,7 +20880,7 @@ void main() {
     r.key === "Escape" && So();
   }
   const ST = "modulepreload", MT = function(r) {
-    return "/hosttest/" + r;
+    return "/iridium_23e_year_sim-se/" + r;
   }, dd = {}, vr = function(e, t, n) {
     let i = Promise.resolve();
     if (t && t.length > 0) {
@@ -21471,7 +21471,7 @@ void main() {
     2: So,
     3: () => {
       vr(async () => {
-        const { hideKidsViewport: r } = await import("./kidsViewport-CekiTOB7.js");
+        const { hideKidsViewport: r } = await import("./kidsViewport-DNpAs2O_.js");
         return {
           hideKidsViewport: r
         };
@@ -21604,11 +21604,11 @@ void main() {
           }), b.addEventListener("mouseout", () => {
             b.style.backgroundColor = "transparent", b.style.opacity = "1", b.style.color = "#00aaff";
           }), b.addEventListener("click", (A) => {
-            A.stopPropagation(), w.name === "PsycheJR" ? vr(() => import("./kidsViewport-CekiTOB7.js"), []).then((P) => {
+            A.stopPropagation(), w.name === "PsycheJR" ? vr(() => import("./kidsViewport-DNpAs2O_.js"), []).then((P) => {
               P.showKidsViewport();
-            }) : w.name === "Escape Velocity" ? vr(() => import("./viewportescapevelocity-CNCDPpFY.js"), []).then((P) => {
+            }) : w.name === "Escape Velocity" ? vr(() => import("./viewportescapevelocity-BfPiRdz6.js"), []).then((P) => {
               P.showEscapeVelocityViewport();
-            }) : w.name === "SpacePic" && vr(() => import("./viewportspacepic-D7QmEwH2.js"), []).then((P) => {
+            }) : w.name === "SpacePic" && vr(() => import("./viewportspacepic-DOsIqmGW.js"), []).then((P) => {
               P.showSpacePicViewport();
             }), document.body.classList.remove("overlay-open");
           }), y.appendChild(b);
@@ -21816,7 +21816,7 @@ void main() {
           console.log("loaded model");
         }), Cr("EXPLORE THE PSYCHE Jr KIDS EXPERIENCE", c, h, 0.7, r, () => {
           vr(async () => {
-            const { showKidsViewport: d } = await import("./kidsViewport-CekiTOB7.js");
+            const { showKidsViewport: d } = await import("./kidsViewport-DNpAs2O_.js");
             return {
               showKidsViewport: d
             };
@@ -22029,7 +22029,7 @@ void main() {
         const p = new rp(16777215, 0.5);
         p.userData.section9Element = true, r.add(p), c.push(p), Jc(l, () => {
           vr(async () => {
-            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-CNCDPpFY.js");
+            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-BfPiRdz6.js");
             return {
               showEscapeVelocityViewport: v
             };
@@ -22040,7 +22040,7 @@ void main() {
           });
         }), Jc(g, () => {
           vr(async () => {
-            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-CNCDPpFY.js");
+            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-BfPiRdz6.js");
             return {
               showEscapeVelocityViewport: v
             };
