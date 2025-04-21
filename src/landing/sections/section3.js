@@ -8,7 +8,6 @@
 import * as THREE from 'three';
 import { getCurrentSection } from '../utils/sectionTracking.js';
 import { triggerButton3D, resolvePath, loadModel } from '../utils/utils.js';
-import { showKidsViewport, } from '../ui/kidsViewport.js'
 
 //let yearButton;
 //let buttonLabel;
@@ -63,75 +62,80 @@ function calculateResponsiveValues() {
 }
 
 export function loadSection3(scene, camera, sections, renderer) {
-  return new Promise((resolve, reject) => {
-      const section3Coords = sections[3]?.position;
-      if (!section3Coords) {
-          console.error("Section 3 position not found.");
-          reject("Section 3 position not found.");
-          return;
-      }
-
+    return new Promise((resolve, reject) => {
+        const section3Coords = sections[3]?.position;
+        if (!section3Coords) {
+            console.error("Section 3 position not found.");
+            reject("Section 3 position not found.");
+            return;
+        }
+  
         const directionalLight = new THREE.DirectionalLight(0x7a5f3e, 15);
         directionalLight.position.set(-150, 150, 13);
-
+  
         const target = new THREE.Object3D();
-      target.position.set(-150, 145, -20); // Set the target position
-
-      // Set the target of the light
-      directionalLight.target = target;
-			scene.add(directionalLight);
-
-      // const { posX, posY, posZ, buttonScale, labelScale } = calculateResponsiveValues();
-
-      const buttonPos = {
-        x: section3Coords.x,
-        y: section3Coords.y + 2,
-        z: section3Coords.z - 12,
-      };
-
-      const modelPosition = {
-        x: section3Coords.x,
-        y: section3Coords.y - 5,
-        z: section3Coords.z - 15,
-      };
-
-      const rotation = { x: 0.2, y: 0, z: 0 };
-      const objRotation = { x: 0.2, y: 0, z: 0 };
-
-      try {
-
-        loadModel(
-            "Jr",
-            resolvePath("res/models/Jr.glb"),
-            modelPosition, // position
-            9, // scale
-            objRotation, // rotation
-            null, // animation
-            scene, // scene
-            () => {  // callback fx
-            console.log("loaded model");
-            });
-
+        target.position.set(-150, 145, -20); // Set the target position
+  
+        directionalLight.target = target;
+        scene.add(directionalLight);
+  
+        const buttonPos = {
+          x: section3Coords.x,
+          y: section3Coords.y + 2,
+          z: section3Coords.z - 12,
+        };
+  
+        const modelPosition = {
+          x: section3Coords.x,
+          y: section3Coords.y - 5,
+          z: section3Coords.z - 15,
+        };
+  
+        const rotation = { x: 0.2, y: 0, z: 0 };
+        const objRotation = { x: 0.2, y: 0, z: 0 };
+  
+        try {
+          loadModel(
+              "Jr",
+              resolvePath("res/models/Jr.glb"),
+              modelPosition,
+              9,
+              objRotation,
+              null,
+              scene,
+              () => {
+                console.log("loaded model");
+              }
+          );
+  
           triggerButton3D(
               "EXPLORE THE PSYCHE Jr KIDS EXPERIENCE",
               buttonPos,
               rotation,
-              .7,
+              0.7,
               scene,
               () => {
-                  showKidsViewport();
-                  console.log("Psyche Jr button clicked.");
+                  import('../ui/kidsViewport.js')
+                    .then(({ showKidsViewport }) => {
+                        showKidsViewport();
+                        console.log("Psyche Jr button clicked.");
+                    })
+                    .catch(err => {
+                        console.error("Failed to load kidsViewport:", err);
+                    });
               }
           ).then(({ textMesh, buttonMesh }) => {
+            // No-op for now
           });
-
-          resolve(); // Resolve the promise when setup is complete
-      } catch (err) {
-          console.error("Error setting up Section 3:", err);
-          reject(err); // Reject the promise if there's an error
-      }
-  });
-}
+  
+          resolve();
+        } catch (err) {
+            console.error("Error setting up Section 3:", err);
+            reject(err);
+        }
+    });
+  }
+  
 
 
 export function renderSection3(camera, scene) {

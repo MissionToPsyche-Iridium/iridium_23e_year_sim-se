@@ -25,7 +25,6 @@ import { showRefsViewport } from '../ui/referencesViewport.js';
 // import iframe destroy functions to destroy iframes if user navigates away from a section
 import { hideNameViewport } from '../ui/psycheName.js';
 import { destroyGamesViewport } from '../ui/gamesViewport.js';
-import { hideKidsViewport } from '../ui/kidsViewport.js';
 import { destroyYearViewport } from '../sections/section4.js';
 import { destroyWebsiteViewport } from '../ui/websiteViewport.js';
 import { destroySurface2Viewport } from '../ui/surface2Viewport.js';
@@ -37,16 +36,25 @@ let camera, renderer, sections, currentSection = 1, scrollProgress = 1;
 let isAnimating = false; // Scroll lock flag
 let lastTouchY = 0;
 
-const destroyHandlers = {   // format = sectionNumber: functionName
+const destroyHandlers = {
   0: destroyRefsViewport,
   2: hideNameViewport,
-  3: hideKidsViewport,
+  3: () => {
+    import('../ui/kidsViewport.js')
+      .then(({ hideKidsViewport }) => {
+        hideKidsViewport();
+      })
+      .catch(err => {
+        console.error("Failed to load kidsViewport for destruction:", err);
+      });
+  },
   4: destroyYearViewport,
   5: destroyWebsiteViewport,
   6: destroyGamesViewport,
   7: destroySurface2Viewport,
   8: destroyLocation2Viewport
 };
+
 
 let lastSection = currentSection;
 

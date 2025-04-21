@@ -6,7 +6,6 @@ import * as THREE from 'three';
 import { getCurrentSection } from '../utils/sectionTracking.js';
 import { makeModelClickable, loadModel } from '../utils/utils.js';
 import gsap from 'gsap';
-import { showEscapeVelocityViewport, hideEscapeVelocityViewport } from '../../../public/escapeVelocity/viewportescapevelocity.js';
 
 let section9Elements = [];
 let escapeVelocityButton;
@@ -67,13 +66,25 @@ export function loadSection9(scene, camera, sections, renderer) {
 
             // Make the button clickable
             makeModelClickable(escapeVelocityButton, () => {
-                showEscapeVelocityViewport();
+                import('../../../public/escapeVelocity/viewportescapevelocity.js')
+                    .then(({ showEscapeVelocityViewport }) => {
+                        showEscapeVelocityViewport();
+                    })
+                    .catch(err => {
+                        console.error("Failed to load Escape Velocity viewport:", err);
+                    });
             });
-
-            // Make the label clickable too
+            
             makeModelClickable(label, () => {
-                showEscapeVelocityViewport();
+                import('../../../public/escapeVelocity/viewportescapevelocity.js')
+                    .then(({ showEscapeVelocityViewport }) => {
+                        showEscapeVelocityViewport();
+                    })
+                    .catch(err => {
+                        console.error("Failed to load Escape Velocity viewport:", err);
+                    });
             });
+            
 
             // Add hover effect to the button
             let isHovered = false;

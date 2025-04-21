@@ -6,7 +6,6 @@
 
 import './landing/ui/referencesViewport.js';
 import './landing/utils/utils.js';
-import './landing/ui/kidsViewport.js';
 import './landing/ui/psycheName.js';
 import './landing/ui/nav.js';
 import './landing/sections/section0.js';
