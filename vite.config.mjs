@@ -12,7 +12,7 @@ export default defineConfig({
     include: ['three']
   },
   build: {
-    outDir: 'dist',
+    outDir: 'docs',
     assetsDir: 'assets',
     emptyOutDir: true,
     chunkSizeWarningLimit: 1500, 
