@@ -568,11 +568,15 @@ footer {
     #psycheJr {
         background-size: contain;
         background-position-y: 100px;
+        background-position-x: 50px;
+        background-size: 70%;
         height: auto;
     }
 
     #psycheJr p {
         width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
