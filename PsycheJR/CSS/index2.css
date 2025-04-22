@@ -567,9 +567,6 @@ footer {
 
     #psycheJr {
         background-size: contain;
-        background-position-y: 70px;
-        background-position-x: 50px;
-        background-size: 70%;
         height: auto;
     }
 
@@ -688,6 +685,12 @@ footer {
         background-color: rgba(49, 49, 49, 0.5);
     }
 
+    #psycheJr {
+        background-position-y: 2rem;
+        background-position-x: 1rem;
+        background-size: 100%;
+    }
+
     footer {
         height: 10vh !important;
     }
@@ -799,6 +802,12 @@ footer {
         margin-top: 3rem;
         margin-bottom: 3rem;
         background-color: rgba(49, 49, 49, 0.5);
+    }
+
+    #psycheJr {
+        background-position-y: -2rem;
+        background-position-x: 1rem;
+        background-size: 100%;
     }
 
     footer {
