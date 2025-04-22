@@ -22,6 +22,7 @@ import { enableTextInteractivity, enableModelClick } from './utils/utils.js';
 import { createStarfield, loadSun } from './scene/starfield.js';
 import { initSectionTracking, getCurrentSection, onResize } from './utils/sectionTracking.js';
 import { animateScrollIndicator, setupNavigation } from './ui/nav.js';
+import { ShootingStarManager } from './scene/shootingStars.js';
 
 import { loadSection0 } from './sections/section0.js';
 import { loadSection1 } from './sections/section1.js';
@@ -39,6 +40,9 @@ import { loadSection9, renderSection9 } from './sections/section9.js';
  * window resize listener
  */
 let camera, renderer;
+let shootingStarManager;
+let starSpawnTimer = 0;
+const clock = new THREE.Clock(); 
 
 /*
 * Initializes the Three.js scene, camera, renderer, and UI elements.
@@ -130,6 +134,14 @@ function init() {
   function animate() {
     requestAnimationFrame(animate);
     updateDebugPanel();
+    if (shootingStarManager) {
+      starSpawnTimer += delta;
+      if (starSpawnTimer > 1.5 + Math.random() * 1.5) {
+        shootingStarManager.spawnStar();
+        starSpawnTimer = 0;
+      }
+      shootingStarManager.update(delta);
+    }
     if (composer) {
       composer.render();
     } else {
