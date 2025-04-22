@@ -293,7 +293,7 @@ footer {
 /** media elements
 *
 */
-@media (min-width: 350px) {
+@media (min-width: 300px) {
     #comparable {
         width: 100%;
         margin-right: auto;
@@ -344,7 +344,8 @@ footer {
     }
 
     footer {
-        margin-top: 120%
+        margin-top: 120%;
+        height: 20vh !important;
     }
 }
 
