@@ -567,6 +567,7 @@ footer {
 
     #psycheJr {
         background-size: contain;
+        background-position-y: 0px;
     }
 }
 
