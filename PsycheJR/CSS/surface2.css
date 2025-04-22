@@ -294,6 +294,12 @@ footer {
 *
 */
 @media (min-width: 300px) {
+    #header-h1 {
+        margin-top: 3rem;
+        width: 90%;
+        font-size: 4rem;
+    }
+
     #comparable {
         width: 100%;
         margin-right: auto;
