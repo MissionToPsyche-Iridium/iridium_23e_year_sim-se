@@ -297,6 +297,8 @@ footer {
     #header-h1 {
         margin-top: 3rem;
         width: 90%;
+        margin-right: auto;
+        margin-left: auto;
         font-size: 4rem;
     }
 
