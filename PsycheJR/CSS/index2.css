@@ -584,7 +584,7 @@ footer {
     *
     */
     header{
-        height: 5vh !important;
+        height: 50vh !important;
     }
     #page-header {
         position: relative;
