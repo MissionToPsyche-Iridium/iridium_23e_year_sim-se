@@ -687,6 +687,10 @@ footer {
         margin-bottom: 3rem;
         background-color: rgba(49, 49, 49, 0.5);
     }
+
+    footer {
+        height: 10vh !important;
+    }
 }
 
 @media (min-width: 360px) and (max-width: 767px) {
@@ -795,6 +799,10 @@ footer {
         margin-top: 3rem;
         margin-bottom: 3rem;
         background-color: rgba(49, 49, 49, 0.5);
+    }
+
+    footer {
+        height: 10vh !important;
     }
 }
 
