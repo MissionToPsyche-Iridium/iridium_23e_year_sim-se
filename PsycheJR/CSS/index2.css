@@ -699,9 +699,12 @@ footer {
     p {
         font-size: 1rem !important;
     }
-    #div3-btn, #div4-btn, #div5-btn, #div8-btn {
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
         font-size: 0.75rem;
     } 
+    button:hover {
+        font-size: 0.8rem;
+    }
 
     /** header elements
     *
@@ -711,7 +714,7 @@ footer {
     }
     #page-header {
         position: relative;
-        height: 20vh !important;
+        height: 30vh !important;
     }
     #page-header h1 {
         margin-top: 3rem;
