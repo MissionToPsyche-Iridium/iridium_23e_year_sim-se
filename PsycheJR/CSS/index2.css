@@ -92,14 +92,14 @@ header {
 
 #view3D-btn {
     padding: 5%;
-    width: 10rem;
+    width: 4rem;
     margin-bottom: 5%;
     border-radius: 1rem;
     cursor: pointer;
     position: relative;
     /*color: #f9a000;
     background: linear-gradient(-45deg, #a53f5b, #592651, #302144);*/
-    font-size: 1.25rem;
+    font-size: 1rem;
 
     background-color: #333; 
     color: orange; 
