@@ -709,7 +709,7 @@ footer {
     #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
         font-size: 0.75rem;
     } 
-    button:hover {
+    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover, #psycheJr-btn:hover {
         font-size: 0.8rem;
     }
 
