@@ -560,6 +560,12 @@ footer {
 
 /*media queries*/
 /*Mobile Phone*/
+@media (min-width: 320px) and (max-width: 1000px) {
+    #view3D-btn{
+        visibility: hidden;
+    }
+}
+
 @media (min-width: 360px) and (max-width: 767px) {
     /** mulit-element styling
     *
