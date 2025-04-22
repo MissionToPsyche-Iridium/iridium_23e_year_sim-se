@@ -566,6 +566,112 @@ footer {
     }
 }
 
+@media (min-width: 300px) and (max-width: 360px) {
+    /** mulit-element styling
+    *
+    */
+    h1{
+        font-size: 2rem !important;
+    }
+    p {
+        font-size: 1rem !important;
+    }
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn {
+        font-size: 0.75rem;
+    } 
+
+    /** header elements
+    *
+    */
+    header{
+        height: 5vh !important;
+    }
+    #page-header {
+        position: relative;
+        height: 20vh !important;
+    }
+    #page-header h1 {
+        margin-top: 3rem;
+        font-size: 1.5rem !important;
+    }
+
+    /** welcome / div 1 elements
+    *
+    */
+    #welcome {
+        margin-top: 1rem;
+    }
+    #welcome-p1{
+        margin-top: 15% !important;
+    }
+    #welcome p{
+        margin-top: 10%;
+        font-size: 1rem; 
+    }
+
+    /** div 3 elements
+    *
+    */
+    #div3{
+        background-size: 50%;
+        background-position-y: 45%;
+        background-position-x: 5%;
+        margin-top: -4rem;
+    }
+    #div3 p{
+        font-size: 0.75rem;
+        margin-left: 7rem;
+        background-color: rgb(255, 255, 255, 0.6);
+    }
+    #div3-btn{
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    /** div 4 elements
+    *
+    */
+    #div4{
+        margin-top: -5rem;
+        border-radius: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #div4 h1{
+        margin-top: 0.5rem;
+    }
+    #div4 p {
+        margin-top: 4rem;
+    }
+
+    /** div 5 elements
+    *
+    */
+    #div5 h1{
+        margin-top: 1rem;
+    }
+    #div5 p {
+        margin-top: 3rem;
+    }
+
+    /** div 8 elements
+    *
+    */
+    #div8::before{
+        border-radius: 0rem;
+    }
+    #div8 h1{
+        margin-top: 1rem;
+        background-color: rgba(49, 49, 49, 0.5);
+    }
+    #div8 p {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        background-color: rgba(49, 49, 49, 0.5);
+    }
+}
+
 @media (min-width: 360px) and (max-width: 767px) {
     /** mulit-element styling
     *
