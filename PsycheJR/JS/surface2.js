@@ -91,8 +91,8 @@ if (window.innerWidth >= 2560){
 } else if (window.innerWidth >= 1000){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
-        { backgroundSize: "600%"},  // Start large and zoomed in
-        { backgroundSize: "800%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "300%"},  // Start large and zoomed in
+        { backgroundSize: "400%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.75, y: 175 })
 }  else if (window.innerWidth >= 700){
