@@ -564,6 +564,10 @@ footer {
     #view3D-btn{
         visibility: hidden;
     }
+
+    #psycheJr {
+        background-size: contain;
+    }
 }
 
 @media (min-width: 300px) and (max-width: 360px) {
