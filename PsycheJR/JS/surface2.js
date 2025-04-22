@@ -84,15 +84,15 @@ if (window.innerWidth >= 2560){
 } else if (window.innerWidth >= 1200){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
-        { backgroundSize: "200%"},  // Start large and zoomed in
-        { backgroundSize: "500%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "300%"},  // Start large and zoomed in
+        { backgroundSize: "700%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.75, y: 150 })
 } else if (window.innerWidth >= 1000){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
         { backgroundSize: "300%"},  // Start large and zoomed in
-        { backgroundSize: "1000%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "800%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.75, y: 175 })
 }  else if (window.innerWidth >= 700){
