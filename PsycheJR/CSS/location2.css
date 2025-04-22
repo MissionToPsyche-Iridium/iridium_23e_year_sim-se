@@ -324,6 +324,72 @@ footer {
 }
 
 /* Media Queries */
+@media (min-width: 300px){
+    #logo {
+        width: 50%;
+    }
+
+    #page-header{
+        margin-top: -60%;
+        height: 35vh !important;
+        width: 150%;
+    }
+
+    #ss-image{
+        transform: scale(1.25);
+    }
+
+    #div1 {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    #div1 p {
+        width: 70% !important;
+        font-size: .75rem !important;
+    }
+
+    #test {
+        font-size: 1rem !important;
+    }
+
+    #div2 p {
+        font-size: .75rem;
+        line-height: 1.75;
+    }
+
+    #div3 h1, #div4 h3{
+        font-size: 1rem;
+    }
+
+    #div3 div {
+        height: 200px;
+        margin: 0.25rem;
+        padding: 2.5%;
+    }
+    #div3 div h4{
+        font-size: 1rem;
+    }
+
+    #div3 div p {
+        margin-top:0.5rem;
+        font-size: 0.6rem;
+    }
+
+    #pluto, #neptune, #uranus, #saturn, #jupiter, #psyche-location, #mars, #earth, #venus, #mercury{
+        background-size: cover;
+        background-position: center;
+    }
+
+    #div4 {
+        margin-top: -3rem !important;
+    }
+
+    #solar-system-map {
+        height: 900px;
+    }
+}
+
 
 @media (min-width: 375px){
     #logo {
