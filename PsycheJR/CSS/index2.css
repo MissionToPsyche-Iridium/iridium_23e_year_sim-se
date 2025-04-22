@@ -576,10 +576,10 @@ footer {
     p {
         font-size: 1rem !important;
     }
-    #div3-btn, #div4-btn, #div5-btn, #div8-btn {
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
         font-size: 0.75rem;
     } 
-    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover{
+    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover, #psycheJr-btn:hover {
         font-size: 0.8rem;
     }
 
@@ -587,7 +587,7 @@ footer {
     *
     */
     header{
-        height: 50vh !important;
+        height: 5vh !important;
     }
     #page-header {
         position: relative;
