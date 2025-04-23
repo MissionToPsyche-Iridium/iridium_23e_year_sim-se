@@ -185,121 +185,103 @@ File Start
           <!-- Colors for Chart / Implement with CSS in future task -->
           <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
           <script>
+          // Responsive D3 Pie Chart
+          // Function to update chart size and redraw
+          function drawResponsivePie(data) {
+            const container = document.getElementById("piechart");
 
-            // Set the dimensions and margins of the graph
-            var width = 600
-                height = 600
-                margin = 40
-            
-            // The radius of the pieplot is half the width or half the height
-            var radius = Math.min(width, height) / 2 - margin
-            
-            // Append the svg object to the div piechart
-            var svg = d3.select("#piechart")
+            // Clear existing chart
+            container.innerHTML = "";
+
+            // Get container dimensions
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight || containerWidth; // fallback
+
+            const margin = 20;
+            const width = containerWidth;
+            const height = containerHeight;
+            const radius = Math.min(width, height) / 2 - margin;
+
+            const svg = d3.select("#piechart")
               .append("svg")
                 .attr("width", width)
                 .attr("height", height)
               .append("g")
-                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-            
-            // Create earth and psyche data sets 
-            var earthData = {Sleep: 8, "Work/School": 8, Eat:3, Relax:5}
-            var psycheData = {Sleep: 1, "Work/School": 1, Eat:.7, Relax:1.5}
-            
-            // Use the set d3 color scales
-            var color = d3.scaleOrdinal()
-              .domain(["a", "b", "c", "d", "e", "f"])
+                .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+            const color = d3.scaleOrdinal()
+              .domain(Object.keys(data))
               .range(d3.schemeDark2);
 
-            var arcGenerator = d3.arc()
+            const pie = d3.pie()
+              .value(d => d.value);
+
+            const data_ready = pie(d3.entries(data));
+
+            const arcGenerator = d3.arc()
               .innerRadius(0)
               .outerRadius(radius);
-            
-            // Build and replace the current chart
-            function updateChart(data) {
-            
-              // Compute the position of each group on the pie:
-              var pie = d3.pie()
-                .value(function(d) {return d.value; })
-                .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) 
-              var data_ready = pie(d3.entries(data))
 
-              // Map to data
-              var u = svg.selectAll("path")
-                .data(data_ready)
-            
-              // Build the pie charts
-              u.enter()
-                .append('path')
-                .merge(u)
-                .transition()
-                .duration(1000)
-                .attr('d', arcGenerator)
-                .attr('fill', function(d) { return color(d.data.key); })
+            svg.selectAll("path")
+              .data(data_ready)
+              .enter()
+              .append("path")
+                .attr("d", arcGenerator)
+                .attr("fill", d => color(d.data.key))
                 .attr("stroke", "white")
                 .style("stroke-width", "2px")
                 .style("opacity", 1);
 
-              // Remove the previous data
-              u.exit().remove();
+            // Add Labels
+            const textGroup = svg.selectAll(".textGroup")
+              .data(data_ready)
+              .enter()
+              .append("g")
+              .attr("class", "textGroup")
+              .attr("transform", d => {
+                const pos = arcGenerator.centroid(d);
+                return `translate(${pos[0]}, ${pos[1]})`;
+              });
 
-              // Add group elements for text
-              var textGroup = svg.selectAll(".textGroup")
-                .data(data_ready);
+            textGroup.append("text")
+              .attr("class", "keyText")
+              .attr("dy", "-0.6em")
+              .text(d => d.data.key)
+              .attr("text-anchor", "middle")
+              .style("fill", "#fff")
+              .style("font-size", "14px");
 
-              var textGroupEnter = textGroup.enter()
-                .append("g")
-                .attr("class", "textGroup");
+            textGroup.append("text")
+              .attr("class", "valueText")
+              .attr("dy", "0.6em")
+              .text(d => d.data.value)
+              .attr("text-anchor", "middle")
+              .style("fill", "#fff")
+              .style("font-size", "18px");
+          }
 
-              textGroupEnter.merge(textGroup)
-                .transition()
-                .duration(1000)
-                .attr("transform", function(d) { 
-                  var _d = arcGenerator.centroid(d);
-                  return "translate(" + _d + ")"; 
-                });
+          // Earth and Psyche data sets
+          const earthData = { Sleep: 8, "Work/School": 8, Eat: 3, Relax: 5 };
+          const psycheData = { Sleep: 1, "Work/School": 1, Eat: 0.7, Relax: 1.5 };
 
-              textGroup.exit().remove();
+          // Chart toggle hook
+          function updateChart(data) {
+            drawResponsivePie(data);
+          }
 
-              // Add key name labels
-              textGroupEnter.append("text")
-                .attr("class", "keyText")
-                .attr("dy", "-0.7em")
-                .text(function(d) { return d.data.key; })
-                .attr("text-anchor", "middle")
-                .style("fill", "#ffffff")
-                .style("font-size", 30);
+          // Init with Earth data
+          drawResponsivePie(earthData);
 
-              // Add value labels
-              textGroupEnter.append("text")
-                .attr("class", "valueText")
-                .attr("dy", "0.35em")
-                .text(function(d) { return d.data.value; })
-                .attr("text-anchor", "middle")
-                .style("fill", "#ffffff")
-                .style("font-size", 50);
-
-              textGroup.select(".keyText")
-                .transition()
-                .duration(1000)
-                .attr("dy", "-0.7em")
-                .text(function(d) { return d.data.key; })
-                .attr("text-anchor", "middle")
-
-              textGroup.select(".valueText")
-                .transition()
-                .duration(1000)
-                .attr("dy", "0.35em")
-                .text(function(d) { return d.data.value; })
-                .attr("text-anchor", "middle")
-
+          // Re-render on window resize
+          window.addEventListener('resize', () => {
+            const checked = document.querySelector('input[name="sort"]:checked').id;
+            if (checked === "Earth") {
+              drawResponsivePie(earthData);
+            } else {
+              drawResponsivePie(psycheData);
             }
-            
-            // Initialize the plot with the first dataset
-            updateChart(earthData);
+          });
           </script>
-      <!-- Add metric that shows the available hours in the day here -->
-
 
       </div>
 
@@ -339,8 +321,6 @@ File Start
             <p id="resultSleep"> </p>
           </div> 
         </div>
-
-        
 
     </div>
   </main>  
