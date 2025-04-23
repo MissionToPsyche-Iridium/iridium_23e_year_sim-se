@@ -9,7 +9,6 @@ updateScreenWidth();
 
 
 
-
 let windowWidth = window.outerWidth;
 let dpr = window.devicePixelRatio;
 let trueSize = Math.round(windowWidth * dpr);
@@ -21,7 +20,6 @@ console.log("devicePixelRatio:", window.devicePixelRatio);
 console.log("Effective Width:", window.innerWidth * window.devicePixelRatio);
 console.log("Zoom Level:", Math.round(window.outerWidth / window.innerWidth * 100) + "%");
 console.log("width of device:", windowWidth, "dpr:", dpr, "trueSize:", trueSize);
-
 
 
 
@@ -85,14 +83,14 @@ if (window.innerWidth >= 2560){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
         { backgroundSize: "300%"},  // Start large and zoomed in
-        { backgroundSize: "850%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "700%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.75, y: 150 })
 } else if (window.innerWidth >= 1000){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
-        { backgroundSize: "300%"},  // Start large and zoomed in
-        { backgroundSize: "1000%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "600%"},  // Start large and zoomed in
+        { backgroundSize: "200%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.75, y: 175 })
 }  else if (window.innerWidth >= 700){
@@ -113,7 +111,14 @@ if (window.innerWidth >= 2560){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
         { backgroundSize: "800%"},  // Start large and zoomed in
-        { backgroundSize: "1000%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "950%", duration: 2 } // Shrink to fit screen properly
+    )
+    tl.to("#header-h1", { scale: 0.5, scale: 0.3, y: -100 })
+} else if (window.innerWidth >= 300){
+    console.log(true, window.innerWidth)
+    tl.fromTo("body", 
+        { backgroundSize: "800%"},  // Start large and zoomed in
+        { backgroundSize: "1250%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.5, scale: 0.3, y: -100 })
 }
@@ -157,7 +162,6 @@ tl.to("body", { backgroundImage: "none", backgroundColor: "black", duration: 1},
 tl.to("body", { backgroundColor: "white", backgroundSize: "100%", duration: 1});
 
 tl.to("#materials", {opacity: 1}, "<50%");
-
 
 if (window.innerWidth >= 1600){
     tl.fromTo(
@@ -328,7 +332,6 @@ if (window.innerWidth >= 1600){
     )
 
 
-
     tl.fromTo(
         "#features-p",
         {
@@ -476,7 +479,6 @@ if (window.innerWidth >= 1600){
     )
 
 
-
     tl.fromTo(
         "#dimensions-p",
         {
@@ -513,7 +515,6 @@ if (window.innerWidth >= 1600){
             } 
         }, "<"
     )
-
 
 
     tl.fromTo(
@@ -867,7 +868,6 @@ if (window.innerWidth >= 1600){
     )
 
 
-
     tl.fromTo(
         "#features-p",
         {
@@ -1016,7 +1016,6 @@ if (window.innerWidth >= 1600){
     )
 
 
-
     tl.fromTo(
         "#dimensions-p",
         {
@@ -1054,7 +1053,6 @@ if (window.innerWidth >= 1600){
             } 
         }, "<"
     )
-
 
 
     tl.fromTo(
@@ -1387,7 +1385,6 @@ if (window.innerWidth >= 1600){
     )
 
 
-
     tl.fromTo(
         "#features-p",
         {
@@ -1538,7 +1535,6 @@ if (window.innerWidth >= 1600){
     )
 
 
-
     tl.fromTo(
         "#dimensions-p",
         {
@@ -1577,7 +1573,6 @@ if (window.innerWidth >= 1600){
             } 
         }, "<"
     )
-
 
 
     tl.fromTo(
@@ -1917,7 +1912,6 @@ if (window.innerWidth >= 1600){
     )
 
 
-
     tl.fromTo(
         "#features-p",
         {
@@ -2068,7 +2062,6 @@ if (window.innerWidth >= 1600){
     )
 
 
-
     tl.fromTo(
         "#dimensions-p",
         {
@@ -2107,7 +2100,6 @@ if (window.innerWidth >= 1600){
             } 
         }, "<"
     )
-
 
 
     tl.fromTo(
@@ -2448,3 +2440,4 @@ if (window.innerWidth >= 1600){
         }
     )
 }
+

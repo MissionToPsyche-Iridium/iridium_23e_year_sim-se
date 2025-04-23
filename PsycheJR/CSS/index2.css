@@ -17,7 +17,6 @@ File Start
 
 -->
 
-
 /*For Testing Delete before production*/
 
 #screen-width-box {
@@ -31,7 +30,6 @@ File Start
     border-radius: 5px;
     z-index: 9999;
 }
-
 
 
 
@@ -92,14 +90,14 @@ header {
 
 #view3D-btn {
     padding: 5%;
-    width: 10rem;
+    width: 4rem;
     margin-bottom: 5%;
     border-radius: 1rem;
     cursor: pointer;
     position: relative;
     /*color: #f9a000;
     background: linear-gradient(-45deg, #a53f5b, #592651, #302144);*/
-    font-size: 1.25rem;
+    font-size: 1rem;
 
     background-color: #333; 
     color: orange; 
@@ -557,9 +555,144 @@ footer {
     }
 }
 
-
 /*media queries*/
 /*Mobile Phone*/
+@media (min-width: 300px) and (max-width: 1000px) {
+    #view3D-btn{
+        visibility: hidden;
+    }
+
+    #psycheJr {
+        background-size: contain;
+        height: auto;
+    }
+
+    #psycheJr p {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 360px) {
+    /** mulit-element styling
+    *
+    */
+    h1{
+        font-size: 2rem !important;
+    }
+    p {
+        font-size: 1rem !important;
+    }
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
+        font-size: 0.75rem;
+    } 
+    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover, #psycheJr-btn:hover {
+        font-size: 0.8rem;
+    }
+
+    /** header elements
+    *
+    */
+    header{
+        height: 5vh !important;
+    }
+    #page-header {
+        position: relative;
+        height: 40vh !important;
+    }
+    #page-header h1 {
+        margin-top: 1rem;
+        font-size: 1.5rem !important;
+    }
+
+    /** welcome / div 1 elements
+    *
+    */
+    #welcome {
+        margin-top: 1rem;
+    }
+    #welcome-p1{
+        margin-top: 15% !important;
+    }
+    #welcome p{
+        margin-top: 10%;
+        font-size: 1rem; 
+    }
+
+    /** div 3 elements
+    *
+    */
+    #div3{
+        background-size: 50%;
+        background-position-y: 45%;
+        background-position-x: 5%;
+        margin-top: -4rem;
+    }
+    #div3 p{
+        font-size: 0.75rem;
+        margin-left: 7rem;
+        background-color: rgb(255, 255, 255, 0.6);
+    }
+    #div3-btn{
+        padding: 3%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    /** div 4 elements
+    *
+    */
+    #div4{
+        margin-top: -5rem;
+        border-radius: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #div4 h1{
+        margin-top: 0.5rem;
+    }
+    #div4 p {
+        margin-top: 4rem;
+    }
+
+    /** div 5 elements
+    *
+    */
+    #div5 h1{
+        margin-top: 1rem;
+    }
+    #div5 p {
+        margin-top: 3rem;
+    }
+
+    /** div 8 elements
+    *
+    */
+    #div8::before{
+        border-radius: 0rem;
+    }
+    #div8 h1{
+        margin-top: 1rem;
+        background-color: rgba(49, 49, 49, 0.5);
+    }
+    #div8 p {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        background-color: rgba(49, 49, 49, 0.5);
+    }
+
+    #psycheJr {
+        background-position-y: -1rem;
+        background-position-x: 1rem;
+        background-size: 100%;
+    }
+
+    footer {
+        height: 10vh !important;
+    }
+}
+
 @media (min-width: 360px) and (max-width: 767px) {
     /** mulit-element styling
     *
@@ -570,9 +703,12 @@ footer {
     p {
         font-size: 1rem !important;
     }
-    #div3-btn, #div4-btn, #div5-btn, #div8-btn {
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
         font-size: 0.75rem;
     } 
+    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover, #psycheJr-btn:hover {
+        font-size: 0.8rem;
+    }
 
     /** header elements
     *
@@ -582,7 +718,7 @@ footer {
     }
     #page-header {
         position: relative;
-        height: 20vh !important;
+        height: 30vh !important;
     }
     #page-header h1 {
         margin-top: 3rem;
@@ -663,6 +799,16 @@ footer {
         margin-top: 3rem;
         margin-bottom: 3rem;
         background-color: rgba(49, 49, 49, 0.5);
+    }
+
+    #psycheJr {
+        background-position-y: -2rem;
+        background-position-x: 1rem;
+        background-size: 100%;
+    }
+
+    footer {
+        height: 10vh !important;
     }
 }
 
@@ -769,7 +915,7 @@ footer {
         height: 20vh;
     }
     #page-header h1 {
-        margin-top: -5rem;
+        margin-top: -3rem;
         font-size: 3.5rem;
     }
 
@@ -796,7 +942,7 @@ footer {
         margin-top: -4rem;
     }
     #div3 p{
-        margin-left: 20rem;
+        margin-left: 30rem;
     }
     #div3-btn{
         padding: 3%;
@@ -1113,3 +1259,4 @@ footer {
         font-size: 50px;
     }
 }
+
