@@ -13,8 +13,8 @@
  * - loadSection0(): Initializes the "References" section with text, menu, and badge.
  */
 
-import { createTextMesh, createMenu, resolvePath } from '../utils/utils.js';
-import { showRefsViewport, loadRefContent } from '../ui/referencesViewport.js';
+import { createTextMesh, createMenu, resolvePath, triggerButton3D } from '../utils/utils.js';
+import { loadRefContent } from '../ui/referencesViewport.js';
 
 export function loadSection0(scene, camera, sections) {
   return new Promise(resolve => {
@@ -26,6 +26,11 @@ export function loadSection0(scene, camera, sections) {
       z: refCoords.z - 13
     }
 
+    const menuButtonPos = {
+      x: refCoords.x - 3,
+      y: refCoords.y + 6, 
+      z: refCoords.z - 13
+    }
     const mainTextRotation = { x: 0, y: 0.1, z: 0 };
 
     createTextMesh("REFERENCES", 
@@ -48,8 +53,20 @@ export function loadSection0(scene, camera, sections) {
         { text: "Contact / Support", onClick: () => loadRefContent(resolvePath("refsViewport/contact.html")) },
       ];
       
-    createMenu(menuItems, textMeshPosition, mainTextRotation, scene);
+    // createMenu(menuItems, textMeshPosition, mainTextRotation, scene);
 
+      // menuItems.forEach()
+      // triggerButton3D(menuItems[0].text, textMeshPosition, mainTextRotation, 0.5, scene, menuItems[0].onClick);
+      menuItems.forEach((item, index) => {
+        const menuPosition = {
+          x: menuButtonPos.x,
+          y: menuButtonPos.y - index * 1.2 - 1.25,
+          z: menuButtonPos.z
+        };
+      
+        triggerButton3D(item.text, menuPosition, mainTextRotation, 0.5, scene, item.onClick, "right");
+      });
+      
     resolve(); 
   });
 }

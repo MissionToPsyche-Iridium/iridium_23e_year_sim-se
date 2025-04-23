@@ -336,12 +336,11 @@ export function createMenu(menuItems, referencePosition, referenceRotation, scen
 
   // Iterate over menu items and create each as a text mesh
   menuItems.forEach((item, index) => {
-    const menuPosition = { x: 0, y: startY - index * menuSpacing, z: 0 }; // Positioning each item vertically
+    const menuPosition = { x: 0, y: startY - index * menuSpacing, z: 0 }; // vertical position
     const menuItem = createMenuItem(item.text, menuPosition, scene, item.onClick); // Create menu item text mesh
-    menuGroup.add(menuItem); // Add menu item to the group
+    menuGroup.add(menuItem); 
   });
 
-  // Add the complete menu group to the scene
   scene.add(menuGroup);
 }
 
@@ -449,29 +448,36 @@ function onMouseMove(event, camera, renderer) {
   mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(interactiveTextMeshes);
+
+  // Combine both interactive sources
+  const interactables = [...interactiveTextMeshes, ...clickableModels];
+  const intersects = raycaster.intersectObjects(interactables);
 
   if (intersects.length > 0) {
-    const intersectedText = intersects[0].object;
+    const hovered = intersects[0].object;
 
-    if (hoveredText !== intersectedText) {
-      if (hoveredText) {
+    if (hoveredText !== hovered) {
+      if (hoveredText && interactiveTextMeshes.includes(hoveredText)) {
+        // Only scale if it's from interactiveTextMeshes
         gsap.to(hoveredText.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
       }
 
-      hoveredText = intersectedText;
+      hoveredText = hovered;
       document.body.style.cursor = "pointer";
-
-      gsap.to(hoveredText.scale, { x: 1.1, y: 1.1, z: 1.1, duration: 0.3 });
+      
+      if (interactiveTextMeshes.includes(hovered)) {
+        gsap.to(hovered.scale, { x: 1.1, y: 1.1, z: 1.1, duration: 0.3 });
+      }
     }
   } else {
-    if (hoveredText) {
+    if (hoveredText && interactiveTextMeshes.includes(hoveredText)) {
       gsap.to(hoveredText.scale, { x: 1, y: 1, z: 1, duration: 0.3 });
-      hoveredText = null;
     }
+    hoveredText = null;
     document.body.style.cursor = "default";
   }
 }
+
 
 
 /**
@@ -623,7 +629,15 @@ export function enableModelClick(camera, renderer) {
  * - Wraps text with a transparent BoxGeometry to increase interactive area.
  * - Fully raycast-compatible via `makeModelClickable()` for click detection.
  */
-export async function triggerButton3D(label, position, rotation, size = 0.7, scene, onClick) {
+export async function triggerButton3D(
+  label, 
+  position, 
+  rotation, 
+  size = 0.7, 
+  scene, 
+  onClick,
+  align = "center"
+) {
   return new Promise((resolve, reject) => {
     const fontLoader = new FontLoader();
 
@@ -646,7 +660,6 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
 
         const vertexShader = await loadShader(resolvePath("res/shaders/textVertexShader.glsl"));
         const fragmentShader = await loadShader(resolvePath("res/shaders/textFragmentShader.glsl"));
-        
 
         const textMaterial = new THREE.ShaderMaterial({
           uniforms: {
@@ -657,9 +670,7 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
         });
 
         const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-        textMesh.position.set(position.x, position.y, position.z + 0.02);
         textMesh.rotation.set(rotation.x, rotation.y, rotation.z);
-        scene.add(textMesh);
 
         const bounds = textGeometry.boundingBox.getSize(new THREE.Vector3());
         const padding = 0.3;
@@ -674,19 +685,29 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
           color: 0x000000,
           transparent: true,
           opacity: 0.05,
-          emissive: new THREE.Color(0x000000), // default base
+          emissive: new THREE.Color(0x000000),
           emissiveIntensity: 1.0
         });
 
         const buttonMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-        buttonMesh.position.set(position.x, position.y, position.z);
         buttonMesh.rotation.set(rotation.x, rotation.y, rotation.z);
         buttonMesh.name = `button-${label.replace(/\s+/g, '-')}`;
+
+        if (align === 'right') {
+          const totalWidth = bounds.x + padding;
+          const offsetX = -totalWidth;
+
+          textMesh.position.set(position.x + offsetX + bounds.x / 2, position.y, position.z + 0.1);
+          buttonMesh.position.set(position.x + offsetX + totalWidth / 2, position.y, position.z);
+        } else {
+          textMesh.position.set(position.x, position.y, position.z + 0.1);
+          buttonMesh.position.set(position.x, position.y, position.z);
+        }
 
         if (onClick) {
           makeModelClickable(buttonMesh, onClick);
         }
-
+        scene.add(textMesh);
         scene.add(buttonMesh);
 
         resolve({ textMesh, buttonMesh });
@@ -696,6 +717,7 @@ export async function triggerButton3D(label, position, rotation, size = 0.7, sce
     }, undefined, reject);
   });
 }
+
 
 
 /*

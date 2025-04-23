@@ -8,32 +8,29 @@ let currentSrc = '';
 
 
 export function loadRefContent(newSrc) {
-    showRefsViewport(); // ensure the container exists
-  
-    const wrapper = document.getElementById(wrapperId);
-    const iframe = document.getElementById(iframeId);
-  
-    if (!wrapper || !iframe) return;
-    if (currentSrc === newSrc) return;
-  
-    wrapper.style.transform = 'rotateY(180deg)';
-  
-    setTimeout(() => {
-      iframe.src = newSrc;
+  showRefsViewport(); // ensure the container exists
+
+  const wrapper = document.getElementById(wrapperId);
+  const iframe = document.getElementById(iframeId);
+
+  if (!wrapper || !iframe) return;
+  if (currentSrc === newSrc) return;
+
+  // Apply rotation
+  wrapper.style.transition = 'transform 1s ease-in-out';
+  wrapper.style.transform = 'rotateY(180deg)';
+
+  // When rotation starts, set up iframe load
+  setTimeout(() => {
+    iframe.onload = () => {
+      // Once loaded, rotate back
+      wrapper.style.transform = 'rotateY(0deg)';
       currentSrc = newSrc;
-    }, 500);
-  
-    setTimeout(() => {
-      wrapper.style.transform = 'rotateY(360deg)';
-      setTimeout(() => {
-        wrapper.style.transition = 'none';
-        wrapper.style.transform = 'rotateY(0deg)';
-        requestAnimationFrame(() => {
-          wrapper.style.transition = 'transform 1s ease-in-out';
-        });
-      }, 1000);
-    }, 1000);
+    };
+    iframe.src = newSrc;
+  }, 500);
 }
+
   
 export function showRefsViewport() {
   if (document.getElementById(containerId)) return;
@@ -55,7 +52,7 @@ export function showRefsViewport() {
   const panel = document.createElement('div');
   panel.id = wrapperId;
   panel.style.transform = 'rotateY(0deg)'; 
-  panel.style.transition = 'transform 1s ease-in-out';
+  panel.style.transition = 'transform 1.2s cubic-bezier(0.4, 0.0, 0.2, 1)';
   panel.style.transformStyle = 'preserve-3d';
   panel.style.backfaceVisibility = 'hidden';
   panel.style.width = '40vw';                  
