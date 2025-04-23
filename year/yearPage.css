@@ -135,7 +135,7 @@ img {
 .scroll-wheel {
     width: 150px;
     height: 250px; 
-    overflow-y: auto;
+    overflow-y: scroll;
     border: 5px solid #592651;
     border-radius: 10px;
     position: relative;
@@ -300,7 +300,7 @@ input[type="radio"]#Psyche:checked + label {
 #work, #school, #sleep, #relax, #eat {
     background-position: center;
     display: flex;
-    height: 200px;
+    max-height: 250px;
     background-size: cover;
     justify-content: center;
     align-items: center;
