@@ -231,6 +231,23 @@ img {
     color: #f9a000;
 }
 
+/*
+Fix for bouncing ages in earth and year age sections
+*/
+#ageOnEarth h3,
+#ageOnPsyche h3 {
+    min-height: 60px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+
+#ageOnEarth p,
+#ageOnPsyche p {
+    margin-top: 10px;
+}
+
+
 /* =======================================================================
    Year Metric Section
    ======================================================================= */
