@@ -266,9 +266,11 @@ header {
 footer {
     bottom: 0;
     margin-top: 10%;
+    text-align: center;
+    color: red;
     height: 30vh;
     width: 100%;
-    background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
+    background-color: blue;
 }
 
 @keyframes colorChange{
@@ -293,15 +295,7 @@ footer {
 /** media elements
 *
 */
-@media (min-width: 300px) {
-    #header-h1 {
-        margin-top: 3rem;
-        width: 90%;
-        margin-right: auto;
-        margin-left: auto;
-        font-size: 4rem;
-    }
-
+@media (min-width: 350px) {
     #comparable {
         width: 100%;
         margin-right: auto;
@@ -352,8 +346,7 @@ footer {
     }
 
     footer {
-        margin-top: 120%;
-        height: 20vh !important;
+        margin-top: 120%
     }
 }
 
@@ -614,8 +607,10 @@ footer {
         bottom: 0;
         margin-top: 35%;
         text-align: center;
+        color: red;
         height: 30vh;
         width: 100%;
+        background-color: blue;
     }
 }
 

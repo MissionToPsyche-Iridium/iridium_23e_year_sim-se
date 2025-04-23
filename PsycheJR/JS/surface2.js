@@ -85,14 +85,14 @@ if (window.innerWidth >= 2560){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
         { backgroundSize: "300%"},  // Start large and zoomed in
-        { backgroundSize: "700%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "850%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.75, y: 150 })
 } else if (window.innerWidth >= 1000){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
-        { backgroundSize: "600%"},  // Start large and zoomed in
-        { backgroundSize: "200%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "300%"},  // Start large and zoomed in
+        { backgroundSize: "1000%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.75, y: 175 })
 }  else if (window.innerWidth >= 700){
@@ -113,14 +113,7 @@ if (window.innerWidth >= 2560){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
         { backgroundSize: "800%"},  // Start large and zoomed in
-        { backgroundSize: "950%", duration: 2 } // Shrink to fit screen properly
-    )
-    tl.to("#header-h1", { scale: 0.5, scale: 0.3, y: -100 })
-} else if (window.innerWidth >= 300){
-    console.log(true, window.innerWidth)
-    tl.fromTo("body", 
-        { backgroundSize: "800%"},  // Start large and zoomed in
-        { backgroundSize: "1250%", duration: 2 } // Shrink to fit screen properly
+        { backgroundSize: "1000%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.5, scale: 0.3, y: -100 })
 }
