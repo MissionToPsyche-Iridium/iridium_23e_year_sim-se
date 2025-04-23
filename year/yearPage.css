@@ -134,9 +134,7 @@ img {
 
 .scroll-wheel {
     width: 150px;
-    height: 40vh; /* scale for small screens */ 
-    min-height: 200px;
-    max-height: 400px;
+    height: 250px; 
     overflow-y: auto;
     border: 5px solid #592651;
     border-radius: 10px;
@@ -389,7 +387,6 @@ Responsive Pie Chart Container
         max-width: 160px;
     }
     .scroll-wheel {
-        width: 100px;
         height: 40vh;
         min-height: 160px;
         max-height: 300px;
@@ -435,7 +432,8 @@ Responsive Pie Chart Container
     }
     #work, #school, #sleep, #eat, #relax {
         font-size: 16px;
-        aspect-ratio: 2.5 / 1; 
+        aspect-ratio: 2.5 / 1;
+        max-height: 275px;
     }
     svg {
         width: 200px !important;
