@@ -89,7 +89,7 @@ if (window.innerWidth >= 2560){
 } else if (window.innerWidth >= 1000){
     console.log(true, window.innerWidth)
     tl.fromTo("body", 
-        { backgroundSize: "600%"},  // Start large and zoomed in
+        { backgroundSize: "500%"},  // Start large and zoomed in
         { backgroundSize: "200%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.75, y: 175 })
