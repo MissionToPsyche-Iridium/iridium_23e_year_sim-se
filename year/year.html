@@ -188,100 +188,94 @@ File Start
           // Responsive D3 Pie Chart
           // Function to update chart size and redraw
           function drawResponsivePie(data) {
-            const container = document.getElementById("piechart");
+          const container = document.getElementById("piechart");
+          container.innerHTML = ""; // Clear previous chart
 
-            // Clear existing chart
-            container.innerHTML = "";
+          // Dynamically calculate size
+          const containerWidth = container.offsetWidth || 300;
+          const maxWidth = Math.min(containerWidth, 600);
+          const width = maxWidth;
+          const height = maxWidth;
+          const margin = 20;
+          const radius = Math.min(width, height) / 2 - margin;
 
-            // Get container dimensions
-            const containerWidth = container.offsetWidth;
-            const containerHeight = container.offsetHeight || containerWidth; // fallback
+          const svg = d3.select("#piechart")
+            .append("svg")
+              .attr("width", width)
+              .attr("height", height)
+            .append("g")
+              .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-            const margin = 20;
-            const width = containerWidth;
-            const height = containerHeight;
-            const radius = Math.min(width, height) / 2 - margin;
+          const color = d3.scaleOrdinal()
+            .domain(Object.keys(data))
+            .range(d3.schemeDark2);
 
-            const svg = d3.select("#piechart")
-              .append("svg")
-                .attr("width", width)
-                .attr("height", height)
-              .append("g")
-                .attr("transform", `translate(${width / 2}, ${height / 2})`);
+          const pie = d3.pie()
+            .value(d => d.value);
 
-            const color = d3.scaleOrdinal()
-              .domain(Object.keys(data))
-              .range(d3.schemeDark2);
+          const data_ready = pie(d3.entries(data));
 
-            const pie = d3.pie()
-              .value(d => d.value);
+          const arcGenerator = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
 
-            const data_ready = pie(d3.entries(data));
+          // Draw slices
+          svg.selectAll("path")
+            .data(data_ready)
+            .enter()
+            .append("path")
+              .attr("d", arcGenerator)
+              .attr("fill", d => color(d.data.key))
+              .attr("stroke", "white")
+              .style("stroke-width", "2px")
+              .style("opacity", 1);
 
-            const arcGenerator = d3.arc()
-              .innerRadius(0)
-              .outerRadius(radius);
+          // Draw labels
+          const textGroup = svg.selectAll(".textGroup")
+            .data(data_ready)
+            .enter()
+            .append("g")
+            .attr("class", "textGroup")
+            .attr("transform", d => {
+              const pos = arcGenerator.centroid(d);
+              return `translate(${pos[0]}, ${pos[1]})`;
+            });
 
-            svg.selectAll("path")
-              .data(data_ready)
-              .enter()
-              .append("path")
-                .attr("d", arcGenerator)
-                .attr("fill", d => color(d.data.key))
-                .attr("stroke", "white")
-                .style("stroke-width", "2px")
-                .style("opacity", 1);
+          textGroup.append("text")
+            .attr("class", "keyText")
+            .attr("dy", "-0.6em")
+            .text(d => d.data.key)
+            .attr("text-anchor", "middle")
+            .style("fill", "#fff")
+            .style("font-size", `${Math.max(width / 25, 12)}px`);
 
-            // Add Labels
-            const textGroup = svg.selectAll(".textGroup")
-              .data(data_ready)
-              .enter()
-              .append("g")
-              .attr("class", "textGroup")
-              .attr("transform", d => {
-                const pos = arcGenerator.centroid(d);
-                return `translate(${pos[0]}, ${pos[1]})`;
-              });
+          textGroup.append("text")
+            .attr("class", "valueText")
+            .attr("dy", "0.6em")
+            .text(d => d.data.value)
+            .attr("text-anchor", "middle")
+            .style("fill", "#fff")
+            .style("font-size", `${Math.max(width / 20, 14)}px`);
+        }
 
-            textGroup.append("text")
-              .attr("class", "keyText")
-              .attr("dy", "-0.6em")
-              .text(d => d.data.key)
-              .attr("text-anchor", "middle")
-              .style("fill", "#fff")
-              .style("font-size", "14px");
+        // Data sets
+        const earthData = { Sleep: 8, "Work/School": 8, Eat: 3, Relax: 5 };
+        const psycheData = { Sleep: 1, "Work/School": 1, Eat: 0.7, Relax: 1.5 };
 
-            textGroup.append("text")
-              .attr("class", "valueText")
-              .attr("dy", "0.6em")
-              .text(d => d.data.value)
-              .attr("text-anchor", "middle")
-              .style("fill", "#fff")
-              .style("font-size", "18px");
-          }
+        // Chart toggle
+        function updateChart(data) {
+          drawResponsivePie(data);
+        }
 
-          // Earth and Psyche data sets
-          const earthData = { Sleep: 8, "Work/School": 8, Eat: 3, Relax: 5 };
-          const psycheData = { Sleep: 1, "Work/School": 1, Eat: 0.7, Relax: 1.5 };
+        // Initial load
+        drawResponsivePie(earthData);
 
-          // Chart toggle hook
-          function updateChart(data) {
-            drawResponsivePie(data);
-          }
-
-          // Init with Earth data
-          drawResponsivePie(earthData);
-
-          // Re-render on window resize
-          window.addEventListener('resize', () => {
-            const checked = document.querySelector('input[name="sort"]:checked').id;
-            if (checked === "Earth") {
-              drawResponsivePie(earthData);
-            } else {
-              drawResponsivePie(psycheData);
-            }
-          });
-          </script>
+        // On resize
+        window.addEventListener('resize', () => {
+          const checked = document.querySelector('input[name="sort"]:checked').id;
+          drawResponsivePie(checked === "Earth" ? earthData : psycheData);
+        });
+      </script>
 
       </div>
 
