@@ -303,7 +303,9 @@ input[type="radio"]#Psyche:checked + label {
     background-size: cover;
     justify-content: center;
     align-items: center;
-    font-size: 45px;
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    font-size: 2.5vw; 
     font-weight: bold;
     text-shadow:
         0.05em 0 black,
@@ -334,9 +336,9 @@ Responsive Pie Chart Container
 ========================================================================================================
 */
 
-#piechart {
+#piechart svg{ 
+    display: block;
     width: 100%;
-    max-width: 100vw;
     margin: auto;
     height: auto;
   }
@@ -426,8 +428,8 @@ Responsive Pie Chart Container
         padding: 0.5rem;
     }
     #work, #school, #sleep, #eat, #relax {
-        font-size: 12px;
-        height: 50px;
+        font-size: 16px;
+        aspect-ratio: 2.5 / 1; 
     }
     svg {
         width: 200px !important;

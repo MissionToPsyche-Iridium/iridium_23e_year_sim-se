@@ -203,6 +203,8 @@ File Start
             .append("svg")
               .attr("width", width)
               .attr("height", height)
+              .attr("viewBox", `0 0 ${width} ${height}`)
+              .attr("preserveAspectRatio", "xMidYMid meet")
             .append("g")
               .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
@@ -218,7 +220,7 @@ File Start
           const arcGenerator = d3.arc()
             .innerRadius(0)
             .outerRadius(radius);
-
+          
           // Draw slices
           svg.selectAll("path")
             .data(data_ready)
@@ -230,7 +232,6 @@ File Start
               .style("stroke-width", "2px")
               .style("opacity", 1);
 
-          // Draw labels
           const textGroup = svg.selectAll(".textGroup")
             .data(data_ready)
             .enter()
@@ -270,10 +271,14 @@ File Start
         // Initial load
         drawResponsivePie(earthData);
 
-        // On resize
+        // On resize 
+        let resizeTimeout;
         window.addEventListener('resize', () => {
-          const checked = document.querySelector('input[name="sort"]:checked').id;
-          drawResponsivePie(checked === "Earth" ? earthData : psycheData);
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(() => {
+            const checked = document.querySelector('input[name="sort"]:checked').id;
+            drawResponsivePie(checked === "Earth" ? earthData : psycheData);
+          }, 200); // delay redraw until user stops resizing
         });
       </script>
 
