@@ -730,7 +730,7 @@ footer {
     #page-header {
         padding-top: 12rem;
         padding-bottom: 5rem;
-
+        height: 30vh !important;
     }
 }
 
