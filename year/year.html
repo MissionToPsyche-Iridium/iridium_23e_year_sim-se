@@ -85,7 +85,7 @@ File Start
               // Add event listener for scrolling through years 
               scrollWheel.addEventListener('scroll', () => {
                   const scrollTop = scrollWheel.scrollTop;
-                  const itemHeight = 30; // Height of each list item
+                  const itemHeight = 32; // Height of each year in list
                   const selectedIndex = Math.round(scrollTop / itemHeight);
                   const selectedYear = yearList.children[selectedIndex].textContent;
 

@@ -134,14 +134,17 @@ img {
 
 .scroll-wheel {
     width: 150px;
-    height: 250px;
-    overflow-y: scroll;
+    height: 40vh; /* scale for small screens */ 
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
     border: 5px solid #592651;
     border-radius: 10px;
     position: relative;
     margin: 20px auto;
     background: #181818;
-}
+  }
+
 .scroll-wheel ul {
     list-style: none;
     padding: 0;
@@ -387,7 +390,9 @@ Responsive Pie Chart Container
     }
     .scroll-wheel {
         width: 100px;
-        height: 160px;
+        height: 40vh;
+        min-height: 160px;
+        max-height: 300px;
     }
     .earthAge, .psycheAge {
         font-size: 48px;
@@ -416,9 +421,10 @@ Responsive Pie Chart Container
     #top, #middle p {
         font-size: 18px;
     }
-    .scroll-wheel li {
-        font-size: 18px;
-        height: 20px;
+    .scroll-wheel {
+        height: 50vh;
+        min-height: 160px;
+        max-height: 400px;
     }
     .earthAge, .psycheAge {
         font-size: 30px;
