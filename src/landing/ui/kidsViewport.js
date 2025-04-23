@@ -134,6 +134,7 @@ function updateViewportSize() {
     }
 }
 
+
 /**
  * Creates and shows the kids viewport with animations.
  */
