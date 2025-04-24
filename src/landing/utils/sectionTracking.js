@@ -21,6 +21,7 @@
 import gsap from 'gsap';
 import * as THREE from 'three';
 import { showRefsViewport } from '../ui/referencesViewport.js';
+import { savedCameraRotation } from '../sections/section6.js'; 
 
 // import iframe destroy functions to destroy iframes if user navigates away from a section
 import { hideNameViewport } from '../ui/psycheName.js';
@@ -155,7 +156,16 @@ export function moveToSection(sectionIndex, lookAt = null) {
   if (destroyHandlers[lastSection]) {
     destroyHandlers[lastSection]();
   }
-
+  if (lastSection === 6 && sectionIndex !== 6) {
+    // If leaving Section 6, restore camera rotation
+    gsap.to(camera.rotation, {
+      x: savedCameraRotation.x,
+      y: savedCameraRotation.y,
+      z: savedCameraRotation.z,
+      duration: 1,
+      ease: "power2.out"
+    }
+  )};
   currentSection = sectionIndex;
   scrollProgress = sectionIndex;
   lastSection = sectionIndex;

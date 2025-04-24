@@ -51,7 +51,7 @@ function init() {
   const sections = [
     { name: "REFERENCES", position: { x: -150, y: -150, z: 13 } },
     { name: "WELCOME", position: { x: 0, y: 0, z: 13 } },
-    { name: "16 PSYCHE", position: { x: 20, y: 30, z: 10 } },
+    { name: "PSYCHE NAME", position: { x: 20, y: 30, z: 10 } },
     { name: "PSYCHE Jr", position: { x: -150, y: 150, z: 13 } },
     { name: "COSMIC COMPARISON", position: { x: 0, y: 300, z: 13 } },
     { name: "MISSION", position: { x: 150, y: 150, z: 13 } },
