@@ -35,12 +35,13 @@ Top Page Header
   }
   
   .scroll-wheel {
-    width: 120px;
-    max-width: 30vw;   
+    width: 120px;               
+    /*max-width: 30vw;*/             
     height: 250px;
     overflow-y: scroll;
     border: 5px solid #592651;
     border-radius: 10px;
+    margin: 20px auto;
     background: #181818;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
@@ -86,6 +87,21 @@ Top Page Header
     2px 2px 5px #000;
 }
 
+.planet-img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .earth-img {
+    width: 60%;
+  }
+  
+  .psyche-img {
+    width: 30%;
+  }
 
   #ageOnEarth {
     background-image: url('../../img/EarthTransparent.png');
@@ -218,3 +234,9 @@ Top Page Header
   #sleep  { background-image: url('../../img/sleep.jpeg'); }
   #eat    { background-image: url('../../img/eat.jpg'); }
   #relax  { background-image: url('../../img/relax.jpeg'); }
+
+  @media (max-width: 480px) {
+    .scroll-wheel {
+      width: 100px;
+    }
+  }
