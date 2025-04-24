@@ -13,6 +13,10 @@ import { triggerButton3D, resolvePath, loadModel } from '../utils/utils.js';
 //let buttonLabel;
 //let hasShownViewport = false;
 let resizeHandler;
+let floatingModel = null;
+let floatStartTime = Date.now();
+let baseY = 0;
+
 
 /**
  * Calculate responsive positioning based on screen width
@@ -98,7 +102,6 @@ export function loadSection3(scene, camera, sections, renderer) {
       const objRotation = { x: 0.2, y: 0, z: 0 };
 
       try {
-
         loadModel(
             "Jr",
             resolvePath("res/models/Jr.glb"),
@@ -107,10 +110,10 @@ export function loadSection3(scene, camera, sections, renderer) {
             objRotation, // rotation
             null, // animation
             scene, // scene
-            () => {  // callback fx
-            console.log("loaded model");
-            });
-
+            (model) => {
+                floatingModel = model;
+                baseY = model.position.y;
+        });
             triggerButton3D(
                 "EXPLORE THE PSYCHE Jr KIDS EXPERIENCE",
                 buttonPos,
@@ -130,8 +133,6 @@ export function loadSection3(scene, camera, sections, renderer) {
                     // New behavior: open kids.html in a new browser tab
                     const kidsUrl = resolvePath('/PsycheJR/kids.html');
                     window.open(kidsUrl, '_blank');
-                
-                    console.log("Psyche Jr button clicked.");
                 }
             )
           resolve(); // Resolve the promise when setup is complete
@@ -139,9 +140,13 @@ export function loadSection3(scene, camera, sections, renderer) {
           console.error("Error setting up Section 3:", err);
           reject(err); // Reject the promise if there's an error
       }
+      const modelLight = new THREE.DirectionalLight(0xffffff, 1.5);
+      modelLight.position.set(section3Coords.x, section3Coords.y, section3Coords.z);
+      modelLight.target.position.set(modelPosition.x, modelPosition.y, modelPosition.z);
+      scene.add(modelLight);
+      scene.add(modelLight.target);
   });
 }
-
 
 export function renderSection3(camera, scene) {
     //if (!yearButton || !buttonLabel) return;
@@ -156,6 +161,11 @@ export function renderSection3(camera, scene) {
                 child.visible = isVisible;
             }
         }
+    // floating effect
+    if (floatingModel && isVisible) {
+        const time = (Date.now() - floatStartTime) * 0.001;
+        floatingModel.position.y = baseY + Math.sin(time * 2) * 0.2;
+    } 
 }
 
 /**
