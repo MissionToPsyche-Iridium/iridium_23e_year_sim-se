@@ -84,64 +84,77 @@ File Start
   <script src="https://d3js.org/d3.v4.js"></script>
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   <script>
-const yearList = document.getElementById('yearList');
-const scrollWheel = document.getElementById('scrollWheel');
-const currentYear = new Date().getFullYear();
+    const yearList = document.getElementById('yearList');
+    const scrollWheel = document.getElementById('scrollWheel');
+    const currentYear = new Date().getFullYear();
+    const itemHeight = 32; // Match your actual <li> height
+    const paddingCount = 3; // Number of padding items to add top & bottom
 
-// Populate years from 2025 to 1925
-for (let year = 2025; year >= 1925; year--) {
-  const li = document.createElement('li');
-  li.textContent = year;
-  yearList.appendChild(li);
-}
+    // Clear existing items if any
+    yearList.innerHTML = "";
 
-// Add invisible padding items to top and bottom for smooth centering
-const topPad = document.createElement('li');
-topPad.style.height = '100px';
-topPad.style.opacity = '0';
-topPad.style.pointerEvents = 'none';
-yearList.insertBefore(topPad, yearList.firstChild);
+    // Add top padding
+    for (let i = 0; i < paddingCount; i++) {
+      const pad = document.createElement('li');
+      pad.style.height = `${itemHeight}px`;
+      pad.style.opacity = '0';
+      yearList.appendChild(pad);
+    }
 
-const bottomPad = document.createElement('li');
-bottomPad.style.height = '100px';
-bottomPad.style.opacity = '0';
-bottomPad.style.pointerEvents = 'none';
-yearList.appendChild(bottomPad);
+    // Add real years
+    for (let year = 2025; year >= 1925; year--) {
+      const li = document.createElement('li');
+      li.textContent = year;
+      yearList.appendChild(li);
+    }
 
-// Scroll event logic
-scrollWheel.addEventListener('scroll', () => {
-  const scrollTop = scrollWheel.scrollTop;
-  const itemHeight = 32; // Set this to the height of your <li> items
-  const containerHeight = scrollWheel.offsetHeight;
-  const centerOffset = containerHeight / 2;
+    // Add bottom padding
+    for (let i = 0; i < paddingCount; i++) {
+      const pad = document.createElement('li');
+      pad.style.height = `${itemHeight}px`;
+      pad.style.opacity = '0';
+      yearList.appendChild(pad);
+    }
 
-  const rawIndex = Math.round((scrollTop + centerOffset - itemHeight / 2) / itemHeight);
+    // Get only the real year elements (not padding)
+    function getRealYearElements() {
+      return Array.from(yearList.children).filter(li => li.textContent);
+    }
 
-  // Filter out the invisible padders
-  const actualItems = Array.from(yearList.children).filter(li => li.textContent !== "");
-  const maxIndex = actualItems.length - 1;
+    // Scroll event
+    scrollWheel.addEventListener('scroll', () => {
+      const scrollTop = scrollWheel.scrollTop;
+      const containerHeight = scrollWheel.offsetHeight;
+      const center = scrollTop + containerHeight / 2;
+      const index = Math.round(center / itemHeight);
 
-  const safeIndex = Math.min(Math.max(rawIndex - 1, 0), maxIndex); // -1 because of top pad
-  const selectedYear = actualItems[safeIndex].textContent;
+      const items = Array.from(yearList.children);
+      const safeIndex = Math.min(Math.max(index, 0), items.length - 1);
 
-  // Toggle visual selection
-  actualItems.forEach((li, index) => {
-    li.classList.toggle('selected', index === safeIndex);
-  });
+      const selectedLi = items[safeIndex];
+      const selectedYear = selectedLi?.textContent;
 
-  // Calculate ages
-  const earthAge = currentYear - selectedYear;
-  const psycheAge = Math.floor(earthAge / 5);
+      // Guard: Only trigger if it's a valid year (not padding)
+      if (!selectedYear || isNaN(selectedYear)) return;
 
-  document.getElementById('earthResult').innerText = `${earthAge}`;
-  document.getElementById('earthResult').className = `earthAge`;
-  document.getElementById('psycheResult').innerText = `${psycheAge}`;
-  document.getElementById('psycheResult').className = `psycheAge`;
-  });
+      // Clear old selections
+      getRealYearElements().forEach(li => li.classList.remove('selected'));
 
-  // Start with the first real year selected
-  scrollWheel.scrollTop = 0;
-  yearList.children[1].classList.add('selected');
+      // Highlight the new one
+      selectedLi.classList.add('selected');
+
+      // Update results
+      const earthAge = currentYear - parseInt(selectedYear);
+      const psycheAge = Math.floor(earthAge / 5);
+
+      document.getElementById('earthResult').innerText = `${earthAge}`;
+      document.getElementById('earthResult').className = `earthAge`;
+      document.getElementById('psycheResult').innerText = `${psycheAge}`;
+      document.getElementById('psycheResult').className = `psycheAge`;
+    });
+
+    // Start with top year selected
+    scrollWheel.scrollTop = 0;
 
     const earthData = { Sleep: 8, "Work/School": 8, Eat: 3, Relax: 5 };
     const psycheData = { Sleep: 1, "Work/School": 1, Eat: 0.7, Relax: 1.5 };
