@@ -35,6 +35,8 @@ Top Page Header
   }
   
   .scroll-wheel {
+    width: 120px;
+    max-width: 30vw;   
     height: 250px;
     overflow-y: scroll;
     border: 5px solid #592651;
