@@ -565,6 +565,7 @@ footer {
     #psycheJr {
         /* visibility: hidden !important; */
         opacity: 0;
+        height: 0;
     }
 
     /* #psycheJr {
@@ -689,7 +690,7 @@ footer {
     }
 
     footer {
-        height: 10vh !important;
+        height: 60vh !important;
     }
 }
 
@@ -802,7 +803,7 @@ footer {
     }
 
     footer {
-        height: 10vh !important;
+        height: 45vh !important;
     }
 }
 
