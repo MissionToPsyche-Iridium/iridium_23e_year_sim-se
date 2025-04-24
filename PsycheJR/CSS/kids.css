@@ -741,4 +741,12 @@ footer {
         transform: scale(0.5);
     }
 
+    #human {
+        transform: translateX(10rem);
+    }
+    
+    #dog {
+        transform: translateX(-10rem);
+    }
+
 }
