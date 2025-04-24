@@ -708,36 +708,71 @@ const tl = gsap.timeline()
         if (!dogRaised) {
             dogRaised = true;
             liftDogButton.textContent = "Lower the Dog";
-            tl3.to(
-                '#Arm',
-                {
-                    y: -30,
-                    rotate: -20,
-                    duration: 4, 
-                    ease: "power2.out"
-                }, "<"
-            )
-        
-            tl3.to(
-                '#sleeve',
-                {
-                    y: -18,
-                    x: 15,
-                    rotate: -22,
-                    duration: 4, 
-                    ease: "power2.out"
-                }, "<"
-            )
-        
-            tl3.to(
-                '#dog',
-                {
-                    y: -350,
-                    x: 10,
-                    duration: 4, 
-                    ease: "power2.out"
-                }, "<"
-            );
+
+            if (window.innerWidth < 1200) {
+                tl3.to(
+                    '#Arm',
+                    {
+                        y: -30,
+                        rotate: -20,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                )
+            
+                tl3.to(
+                    '#sleeve',
+                    {
+                        y: -18,
+                        x: 15,
+                        rotate: -22,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                )
+            
+                tl3.to(
+                    '#dog',
+                    {
+                        y: -350,
+                        x: 0,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                );
+            } else { 
+                tl3.to(
+                    '#Arm',
+                    {
+                        y: -30,
+                        rotate: -20,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                )
+            
+                tl3.to(
+                    '#sleeve',
+                    {
+                        y: -18,
+                        x: 15,
+                        rotate: -22,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                )
+            
+                tl3.to(
+                    '#dog',
+                    {
+                        y: -350,
+                        x: 10,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                );
+            }
+
         } else {
             dogRaised = false;
             liftDogButton.textContent = "Lift the Dog";
