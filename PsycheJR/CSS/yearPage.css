@@ -87,7 +87,7 @@ Top Page Header
 
   #ageOnEarth {
     background-image: url('../../img/EarthTransparent.png');
-    background-size: contain;
+    background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
     color: #087f23;
@@ -99,7 +99,7 @@ Top Page Header
   
   #ageOnPsyche {
     background-image: url('../../img/PsycheTransparent.png');
-    background-size: contain;
+    background-size: 30%;
     background-repeat: no-repeat;
     background-position: center;
     color: #f9a000;
