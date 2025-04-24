@@ -735,7 +735,7 @@ const tl = gsap.timeline()
                     '#dog',
                     {
                         y: -350,
-                        x: 0,
+                        x: -10,
                         duration: 4, 
                         ease: "power2.out"
                     }, "<"

@@ -745,4 +745,8 @@ footer {
         transform: scale(0.5) translateX(-10rem);
     }
 
+    #liftDog {
+        transform: translateY(-10rem);
+    }
+
 }
