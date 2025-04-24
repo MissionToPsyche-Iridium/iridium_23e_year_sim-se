@@ -91,6 +91,13 @@ File Start
       yearList.appendChild(li);
     }
 
+    // Add a spacer element so final item can scroll into view
+    const spacer = document.createElement('li');
+    spacer.style.height = '120px'; // or match scroll-wheel height
+    spacer.style.border = 'none';
+    spacer.style.background = 'transparent';
+    yearList.appendChild(spacer);
+
     scrollWheel.addEventListener('scroll', () => {
       const scrollTop = scrollWheel.scrollTop;
       const itemHeight = 32;
@@ -99,6 +106,12 @@ File Start
 
       Array.from(yearList.children).forEach((li, index) => {
         li.classList.toggle('selected', index === selectedIndex);
+        if (index === selectedIndex) {
+          li.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }
       });
 
       const earthAge = currentYear - selectedYear;

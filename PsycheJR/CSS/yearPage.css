@@ -65,8 +65,37 @@ body {
   }
   
   .earthAge, .psycheAge {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
+    text-shadow:
+      2px 2px 0 yellow,
+      -2px -2px 0 yellow,
+      2px -2px 0 yellow,
+      -2px 2px 0 yellow;
+  }
+
+  #ageOnEarth {
+    background-image: url('../../img/EarthTransparent.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #087f23;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px 0;
+    min-height: 140px;
+  }
+  
+  #ageOnPsyche {
+    background-image: url('../../img/PsycheTransparent.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #f9a000;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px 0;
+    min-height: 140px;
   }
   
   .wrap {
@@ -122,8 +151,8 @@ body {
     text-shadow: 0 0 3px black;
   }
   
-  #work   { background-image: url('../img/work.jpeg'); }
-  #school { background-image: url('../img/school.jpeg'); }
-  #sleep  { background-image: url('../img/sleep.jpeg'); }
-  #eat    { background-image: url('../img/eat.jpg'); }
-  #relax  { background-image: url('../img/relax.jpeg'); }
+  #work   { background-image: url('../../img/work.jpeg'); }
+  #school { background-image: url('../../img/school.jpeg'); }
+  #sleep  { background-image: url('../../img/sleep.jpeg'); }
+  #eat    { background-image: url('../../img/eat.jpg'); }
+  #relax  { background-image: url('../../img/relax.jpeg'); }
