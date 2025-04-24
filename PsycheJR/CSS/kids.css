@@ -747,7 +747,11 @@ footer {
 
     #liftDog {
         transform: translateY(-10rem) translateX(-5rem);
-        color: blue;
+        color: red;
+    }
+
+    #humanOutfit {
+        transform: translateY(-10rem);
     }
 
 }
