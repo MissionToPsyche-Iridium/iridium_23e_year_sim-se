@@ -78,7 +78,7 @@ body {
 
   #ageOnEarth h3,
   #ageOnPsyche h3 {
-  font-size: 30;
+  font-size: 30px;
   font-weight: bold;
   margin: 0 0 10px 0;
 }
@@ -191,14 +191,14 @@ body {
   
   .or-label {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 26px;
+    font-size: 18px;
     font-weight: bold;
     color: #f9a000;
     background: rgba(0, 0, 0, 0.85);
-    padding: 6px 16px;
+    padding: 2px 8px;
     border-radius: 50px;
     box-shadow: 0 0 10px #f9a000;
     z-index: 2;
