@@ -1,27 +1,54 @@
 const tl = gsap.timeline()
 
-        tl.fromTo(
-            "#sun",
-            {
-                y: -300
-            },
-            {
-                y: -300
-            }
+        if (window.innerWidth < 1200){
+            tl.fromTo(
+                "#sun",
+                {
+                    y: -300
+                },
+                {
+                    y: -500
+                }
+            );
+    
+            tl.fromTo (
+                "#spaceship",
+                {
+                    rotate: 0,
+                    x: 0, 
+                    y: -500
+                },
+                {
+                    rotate: 45, 
+                    duration: 4
+                }
+            );
+        } else {
+            tl.fromTo(
+                "#sun",
+                {
+                    y: -300
+                },
+                {
+                    y: -300
+                }
+            );
+    
+            tl.fromTo (
+                "#spaceship",
+                {
+                    rotate: 0,
+                    x: 0, 
+                    y: -300
+                },
+                {
+                    rotate: 45, 
+                    duration: 4
+                }
         );
+        }
 
-        tl.fromTo (
-            "#spaceship",
-            {
-                rotate: 0,
-                x: 0, 
-                y: -300
-            },
-            {
-                rotate: 45, 
-                duration: 4
-            }
-    );
+        
 
     tl.fromTo(
         "#spaceship",
