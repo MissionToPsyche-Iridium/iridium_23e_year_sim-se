@@ -708,7 +708,7 @@ footer {
     }
 
     #astronaut {
-        transform: scale(0.5) translateX(15rem);
+        transform: scale(0.5) translateX(20rem);
         margin-top: -10rem;
         padding-bottom: 0;
         margin-bottom: -2rem;
@@ -721,15 +721,15 @@ footer {
     }
 
     #liftCar {
-        transform: translateY(-20rem) translateX(15rem);
+        transform: translateY(-20rem) translateX(25rem);
     }
 
     #changeColorBtn {
-        transform: translateY(-15rem) translateX(5rem);
+        transform: translateY(-15rem) translateX(10rem);
     }
 
     #changeSquareColor {
-        transform: translateY(-15rem) translateX(5rem);
+        transform: translateY(-15rem) translateX(10rem);
     }
 
     #container1 input {
