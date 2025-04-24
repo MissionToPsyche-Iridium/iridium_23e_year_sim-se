@@ -730,10 +730,15 @@ footer {
 
     #changeSquareColor {
         transform: translateY(-16rem) translateX(10rem);
+        border-radius: 1rem;
     }
 
     #container1 input {
         transform: scale(1.5) translateY(-10rem) translateX(-20rem);
+    }
+
+    #human, #dog {
+        transform: scale(0.5);
     }
 
 }
