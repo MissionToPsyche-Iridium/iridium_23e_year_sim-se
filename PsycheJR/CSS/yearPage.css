@@ -76,13 +76,20 @@ body {
       -2px 2px 0 yellow;
   }
 
+  #ageOnEarth h3,
+  #ageOnPsyche h3 {
+  font-size: 30;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
   #ageOnEarth {
     background-image: url('../../img/EarthTransparent.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     color: #087f23;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     padding: 20px 0;
     min-height: 140px;
@@ -94,7 +101,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     color: #f9a000;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     padding: 20px 0;
     min-height: 140px;
@@ -159,6 +166,44 @@ body {
     align-items: center;
     justify-content: center;
     text-shadow: 0 0 3px black;
+  }
+
+  .work-school-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    position: relative;
+  }
+  
+  #work, #school {
+    flex: 1;
+    height: 100px;
+    font-size: 16px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 0 3px black;
+  }
+  
+  .or-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+    font-weight: bold;
+    color: #f9a000;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 6px 16px;
+    border-radius: 50px;
+    box-shadow: 0 0 10px #f9a000;
+    z-index: 2;
+    pointer-events: none;
+    letter-spacing: 1px;
   }
   
   #work   { background-image: url('../../img/work.jpeg'); }
