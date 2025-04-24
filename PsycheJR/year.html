@@ -84,48 +84,64 @@ File Start
   <script src="https://d3js.org/d3.v4.js"></script>
   <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   <script>
-    const yearList = document.getElementById('yearList');
-    const scrollWheel = document.getElementById('scrollWheel');
-    const currentYear = new Date().getFullYear();
+const yearList = document.getElementById('yearList');
+const scrollWheel = document.getElementById('scrollWheel');
+const currentYear = new Date().getFullYear();
 
-    for (let year = 2025; year >= 1925; year--) {
-      const li = document.createElement('li');
-      li.textContent = year;
-      yearList.appendChild(li);
-    }
+// Populate years from 2025 to 1925
+for (let year = 2025; year >= 1925; year--) {
+  const li = document.createElement('li');
+  li.textContent = year;
+  yearList.appendChild(li);
+}
 
-    scrollWheel.addEventListener('scroll', () => {
-      const scrollTop = scrollWheel.scrollTop;
-      const itemHeight = 32; // adjust to your actual li height
-      const scrollBoxHeight = scrollWheel.offsetHeight;
+// Add invisible padding items to top and bottom for smooth centering
+const topPad = document.createElement('li');
+topPad.style.height = '100px';
+topPad.style.opacity = '0';
+topPad.style.pointerEvents = 'none';
+yearList.insertBefore(topPad, yearList.firstChild);
 
-      // Calculate which item is visually centered
-      const centerOffset = scrollBoxHeight / 2;
-      const selectedIndex = Math.round((scrollTop + centerOffset - itemHeight / 2) / itemHeight);
+const bottomPad = document.createElement('li');
+bottomPad.style.height = '100px';
+bottomPad.style.opacity = '0';
+bottomPad.style.pointerEvents = 'none';
+yearList.appendChild(bottomPad);
 
-      // Guard against out-of-bounds index
-      const maxIndex = yearList.children.length - 1;
-      const safeIndex = Math.min(Math.max(selectedIndex, 0), maxIndex);
+// Scroll event logic
+scrollWheel.addEventListener('scroll', () => {
+  const scrollTop = scrollWheel.scrollTop;
+  const itemHeight = 32; // Set this to the height of your <li> items
+  const containerHeight = scrollWheel.offsetHeight;
+  const centerOffset = containerHeight / 2;
 
-      const selectedYear = yearList.children[safeIndex].textContent;
+  const rawIndex = Math.round((scrollTop + centerOffset - itemHeight / 2) / itemHeight);
 
-      // Update selected style
-      Array.from(yearList.children).forEach((li, index) => {
-        li.classList.toggle('selected', index === safeIndex);
-      });
+  // Filter out the invisible padders
+  const actualItems = Array.from(yearList.children).filter(li => li.textContent !== "");
+  const maxIndex = actualItems.length - 1;
 
-      // Update age values
-      const earthAge = currentYear - selectedYear;
-      const psycheAge = Math.floor(earthAge / 5);
+  const safeIndex = Math.min(Math.max(rawIndex - 1, 0), maxIndex); // -1 because of top pad
+  const selectedYear = actualItems[safeIndex].textContent;
 
-      document.getElementById('earthResult').innerText = `${earthAge}`;
-      document.getElementById('earthResult').className = `earthAge`;
-      document.getElementById('psycheResult').innerText = `${psycheAge}`;
-      document.getElementById('psycheResult').className = `psycheAge`;
-    });
+  // Toggle visual selection
+  actualItems.forEach((li, index) => {
+    li.classList.toggle('selected', index === safeIndex);
+  });
 
-    scrollWheel.scrollTop = 0;
-    yearList.children[0].classList.add('selected');
+  // Calculate ages
+  const earthAge = currentYear - selectedYear;
+  const psycheAge = Math.floor(earthAge / 5);
+
+  document.getElementById('earthResult').innerText = `${earthAge}`;
+  document.getElementById('earthResult').className = `earthAge`;
+  document.getElementById('psycheResult').innerText = `${psycheAge}`;
+  document.getElementById('psycheResult').className = `psycheAge`;
+  });
+
+  // Start with the first real year selected
+  scrollWheel.scrollTop = 0;
+  yearList.children[1].classList.add('selected');
 
     const earthData = { Sleep: 8, "Work/School": 8, Eat: 3, Relax: 5 };
     const psycheData = { Sleep: 1, "Work/School": 1, Eat: 0.7, Relax: 1.5 };
