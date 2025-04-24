@@ -106,12 +106,6 @@ File Start
 
       Array.from(yearList.children).forEach((li, index) => {
         li.classList.toggle('selected', index === selectedIndex);
-        if (index === selectedIndex) {
-          li.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-          });
-        }
       });
 
       const earthAge = currentYear - selectedYear;
@@ -173,21 +167,25 @@ File Start
         .attr("class", "textGroup")
         .attr("transform", d => `translate(${arc.centroid(d)})`);
 
+      // Key text 
       textGroup.append("text")
         .attr("class", "keyText")
-        .attr("dy", "-0.6em")
+        .attr("dy", "-0.7em")
         .text(d => d.data.key)
         .attr("text-anchor", "middle")
         .style("fill", "#fff")
-        .style("font-size", `${Math.max(width / 25, 12)}px`);
+        .style("font-size", `${Math.max(width / 18, 14)}px`)
+        .style("font-weight", "bold");
 
+      // Value text 
       textGroup.append("text")
         .attr("class", "valueText")
-        .attr("dy", "0.6em")
+        .attr("dy", "0.8em")
         .text(d => d.data.value)
         .attr("text-anchor", "middle")
         .style("fill", "#fff")
-        .style("font-size", `${Math.max(width / 20, 14)}px`);
+        .style("font-size", `${Math.max(width / 14, 18)}px`)
+        .style("font-weight", "bold");
     }
 
     function updateChart(data) {
