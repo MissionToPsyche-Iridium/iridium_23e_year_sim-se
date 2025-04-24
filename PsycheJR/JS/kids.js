@@ -16,7 +16,7 @@ const tl = gsap.timeline()
                 {
                     rotate: 0,
                     x: 0, 
-                    y: -500
+                    y: -700
                 },
                 {
                     rotate: 45, 
