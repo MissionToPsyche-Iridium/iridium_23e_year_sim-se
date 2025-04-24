@@ -94,23 +94,27 @@ File Start
       yearList.appendChild(li);
     }
 
-    // Add a spacer element so final item can scroll into view
-    const spacer = document.createElement('li');
-    spacer.style.height = '120px'; 
-    spacer.style.border = 'none';
-    spacer.style.background = 'transparent';
-    yearList.appendChild(spacer);
-
     scrollWheel.addEventListener('scroll', () => {
       const scrollTop = scrollWheel.scrollTop;
-      const itemHeight = 32;
-      const selectedIndex = Math.round(scrollTop / itemHeight);
-      const selectedYear = yearList.children[selectedIndex].textContent;
+      const itemHeight = 32; // adjust to your actual li height
+      const scrollBoxHeight = scrollWheel.offsetHeight;
 
+      // Calculate which item is visually centered
+      const centerOffset = scrollBoxHeight / 2;
+      const selectedIndex = Math.round((scrollTop + centerOffset - itemHeight / 2) / itemHeight);
+
+      // Guard against out-of-bounds index
+      const maxIndex = yearList.children.length - 1;
+      const safeIndex = Math.min(Math.max(selectedIndex, 0), maxIndex);
+
+      const selectedYear = yearList.children[safeIndex].textContent;
+
+      // Update selected style
       Array.from(yearList.children).forEach((li, index) => {
-        li.classList.toggle('selected', index === selectedIndex);
+        li.classList.toggle('selected', index === safeIndex);
       });
 
+      // Update age values
       const earthAge = currentYear - selectedYear;
       const psycheAge = Math.floor(earthAge / 5);
 
