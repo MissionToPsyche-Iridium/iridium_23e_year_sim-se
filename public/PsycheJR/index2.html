@@ -37,8 +37,13 @@ File Start
     </header>
     <!-- Divider housing the 3D View Navigation button-->
     <div id="view3D">
-        <a href="/index.html"><button id="view3D-btn">Try in 3D</button></a>
-    </div>
+        <a id="view3D-link"><button id="view3D-btn">Try in 3D</button></a>
+
+        <script type="module">
+          const base = import.meta.env.BASE_URL;
+          document.getElementById('view3D-link').href = `${base}index.html`;
+        </script>
+            </div>
     <!-- Main header of the page -->
     <div id="page-header">
         <h1>Welcome to a year on Psyche 16</h1>
