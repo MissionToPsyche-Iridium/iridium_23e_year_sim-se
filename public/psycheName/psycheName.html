@@ -87,10 +87,7 @@ File Start
         <div id="viewportContainer" style="display: none;">
             <button id="closeButton">x Close</button>
             <div id="content"></div>
-            <div style="margin-top: 10px;">
-                <button id="speakButton">🔊 Listen</button>
-                <button id="stopButton">⏹ Stop</button>
-            </div>
+            <audio id="sectionAudio" controls style="margin-top: 10px; display: none;"></audio>
         </div>
         
 
@@ -173,43 +170,30 @@ File Start
                     popup.style.display = "none";
                 }
             });
-            const synth = window.speechSynthesis;
-            let selectedVoice = null;
+            const sectionAudio = document.getElementById("sectionAudio");
+            const audioMap = {
+                introLink: "name_intro.mp3",
+                historyLink: "name_history.mp3",
+                missionLink: "name_mission.mp3",
+                funFactsLink: "name_facts.mp3"
+            };
+            document.querySelectorAll("ul li a").forEach(link => {
+                link.addEventListener("click", () => {
+                    const sectionKey = link.id;
+                    contentBox.innerHTML = sections[sectionKey] || "No content available.";
+                    popup.style.display = "block";
 
-            const speakButton = document.getElementById("speakButton");
-            const stopButton = document.getElementById("stopButton");
-
-            function loadVoices() {
-                const voices = synth.getVoices();
-                selectedVoice = voices.find(v => 
-                    v.name.includes("Google US English") || 
-                    v.name.includes("Microsoft") || 
-                    v.lang === "en-US"
-                ) || voices[0]; 
-            }
-            loadVoices();
-            if (speechSynthesis.onvoiceschanged !== undefined) {
-                speechSynthesis.onvoiceschanged = loadVoices;
-            }
-
-            speakButton.addEventListener("click", () => {
-                synth.cancel(); 
-                const text = document.getElementById("content").innerText;
-
-                const utterance = new SpeechSynthesisUtterance(text);
-                if (selectedVoice) utterance.voice = selectedVoice;
-
-                utterance.rate = 1;
-                utterance.pitch = 1;
-                utterance.lang = "en-US";
-
-                synth.speak(utterance);
+                    // Handle audio playback
+                    if (audioMap[sectionKey]) {
+                        sectionAudio.src = audioMap[sectionKey];
+                        sectionAudio.style.display = "block";
+                        sectionAudio.load();
+                    } else {
+                        sectionAudio.src = "";
+                        sectionAudio.style.display = "none";
+                    }
+                });
             });
-
-            stopButton.addEventListener("click", () => {
-                synth.cancel();
-            });
-
 
         });
     </script>
