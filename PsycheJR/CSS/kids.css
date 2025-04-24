@@ -747,7 +747,6 @@ footer {
 
     #liftDog {
         transform: translateY(-10rem) translateX(-5rem);
-        color: blue;
     }
 
     #humanOutfit {
@@ -756,6 +755,10 @@ footer {
 
     #humanColor {
         transform: translateY(-10rem) translateX(-5rem);
+    }
+
+    #container2 {
+        height: 1150px;
     }
 
 }
