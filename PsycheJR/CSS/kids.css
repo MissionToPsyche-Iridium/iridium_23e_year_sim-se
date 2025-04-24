@@ -747,7 +747,7 @@ footer {
 
     #liftDog {
         transform: translateY(-10rem) translateX(-5rem);
-        color: red;
+        color: blue;
     }
 
 }
