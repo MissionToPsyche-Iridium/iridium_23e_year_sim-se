@@ -680,3 +680,60 @@ input[type="color"] {
 footer {
     height: 400px;
 }
+
+@media (min-width: 1000px) and (max-width: 1200px) {
+    #spaceship, #sun {
+        transform: scale(0.75);
+    }
+
+    #div6 {
+        margin-top: 25rem;
+    }
+
+    #div7, #div8 {
+        margin-top: 20rem;
+    }
+
+    #div9, #div10, #div11 {
+        margin-top: 10rem;
+    }
+
+    #div6 {
+        height: auto;
+    }
+
+    #container1 {
+        margin-top: 5rem;
+        height: 850px;
+    }
+
+    #astronaut {
+        transform: scale(0.5) translateX(-35rem);
+        margin-top: -10rem;
+        padding-bottom: 0;
+        margin-bottom: -2rem;
+    }
+
+    #car {
+        transform: scale(0.5);
+        margin-top: -80rem;
+        margin-left: -2rem;
+    }
+
+    #liftCar {
+        transform: translateY(-20rem) translateX(15rem);
+    }
+
+    #changeColorBtn {
+        transform: translateY(-15rem) translateX(5rem);
+    }
+
+    #changeSquareColor {
+        transform: translateY(-15rem) translateX(5rem);
+    }
+
+    #container1 input {
+        transform: scale(1.5) translateY(-10rem) translateX(-20rem);
+    }
+
+}
