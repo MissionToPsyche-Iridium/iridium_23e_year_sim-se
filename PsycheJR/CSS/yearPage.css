@@ -82,7 +82,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     color: #087f23;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     padding: 20px 0;
     min-height: 140px;
@@ -94,7 +94,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     color: #f9a000;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     padding: 20px 0;
     min-height: 140px;
@@ -113,7 +113,7 @@ body {
   .wrap label {
     padding: 10px 20px;
     font-size: 18px;
-    background: #e5e5e5;
+    background: #e5e5e565;
     margin: 0 5px;
     border-radius: 8px;
     cursor: pointer;
@@ -127,6 +127,14 @@ body {
   #Psyche:checked + label {
     background: #f9a000;
     color: #592651;
+  }
+
+  #resultHours {
+    font-size: 30px;         
+    font-weight: bold;
+    color: #ffffff;
+    margin: 20px 0;
+    text-shadow: 0 0 3px black;
   }
   
   #piechart svg {
