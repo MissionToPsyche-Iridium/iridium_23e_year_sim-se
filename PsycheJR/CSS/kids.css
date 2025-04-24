@@ -715,7 +715,6 @@ footer {
     }
 
     #car {
-        opacity: 0;
         transform: scale(0.5);
         margin-top: -80rem;
         margin-left: -2rem;
