@@ -156,7 +156,6 @@ export function renderSection6(camera, scene) {
   const currentSection = getCurrentSection();
   const isVisible = currentSection === 6;
   
-  // Auto-show/hide viewport logic has been removed.
   
   if (gameControllerModel && isVisible) {
     gameControllerModel.rotation.y += 0.01;
