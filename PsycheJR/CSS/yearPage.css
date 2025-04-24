@@ -165,8 +165,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-shadow: 0 0 3px black;
-  }
+    text-shadow:
+        0 0 5px #000,
+        0 0 10px #000,
+        2px 2px 5px #000;
+        }
 
   .work-school-group {
     display: flex;
