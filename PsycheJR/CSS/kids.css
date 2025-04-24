@@ -708,7 +708,7 @@ footer {
     }
 
     #astronaut {
-        transform: scale(0.5) translateX(35rem);
+        transform: scale(0.5) translateX(15rem);
         margin-top: -10rem;
         padding-bottom: 0;
         margin-bottom: -2rem;
