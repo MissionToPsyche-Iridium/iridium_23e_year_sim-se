@@ -1,27 +1,54 @@
 const tl = gsap.timeline()
 
-        tl.fromTo(
-            "#sun",
-            {
-                y: -300
-            },
-            {
-                y: -300
-            }
+        if (window.innerWidth < 1200){
+            tl.fromTo(
+                "#sun",
+                {
+                    y: -300
+                },
+                {
+                    y: -500
+                }
+            );
+    
+            tl.fromTo (
+                "#spaceship",
+                {
+                    rotate: 0,
+                    x: 0, 
+                    y: -700
+                },
+                {
+                    rotate: 45, 
+                    duration: 4
+                }
+            );
+        } else {
+            tl.fromTo(
+                "#sun",
+                {
+                    y: -300
+                },
+                {
+                    y: -300
+                }
+            );
+    
+            tl.fromTo (
+                "#spaceship",
+                {
+                    rotate: 0,
+                    x: 0, 
+                    y: -300
+                },
+                {
+                    rotate: 45, 
+                    duration: 4
+                }
         );
+        }
 
-        tl.fromTo (
-            "#spaceship",
-            {
-                rotate: 0,
-                x: 0, 
-                y: -300
-            },
-            {
-                rotate: 45, 
-                duration: 4
-            }
-    );
+        
 
     tl.fromTo(
         "#spaceship",
@@ -708,36 +735,71 @@ const tl = gsap.timeline()
         if (!dogRaised) {
             dogRaised = true;
             liftDogButton.textContent = "Lower the Dog";
-            tl3.to(
-                '#Arm',
-                {
-                    y: -30,
-                    rotate: -20,
-                    duration: 4, 
-                    ease: "power2.out"
-                }, "<"
-            )
-        
-            tl3.to(
-                '#sleeve',
-                {
-                    y: -18,
-                    x: 15,
-                    rotate: -22,
-                    duration: 4, 
-                    ease: "power2.out"
-                }, "<"
-            )
-        
-            tl3.to(
-                '#dog',
-                {
-                    y: -350,
-                    x: 10,
-                    duration: 4, 
-                    ease: "power2.out"
-                }, "<"
-            );
+
+            if (window.innerWidth < 1200) {
+                tl3.to(
+                    '#Arm',
+                    {
+                        y: -30,
+                        rotate: -20,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                )
+            
+                tl3.to(
+                    '#sleeve',
+                    {
+                        y: -18,
+                        x: 15,
+                        rotate: -22,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                )
+            
+                tl3.to(
+                    '#dog',
+                    {
+                        y: -340,
+                        x: -30,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                );
+            } else { 
+                tl3.to(
+                    '#Arm',
+                    {
+                        y: -30,
+                        rotate: -20,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                )
+            
+                tl3.to(
+                    '#sleeve',
+                    {
+                        y: -18,
+                        x: 15,
+                        rotate: -22,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                )
+            
+                tl3.to(
+                    '#dog',
+                    {
+                        y: -350,
+                        x: 10,
+                        duration: 4, 
+                        ease: "power2.out"
+                    }, "<"
+                );
+            }
+
         } else {
             dogRaised = false;
             liftDogButton.textContent = "Lift the Dog";
