@@ -543,6 +543,11 @@ class RoverGame {
         this.drawRover();
         this.drawGameUI();
         this.updateAndDrawMilestoneEffect();
+        
+        // Draw touch controls if game is active
+        if (!this.isPaused && !this.isGameOver) {
+            this.drawTouchControls();
+        }
 
         if (this.isPaused) {
             this.ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
@@ -554,6 +559,87 @@ class RoverGame {
              this.ctx.font = '18px "Segoe UI", Arial, sans-serif';
              this.ctx.fillText('Press ESC to Resume', this.canvas.width / 2, this.canvas.height / 2 + 20);
             this.ctx.textAlign = 'left';
+        }
+    }
+    
+    drawTouchControls() {
+        const ctx = this.ctx;
+        
+        // Draw shield button
+        const shieldBtn = this.touchControls.shieldButton;
+        const shieldGradient = ctx.createRadialGradient(
+            shieldBtn.x, shieldBtn.y, 0,
+            shieldBtn.x, shieldBtn.y, shieldBtn.radius
+        );
+        shieldGradient.addColorStop(0, 'rgba(173, 255, 216, 0.7)');
+        shieldGradient.addColorStop(0.7, 'rgba(173, 255, 216, 0.4)');
+        shieldGradient.addColorStop(1, 'rgba(173, 255, 216, 0.1)');
+        
+        ctx.beginPath();
+        ctx.arc(shieldBtn.x, shieldBtn.y, shieldBtn.radius, 0, Math.PI * 2);
+        ctx.fillStyle = shieldGradient;
+        ctx.fill();
+        
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw shield icon
+        ctx.font = '24px "Segoe UI Emoji", Arial';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🛡️', shieldBtn.x, shieldBtn.y);
+        
+        // Draw joystick if active
+        if (this.touchControls.joystickActive) {
+            const baseX = this.touchControls.joystickBaseX;
+            const baseY = this.touchControls.joystickBaseY;
+            const currentX = this.touchControls.currentX;
+            const currentY = this.touchControls.currentY;
+            const maxRadius = this.touchControls.joystickRadius;
+            
+            // Calculate joystick handle position (constrained by max radius)
+            const dx = currentX - baseX;
+            const dy = currentY - baseY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx);
+            const handleDistance = Math.min(distance, maxRadius);
+            const handleX = baseX + Math.cos(angle) * handleDistance;
+            const handleY = baseY + Math.sin(angle) * handleDistance;
+            
+            // Draw joystick base
+            ctx.beginPath();
+            ctx.arc(baseX, baseY, maxRadius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            
+            // Draw direction line
+            ctx.beginPath();
+            ctx.moveTo(baseX, baseY);
+            ctx.lineTo(handleX, handleY);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Draw joystick handle
+            ctx.beginPath();
+            ctx.arc(handleX, handleY, 20, 0, Math.PI * 2);
+            const handleGradient = ctx.createRadialGradient(
+                handleX, handleY, 0,
+                handleX, handleY, 20
+            );
+            handleGradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+            handleGradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.7)');
+            handleGradient.addColorStop(1, 'rgba(255, 255, 255, 0.5)');
+            ctx.fillStyle = handleGradient;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
         }
     }
 
@@ -1337,38 +1423,258 @@ class RoverGame {
     }
 
     setupControls() {
+        // Keyboard controls
         this.boundKeyDown = this.handleKeyDown.bind(this);
         this.boundKeyUp = this.handleKeyUp.bind(this);
         document.addEventListener('keydown', this.boundKeyDown);
         document.addEventListener('keyup', this.boundKeyUp);
+        
+        // Touch controls
+        this.boundTouchStart = this.handleTouchStart.bind(this);
+        this.boundTouchMove = this.handleTouchMove.bind(this);
+        this.boundTouchEnd = this.handleTouchEnd.bind(this);
+        this.canvas.addEventListener('touchstart', this.boundTouchStart, { passive: false });
+        this.canvas.addEventListener('touchmove', this.boundTouchMove, { passive: false });
+        this.canvas.addEventListener('touchend', this.boundTouchEnd);
+        this.canvas.addEventListener('touchcancel', this.boundTouchEnd);
+        
+        // Mouse controls for testing touch on desktop
+        this.boundMouseDown = this.handleMouseDown.bind(this);
+        this.boundMouseMove = this.handleMouseMove.bind(this);
+        this.boundMouseUp = this.handleMouseUp.bind(this);
+        this.canvas.addEventListener('mousedown', this.boundMouseDown);
+        this.canvas.addEventListener('mousemove', this.boundMouseMove);
+        document.addEventListener('mouseup', this.boundMouseUp);
+        
+        // Touch control state
+        this.touchControls = {
+            active: false,
+            startX: 0,
+            startY: 0,
+            currentX: 0,
+            currentY: 0,
+            joystickRadius: 50,
+            joystickBaseX: 0,
+            joystickBaseY: 0,
+            joystickActive: false,
+            doubleTapTimer: null,
+            lastTapTime: 0,
+            shieldButton: {
+                x: this.canvas.width - 60,
+                y: this.canvas.height - 60,
+                radius: 40
+            }
+        };
     }
 
     removeControls() {
+        // Remove keyboard listeners
         document.removeEventListener('keydown', this.boundKeyDown);
         document.removeEventListener('keyup', this.boundKeyUp);
+        
+        // Remove touch listeners
+        this.canvas.removeEventListener('touchstart', this.boundTouchStart);
+        this.canvas.removeEventListener('touchmove', this.boundTouchMove);
+        this.canvas.removeEventListener('touchend', this.boundTouchEnd);
+        this.canvas.removeEventListener('touchcancel', this.boundTouchEnd);
+        
+        // Remove mouse listeners
+        this.canvas.removeEventListener('mousedown', this.boundMouseDown);
+        this.canvas.removeEventListener('mousemove', this.boundMouseMove);
+        document.removeEventListener('mouseup', this.boundMouseUp);
+        
+        // Clear any timers
+        if (this.touchControls.doubleTapTimer) {
+            clearTimeout(this.touchControls.doubleTapTimer);
+            this.touchControls.doubleTapTimer = null;
+        }
     }
 
-     handleKeyDown(e) {
-         if (e.key === 'Escape') { this.togglePause(); return; }
-         if (this.isPaused || this.isGameOver || this.player.state !== 'normal') return;
-         let targetVelX = this.player.velocity.x, targetVelY = this.player.velocity.y, updated = false;
-         switch (e.key.toLowerCase()) {
-             case 'arrowup': case 'w': targetVelY = -this.player.baseSpeed; updated = true; break;
-             case 'arrowdown': case 's': targetVelY = this.player.baseSpeed; updated = true; break;
-             case 'arrowleft': case 'a': targetVelX = -this.player.baseSpeed; updated = true; break;
-             case 'arrowright': case 'd': targetVelX = this.player.baseSpeed; updated = true; break;
-             case ' ': e.preventDefault(); this.activateShield(); break;
-         }
-         if (updated) { this.player.velocity.x = targetVelX; this.player.velocity.y = targetVelY; }
-     }
+    handleKeyDown(e) {
+        if (e.key === 'Escape') { this.togglePause(); return; }
+        if (this.isPaused || this.isGameOver || this.player.state !== 'normal') return;
+        let targetVelX = this.player.velocity.x, targetVelY = this.player.velocity.y, updated = false;
+        switch (e.key.toLowerCase()) {
+            case 'arrowup': case 'w': targetVelY = -this.player.baseSpeed; updated = true; break;
+            case 'arrowdown': case 's': targetVelY = this.player.baseSpeed; updated = true; break;
+            case 'arrowleft': case 'a': targetVelX = -this.player.baseSpeed; updated = true; break;
+            case 'arrowright': case 'd': targetVelX = this.player.baseSpeed; updated = true; break;
+            case ' ': e.preventDefault(); this.activateShield(); break;
+        }
+        if (updated) { this.player.velocity.x = targetVelX; this.player.velocity.y = targetVelY; }
+    }
 
-     handleKeyUp(e) {
-         const keyReleased = e.key.toLowerCase();
-         if ((keyReleased === 'arrowup' || keyReleased === 'w') && this.player.velocity.y < 0) this.player.velocity.y = 0;
-         if ((keyReleased === 'arrowdown' || keyReleased === 's') && this.player.velocity.y > 0) this.player.velocity.y = 0;
-         if ((keyReleased === 'arrowleft' || keyReleased === 'a') && this.player.velocity.x < 0) this.player.velocity.x = 0;
-         if ((keyReleased === 'arrowright' || keyReleased === 'd') && this.player.velocity.x > 0) this.player.velocity.x = 0;
-     }
+    handleKeyUp(e) {
+        const keyReleased = e.key.toLowerCase();
+        if ((keyReleased === 'arrowup' || keyReleased === 'w') && this.player.velocity.y < 0) this.player.velocity.y = 0;
+        if ((keyReleased === 'arrowdown' || keyReleased === 's') && this.player.velocity.y > 0) this.player.velocity.y = 0;
+        if ((keyReleased === 'arrowleft' || keyReleased === 'a') && this.player.velocity.x < 0) this.player.velocity.x = 0;
+        if ((keyReleased === 'arrowright' || keyReleased === 'd') && this.player.velocity.x > 0) this.player.velocity.x = 0;
+    }
+    
+    // Touch event handlers
+    handleTouchStart(e) {
+        e.preventDefault(); // Prevent default scrolling behavior
+        
+        if (this.isPaused || this.isGameOver) {
+            // Handle pause menu touch if needed
+            return;
+        }
+        
+        const touch = e.touches[0];
+        const rect = this.canvas.getBoundingClientRect();
+        const touchX = touch.clientX - rect.left;
+        const touchY = touch.clientY - rect.top;
+        
+        // Check if shield button was touched
+        const shieldBtn = this.touchControls.shieldButton;
+        const dx = touchX - shieldBtn.x;
+        const dy = touchY - shieldBtn.y;
+        if (dx * dx + dy * dy <= shieldBtn.radius * shieldBtn.radius) {
+            this.activateShield();
+            return;
+        }
+        
+        // Check for double tap (alternative shield activation)
+        const now = Date.now();
+        const timeSinceLastTap = now - this.touchControls.lastTapTime;
+        if (timeSinceLastTap < 300) { // 300ms threshold for double tap
+            this.activateShield();
+            this.touchControls.lastTapTime = 0; // Reset to prevent triple-tap issues
+            return;
+        }
+        this.touchControls.lastTapTime = now;
+        
+        // Set up joystick control
+        this.touchControls.active = true;
+        this.touchControls.startX = touchX;
+        this.touchControls.startY = touchY;
+        this.touchControls.currentX = touchX;
+        this.touchControls.currentY = touchY;
+        this.touchControls.joystickBaseX = touchX;
+        this.touchControls.joystickBaseY = touchY;
+        this.touchControls.joystickActive = true;
+        
+        // Update player velocity based on touch position
+        this.updateTouchVelocity();
+    }
+    
+    handleTouchMove(e) {
+        e.preventDefault(); // Prevent default scrolling behavior
+        
+        if (!this.touchControls.active || this.isPaused || this.isGameOver || this.player.state !== 'normal') {
+            return;
+        }
+        
+        const touch = e.touches[0];
+        const rect = this.canvas.getBoundingClientRect();
+        this.touchControls.currentX = touch.clientX - rect.left;
+        this.touchControls.currentY = touch.clientY - rect.top;
+        
+        // Update player velocity based on touch position
+        this.updateTouchVelocity();
+    }
+    
+    handleTouchEnd(e) {
+        e.preventDefault();
+        
+        // Stop the rover when touch ends
+        if (this.touchControls.active) {
+            this.player.velocity.x = 0;
+            this.player.velocity.y = 0;
+            this.touchControls.active = false;
+            this.touchControls.joystickActive = false;
+        }
+    }
+    
+    // Mouse event handlers (for testing touch on desktop)
+    handleMouseDown(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        
+        if (this.isPaused || this.isGameOver) {
+            // Handle pause menu clicks if needed
+            return;
+        }
+        
+        // Check if shield button was clicked
+        const shieldBtn = this.touchControls.shieldButton;
+        const dx = mouseX - shieldBtn.x;
+        const dy = mouseY - shieldBtn.y;
+        if (dx * dx + dy * dy <= shieldBtn.radius * shieldBtn.radius) {
+            this.activateShield();
+            return;
+        }
+        
+        // Check for double click (alternative shield activation)
+        const now = Date.now();
+        const timeSinceLastTap = now - this.touchControls.lastTapTime;
+        if (timeSinceLastTap < 300) { // 300ms threshold for double click
+            this.activateShield();
+            this.touchControls.lastTapTime = 0; // Reset to prevent triple-click issues
+            return;
+        }
+        this.touchControls.lastTapTime = now;
+        
+        // Set up joystick control
+        this.touchControls.active = true;
+        this.touchControls.startX = mouseX;
+        this.touchControls.startY = mouseY;
+        this.touchControls.currentX = mouseX;
+        this.touchControls.currentY = mouseY;
+        this.touchControls.joystickBaseX = mouseX;
+        this.touchControls.joystickBaseY = mouseY;
+        this.touchControls.joystickActive = true;
+        
+        // Update player velocity based on mouse position
+        this.updateTouchVelocity();
+    }
+    
+    handleMouseMove(e) {
+        if (!this.touchControls.active || this.isPaused || this.isGameOver || this.player.state !== 'normal') {
+            return;
+        }
+        
+        const rect = this.canvas.getBoundingClientRect();
+        this.touchControls.currentX = e.clientX - rect.left;
+        this.touchControls.currentY = e.clientY - rect.top;
+        
+        // Update player velocity based on mouse position
+        this.updateTouchVelocity();
+    }
+    
+    handleMouseUp() {
+        // Stop the rover when mouse button is released
+        if (this.touchControls.active) {
+            this.player.velocity.x = 0;
+            this.player.velocity.y = 0;
+            this.touchControls.active = false;
+            this.touchControls.joystickActive = false;
+        }
+    }
+    
+    updateTouchVelocity() {
+        if (!this.touchControls.active || this.player.state !== 'normal') {
+            return;
+        }
+        
+        // Calculate distance and direction from joystick base to current touch position
+        const dx = this.touchControls.currentX - this.touchControls.joystickBaseX;
+        const dy = this.touchControls.currentY - this.touchControls.joystickBaseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Normalize and apply max speed
+        const maxRadius = this.touchControls.joystickRadius;
+        if (distance > 0) {
+            const normalizedDistance = Math.min(distance, maxRadius) / maxRadius;
+            this.player.velocity.x = (dx / distance) * this.player.baseSpeed * normalizedDistance;
+            this.player.velocity.y = (dy / distance) * this.player.baseSpeed * normalizedDistance;
+        } else {
+            this.player.velocity.x = 0;
+            this.player.velocity.y = 0;
+        }
+    }
 
     togglePause() {
          if (this.isGameOver) return;
@@ -1741,7 +2047,7 @@ function showMainMenu() {
             <button class="game-btn difficulty-btn easy" onclick="showRoverSelection('easy')"><span class="difficulty-icon">★☆☆</span> EASY</button>
             <button class="game-btn difficulty-btn medium" onclick="showRoverSelection('medium')"><span class="difficulty-icon">★★☆</span> MEDIUM</button>
             <button class="game-btn difficulty-btn hard" onclick="showRoverSelection('hard')"><span class="difficulty-icon">★★★</span> HARD</button>
-        </div></div><p class="controls-hint">Controls: WASD/Arrows = Move | Space = Shield | ESC = Pause</p>
+        </div></div><p class="controls-hint">Controls: WASD/Arrows = Move | Space = Shield | ESC = Pause<br>Touch: Drag anywhere for joystick | Shield button or double-tap for shield</p>
     </div>`;
 }
 
