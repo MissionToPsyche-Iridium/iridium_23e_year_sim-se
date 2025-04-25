@@ -19,6 +19,7 @@ Unveiling the Mysteries of Asteroid 16 Psyche and The Cosmic Discoveries Ahead T
 ## Introduction
 
 This project is a web-based interactive application designed to educate and engage the general public on the scientific and historical significance of 16 Psyche, an asteroid in our solar system. Developed as a team effort, the site combines informative text, interactive animations, videos, and games to deliver an immersive learning experience. Using HTML, CSS, JavaScript, and Three.js, the application visualizes how 16 Psyche fits into the broader context of the solar system, illustrating its influence on surface conditions such as day and night cycles, seasons, and temperatures, where relevant.
+
 This collaborative team effort included research, design, and development to produce a cohesive and engaging final product aligned with the original project scope. The site also explores facts, common hypotheses, and the currently underway Mission to 16 Psyche, aimed at deepening public understanding.
 
 ---
