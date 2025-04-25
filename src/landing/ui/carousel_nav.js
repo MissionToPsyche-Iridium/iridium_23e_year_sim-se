@@ -100,6 +100,10 @@ export function setupCarouselNavigation(sections) {
     refLabel.style.transform = 'translateX(-10px)';
   });
 
+  refWrapper.addEventListener('click', () => {
+    moveToSection(0);
+  })
+
   renderNav();
 
   function syncNav() {
