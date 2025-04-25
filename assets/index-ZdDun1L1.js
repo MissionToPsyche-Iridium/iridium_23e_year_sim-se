@@ -21432,7 +21432,7 @@ void main() {
     2: So,
     3: () => {
       tu(async () => {
-        const { hideKidsViewport: r } = await import("./kidsViewport-BhIFHcuo.js");
+        const { hideKidsViewport: r } = await import("./kidsViewport-BKTJkkGl.js");
         return {
           hideKidsViewport: r
         };
@@ -21603,8 +21603,8 @@ void main() {
     };
     return new Promise(async (l, c) => {
       Qc("YEAR ON PSYCHE", i, s, 1.5, r, 0.02, "#FFA500", 0.07, 0.03);
-      const h = await Qc(`16 PSYCHE IS AN ASTEROID IN OUR SOLAR SYSTEM
-    EXPLORE THIS SITE TO LEARN ABOUT PSYCHE,,
+      const h = await Qc(`16 PSYCHE IS AN ASTEROID IN OUR SOLAR SYSTEM.
+    EXPLORE THIS SITE TO LEARN ABOUT PSYCHE,
      ITS ORIGIN, ORBIT, AND WHAT MAKES IT UNIQUE
 `, o, a, 0.4, r, null, "#FFA500");
       h.material.uniforms.opacity.value = 0, ft.to(h.material.uniforms.opacity, {
@@ -21917,7 +21917,7 @@ void main() {
         const p = new ip(16777215, 0.5);
         p.userData.section9Element = true, r.add(p), c.push(p), eu(l, () => {
           tu(async () => {
-            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-Ds2SAwGu.js");
+            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-Db3ys-iB.js");
             return {
               showEscapeVelocityViewport: v
             };
@@ -21928,7 +21928,7 @@ void main() {
           });
         }), eu(g, () => {
           tu(async () => {
-            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-Ds2SAwGu.js");
+            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-Db3ys-iB.js");
             return {
               showEscapeVelocityViewport: v
             };

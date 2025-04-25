@@ -98,7 +98,7 @@ header {
     /*color: #f9a000;
     background: linear-gradient(-45deg, #a53f5b, #592651, #302144);*/
     font-size: 1rem;
-
+    z-index: 10;
     background-color: #333; 
     color: orange; 
 }
