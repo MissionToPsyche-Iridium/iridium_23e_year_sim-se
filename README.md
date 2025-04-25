@@ -92,28 +92,28 @@ Here's an overview of the folder structure:
 
 ```
 ├── public/
-│   └── PsycheJR/             # Vite configuration file
-│   └── balance/              # Balance game files
-│   └── css/                  # Styling 
-│   └── escapeVelocity/       # Escape Velocity Game files
-│   └── games/                # Temperature Game files
-│   └── img/                  # Images
-│   └── psycheName/           # Name Oragin files
-│   └── refsViewport/         # Reference Section files
-│   └── res/                  # Resources (Icons, fonts, models, etc) 
-│   └── spacepic/             # Space Picture files
-│   └── website/              # Psyche Mission Website files
-│   └── year/                 # Cosmic Comparison files               
+│   └── PsycheJR/             # JavaScript/HTML files for the mobile experience
+│   └── balance/              # Balance game HTML, JS, and assets
+│   └── css/                  # Global stylesheets
+│   └── escapeVelocity/       # Escape Velocity game files
+│   └── games/                # Temperature game files
+│   └── img/                  # Image assets
+│   └── psycheName/           # Name origin interactive experience
+│   └── refsViewport/         # Reference section content and interactions
+│   └── res/                  # Shared resources (icons, fonts, 3D models)
+│   └── spacepic/             # Space picture viewer files
+│   └── website/              # Psyche Mission website (static pages)
+│   └── year/                 # Year on Psyche (Cosmic Comparison)
 ├── src/
-    └──landing/               # Contains the THREE.js scene setup
-    └──imports.js             # File paths needed for Vite build     
-├── vite.config.js            # Vite configuration file
-├── .gitignore                # Untracked folders and files
-├── README.md                 # This beautiful file explains the project
-├── index.html                # Main entry point to the website
-├── package-lock.js           # Locks a specific version of dependencies 
-├── package.json              # Project metadata and dependencies
-├── vite.config.js            # Vite configuration file
+│   └── landing/              # Three.js scene setup and related modules
+│   └── imports.js            # Path imports for Vite bundling
+├── index.html                # Root entry point that loads the app (desktop)
+├── vite.config.js            # Configuration file for Vite build tooling
+├── .gitignore                # Files/folders to be excluded from Git
+├── README.md                 # Project overview and documentation
+├── package-lock.json         # Exact versions of installed dependencies
+├── package.json              # Project metadata and dependency declarations
+
 
 ```
 
