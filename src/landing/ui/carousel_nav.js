@@ -1,5 +1,6 @@
 import { moveToSection } from './../utils/sectionTracking.js';
 import { resolvePath } from '../utils/utils.js';
+import { getCurrentSection } from './../utils/sectionTracking.js';
 
 export function setupCarouselNavigation(sections) {
   const navContainer = document.createElement('div');
@@ -10,8 +11,8 @@ export function setupCarouselNavigation(sections) {
 
   function renderNav() {
     navContainer.innerHTML = "";
-  
-    const visibleRange = 3; // show 3 above and 3 below
+  // show 3 above and 3 below
+    const visibleRange = 3; 
     const totalVisible = visibleRange * 2 + 1;
   
     for (let offset = -visibleRange; offset <= visibleRange; offset++) {
@@ -39,18 +40,6 @@ export function setupCarouselNavigation(sections) {
     }
   }
   
-
-  // Optional: scroll or keyboard support
-  window.addEventListener('wheel', (e) => {
-    if (e.deltaY > 0) {
-      currentIndex = (currentIndex + 1) % sections.length;
-    } else if (e.deltaY < 0) {
-      currentIndex = (currentIndex - 1 + sections.length) % sections.length;
-    }
-    moveToSection(currentIndex, sections[currentIndex].position);
-    renderNav();
-  });
-  
   window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown') {
       currentIndex = (currentIndex + 1) % sections.length;
@@ -63,7 +52,7 @@ export function setupCarouselNavigation(sections) {
     renderNav();
   });
   
-  // Create REFERENCES icon overlay
+  // References icon overlay
   const refWrapper = document.createElement('div');
   refWrapper.id = 'ref-icon-wrapper';
   refWrapper.style.position = 'fixed';
@@ -112,4 +101,14 @@ export function setupCarouselNavigation(sections) {
   });
 
   renderNav();
+
+  function syncNav() {
+    const idx = getCurrentSection();
+    if (idx !== currentIndex) {
+      currentIndex = idx;
+      renderNav();
+    }
+    requestAnimationFrame(syncNav);
+  }
+  syncNav();            
 }
