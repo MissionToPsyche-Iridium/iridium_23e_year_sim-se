@@ -56,8 +56,8 @@ export function loadSection1(scene, camera, sections) {
       0.03); // bevel thickness
   
     const psycheText = 
-      "16 PSYCHE IS AN ASTEROID IN OUR SOLAR SYSTEM\n" +
-      "    EXPLORE THIS SITE TO LEARN ABOUT PSYCHE,,\n" +
+      "16 PSYCHE IS AN ASTEROID IN OUR SOLAR SYSTEM.\n" +
+      "    EXPLORE THIS SITE TO LEARN ABOUT PSYCHE,\n" +
       "     ITS ORIGIN, ORBIT, AND WHAT MAKES IT UNIQUE\n";
   
     const textMesh = await createTextMesh(
