@@ -1,394 +1,238 @@
-/*
-========================================================================================================
-Top Page Header
-========================================================================================================
-*/
 
+/* Main body */
 body {
     margin: 0;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: white;
     text-align: center;
     overflow-x: hidden;
-}
-#main-background{
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
-    padding-top: 20px;
-}
-
-header {
-    grid-row: 1 / 2;
-    grid-column: 1 / 4;
+  }
+  
+  /* Background */
+  #main-background {
+    padding: 10px 5vw;
+  }
+  
+  /* text - how old would you ... and select a day.. */
+  #top p, #middle p {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  
+  .age-container {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
-
-}
-
-#psyche {
-    width: 125%;
-    left: 5%;
-    top: -5%;
-    position: relative;
-    animation: logo-move-in;
-    animation-duration: 2s;
-}
-
-#asteroid {
-    float: right;
-    position: relative;
-    width: 50%;
-    right: -5%;
-    top: -5%;
-    animation: header-move-in;
-    animation-duration: 2s;
-}
-
-#top {
-    color:#ffffff;
-    font-size: 60px;
-    font-weight: bold;
-}
-
-#top p{
-    padding-top: 100px;
-    padding-bottom: 100px;
-}
-
-#middle p{
-    color:#ffffff;
-    font-size: 60px;
-    font-weight: bold;
-    padding-top: 100px;
-    padding-bottom: 10px;
-}
-
-@keyframes header-move-in {
-    from {transform: translate(200px, -200px);} /* Move from bottom-right */
-    to {transform: translate(0, 0);} /* Move to original position */
-}
-
-@keyframes logo-move-in {
-    from {transform: translate(-200px, -200px);} /* Move from top-left */
-    to {transform: translate(0, 0);} /* Move to original position */
-}
-/*
-========================================================================================================
-Year Selection Section
-========================================================================================================
-*/
-
-.age-container {
-    display: grid;
-    grid-template-rows: auto 1fr;
+    flex-direction: column;
     gap: 20px;
-}
+  }
   
-.single-column {
-    text-align: center;
-}
-
-.two-columns {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0px;
-}
+  /* Base text for scroll to your ... and age on for both */
+  .column h3 {
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
   
-.three-columns {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px; 
-}
-  
-.column {
-    height: 450px;
-    text-align: center;
-    
-}
-
-.columnLarge {
-    height: 650px;
-    text-align: center;
-    padding-bottom: 100px;
-    padding-top: 50px;
-    margin-right: 10px;
-}
-
-.columnLarge headerHours {
-    font-size: 55px;
-    padding-bottom: 0 !important;
-    padding-top: 0 !important;
-    text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-}
-
-img {
-    height: 100%;
-    width: auto;
-}
-
-.wheelHeader {
-    color:#ffffff;
-    font-size: 45px;
-    margin-top: 0;
-}
-
-.scroll-wheel {
-    width: 150px;
+  /* Scroll wheel base container */
+  .scroll-wheel {
+    width: 120px; 
     height: 250px;
     overflow-y: scroll;
     border: 5px solid #592651;
     border-radius: 10px;
-    position: relative;
     margin: 20px auto;
-}
-.scroll-wheel ul {
+    background: #181818;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  /* Scroll wheel clean base for adding new elements */
+  .scroll-wheel ul {
     list-style: none;
-    padding: 0;
     margin: 0;
-    width: 100%;
-}
-.scroll-wheel li {
+    padding: 0;
+  }
+  
+  /* Scroll wheel list elements unselected */
+  .scroll-wheel li {
     height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 35px;
-}
-.scroll-wheel li.selected {
-    font-weight: bold;
-    color: #000000;
-}
-
-#yearSelection {
-    background-size: cover;
-    background-position: center;
-    color: #ffffff;
-    font-size: 32px; 
-    font-weight: bold;
-}
-
-#yearselection h3 {
-    color: #ffffff;
-    font-size: 40px; 
-    font-weight: bold;
-    padding-left: 20px;
-}
-
-
-#ageOnEarth {
-    background-image: url(/img/EarthTransparent.png);
-    background-size: cover;
-    background-position: center;
-    color: #087f23;
-    font-size: 50px; 
-    font-weight: bold;
-    text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-}
-
-#ageOnPsyche {
-    background-image: url(/img/PsycheTransparent.png);
-    background-size: cover;
-    background-position: center;
-    color: #f9a000; 
-    font-size: 50px; 
-    font-weight: bold;
-    text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-}
-
-.earthAge {
-    font-size: 100px; 
-    font-weight: bold;
-    color: #087f23;
-    text-shadow: 
-                2px 2px 0 yellow, 
-                -2px -2px 0 yellow, 
-                2px -2px 0 yellow, 
-                -2px 2px 0 yellow;
-}
-.psycheAge {
-    font-size: 100px; 
+  }
+  
+  /* Scroll wheel list element that is selected */
+  .scroll-wheel li.selected {
     font-weight: bold;
     color: #f9a000;
-    text-shadow: 
-                2px 2px 0 yellow, 
-                -2px -2px 0 yellow, 
-                2px -2px 0 yellow, 
-                -2px 2px 0 yellow;
+  }
+  
+  /* Base for ages shown */
+  .earthAge, .psycheAge {
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow:
+      2px 2px 0 yellow,
+      -2px -2px 0 yellow,
+      2px -2px 0 yellow,
+      -2px 2px 0 yellow;
+  }
+  
+  /* Ages for earth and Psyche headers */
+  #ageOnEarth h3,
+  #ageOnPsyche h3 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  text-shadow:
+    0 0 5px #000,
+    0 0 10px #000,
+    2px 2px 5px #000;
 }
 
-/*
-========================================================================================================
-Year Metric Section
-========================================================================================================
-*/
-
-/* Toggle Switch for all metrics */
-.wrap {
-    /* width: 200px !important; */
-    display: flex !important;
-    border-radius: 2rem;
-    overflow: hidden;
-    padding: 0;
-    background-color: #e5e5e5;
-    border: 3rem;
-    /* justify-content: stretch; */
-    /* align-items: center; */
-    
-}
-
-input[type="radio"] {
-    display:none;
-}
-
-input[type="radio"] + label {
-    width: 50%;
-    font-size: 3.5rem;
-    padding: 1.5rem;
-    text-align: center;
-    color: #000000;
+  /* Earth age display container and text */
+  #ageOnEarth {
+    background-image: url('../../img/EarthTransparent.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #087f23;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px 0;
+    min-height: 140px;
+  }
+  
+  /* Psyche age display container and text */
+  #ageOnPsyche {
+    background-image: url('../../img/PsycheTransparent.png');
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #f9a000;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px 0;
+    min-height: 140px;
+  }
+  
+  /* Radio button wrap */
+  .wrap {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+  }
+  
+  /* Radio button input */
+  input[type="radio"] {
+    display: none;
+  }
+  
+  /* Basic label wrap for unselected button */
+  .wrap label {
+    padding: 10px 20px;
+    font-size: 18px;
+    background: #e5e5e565;
+    margin: 0 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.5s;
-    z-index: 2;
-    border-radius: 1rem;
-    display: flex;
-    position:relative;
-    justify-content: center;
-    align-items: center;
-}
-
-input[type="radio"]#Earth:checked + label {
-    color: #ffffff;
+  }
+  
+  /* Earth button when checked */
+  #Earth:checked + label {
     background: #087f23;
-    z-index: 1;
-}
-
-input[type="radio"]#Psyche:checked + label {
-    color: #592651;
+    color: white;
+  }
+  
+  /* Psyche radio button when checked */
+  #Psyche:checked + label {
     background: #f9a000;
-    z-index: 1;
-}
-
-
-#work {
-    background-image: url(/img/work.jpeg);
+    color: #592651;
+  }
+  
+  /* Daily metrics text */
+  #resultHours {
+    font-size: 30px;         
+    font-weight: bold;
+    color: #ffffff;
+    margin: 20px 0;
+    text-shadow: 0 0 3px black;
+  }
+  
+  /* Piecharts elements */
+  #piechart svg {
+    width: 100%;
+    height: auto;
+    margin: 20px auto;
+  }
+  
+  /* Holds photos and metrics for daily life in each location */
+  .columnLarge {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* This is the base of all the metric photos showing daily activity time metrics */
+  #work, #school, #sleep, #eat, #relax {
+    background-size: cover;
+    background-position: center;
+    height: 100px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow:
+        0 0 5px #000,
+        0 0 10px #000,
+        2px 2px 5px #000;
+    }
+  /* Container for the work and school photos and metric and OR bubble */
+  .work-school-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    position: relative;
+  }
+  
+  /* Photos to display the metrics  */
+  #work, #school {
+    flex: 1;
+    height: 100px;
+    font-size: 20px;
+    background-size: cover;
     background-position: center;
     display: flex;
-    height: 220px;
-    background-size: cover;
+    align-items: center;
     justify-content: center;
-    font-size: 45px;
+    text-shadow: 0 0 3px black;
+  }
+  /* OR label between School and Work */
+  .or-label {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
     font-weight: bold;
-    text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-}
-
-#school {
-    background-image: url(/img/school.jpeg);
-    background-position: center;
-    display: flex;
-    height: 220px;
-    background-size: cover;
-    justify-content: center;
-    font-size: 45px;
-    font-weight: bold;
-    text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-}
-
-#sleep {
-    background-image: url(/img/sleep.jpeg);
-    background-position: center;
-    display: flex;
-    height: 220px;
-    background-size: cover;
-    justify-content: center;
-    font-size: 45px;
-    font-weight: bold;
-    text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-    }
-
-#relax {
-    background-image: url(/img/relax.jpeg);
-    display: flex;
-    height: 220px;
-    background-size: cover;
-    justify-content: center;
-    font-size: 45px;
-    font-weight: bold;
-    text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-    }
-
-#eat {
-    background-image: url(/img/eat.jpg);
-    background-size: cover;
-    height: 220px;
-    font-size: 45px;
-    font-weight: bold;
-    text-shadow:
-        0.05em 0 black,
-        0 0.05em black,
-        -0.05em 0 black,
-        0 -0.05em black,
-        -0.05em -0.05em black,
-        -0.05em 0.05em black,
-        0.05em -0.05em black,
-        0.05em 0.05em black;
-    }
-
-#footer {
-    background-image: linear-gradient(90deg,#a53f5b, #592651);
-    background-size: cover;
-}
+    color: #f9a000;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 2px 8px;
+    border-radius: 50px;
+    box-shadow: 0 0 10px #f9a000;
+    z-index: 2;
+    pointer-events: none;
+    letter-spacing: 1px;
+  }
+  
+  /* Image paths for photos showing daily activities */
+  #work   { background-image: url('../../img/work.jpeg'); }
+  #school { background-image: url('../../img/school.jpeg'); }
+  #sleep  { background-image: url('../../img/sleep.jpeg'); }
+  #eat    { background-image: url('../../img/eat.jpg'); }
+  #relax  { background-image: url('../../img/relax.jpeg'); }
+  
