@@ -165,23 +165,25 @@ ul li:last-child {
 #viewportContainer {
     display: none;
     color: white;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80vh;
-    height: 67vh;
-    margin: 0 auto;
-    background: url('res/textures/8k_stars_milky_way.jpg'), black;
-    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    min-height: 300px;
+    max-height: 80vh;
+    background-color: black;
     border-radius: 10px;
-    border: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     padding: 20px;
     overflow: auto;
-    overflow-y: auto;
-    position: fixed;
-    z-index: 2;
+    z-index: 1000;
+    box-sizing: border-box;
 }
 
 body::before {
@@ -200,8 +202,8 @@ body::before {
 #content {
     font-family: Arial, sans-serif;
     color: white;
-    padding: 20px;
-    font-size: 14px;
+    padding: 15px;
+    font-size: 16px;
     line-height: 1.6;
     text-align: left;
     max-height: 70vh;  
@@ -213,17 +215,18 @@ body::before {
     top: 10px; /* 10px from the top */
     right: 10px; /* 10px from the right */
     background-color: transparent;
-    border: none;
-    color: cyan;
-    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
     font-size: 1rem;
-    color: #333;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    z-index: 1001;
 }
 #closeButton:hover {
-    background-color: whitesmoke;
-    transform: scale(1.2);
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 #animation-container {
     position: absolute;
@@ -234,4 +237,144 @@ body::before {
     height: 100vh;
     z-index: -1; /* Sends animation behind the text */
     pointer-events: none; /* Allows clicks to pass through */
+}
+
+/* Media Queries for Responsive Design */
+
+/* Mobile (small): 375-420px */
+@media screen and (min-width: 375px) and (max-width: 420px) {
+    h1 {
+        font-size: 1.2rem;
+        margin-top: 20px;
+    }
+    
+    ul li a {
+        font-size: 12px;
+        padding: 10px 20px;
+    }
+    
+    #viewportContainer {
+        width: 95%;
+        max-width: 95%;
+        padding: 15px 10px;
+        min-height: 250px;
+    }
+    
+    #content {
+        font-size: 14px;
+        padding: 10px;
+        max-height: 60vh;
+    }
+    
+    #content h2 {
+        font-size: 16px;
+    }
+    
+    #closeButton {
+        font-size: 0.9rem;
+        top: 5px;
+        right: 5px;
+    }
+}
+
+/* Mobile (large): 430-600px */
+@media screen and (min-width: 421px) and (max-width: 600px) {
+    h1 {
+        font-size: 1.3rem;
+        margin-top: 25px;
+    }
+    
+    ul li a {
+        font-size: 13px;
+        padding: 12px 25px;
+    }
+    
+    #viewportContainer {
+        width: 90%;
+        max-width: 90%;
+        padding: 15px;
+        min-height: 280px;
+    }
+    
+    #content {
+        font-size: 15px;
+        padding: 12px;
+        max-height: 65vh;
+    }
+    
+    #content h2 {
+        font-size: 17px;
+    }
+}
+
+/* Tablet: 768-1024px */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+    
+    ul li a {
+        font-size: 14px;
+    }
+    
+    #viewportContainer {
+        width: 85%;
+        max-width: 700px;
+    }
+    
+    #content {
+        font-size: 16px;
+        max-height: 70vh;
+    }
+    
+    #content h2 {
+        font-size: 18px;
+    }
+}
+
+/* Laptop/Desktop: 1280-1920px */
+@media screen and (min-width: 1025px) and (max-width: 1920px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    #viewportContainer {
+        max-width: 800px;
+    }
+    
+    #content {
+        font-size: 16px;
+    }
+    
+    #content h2 {
+        font-size: 18px;
+    }
+}
+
+/* Large Monitor: 1921-2560+ */
+@media screen and (min-width: 1921px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    ul li a {
+        font-size: 16px;
+        padding: 18px 35px;
+    }
+    
+    #viewportContainer {
+        max-width: 1000px;
+    }
+    
+    #content {
+        font-size: 18px;
+    }
+    
+    #content h2 {
+        font-size: 20px;
+    }
+    
+    #closeButton {
+        font-size: 1.2rem;
+    }
 }
