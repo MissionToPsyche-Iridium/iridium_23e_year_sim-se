@@ -14491,7 +14491,7 @@ Program Info Log: ` + G + `
         const rt = zn[oe];
         Ke = rt.vertexShader, X = rt.fragmentShader;
       } else Ke = S.vertexShader, X = S.fragmentShader, l.update(S), ie = l.getVertexShaderID(S), Te = l.getFragmentShaderID(S);
-      const ae = r.getRenderTarget(), Ae = r.state.buffers.depth.getReversed(), $e = O.isInstancedMesh === true, we = O.isBatchedMesh === true, Qe = !!S.map, Q = !!S.matcap, J = !!$, C = !!S.aoMap, be = !!S.lightMap, te = !!S.bumpMap, xe = !!S.normalMap, se = !!S.displacementMap, Ie = !!S.emissiveMap, de = !!S.metalnessMap, R = !!S.roughnessMap, T = S.anisotropy > 0, F = S.clearcoat > 0, Y = S.dispersion > 0, Z = S.iridescence > 0, K = S.sheen > 0, Ee = S.transmission > 0, ue = T && !!S.anisotropyMap, _e = F && !!S.clearcoatMap, We = F && !!S.clearcoatNormalMap, re = F && !!S.clearcoatRoughnessMap, ye = Z && !!S.iridescenceMap, De = Z && !!S.iridescenceThicknessMap, Ne = K && !!S.sheenColorMap, Se = K && !!S.sheenRoughnessMap, qe = !!S.specularMap, ke = !!S.specularColorMap, ut = !!S.specularIntensityMap, I = Ee && !!S.transmissionMap, he = Ee && !!S.thicknessMap, W = !!S.gradientMap, j = !!S.alphaMap, me = S.alphaTest > 0, pe = !!S.alphaHash, Be = !!S.extensions;
+      const ae = r.getRenderTarget(), Ae = r.state.buffers.depth.getReversed(), $e = O.isInstancedMesh === true, we = O.isBatchedMesh === true, Qe = !!S.map, Q = !!S.matcap, J = !!$, C = !!S.aoMap, be = !!S.lightMap, te = !!S.bumpMap, xe = !!S.normalMap, se = !!S.displacementMap, Ie = !!S.emissiveMap, de = !!S.metalnessMap, R = !!S.roughnessMap, T = S.anisotropy > 0, F = S.clearcoat > 0, Y = S.dispersion > 0, Z = S.iridescence > 0, K = S.sheen > 0, Ee = S.transmission > 0, ue = T && !!S.anisotropyMap, _e = F && !!S.clearcoatMap, We = F && !!S.clearcoatNormalMap, re = F && !!S.clearcoatRoughnessMap, ye = Z && !!S.iridescenceMap, De = Z && !!S.iridescenceThicknessMap, Ne = K && !!S.sheenColorMap, Se = K && !!S.sheenRoughnessMap, qe = !!S.specularMap, ke = !!S.specularColorMap, ht = !!S.specularIntensityMap, I = Ee && !!S.transmissionMap, he = Ee && !!S.thicknessMap, W = !!S.gradientMap, j = !!S.alphaMap, me = S.alphaTest > 0, pe = !!S.alphaHash, Be = !!S.extensions;
       let yt = zi;
       S.toneMapped && (ae === null || ae.isXRRenderTarget === true) && (yt = r.toneMapping);
       const Bt = {
@@ -14544,7 +14544,7 @@ Program Info Log: ` + G + `
         sheenRoughnessMap: Se,
         specularMap: qe,
         specularColorMap: ke,
-        specularIntensityMap: ut,
+        specularIntensityMap: ht,
         transmission: Ee,
         transmissionMap: I,
         thicknessMap: he,
@@ -14573,7 +14573,7 @@ Program Info Log: ` + G + `
         sheenRoughnessMapUv: Se && g(S.sheenRoughnessMap.channel),
         specularMapUv: qe && g(S.specularMap.channel),
         specularColorMapUv: ke && g(S.specularColorMap.channel),
-        specularIntensityMapUv: ut && g(S.specularIntensityMap.channel),
+        specularIntensityMapUv: ht && g(S.specularIntensityMap.channel),
         transmissionMapUv: I && g(S.transmissionMap.channel),
         thicknessMapUv: he && g(S.thicknessMap.channel),
         alphaMapUv: j && g(S.alphaMap.channel),
@@ -15551,7 +15551,7 @@ void main() {
       const j = c.get(he).get(I);
       l.get(he) !== j && (r.uniformBlockBinding(he, j, I.__bindingPointIndex), l.set(he, j));
     }
-    function ut() {
+    function ht() {
       r.disable(r.BLEND), r.disable(r.CULL_FACE), r.disable(r.DEPTH_TEST), r.disable(r.POLYGON_OFFSET_FILL), r.disable(r.SCISSOR_TEST), r.disable(r.STENCIL_TEST), r.disable(r.SAMPLE_ALPHA_TO_COVERAGE), r.blendEquation(r.FUNC_ADD), r.blendFunc(r.ONE, r.ZERO), r.blendFuncSeparate(r.ONE, r.ZERO, r.ONE, r.ZERO), r.blendColor(0, 0, 0, 0), r.colorMask(true, true, true, true), r.clearColor(0, 0, 0, 0), r.depthMask(true), r.depthFunc(r.LESS), o.setReversed(false), r.clearDepth(1), r.stencilMask(4294967295), r.stencilFunc(r.ALWAYS, 0, 4294967295), r.stencilOp(r.KEEP, r.KEEP, r.KEEP), r.clearStencil(0), r.cullFace(r.BACK), r.frontFace(r.CCW), r.polygonOffset(0, 0), r.activeTexture(r.TEXTURE0), r.bindFramebuffer(r.FRAMEBUFFER, null), r.bindFramebuffer(r.DRAW_FRAMEBUFFER, null), r.bindFramebuffer(r.READ_FRAMEBUFFER, null), r.useProgram(null), r.lineWidth(1), r.scissor(0, 0, r.canvas.width, r.canvas.height), r.viewport(0, 0, r.canvas.width, r.canvas.height), u = {}, oe = null, ce = {}, h = {}, f = /* @__PURE__ */ new WeakMap(), d = [], _ = null, g = false, m = null, p = null, y = null, v = null, x = null, b = null, w = null, A = new Re(0, 0, 0), P = 0, S = false, M = null, L = null, G = null, O = null, V = null, Ke.set(0, 0, r.canvas.width, r.canvas.height), X.set(0, 0, r.canvas.width, r.canvas.height), s.reset(), o.reset(), a.reset();
     }
     return {
@@ -15589,7 +15589,7 @@ void main() {
       compressedTexSubImage3D: _e,
       scissor: Ne,
       viewport: Se,
-      reset: ut
+      reset: ht
     };
   }
   function oM(r, e, t, n, i, s, o) {
@@ -15799,15 +15799,15 @@ void main() {
         let Ne = v(T.internalFormat, ye, De, T.colorSpace, T.isVideoTexture);
         Le(Y, T);
         let Se;
-        const qe = T.mipmaps, ke = T.isVideoTexture !== true, ut = Ee.__version === void 0 || Z === true, I = K.dataReady, he = b(T, re);
-        if (T.isDepthTexture) Ne = x(T.format === fs, T.type), ut && (ke ? t.texStorage2D(r.TEXTURE_2D, 1, Ne, re.width, re.height) : t.texImage2D(r.TEXTURE_2D, 0, Ne, re.width, re.height, 0, ye, De, null));
+        const qe = T.mipmaps, ke = T.isVideoTexture !== true, ht = Ee.__version === void 0 || Z === true, I = K.dataReady, he = b(T, re);
+        if (T.isDepthTexture) Ne = x(T.format === fs, T.type), ht && (ke ? t.texStorage2D(r.TEXTURE_2D, 1, Ne, re.width, re.height) : t.texImage2D(r.TEXTURE_2D, 0, Ne, re.width, re.height, 0, ye, De, null));
         else if (T.isDataTexture) if (qe.length > 0) {
-          ke && ut && t.texStorage2D(r.TEXTURE_2D, he, Ne, qe[0].width, qe[0].height);
+          ke && ht && t.texStorage2D(r.TEXTURE_2D, he, Ne, qe[0].width, qe[0].height);
           for (let W = 0, j = qe.length; W < j; W++) Se = qe[W], ke ? I && t.texSubImage2D(r.TEXTURE_2D, W, 0, 0, Se.width, Se.height, ye, De, Se.data) : t.texImage2D(r.TEXTURE_2D, W, Ne, Se.width, Se.height, 0, ye, De, Se.data);
           T.generateMipmaps = false;
-        } else ke ? (ut && t.texStorage2D(r.TEXTURE_2D, he, Ne, re.width, re.height), I && t.texSubImage2D(r.TEXTURE_2D, 0, 0, 0, re.width, re.height, ye, De, re.data)) : t.texImage2D(r.TEXTURE_2D, 0, Ne, re.width, re.height, 0, ye, De, re.data);
+        } else ke ? (ht && t.texStorage2D(r.TEXTURE_2D, he, Ne, re.width, re.height), I && t.texSubImage2D(r.TEXTURE_2D, 0, 0, 0, re.width, re.height, ye, De, re.data)) : t.texImage2D(r.TEXTURE_2D, 0, Ne, re.width, re.height, 0, ye, De, re.data);
         else if (T.isCompressedTexture) if (T.isCompressedArrayTexture) {
-          ke && ut && t.texStorage3D(r.TEXTURE_2D_ARRAY, he, Ne, qe[0].width, qe[0].height, re.depth);
+          ke && ht && t.texStorage3D(r.TEXTURE_2D_ARRAY, he, Ne, qe[0].width, qe[0].height, re.depth);
           for (let W = 0, j = qe.length; W < j; W++) if (Se = qe[W], T.format !== bn) if (ye !== null) if (ke) {
             if (I) if (T.layerUpdates.size > 0) {
               const me = gf(Se.width, Se.height, T.format, T.type);
@@ -15821,11 +15821,11 @@ void main() {
           else console.warn("THREE.WebGLRenderer: Attempt to load unsupported compressed texture format in .uploadTexture()");
           else ke ? I && t.texSubImage3D(r.TEXTURE_2D_ARRAY, W, 0, 0, 0, Se.width, Se.height, re.depth, ye, De, Se.data) : t.texImage3D(r.TEXTURE_2D_ARRAY, W, Ne, Se.width, Se.height, re.depth, 0, ye, De, Se.data);
         } else {
-          ke && ut && t.texStorage2D(r.TEXTURE_2D, he, Ne, qe[0].width, qe[0].height);
+          ke && ht && t.texStorage2D(r.TEXTURE_2D, he, Ne, qe[0].width, qe[0].height);
           for (let W = 0, j = qe.length; W < j; W++) Se = qe[W], T.format !== bn ? ye !== null ? ke ? I && t.compressedTexSubImage2D(r.TEXTURE_2D, W, 0, 0, Se.width, Se.height, ye, Se.data) : t.compressedTexImage2D(r.TEXTURE_2D, W, Ne, Se.width, Se.height, 0, Se.data) : console.warn("THREE.WebGLRenderer: Attempt to load unsupported compressed texture format in .uploadTexture()") : ke ? I && t.texSubImage2D(r.TEXTURE_2D, W, 0, 0, Se.width, Se.height, ye, De, Se.data) : t.texImage2D(r.TEXTURE_2D, W, Ne, Se.width, Se.height, 0, ye, De, Se.data);
         }
         else if (T.isDataArrayTexture) if (ke) {
-          if (ut && t.texStorage3D(r.TEXTURE_2D_ARRAY, he, Ne, re.width, re.height, re.depth), I) if (T.layerUpdates.size > 0) {
+          if (ht && t.texStorage3D(r.TEXTURE_2D_ARRAY, he, Ne, re.width, re.height, re.depth), I) if (T.layerUpdates.size > 0) {
             const W = gf(re.width, re.height, T.format, T.type);
             for (const j of T.layerUpdates) {
               const me = re.data.subarray(j * W / re.data.BYTES_PER_ELEMENT, (j + 1) * W / re.data.BYTES_PER_ELEMENT);
@@ -15834,22 +15834,22 @@ void main() {
             T.clearLayerUpdates();
           } else t.texSubImage3D(r.TEXTURE_2D_ARRAY, 0, 0, 0, 0, re.width, re.height, re.depth, ye, De, re.data);
         } else t.texImage3D(r.TEXTURE_2D_ARRAY, 0, Ne, re.width, re.height, re.depth, 0, ye, De, re.data);
-        else if (T.isData3DTexture) ke ? (ut && t.texStorage3D(r.TEXTURE_3D, he, Ne, re.width, re.height, re.depth), I && t.texSubImage3D(r.TEXTURE_3D, 0, 0, 0, 0, re.width, re.height, re.depth, ye, De, re.data)) : t.texImage3D(r.TEXTURE_3D, 0, Ne, re.width, re.height, re.depth, 0, ye, De, re.data);
+        else if (T.isData3DTexture) ke ? (ht && t.texStorage3D(r.TEXTURE_3D, he, Ne, re.width, re.height, re.depth), I && t.texSubImage3D(r.TEXTURE_3D, 0, 0, 0, 0, re.width, re.height, re.depth, ye, De, re.data)) : t.texImage3D(r.TEXTURE_3D, 0, Ne, re.width, re.height, re.depth, 0, ye, De, re.data);
         else if (T.isFramebufferTexture) {
-          if (ut) if (ke) t.texStorage2D(r.TEXTURE_2D, he, Ne, re.width, re.height);
+          if (ht) if (ke) t.texStorage2D(r.TEXTURE_2D, he, Ne, re.width, re.height);
           else {
             let W = re.width, j = re.height;
             for (let me = 0; me < he; me++) t.texImage2D(r.TEXTURE_2D, me, Ne, W, j, 0, ye, De, null), W >>= 1, j >>= 1;
           }
         } else if (qe.length > 0) {
-          if (ke && ut) {
+          if (ke && ht) {
             const W = de(qe[0]);
             t.texStorage2D(r.TEXTURE_2D, he, Ne, W.width, W.height);
           }
           for (let W = 0, j = qe.length; W < j; W++) Se = qe[W], ke ? I && t.texSubImage2D(r.TEXTURE_2D, W, 0, 0, ye, De, Se) : t.texImage2D(r.TEXTURE_2D, W, Ne, ye, De, Se);
           T.generateMipmaps = false;
         } else if (ke) {
-          if (ut) {
+          if (ht) {
             const W = de(re);
             t.texStorage2D(r.TEXTURE_2D, he, Ne, W.width, W.height);
           }
@@ -15870,12 +15870,12 @@ void main() {
         r.pixelStorei(r.UNPACK_FLIP_Y_WEBGL, T.flipY), r.pixelStorei(r.UNPACK_PREMULTIPLY_ALPHA_WEBGL, T.premultiplyAlpha), r.pixelStorei(r.UNPACK_ALIGNMENT, T.unpackAlignment), r.pixelStorei(r.UNPACK_COLORSPACE_CONVERSION_WEBGL, _e);
         const We = T.isCompressedTexture || T.image[0].isCompressedTexture, re = T.image[0] && T.image[0].isDataTexture, ye = [];
         for (let j = 0; j < 6; j++) !We && !re ? ye[j] = g(T.image[j], true, i.maxCubemapSize) : ye[j] = re ? T.image[j].image : T.image[j], ye[j] = Ie(T, ye[j]);
-        const De = ye[0], Ne = s.convert(T.format, T.colorSpace), Se = s.convert(T.type), qe = v(T.internalFormat, Ne, Se, T.colorSpace), ke = T.isVideoTexture !== true, ut = K.__version === void 0 || Y === true, I = Z.dataReady;
+        const De = ye[0], Ne = s.convert(T.format, T.colorSpace), Se = s.convert(T.type), qe = v(T.internalFormat, Ne, Se, T.colorSpace), ke = T.isVideoTexture !== true, ht = K.__version === void 0 || Y === true, I = Z.dataReady;
         let he = b(T, De);
         Le(r.TEXTURE_CUBE_MAP, T);
         let W;
         if (We) {
-          ke && ut && t.texStorage2D(r.TEXTURE_CUBE_MAP, he, qe, De.width, De.height);
+          ke && ht && t.texStorage2D(r.TEXTURE_CUBE_MAP, he, qe, De.width, De.height);
           for (let j = 0; j < 6; j++) {
             W = ye[j].mipmaps;
             for (let me = 0; me < W.length; me++) {
@@ -15884,7 +15884,7 @@ void main() {
             }
           }
         } else {
-          if (W = T.mipmaps, ke && ut) {
+          if (W = T.mipmaps, ke && ht) {
             W.length > 0 && he++;
             const j = de(ye[0]);
             t.texStorage2D(r.TEXTURE_CUBE_MAP, he, qe, j.width, j.height);
@@ -16655,9 +16655,9 @@ void main() {
       } catch (E) {
         throw console.error("THREE.WebGLRenderer: " + E.message), E;
       }
-      let te, xe, se, Ie, de, R, T, F, Y, Z, K, Ee, ue, _e, We, re, ye, De, Ne, Se, qe, ke, ut, I;
+      let te, xe, se, Ie, de, R, T, F, Y, Z, K, Ee, ue, _e, We, re, ye, De, Ne, Se, qe, ke, ht, I;
       function he() {
-        te = new by(C), te.init(), ke = new aM(C, te), xe = new vy(C, te, e, ke), se = new sM(C, te), xe.reverseDepthBuffer && f && se.buffers.depth.setReversed(true), Ie = new Ry(C), de = new qS(), R = new oM(C, te, se, de, xe, ke, Ie), T = new Sy(x), F = new Ey(x), Y = new U0(C), ut = new _y(C, Y), Z = new wy(C, Y, Ie, ut), K = new Py(C, Z, Y, Ie), Ne = new Cy(C, xe, R), re = new yy(de), Ee = new XS(x, T, F, te, xe, ut, re), ue = new dM(x, de), _e = new KS(), We = new eM(te), De = new gy(x, T, F, se, K, d, l), ye = new iM(x, K, xe), I = new pM(C, Ie, xe, se), Se = new xy(C, te, Ie), qe = new Ay(C, te, Ie), Ie.programs = Ee.programs, x.capabilities = xe, x.extensions = te, x.properties = de, x.renderLists = _e, x.shadowMap = ye, x.state = se, x.info = Ie;
+        te = new by(C), te.init(), ke = new aM(C, te), xe = new vy(C, te, e, ke), se = new sM(C, te), xe.reverseDepthBuffer && f && se.buffers.depth.setReversed(true), Ie = new Ry(C), de = new qS(), R = new oM(C, te, se, de, xe, ke, Ie), T = new Sy(x), F = new Ey(x), Y = new U0(C), ht = new _y(C, Y), Z = new wy(C, Y, Ie, ht), K = new Py(C, Z, Y, Ie), Ne = new Cy(C, xe, R), re = new yy(de), Ee = new XS(x, T, F, te, xe, ht, re), ue = new dM(x, de), _e = new KS(), We = new eM(te), De = new gy(x, T, F, se, K, d, l), ye = new iM(x, K, xe), I = new pM(C, Ie, xe, se), Se = new xy(C, te, Ie), qe = new Ay(C, te, Ie), Ie.programs = Ee.programs, x.capabilities = xe, x.extensions = te, x.properties = de, x.renderLists = _e, x.shadowMap = ye, x.state = se, x.info = Ie;
       }
       he();
       const W = new hM(x, C);
@@ -16734,7 +16734,7 @@ void main() {
       }, this.clearStencil = function() {
         this.clear(false, false, true);
       }, this.dispose = function() {
-        t.removeEventListener("webglcontextlost", j, false), t.removeEventListener("webglcontextrestored", me, false), t.removeEventListener("webglcontextcreationerror", pe, false), De.dispose(), _e.dispose(), We.dispose(), de.dispose(), T.dispose(), F.dispose(), K.dispose(), ut.dispose(), I.dispose(), Ee.dispose(), W.dispose(), W.removeEventListener("sessionstart", uh), W.removeEventListener("sessionend", hh), Ki.stop();
+        t.removeEventListener("webglcontextlost", j, false), t.removeEventListener("webglcontextrestored", me, false), t.removeEventListener("webglcontextcreationerror", pe, false), De.dispose(), _e.dispose(), We.dispose(), de.dispose(), T.dispose(), F.dispose(), K.dispose(), ht.dispose(), I.dispose(), Ee.dispose(), W.dispose(), W.removeEventListener("sessionstart", uh), W.removeEventListener("sessionend", hh), Ki.stop();
       };
       function j(E) {
         E.preventDefault(), console.log("THREE.WebGLRenderer: Context Lost."), b = true;
@@ -16774,7 +16774,7 @@ void main() {
         ne !== null && (je = Math.max(je, ne.start * Ue), tt = Math.min(tt, (ne.start + ne.count) * Ue)), Me !== null ? (je = Math.max(je, 0), tt = Math.min(tt, Me.count)) : Ce != null && (je = Math.max(je, 0), tt = Math.min(tt, Ce.count));
         const Et = tt - je;
         if (Et < 0 || Et === 1 / 0) return;
-        ut.setup(U, k, ve, z, Me);
+        ht.setup(U, k, ve, z, Me);
         let St, Je = Se;
         if (Me !== null && (St = Y.get(Me), Je = qe, Je.setIndex(St)), U.isMesh) k.wireframe === true ? (se.setLineWidth(k.wireframeLinewidth * J()), Je.setMode(C.LINES)) : Je.setMode(C.TRIANGLES);
         else if (U.isLine) {
@@ -16866,7 +16866,7 @@ void main() {
             fh(m, E, Me, Me.viewport);
           }
         } else U.length > 0 && dh(k, U, E, N), Q && De.render(E), fh(m, E, N);
-        P !== null && A === 0 && (R.updateMultisampleRenderTarget(P), R.updateRenderTargetMipmap(P)), E.isScene === true && E.onAfterRender(x, E, N), ut.resetDefaultState(), S = -1, M = null, v.pop(), v.length > 0 ? (p = v[v.length - 1], ie === true && re.setGlobalState(x.clippingPlanes, p.state.camera)) : p = null, y.pop(), y.length > 0 ? m = y[y.length - 1] : m = null;
+        P !== null && A === 0 && (R.updateMultisampleRenderTarget(P), R.updateRenderTargetMipmap(P)), E.isScene === true && E.onAfterRender(x, E, N), ht.resetDefaultState(), S = -1, M = null, v.pop(), v.length > 0 ? (p = v[v.length - 1], ie === true && re.setGlobalState(x.clippingPlanes, p.state.camera)) : p = null, y.pop(), y.length > 0 ? m = y[y.length - 1] : m = null;
       };
       function Ya(E, N, z, k) {
         if (E.visible === false) return;
@@ -17134,7 +17134,7 @@ void main() {
       }, this.initTexture = function(E) {
         E.isCubeTexture ? R.setTextureCube(E, 0) : E.isData3DTexture ? R.setTexture3D(E, 0) : E.isDataArrayTexture || E.isCompressedArrayTexture ? R.setTexture2DArray(E, 0) : R.setTexture2D(E, 0), se.unbindTexture();
       }, this.resetState = function() {
-        w = 0, A = 0, P = null, se.reset(), ut.reset();
+        w = 0, A = 0, P = null, se.reset(), ht.reset();
       }, typeof __THREE_DEVTOOLS__ < "u" && __THREE_DEVTOOLS__.dispatchEvent(new CustomEvent("observe", {
         detail: this
       }));
@@ -20564,7 +20564,7 @@ void main() {
   ln.registerPlugin(hm);
   ft = ln.registerPlugin(hm) || ln;
   ft.core.Tween;
-  function ht(r) {
+  function ut(r) {
     return `/iridium_23e_year_sim-se/${r}`;
   }
   const Hl = /* @__PURE__ */ new Map(), qs = [], Es = new wr(), ya = new ee();
@@ -20575,7 +20575,7 @@ void main() {
   }
   async function eu(r, e, t, n = 1.5, i, s = 0.02, o = "#F99F00", a = 0.05, l = 0.03) {
     return new Promise((c, u) => {
-      new hp().load(ht("res/font/Genos_Bold.json"), async (f) => {
+      new hp().load(ut("res/font/Genos_Bold.json"), async (f) => {
         try {
           const d = new fp(r, {
             font: f,
@@ -20587,7 +20587,7 @@ void main() {
             bevelSize: s,
             bevelOffset: 0,
             bevelSegments: 5
-          }), _ = await Fa(ht("res/shaders/textVertexShader.glsl")), g = await Fa(ht("res/shaders/textFragmentShader.glsl")), m = new Gt({
+          }), _ = await Fa(ut("res/shaders/textVertexShader.glsl")), g = await Fa(ut("res/shaders/textFragmentShader.glsl")), m = new Gt({
             uniforms: {
               textColor: {
                 value: new Re(o)
@@ -20693,7 +20693,7 @@ void main() {
   }
   async function Yi(r, e, t, n = 0.7, i, s, o = "center") {
     return new Promise((a, l) => {
-      new hp().load(ht("res/font/GenosThin_Regular.json"), async (u) => {
+      new hp().load(ut("res/font/GenosThin_Regular.json"), async (u) => {
         try {
           const h = new fp(r, {
             font: u,
@@ -20707,7 +20707,7 @@ void main() {
             bevelSegments: 5
           });
           h.computeBoundingBox(), h.center();
-          const f = await Fa(ht("res/shaders/textVertexShader.glsl")), d = await Fa(ht("res/shaders/textFragmentShader.glsl")), _ = new Gt({
+          const f = await Fa(ut("res/shaders/textVertexShader.glsl")), d = await Fa(ut("res/shaders/textFragmentShader.glsl")), _ = new Gt({
             uniforms: {
               textColor: {
                 value: new Re(249 / 255, 159 / 255, 0 / 255)
@@ -20763,7 +20763,7 @@ void main() {
     0 0 30px rgba(0, 123, 255, 0.3),
     0 0 60px rgba(0, 123, 255, 0.2)`, e.style.borderRadius = "15px", e.style.overflow = "hidden", e.style.pointerEvents = "auto";
     const t = document.createElement("iframe");
-    t.id = dm, t.src = ht("refsViewport/disclaimer.html"), t.style.width = "100%", t.style.height = "100%", t.style.border = "none", t.style.backgroundColor = "#000", e.style.backgroundColor = "#000", e.appendChild(t), r.appendChild(e), document.body.appendChild(r);
+    t.id = dm, t.src = ut("refsViewport/disclaimer.html"), t.style.width = "100%", t.style.height = "100%", t.style.border = "none", t.style.backgroundColor = "#000", e.style.backgroundColor = "#000", e.appendChild(t), r.appendChild(e), document.body.appendChild(r);
   }
   function xE() {
     const r = document.getElementById("refs-viewport");
@@ -21082,7 +21082,7 @@ void main() {
     const o = document.createElement("div");
     o.style.display = "flex", o.style.alignItems = "center";
     const a = document.createElement("button");
-    a.textContent = "\u21A9", TE(a), Ii = document.createElement("button"), Ii.textContent = "\u2715", Qu(Ii), o.appendChild(a), o.appendChild(Ii), i.appendChild(s), i.appendChild(o), it.appendChild(i), ai = document.createElement("iframe"), ai.src = ht("/games/games.html"), eh(ai, {
+    a.textContent = "\u21A9", TE(a), Ii = document.createElement("button"), Ii.textContent = "\u2715", Qu(Ii), o.appendChild(a), o.appendChild(Ii), i.appendChild(s), i.appendChild(o), it.appendChild(i), ai = document.createElement("iframe"), ai.src = ut("/games/games.html"), eh(ai, {
       backgroundColor: "rgba(0, 0, 0, 0.0)"
     }), th(document), ai.onerror = () => {
       console.error("Failed to load games iframe content");
@@ -21189,7 +21189,7 @@ void main() {
         z: 0
       };
       try {
-        Rr("controller", ht("res/models/arcade_controller.glb"), l, 2, u, {
+        Rr("controller", ut("res/models/arcade_controller.glb"), l, 2, u, {
           rotation: {
             x: 0,
             y: -40,
@@ -21252,7 +21252,7 @@ void main() {
       backgroundColor: "#f9a000",
       gradientStart: "#f9a000",
       gradientEnd: "#f9a000"
-    }), Ys = document.createElement("h2"), Ys.textContent = "Compare Earth and Psyche", Ju(Ys), fr = document.createElement("button"), fr.textContent = "\u2715", Qu(fr), cr.appendChild(Ys), cr.appendChild(fr), pt.appendChild(cr), li = document.createElement("iframe"), li.src = ht("/year/year.html"), eh(li, {
+    }), Ys = document.createElement("h2"), Ys.textContent = "Compare Earth and Psyche", Ju(Ys), fr = document.createElement("button"), fr.textContent = "\u2715", Qu(fr), cr.appendChild(Ys), cr.appendChild(fr), pt.appendChild(cr), li = document.createElement("iframe"), li.src = ut("/year/year.html"), eh(li, {
       backgroundColor: "#222"
     }), li.onerror = () => {
       console.error("Failed to load iframe content");
@@ -21304,7 +21304,7 @@ void main() {
     };
     return new Promise((c, u) => {
       try {
-        Rr("balance", ht("res/models/balance_scale.glb"), o, 0.9, l, null, r, () => {
+        Rr("balance", ut("res/models/balance_scale.glb"), o, 0.9, l, null, r, () => {
           console.log("loaded model");
         });
         const { buttonMesh: h } = Yi("THE COSMIC COMPARISON OF EARTH AND PSYCHE", s, a, 0.7, r, () => {
@@ -21391,7 +21391,7 @@ void main() {
       gradientEnd: "rgba(20, 20, 40, 0.2)"
     });
     const i = document.createElement("h2");
-    i.textContent = "Psyche's Location in Space", Ju(i), dr = document.createElement("button"), dr.textContent = "\u2715", Qu(dr), n.appendChild(i), n.appendChild(dr), Ze.appendChild(n), ci = document.createElement("iframe"), ci.src = ht("/PsycheJR/location2.html"), eh(ci, {
+    i.textContent = "Psyche's Location in Space", Ju(i), dr = document.createElement("button"), dr.textContent = "\u2715", Qu(dr), n.appendChild(i), n.appendChild(dr), Ze.appendChild(n), ci = document.createElement("iframe"), ci.src = ut("/PsycheJR/location2.html"), eh(ci, {
       backgroundColor: "rgba(0, 0, 0, 0.0)"
     }), th(document), ci.onerror = () => {
       console.error("Failed to load location2 iframe content");
@@ -21432,7 +21432,7 @@ void main() {
     2: So,
     3: () => {
       nu(async () => {
-        const { hideKidsViewport: r } = await import("./kidsViewport-BhEySRgQ.js");
+        const { hideKidsViewport: r } = await import("./kidsViewport-CvXa2XOX.js");
         return {
           hideKidsViewport: r
         };
@@ -21544,31 +21544,31 @@ void main() {
       eu("REFERENCES", s, a, 1, r, 0.02, "#FFA500", 0.07, 0.03), [
         {
           text: "Disclaimer",
-          onClick: () => sr(ht("refsViewport/disclaimer.html"))
+          onClick: () => sr(ut("refsViewport/disclaimer.html"))
         },
         {
           text: "Dev & Contributors",
-          onClick: () => sr(ht("refsViewport/dev.html"))
+          onClick: () => sr(ut("refsViewport/dev.html"))
         },
         {
           text: "Acknowledgments",
-          onClick: () => sr(ht("refsViewport/thanks.html"))
+          onClick: () => sr(ut("refsViewport/thanks.html"))
         },
         {
           text: "Licensing",
-          onClick: () => sr(ht("refsViewport/license.html"))
+          onClick: () => sr(ut("refsViewport/license.html"))
         },
         {
           text: "Third Party Assets",
-          onClick: () => sr(ht("refsViewport/assets.html"))
+          onClick: () => sr(ut("refsViewport/assets.html"))
         },
         {
           text: "Technical References",
-          onClick: () => sr(ht("refsViewport/technical.html"))
+          onClick: () => sr(ut("refsViewport/technical.html"))
         },
         {
           text: "Contact / Support",
-          onClick: () => sr(ht("refsViewport/contact.html"))
+          onClick: () => sr(ut("refsViewport/contact.html"))
         }
       ].forEach((c, u) => {
         const h = {
@@ -21611,7 +21611,7 @@ void main() {
         value: 1,
         duration: 2.5,
         delay: 4
-      }), Rr("asteroid", ht("res/models/psyche_new.glb"), {
+      }), Rr("asteroid", ut("res/models/psyche_new.glb"), {
         x: 80,
         y: 60,
         z: 20
@@ -21703,10 +21703,10 @@ void main() {
         z: 0
       };
       try {
-        Rr("Jr", ht("res/models/Jr.glb"), u, 9, f, null, r, (_) => {
+        Rr("Jr", ut("res/models/Jr.glb"), u, 9, f, null, r, (_) => {
           ou = _, Tm = _.position.y;
         }), Yi("EXPLORE THE PSYCHE Jr KIDS EXPERIENCE", c, h, 0.7, r, () => {
-          const _ = ht("/PsycheJR/kids.html");
+          const _ = ut("/PsycheJR/kids.html");
           window.open(_, "_blank");
         }), i();
       } catch (_) {
@@ -21750,7 +21750,7 @@ void main() {
     };
     return new Promise((c, u) => {
       try {
-        Rr("Satellite", ht("res/models/satellite.glb"), o, 0.75, l, {
+        Rr("Satellite", ut("res/models/satellite.glb"), o, 0.75, l, {
           rotation: {
             x: 20,
             y: 0,
@@ -21802,10 +21802,10 @@ void main() {
         z: 0
       };
       try {
-        Rr("Surface Slice", ht("res/models/PsycheSlice.glb"), l, 1.4, u, null, r, () => {
+        Rr("Surface Slice", ut("res/models/PsycheSlice.glb"), l, 1.4, u, null, r, () => {
           console.log("loaded model");
         }), Yi("Explore the Surface of Psyche", a, c, 0.7, r, () => {
-          window.open(ht("/PsycheJR/surface2.html")), console.log("Surface button clicked.");
+          window.open(ut("/PsycheJR/surface2.html")), console.log("Surface button clicked.");
         }).then(({ textMesh: h, buttonMesh: f }) => {
           const d = f.material.emissive.clone(), _ = f.material.emissiveIntensity, g = new wr(), m = new ee();
           window.addEventListener("mousemove", (p) => {
@@ -21853,7 +21853,7 @@ void main() {
     };
     return new Promise((c, u) => {
       try {
-        Rr("location pin", ht("res/models/navigation_pin.glb"), o, 1, l, {
+        Rr("location pin", ut("res/models/navigation_pin.glb"), o, 1, l, {
           rotation: {
             x: 0,
             y: -40,
@@ -21917,7 +21917,7 @@ void main() {
         const p = new ip(16777215, 0.5);
         p.userData.section9Element = true, r.add(p), c.push(p), tu(l, () => {
           nu(async () => {
-            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-DsHW_F6O.js");
+            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-Kgb3GU6V.js");
             return {
               showEscapeVelocityViewport: v
             };
@@ -21928,7 +21928,7 @@ void main() {
           });
         }), tu(g, () => {
           nu(async () => {
-            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-DsHW_F6O.js");
+            const { showEscapeVelocityViewport: v } = await import("./viewportescapevelocity-Kgb3GU6V.js");
             return {
               showEscapeVelocityViewport: v
             };
@@ -22462,21 +22462,31 @@ void main() {
     let t = 1;
     function n() {
       e.innerHTML = "";
-      const i = 3;
-      for (let s = -3; s <= i; s++) {
-        const o = (t + s + r.length) % r.length, a = Math.abs(s), l = document.createElement("div");
-        l.className = "carousel-item", l.textContent = r[o].name, s === 0 ? l.classList.add("active") : (l.style.opacity = `${1 - a * 0.2}`, l.style.transform = `scale(${1 - a * 0.05})`), l.addEventListener("click", () => {
-          t = o, Sa(o, r[o].position), n();
-        }), e.appendChild(l);
+      const a = 3;
+      for (let l = -3; l <= a; l++) {
+        const c = (t + l + r.length) % r.length, u = Math.abs(l), h = document.createElement("div");
+        h.className = "carousel-item", h.textContent = r[c].name, l === 0 ? h.classList.add("active") : (h.style.opacity = `${1 - u * 0.2}`, h.style.transform = `scale(${1 - u * 0.05})`), h.addEventListener("click", () => {
+          t = c, Sa(c, r[c].position), n();
+        }), e.appendChild(h);
       }
     }
-    window.addEventListener("wheel", (i) => {
-      i.deltaY > 0 ? t = (t + 1) % r.length : i.deltaY < 0 && (t = (t - 1 + r.length) % r.length), Sa(t, r[t].position), n();
-    }), window.addEventListener("keydown", (i) => {
-      if (i.key === "ArrowDown") t = (t + 1) % r.length;
-      else if (i.key === "ArrowUp") t = (t - 1 + r.length) % r.length;
+    window.addEventListener("wheel", (a) => {
+      a.deltaY > 0 ? t = (t + 1) % r.length : a.deltaY < 0 && (t = (t - 1 + r.length) % r.length), Sa(t, r[t].position), n();
+    }), window.addEventListener("keydown", (a) => {
+      if (a.key === "ArrowDown") t = (t + 1) % r.length;
+      else if (a.key === "ArrowUp") t = (t - 1 + r.length) % r.length;
       else return;
       Sa(t, r[t].position), n();
+    });
+    const i = document.createElement("div");
+    i.id = "ref-icon-wrapper", i.style.position = "fixed", i.style.bottom = "30px", i.style.left = "30px", i.style.display = "flex", i.style.alignItems = "center", i.style.gap = "10px", i.style.cursor = "pointer", i.style.zIndex = "1000";
+    const s = document.createElement("img");
+    s.id = "ref-icon", s.src = ut("/res/icons/link-duo.png"), s.alt = "References", s.style.width = "36px", s.style.height = "36px", s.style.transition = "transform 0.2s ease";
+    const o = document.createElement("span");
+    o.id = "ref-label", o.textContent = "REFERENCES", o.style.fontSize = "0.9rem", o.style.fontWeight = "bold", o.style.fontFamily = "sans-serif", o.style.color = "#fff", o.style.opacity = "0", o.style.transform = "translateX(-10px)", o.style.transition = "opacity 0.3s ease, transform 0.3s ease", o.style.whiteSpace = "nowrap", i.appendChild(s), i.appendChild(o), document.body.appendChild(i), i.addEventListener("mouseenter", () => {
+      s.style.transform = "scale(1.05)", o.style.opacity = "1", o.style.transform = "translateX(0)";
+    }), i.addEventListener("mouseleave", () => {
+      s.style.transform = "scale(1)", o.style.opacity = "0", o.style.transform = "translateX(-10px)";
     }), n();
   }
   function hb() {

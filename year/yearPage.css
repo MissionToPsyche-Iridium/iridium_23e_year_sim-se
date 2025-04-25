@@ -1,20 +1,18 @@
-/*
-========================================================================================================
-Top Page Header
-========================================================================================================
-*/
-
+/* Main body */
 body {
     margin: 0;
     text-align: center;
     overflow-x: hidden;
     font-family: Arial, sans-serif;
 }
+
+/* Background */
 #main-background{
     background: black;
     padding-top: 20px;
 }
 
+/* Header images container */
 header {
     grid-row: 1 / 2;
     grid-column: 1 / 4;
@@ -25,6 +23,7 @@ header {
 
 }
 
+/* Psyche logo image */
 #psyche {
     width: 25%;
     left: 3%;
@@ -34,6 +33,7 @@ header {
     animation-duration: 2s;
 }
 
+/* Asteroid image */
 #asteroid {
     float: right;
     position: relative;
@@ -44,6 +44,7 @@ header {
     animation-duration: 2s;
 }
 
+/* Top section */
 #top {
     color:#ffffff;
     font-size: 60px;
@@ -51,11 +52,13 @@ header {
     font-family: Arial, sans-serif;
 }
 
+/* Header paragraphs  */
 #top p{
     padding-top: 25px;
     padding-bottom: 25px;
 }
 
+/* Middle paragraphs */
 #middle p{
     color:#ffffff;
     font-size: 60px;
@@ -64,49 +67,52 @@ header {
     padding-bottom: 10px;
 }
 
+/* Move in on load */
 @keyframes header-move-in {
     from {transform: translate(200px, -200px);} /* Move from bottom-right */
     to {transform: translate(0, 0);} /* Move to original position */
 }
 
+/* Move in on load */
 @keyframes logo-move-in {
     from {transform: translate(-200px, -200px);} /* Move from top-left */
     to {transform: translate(0, 0);} /* Move to original position */
 }
-/*
-========================================================================================================
-Year Selection Section
-========================================================================================================
-*/
 
+/* Container for school wheel and ages displayed */
 .age-container {
     display: grid;
     grid-template-rows: auto 1fr;
     gap: 20px;
 }
-  
+
+/* NOT USED here but keeping in if needed  */
 .single-column {
     text-align: center;
 }
 
+/* Two column base */
 .two-columns {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0px;
 }
-  
+
+/* Three column base */
 .three-columns {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2px; 
 }
-  
+
+/* Single column base */
 .column {
     height: 450px;
     text-align: center;
     
 }
 
+/* For the piechart and metrics photos */
 .columnLarge {
     height: 650px;
     text-align: center;
@@ -115,6 +121,7 @@ Year Selection Section
     margin-right: 10px;
 }
 
+/* Displays the total hours in each day from radio button toggle */
 .columnLarge headerHours {
     font-size: 55px;
     padding-bottom: 0 !important;
@@ -130,17 +137,20 @@ Year Selection Section
         0.05em 0.05em black;
 }
 
+/* Image base */
 img {
     height: 100%;
     width: auto;
 }
 
+/* Scroll wheel text header */
 .wheelHeader {
     color:#ffffff;
     font-size: 45px;
     margin-top: 0;
 }
 
+/* Scroll wheel container */
 .scroll-wheel {
     width: 150px;
     height: 250px;
@@ -150,12 +160,16 @@ img {
     position: relative;
     margin: 20px auto;
 }
+
+/* Clean scroll wheel out for new elements */
 .scroll-wheel ul {
     list-style: none;
     padding: 0;
     margin: 0;
     width: 100%;
 }
+
+/* Base for scroll wheel list items */
 .scroll-wheel li {
     height: 32px;
     display: flex;
@@ -164,11 +178,14 @@ img {
     font-size: 35px;
     font-family: Arial, sans-serif;
 }
+
+/* Changes for the item that is selected */
 .scroll-wheel li.selected {
     font-weight: bold;
     color: #f9a000;
 }
 
+/* Base for the year selection */
 #yearSelection {
     background-size: cover;
     background-position: center;
@@ -177,6 +194,7 @@ img {
     font-weight: bold;
 }
 
+/* Year selection header */
 #yearselection h3 {
     color: #ffffff;
     font-size: 40px; 
@@ -184,7 +202,7 @@ img {
     padding-left: 20px;
 }
 
-
+/* Age on earth container with image and text */
 #ageOnEarth {
     background-image: url(../img/EarthTransparent.png);
     background-size: contain;
@@ -204,6 +222,7 @@ img {
         0.05em 0.05em black;
 }
 
+/* Psyche age container with image and text */
 #ageOnPsyche {
     background-image: url(../img/PsycheTransparent.png);
     background-size: contain;
@@ -223,6 +242,7 @@ img {
         0.05em 0.05em black;
 }
 
+/* Displayed earth age */
 .earthAge {
     font-size: 100px; 
     font-weight: bold;
@@ -233,6 +253,7 @@ img {
                 2px -2px 0 yellow, 
                 -2px 2px 0 yellow;
 }
+/* Displayed Psyche age */
 .psycheAge {
     font-size: 100px; 
     font-weight: bold;
@@ -244,12 +265,6 @@ img {
                 -2px 2px 0 yellow;
 }
 
-/*
-========================================================================================================
-Year Metric Section
-========================================================================================================
-*/
-
 /* Toggle Switch for all metrics */
 .wrap {
     display: flex !important;
@@ -260,10 +275,12 @@ Year Metric Section
     border: 3rem;
 }
 
+/* Input for radio buttons */
 input[type="radio"] {
     display:none;
 }
 
+/* Radio button label base */
 input[type="radio"] + label {
     width: 50%;
     font-size: 3.5rem;
@@ -281,19 +298,21 @@ input[type="radio"] + label {
     font-family: Arial, sans-serif;
 }
 
+/* Earth button selected */
 input[type="radio"]#Earth:checked + label {
     color: #ffffff;
     background: #087f23;
     z-index: 1;
 }
 
+/* Psyche button selected */
 input[type="radio"]#Psyche:checked + label {
     color: #592651;
     background: #f9a000;
     z-index: 1;
 }
 
-
+/* Work container */
 #work {
     background-image: url(../img/work.jpeg);
     background-position: center;
@@ -314,6 +333,7 @@ input[type="radio"]#Psyche:checked + label {
         0.05em 0.05em black;
 }
 
+/* School container */
 #school {
     background-image: url(../img/school.jpeg);
     background-position: center;
@@ -334,6 +354,41 @@ input[type="radio"]#Psyche:checked + label {
         0.05em 0.05em black;
 }
 
+/* Work school container base */
+.work-school-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    position: relative;
+  }
+  
+  /* Update for base to align in columnLarge */
+  #work, #school {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  /* OR label between the work and school metrics */
+  .or-label {
+    position: absolute;
+    top: 35%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: bold;
+    color: #f9a000;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 4px 10px;
+    border-radius: 50px;
+    box-shadow: 0 0 6px #f9a000;
+    z-index: 2;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+  }
+
+/* Sleep container  */
 #sleep {
     background-image: url(../img/sleep.jpeg);
     background-position: center;
@@ -354,6 +409,7 @@ input[type="radio"]#Psyche:checked + label {
         0.05em 0.05em black;
     }
 
+/* Relax container */
 #relax {
     background-image: url(../img/relax.jpeg);
     display: flex;
@@ -373,6 +429,7 @@ input[type="radio"]#Psyche:checked + label {
         0.05em 0.05em black;
     }
 
+/* Eat container */
 #eat {
     background-image: url(../img/eat.jpg);
     background-size: cover;
@@ -389,7 +446,7 @@ input[type="radio"]#Psyche:checked + label {
         0.05em -0.05em black,
         0.05em 0.05em black;
     }
-
+/* Footer - Nothing in here any more, just keeping in */
 #footer {
     background: black;
     background-size: cover;
