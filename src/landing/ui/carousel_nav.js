@@ -1,4 +1,5 @@
 import { moveToSection } from './../utils/sectionTracking.js';
+import { resolvePath } from '../utils/utils.js';
 
 export function setupCarouselNavigation(sections) {
   const navContainer = document.createElement('div');
@@ -62,6 +63,53 @@ export function setupCarouselNavigation(sections) {
     renderNav();
   });
   
+  // Create REFERENCES icon overlay
+  const refWrapper = document.createElement('div');
+  refWrapper.id = 'ref-icon-wrapper';
+  refWrapper.style.position = 'fixed';
+  refWrapper.style.bottom = '30px';
+  refWrapper.style.left = '30px';
+  refWrapper.style.display = 'flex';
+  refWrapper.style.alignItems = 'center';
+  refWrapper.style.gap = '10px';
+  refWrapper.style.cursor = 'pointer';
+  refWrapper.style.zIndex = '1000'; 
+
+  const refIcon = document.createElement('img');
+  refIcon.id = 'ref-icon';
+  refIcon.src = resolvePath('/res/icons/link-duo.png');
+  refIcon.alt = 'References';
+  refIcon.style.width = '36px';
+  refIcon.style.height = '36px';
+  refIcon.style.transition = 'transform 0.2s ease';
+
+  const refLabel = document.createElement('span');
+  refLabel.id = 'ref-label';
+  refLabel.textContent = 'REFERENCES';
+  refLabel.style.fontSize = '0.9rem';
+  refLabel.style.fontWeight = 'bold';
+  refLabel.style.fontFamily = 'sans-serif';
+  refLabel.style.color = '#fff';
+  refLabel.style.opacity = '0';
+  refLabel.style.transform = 'translateX(-10px)';
+  refLabel.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  refLabel.style.whiteSpace = 'nowrap';
+
+  refWrapper.appendChild(refIcon);
+  refWrapper.appendChild(refLabel);
+  document.body.appendChild(refWrapper);
+
+  refWrapper.addEventListener('mouseenter', () => {
+    refIcon.style.transform = 'scale(1.05)';
+    refLabel.style.opacity = '1';
+    refLabel.style.transform = 'translateX(0)';
+  });
+
+  refWrapper.addEventListener('mouseleave', () => {
+    refIcon.style.transform = 'scale(1)';
+    refLabel.style.opacity = '0';
+    refLabel.style.transform = 'translateX(-10px)';
+  });
 
   renderNav();
 }
