@@ -108,11 +108,11 @@ Here's an overview of the folder structure:
     └──landing/               # Contains the THREE.js scene setup
     └──imports.js             # File paths needed for Vite build     
 ├── vite.config.js            # Vite configuration file
-└── .gitignore                # Untracked folders and files
+├── .gitignore                # Untracked folders and files
 ├── README.md                 # This beautiful file explains the project
-└── index.html                # Main entry point to the website
+├── index.html                # Main entry point to the website
 ├── package-lock.js           # Locks a specific version of dependencies 
-└── package.json              # Project metadata and dependencies
+├── package.json              # Project metadata and dependencies
 ├── vite.config.js            # Vite configuration file
 
 ```
