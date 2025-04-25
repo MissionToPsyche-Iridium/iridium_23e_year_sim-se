@@ -5,7 +5,7 @@ export function setupCarouselNavigation(sections) {
   navContainer.id = 'carousel-nav';
   document.body.appendChild(navContainer);
 
-  let currentIndex = 0;
+  let currentIndex = 1;
 
   function renderNav() {
     navContainer.innerHTML = "";

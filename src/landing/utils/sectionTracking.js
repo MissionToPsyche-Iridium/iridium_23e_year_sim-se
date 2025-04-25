@@ -134,8 +134,8 @@ export function onScroll(event) {
   console.log("Swipe Direction: ", direction);
 
   if (newSection > 8) {
-    newSection = 1;
-  } else if (newSection < 1) {
+    newSection = 0;
+  } else if (newSection < 0) {
     newSection = 8;
   }
   isAnimating = true;
@@ -170,7 +170,6 @@ export function moveToSection(sectionIndex, lookAt = null) {
   scrollProgress = sectionIndex;
   lastSection = sectionIndex;
   currentSection = sectionIndex;
-  scrollProgress = sectionIndex;
 
   const sectionPos = sections[sectionIndex].position;
   const duration = 2;
@@ -200,10 +199,6 @@ export function moveToSection(sectionIndex, lookAt = null) {
 
       isAnimating = false;
       console.log("Moved to Section:", currentSection);
-
-      const direction = new THREE.Vector3();
-      camera.getWorldDirection(direction);
-      console.log('Camera is now looking in direction:', direction);
     }
   });
 }
