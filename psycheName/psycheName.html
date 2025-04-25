@@ -22,24 +22,19 @@ File Start
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive Psyche Page</title>
-    <link rel="stylesheet" href="./psycheName.css">
-     <!-- Three.js Scene removed -->
+    <link rel="stylesheet" href="./psycheName.css" />
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             overflow: hidden;
         }
-
-        /* Fullscreen Three.js Scene */
         canvas {
             display: block;
         }
-
-        /* UI Panel for Clickable Links */
         .menu {
             position: absolute;
             top: 10%;
@@ -48,7 +43,6 @@ File Start
             padding: 15px;
             border-radius: 10px;
         }
-
         .menu a {
             display: block;
             color: white;
@@ -56,8 +50,6 @@ File Start
             margin-bottom: 10px;
             cursor: pointer;
         }
-
-        /* Popups for Sections */
         .popup {
             display: none;
             position: absolute;
@@ -70,7 +62,6 @@ File Start
             border-radius: 10px;
             text-align: center;
         }
-
         .close-btn {
             cursor: pointer;
             color: red;
@@ -79,7 +70,6 @@ File Start
             top: 10px;
             right: 10px;
         }
-
     </style>
 </head>
 <body>
@@ -90,16 +80,17 @@ File Start
             <li><a href="javascript:void(0)" id="historyLink">Historical Background</a></li>
             <li><a href="javascript:void(0)" id="missionLink">NASA's Psyche Mission</a></li>
             <li><a href="javascript:void(0)" id="funFactsLink">Fun Facts</a></li>
-
         </ul>
 
-        <!-- for the quiz -->
         <button id="quizButton" style="margin: 20px;">Test your knowledge!</button>
-        <!-- The Container for Detailed Content (Initially Hidden) -->
+
         <div id="viewportContainer" style="display: none;">
             <button id="closeButton">x Close</button>
             <div id="content"></div>
+            <audio id="sectionAudio" controls style="margin-top: 10px; display: none;"></audio>
         </div>
+        
+
         <div class="popup" id="quizPopup" style="display: none;">
             <span class="close-btn" id="quizClose">x</span>
             <h2>Welcome to the Psyche Quiz!</h2>
@@ -108,128 +99,103 @@ File Start
         </div>
     </main>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
+    <!-- Vite-style module import -->
+    <script type="module">
+        import { quiz, sections } from './nameText.js';
+
+        document.addEventListener("DOMContentLoaded", () => {
             const quizButton = document.getElementById("quizButton");
             const quizPopup = document.getElementById("quizPopup");
             const quizClose = document.getElementById("quizClose");
             const quizContent = document.getElementById("quizContent");
             const nextButton = document.getElementById("nextQuestion");
-    
-            const quiz = [
-                {
-                    question: "What is Psyche primarily made of?",
-                    choices: ["Rock and Ice", "Nickel and Iron", "Carbon", "Gas"],
-                    answer: "Nickel and Iron"
-                },
-                {
-                    question: "What does the name 'Psyche' mean in Greek mythology?",
-                    choices: ["Star", "Soul", "Warrior", "Hope"],
-                    answer: "Soul"
-                },
-                {
-                    question: "Which organization is conducting the Psyche mission?",
-                    choices: ["SpaceX", "NASA", "ESA", "Blue Origin"],
-                    answer: "NASA"
-                }
-            ];
-    
+            const contentBox = document.getElementById("content");
+            const popup = document.getElementById("viewportContainer");
+            const closeButton = document.getElementById("closeButton");
+
             let currentQuestion = 0;
-    
+
             function loadQuestion() {
                 const q = quiz[currentQuestion];
-                quizContent.innerHTML = `<p><strong>${q.question}</strong></p>` + 
-                    q.choices.map(choice => 
+                quizContent.innerHTML = `<p><strong>${q.question}</strong></p>` +
+                    q.choices.map(choice =>
                         `<button class="quiz-option" data-answer="${choice}">${choice}</button>`
                     ).join("<br><br>");
             }
-    
+
             quizButton.addEventListener("click", () => {
                 currentQuestion = 0;
                 quizPopup.style.display = "block";
+                nextButton.style.display = "inline-block";
                 loadQuestion();
             });
-    
+
             quizClose.addEventListener("click", () => {
                 quizPopup.style.display = "none";
             });
-    
+
             nextButton.addEventListener("click", () => {
                 currentQuestion++;
                 if (currentQuestion < quiz.length) {
                     loadQuestion();
                 } else {
-
-                    quizContent.innerHTML = "<h3>⭐ Great job! You finished the quiz ⭐</h3>";
+                    quizContent.innerHTML = "<h3>Great job! You finished the quiz.</h3>";
                     nextButton.style.display = "none";
                 }
             });
-    
+
             document.addEventListener("click", (e) => {
                 if (e.target.classList.contains("quiz-option")) {
                     const selected = e.target.dataset.answer;
                     const correct = quiz[currentQuestion].answer;
-                    if (selected === correct) {
-                        e.target.style.backgroundColor = "lightgreen";
-                    } else {
-                        e.target.style.backgroundColor = "tomato";
-                    }
-                    // Disable other buttons
-                    document.querySelectorAll(".quiz-option").forEach(btn => {
-                        btn.disabled = true;
-                    });
+                    e.target.style.backgroundColor = selected === correct ? "lightgreen" : "tomato";
+                    document.querySelectorAll(".quiz-option").forEach(btn => btn.disabled = true);
                 }
             });
-        });
-    </script>
 
-    <!-- Three.js Scene -->
-    <script>
-        // DOM Content Loaded Event
-        document.addEventListener("DOMContentLoaded", function() {
-            let contentBox = document.getElementById("content");
-            let popup = document.getElementById("viewportContainer");
-            let closeButton = document.getElementById("closeButton");
-
-            // Ensure the elements are available
-            if (!popup || !contentBox || !closeButton) {
-                console.error("Missing elements: viewportContainer, content, or closeButton.");
-                return;
-            }
-
-
-            // Define content for each section
-            const sections = {
-                introLink: "<h2>Introduction of Name Origin for Psyche</h2><p>Psyche is a metal-rich asteroid orbiting the Sun between Mars and Jupiter.</p><p>It's named for the goddess of the soul in ancient Greek mythology, often depicted as a butterfly-winged female figure.</p>",
-                historyLink: "<h2>Historical Background</h2><p>Psyche was discovered in 1852 by Italian astronomer Annibale de Gasparis and is one of the largest asteroids in our solar system.</p><p>Because it was the 16th asteroid to be discovered, it is sometimes referred to as 16 Psyche.</p>",
-                missionLink: "<h2>NASA's Psyche Mission</h2><p>The Psyche spacecraft, designed by NASA, aims to study the asteroid to understand more about planetary cores and the history of the solar system. The Psyche spacecraft is traveling to a unique metal-rich asteroid with the same name, orbiting the Sun between Mars and Jupiter. By Auguest 2029 the spacecraft will begin exploring the asteroid that scientists think - because of its high metal content - may be the partial core of a planetesimal, a building block of an early planet.</p>",
-                funFactsLink: "<h2>Fun Facts</h2></p>Psyche is primarily composed of nickel and iron, much like Earth's core.<p></p>Psyche is irregular and potato-like. If the asteroid were sliced in half horizontally at the equator - picture a squished oval - it would measure 173 miles (280 kilometers) across at its widest point and 144 miles (232 kilometes) long.</p><p>Its surface area is 64,000 quare miles (165,000 square kilometers)</p><p>Its name means 'soul' in Greek mythology.</p>"
-            };
-
-            // Show popup content when clicking a link
             document.querySelectorAll("ul li a").forEach(link => {
-                link.addEventListener("click", function () {
-                    let sectionKey = this.id;
+                link.addEventListener("click", () => {
+                    const sectionKey = link.id;
                     contentBox.innerHTML = sections[sectionKey] || "No content available.";
-                    popup.style.display = "block";  // Show popup
+                    popup.style.display = "block";
                 });
             });
 
-            // Close popup when clicking close button
-            closeButton.addEventListener("click", function () {
-                popup.style.display = "none";  // Hide popup
+            closeButton.addEventListener("click", () => {
+                popup.style.display = "none";
             });
 
-            // Close popup when clicking outside of it
             window.addEventListener("click", function (e) {
                 if (e.target === popup) {
                     popup.style.display = "none";
                 }
             });
+            const sectionAudio = document.getElementById("sectionAudio");
+            const audioMap = {
+                introLink: "name_intro.mp3",
+                historyLink: "name_history.mp3",
+                missionLink: "name_mission.mp3",
+                funFactsLink: "name_facts.mp3"
+            };
+            document.querySelectorAll("ul li a").forEach(link => {
+                link.addEventListener("click", () => {
+                    const sectionKey = link.id;
+                    contentBox.innerHTML = sections[sectionKey] || "No content available.";
+                    popup.style.display = "block";
+
+                    // Handle audio playback
+                    if (audioMap[sectionKey]) {
+                        sectionAudio.src = audioMap[sectionKey];
+                        sectionAudio.style.display = "block";
+                        sectionAudio.load();
+                    } else {
+                        sectionAudio.src = "";
+                        sectionAudio.style.display = "none";
+                    }
+                });
+            });
+
         });
     </script>
-
-    <!-- Three.js Scene and 3D model removed -->
-
 </body>
 </html>
