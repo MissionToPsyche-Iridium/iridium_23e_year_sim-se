@@ -34,6 +34,9 @@ import { loadSection7, renderSection7 } from './sections/section7.js';
 import { loadSection8, renderSection8 } from './sections/section8.js';
 import { loadSection9, renderSection9 } from './sections/section9.js';
 
+
+import { setupCarouselNavigation } from './ui/carousel_nav.js'
+
 /**
  * Global scope camera and renderer required for 
  * window resize listener
@@ -70,8 +73,8 @@ function init() {
   ];
   
 
-  setupNavigation(sections);
-  
+  // setupNavigation(sections);
+  setupCarouselNavigation(sections);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
 
