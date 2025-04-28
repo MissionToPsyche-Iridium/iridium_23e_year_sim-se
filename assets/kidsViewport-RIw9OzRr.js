@@ -1,4 +1,4 @@
-import "./index-CMEN9wf4.js";
+import "./index-B4lKmmCT.js";
 function r() {
 }
 window.setKidsViewportSize = function(i, t) {

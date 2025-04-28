@@ -373,7 +373,7 @@ input[type="radio"]#Psyche:checked + label {
   /* OR label between the work and school metrics */
   .or-label {
     position: absolute;
-    top: 35%; 
+    top: 15%; 
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 30px;
