@@ -443,7 +443,7 @@ const tl = gsap.timeline()
         },
         {
             rotate: 120,
-            x: 3000,
+            x: 9000,
             y: 8600,
             duration: 6,
             scrollTrigger: {
