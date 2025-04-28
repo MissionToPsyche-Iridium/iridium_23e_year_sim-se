@@ -1,3 +1,32 @@
+function updateScreenWidth() {
+    const box = document.getElementById("screen-width-box");
+    box.textContent = `Width: ${window.innerWidth}px`;
+}
+
+window.addEventListener("resize", updateScreenWidth);
+
+updateScreenWidth();
+
+
+
+
+let windowWidth = window.outerWidth;
+let dpr = window.devicePixelRatio;
+let trueSize = Math.round(windowWidth * dpr);
+
+console.log("window.innerWidth:", window.innerWidth);
+console.log("window.innerHeight:", window.innerHeight);
+console.log("window.outerWidth:", window.outerWidth);
+console.log("devicePixelRatio:", window.devicePixelRatio);
+console.log("Effective Width:", window.innerWidth * window.devicePixelRatio);
+console.log("Zoom Level:", Math.round(window.outerWidth / window.innerWidth * 100) + "%");
+console.log("width of device:", windowWidth, "dpr:", dpr, "trueSize:", trueSize);
+
+
+
+
+
+
 
 gsap.set([
     "#page-header", 
