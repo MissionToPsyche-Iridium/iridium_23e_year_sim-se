@@ -1,4 +1,4 @@
-import { moveToSection } from './../utils/sectionTracking.js';
+import { moveToSection, getIsMoving, setIsMoving } from './../utils/sectionTracking.js';
 import { resolvePath } from '../utils/utils.js';
 import { getCurrentSection } from './../utils/sectionTracking.js';
 
@@ -11,47 +11,60 @@ export function setupCarouselNavigation(sections) {
 
   function renderNav() {
     navContainer.innerHTML = "";
-  // show 3 above and 3 below
-    const visibleRange = 3; 
-    const totalVisible = visibleRange * 2 + 1;
-  
+    const visibleRange = 3;
+
     for (let offset = -visibleRange; offset <= visibleRange; offset++) {
       const i = (currentIndex + offset + sections.length) % sections.length;
       const distance = Math.abs(offset);
-  
+
       const item = document.createElement('div');
       item.className = 'carousel-item';
       item.textContent = sections[i].name;
-  
+
       if (offset === 0) {
         item.classList.add('active');
       } else {
         item.style.opacity = `${1 - distance * 0.2}`;
         item.style.transform = `scale(${1 - distance * 0.05})`;
       }
-  
-      item.addEventListener('click', () => {
+
+      item.addEventListener('click', async () => {
+        // Added check for isMoving to stop new nav actions
+        if (getIsMoving()) return;
+        setIsMoving(true);
+        await moveToSection(i, sections[i].position);
         currentIndex = i;
-        moveToSection(i, sections[i].position);
         renderNav();
+        // Done moving so reset flag
+        setIsMoving(false);
       });
-  
+
       navContainer.appendChild(item);
     }
   }
-  
-  window.addEventListener('keydown', (e) => {
+
+  window.addEventListener('keydown', async (e) => {
+    // Check for isMoving to stop new nav actions
+    // Now no new arrow keys will trigger a move until the current is finished
+    if (getIsMoving()) return;
+
     if (e.key === 'ArrowDown') {
-      currentIndex = (currentIndex + 1) % sections.length;
+      const nextIndex = (currentIndex + 1) % sections.length;
+      setIsMoving(true);
+      await moveToSection(nextIndex, sections[nextIndex].position);
+      currentIndex = nextIndex;
+      renderNav();
+      setIsMoving(false);
     } else if (e.key === 'ArrowUp') {
-      currentIndex = (currentIndex - 1 + sections.length) % sections.length;
-    } else {
-      return;
+      const prevIndex = (currentIndex - 1 + sections.length) % sections.length;
+      setIsMoving(true);
+      await moveToSection(prevIndex, sections[prevIndex].position);
+      currentIndex = prevIndex;
+      renderNav();
+      setIsMoving(false);
     }
-    moveToSection(currentIndex, sections[currentIndex].position);
-    renderNav();
   });
-  
+
   // References icon overlay
   const refWrapper = document.createElement('div');
   refWrapper.id = 'ref-icon-wrapper';
@@ -100,9 +113,15 @@ export function setupCarouselNavigation(sections) {
     refLabel.style.transform = 'translateX(-10px)';
   });
 
-  refWrapper.addEventListener('click', () => {
-    moveToSection(0);
-  })
+  refWrapper.addEventListener('click', async () => {
+    // Unified all nav movements, stopped clicks during movement
+    if (getIsMoving()) return;
+    setIsMoving(true);
+    await moveToSection(0, sections[0].position);
+    currentIndex = 0;
+    renderNav();
+    setIsMoving(false);
+  });
 
   renderNav();
 

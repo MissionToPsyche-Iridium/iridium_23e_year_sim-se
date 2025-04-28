@@ -32,10 +32,22 @@ import { destroySurface2Viewport } from '../ui/surface2Viewport.js';
 import { destroyLocation2Viewport } from '../ui/location2Viewport.js';
 import { destroyRefsViewport } from '../ui/referencesViewport.js';
 
-
 let camera, renderer, sections, currentSection = 1, scrollProgress = 1;
 let isAnimating = false; // Scroll lock flag
 let lastTouchY = 0;
+
+// Unifying all nav movements 
+let isMoving = false;
+
+// Exporting to carousel nav
+export function getIsMoving() {
+  return isMoving;
+}
+
+// Exporting to carousel nav
+export function setIsMoving(value) {
+  isMoving = value;
+}
 
 const destroyHandlers = {
   0: destroyRefsViewport,
@@ -128,6 +140,8 @@ export function onResize(camera, renderer) {
 */
 export function onScroll(event) {
   if (isAnimating) return;
+  // Added to unify nav menu to wait for transition
+  if (getIsMoving()) return;
 
   const direction = event.deltaY > 0 ? 1 : -1;
   let newSection = currentSection + direction;
@@ -138,8 +152,14 @@ export function onScroll(event) {
   } else if (newSection < 0) {
     newSection = 8;
   }
+
   isAnimating = true;
-  moveToSection(newSection);
+  setIsMoving(true); 
+  moveToSection(newSection).then(() => {
+    isAnimating = false;
+    // Reached new section, set to false
+    setIsMoving(false); 
+  });
 }
 
 
@@ -152,54 +172,62 @@ export function onScroll(event) {
 * - lookAt: Optional THREE.Vector3 position for the camera to look at.
 */
 export function moveToSection(sectionIndex, lookAt = null) {
-  if (sectionIndex < 0 || sectionIndex >= sections.length) return;
-  if (destroyHandlers[lastSection]) {
-    destroyHandlers[lastSection]();
-  }
-  if (lastSection === 6 && sectionIndex !== 6) {
-    // If leaving Section 6, restore camera rotation
-    gsap.to(camera.rotation, {
-      x: savedCameraRotation.x,
-      y: savedCameraRotation.y,
-      z: savedCameraRotation.z,
-      duration: 1,
-      ease: "power2.out"
+  return new Promise((resolve) => { // <<< Wrap everything in a Promise
+    if (sectionIndex < 0 || sectionIndex >= sections.length) {
+      resolve(); // <<< Always resolve even on invalid move
+      return;
     }
-  )};
-  currentSection = sectionIndex;
-  scrollProgress = sectionIndex;
-  lastSection = sectionIndex;
-  currentSection = sectionIndex;
 
-  const sectionPos = sections[sectionIndex].position;
-  const duration = 2;
+    if (destroyHandlers[lastSection]) {
+      destroyHandlers[lastSection]();
+    }
 
-  gsap.to(camera.position, {
-    x: sectionPos.x,
-    y: sectionPos.y,
-    z: sectionPos.z,
-    duration: duration,
-    ease: "power4.inOut",
-    onUpdate: () => {
-      if (lookAt && sectionIndex === 6) {
-        // camera.lookAt(lookAt.x, lookAt.y, lookAt.z); // Optional: Look at model in section 6
-      }
-    },
-    onComplete: () => {
-      if (sectionIndex !== 6) {
-        const resetLookAt = new THREE.Vector3(
-          camera.position.x,
-          camera.position.y,
-          camera.position.z - 1 // Look directly along negative Z-axis
-        );
-        if (sectionIndex === 0) {
-          showRefsViewport();
+    if (lastSection === 6 && sectionIndex !== 6) {
+      // If leaving Section 6, restore camera rotation
+      gsap.to(camera.rotation, {
+        x: savedCameraRotation.x,
+        y: savedCameraRotation.y,
+        z: savedCameraRotation.z,
+        duration: 1,
+        ease: "power2.out"
+      });
+    }
+
+    currentSection = sectionIndex;
+    scrollProgress = sectionIndex;
+    lastSection = sectionIndex;
+
+    const sectionPos = sections[sectionIndex].position;
+    const duration = 2;
+
+    gsap.to(camera.position, {
+      x: sectionPos.x,
+      y: sectionPos.y,
+      z: sectionPos.z,
+      duration: duration,
+      ease: "power4.inOut",
+      onUpdate: () => {
+        if (lookAt && sectionIndex === 6) {
+          // camera.lookAt(lookAt.x, lookAt.y, lookAt.z); 
         }
-      }
+      },
+      onComplete: () => {
+        if (sectionIndex !== 6) {
+          const resetLookAt = new THREE.Vector3(
+            camera.position.x,
+            camera.position.y,
+            camera.position.z - 1 // Look directly along (-) Z-axis
+          );
+          if (sectionIndex === 0) {
+            showRefsViewport();
+          }
+        }
 
-      isAnimating = false;
-      console.log("Moved to Section:", currentSection);
-    }
+        isAnimating = false;
+        console.log("Moved to Section:", currentSection);
+        resolve(); // All tasks are done
+      }
+    });
   });
 }
 
