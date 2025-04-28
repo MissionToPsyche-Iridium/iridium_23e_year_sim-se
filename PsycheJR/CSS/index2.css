@@ -67,7 +67,7 @@ header {
 #page-header {
     width: 100%;
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 10rem;
     height: 30vh;
     position: relative;
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
