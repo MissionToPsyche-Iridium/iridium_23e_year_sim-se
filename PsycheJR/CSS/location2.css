@@ -694,7 +694,7 @@ footer {
 
 @media (min-width: 1280px){
     #page-header{
-        margin-top: -20%;
+        margin-top: 0%;
         height: 25vh !important;
     }
 
@@ -729,10 +729,10 @@ footer {
 }
 
 @media (min-width: 1440px){
-    #page-header{
+/*     #page-header{
         margin-top: -15%;
         height: 25vh !important;
-    }
+    } */
 
     #div3 div {
         margin: 0.5rem;
@@ -742,9 +742,8 @@ footer {
 
 @media (min-width: 1512px) {
     #page-header {
-        padding-top: 12rem;
-        padding-bottom: 5rem;
-        height: 30vh !important;
+        padding-top: 5rem;
+        height: 25vh !important;
     }
 }
 
