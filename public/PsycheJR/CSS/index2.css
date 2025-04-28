@@ -67,7 +67,7 @@ header {
 #page-header {
     width: 100%;
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 10rem;
     height: 30vh;
     position: relative;
     background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
@@ -483,7 +483,7 @@ header {
 }
 
 #psycheJr {
-    height: 700px;
+    height: 900px;
     background-color: purple;
     color: white;
     text-align: center;
@@ -496,8 +496,16 @@ header {
     background-repeat: no-repeat;
 }
 
+#psycheJr h1 {
+    font-size: 120px;
+}
+
 #psycheJr p {
     margin-top: 2rem;
+    font-size: 70px;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #psycheJr-btn {
@@ -883,6 +891,18 @@ footer {
     #div5 p {
         margin-top: 3rem;
     }
+
+    #psycheJr {
+        height: 500px;
+        background-size: 70%;
+        background-position-y: -30px;
+        background-position-x: -100px;
+        background-repeat: no-repeat;
+    }
+
+    #psycheJr-btn {
+        margin-top: 5rem;
+    }
 }
 
 /*1024px*/
@@ -944,6 +964,18 @@ footer {
         margin-top: 5rem;
         margin-bottom: 5%;
     }
+
+    #psycheJr {
+        height: 700px;
+        background-size: 70%;
+        background-position-y: -30px;
+        background-position-x: -100px;
+        background-repeat: no-repeat;
+    }
+
+    #psycheJr-btn {
+        margin-top: 5rem;
+    }
 }
 
 /*1280px*/
@@ -951,16 +983,16 @@ footer {
     /** multi-element styling
     *
     */
-    #div3-btn, #div4-btn, #div5-btn, #div8-btn {
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
         font-size: 20px;
     } 
-    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover {
+    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover, #psycheJr-btn:hover {
         font-size: 25px;
     } 
-    #div3 h1, #div4 h1, #div5 h1, #div8 h1 {
+    #div3 h1, #div4 h1, #div5 h1, #div8 h1, #psycheJr h1 {
         font-size: 60px;
     } 
-    #div3 p, #div4 p, #div5 p, #div8 p  {
+    #div3 p, #div4 p, #div5 p, #div8 p, #psycheJr p  {
         font-size: 30px;
     }
 
@@ -1022,6 +1054,18 @@ footer {
         margin-top: 15%;
         width: 80%;
     }
+
+    #psycheJr {
+        height: 700px;
+        background-size: 70%;
+        background-position-y: -30px;
+        background-position-x: -100px;
+        background-repeat: no-repeat;
+    }
+
+    #psycheJr-btn {
+        margin-top: 10rem;
+    }
 }
 
 /*1440px*/
@@ -1036,10 +1080,10 @@ footer {
         font-size: 30px !important;
     }
 
-    #div3-btn, #div4-btn, #div5-btn, #div8-btn {
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
         font-size: 20px;
     } 
-    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover {
+    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover, #psycheJr-btn:hover {
         font-size: 25px;
     } 
 
@@ -1102,6 +1146,18 @@ footer {
         margin-top: 15%;
         width: 80%;
     }
+
+    #psycheJr {
+        height: 700px;
+        background-size: 70%;
+        background-position-y: -100px;
+        background-position-x: -100px;
+        background-repeat: no-repeat;
+    }
+
+    #psycheJr-btn {
+        margin-top: 10rem;
+    }
 }
 
 /*Full HD*/
@@ -1115,10 +1171,10 @@ footer {
     p{
         font-size: 40px !important;
     }
-    #div3-btn, #div4-btn, #div5-btn, #div8-btn {
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
         font-size: 25px;
     } 
-    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover {
+    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover, #psycheJr-btn:hover {
         font-size: 30px;
     } 
 
@@ -1194,6 +1250,18 @@ footer {
         margin-top: 5%;
         margin-bottom: 5%;
     }
+
+    #psycheJr {
+        height: 700px;
+        background-size: 70%;
+        background-position-y: -100px;
+        background-position-x: -100px;
+        background-repeat: no-repeat;
+    }
+
+    #psycheJr-btn {
+        margin-top: 10rem;
+    }
 }
 
 /*2048px*/
@@ -1234,6 +1302,18 @@ footer {
     #welcome p {
         padding-top: 1rem;
     }
+
+    #psycheJr {
+        height: 700px;
+        background-size: 50%;
+        background-position-y: -100px;
+        background-position-x: -100px;
+        background-repeat: no-repeat;
+    }
+
+    #psycheJr-btn {
+        margin-top: 10rem;
+    }
 }
 
 /*2510px*/
@@ -1241,10 +1321,10 @@ footer {
     /** multi-element styling
     *
     */
-    #div3-btn, #div4-btn, #div5-btn, #div8-btn {
+    #div3-btn, #div4-btn, #div5-btn, #div8-btn, #psycheJr-btn {
         font-size: 30px;
     } 
-    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover {
+    #div3-btn:hover, #div4-btn:hover, #div5-btn:hover, #div8-btn:hover, #psycheJr-btn:hover {
         font-size: 40px;
     } 
     #div3 h1, #div4 h1, #div5 h1, #div8 h1 {
@@ -1252,6 +1332,18 @@ footer {
     } 
     #div3 p, #div4 p, #div5 p, #div8 p  {
         font-size: 50px;
+    }
+
+    #psycheJr {
+        height: 900px;
+        background-size: 50%;
+        background-position-y: -150px;
+        background-position-x: -100px;
+        background-repeat: no-repeat;
+    }
+
+    #psycheJr-btn {
+        margin-top: 10rem;
     }
 }
 

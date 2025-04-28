@@ -17,6 +17,20 @@ File Start
 
 -->
 
+/*For Testing Delete before production*/
+
+#screen-width-box {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
 /** body elements
 *
 */
@@ -680,7 +694,7 @@ footer {
 
 @media (min-width: 1280px){
     #page-header{
-        margin-top: -20%;
+        margin-top: 0%;
         height: 25vh !important;
     }
 
@@ -715,10 +729,10 @@ footer {
 }
 
 @media (min-width: 1440px){
-    #page-header{
+/*     #page-header{
         margin-top: -15%;
         height: 25vh !important;
-    }
+    } */
 
     #div3 div {
         margin: 0.5rem;
@@ -728,9 +742,8 @@ footer {
 
 @media (min-width: 1512px) {
     #page-header {
-        padding-top: 12rem;
-        padding-bottom: 5rem;
-        height: 30vh !important;
+        padding-top: 5rem;
+        height: 25vh !important;
     }
 }
 
