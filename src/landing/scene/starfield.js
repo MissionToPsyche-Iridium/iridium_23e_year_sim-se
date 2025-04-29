@@ -91,7 +91,7 @@ export function loadSun(scene, renderer, camera, bloomStrength = 2.0) {
   });
 
   const sun = new THREE.Mesh(sunGeometry, sunMaterial);
-  sun.position.set(-400, 250, -500);
+  sun.position.set(-400, 250, -900);
   scene.add(sun);
 
   // point light at sun's position
@@ -107,8 +107,8 @@ export function loadSun(scene, renderer, camera, bloomStrength = 2.0) {
   const bloomPass = new UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
     bloomStrength, // Intensity
-    0.4,  // Spread of glow
-    1.2   // Brightness threshold for bloom
+    0.5,  // Spread of glow
+    1.0   // Brightness threshold for bloom
   );
   composer.addPass(bloomPass);
 
