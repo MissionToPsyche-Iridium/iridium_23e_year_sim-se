@@ -69,7 +69,6 @@ function init() {
     },
     { name: "SURFACE OF PSYCHE", position: { x: 150, y: -150, z: 13 } },
     { name: "LOCATION OF PYSCHE", position: { x: 0, y: -300, z: 13 } },
-    { name: "ORBITS", position: { x: -400, y: 250, z: -800}}
   ];
   
 
