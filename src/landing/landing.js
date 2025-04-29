@@ -34,7 +34,6 @@ import { loadSection7, renderSection7 } from './sections/section7.js';
 import { loadSection8, renderSection8 } from './sections/section8.js';
 import { loadSection9, renderSection9 } from './sections/section9.js';
 
-
 import { setupCarouselNavigation } from './ui/carousel_nav.js'
 
 /**
@@ -69,7 +68,8 @@ function init() {
       ]
     },
     { name: "SURFACE OF PSYCHE", position: { x: 150, y: -150, z: 13 } },
-    { name: "LOCATION OF PYSCHE", position: { x: 0, y: -300, z: 13 } }
+    { name: "LOCATION OF PYSCHE", position: { x: 0, y: -300, z: 13 } },
+    { name: "ORBITS", position: { x: -400, y: 250, z: -800}}
   ];
   
 
@@ -108,7 +108,7 @@ function init() {
 
   // Debug panel for development. will delete this later
   const debugPanel = document.getElementById('debug-panel');
-  debugPanel.style.display = 'none';
+  // debugPanel.style.display = 'none';
   /*
   * Updates the debug panel with current section and camera position.
   */  
@@ -133,20 +133,22 @@ function init() {
   */
   function animate() {
     requestAnimationFrame(animate);
-    if (!debugPanel.hidden) updateDebugPanel();
-    
+    if (!debugPanel.hidden) updateDebugPanel();    
     if (composer) {
       composer.render();
     } else {
       renderer.render(scene, camera);
-    }    
-    renderSection3(camera,scene);
-    renderSection4(camera,scene);
-    renderSection5(camera,scene);
-    renderSection6(camera,scene);
-    renderSection8(camera,scene);
-    renderSection7(camera,scene);
-    renderSection9(camera,scene);
+    }
+    const activeSection = getCurrentSection();
+    switch (activeSection) {
+      case 3: renderSection3(camera, scene); break;
+      case 4: renderSection4(camera, scene); break;
+      case 5: renderSection5(camera, scene); break;
+      case 6: renderSection6(camera, scene); break;
+      case 7: renderSection7(camera, scene); break;
+      case 8: renderSection8(camera, scene); break;
+      case 9: renderSection9(camera, scene); break;
+    }
   }
 
   // Enable text interactivity before loading models
@@ -166,7 +168,7 @@ function init() {
     loadSection6(scene, camera, sections, renderer),
     loadSection7(scene, camera, sections, renderer),
     loadSection8(scene, camera, sections, renderer),
-    loadSection9(scene, camera, sections, renderer)
+    loadSection9(scene, camera, sections, renderer),
   ];
 
   let loadedCount = 0;
