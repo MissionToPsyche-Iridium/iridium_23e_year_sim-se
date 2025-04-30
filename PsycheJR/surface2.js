@@ -2455,5 +2455,4 @@ if (window.innerWidth >= 1600){
             druation: 3
         }
     )
-    }
 }
