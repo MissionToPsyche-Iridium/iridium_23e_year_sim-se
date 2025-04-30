@@ -7,7 +7,8 @@ window.addEventListener("resize", updateScreenWidth);
 
 updateScreenWidth();
 
-
+// Fix for very small screens
+const isSmallScreen = window.innerWidth <= 400;
 
 
 let windowWidth = window.outerWidth;
@@ -104,18 +105,22 @@ if (window.innerWidth >= 2560){
     tl.to("#header-h1", { scale: 0.7, y: 80 })
 } else if (window.innerWidth >= 400){
     console.log(true, window.innerWidth)
+    if (!isSmallScreen) {
     tl.fromTo("body", 
         { backgroundSize: "600%"},  // Start large and zoomed in
         { backgroundSize: "800%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.5, scale: 0.5, y: -100 })
+    }
 } else if (window.innerWidth >= 350){
     console.log(true, window.innerWidth)
+    if (!isSmallScreen) {
     tl.fromTo("body", 
         { backgroundSize: "800%"},  // Start large and zoomed in
         { backgroundSize: "1000%", duration: 2 } // Shrink to fit screen properly
     )
-    //tl.to("#header-h1", { scale: 0.5, scale: 0.3, y: -100 })
+    tl.to("#header-h1", { scale: 0.5, scale: 0.3, y: -100 })
+    }
 }
 
 if(window.width >= 700){
@@ -1761,6 +1766,7 @@ if (window.innerWidth >= 1600){
         }
     )
 } else if (window.innerWidth >= 700){
+    if (!isSmallScreen) {
     tl.to(
         "#header-h1",
         {
@@ -2297,6 +2303,7 @@ if (window.innerWidth >= 1600){
             }
         }
     )
+    }
 } else {
     tl.to(
         "body",
