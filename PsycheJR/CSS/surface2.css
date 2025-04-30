@@ -31,163 +31,604 @@ File Start
     z-index: 9999;
 }
 
-/* General Clean Base */
+/** body elements
+*
+*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Body */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #e5e5e5;
-  }
-  
-  /* Header */
-  #header-container {
-    width: 100%;
-    padding: 20px 0;
-    background-color: #3e3e3e;
-  }
-  
-  #header-h1 {
-    color: white;
-    text-align: center;
-    font-size: 36px;
-  }
-  
-  /* Sections */
-  #materials, #features, #dimensions, #comparable, #explore {
-    background-color: #d9d9d9;
-    width: 90%;
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 20px 10px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Inner Section Containers */
-  #inner-materials, #inner-features, #inner-dimensions, #inner-comparable {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 2560px;
+}
+
+div {
     background-color: white;
-    padding: 20px;
+}
+
+/** header elements
+*
+*/
+header {
+    height: 30vh;
+    width: 100%;
+}
+
+#logo {
+    padding-top: 2rem !important;
+    display: block;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header-h1 {
+    text-align: center;
+    margin-top: 5%;
+    font-size: 90px;
+    color: transparent;
+    background-image: linear-gradient(#f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
+    background-clip: text;
+}
+ #dimensions, #comparable, #div5 {
+    margin-top: 15%;
+    text-align: center;
+    width: 100%;
+
+    h1{
+        font-size: 60px;
+    }
+    p {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        font-size: 40px;
+    }
+}
+
+/** div1/materials elements
+*
+*/
+#materials{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 25%;
+    background-image: url(../img/psyche-surface2.svg);
+    background-color: black;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 3rem;
+}
+
+#inner-materials, #inner-features, #inner-dimensions, #inner-comparable, #inner-explore {
+    padding-top: 10%;
+    padding-bottom: 10%;
+    text-align: center;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #f47c33;
+    border-radius: 3rem;
+    margin-right: auto;
+    margin-left: auto;
+    h1{
+        padding-top: 5%;
+        font-size: 60px;
+    }
+
+    p{
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        font-size: 40px;
+    }
+}
+
+#inner-explore p {
+    padding-bottom: 10% !important;
+}
+
+/** div2/features elements
+*
+*/
+#features {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+    border-radius: 3rem;
+    background-image: url(../img/craters.jpg);
+    background-color: black;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/** div3/dimensions elements
+*
+*/
+#dimensions {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+    border-radius: 3rem;
+    background-image: url(../img/psyche-wide.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#comparable {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+    border-radius: 3rem;
+    background-image: url(../img/swiss-map.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+#surface-img, #wide-img, #swiss-flag {
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-radius: 10px;
-  }
-  
-  /* Section Headings */
-  #materials h1, #features h1, #dimensions h1, #comparable h1 {
-    font-size: 28px;
-    color: black;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  
-  /* Paragraphs */
-  #materials p, #features p, #dimensions p, .comparable-p {
-    font-size: 18px;
-    color: black;
-    text-align: center;
-    line-height: 1.5;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    padding: 0 10px;
-  }
-  
-  /* Explore Section */
-  #explore {
-    text-align: center;
-    padding: 40px 20px;
-  }
-  
-  #explore h1 {
-    font-size: 28px;
-    color: black;
-    margin-bottom: 20px;
-  }
-  
-  /* Explore Buttons */
-  .explore-button {
-    display: inline-block;
-    background-color: #3e3e3e;
-    color: white;
-    text-decoration: none;
-    padding: 12px 24px;
-    margin: 10px 5px;
-    border-radius: 8px;
-    font-size: 18px;
-    transition: background-color 0.3s;
-  }
-  
-  .explore-button:hover {
-    background-color: #5c5c5c;
-  }
-  
-  /* Spacing Adjustment */
-  .section-spacer {
-    height: 50px;
-  }
-  
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #3e3e3e;
-    color: white;
-    font-size: 14px;
-  }
-  
-  /* ============ RESPONSIVE SCALING UP ============ */
-  
-  /* Medium Devices (Tablets) */
-  @media (min-width: 700px) {
+}
+
+/** div4/comparable elements
+*
+*/
+#comparable h3 {
+    border-bottom: solid 5px red;
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 50px;
+}
+
+#comparable h4 {
+    font-size: 40px;
+}
+
+/** div5/explore elements
+*
+*/
+#explore{
+    background-color: black;
+    height: 100vh;
+    
+}
+
+#psyche-container {
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed */
+    height: 50vh; /* Adjust height dynamically */
+    margin: 0 auto; /* Center horizontally */
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 5%;
+    z-index: 1;
+    background-color: black;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes spin {
+    from
+    {
+        --angle: 0deg;
+    } 
+    to
+    {
+        --angle:360deg;
+    }
+}
+
+#psyche-container::after, #psyche-container::before {
+    
+    content: '';
+    position: absolute;
+    height: 105%;
+    width: 105%;
+    background-color: black;
+    /*background-image: conic-gradient(from var(--angle), transparent, transparent, #f9a000, #a53f5b);*/
+    background-image: conic-gradient(from var(--angle), transparent, transparent, #f9a000, #f47c33, transparent, transparent, #ef5966, #a53f5b, #592651, #302144, #f9a000);
+    z-index: -1;
+    padding: 1px;
+    animation: 4s spin linear infinite;
+    overflow: hidden;
+    border-radius: 5rem;
+}
+
+#psyche-container::before {
+    filter: blur(3.5rem);
+    opacity: 0.7;
+}
+
+/** footer elements
+*
+*/
+footer {
+    bottom: 0;
+    margin-top: 10%;
+    height: 30vh;
+    width: 100%;
+    background: linear-gradient(-45deg, #f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
+}
+
+@keyframes colorChange{
+    0% {
+        color: gold;
+    }
+    25% {
+        color: goldenrod;
+    }
+    50% {
+        color: gray;
+    }
+    75% {
+        color: goldenrod;
+    }
+    100% {
+        color: gold;
+    }
+}
+
+/** media elements
+*
+*/
+@media (min-width: 300px) {
     #header-h1 {
-      font-size: 70px;
+        margin-top: 3rem;
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        font-size: 4rem;
     }
-  
-    #materials h1, #features h1, #dimensions h1, #comparable h1 {
-      font-size: 50px;
+
+    #comparable {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 1rem;
+        border-radius: 3rem;
+        background-image: none;
+        background-color: black;
     }
-  
-    #materials p, #features p, #dimensions p, .comparable-p {
-      font-size: 24px;
+
+    #comparable h3 {
+        border-bottom: none;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        padding-bottom: 1rem;
+        font-size: 50px;
+        
     }
-  
-    #explore h1 {
-      font-size: 50px;
+
+    .comparable p{
+        margin-top: 1.5rem;
     }
-  
-    .explore-button {
-      font-size: 20px;
-      padding: 14px 30px;
+
+    #inner-comparable {
+        margin: 0;
     }
-  }
-  
-  /* Large Devices (Desktops) */
-  @media (min-width: 1024px) {
+
+    #h4-1, #h4-2 {
+        margin-top: -150px;
+        padding-bottom: 1rem;
+    }
+
+    #psyche-container {
+        width: 100%;
+        height: 50vh; 
+        margin: 0 auto; 
+        border-radius: 1rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        margin-bottom: 5%;
+        z-index: 1;
+        background-color: black;
+        margin-top: -250px;
+    }
+
+    footer {
+        margin-top: 120%;
+        height: 20vh !important;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 700px) {
+    #explore h1{
+        padding-bottom: 1.5rem;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+    #comparable {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 1rem;
+        border-radius: 3rem;
+        background-image: url(../img/swiss-map.png);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    #comparable h3 {
+        border-bottom: none;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        padding-bottom: 1rem;
+        font-size: 50px;
+        
+    }
+
+    .comparable p{
+        margin-top: 1.5rem;
+    }
+
+    #inner-comparable {
+        margin: 0;
+    }
+
+    #h4-1, #h4-2 {
+        margin-top: 0px;
+        padding-bottom: 1rem;
+        color: #ef5966;
+    }
+
+    footer {
+        margin-top: 30%;
+    }
+}
+
+@media (min-width: 900px) {
+    header {
+        height: 30vh;
+        width: 100%;
+    }
+    
+    div {
+        background-color: white;
+    }
+    
+    #logo {
+        padding-top: 1rem;
+        display: block;
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
     #header-h1 {
-      font-size: 90px;
+        text-align: center;
+        margin-top: 5%;
+        font-size: 90px;
+        color: transparent;
+        background-image: linear-gradient(#f9a000, #f47c33, #ef5966, #a53f5b, #592651, #302144);
+        background-clip: text;
     }
-  
-    #materials, #features, #dimensions, #comparable, #explore {
-      margin: 50px auto;
-      padding: 40px;
+     #dimensions, #comparable, #div5 {
+        margin-top: 15%;
+        text-align: center;
+        width: 100%;
+    
+        h1{
+            font-size: 60px;
+        }
+        p {
+            margin-top: 5%;
+            margin-bottom: 5%;
+            font-size: 40px;
+        }
     }
-  
-    #materials h1, #features h1, #dimensions h1, #comparable h1 {
-      font-size: 60px;
+    
+    #materials{
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 25%;
+        background-image: url(../img/psyche-surface.svg);
+        background-color: black;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 3rem;
     }
-  
-    #materials p, #features p, #dimensions p, .comparable-p {
-      font-size: 28px;
+    
+    #inner-materials, #inner-features, #inner-dimensions, #inner-comparable, #inner-explore {
+        padding-top: 10%;
+        padding-bottom: 10%;
+        text-align: center;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        color: #f47c33;
+        border-radius: 3rem;
+        margin-right: auto;
+        margin-left: auto;
+        h1{
+            padding-top: 5%;
+            font-size: 60px;
+        }
+    
+        p{
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 5%;
+            margin-bottom: 5%;
+            font-size: 40px;
+        }
     }
-  
-    #explore h1 {
-      font-size: 60px;
+    
+    #inner-explore p {
+        padding-bottom: 10% !important;
     }
-  
-    .explore-button {
-      font-size: 22px;
-      padding: 16px 36px;
+    
+    #features {
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 10%;
+        border-radius: 3rem;
+        background-image: url(../img/craters.jpg);
+        background-color: black;
+        background-size: cover;
+        background-repeat: no-repeat;
     }
-  }
+    
+    #dimensions {
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 10%;
+        border-radius: 3rem;
+        background-image: url(../img/psyche-wide.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    #comparable {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 10%;
+        border-radius: 3rem;
+        background-image: url(../img/swiss-map.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: black;
+    }
+    
+    #surface-img, #wide-img, #swiss-flag {
+        margin-right: auto;
+        margin-left: auto;
+        width: 80%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    
+    #comparable h3 {
+        border-bottom: solid 5px red;
+        width: 40%;
+        margin-right: auto;
+        margin-left: auto;
+        font-size: 50px;
+    }
+    
+    #comparable h4 {
+        font-size: 40px;
+    }
+
+    #h4-1, #h4-2 {
+        margin-top: 0px;
+        padding-bottom: 1rem;
+        color: #ef5966;
+    }
+    
+    #explore{
+        background-color: black;
+        height: 100vh;
+        
+    }
+    
+    #psyche-container {
+        width: 100%;
+        max-width: 1200px; /* Adjust as needed */
+        height: 50vh; /* Adjust height dynamically */
+        margin: 0 auto; /* Center horizontally */
+        border-radius: 1rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        margin-bottom: 5%;
+        z-index: 1;
+        background-color: black;
+    }
+    
+    @property --angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+    }
+    
+    @keyframes spin {
+        from
+        {
+            --angle: 0deg;
+        } 
+        to
+        {
+            --angle:360deg;
+        }
+    }
+    
+    #psyche-container::after, #psyche-container::before {
+        
+        content: '';
+        position: absolute;
+        height: 105%;
+        width: 105%;
+        background-color: black;
+        /*background-image: conic-gradient(from var(--angle), transparent, transparent, #f9a000, #a53f5b);*/
+        background-image: conic-gradient(from var(--angle), transparent, transparent, #f9a000, #f47c33, transparent, transparent, #ef5966, #a53f5b, #592651, #302144, #f9a000);
+        z-index: -1;
+        padding: 1px;
+        animation: 4s spin linear infinite;
+        overflow: hidden;
+        border-radius: 5rem;
+    }
+    
+    #psyche-container::before {
+        filter: blur(3.5rem);
+        opacity: 0.7;
+    }
+    
+    
+    footer {
+        bottom: 0;
+        margin-top: 35%;
+        text-align: center;
+        height: 30vh;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1512px) {
+    footer {
+        margin-top: 40rem;
+    }
+}
+
+@media (min-width: 2560px) {
+    #logo {
+        padding-top: 3rem !important;
+    }
+    
+    footer {
+        margin-top: 50rem;
+    }
+}
