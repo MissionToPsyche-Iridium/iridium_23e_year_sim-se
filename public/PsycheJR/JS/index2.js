@@ -1,3 +1,6 @@
+/* 
+//Screen Responsiveness Testing
+
 function updateScreenWidth() {
     const box = document.getElementById("screen-width-box");
     box.textContent = `Width: ${window.innerWidth}px`;
@@ -18,7 +21,7 @@ console.log("window.outerWidth:", window.outerWidth);
 console.log("devicePixelRatio:", window.devicePixelRatio);
 console.log("Effective Width:", window.innerWidth * window.devicePixelRatio);
 console.log("Zoom Level:", Math.round(window.outerWidth / window.innerWidth * 100) + "%");
-console.log("width of device:", windowWidth, "dpr:", dpr, "trueSize:", trueSize);
+console.log("width of device:", windowWidth, "dpr:", dpr, "trueSize:", trueSize); */
 
 
 gsap.set([
