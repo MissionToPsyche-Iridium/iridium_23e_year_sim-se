@@ -7,7 +7,8 @@ window.addEventListener("resize", updateScreenWidth);
 
 updateScreenWidth();
 
-
+// Fix for very small screens
+const isSmallScreen = window.innerWidth <= 400;
 
 
 let windowWidth = window.outerWidth;
@@ -104,18 +105,22 @@ if (window.innerWidth >= 2560){
     tl.to("#header-h1", { scale: 0.7, y: 80 })
 } else if (window.innerWidth >= 400){
     console.log(true, window.innerWidth)
+    if (!isSmallScreen) {
     tl.fromTo("body", 
         { backgroundSize: "600%"},  // Start large and zoomed in
         { backgroundSize: "800%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.5, scale: 0.5, y: -100 })
+    }
 } else if (window.innerWidth >= 350){
     console.log(true, window.innerWidth)
+    if (!isSmallScreen) {
     tl.fromTo("body", 
         { backgroundSize: "800%"},  // Start large and zoomed in
         { backgroundSize: "1000%", duration: 2 } // Shrink to fit screen properly
     )
     tl.to("#header-h1", { scale: 0.5, scale: 0.3, y: -100 })
+    }
 }
 
 if(window.width >= 700){
@@ -1761,8 +1766,9 @@ if (window.innerWidth >= 1600){
         }
     )
 } else if (window.innerWidth >= 700){
+    if (!isSmallScreen) {
     tl.to(
-        "header-h1",
+        "#header-h1",
         {
             scale: 0.75
         }
@@ -2297,7 +2303,9 @@ if (window.innerWidth >= 1600){
             }
         }
     )
-} else {
+    }
+} else if (window.innerWidth < 400) {
+
     tl.to(
         "body",
         {
@@ -2320,17 +2328,6 @@ if (window.innerWidth >= 1600){
         }
     )
 
-    tl.to(
-        "#materials-p",
-        {
-            scale: 0.7,
-            y: -190,
-            width: "100%",
-            color: "white",
-            ease: "power4.inOut",
-            druation: 3
-        }
-    )
 
     tl.to(
         "#features",
@@ -2345,19 +2342,6 @@ if (window.innerWidth >= 1600){
         "#features-h1",
         {
             scale: 0.8
-        }
-    )
-
-    tl.to(
-        "#features-p",
-        {
-            scale: 0.7,
-            y: -190,
-            width: "100%",
-            ease: "power4.inOut",
-            druation: 3,
-            color: "white",
-            marginBottom: "5px"
         }
     )
 
@@ -2379,18 +2363,6 @@ if (window.innerWidth >= 1600){
     )
 
     tl.to(
-        "#dimensions-p",
-        {
-            scale: 0.7,
-            y: -160,
-            width: "100%",
-            color: "white",
-            ease: "power4.inOut",
-            druation: 3
-        }
-    )
-
-    tl.to(
         "#comparable",
         {
             backgroundPosition: "center",
@@ -2404,18 +2376,6 @@ if (window.innerWidth >= 1600){
         "#comparable-h1, #comparable-h3, .comparable-h4",
         {
             scale: 0.8
-        }
-    )
-
-    tl.to(
-        ".comparable-p",
-        {
-            scale: 0.6,
-            y: -140,
-            width: "100%",
-            color: "white",
-            ease: "power4.inOut",
-            druation: 3
         }
     )
 
@@ -2436,15 +2396,30 @@ if (window.innerWidth >= 1600){
         }
     )
 
-    tl.to(
-        "#explore-p",
-        {
-            scale: 0.7,
-            y: -160,
-            width: "100%",
-            color: "white",
-            ease: "power4.inOut",
-            druation: 3
-        }
-    )
+}
+
+// Fix for very small phones 
+if (window.innerWidth < 400) {
+    gsap.killTweensOf([
+        "#materials-p",
+        "#features-p",
+        "#dimensions-p",
+        ".comparable-p",
+        "#explore-p"
+    ]);
+}
+
+if (window.innerWidth < 400) {
+    gsap.set([
+        "#materials-p",
+        "#features-p",
+        "#dimensions-p",
+        ".comparable-p",
+        "#explore-p"
+    ], {
+        clearProps: "all",  
+        scale: 1,
+        y: 0,
+        opacity: 1
+    });
 }
