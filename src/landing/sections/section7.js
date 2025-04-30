@@ -15,7 +15,7 @@
 
 import * as THREE from 'three';
 import { getCurrentSection } from '../utils/sectionTracking.js';
-import { resolvePath, loadModel, triggerButton3D, applyGlowEffect } from '../utils/utils.js';
+import { resolvePath, loadModel, triggerButton3D} from '../utils/utils.js';
 import { showSurface2Viewport } from '../ui/surface2Viewport.js';
 
 /**
@@ -119,34 +119,9 @@ export function loadSection7(scene, camera, sections, renderer) {
                     // Store original material properties to restore when not hovering
                     const originalEmissive = buttonMesh.material.emissive.clone();
                     const originalEmissiveIntensity = buttonMesh.material.emissiveIntensity;
-                    
-                    const raycaster = new THREE.Raycaster();
-                    const mouse = new THREE.Vector2();
-      
-                    window.addEventListener("mousemove", (event) => {
-                        const rect = renderer.domElement.getBoundingClientRect();
-                        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-                        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-      
-                        raycaster.setFromCamera(mouse, camera);
-                        const intersects = raycaster.intersectObjects([buttonMesh]);
-      
-                        if (intersects.length > 0) {
-                            // Apply glow effect on hover
-                            applyGlowEffect(buttonMesh, {
-                                color: '#ff9900',
-                                intensity: 2.0
-                            });
-                            renderer.domElement.style.cursor = "pointer";
-                        } else {
-                            // Remove glow effect when not hovering
-                            buttonMesh.material.emissive = originalEmissive;
-                            buttonMesh.material.emissiveIntensity = originalEmissiveIntensity;
-                            buttonMesh.material.needsUpdate = true;
-                            renderer.domElement.style.cursor = "default";
-                        }
-                    });
                 });
+
+                // Removed the glowEffect
       
                 resolve(); // Resolve the promise when setup is complete
             } catch (err) {

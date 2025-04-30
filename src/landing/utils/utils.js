@@ -45,6 +45,9 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import gsap from 'gsap';
 
+let hoverTargets = [];
+let hoverCamera = null;
+let hoverRenderer = null;
 
 /**
  * Resolves a relative path using the base URL provided by Vite at runtime.
@@ -476,9 +479,22 @@ function onMouseMove(event, camera, renderer) {
     hoveredText = null;
     document.body.style.cursor = "default";
   }
+
+  // Cursor check
+  if (hoverCamera && hoverRenderer && hoverTargets.length > 0) {
+    const hoverRect = hoverRenderer.domElement.getBoundingClientRect();
+    hoverMouse.x = ((event.clientX - hoverRect.left) / hoverRect.width) * 2 - 1;
+    hoverMouse.y = -((event.clientY - hoverRect.top) / hoverRect.height) * 2 + 1;
+
+    hoverRaycaster.setFromCamera(hoverMouse, hoverCamera);
+    const hoverIntersects = hoverRaycaster.intersectObjects(hoverTargets);
+
+    // If hoverTargets are intersected, override cursor to pointer 
+    if (hoverIntersects.length > 0) {
+      hoverRenderer.domElement.style.cursor = 'pointer';
+    }
+  }
 }
-
-
 
 /**
  * Handles mouse click events on interactive text meshes.
@@ -838,4 +854,22 @@ export function getDynamicScale(camera, modelPosition, baseScale, scaleFactor = 
 
 export function loadBadge(scene) {
   // load the psyche icon/badge into the scene
+}
+
+/**
+ * Setup a global hover cursor listener for buttonMeshes
+ * @param {THREE.Camera} camera - The active camera
+ * @param {THREE.WebGLRenderer} renderer - The renderer 
+ * @param {THREE.Object3D[]} targets - Array of buttonMeshes 
+ */
+export function setupHoverCursor(camera, renderer, targets) {
+  hoverCamera = camera;
+  hoverRenderer = renderer;
+  hoverTargets = targets;
+
+  // Add it once
+  if (!window._hasHoverListener) {
+    window.addEventListener('mousemove', onMouseMove);
+    window._hasHoverListener = true;
+  }
 }
