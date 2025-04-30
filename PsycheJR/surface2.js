@@ -2305,6 +2305,7 @@ if (window.innerWidth >= 1600){
     )
     }
 } else {
+    if (!isSmallScreen) {
     tl.to(
         "body",
         {
@@ -2454,4 +2455,5 @@ if (window.innerWidth >= 1600){
             druation: 3
         }
     )
+    }
 }
