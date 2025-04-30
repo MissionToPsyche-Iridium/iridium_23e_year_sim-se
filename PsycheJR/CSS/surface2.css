@@ -632,3 +632,16 @@ footer {
         margin-top: 50rem;
     }
 }
+
+/* Fix for very small phones */
+@media (max-width: 375px) {
+    #inner-materials p,
+    #inner-features p,
+    #inner-dimensions p,
+    #inner-comparable p,
+    #inner-explore p {
+      font-size: 28px;
+      line-height: 1.4;
+      width: 90%;
+    }
+  }

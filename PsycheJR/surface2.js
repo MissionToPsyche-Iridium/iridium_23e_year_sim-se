@@ -150,7 +150,7 @@ if(window.width >= 700){
     );
 }
 
-tl.to("#header-h1", {opacity: 1, duration: 2})
+//tl.to("#header-h1", {opacity: 1, duration: 2})
 
 // Smooth transition from background image to black, then to white
 tl.to("body", { backgroundImage: "none", backgroundColor: "black", duration: 1}, "<60%");
