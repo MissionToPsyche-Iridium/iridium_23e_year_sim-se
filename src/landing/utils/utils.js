@@ -855,5 +855,3 @@ export function getDynamicScale(camera, modelPosition, baseScale, scaleFactor = 
 export function loadBadge(scene) {
   // load the psyche icon/badge into the scene
 }
-
-
