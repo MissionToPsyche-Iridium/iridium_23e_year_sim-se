@@ -2328,17 +2328,6 @@ if (window.innerWidth >= 1600){
         }
     )
 
-    tl.to(
-        "#materials-p",
-        {
-            scale: 0.7,
-            //y: -190,
-            width: "100%",
-            color: "white",
-            ease: "power4.inOut",
-            druation: 3
-        }
-    )
 
     tl.to(
         "#features",
@@ -2353,19 +2342,6 @@ if (window.innerWidth >= 1600){
         "#features-h1",
         {
             scale: 0.8
-        }
-    )
-
-    tl.to(
-        "#features-p",
-        {
-            scale: 0.7,
-            //y: -190,
-            width: "100%",
-            ease: "power4.inOut",
-            druation: 3,
-            color: "white",
-            marginBottom: "5px"
         }
     )
 
@@ -2387,18 +2363,6 @@ if (window.innerWidth >= 1600){
     )
 
     tl.to(
-        "#dimensions-p",
-        {
-            scale: 0.7,
-            //y: -160,
-            width: "100%",
-            color: "white",
-            ease: "power4.inOut",
-            druation: 3
-        }
-    )
-
-    tl.to(
         "#comparable",
         {
             backgroundPosition: "center",
@@ -2412,18 +2376,6 @@ if (window.innerWidth >= 1600){
         "#comparable-h1, #comparable-h3, .comparable-h4",
         {
             scale: 0.8
-        }
-    )
-
-    tl.to(
-        ".comparable-p",
-        {
-            scale: 0.6,
-            //y: -140,
-            width: "100%",
-            color: "white",
-            ease: "power4.inOut",
-            druation: 3
         }
     )
 
@@ -2444,15 +2396,4 @@ if (window.innerWidth >= 1600){
         }
     )
 
-    tl.to(
-        "#explore-p",
-        {
-            scale: 0.7,
-            //y: -160,
-            width: "100%",
-            color: "white",
-            ease: "power4.inOut",
-            druation: 3
-        }
-    )
 }
