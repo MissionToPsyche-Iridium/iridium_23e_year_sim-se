@@ -856,20 +856,4 @@ export function loadBadge(scene) {
   // load the psyche icon/badge into the scene
 }
 
-/**
- * Setup a global hover cursor listener for buttonMeshes
- * @param {THREE.Camera} camera - The active camera
- * @param {THREE.WebGLRenderer} renderer - The renderer 
- * @param {THREE.Object3D[]} targets - Array of buttonMeshes 
- */
-export function setupHoverCursor(camera, renderer, targets) {
-  hoverCamera = camera;
-  hoverRenderer = renderer;
-  hoverTargets = targets;
 
-  // Add it once
-  if (!window._hasHoverListener) {
-    window.addEventListener('mousemove', onMouseMove);
-    window._hasHoverListener = true;
-  }
-}
