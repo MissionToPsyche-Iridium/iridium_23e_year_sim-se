@@ -2397,3 +2397,29 @@ if (window.innerWidth >= 1600){
     )
 
 }
+
+// Fix for very small phones 
+if (window.innerWidth < 400) {
+    gsap.killTweensOf([
+        "#materials-p",
+        "#features-p",
+        "#dimensions-p",
+        ".comparable-p",
+        "#explore-p"
+    ]);
+}
+
+if (window.innerWidth < 400) {
+    gsap.set([
+        "#materials-p",
+        "#features-p",
+        "#dimensions-p",
+        ".comparable-p",
+        "#explore-p"
+    ], {
+        clearProps: "all",  
+        scale: 1,
+        y: 0,
+        opacity: 1
+    });
+}
