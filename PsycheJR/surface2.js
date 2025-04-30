@@ -155,7 +155,7 @@ if(window.width >= 700){
     );
 }
 
-//tl.to("#header-h1", {opacity: 1, duration: 2})
+tl.to("#header-h1", {opacity: 1, duration: 2})
 
 // Smooth transition from background image to black, then to white
 tl.to("body", { backgroundImage: "none", backgroundColor: "black", duration: 1}, "<60%");
@@ -2304,8 +2304,8 @@ if (window.innerWidth >= 1600){
         }
     )
     }
-} else {
-    if (!isSmallScreen) {
+} else if (window.innerWidth < 400) {
+
     tl.to(
         "body",
         {
@@ -2332,7 +2332,7 @@ if (window.innerWidth >= 1600){
         "#materials-p",
         {
             scale: 0.7,
-            y: -190,
+            //y: -190,
             width: "100%",
             color: "white",
             ease: "power4.inOut",
@@ -2360,7 +2360,7 @@ if (window.innerWidth >= 1600){
         "#features-p",
         {
             scale: 0.7,
-            y: -190,
+            //y: -190,
             width: "100%",
             ease: "power4.inOut",
             druation: 3,
@@ -2390,7 +2390,7 @@ if (window.innerWidth >= 1600){
         "#dimensions-p",
         {
             scale: 0.7,
-            y: -160,
+            //y: -160,
             width: "100%",
             color: "white",
             ease: "power4.inOut",
@@ -2419,7 +2419,7 @@ if (window.innerWidth >= 1600){
         ".comparable-p",
         {
             scale: 0.6,
-            y: -140,
+            //y: -140,
             width: "100%",
             color: "white",
             ease: "power4.inOut",
@@ -2448,7 +2448,7 @@ if (window.innerWidth >= 1600){
         "#explore-p",
         {
             scale: 0.7,
-            y: -160,
+            //y: -160,
             width: "100%",
             color: "white",
             ease: "power4.inOut",
