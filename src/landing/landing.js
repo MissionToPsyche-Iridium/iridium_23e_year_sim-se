@@ -205,6 +205,12 @@ function fadeOutLoadingScreen() {
 
 setupResizeListener();
 
+// Cursor setup
+if (!window._hasUnifiedMouseMoveListener) {
+  window.addEventListener('mousemove', (e) => onMouseMove(e, camera, renderer));
+  window._hasUnifiedMouseMoveListener = true;
+}
+
 init();
 
 

@@ -45,6 +45,9 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import gsap from 'gsap';
 
+let hoverTargets = [];
+let hoverCamera = null;
+let hoverRenderer = null;
 
 /**
  * Resolves a relative path using the base URL provided by Vite at runtime.
@@ -475,6 +478,21 @@ function onMouseMove(event, camera, renderer) {
     }
     hoveredText = null;
     document.body.style.cursor = "default";
+  }
+  
+  // Cursor check
+  if (hoverCamera && hoverRenderer && hoverTargets.length > 0) {
+    const hoverRect = hoverRenderer.domElement.getBoundingClientRect();
+    hoverMouse.x = ((event.clientX - hoverRect.left) / hoverRect.width) * 2 - 1;
+    hoverMouse.y = -((event.clientY - hoverRect.top) / hoverRect.height) * 2 + 1;
+
+    hoverRaycaster.setFromCamera(hoverMouse, hoverCamera);
+    const hoverIntersects = hoverRaycaster.intersectObjects(hoverTargets);
+
+    // If hoverTargets are intersected, override cursor to pointer 
+    if (hoverIntersects.length > 0) {
+      hoverRenderer.domElement.style.cursor = 'pointer';
+    }
   }
 }
 
