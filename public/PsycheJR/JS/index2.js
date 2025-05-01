@@ -1,6 +1,9 @@
 /* 
 //Screen Responsiveness Testing
 
+/* 
+//Screen Responsiveness Testing
+
 function updateScreenWidth() {
     const box = document.getElementById("screen-width-box");
     box.textContent = `Width: ${window.innerWidth}px`;

@@ -357,6 +357,31 @@ footer {
     }
 }
 
+@media (max-width: 400px) {
+    p, 
+    #materials-p,
+    #features-p,
+    #dimensions-p,
+    .comparable-p,
+    #explore-p {
+        transform: none !important;
+        scale: 1 !important;
+        translate: none !important;
+        y: 0 !important;
+        margin-top: 0 !important;
+        padding-bottom: 0 !important;
+        font-size: 1rem !important;
+    }
+
+    #h4-1, #h4-2 {
+        margin-top: 0 !important;
+    }
+
+    #psyche-container {
+        margin-top: 0 !important;
+    }
+}
+
 @media (min-width: 400px) and (max-width: 700px) {
     #explore h1{
         padding-bottom: 1.5rem;
@@ -635,3 +660,10 @@ footer {
     }
 }
 
+/* Fix for very small phones */
+@media (max-width: 375px) {
+    #materials-p {
+      transform: scale(1) !important;
+      transform-origin: center center;
+    }
+  }
