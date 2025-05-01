@@ -107,7 +107,7 @@ function init() {
 
   // Debug panel for development. will delete this later
   const debugPanel = document.getElementById('debug-panel');
-  // debugPanel.style.display = 'none';
+  debugPanel.style.display = 'none';
   /*
   * Updates the debug panel with current section and camera position.
   */  
